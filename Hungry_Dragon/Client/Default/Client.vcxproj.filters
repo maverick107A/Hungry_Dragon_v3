@@ -79,6 +79,9 @@
     <Filter Include="02. GameObject\01. Stage\02.Bullet\00.Normal">
       <UniqueIdentifier>{0572fbeb-61dd-4ec9-bf8f-1f99844d5286}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Scene\02. PlayerTest">
+      <UniqueIdentifier>{8da5808b-3fa5-4c62-b2fc-d769bd219cee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -138,6 +141,9 @@
     <ClInclude Include="..\Code\Bullet.h">
       <Filter>02. GameObject\01. Stage\02.Bullet</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\PlayerTest.h">
+      <Filter>01. Scene\02. PlayerTest</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -187,6 +193,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Bullet.cpp">
       <Filter>02. GameObject\01. Stage\02.Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\PlayerTest.cpp">
+      <Filter>01. Scene\02. PlayerTest</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
