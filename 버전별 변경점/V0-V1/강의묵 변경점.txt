@@ -1,0 +1,11 @@
+﻿GameObject 내 Stage 내 Terrain내 CBackGround를 지형용으로 추가
+
+GameObject 내 Stage 내 Player 내 CTestPlater 추가
+
+Engine의 Resources에 정점찍은 이미지용 CubeDra 추가
+
+Engine의 Utility내 Component내의 Camera추가, Satate내 PlayerState 추가
+
+ResourcesManager에서 쓰는 enum 값에 Buffer_Terrain, Buffer_CubeDra 추가 해당 리소스 클래스 생성하는 코드 추가
+
+Componenet에 PlayerState 클래스 추가

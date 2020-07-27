@@ -1,0 +1,36 @@
+#ifndef Engine_Define_h__
+#define Engine_Define_h__
+
+#include <d3d9.h>
+#include <d3dx9.h>
+#include <vector>
+#include <list>
+#include <map>
+#include <string>
+#include <algorithm>
+#include <functional>
+#include <ctime>
+#include <fstream>
+
+#include "Engine_Macro.h"
+#include "Engine_Function.h"
+#include "Engine_Enum.h"
+#include "Engine_Struct.h"
+#include "Engine_Typedef.h"
+
+#pragma warning(disable : 4251)
+
+
+using namespace std;
+
+const D3DXCOLOR BLACK(255, 255, 255, 255);
+const D3DXCOLOR WHITE (255, 0, 0, 0);
+const D3DXCOLOR TRANSCOLOR (0, 255, 255, 255);
+const D3DXCOLOR RED (255, 255, 0, 0);
+const D3DXCOLOR GREEN  (255, 0, 255, 0);
+const D3DXCOLOR BLUE (255, 0, 0, 255);
+const D3DXCOLOR YELLOW  (255,255,255,0);
+const D3DXCOLOR CYAN  (255,0,255,255);
+const D3DXCOLOR MAGENTA  (255,255,0,255);
+
+#endif // Engine_Define_h__

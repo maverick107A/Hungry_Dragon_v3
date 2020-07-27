@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="00. Resources">
+      <UniqueIdentifier>{db949b0a-963c-4990-a3ae-fcc0f50cf80e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. ResourcesMgr">
+      <UniqueIdentifier>{ed27f495-059e-4fd9-8618-d483e9ccde60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99. Export">
+      <UniqueIdentifier>{294b9dbb-578b-4490-beb3-77fc78777376}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\00. VIBuffer">
+      <UniqueIdentifier>{089f5e49-4d7e-48b9-9d2d-e5982a1305b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\01. Texture">
+      <UniqueIdentifier>{e71cc84e-7a0a-4040-8b0f-32e30cdd4e2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\00. VIBuffer\02. CubeCol">
+      <UniqueIdentifier>{75f8c4c9-e548-43a6-8e18-d379ab5004cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\00. VIBuffer\00. Terrain">
+      <UniqueIdentifier>{329c2def-0cb7-4f8d-8d22-0e319bc6270d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\00. VIBuffer\01. CubeDra">
+      <UniqueIdentifier>{ca1824d6-ac76-48e6-a532-88f456d7b6b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\01. Texture\00. CubeTex">
+      <UniqueIdentifier>{4e9eefee-a045-4010-98fe-be4eecb62b74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\01. Texture\01. TerrainTex">
+      <UniqueIdentifier>{97516da8-155b-4ed8-b97a-6f36aa3e1f2d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Code\Resources.cpp">
+      <Filter>00. Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\VIBuffer.cpp">
+      <Filter>00. Resources\00. VIBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ResourcesMgr.cpp">
+      <Filter>01. ResourcesMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Texture.cpp">
+      <Filter>00. Resources\01. Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Terrain.cpp">
+      <Filter>00. Resources\00. VIBuffer\00. Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CubeDra.cpp">
+      <Filter>00. Resources\00. VIBuffer\01. CubeDra</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CubeCol.cpp">
+      <Filter>00. Resources\00. VIBuffer\02. CubeCol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CubeTex.cpp">
+      <Filter>00. Resources\01. Texture\00. CubeTex</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\TerrainTex.cpp">
+      <Filter>00. Resources\01. Texture\01. TerrainTex</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Code\Resources.h">
+      <Filter>00. Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\VIBuffer.h">
+      <Filter>00. Resources\00. VIBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\ResourcesMgr.h">
+      <Filter>01. ResourcesMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Header\Export_Resources.h">
+      <Filter>99. Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Texture.h">
+      <Filter>00. Resources\01. Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Terrain.h">
+      <Filter>00. Resources\00. VIBuffer\00. Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\CubeDra.h">
+      <Filter>00. Resources\00. VIBuffer\01. CubeDra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\CubeCol.h">
+      <Filter>00. Resources\00. VIBuffer\02. CubeCol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\CubeTex.h">
+      <Filter>00. Resources\01. Texture\00. CubeTex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\TerrainTex.h">
+      <Filter>00. Resources\01. Texture\01. TerrainTex</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Header\Export_Resources.inl">
+      <Filter>99. Export</Filter>
+    </None>
+  </ItemGroup>
+</Project>
