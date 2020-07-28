@@ -31,6 +31,9 @@
     <Filter Include="00. Resources\01. Texture\01. TerrainTex">
       <UniqueIdentifier>{97516da8-155b-4ed8-b97a-6f36aa3e1f2d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00. Resources\02. Particle">
+      <UniqueIdentifier>{311d8c26-d87a-44a4-b86e-8f274d02f97f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\Resources.cpp">
@@ -59,6 +62,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\TerrainTex.cpp">
       <Filter>00. Resources\01. Texture\01. TerrainTex</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Particle.cpp">
+      <Filter>00. Resources\02. Particle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +97,9 @@
     </ClInclude>
     <ClInclude Include="..\Code\TerrainTex.h">
       <Filter>00. Resources\01. Texture\01. TerrainTex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Particle.h">
+      <Filter>00. Resources\02. Particle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
