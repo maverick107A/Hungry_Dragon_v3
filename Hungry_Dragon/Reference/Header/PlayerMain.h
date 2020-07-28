@@ -32,6 +32,7 @@ public:
 public:
 	CTransform* Get_Transform() { return m_pTransform; }
 	const D3DXVECTOR3&			Get_Look() { return m_vLook; }
+	const D3DXVECTOR3&			Get_Up() { return m_vUp; }
 	CBaseLand*	Get_Terrain() { return m_pTerrain; }
 
 protected:
