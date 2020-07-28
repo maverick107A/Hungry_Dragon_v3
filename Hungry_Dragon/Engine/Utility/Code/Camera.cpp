@@ -1,5 +1,5 @@
 #include "Camera.h"
-#include "Terrain.h"
+#include "BaseLand.h"
 
 USING(Engine)
 
@@ -19,7 +19,7 @@ HRESULT Engine::CCamera::Ready_Camera(void)
 	return S_OK;
 }
 
-_int Engine::CCamera::Update_Component(const _float& fTimeDelta, LPDIRECT3DDEVICE9& pGraphicDev, _vec3 _vPos, _vec3* _vLook, _vec3* _Up, CForestLand* _pTerrain)
+_int Engine::CCamera::Update_Component(const _float& fTimeDelta, LPDIRECT3DDEVICE9& pGraphicDev, _vec3 _vPos, _vec3* _vLook, _vec3* _Up, CBaseLand* _pTerrain)
 {
 	POINT tPos = {};
 	GetCursorPos(&tPos);

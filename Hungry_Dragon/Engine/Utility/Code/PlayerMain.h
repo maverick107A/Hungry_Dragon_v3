@@ -9,7 +9,7 @@ class CVIBuffer;
 class CTexture;
 class CTransform;
 class CCamera;
-class CForestLand;
+class CBaseLand;
 class CPlayerState;
 
 class ENGINE_DLL CPlayerMain : public Engine::CGameObject
@@ -32,7 +32,7 @@ public:
 public:
 	CTransform* Get_Transform() { return m_pTransform; }
 	const D3DXVECTOR3&			Get_Look() { return m_vLook; }
-	CForestLand*	Get_Terrain() { return m_pTerrain; }
+	CBaseLand*	Get_Terrain() { return m_pTerrain; }
 
 protected:
 	virtual void State_Change() {};
@@ -42,7 +42,7 @@ protected:
 	CVIBuffer*				m_pBufferCom = nullptr;
 	CTransform*				m_pTransform = nullptr;
 	CCamera*				m_pCamera = nullptr;
-	CForestLand*				m_pTerrain = nullptr;
+	CBaseLand*				m_pTerrain = nullptr;
 	CPlayerState*			m_pState = nullptr;
 	D3DXVECTOR3				m_vLook;
 	D3DXVECTOR3				m_vUp;

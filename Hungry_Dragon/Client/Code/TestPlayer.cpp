@@ -35,7 +35,7 @@ HRESULT CTestPlayer::Ready_Object(void)
 int CTestPlayer::Update_Object(const float& fTimeDelta)
 {
 	//임시용 레디때로 바꾸던가 밖에서 넣어줘야함
-	m_pTerrain = static_cast<Engine::CForestLand*>
+	m_pTerrain = static_cast<Engine::CBaseLand*>
 		(Engine::Get_Component(L"GameLogic",
 			L"BackGround",
 			L"Com_Buffer",
@@ -233,7 +233,7 @@ void CTestPlayer::Key_Input(const float& fTimeDelta)
 
 void CTestPlayer::Ride_Terrain()
 {
-	m_pTerrain = static_cast<Engine::CForestLand*>
+	m_pTerrain = static_cast<Engine::CBaseLand*>
 		(Engine::Get_Component(L"Environment",
 			L"BackGround",
 			L"Com_Buffer",

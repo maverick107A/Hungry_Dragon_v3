@@ -2,7 +2,7 @@
 #include "PlayerMain.h"
 #include "Transform.h"
 #include "Terrain.h"
-#include "ForestLand.h"
+#include "BaseLand.h"
 
 USING(Engine)
 
@@ -24,7 +24,7 @@ Engine::CPlayerState::~CPlayerState(void)
 bool CPlayerState::Land_Check(float* _fHeight)
 {
 	D3DXVECTOR3* vPos = &m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS];
-	CForestLand* pTerrain = m_pPlayer->Get_Terrain();
+	CBaseLand* pTerrain = m_pPlayer->Get_Terrain();
 
 	//if (vPos->y > 13.f) 여기다 높이에 의한 컬링 만들어야함
 	//	return;
