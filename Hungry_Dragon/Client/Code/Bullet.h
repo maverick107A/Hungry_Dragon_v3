@@ -14,7 +14,7 @@ class CTransform;
 
 END
 class CBullet : public Engine::CGameObject
-{ 
+{
 
 protected:
 	explicit CBullet(LPDIRECT3DDEVICE9 pGraphicDev);
