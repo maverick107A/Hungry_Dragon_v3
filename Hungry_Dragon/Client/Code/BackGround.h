@@ -6,7 +6,7 @@
 
 BEGIN(Engine)
 
-class CTerrain;
+class CForestLand;
 class CTransform;
 
 END
@@ -26,7 +26,7 @@ private:
 	HRESULT		Add_Component(void);
 
 private:
-	Engine::CTerrain*		m_pBufferCom = nullptr;
+	Engine::CForestLand*		m_pBufferCom = nullptr;
 	Engine::CTransform*		m_pTransform = nullptr;
 
 public:

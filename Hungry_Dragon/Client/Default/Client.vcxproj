@@ -171,7 +171,9 @@
     <ClInclude Include="..\Code\Run_Monster.h" />
     <ClInclude Include="..\Code\Scene_Monster.h" />
     <ClInclude Include="..\Code\Scene_Proto.h" />
+    <ClInclude Include="..\Code\StageOne.h" />
     <ClInclude Include="..\Code\Terrain.h" />
+    <ClInclude Include="..\Code\TerrainPlayer.h" />
     <ClInclude Include="..\Code\TestPlayer.h" />
     <ClInclude Include="..\Header\Define.h" />
     <ClInclude Include="Client.h" />
@@ -194,7 +196,9 @@
     <ClCompile Include="..\Code\Run_Monster.cpp" />
     <ClCompile Include="..\Code\Scene_Monster.cpp" />
     <ClCompile Include="..\Code\Scene_Proto.cpp" />
+    <ClCompile Include="..\Code\StageOne.cpp" />
     <ClCompile Include="..\Code\Terrain.cpp" />
+    <ClCompile Include="..\Code\TerrainPlayer.cpp" />
     <ClCompile Include="..\Code\TestPlayer.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="stdafx.cpp">

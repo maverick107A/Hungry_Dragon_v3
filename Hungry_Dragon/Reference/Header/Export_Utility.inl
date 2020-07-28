@@ -18,6 +18,26 @@ HRESULT	Create_Management(CManagement** ppManagement)
 	return S_OK;
 }
 
+// Renderer
+// Get
+CRenderer*		Get_Renderer(void)
+{
+	return CRenderer::GetInstance();
+}
+// Set
+// General
+void	Add_RenderGroup(RENDERID eType, CGameObject* pGameObject)
+{
+	CRenderer::GetInstance()->Add_RenderGroup(eType, pGameObject);
+}
+void	Render_GameObject(void)
+{
+	CRenderer::GetInstance()->Render_GameObject();
+}
+void	Clear_RenderGroup(void)
+{
+	CRenderer::GetInstance()->Clear_RenderGroup();
+}
 
 //Object_Pool
 

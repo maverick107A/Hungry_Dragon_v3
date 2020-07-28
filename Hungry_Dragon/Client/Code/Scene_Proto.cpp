@@ -191,7 +191,7 @@ HRESULT CScene_Proto::Ready_Resource(LPDIRECT3DDEVICE9 pGraphicDev, RESOURCEID e
 	FAILED_CHECK_RETURN(Engine::Ready_Buffer(pGraphicDev,
 		RESOURCE_STATIC,
 		L"BUFFER_TERRAIN",
-		Engine::BUFFER_TERRAIN),
+		Engine::BUFFER_FOREST),
 		E_FAIL);
 
 	FAILED_CHECK_RETURN(Engine::Ready_Buffer(pGraphicDev,

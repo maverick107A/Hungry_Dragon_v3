@@ -2,6 +2,7 @@
 #include "PlayerMain.h"
 #include "Transform.h"
 #include "Terrain.h"
+#include "ForestLand.h"
 
 USING(Engine)
 
@@ -23,14 +24,14 @@ Engine::CPlayerState::~CPlayerState(void)
 bool CPlayerState::Land_Check(float* _fHeight)
 {
 	D3DXVECTOR3* vPos = &m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS];
-	CTerrain*	 pTerrain = m_pPlayer->Get_Terrain();
+	CForestLand* pTerrain = m_pPlayer->Get_Terrain();
 
 	//if (vPos->y > 13.f) 여기다 높이에 의한 컬링 만들어야함
 	//	return;
 
 	int Vernum = (int(vPos->x*INVERSETILESIZE) + VERTEXSIZE*int(vPos->z*INVERSETILESIZE));
 
-	if (0 > Vernum || VERTEXSIZE*VERTEXSIZE < Vernum)
+	if (0 > Vernum || VERTEXSIZE*(VERTEXSIZE-1)-1 < Vernum)
 	{
 		*_fHeight = 0.f;
 		return false;
@@ -46,9 +47,9 @@ bool CPlayerState::Land_Check(float* _fHeight)
 	D3DXVECTOR3	vTemp2 = { -1.f,0.f,-1.f };
 	if (D3DXVec3Dot(&vTemp1, &vTemp2) > 0)
 	{
-		Vertex1.y = pTerrain->Get_TerrainHeight()[Vernum];
-		Vertex2.y = pTerrain->Get_TerrainHeight()[Vernum + 1];
-		Vertex3.y = pTerrain->Get_TerrainHeight()[Vernum + VERTEXSIZE];
+		Vertex1.y = (float)pTerrain->Get_TerrainHeight()[Vernum];
+		Vertex2.y = (float)pTerrain->Get_TerrainHeight()[Vernum + 1];
+		Vertex3.y = (float)pTerrain->Get_TerrainHeight()[Vernum + VERTEXSIZE];
 
 		vTemp1 = Vertex2 - Vertex1;
 		vTemp2 = Vertex3 - Vertex1;
@@ -65,9 +66,9 @@ bool CPlayerState::Land_Check(float* _fHeight)
 	}
 	else
 	{
-		Vertex2.y = pTerrain->Get_TerrainHeight()[Vernum + 1];
-		Vertex3.y = pTerrain->Get_TerrainHeight()[Vernum + VERTEXSIZE];
-		Vertex4.y = pTerrain->Get_TerrainHeight()[Vernum + VERTEXSIZE + 1];
+		Vertex2.y = (float)pTerrain->Get_TerrainHeight()[Vernum + 1];
+		Vertex3.y = (float)pTerrain->Get_TerrainHeight()[Vernum + VERTEXSIZE];
+		Vertex4.y = (float)pTerrain->Get_TerrainHeight()[Vernum + VERTEXSIZE + 1];
 
 		vTemp1 = Vertex3 - Vertex4;
 		vTemp2 = Vertex2 - Vertex4;

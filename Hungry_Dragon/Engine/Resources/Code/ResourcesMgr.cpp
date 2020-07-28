@@ -69,6 +69,20 @@ HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 	case BUFFER_TERRAINTEX:
 		pResources = CTerrainTex::Create(pGraphicDev, dwCntX, dwCntZ, dwVtxItv);
 		break;
+	case BUFFER_FOREST:
+		pResources = CForestLand::Create(pGraphicDev);
+		break;
+	case BUFFER_RIFT:
+		//pResources = CTriCol::Create(pGraphicDev);
+		break;
+
+	case BUFFER_VOLCANO:
+		//pResources = CRcCol::Create(pGraphicDev);
+		break;
+
+	case BUFFER_ICEAGE:
+		//pResources = CRcTex::Create(pGraphicDev);
+		break;
 	}
 
 	m_pmapResource[wContainerIdx].emplace(pBufferTag, pResources);
@@ -140,6 +154,6 @@ HRESULT Engine::CResourcesMgr::Ready_Texture(LPDIRECT3DDEVICE9 pGraphicDev,
 }
 
 void CResourcesMgr::Load_Particle() {
-	CParticle* pParticle;
+	//CParticle* pParticle;
 }
 

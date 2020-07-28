@@ -52,6 +52,12 @@
     <Filter Include="03. GameObject\00.Player">
       <UniqueIdentifier>{1ca9482e-39ce-4e81-83db-902fce8aeb43}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04. Component\03. Behavior">
+      <UniqueIdentifier>{4d246ed3-8638-4422-a103-638155617460}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. Component\04. TerrainMgr">
+      <UniqueIdentifier>{17d9424d-c3c4-4a17-be31-f3037a6f193e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\Component.cpp">
@@ -98,6 +104,18 @@
     </ClCompile>
     <ClCompile Include="..\Code\PlayerState.cpp">
       <Filter>04. Component\02.State\00.PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Static_Behavior.cpp">
+      <Filter>04. Component\03. Behavior</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Dynamic_Behavior.cpp">
+      <Filter>04. Component\03. Behavior</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Sector_Manager.cpp">
+      <Filter>04. Component\04. TerrainMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Terrain_Manager.cpp">
+      <Filter>04. Component\04. TerrainMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +166,18 @@
     </ClInclude>
     <ClInclude Include="..\Code\PlayerState.h">
       <Filter>04. Component\02.State\00.PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Dynamic_Behavior.h">
+      <Filter>04. Component\03. Behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Static_Behavior.h">
+      <Filter>04. Component\03. Behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Sector_Manager.h">
+      <Filter>04. Component\04. TerrainMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Terrain_Manager.h">
+      <Filter>04. Component\04. TerrainMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

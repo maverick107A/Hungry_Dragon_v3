@@ -19,6 +19,8 @@
 #include "TerrainTex.h"
 #include "CubeTex.h"
 
+#include "ForestLand.h"
+
 #include "Particle.h"		//임시. 파티클 종류별로 생성하면 추가하고 지울 것.
 //-------------------------------------------------------
 
