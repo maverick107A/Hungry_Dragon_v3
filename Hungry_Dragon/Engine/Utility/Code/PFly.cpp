@@ -27,6 +27,8 @@ void CPFly::Enter_State(CPlayerMain* _pPlayer)
 void CPFly::Update_State(const float& fTimeDelta)
 {
 	D3DXVECTOR3 vDir = { 0.f,0.f,0.f };
+	D3DXVECTOR3 vRight = { 0.f,0.f,0.f };
+	D3DXVec3Cross(&vRight, &m_pPlayer->Get_Up(), &m_pPlayer->Get_Look());
 	bool bCheck = false;
 	bool bShift = false;
 	if (GetAsyncKeyState('W'))
@@ -37,6 +39,16 @@ void CPFly::Update_State(const float& fTimeDelta)
 	else if (GetAsyncKeyState('S'))
 	{
 		vDir -= m_pPlayer->Get_Look();
+		bCheck = true;
+	}
+	else if (GetAsyncKeyState('A'))
+	{
+		vDir -= vRight;
+		bCheck = true;
+	}
+	else if (GetAsyncKeyState('D'))
+	{
+		vDir += vRight;
 		bCheck = true;
 	}
 	if (GetAsyncKeyState(VK_SPACE))
@@ -55,12 +67,18 @@ void CPFly::Update_State(const float& fTimeDelta)
 		{
 			vDir *= 100.f;
 		}
-		vDir *= fTimeDelta*m_fSpeed;;
-		m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS] += vDir;
-		float fDis = sqrtf(vDir.x*vDir.x + vDir.y*vDir.y + vDir.z*vDir.z);
-		float fPlaneDis = sqrtf(vDir.x*vDir.x + vDir.z*vDir.z);
+		vDir *= fTimeDelta*0.3f;
+		m_vSpeed += vDir;
+		float fLength = D3DXVec3Length(&m_vSpeed);
+		if (50.f < fLength)
+			m_vSpeed *= 50.f/fLength;
+		m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS] += m_vSpeed;
+		//여기까지 가속시스템
+
+		float fDis = sqrtf(m_vSpeed.x*m_vSpeed.x + m_vSpeed.y*m_vSpeed.y + m_vSpeed.z*m_vSpeed.z);
+		float fPlaneDis = sqrtf(m_vSpeed.x*m_vSpeed.x + m_vSpeed.z*m_vSpeed.z);
 		float fAngleX = acosf(fPlaneDis / fDis);
-		if (0 < vDir.y)
+		if (0 < m_vSpeed.y)
 			fAngleX *= -1;
 		if (abs(m_pPlayer->Get_Transform()->m_vAngle.x - fAngleX) < m_fAngleSpeed)
 			m_pPlayer->Get_Transform()->m_vAngle.x = fAngleX;
@@ -75,8 +93,8 @@ void CPFly::Update_State(const float& fTimeDelta)
 		//m_pTransform->m_vAngle.x = m_pCamera->m_fAngleX;
 		if (0.f != fPlaneDis)
 		{
-			float fAngleY = acosf(vDir.z / fPlaneDis);
-			if (0 > vDir.x) // 각도의 범위는 -Pi to Pi
+			float fAngleY = acosf(m_vSpeed.z / fPlaneDis);
+			if (0 > m_vSpeed.x) // 각도의 범위는 -Pi to Pi
 			{
 				fAngleY *= -1;
 				fAngleY += Pi*2;

@@ -22,6 +22,7 @@ public:
 private:
 	float			m_fSpeed = 10.f;
 	float			m_fAngleSpeed = 0.05f;
+	_vec3			m_vSpeed = {0.f,0.f,0.f};
 
 public:
 	static CPFly*		Create(void);
