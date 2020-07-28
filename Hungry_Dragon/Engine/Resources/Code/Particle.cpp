@@ -23,10 +23,12 @@ CParticle::CParticle(const CParticle & rhs)
 	m_BoundingBox = rhs.m_BoundingBox;
 
 	m_Tex = rhs.m_Tex;
-	m_Tex->AddRef();
+	if(m_Tex!=nullptr)
+		m_Tex->AddRef();
 
 	m_Vb = rhs.m_Vb;
-	m_Vb->AddRef();
+	if(m_Vb!=nullptr)
+		m_Vb->AddRef();
 }
 
 CParticle::~CParticle(void) {
@@ -147,7 +149,18 @@ bool CParticle::Is_Dead(void) {
 }
 
 void CParticle::Set_Texture(_tchar * texFileName) {
-	D3DXCreateTextureFromFile(m_pGraphicDev, texFileName, &m_Tex);
+	IDirect3DTexture9*		temp_Tex;
+	if (S_OK == D3DXCreateTextureFromFile(m_pGraphicDev, texFileName, &temp_Tex)) {
+		Safe_Release(m_Tex);
+		m_Tex=temp_Tex;
+	}
+		
+}
+
+void CParticle::Set_Size(_float _fSize) {
+	if (_fSize>0) {
+		m_fSize = _fSize;
+	}
 }
 
 void CParticle::Free(void) {
@@ -173,7 +186,7 @@ DWORD CParticle::FloatToDword(float& f) {
 	return *((DWORD*)&f);
 }
 
-float CParticle::GetRandomFloat(float lowBound, float highBound) {
+float CParticle::Get_RandomFloat(float lowBound, float highBound) {
 	if (lowBound >= highBound) // bad input
 		return lowBound;
 
@@ -185,7 +198,7 @@ float CParticle::GetRandomFloat(float lowBound, float highBound) {
 }
 
 void CParticle::Get_RandomVector(_vec3* _out, _vec3* _min, _vec3* _max) {
-	_out->x = GetRandomFloat(_min->x, _max->x);
-	_out->y = GetRandomFloat(_min->y, _max->y);
-	_out->z = GetRandomFloat(_min->z, _max->z);
+	_out->x = Get_RandomFloat(_min->x, _max->x);
+	_out->y = Get_RandomFloat(_min->y, _max->y);
+	_out->z = Get_RandomFloat(_min->z, _max->z);
 }

@@ -20,6 +20,7 @@ HRESULT Engine::CResourcesMgr::Reserve_ContainerSize(const _ushort& wSize)
 		return E_FAIL;
 
 	m_pmapResource = new map<const _tchar*, CResources*>[wSize];
+	m_vecParticle.reserve(PART_END);
 
 	m_sMaxContainer = wSize;
 
@@ -96,12 +97,15 @@ void Engine::CResourcesMgr::Free(void)
 	Safe_Delete_Array(m_pmapResource);
 }
 
+void CResourcesMgr::Ready_Particle(LPDIRECT3DDEVICE9 pGraphicDev, const _ushort & wContainerIdx, const _tchar * pTextureTag, PARTICLEID _ePartID, float _fSize, BoundingBox _boundingBox, _vec3 m_vOrigin) {
+}
+
 void Engine::CResourcesMgr::Render_Buffer(const _ushort& wContainerIdx, const _tchar* pBufferTag)
 {
 	CResources*	pResources = Find_Resources(wContainerIdx, pBufferTag);
 	NULL_CHECK(pResources);
 
-	dynamic_cast<CVIBuffer*>(pResources)->Render_Buffer();
+	static_cast<CVIBuffer*>(pResources)->Render_Buffer();
 }
 
 CResources* Engine::CResourcesMgr::Clone(const _ushort& wContainerIdx, const _tchar* pResourceTag)
@@ -111,7 +115,7 @@ CResources* Engine::CResourcesMgr::Clone(const _ushort& wContainerIdx, const _tc
 
 	CResources*	pPrototype = Find_Resources(wContainerIdx, pResourceTag);
 
-	return dynamic_cast<CResources*>(pPrototype->Clone());
+	return static_cast<CResources*>(pPrototype->Clone());
 }
 
 HRESULT Engine::CResourcesMgr::Ready_Texture(LPDIRECT3DDEVICE9 pGraphicDev,
@@ -133,5 +137,9 @@ HRESULT Engine::CResourcesMgr::Ready_Texture(LPDIRECT3DDEVICE9 pGraphicDev,
 	m_pmapResource[wContainerIdx].emplace(pTextureTag, pResources);
 
 	return S_OK;
+}
+
+void CResourcesMgr::Load_Particle() {
+	CParticle* pParticle;
 }
 
