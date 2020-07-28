@@ -23,9 +23,10 @@ public:
 	bool			Is_Empty(void);
 	bool			Is_Dead(void);
 	void			Set_Texture(_tchar* texFileName);
+	void			Set_Size(_float _fSize);
 	DWORD			FloatToDword(float& f);
-	float GetRandomFloat(float lowBound, float highBound);
-	void Get_RandomVector(_vec3* _out, _vec3* _min, _vec3* _max);
+	float			Get_RandomFloat(float lowBound, float highBound);
+	void			Get_RandomVector(_vec3* _out, _vec3* _min, _vec3* _max);
 
 public:
 	virtual CComponent*	Clone(void) { return nullptr; }
@@ -37,19 +38,19 @@ protected:
 
 
 protected:
-	_vec3	m_vOrigin;
-	BoundingBox m_BoundingBox;
+	_vec3					m_vOrigin;
+	BoundingBox				m_BoundingBox;
 
 	float					m_fEmitRate;
 	float					m_fSize;
-	IDirect3DTexture9*		m_Tex;
+	IDirect3DTexture9*		m_Tex=nullptr;
 	IDirect3DVertexBuffer9*	m_Vb;
 	list<ATTRIBUTE>			m_arrParticle;
 	int						m_iMaxParticle;
 
-	DWORD	m_VbSize;
-	DWORD	m_vOffset;
-	DWORD	m_BatchSize;
+	DWORD					m_VbSize;
+	DWORD					m_vOffset;
+	DWORD					m_BatchSize;
 };
 
 END

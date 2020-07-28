@@ -49,7 +49,7 @@ HRESULT Engine::CTerrain::Ready_Buffer(void)
 	int iTemp = 0;
 	for (int i = 0; i < iSize; ++i)
 	{
-		m_vecHeight[i] = imgInfo[iTemp] * 2.f;
+		m_vecHeight[i] = 0.f;
 		iTemp += 4;
 	}
 	delete[] imgInfo;

@@ -48,7 +48,7 @@ _int Engine::CCamera::Update_Component(const _float& fTimeDelta, LPDIRECT3DDEVIC
 	m_vPos = _vPos - m_vDir*m_fCameraDis;
 
 	//faskjfsadlkfjaldskjf
-	int Vernum = (int(m_vPos.x*INVERSETILESIZE) + VERTEXSIZE*int(m_vPos.z*INVERSETILESIZE));
+	/*int Vernum = (int(m_vPos.x*INVERSETILESIZE) + VERTEXSIZE*int(m_vPos.z*INVERSETILESIZE));
 
 	D3DXVECTOR3 Vertex1 = { float(int(m_vPos.x*INVERSETILESIZE)*TILECX), 0.f, float(int(m_vPos.z*INVERSETILESIZE)*TILECZ) };
 	D3DXVECTOR3 Vertex2 = { float(int(m_vPos.x*INVERSETILESIZE)*TILECX + TILECX), 0.f, float(int(m_vPos.z*INVERSETILESIZE)*TILECZ) };
@@ -103,7 +103,7 @@ _int Engine::CCamera::Update_Component(const _float& fTimeDelta, LPDIRECT3DDEVIC
 		}
 		else if (m_fCameraDis < 10.f)
 			m_fCameraDis += 0.5f;
-	}
+	}*/
 	//sadkfjdsalkjfalkdsjfaldsk
 
 	m_vDir = m_vPos + m_vDir;

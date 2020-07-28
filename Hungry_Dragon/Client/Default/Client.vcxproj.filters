@@ -31,9 +31,6 @@
     <Filter Include="02. GameObject">
       <UniqueIdentifier>{2cbaa01a-5fb5-4d17-9164-8169c87441b6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. GameObject\00. Logo">
-      <UniqueIdentifier>{96d40a23-3640-4667-974e-ad3d40d42673}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. GameObject\01. Stage">
       <UniqueIdentifier>{7aac664a-bdaf-425c-84a7-375cffc981a7}</UniqueIdentifier>
     </Filter>
@@ -81,6 +78,12 @@
     </Filter>
     <Filter Include="01. Scene\02. PlayerTest">
       <UniqueIdentifier>{8da5808b-3fa5-4c62-b2fc-d769bd219cee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Scene\99.Scene_Proto">
+      <UniqueIdentifier>{4b8d3310-6267-4c3c-b336-49e7cffdbe50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\00. Logo">
+      <UniqueIdentifier>{96d40a23-3640-4667-974e-ad3d40d42673}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +147,9 @@
     <ClInclude Include="..\Code\PlayerTest.h">
       <Filter>01. Scene\02. PlayerTest</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\Scene_Proto.h">
+      <Filter>01. Scene\99.Scene_Proto</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -196,6 +202,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\PlayerTest.cpp">
       <Filter>01. Scene\02. PlayerTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Scene_Proto.cpp">
+      <Filter>01. Scene\99.Scene_Proto</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

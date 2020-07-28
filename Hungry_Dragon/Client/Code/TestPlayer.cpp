@@ -36,7 +36,7 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 {
 	//임시용 레디때로 바꾸던가 밖에서 넣어줘야함
 	m_pTerrain = static_cast<Engine::CTerrain*>
-		(Engine::Get_Component(L"Environment",
+		(Engine::Get_Component(L"GameLogic",
 			L"BackGround",
 			L"Com_Buffer",
 			Engine::ID_STATIC));

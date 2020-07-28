@@ -170,6 +170,7 @@
     <ClInclude Include="..\Code\PlayerTest.h" />
     <ClInclude Include="..\Code\Run_Monster.h" />
     <ClInclude Include="..\Code\Scene_Monster.h" />
+    <ClInclude Include="..\Code\Scene_Proto.h" />
     <ClInclude Include="..\Code\Terrain.h" />
     <ClInclude Include="..\Code\TestPlayer.h" />
     <ClInclude Include="..\Header\Define.h" />
@@ -192,6 +193,7 @@
     <ClCompile Include="..\Code\PlayerTest.cpp" />
     <ClCompile Include="..\Code\Run_Monster.cpp" />
     <ClCompile Include="..\Code\Scene_Monster.cpp" />
+    <ClCompile Include="..\Code\Scene_Proto.cpp" />
     <ClCompile Include="..\Code\Terrain.cpp" />
     <ClCompile Include="..\Code\TestPlayer.cpp" />
     <ClCompile Include="Client.cpp" />
