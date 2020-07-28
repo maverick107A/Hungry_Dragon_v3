@@ -126,3 +126,4 @@ HRESULT CPlayerTest::Ready_Resource(LPDIRECT3DDEVICE9 pGraphicDev, RESOURCEID eM
 
 
 
+
