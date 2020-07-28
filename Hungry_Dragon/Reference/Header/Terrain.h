@@ -17,17 +17,17 @@ public:
 	virtual void Render_Buffer(void) override;
 
 public:
-	static CTerrain*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
-	virtual CComponent*	Clone(void)override;
-	virtual void Free(void) override;	
-
-public:
-	const vector<int>& Get_TerrainHeight();
+	const vector<float>& Get_TerrainHeight();
 
 private:
-	vector<int>			m_vecHeight;
+	vector<float>		m_vecHeight;
 	IDirect3DTexture9*	m_pTex;
 	bool				m_bCheck = true;
+
+public:
+	static CTerrain*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
+	virtual CComponent*	Clone(void)override;
+	virtual void Free(void) override;
 };
 
 END

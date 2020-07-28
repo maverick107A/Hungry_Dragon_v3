@@ -4,40 +4,30 @@
 #include "Component.h"
 
 BEGIN(Engine)
-
+class CPlayerMain;
 class ENGINE_DLL CPlayerState : public CComponent
 {
-private:
+protected:
 	explicit CPlayerState(void);
 	explicit CPlayerState(const CPlayerState& rhs);
 	virtual ~CPlayerState(void);
 
 public:
-	void			Get_Info(INFO eType, _vec3* pInfo);
+	virtual void Enter_State(CPlayerMain* _pPlayer) PURE;
+	virtual void Update_State(const float& fTimeDelta) PURE;
+	virtual void Out_State() PURE;
+
+protected:
+	CPlayerMain*				m_pPlayer = nullptr;
+
+protected:
+	virtual bool Land_Check(float* _fHeight);
 
 public:
-	HRESULT			Ready_State(void);
-	virtual _int	Update_State(const _float& fTimeDelta);
-	void			Set_State(LPDIRECT3DDEVICE9& pGraphicDev);
+	static CPlayerState*		Create(void) { return nullptr; }
+	virtual CComponent*			Clone(void) { return nullptr; }
 
-public:
-	void			Rotation(ROTATION eType, const _float& fAngle);
-	const _matrix*	Compute_LookAtTarget(const _vec3* pTargetPos);
-	void			Chase_Target(const _vec3* pTargetPos, const _float& fSpeed);
-
-
-public:
-	_vec3		m_vInfo[INFO_END];
-	_vec3		m_vScale; 
-	_vec3		m_vAngle;
-	_vec3		m_vTrans;
-	_matrix		m_matWorld;
-
-public:
-	static CPlayerState*		Create(void);
-	virtual CComponent*		Clone(void);
-
-private:
+protected:
 	virtual void Free(void);
 
 };

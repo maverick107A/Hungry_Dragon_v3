@@ -15,6 +15,7 @@ Engine::CTerrain::CTerrain(const CTerrain& rhs)
 {
 	m_vecHeight = rhs.m_vecHeight;
 	m_pTex = rhs.m_pTex;
+	m_pTex->AddRef();
 }
 
 Engine::CTerrain::~CTerrain(void)
@@ -23,7 +24,8 @@ Engine::CTerrain::~CTerrain(void)
 }
 
 HRESULT Engine::CTerrain::Ready_Buffer(void)
-{	D3DXCreateTextureFromFile(
+{
+	D3DXCreateTextureFromFile(
 		m_pGraphicDev,
 		L"../Bin/Resource/Texture/Terrain/ColorHeight.bmp",
 		&m_pTex);
@@ -34,28 +36,28 @@ HRESULT Engine::CTerrain::Ready_Buffer(void)
 	BITMAPFILEHEADER bitmapFileHeader;
 	fread(&bitmapFileHeader, sizeof(bitmapFileHeader), 1, FilePtr);
 
-	const int iSize = 129 * 129;
+	const int iSize = VERTEXSIZE * VERTEXSIZE;
 
 	m_vecHeight.resize(iSize);
 
-	unsigned char* imgInfo = new unsigned char[iSize*4];
+	unsigned char* imgInfo = new unsigned char[iSize * 4];
 
 	fseek(FilePtr, bitmapFileHeader.bfOffBits, SEEK_SET);
-	fread(imgInfo, 1, iSize*4, FilePtr);
+	fread(imgInfo, 1, iSize * 4, FilePtr);
 	fclose(FilePtr);
 
 	int iTemp = 0;
 	for (int i = 0; i < iSize; ++i)
 	{
-		m_vecHeight[i] = imgInfo[iTemp];
+		m_vecHeight[i] = imgInfo[iTemp] * 2.f;
 		iTemp += 4;
 	}
 	delete[] imgInfo;
 
 
 	//¸ÊÂï±â
-	m_dwVtxCnt = 129*129;
-	m_dwTriCnt = 128*128*2;
+	m_dwVtxCnt = VERTEXSIZE *VERTEXSIZE;
+	m_dwTriCnt = (VERTEXSIZE - 1)*(VERTEXSIZE - 1) * 2;
 	m_dwVtxSize = sizeof(VTXTEX);
 	m_dwFVF = FVF_TEX;
 
@@ -67,18 +69,17 @@ HRESULT Engine::CTerrain::Ready_Buffer(void)
 	VTXTEX*		pVertex = nullptr;
 
 	m_pVB->Lock(0, 0, (void**)&pVertex, 0);
-	
-	for (int i = 0; i < 129; ++i)
+
+	for (int i = 0; i < VERTEXSIZE; ++i)
 	{
-		for (int j = 0; j < 129; ++j)
+		for (int j = 0; j < VERTEXSIZE; ++j)
 		{
-			pVertex[j + i * 129].vPosition = _vec3(float(j), m_vecHeight[(j + i * 129)]*0.05f, float(i));
-			pVertex[j + i * 129].vTexUV = {j / 128.f, 1- i / 128.f };
-			//pVertex[j + i * 129].vPosition = _vec3(float(j), m_vecHeight[(j + (128 - i) * 129) * 4] * 0.05f, -float(i));
-			//pVertex[j + i * 129].vTexUV = { j / 128.f,i / 128.f };
+			pVertex[j + i * VERTEXSIZE].vPosition = _vec3(float(j)*TILECX, m_vecHeight[(j + i * VERTEXSIZE)], float(i)*TILECX);
+			pVertex[j + i * VERTEXSIZE].vTexUV = { j / float(VERTEXSIZE - 1), 1 - i / float(VERTEXSIZE - 1) };
+			//pVertex[j + i * VERTEXSIZE].vPosition = _vec3(float(j), m_vecHeight[(j + (128 - i) * 129) * 4] * 0.05f, -float(i));
+			//pVertex[j + i * VERTEXSIZE].vTexUV = { j / 128.f,i / 128.f };
 		}
 	}
-
 	m_pVB->Unlock();
 
 	INDEX16*		pIndex = nullptr;
@@ -88,18 +89,18 @@ HRESULT Engine::CTerrain::Ready_Buffer(void)
 
 
 	int iPoint = 0;
-	for (int j = 0; j < 128; ++j)
+	for (int j = 0; j < (VERTEXSIZE - 1); ++j)
 	{
-		for (int i = 0; i < 128; ++i)
+		for (int i = 0; i < (VERTEXSIZE - 1); ++i)
 		{
-			iPoint = i + j * 129;
-			pIndex[(i + j * 128) * 2]._0 = iPoint;
-			pIndex[(i + j * 128) * 2]._2 = iPoint + 1;
-			pIndex[(i + j * 128) * 2]._1 = iPoint + 129;
-						
-			pIndex[(i + j * 128) * 2 + 1]._0 = iPoint + 129;
-			pIndex[(i + j * 128) * 2 + 1]._2 = iPoint + 1;
-			pIndex[(i + j * 128) * 2 + 1]._1 = iPoint + 1 + 129;
+			iPoint = i + j * VERTEXSIZE;
+			pIndex[(i + j * (VERTEXSIZE - 1)) * 2]._0 = iPoint;
+			pIndex[(i + j * (VERTEXSIZE - 1)) * 2]._2 = iPoint + 1;
+			pIndex[(i + j * (VERTEXSIZE - 1)) * 2]._1 = iPoint + VERTEXSIZE;
+
+			pIndex[(i + j * (VERTEXSIZE - 1)) * 2 + 1]._0 = iPoint + VERTEXSIZE;
+			pIndex[(i + j * (VERTEXSIZE - 1)) * 2 + 1]._2 = iPoint + 1;
+			pIndex[(i + j * (VERTEXSIZE - 1)) * 2 + 1]._1 = iPoint + 1 + VERTEXSIZE;
 		}
 	}
 
@@ -118,12 +119,11 @@ void Engine::CTerrain::Render_Buffer(void)
 
 void Engine::CTerrain::Free(void)
 {
-
-		m_pTex->Release();
+	Safe_Release(m_pTex);
 	CVIBuffer::Free();
 }
 
-const vector<int>& CTerrain::Get_TerrainHeight()
+const vector<float>& CTerrain::Get_TerrainHeight()
 {
 	return m_vecHeight;
 }

@@ -7,6 +7,7 @@
 //여기에 스테이지 헤더파일 추가
 #include "Logo.h"
 #include "Scene_Monster.h"
+#include "PlayerTest.h"
 //-------------------------------------------------------
 //매니저 헤더********************************************
 //-------------------------------------------------------
@@ -79,7 +80,7 @@ HRESULT CMainApp::Ready_Scene(LPDIRECT3DDEVICE9 pGraphicDev,
 {
 	Engine::CScene*		pScene = nullptr;
 
-	pScene = CScene_Monster::Create(pGraphicDev);
+	pScene = CPlayerTest::Create(pGraphicDev);
 	NULL_CHECK_RETURN(pScene, E_FAIL);
 
 	FAILED_CHECK_RETURN(Engine::Create_Management(ppManagementInstance), E_FAIL);

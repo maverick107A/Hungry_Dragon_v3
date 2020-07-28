@@ -172,6 +172,11 @@ call CopyUtility.bat</Command>
     <ClCompile Include="..\Code\Layer.cpp" />
     <ClCompile Include="..\Code\Management.cpp" />
     <ClCompile Include="..\Code\ObjectPool.cpp" />
+    <ClCompile Include="..\Code\PFly.cpp" />
+    <ClCompile Include="..\Code\PFlyIdle.cpp" />
+    <ClCompile Include="..\Code\PLandIdle.cpp" />
+    <ClCompile Include="..\Code\PLandRush.cpp" />
+    <ClCompile Include="..\Code\PlayerMain.cpp" />
     <ClCompile Include="..\Code\PlayerState.cpp" />
     <ClCompile Include="..\Code\Renderer.cpp" />
     <ClCompile Include="..\Code\Scene.cpp" />
@@ -185,6 +190,11 @@ call CopyUtility.bat</Command>
     <ClInclude Include="..\Code\Layer.h" />
     <ClInclude Include="..\Code\Management.h" />
     <ClInclude Include="..\Code\ObjectPool.h" />
+    <ClInclude Include="..\Code\PFly.h" />
+    <ClInclude Include="..\Code\PFlyIdle.h" />
+    <ClInclude Include="..\Code\PLandIdle.h" />
+    <ClInclude Include="..\Code\PLandRush.h" />
+    <ClInclude Include="..\Code\PlayerMain.h" />
     <ClInclude Include="..\Code\PlayerState.h" />
     <ClInclude Include="..\Code\Renderer.h" />
     <ClInclude Include="..\Code\Scene.h" />

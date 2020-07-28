@@ -25,9 +25,9 @@ HRESULT CTestPlayer::Ready_Object(void)
 {
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
-	m_pTransform->m_vInfo[Engine::INFO_POS].x = 64.f;
-	m_pTransform->m_vInfo[Engine::INFO_POS].z = 64.f;
-	m_pTransform->m_vInfo[Engine::INFO_POS].y = 150.f;
+	m_pTransform->m_vInfo[Engine::INFO_POS].x = 264.f;
+	m_pTransform->m_vInfo[Engine::INFO_POS].z = 264.f;
+	m_pTransform->m_vInfo[Engine::INFO_POS].y = 700.f;
 
 	return S_OK;
 }
@@ -44,7 +44,7 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 	//Key_Input(fTimeDelta);
 
 	//Ride_Terrain();
-	
+
 
 	m_pState->Update_State(fTimeDelta);
 	m_pCamera->Update_Component(fTimeDelta, m_pGraphicDev, m_pTransform->m_vInfo[Engine::INFO_POS], &m_vLook, &m_vUp, m_pTerrain);
@@ -159,7 +159,7 @@ void CTestPlayer::Key_Input(const float& fTimeDelta)
 
 	if (GetAsyncKeyState(VK_SPACE))
 	{
-		vDir += D3DXVECTOR3(0.f,1.f,0.f);
+		vDir += D3DXVECTOR3(0.f, 1.f, 0.f);
 		//vDir += m_vUp;
 		/*m_pTransform->m_vInfo[Engine::INFO_POS].y += fTimeDelta*m_fSpeed;*/
 		bCheck = true;
@@ -178,7 +178,7 @@ void CTestPlayer::Key_Input(const float& fTimeDelta)
 			vDir *= fTimeDelta*m_fSpeed;;
 			if (m_bShift)
 			{
-				vDir*=200.f;
+				vDir *= 200.f;
 				m_bShift = false;
 			}
 			m_pTransform->m_vInfo[Engine::INFO_POS] += vDir;
@@ -189,7 +189,7 @@ void CTestPlayer::Key_Input(const float& fTimeDelta)
 				fAngleX *= -1;
 			//m_pTransform->m_vAngle.x = fAngleX;
 			m_pTransform->m_vAngle.x = 0.f;
-			if(0.f != fPlaneDis)
+			if (0.f != fPlaneDis)
 			{
 				float fAngleY = acosf(vDir.z / fPlaneDis);
 				if (0 > vDir.x)
@@ -205,7 +205,7 @@ void CTestPlayer::Key_Input(const float& fTimeDelta)
 			D3DXVec3Normalize(&vDir, &vDir);
 			if (m_bShift)
 			{
-				vDir*=200.f;
+				vDir *= 200.f;
 				m_bShift = false;
 			}
 			vDir *= fTimeDelta*m_fSpeed;;
@@ -276,14 +276,14 @@ void CTestPlayer::Ride_Terrain()
 
 			m_pTransform->m_vAngle.x = (acosf(vNorm.x*vNorm.x + vNorm.z*vNorm.z) - Pi*0.5f);
 		}
-		else if (m_pTransform->m_vInfo[Engine::INFO_POS].y <= fTerrainHieght+1)
+		else if (m_pTransform->m_vInfo[Engine::INFO_POS].y <= fTerrainHieght + 1)
 			m_bLand = true;
 	}
 	else
 	{
 		Vertex2.y = m_pTerrain->Get_TerrainHeight()[Vernum + 1] * 0.5f;
 		Vertex3.y = m_pTerrain->Get_TerrainHeight()[Vernum + VERTEXSIZE] * 0.5f;
-		Vertex4.y = m_pTerrain->Get_TerrainHeight()[Vernum + VERTEXSIZE+1] * 0.5f;
+		Vertex4.y = m_pTerrain->Get_TerrainHeight()[Vernum + VERTEXSIZE + 1] * 0.5f;
 
 		vTemp1 = Vertex3 - Vertex4;
 		vTemp2 = Vertex2 - Vertex4;
@@ -304,4 +304,3 @@ void CTestPlayer::Ride_Terrain()
 			m_bLand = true;
 	}
 }
-

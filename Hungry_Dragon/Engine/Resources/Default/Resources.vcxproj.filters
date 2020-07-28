@@ -45,9 +45,6 @@
     <ClCompile Include="..\Code\Texture.cpp">
       <Filter>00. Resources\01. Texture</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Terrain.cpp">
-      <Filter>00. Resources\00. VIBuffer\00. Terrain</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\CubeDra.cpp">
       <Filter>00. Resources\00. VIBuffer\01. CubeDra</Filter>
     </ClCompile>
@@ -59,6 +56,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\TerrainTex.cpp">
       <Filter>00. Resources\01. Texture\01. TerrainTex</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Terrain.cpp">
+      <Filter>00. Resources\00. VIBuffer\00. Terrain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -77,9 +77,6 @@
     <ClInclude Include="..\Code\Texture.h">
       <Filter>00. Resources\01. Texture</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\Terrain.h">
-      <Filter>00. Resources\00. VIBuffer\00. Terrain</Filter>
-    </ClInclude>
     <ClInclude Include="..\Code\CubeDra.h">
       <Filter>00. Resources\00. VIBuffer\01. CubeDra</Filter>
     </ClInclude>
@@ -91,6 +88,9 @@
     </ClInclude>
     <ClInclude Include="..\Code\TerrainTex.h">
       <Filter>00. Resources\01. Texture\01. TerrainTex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Terrain.h">
+      <Filter>00. Resources\00. VIBuffer\00. Terrain</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
