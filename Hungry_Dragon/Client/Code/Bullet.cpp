@@ -24,6 +24,13 @@ int CBullet::Update_Object(const float & fTimeDelta)
 {
 	Engine::CGameObject::Update_Object(fTimeDelta);
 
+
+	if (m_iEvent == BULLET_DEAD)
+	{
+		return -1;
+	}
+
+
 	return m_iEvent;
 }
 

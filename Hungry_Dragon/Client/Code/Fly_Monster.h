@@ -31,6 +31,8 @@ public:
 
 private:
 	virtual void Free(void) override;
+	bool  m_bFirst = true;
+	float m_fShotingLate = 0;
 };
 
 
