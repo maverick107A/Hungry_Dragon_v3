@@ -171,6 +171,7 @@ call CopyResources.bat</Command>
     <ClCompile Include="..\Code\CubeCol.cpp" />
     <ClCompile Include="..\Code\CubeDra.cpp" />
     <ClCompile Include="..\Code\CubeTex.cpp" />
+    <ClCompile Include="..\Code\Particle.cpp" />
     <ClCompile Include="..\Code\Resources.cpp" />
     <ClCompile Include="..\Code\ResourcesMgr.cpp" />
     <ClCompile Include="..\Code\Terrain.cpp" />
@@ -183,6 +184,7 @@ call CopyResources.bat</Command>
     <ClInclude Include="..\Code\CubeCol.h" />
     <ClInclude Include="..\Code\CubeDra.h" />
     <ClInclude Include="..\Code\CubeTex.h" />
+    <ClInclude Include="..\Code\Particle.h" />
     <ClInclude Include="..\Code\Resources.h" />
     <ClInclude Include="..\Code\ResourcesMgr.h" />
     <ClInclude Include="..\Code\Terrain.h" />

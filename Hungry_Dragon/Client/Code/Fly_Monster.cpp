@@ -28,11 +28,13 @@ HRESULT CFly_Monster::Ready_Object(void)
 
 int CFly_Monster::Update_Object(const float & fTimeDelta)
 {
-	
-	
 
+	m_fShotingLate += fTimeDelta;
+	if (m_fShotingLate > 0.3f)
+	{
 		Shooting();
-	
+		m_fShotingLate = 0;
+	}
 
 
 	D3DXVECTOR3	vMonsterPos;
@@ -75,7 +77,7 @@ void CFly_Monster::Shooting(void)
 	D3DXVECTOR3	vMonsterPos;
 	m_pTransform->Get_Info(Engine::INFO_POS, &vMonsterPos);
 
-	Engine::Set_Bullet_LayerMap(Engine::OBJID::NORMAL_BULLET, 1 , vMonsterPos);
+	Engine::Set_Bullet_LayerMap(Engine::OBJID::NORMAL_BULLET, 1, vMonsterPos);
 
 }
 

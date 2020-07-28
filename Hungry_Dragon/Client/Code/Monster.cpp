@@ -16,7 +16,7 @@ CMonster::~CMonster(void)
 
 HRESULT CMonster::Ready_Object(void)
 {
- 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
+	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 	return S_OK;
 }
 
@@ -78,7 +78,7 @@ HRESULT CMonster::Add_Component(void)
 
 void CMonster::Key_Input(const float & fTimeDelta)
 {
-	
+
 }
 
 CMonster * CMonster::Create(LPDIRECT3DDEVICE9 pGraphicDev)

@@ -16,6 +16,10 @@ END
 
 class  CNormal_Bullet : public CBullet
 {
+
+	enum BULLETSTATE { IDLE_BULLET, DEAD_BULLET, REFLECT_BULLET, STATE_END };
+
+
 private:
 	explicit CNormal_Bullet(LPDIRECT3DDEVICE9 pGraphicDev);
 	virtual ~CNormal_Bullet(void);
@@ -25,7 +29,7 @@ public:
 	virtual void Render_Object(void) override;
 private:
 	HRESULT		Add_Component(void);
-
+	void		State_Change();
 public:
 	static CNormal_Bullet*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 
@@ -33,8 +37,10 @@ private:
 	virtual void Free(void) override;
 
 private:
-	bool m_bFirst = true;
-
+	bool			m_bFirst = true;
+	BULLETSTATE		m_preState;
+	BULLETSTATE		m_eState;
+	D3DXVECTOR3		m_vReflDir;
 };
 
 

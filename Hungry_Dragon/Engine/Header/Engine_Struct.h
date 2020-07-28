@@ -71,6 +71,49 @@ namespace Engine
 	typedef struct CYLINDER {
 
 	}_cylinder;
+
+	typedef struct PARTICLE {
+		_vec3				vPosition;
+		D3DCOLOR			tColor;
+	}PARTICLE;
+
+	static const _ulong	FVF_PART = D3DFVF_XYZ | D3DFVF_DIFFUSE;
+
+	struct ATTRIBUTE {
+		ATTRIBUTE() {
+			fLifeTime = 0.f;
+			fAge = 0.f;
+			bAlive = true;
+		}
+
+		_vec3 vPosition;
+		_vec3 vVelocity;
+		_vec3 vAccel;
+
+		float fLifeTime;
+		float fAge;
+
+		D3DXCOLOR tColor;
+		D3DXCOLOR tColorFade;
+
+		bool	bAlive;
+	};
+
+	typedef struct BoundingBox {
+
+		bool isPointInside(_vec3& position) {
+			if (position.x >= vMin.x && position.y >= vMin.y && position.z >= vMin.z &&
+				position.x <= vMax.x && position.y <= vMax.y && position.z <= vMax.z) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+
+		_vec3 vMin;
+		_vec3 vMax;
+	}BoundingBox;
 }
 
 
