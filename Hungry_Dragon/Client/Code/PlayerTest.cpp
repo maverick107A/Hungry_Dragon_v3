@@ -97,9 +97,9 @@ HRESULT CPlayerTest::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 
 	Engine::CGameObject*		pGameObject = nullptr;
 
-	//pGameObject = CTestPlayer::Create(m_pGraphicDev);
-	//NULL_CHECK_RETURN(pGameObject, E_FAIL);
-	//FAILED_CHECK_RETURN(pLayer->Add_Object(L"Player", pGameObject), E_FAIL);
+	pGameObject = CTestPlayer::Create(m_pGraphicDev);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(pLayer->Add_Object(L"Player", pGameObject), E_FAIL);
 
 	m_mapLayer.emplace(pLayerTag, pLayer);
 

@@ -28,7 +28,6 @@ public:
 
 public:
 	void Set_Sate(STATE _eState) { m_eState = _eState; }
-	void Set_Speed(float _fSpeed) { m_fSpeed = _fSpeed; }
 
 public:
 	CTransform* Get_Transform() { return m_pTransform; }
