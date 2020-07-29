@@ -21,7 +21,7 @@ Engine::CPlayerState::~CPlayerState(void)
 
 }
 
-bool CPlayerState::Land_Check(float* _fHeight)
+bool CPlayerState::Land_Check(float* _fHeight, _vec3* _vNorm)
 {
 	D3DXVECTOR3* vPos = &m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS];
 	CBaseLand* pTerrain = m_pPlayer->Get_Terrain();
@@ -33,7 +33,8 @@ bool CPlayerState::Land_Check(float* _fHeight)
 
 	if (0 > Vernum || VERTEXSIZE*(VERTEXSIZE-1)-1 < Vernum)
 	{
-		*_fHeight = 0.f;
+		if(_fHeight)
+			*_fHeight = 0.f;
 		return false;
 	}
 
@@ -47,9 +48,9 @@ bool CPlayerState::Land_Check(float* _fHeight)
 	D3DXVECTOR3	vTemp2 = { -1.f,0.f,-1.f };
 	if (D3DXVec3Dot(&vTemp1, &vTemp2) > 0)
 	{
-		Vertex1.y = (float)pTerrain->Get_TerrainHeight()[Vernum];
-		Vertex2.y = (float)pTerrain->Get_TerrainHeight()[Vernum + 1];
-		Vertex3.y = (float)pTerrain->Get_TerrainHeight()[Vernum + VERTEXSIZE];
+		Vertex1.y = (float)pTerrain->Get_TerrainHeight()[Vernum]+1;
+		Vertex2.y = (float)pTerrain->Get_TerrainHeight()[Vernum + 1]+1;
+		Vertex3.y = (float)pTerrain->Get_TerrainHeight()[Vernum + VERTEXSIZE]+1;
 
 		vTemp1 = Vertex2 - Vertex1;
 		vTemp2 = Vertex3 - Vertex1;
@@ -59,16 +60,19 @@ bool CPlayerState::Land_Check(float* _fHeight)
 		float fConst = D3DXVec3Dot(&vNorm, &Vertex1);
 		float fTerrainHieght = (fConst - vNorm.x*vPos->x - vNorm.z*vPos->z) / vNorm.y;
 
-		*_fHeight = fTerrainHieght;
+		if(_fHeight)
+			*_fHeight = fTerrainHieght;
+		if (_vNorm)
+			*_vNorm = vNorm;
 
 		if (vPos->y <= fTerrainHieght)
 			return true;
 	}
 	else
 	{
-		Vertex2.y = (float)pTerrain->Get_TerrainHeight()[Vernum + 1];
-		Vertex3.y = (float)pTerrain->Get_TerrainHeight()[Vernum + VERTEXSIZE];
-		Vertex4.y = (float)pTerrain->Get_TerrainHeight()[Vernum + VERTEXSIZE + 1];
+		Vertex2.y = (float)pTerrain->Get_TerrainHeight()[Vernum + 1]+1;
+		Vertex3.y = (float)pTerrain->Get_TerrainHeight()[Vernum + VERTEXSIZE]+1;
+		Vertex4.y = (float)pTerrain->Get_TerrainHeight()[Vernum + VERTEXSIZE + 1]+1;
 
 		vTemp1 = Vertex3 - Vertex4;
 		vTemp2 = Vertex2 - Vertex4;
@@ -78,7 +82,10 @@ bool CPlayerState::Land_Check(float* _fHeight)
 		float fConst = D3DXVec3Dot(&vNorm, &Vertex3);
 		float fTerrainHieght = (fConst - vNorm.x*vPos->x - vNorm.z*vPos->z) / vNorm.y;
 
-		*_fHeight = fTerrainHieght;
+		if (_fHeight)
+			*_fHeight = fTerrainHieght;
+		if (_vNorm)
+			*_vNorm = vNorm;
 
 		if (vPos->y <= fTerrainHieght)
 			return true;

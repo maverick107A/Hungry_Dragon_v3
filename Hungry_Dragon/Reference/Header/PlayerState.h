@@ -21,7 +21,7 @@ protected:
 	CPlayerMain*				m_pPlayer = nullptr;
 
 protected:
-	virtual bool Land_Check(float* _fHeight);
+	virtual bool Land_Check(float* _fHeight = nullptr, _vec3* _vNorm = nullptr);
 
 public:
 	static CPlayerState*		Create(void) { return nullptr; }

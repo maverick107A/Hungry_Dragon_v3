@@ -46,6 +46,9 @@ public:
 	static CScene_Proto*		Create(LPDIRECT3DDEVICE9 pGraphicDev);
 
 private:
+	bool						m_bWireFrame = false;
+
+private:
 	virtual void Free(void) override;
 private:
 	// 플레이어 받아오는곳

@@ -5,6 +5,7 @@ USING(Engine)
 Engine::CTransform::CTransform(void)
 	: m_vScale(1.f, 1.f, 1.f)
 	, m_vAngle(0.f, 0.f, 0.f)
+	, m_vAddTrans(0.f,0.f,0.f)
 {
 	
 }
@@ -75,6 +76,14 @@ _int Engine::CTransform::Update_Component(const _float& fTimeDelta)
 
 	for(_uint i = 0; i < INFO_END ;++i)
 		memcpy(&m_matWorld.m[i][0], &m_vInfo[i], sizeof(_vec3));
+
+
+	//추가이동
+	for (int i = 0; i < 3; ++i)
+	{
+		m_matWorld.m[INFO_POS][i] += m_vAddTrans[i];
+	}
+	//여기까지
 
 	return 0;
 }

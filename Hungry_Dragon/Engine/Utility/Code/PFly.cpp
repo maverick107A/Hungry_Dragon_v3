@@ -60,6 +60,10 @@ void CPFly::Update_State(const float& fTimeDelta)
 	{
 		bShift = true;
 	}
+	if (GetAsyncKeyState('E'))
+	{
+		m_pPlayer->Get_Transform()->m_vAddTrans = vDir;
+	}
 	if (bCheck)
 	{
 		D3DXVec3Normalize(&vDir, &vDir);
@@ -135,8 +139,7 @@ void CPFly::Update_State(const float& fTimeDelta)
 		m_pPlayer->Set_Sate(CPlayerMain::STATE_FLYIDLE);
 	}
 	//아무 쓸모없는 변수
-	float fTemp;
-	if (Land_Check(&fTemp))
+	if (Land_Check())
 		m_pPlayer->Set_Sate(CPlayerMain::STATE_LANDRUSH);
 }
 

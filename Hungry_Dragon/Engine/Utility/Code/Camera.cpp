@@ -48,62 +48,68 @@ _int Engine::CCamera::Update_Component(const _float& fTimeDelta, LPDIRECT3DDEVIC
 	m_vPos = _vPos - m_vDir*m_fCameraDis;
 
 	//faskjfsadlkfjaldskjf
-	/*int Vernum = (int(m_vPos.x*INVERSETILESIZE) + VERTEXSIZE*int(m_vPos.z*INVERSETILESIZE));
+	int Vernum = (int(m_vPos.x*INVERSETILESIZE) + VERTEXSIZE*int(m_vPos.z*INVERSETILESIZE));
 
-	D3DXVECTOR3 Vertex1 = { float(int(m_vPos.x*INVERSETILESIZE)*TILECX), 0.f, float(int(m_vPos.z*INVERSETILESIZE)*TILECZ) };
-	D3DXVECTOR3 Vertex2 = { float(int(m_vPos.x*INVERSETILESIZE)*TILECX + TILECX), 0.f, float(int(m_vPos.z*INVERSETILESIZE)*TILECZ) };
-	D3DXVECTOR3 Vertex3 = { float(int(m_vPos.x*INVERSETILESIZE)*TILECX), 0.f, float(int(m_vPos.z*INVERSETILESIZE)*TILECZ + TILECZ) };
-	D3DXVECTOR3 Vertex4 = { float(int(m_vPos.x*INVERSETILESIZE)*TILECX + TILECX), 0.f, float(int(m_vPos.z*INVERSETILESIZE)*TILECZ + TILECZ) };
-
-
-	D3DXVECTOR3 vTemp1 = m_vPos - Vertex3;
-	D3DXVECTOR3	vTemp2 = { -1.f,0.f,-1.f };
-	if (D3DXVec3Dot(&vTemp1, &vTemp2) > 0)
+	if (0 > Vernum || VERTEXSIZE*(VERTEXSIZE - 1) - 1 < Vernum)
 	{
-		Vertex1.y = _pTerrain->Get_TerrainHeight()[Vernum];
-		Vertex2.y = _pTerrain->Get_TerrainHeight()[Vernum + 1];
-		Vertex3.y = _pTerrain->Get_TerrainHeight()[Vernum + 129];
-
-		vTemp1 = Vertex2 - Vertex1;
-		vTemp2 = Vertex3 - Vertex1;
-		D3DXVECTOR3 vNorm = {};
-		D3DXVec3Cross(&vNorm, &vTemp1, &vTemp2);
-
-		float fConst = D3DXVec3Dot(&vNorm, &Vertex1);
-		float fTerrainHieght = (fConst - vNorm.x*m_vPos.x - vNorm.z*m_vPos.z) / vNorm.y;
-
-		if (m_vPos.y < fTerrainHieght)
-		{
-			m_fCameraDis -= 0.5f;
-			if (m_fCameraDis < 0.f)
-				m_fCameraDis = 0.f;
-		}
-		else if (m_fCameraDis < 10.f)
-			m_fCameraDis += 0.5f;
 	}
 	else
 	{
-		Vertex2.y = _pTerrain->Get_TerrainHeight()[Vernum + 1];
-		Vertex3.y = _pTerrain->Get_TerrainHeight()[Vernum + 129];
-		Vertex4.y = _pTerrain->Get_TerrainHeight()[Vernum + 130];
+		D3DXVECTOR3 Vertex1 = { float(int(m_vPos.x*INVERSETILESIZE)*TILECX), 0.f, float(int(m_vPos.z*INVERSETILESIZE)*TILECZ) };
+		D3DXVECTOR3 Vertex2 = { float(int(m_vPos.x*INVERSETILESIZE)*TILECX + TILECX), 0.f, float(int(m_vPos.z*INVERSETILESIZE)*TILECZ) };
+		D3DXVECTOR3 Vertex3 = { float(int(m_vPos.x*INVERSETILESIZE)*TILECX), 0.f, float(int(m_vPos.z*INVERSETILESIZE)*TILECZ + TILECZ) };
+		D3DXVECTOR3 Vertex4 = { float(int(m_vPos.x*INVERSETILESIZE)*TILECX + TILECX), 0.f, float(int(m_vPos.z*INVERSETILESIZE)*TILECZ + TILECZ) };
 
-		vTemp1 = Vertex3 - Vertex4;
-		vTemp2 = Vertex2 - Vertex4;
-		D3DXVECTOR3 vNorm = {};
-		D3DXVec3Cross(&vNorm, &vTemp1, &vTemp2);
 
-		float fConst = D3DXVec3Dot(&vNorm, &Vertex2);
-		float fTerrainHieght = (fConst - vNorm.x*m_vPos.x - vNorm.z*m_vPos.z) / vNorm.y;
-
-		if (m_vPos.y < fTerrainHieght)
+		D3DXVECTOR3 vTemp1 = m_vPos - Vertex3;
+		D3DXVECTOR3	vTemp2 = { -1.f,0.f,-1.f };
+		if (D3DXVec3Dot(&vTemp1, &vTemp2) > 0)
 		{
-			m_fCameraDis -= 0.5f;
-			if (m_fCameraDis < 0.f)
-				m_fCameraDis = 0.f;
+			Vertex1.y = _pTerrain->Get_TerrainHeight()[Vernum]+1.f;
+			Vertex2.y = _pTerrain->Get_TerrainHeight()[Vernum + 1]+1.f;
+			Vertex3.y = _pTerrain->Get_TerrainHeight()[Vernum + 129]+1.f;
+
+			vTemp1 = Vertex2 - Vertex1;
+			vTemp2 = Vertex3 - Vertex1;
+			D3DXVECTOR3 vNorm = {};
+			D3DXVec3Cross(&vNorm, &vTemp1, &vTemp2);
+
+			float fConst = D3DXVec3Dot(&vNorm, &Vertex1);
+			float fTerrainHieght = (fConst - vNorm.x*m_vPos.x - vNorm.z*m_vPos.z) / vNorm.y;
+
+			if (m_vPos.y < fTerrainHieght)
+			{
+				m_fCameraDis -= 0.5f;
+				if (m_fCameraDis < 0.f)
+					m_fCameraDis = 0.f;
+			}
+			else if (m_fCameraDis < 10.f)
+				m_fCameraDis += 0.5f;
 		}
-		else if (m_fCameraDis < 10.f)
-			m_fCameraDis += 0.5f;
-	}*/
+		else
+		{
+			Vertex2.y = _pTerrain->Get_TerrainHeight()[Vernum + 1] + 1.f;
+			Vertex3.y = _pTerrain->Get_TerrainHeight()[Vernum + 129] + 1.f;
+			Vertex4.y = _pTerrain->Get_TerrainHeight()[Vernum + 130] + 1.f;
+
+			vTemp1 = Vertex3 - Vertex4;
+			vTemp2 = Vertex2 - Vertex4;
+			D3DXVECTOR3 vNorm = {};
+			D3DXVec3Cross(&vNorm, &vTemp1, &vTemp2);
+
+			float fConst = D3DXVec3Dot(&vNorm, &Vertex2);
+			float fTerrainHieght = (fConst - vNorm.x*m_vPos.x - vNorm.z*m_vPos.z) / vNorm.y;
+
+			if (m_vPos.y < fTerrainHieght)
+			{
+				m_fCameraDis -= 0.5f;
+				if (m_fCameraDis < 0.f)
+					m_fCameraDis = 0.f;
+			}
+			else if (m_fCameraDis < 10.f)
+				m_fCameraDis += 0.5f;
+		}
+	}
 	//sadkfjdsalkjfalkdsjfaldsk
 
 	m_vDir = m_vPos + m_vDir;

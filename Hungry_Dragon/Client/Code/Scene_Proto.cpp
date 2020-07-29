@@ -37,7 +37,14 @@ HRESULT CScene_Proto::Ready_Scene(void) {
 }
 
 _int CScene_Proto::Update_Scene(const _float& fTimeDelta) {
-
+	if (GetAsyncKeyState('F') & 0x0001)
+	{
+		if(m_bWireFrame)
+			m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+		else
+			m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+		m_bWireFrame = !m_bWireFrame;
+	}
 	pPlayerTransformCom = dynamic_cast<Engine::CTransform*>
 		(Engine::Get_Component(L"GameLogic",
 			L"TestPlayer",
