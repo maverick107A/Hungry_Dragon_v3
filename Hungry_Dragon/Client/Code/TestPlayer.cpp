@@ -46,21 +46,28 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 
 	//Ride_Terrain();
 
-	if ((GetAsyncKeyState('R') & 0x8000) && nullptr == m_pParticle) {
+	//R 키 누르면 생성
+	if ((GetAsyncKeyState('R') & 0x8000) ) {
 		Engine::_vec3 vOrigin=Engine::_vec3(0.f,0.f,0.f);
 		Engine::BoundingBox tempBoundingBox;
 		tempBoundingBox.vMax = Engine::_vec3(100.f,100.f,100.f);
 		tempBoundingBox.vMin = Engine::_vec3(-100.f, -100.f, -100.f);
+		Engine::CResources* tempParticle = Engine::Get_Particle(m_pGraphicDev, Engine::PART_ATK, tempBoundingBox, vOrigin);
 
-		/*tempBoundingBox.vMax = { 1000.f,1000.f,1000.f };
-		tempBoundingBox.vMin = { -1000.f,-1000.f,-1000.f };*/
-		m_pParticle = Engine::Get_Particle(m_pGraphicDev, Engine::PART_ATK, tempBoundingBox, vOrigin);
+		//나중엔 미리 올려 놓는 식으로 구현하자
+		static_cast<Engine::CAtkPart*>(tempParticle)->Set_Texture(L"../../Asset/snowflake.dds");
+		m_arrParticle.emplace_back( tempParticle);
 	}
 
-	if (m_pParticle != nullptr) {
-		int result = m_pParticle->Update_Component(fTimeDelta);
-		if (-1 == result) {
-			Engine::Safe_Release(m_pParticle);
+	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end();) {
+		int life = (*iter)->Update_Component(fTimeDelta);
+
+		if (life == 0) {
+			++iter;
+		}
+		else {
+			Safe_Release(*iter);
+			iter = m_arrParticle.erase(iter);
 		}
 	}
 
@@ -85,13 +92,20 @@ void CTestPlayer::Render_Object(void)
 	m_pTransform->Set_Transform(m_pGraphicDev);
 	m_pBufferCom->Render_Buffer();
 
-	if (nullptr != m_pParticle)
-		m_pParticle->Render_Buffer();
+	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end();++iter) {
+		(*iter)->Render_Buffer();
+	}
 }
 
 void CTestPlayer::Free(void)
 {
-	Engine::Safe_Release(m_pParticle);
+	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end();) {
+		Engine::Safe_Release((*iter));
+		iter = m_arrParticle.erase(iter);
+
+	}
+	m_arrParticle.clear();
+	
 	m_pState->Release();
 	Engine::CGameObject::Free();
 }

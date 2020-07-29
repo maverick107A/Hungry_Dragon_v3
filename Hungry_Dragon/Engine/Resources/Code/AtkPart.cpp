@@ -22,9 +22,9 @@ CAtkPart::CAtkPart(LPDIRECT3DDEVICE9 pGraphicDev, _vec3 vOrigin ,BoundingBox * b
 {
 	m_BoundingBox = *boundingBox;
 	m_fSize = _fSize;
-	m_VbSize = 100;
+	m_VbSize = 40;
 	m_vOffset = 0;
-	m_BatchSize = 25;
+	m_BatchSize = 10;
 
 	m_fWidth = 5.f;
 	m_fHeight = 10.f;
@@ -61,7 +61,7 @@ void CAtkPart::Reset_Particle(ATTRIBUTE* _attribute) {
 	float ftempRand_t = 2.f*Pi*(float)rand() / RAND_MAX;
 
 	_attribute->vVelocity.x = (ftempRand_r*cosf(ftempRand_t))*m_fWidth;
-	_attribute->vVelocity.y = ((ftempRand_r*sinf(ftempRand_t))*m_fHeight-m_fSpeed);
+	_attribute->vVelocity.y = ((ftempRand_r*sinf(ftempRand_t))*m_fHeight+m_fSpeed);
 	_attribute->vVelocity.z = (ftempRand_z*sinf(ftempRand_t))*m_fWidth;
 
 	_attribute->tColor = D3DXCOLOR(255.f, 0.f, 0.f, 255.f-(rand()*50/RAND_MAX));

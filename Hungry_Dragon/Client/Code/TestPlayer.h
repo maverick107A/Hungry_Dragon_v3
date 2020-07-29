@@ -41,7 +41,7 @@ private:
 	virtual void Free(void) override;
 
 public:
-	Engine::CResources* m_pParticle = nullptr;
+	list<Engine::CResources*>  m_arrParticle;
 
 };
 
