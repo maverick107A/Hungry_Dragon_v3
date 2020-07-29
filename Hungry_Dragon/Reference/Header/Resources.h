@@ -14,6 +14,9 @@ protected:
 	explicit CResources(const CResources& rhs);
 	virtual ~CResources(void);
 
+public:
+	virtual void		Render_Buffer(void)PURE;
+
 protected:
 	LPDIRECT3DDEVICE9		m_pGraphicDev;
 

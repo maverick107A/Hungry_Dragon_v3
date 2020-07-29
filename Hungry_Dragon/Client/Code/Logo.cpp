@@ -30,7 +30,7 @@ HRESULT CLogo::Ready_Scene(void)
 		_float(WINCX) / WINCY,
 		1.f,
 		1000.f);
-	;;;;;;;;;;
+
 	m_pGraphicDev->SetTransform(D3DTS_PROJECTION, &matProj);
 	m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 

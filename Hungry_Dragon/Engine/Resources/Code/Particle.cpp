@@ -7,6 +7,7 @@ CParticle::CParticle(LPDIRECT3DDEVICE9 pGraphicDev)
 {
 	m_Vb = 0;
 	m_Tex = 0;
+	m_fSpeed = 17.f;
 }
 
 CParticle::CParticle(const CParticle & rhs)
@@ -19,6 +20,7 @@ CParticle::CParticle(const CParticle & rhs)
 	,m_VbSize(rhs.m_VbSize)
 	,m_vOffset(rhs.m_vOffset)
 	,m_BatchSize(rhs.m_BatchSize)
+	,m_fSpeed(rhs.m_fSpeed)
 {
 	m_BoundingBox = rhs.m_BoundingBox;
 
@@ -79,6 +81,8 @@ void CParticle::Render_Buffer(void) {
 				
 				particleInBatchNum = 0;
 			}
+			
+			
 		}
 	}
 
@@ -116,7 +120,6 @@ void CParticle::Render_Begin(void) {
 
 void CParticle::Render_End(void) {
 	m_pGraphicDev->SetTexture(0, 0);
-	m_pGraphicDev->SetRenderState(D3DRS_LIGHTING, true);
 	m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
 	m_pGraphicDev->SetRenderState(D3DRS_POINTSCALEENABLE, false);
 	m_pGraphicDev->SetRenderState(D3DRS_POINTSPRITEENABLE, false);

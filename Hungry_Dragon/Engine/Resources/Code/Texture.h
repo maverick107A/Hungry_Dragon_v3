@@ -31,6 +31,10 @@ public:
 	virtual CResources*		Clone(void);
 	virtual void			Free(void);
 
+
+	// CResources을(를) 통해 상속됨
+	virtual void Render_Buffer(void) override;
+
 };
 
 END

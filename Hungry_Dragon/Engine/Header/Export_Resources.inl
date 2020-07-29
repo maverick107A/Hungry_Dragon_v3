@@ -1,3 +1,4 @@
+#include "Export_Resources.h"
 // ResourcesMgr
 // Get
 // Set
@@ -27,6 +28,10 @@ HRESULT	Ready_Texture(LPDIRECT3DDEVICE9 pGraphicDev,
 	return CResourcesMgr::GetInstance()->Ready_Texture(pGraphicDev, wContainerIdx, pTextureTag, eType, pPath, iCnt);
 }
 
+inline void Load_Particle(LPDIRECT3DDEVICE9 pGraphicDev) {
+	CResourcesMgr::GetInstance()->Load_Particle(pGraphicDev);
+}
+
 
 void	Render_Buffer(const _ushort& wContainerIdx, const _tchar* pBufferTag)
 {
@@ -36,6 +41,10 @@ void	Render_Buffer(const _ushort& wContainerIdx, const _tchar* pBufferTag)
 CResources*		Clone(const _ushort& wContainerIdx, const _tchar* pResourceTag)
 {
 	return CResourcesMgr::GetInstance()->Clone(wContainerIdx, pResourceTag);
+}
+
+inline CResources * Get_Particle(LPDIRECT3DDEVICE9 pGraphicDev, PARTICLEID _ePartID, BoundingBox _boundingBox, _vec3 _vOrigin) {
+	return CResourcesMgr::GetInstance()->Get_Particle(pGraphicDev, _ePartID, _boundingBox, _vOrigin);
 }
 
 // Release
