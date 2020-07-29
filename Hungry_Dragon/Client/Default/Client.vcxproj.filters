@@ -91,6 +91,9 @@
     <Filter Include="01. Scene\70. PlayerTest">
       <UniqueIdentifier>{8da5808b-3fa5-4c62-b2fc-d769bd219cee}</UniqueIdentifier>
     </Filter>
+    <Filter Include="72. Test">
+      <UniqueIdentifier>{a88ee47e-e890-436e-a7ad-2ee32e81ec36}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
