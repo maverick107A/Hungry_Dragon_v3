@@ -38,5 +38,6 @@ const D3DXCOLOR MAGENTA  (255,255,0,255);
 #define VERTEXSIZE 129
 #define Pi 3.141592f
 #define INVERSETILESIZE 0.01f
+#define GRAVITY 5.f
 
 #endif // Engine_Define_h__

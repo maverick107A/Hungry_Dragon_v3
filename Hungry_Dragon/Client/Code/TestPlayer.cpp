@@ -2,6 +2,7 @@
 #include "TestPlayer.h"
 
 #include "Export_Function.h"
+#include "AtkPart.h"
 #include "CubeDra.h"
 #include "Camera.h"
 #include "PlayerState.h"
@@ -26,8 +27,8 @@ HRESULT CTestPlayer::Ready_Object(void)
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
 	m_pTransform->m_vInfo[Engine::INFO_POS].x = 264.f;
-	m_pTransform->m_vInfo[Engine::INFO_POS].z = 264.f;
 	m_pTransform->m_vInfo[Engine::INFO_POS].y = 700.f;
+	m_pTransform->m_vInfo[Engine::INFO_POS].z = 264.f;
 
 	return S_OK;
 }
@@ -45,6 +46,24 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 
 	//Ride_Terrain();
 
+	if ((GetAsyncKeyState('R') & 0x8000) && nullptr == m_pParticle) {
+		Engine::_vec3 vOrigin;
+		m_pTransform->Get_Info(Engine::INFO_POS, &vOrigin);
+		Engine::BoundingBox tempBoundingBox;
+		tempBoundingBox.vMax = vOrigin+Engine::_vec3(300.f,300.f,300.f);
+		tempBoundingBox.vMin = vOrigin-Engine::_vec3(300.f, 300.f, 300.f);
+
+		/*tempBoundingBox.vMax = { 1000.f,1000.f,1000.f };
+		tempBoundingBox.vMin = { -1000.f,-1000.f,-1000.f };*/
+		m_pParticle = Engine::Get_Particle(m_pGraphicDev, Engine::PART_ATK, tempBoundingBox, vOrigin);
+	}
+
+	if (m_pParticle != nullptr) {
+		int result = m_pParticle->Update_Component(fTimeDelta);
+		if (-1 == result) {
+			Engine::Safe_Release(m_pParticle);
+		}
+	}
 
 	m_pState->Update_State(fTimeDelta);
 	m_pCamera->Update_Component(fTimeDelta, m_pGraphicDev, m_pTransform->m_vInfo[Engine::INFO_POS], &m_vLook, &m_vUp, m_pTerrain);
@@ -66,10 +85,14 @@ void CTestPlayer::Render_Object(void)
 {
 	m_pTransform->Set_Transform(m_pGraphicDev);
 	m_pBufferCom->Render_Buffer();
+
+	if (nullptr != m_pParticle)
+		m_pParticle->Render_Buffer();
 }
 
 void CTestPlayer::Free(void)
 {
+	Engine::Safe_Release(m_pParticle);
 	m_pState->Release();
 	Engine::CGameObject::Free();
 }

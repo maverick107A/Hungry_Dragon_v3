@@ -11,6 +11,8 @@ class CTexture;
 class CTransform;
 class CCamera;
 class CTerrain;
+class CAtkPart;
+class CResources;
 
 END
 class CTestPlayer : public Engine::CPlayerMain
@@ -37,6 +39,9 @@ public:
 
 private:
 	virtual void Free(void) override;
+
+public:
+	Engine::CResources* m_pParticle = nullptr;
 
 };
 

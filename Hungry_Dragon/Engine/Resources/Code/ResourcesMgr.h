@@ -5,7 +5,7 @@
 //매니저 헤더********************************************
 //-------------------------------------------------------
 //여기에 매니저 헤더 추가
-
+#include "TimerMgr.h"		//파티클용 타이머 추가를 위함.
 
 //-------------------------------------------------------
 //기타 헤더**********************************************
@@ -19,7 +19,7 @@
 #include "TerrainTex.h"
 #include "CubeTex.h"
 
-#include "Particle.h"		//임시. 파티클 종류별로 생성하면 추가하고 지울 것.
+#include "AtkPart.h"		//임시. 파티클 종류별로 생성하면 추가하고 지울 것.
 //-------------------------------------------------------
 
 
@@ -54,14 +54,11 @@ public:
 							const _uint& iCnt = 1);
 
 	//미리 벡터 공간 m_vecParticle에 모든 파티클 효과를 생성해 적재해 놓는 함수
-	void	Load_Particle();
+	void	Load_Particle(LPDIRECT3DDEVICE9 pGraphicDev);
 
 	//Particle 프리셋에서 클론한 파티클을 Layer에 삽입하는 함수
-	void	Ready_Particle(LPDIRECT3DDEVICE9 pGraphicDev,
-							const _ushort& wContainerIdx,
-							const _tchar* pTextureTag,
+	CResources*	Get_Particle(LPDIRECT3DDEVICE9 pGraphicDev,
 							PARTICLEID _ePartID,
-							float _fSize,
 							BoundingBox _boundingBox,
 							_vec3 m_vOrigin);
 
@@ -80,7 +77,7 @@ private:
 
 private:
 	map<const _tchar*, CResources*>*		m_pmapResource = nullptr;
-	vector<CResources*>						m_vecParticle;
+	vector<CParticle*>						m_vecParticle;
 	_ushort									m_sMaxContainer;
 
 public:

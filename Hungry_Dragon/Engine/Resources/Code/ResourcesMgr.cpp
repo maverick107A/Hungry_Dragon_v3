@@ -93,11 +93,21 @@ void Engine::CResourcesMgr::Free(void)
 		for_each(m_pmapResource[i].begin(), m_pmapResource[i].end(), CDeleteMap());
 		m_pmapResource[i].clear();
 	}
+
+	for (size_t i = 0; i < PART_END; ++i) {
+		Safe_Release(m_vecParticle[i]);
+	}
+	m_vecParticle.clear();
 	
 	Safe_Delete_Array(m_pmapResource);
 }
 
-void CResourcesMgr::Ready_Particle(LPDIRECT3DDEVICE9 pGraphicDev, const _ushort & wContainerIdx, const _tchar * pTextureTag, PARTICLEID _ePartID, float _fSize, BoundingBox _boundingBox, _vec3 m_vOrigin) {
+CResources* CResourcesMgr::Get_Particle(LPDIRECT3DDEVICE9 pGraphicDev, PARTICLEID _ePartID, BoundingBox _boundingBox, _vec3 _vOrigin) {
+	if ((size_t)_ePartID >= m_vecParticle.size()) {
+		return nullptr;
+	}
+
+	return m_vecParticle[_ePartID]->Clone(_vOrigin, _boundingBox);
 }
 
 void Engine::CResourcesMgr::Render_Buffer(const _ushort& wContainerIdx, const _tchar* pBufferTag)
@@ -105,7 +115,7 @@ void Engine::CResourcesMgr::Render_Buffer(const _ushort& wContainerIdx, const _t
 	CResources*	pResources = Find_Resources(wContainerIdx, pBufferTag);
 	NULL_CHECK(pResources);
 
-	static_cast<CVIBuffer*>(pResources)->Render_Buffer();
+	static_cast<CResources*>(pResources)->Render_Buffer();
 }
 
 CResources* Engine::CResourcesMgr::Clone(const _ushort& wContainerIdx, const _tchar* pResourceTag)
@@ -139,7 +149,24 @@ HRESULT Engine::CResourcesMgr::Ready_Texture(LPDIRECT3DDEVICE9 pGraphicDev,
 	return S_OK;
 }
 
-void CResourcesMgr::Load_Particle() {
+void CResourcesMgr::Load_Particle(LPDIRECT3DDEVICE9 pGraphicDev) {
+
+	//파티클 전용 타이머 추가
+	CTimerMgr::GetInstance()->Ready_Timer(L"Paticle_Timer");
+
 	CParticle* pParticle;
+
+	for (int i = 0; i < PART_END; ++i) {
+		switch (i) {
+		case PART_ATK:
+			pParticle =	CAtkPart::Create(pGraphicDev, 500);
+			break;
+		default:
+			pParticle = nullptr;
+			break;
+		}
+
+		m_vecParticle.emplace_back(pParticle);
+	}
 }
 
