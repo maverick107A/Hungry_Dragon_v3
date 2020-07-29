@@ -99,3 +99,6 @@ void Engine::CTexture::Free(void)
 	m_vecTexture.clear();
 }
 
+void CTexture::Render_Buffer(void) {
+}
+

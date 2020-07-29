@@ -31,17 +31,11 @@
     <Filter Include="00. Resources\01. Texture\01. TerrainTex">
       <UniqueIdentifier>{97516da8-155b-4ed8-b97a-6f36aa3e1f2d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00. Resources\03. Billboard">
-      <UniqueIdentifier>{4a313615-ebae-4f44-bc5c-bf4cb2eafe2e}</UniqueIdentifier>
+    <Filter Include="00. Resources\02. Particle">
+      <UniqueIdentifier>{e0bbf74c-4a82-4068-82de-210f3e591c81}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00. Resources\04. Sector">
-      <UniqueIdentifier>{5c847960-e088-4270-8c7d-a37d506a8874}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00. Resources\02. Land">
-      <UniqueIdentifier>{f36f05ee-9990-42d3-bd81-bcf2b03413c5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00. Resources\00. VIBuffer\50. 아직 안씀">
-      <UniqueIdentifier>{f5bfd834-4bd3-48d4-8b3d-672889637e0c}</UniqueIdentifier>
+    <Filter Include="00. Resources\02. Particle\00. AtkPart">
+      <UniqueIdentifier>{9dec9d84-03db-4be6-a711-a6288816a69e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -72,54 +66,11 @@
     <ClCompile Include="..\Code\Terrain.cpp">
       <Filter>00. Resources\00. VIBuffer\00. Terrain</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Particle.cpp" />
-    <ClCompile Include="..\Code\IceAgeLand.cpp">
-      <Filter>00. Resources\02. Land</Filter>
+    <ClCompile Include="..\Code\Particle.cpp">
+      <Filter>00. Resources\02. Particle</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\RiftLand.cpp">
-      <Filter>00. Resources\02. Land</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\VolcanoLand.cpp">
-      <Filter>00. Resources\02. Land</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\BaseLand.cpp">
-      <Filter>00. Resources\02. Land</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ForestLand.cpp">
-      <Filter>00. Resources\02. Land</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\TreeBoard.cpp">
-      <Filter>00. Resources\03. Billboard</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\BaseBoard.cpp">
-      <Filter>00. Resources\03. Billboard</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MeteorBoard.cpp">
-      <Filter>00. Resources\03. Billboard</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\RoadSector.cpp">
-      <Filter>00. Resources\04. Sector</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\BaseSector.cpp">
-      <Filter>00. Resources\04. Sector</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\BoardSector.cpp">
-      <Filter>00. Resources\04. Sector</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\GlacierTex.cpp">
-      <Filter>00. Resources\00. VIBuffer\50. 아직 안씀</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\RockTex.cpp">
-      <Filter>00. Resources\00. VIBuffer\50. 아직 안씀</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\SkyCube.cpp">
-      <Filter>00. Resources\00. VIBuffer\50. 아직 안씀</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\UnitSector.cpp">
-      <Filter>00. Resources\04. Sector</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\LandTex.cpp">
-      <Filter>00. Resources\00. VIBuffer\50. 아직 안씀</Filter>
+    <ClCompile Include="..\Code\AtkPart.cpp">
+      <Filter>00. Resources\02. Particle\00. AtkPart</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -153,54 +104,11 @@
     <ClInclude Include="..\Code\Terrain.h">
       <Filter>00. Resources\00. VIBuffer\00. Terrain</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\Particle.h" />
-    <ClInclude Include="..\Code\IceAgeLand.h">
-      <Filter>00. Resources\02. Land</Filter>
+    <ClInclude Include="..\Code\Particle.h">
+      <Filter>00. Resources\02. Particle</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\RiftLand.h">
-      <Filter>00. Resources\02. Land</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\VolcanoLand.h">
-      <Filter>00. Resources\02. Land</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\BaseLand.h">
-      <Filter>00. Resources\02. Land</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\ForestLand.h">
-      <Filter>00. Resources\02. Land</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\TreeBoard.h">
-      <Filter>00. Resources\03. Billboard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\BaseBoard.h">
-      <Filter>00. Resources\03. Billboard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\MeteorBoard.h">
-      <Filter>00. Resources\03. Billboard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\RoadSector.h">
-      <Filter>00. Resources\04. Sector</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\BaseSector.h">
-      <Filter>00. Resources\04. Sector</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\BoardSector.h">
-      <Filter>00. Resources\04. Sector</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\GlacierTex.h">
-      <Filter>00. Resources\00. VIBuffer\50. 아직 안씀</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\RockTex.h">
-      <Filter>00. Resources\00. VIBuffer\50. 아직 안씀</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\SkyCube.h">
-      <Filter>00. Resources\00. VIBuffer\50. 아직 안씀</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\UnitSector.h">
-      <Filter>00. Resources\04. Sector</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\LandTex.h">
-      <Filter>00. Resources\00. VIBuffer\50. 아직 안씀</Filter>
+    <ClInclude Include="..\Code\AtkPart.h">
+      <Filter>00. Resources\02. Particle\00. AtkPart</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

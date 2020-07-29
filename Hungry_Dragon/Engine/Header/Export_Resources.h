@@ -27,8 +27,15 @@ inline HRESULT	Ready_Texture(LPDIRECT3DDEVICE9 pGraphicDev,
 							const _tchar* pPath,
 							const _uint& iCnt = 1);
 
+inline void	Load_Particle(LPDIRECT3DDEVICE9 pGraphicDev);
+
 inline void	Render_Buffer(const _ushort& wContainerIdx, const _tchar* pBufferTag);
 inline CResources*		Clone(const _ushort& wContainerIdx, const _tchar* pResourceTag);
+
+inline CResources*	Get_Particle(LPDIRECT3DDEVICE9 pGraphicDev,
+	PARTICLEID _ePartID,
+	BoundingBox _boundingBox,
+	_vec3 _vOrigin);
 
 
 // Release

@@ -23,7 +23,7 @@ private: // 생성자
 	// Public 변수
 public:
 	HRESULT			Ready_MainApp(void);
-	Engine::_int			Update_MainApp(const Engine::_float& fTimeDelta);
+	Engine::_int	Update_MainApp(const Engine::_float& fTimeDelta);
 	void			Render_MainApp(void);
 
 	// Protected 함수

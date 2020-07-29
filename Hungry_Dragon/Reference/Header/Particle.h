@@ -29,7 +29,7 @@ public:
 	void			Get_RandomVector(_vec3* _out, _vec3* _min, _vec3* _max);
 
 public:
-	virtual CComponent*	Clone(void) { return nullptr; }
+	virtual CResources*	Clone(_vec3 _origin, BoundingBox _boundingBox)PURE;
 	virtual void Free(void);
 
 protected:
@@ -43,6 +43,8 @@ protected:
 
 	float					m_fEmitRate;
 	float					m_fSize;
+	float					m_fSpeed;
+
 	IDirect3DTexture9*		m_Tex=nullptr;
 	IDirect3DVertexBuffer9*	m_Vb;
 	list<ATTRIBUTE>			m_arrParticle;
