@@ -169,30 +169,62 @@ call CopyResources.bat</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\AtkPart.cpp" />
+    <ClCompile Include="..\Code\BaseBoard.cpp" />
+    <ClCompile Include="..\Code\BaseLand.cpp" />
+    <ClCompile Include="..\Code\BaseSector.cpp" />
+    <ClCompile Include="..\Code\BoardSector.cpp" />
     <ClCompile Include="..\Code\CubeCol.cpp" />
     <ClCompile Include="..\Code\CubeDra.cpp" />
     <ClCompile Include="..\Code\CubeTex.cpp" />
+    <ClCompile Include="..\Code\ForestLand.cpp" />
+    <ClCompile Include="..\Code\GlacierTex.cpp" />
+    <ClCompile Include="..\Code\IceAgeLand.cpp" />
+    <ClCompile Include="..\Code\LandTex.cpp" />
+    <ClCompile Include="..\Code\MeteorBoard.cpp" />
     <ClCompile Include="..\Code\Particle.cpp" />
     <ClCompile Include="..\Code\Resources.cpp" />
     <ClCompile Include="..\Code\ResourcesMgr.cpp" />
+    <ClCompile Include="..\Code\RiftLand.cpp" />
+    <ClCompile Include="..\Code\RoadSector.cpp" />
+    <ClCompile Include="..\Code\RockTex.cpp" />
+    <ClCompile Include="..\Code\SkyCube.cpp" />
     <ClCompile Include="..\Code\Terrain.cpp" />
     <ClCompile Include="..\Code\TerrainTex.cpp" />
     <ClCompile Include="..\Code\Texture.cpp" />
+    <ClCompile Include="..\Code\TreeBoard.cpp" />
+    <ClCompile Include="..\Code\UnitSector.cpp" />
     <ClCompile Include="..\Code\VIBuffer.cpp" />
+    <ClCompile Include="..\Code\VolcanoLand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Header\Export_Resources.h" />
     <ClInclude Include="..\Code\AtkPart.h" />
+    <ClInclude Include="..\Code\BaseBoard.h" />
+    <ClInclude Include="..\Code\BaseLand.h" />
+    <ClInclude Include="..\Code\BaseSector.h" />
+    <ClInclude Include="..\Code\BoardSector.h" />
     <ClInclude Include="..\Code\CubeCol.h" />
     <ClInclude Include="..\Code\CubeDra.h" />
     <ClInclude Include="..\Code\CubeTex.h" />
+    <ClInclude Include="..\Code\ForestLand.h" />
+    <ClInclude Include="..\Code\GlacierTex.h" />
+    <ClInclude Include="..\Code\IceAgeLand.h" />
+    <ClInclude Include="..\Code\LandTex.h" />
+    <ClInclude Include="..\Code\MeteorBoard.h" />
     <ClInclude Include="..\Code\Particle.h" />
     <ClInclude Include="..\Code\Resources.h" />
     <ClInclude Include="..\Code\ResourcesMgr.h" />
+    <ClInclude Include="..\Code\RiftLand.h" />
+    <ClInclude Include="..\Code\RoadSector.h" />
+    <ClInclude Include="..\Code\RockTex.h" />
+    <ClInclude Include="..\Code\SkyCube.h" />
     <ClInclude Include="..\Code\Terrain.h" />
     <ClInclude Include="..\Code\TerrainTex.h" />
     <ClInclude Include="..\Code\Texture.h" />
+    <ClInclude Include="..\Code\TreeBoard.h" />
+    <ClInclude Include="..\Code\UnitSector.h" />
     <ClInclude Include="..\Code\VIBuffer.h" />
+    <ClInclude Include="..\Code\VolcanoLand.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Header\Export_Resources.inl" />

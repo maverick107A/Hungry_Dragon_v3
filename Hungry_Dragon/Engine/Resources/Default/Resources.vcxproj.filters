@@ -37,6 +37,9 @@
     <Filter Include="00. Resources\02. Particle\00. AtkPart">
       <UniqueIdentifier>{9dec9d84-03db-4be6-a711-a6288816a69e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00. Resources\50. TerrainCode">
+      <UniqueIdentifier>{bd822e16-2224-410e-aa82-d9dd19eb19fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\Resources.cpp">
@@ -71,6 +74,54 @@
     </ClCompile>
     <ClCompile Include="..\Code\AtkPart.cpp">
       <Filter>00. Resources\02. Particle\00. AtkPart</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\RockTex.cpp">
+      <Filter>00. Resources\50. TerrainCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SkyCube.cpp">
+      <Filter>00. Resources\50. TerrainCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\TreeBoard.cpp">
+      <Filter>00. Resources\50. TerrainCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\UnitSector.cpp">
+      <Filter>00. Resources\50. TerrainCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\VolcanoLand.cpp">
+      <Filter>00. Resources\50. TerrainCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BaseBoard.cpp">
+      <Filter>00. Resources\50. TerrainCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BaseLand.cpp">
+      <Filter>00. Resources\50. TerrainCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BaseSector.cpp">
+      <Filter>00. Resources\50. TerrainCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BoardSector.cpp">
+      <Filter>00. Resources\50. TerrainCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ForestLand.cpp">
+      <Filter>00. Resources\50. TerrainCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\GlacierTex.cpp">
+      <Filter>00. Resources\50. TerrainCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\IceAgeLand.cpp">
+      <Filter>00. Resources\50. TerrainCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\LandTex.cpp">
+      <Filter>00. Resources\50. TerrainCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MeteorBoard.cpp">
+      <Filter>00. Resources\50. TerrainCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\RiftLand.cpp">
+      <Filter>00. Resources\50. TerrainCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\RoadSector.cpp">
+      <Filter>00. Resources\50. TerrainCode</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -109,6 +160,54 @@
     </ClInclude>
     <ClInclude Include="..\Code\AtkPart.h">
       <Filter>00. Resources\02. Particle\00. AtkPart</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\RoadSector.h">
+      <Filter>00. Resources\50. TerrainCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\RockTex.h">
+      <Filter>00. Resources\50. TerrainCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\SkyCube.h">
+      <Filter>00. Resources\50. TerrainCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\TreeBoard.h">
+      <Filter>00. Resources\50. TerrainCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\UnitSector.h">
+      <Filter>00. Resources\50. TerrainCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\VolcanoLand.h">
+      <Filter>00. Resources\50. TerrainCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\BaseBoard.h">
+      <Filter>00. Resources\50. TerrainCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\BaseLand.h">
+      <Filter>00. Resources\50. TerrainCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\BaseSector.h">
+      <Filter>00. Resources\50. TerrainCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\BoardSector.h">
+      <Filter>00. Resources\50. TerrainCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\ForestLand.h">
+      <Filter>00. Resources\50. TerrainCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\GlacierTex.h">
+      <Filter>00. Resources\50. TerrainCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\IceAgeLand.h">
+      <Filter>00. Resources\50. TerrainCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\LandTex.h">
+      <Filter>00. Resources\50. TerrainCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\MeteorBoard.h">
+      <Filter>00. Resources\50. TerrainCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\RiftLand.h">
+      <Filter>00. Resources\50. TerrainCode</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

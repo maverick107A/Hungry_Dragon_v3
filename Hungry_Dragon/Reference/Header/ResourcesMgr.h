@@ -14,16 +14,16 @@
 #include "Terrain.h"
 #include "CubeDra.h"
 #include "CubeCol.h"
+#include "ForestLand.h"
 #include "TerrainTex.h"
 #include "CubeTex.h"
-#include "ForestLand.h"
 
 #include "Texture.h"
 
 #include "AtkPart.h"
 //-------------------------------------------------------
 
-
+//현재 파티클들은 미리 리소스매니저에 원형을 vector의 형태로 등재해 두고, Enum값인 PARTICLEID를 통해 해당 벡터에 접근해 그 파티클을 복사한 새로운 파티클을 리턴해 주는 형식을 채택하고 있다.
 
 
 BEGIN(Engine)
@@ -57,7 +57,7 @@ public:
 	//미리 벡터 공간 m_vecParticle에 모든 파티클 효과를 생성해 적재해 놓는 함수
 	void	Load_Particle(LPDIRECT3DDEVICE9 pGraphicDev);
 
-	//Particle 프리셋에서 클론한 파티클을 Layer에 삽입하는 함수
+	//Particle 프리셋에서 클론한 파티클을 리턴하는 함수
 	CResources*	Get_Particle(LPDIRECT3DDEVICE9 pGraphicDev,
 							PARTICLEID _ePartID,
 							BoundingBox _boundingBox,

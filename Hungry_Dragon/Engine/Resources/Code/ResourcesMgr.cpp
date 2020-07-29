@@ -173,7 +173,7 @@ void CResourcesMgr::Load_Particle(LPDIRECT3DDEVICE9 pGraphicDev) {
 	for (int i = 0; i < PART_END; ++i) {
 		switch (i) {
 		case PART_ATK:
-			pParticle =	CAtkPart::Create(pGraphicDev, 50);
+			pParticle = CAtkPart::Create(pGraphicDev, 50);
 			break;
 		default:
 			pParticle = nullptr;
@@ -183,3 +183,4 @@ void CResourcesMgr::Load_Particle(LPDIRECT3DDEVICE9 pGraphicDev) {
 		m_vecParticle.emplace_back(pParticle);
 	}
 
+}

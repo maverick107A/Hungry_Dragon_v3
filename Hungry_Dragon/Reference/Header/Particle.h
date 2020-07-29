@@ -44,7 +44,6 @@ protected:
 	float					m_fEmitRate;
 	float					m_fSize;
 	float					m_fSpeed;
-
 	IDirect3DTexture9*		m_Tex=nullptr;
 	IDirect3DVertexBuffer9*	m_Vb;
 	list<ATTRIBUTE>			m_arrParticle;
