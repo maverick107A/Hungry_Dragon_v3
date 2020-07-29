@@ -22,6 +22,12 @@ HRESULT CBullet::Ready_Object(void)
 
 int CBullet::Update_Object(const float & fTimeDelta)
 {
+
+	D3DXVECTOR3	vBulletPos;
+	m_pTransform->Get_Info(Engine::INFO_POS, &vBulletPos);
+	D3DXVECTOR3 Dir = vBulletPos - m_vPlayerPos;
+	m_fDistance = D3DXVec3Length(&Dir);
+
 	Engine::CGameObject::Update_Object(fTimeDelta);
 
 

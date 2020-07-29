@@ -2,6 +2,7 @@
 #include "NormalBullet.h"
 #include "Export_Function.h"
 #include <time.h>
+
 CNormal_Bullet::CNormal_Bullet(LPDIRECT3DDEVICE9 pGraphicDev)
 	:CBullet(pGraphicDev)
 {
@@ -20,9 +21,7 @@ HRESULT CNormal_Bullet::Ready_Object(void)
 	m_pTransform->m_vInfo[Engine::INFO_POS].y = m_vFirstPos.y;
 	m_pTransform->m_vInfo[Engine::INFO_POS].z = m_vFirstPos.z;
 
-	m_pTransform->m_vScale.x = 5.f;
-	m_pTransform->m_vScale.y = 5.f;
-	m_pTransform->m_vScale.z = 5.f;
+
 
 	m_eState = IDLE_BULLET;
 	m_preState = IDLE_BULLET;
@@ -41,74 +40,69 @@ int CNormal_Bullet::Update_Object(const float & fTimeDelta)
 		m_bFirst = false;
 		m_iEvent = 0;
 		m_eState = IDLE_BULLET;
-
-		m_pTransform->m_vScale.x = 5.f;
-		m_pTransform->m_vScale.y = 5.f;
-		m_pTransform->m_vScale.z = 5.f;
+		m_FirstPos = m_vPlayerPos;
 	}
-
-	D3DXVECTOR3	vBulletPos;
-	m_pTransform->Get_Info(Engine::INFO_POS, &vBulletPos);
-	D3DXVECTOR3 Dir = vBulletPos - m_vPlayerPos;
-	float fDistance = D3DXVec3Length(&Dir);
 
 	CBullet::Update_Object(fTimeDelta);
 
 	if (m_eState == IDLE_BULLET)
 	{
-		m_pTransform->Chase_Target(&m_vPlayerPos, (fTimeDelta * 100.f));
+		m_pTransform->Chase_Target(&m_FirstPos, (fTimeDelta * 100.f));
 	}
 	else if (m_eState == DEAD_BULLET)
 	{
 		m_bFirst = true;
 		Dead_Bullet();
 	}
-	else if (m_eState == REFLECT_BULLET)
-	{
 
-		//D3DXVec3Normalize(&Dir, &Dir);
+	//else if (m_eState == DEAD_BULLET)
+	//{
+	//	m_bFirst = true;
+	//	Dead_Bullet();
+	//}
+	//else if (m_eState == REFLECT_BULLET)
+	//{
 
-		m_pTransform->Add_Trans(&m_vReflDir);
+	//	//D3DXVec3Normalize(&Dir, &Dir);
 
-		m_pTransform->m_vScale.x *= 0.99f;
-		m_pTransform->m_vScale.y *= 0.99f;
-		m_pTransform->m_vScale.z *= 0.99f;
+	//	m_pTransform->Add_Trans(&m_vReflDir);
 
-
-		if (fDistance > 40 || m_pTransform->m_vScale.x < 0)
-		{
-			m_eState = DEAD_BULLET;
-		}
-
-
-	}
+	//	m_pTransform->m_vScale.x *= 0.99f;
+	//	m_pTransform->m_vScale.y *= 0.99f;
+	//	m_pTransform->m_vScale.z *= 0.99f;
 
 
-
-	// LateUpdate? ¿Û ¾ø¾û ¾û¾û. ¿ì¾î¾î¾û¾û
-
-
-
-
+	//	if (m_fDistance > 5 || m_pTransform->m_vScale.x < 0)
+	//	{
+	//		m_eState = DEAD_BULLET;
+	//	}
 
 
-	if (fDistance < 13)
-	{
-		m_eState = REFLECT_BULLET;
-		m_vReflDir = { (float(rand() % 10) - 5.f)     , (float(rand() % 10) - 5.f)  , (float(rand() % 10) - 5.f) };
-		//D3DXVec3Normalize(&m_vReflDir, &m_vReflDir);
-		m_vReflDir *= 0.5f;
-		//D3DXVec3TransformNormal(&m_vReflDir, &m_vReflDir, &matRandRot);
-	}
+	//}
+
+
+	//if (m_fDistance < 13)
+	//{
+	//	m_eState = REFLECT_BULLET;
+	//	m_vReflDir = { (float(rand() % 10) - 5.f)     , (float(rand() % 10) - 5.f)  , (float(rand() % 10) - 5.f) };
+	//	m_vReflDir *= 0.5f;
+	//}
+
+	//if (m_fDistance > 200)
+	//{
+	//	m_eState = DEAD_BULLET;
+	//}
+
 
 	State_Change();
+
 	return m_iEvent;
 }
 
 void CNormal_Bullet::Render_Object(void)
 {
 	m_pTransform->Set_Transform(m_pGraphicDev);
-	m_pTextureCom->Set_Texture();
+	m_pTextureCom->Set_Texture(0);
 	m_pBufferCom->Render_Buffer();
 }
 

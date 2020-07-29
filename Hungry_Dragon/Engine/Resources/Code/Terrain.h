@@ -18,12 +18,13 @@ public:
 
 public:
 	const vector<float>& Get_TerrainHeight();
-
+	const _vec3*		Get_VtxPos(void) const { return m_pPos; }
 private:
 	vector<float>		m_vecHeight;
 	IDirect3DTexture9*	m_pTex;
+	_vec3*				m_pPos;
 	bool				m_bCheck = true;
-
+	_bool				m_bClone;
 public:
 	static CTerrain*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 	virtual CComponent*	Clone(void)override;

@@ -30,9 +30,9 @@ private:
 	void	Jump(const float& fTimeDelta);
 private:
 	bool					m_bJump_check = false;
-	float					m_fJumpPower;
+	float					m_fJumpPower = 0.5;
 	float					m_fJumpSpeed = 0.1f;
-	float					m_fAccel = 0.1f;
+	float					m_fAccel = 0.01f;
 	float					m_fFirstY;
 };
 

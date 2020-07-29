@@ -128,9 +128,6 @@ HRESULT CScene_Proto::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(pLayer->Add_Object(L"TestPlayer", pGameObject), E_FAIL);
 
-	m_mapLayer.emplace(pLayerTag, pLayer);
-
-
 
 	pGameObject = CFly_Monster::Create(m_pGraphicDev);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
@@ -185,15 +182,9 @@ HRESULT CScene_Proto::Ready_Resource(LPDIRECT3DDEVICE9 pGraphicDev, RESOURCEID e
 		RESOURCE_STAGE,
 		L"Texture_BoxHead",
 		Engine::TEX_NORMAL,
-		L"../Bin/Resource/Texture/BoxHead.png"),
+		L"../Bin/Resource/Texture/HeadPng/Head%d.png" , 4),
 		E_FAIL);
 
-	FAILED_CHECK_RETURN(Engine::Ready_Texture(pGraphicDev,
-		RESOURCE_STAGE,
-		L"Texture_PlayerBox",
-		Engine::TEX_NORMAL,
-		L"../Bin/Resource/Texture/PlayerBox.png"),
-		E_FAIL);
 
 	FAILED_CHECK_RETURN(Engine::Ready_Buffer(pGraphicDev,
 		RESOURCE_STATIC,
