@@ -91,8 +91,8 @@
     <Filter Include="01. Scene\70. PlayerTest">
       <UniqueIdentifier>{8da5808b-3fa5-4c62-b2fc-d769bd219cee}</UniqueIdentifier>
     </Filter>
-    <Filter Include="72. Test">
-      <UniqueIdentifier>{a88ee47e-e890-436e-a7ad-2ee32e81ec36}</UniqueIdentifier>
+    <Filter Include="02. GameObject\01. Stage\04.SkySphere">
+      <UniqueIdentifier>{7aa7f97f-bd8d-4e1e-b0d2-501f69181828}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -165,6 +165,9 @@
     <ClInclude Include="..\Code\StageOne.h">
       <Filter>01. Scene\50. StageOne</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\SkySphere.h">
+      <Filter>02. GameObject\01. Stage\04.SkySphere</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -226,6 +229,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\StageOne.cpp">
       <Filter>01. Scene\50. StageOne</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SkySphere.cpp">
+      <Filter>02. GameObject\01. Stage\04.SkySphere</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

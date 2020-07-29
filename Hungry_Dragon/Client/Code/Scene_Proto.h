@@ -22,6 +22,7 @@
 #include "NormalBullet.h"
 #include "Fly_Monster.h"
 #include "TestPlayer.h"
+#include "SkySphere.h"
 //-------------------------------------------------------
 
 using namespace Engine;
