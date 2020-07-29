@@ -47,11 +47,10 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 	//Ride_Terrain();
 
 	if ((GetAsyncKeyState('R') & 0x8000) && nullptr == m_pParticle) {
-		Engine::_vec3 vOrigin;
-		m_pTransform->Get_Info(Engine::INFO_POS, &vOrigin);
+		Engine::_vec3 vOrigin=Engine::_vec3(0.f,0.f,0.f);
 		Engine::BoundingBox tempBoundingBox;
-		tempBoundingBox.vMax = vOrigin+Engine::_vec3(300.f,300.f,300.f);
-		tempBoundingBox.vMin = vOrigin-Engine::_vec3(300.f, 300.f, 300.f);
+		tempBoundingBox.vMax = Engine::_vec3(100.f,100.f,100.f);
+		tempBoundingBox.vMin = Engine::_vec3(-100.f, -100.f, -100.f);
 
 		/*tempBoundingBox.vMax = { 1000.f,1000.f,1000.f };
 		tempBoundingBox.vMin = { -1000.f,-1000.f,-1000.f };*/

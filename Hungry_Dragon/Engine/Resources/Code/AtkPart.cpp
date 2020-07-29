@@ -10,6 +10,8 @@ CAtkPart::CAtkPart(LPDIRECT3DDEVICE9 pGraphicDev)
 CAtkPart::CAtkPart(const CAtkPart & rhs)
 	:CParticle(rhs)
 {
+	m_arrParticle = rhs.m_arrParticle;
+
 	m_fWidth = 5.f;
 	m_fHeight = 10.f;
 	
@@ -19,8 +21,7 @@ CAtkPart::CAtkPart(LPDIRECT3DDEVICE9 pGraphicDev, _vec3 vOrigin ,BoundingBox * b
 	:CParticle(pGraphicDev)
 {
 	m_BoundingBox = *boundingBox;
-	//m_fSize = _fSize;
-	m_fSize = 100.f;
+	m_fSize = _fSize;
 	m_VbSize = 100;
 	m_vOffset = 0;
 	m_BatchSize = 25;
