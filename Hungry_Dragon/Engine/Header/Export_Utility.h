@@ -5,6 +5,7 @@
 #include "Management.h"
 #include "ObjectPool.h"
 #include "Transform.h"
+#include "Renderer.h"
 
 BEGIN(Engine)
 
@@ -15,6 +16,15 @@ inline CComponent*			Get_Component(const _tchar* pLayerTag, const _tchar* pObjTa
 // General
 inline HRESULT	Create_Management(CManagement** ppManagement);
 
+
+// Renderer
+// Get
+inline CRenderer*		Get_Renderer(void);
+// Set
+// General
+inline void	Add_RenderGroup(RENDERID eType, CGameObject* pGameObject);
+inline void	Render_GameObject(void);
+inline void	Clear_RenderGroup(void);
 
 // Object_Pool
 

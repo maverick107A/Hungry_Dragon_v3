@@ -13,6 +13,24 @@ namespace Engine
 	const _ulong	FVF_COL = D3DFVF_XYZ | D3DFVF_DIFFUSE | D3DFVF_TEX0;
 
 
+	typedef struct tagVertexUV
+	{
+		_vec3		vPosition;
+		_vec2		vTexUV;
+
+		tagVertexUV(float _x, float _y, float _z, float _u, float _v) {
+			vPosition.x = _x;
+			vPosition.y = _y;
+			vPosition.z = _z;
+
+			vTexUV.x = _u;
+			vTexUV.y = _v;
+		}
+
+	}VTXUV;
+
+	const _ulong	FVF_UV = D3DFVF_XYZ | D3DFVF_TEX1;
+
 	typedef struct tagVertexTex
 	{
 		_vec3		vPosition;

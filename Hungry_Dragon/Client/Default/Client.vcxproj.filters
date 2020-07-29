@@ -31,9 +31,6 @@
     <Filter Include="02. GameObject">
       <UniqueIdentifier>{2cbaa01a-5fb5-4d17-9164-8169c87441b6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. GameObject\00. Logo">
-      <UniqueIdentifier>{96d40a23-3640-4667-974e-ad3d40d42673}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. GameObject\01. Stage">
       <UniqueIdentifier>{7aac664a-bdaf-425c-84a7-375cffc981a7}</UniqueIdentifier>
     </Filter>
@@ -45,9 +42,6 @@
     </Filter>
     <Filter Include="02. GameObject\01. Stage\00.Terrain">
       <UniqueIdentifier>{bc2a9999-d260-4edf-a3bb-6ddbd6b0b943}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01. Scene\01. Scene_Monster">
-      <UniqueIdentifier>{91154392-52f1-43dc-9b58-bbffba06c1e7}</UniqueIdentifier>
     </Filter>
     <Filter Include="02. GameObject\01. Stage\01. Scene_Monster">
       <UniqueIdentifier>{b6c97def-0aef-4b67-9b01-68dcab2a4532}</UniqueIdentifier>
@@ -79,7 +73,22 @@
     <Filter Include="02. GameObject\01. Stage\02.Bullet\00.Normal">
       <UniqueIdentifier>{0572fbeb-61dd-4ec9-bf8f-1f99844d5286}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Scene\02. PlayerTest">
+    <Filter Include="02. GameObject\00. Logo">
+      <UniqueIdentifier>{96d40a23-3640-4667-974e-ad3d40d42673}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\03.Terrain">
+      <UniqueIdentifier>{469736e8-ed0a-45d7-88ea-3a633d005092}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Scene\01.Scene_Proto">
+      <UniqueIdentifier>{4b8d3310-6267-4c3c-b336-49e7cffdbe50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Scene\20. Scene_Monster">
+      <UniqueIdentifier>{91154392-52f1-43dc-9b58-bbffba06c1e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Scene\50. StageOne">
+      <UniqueIdentifier>{bac2b7ef-17a0-4138-8ecd-1128cd6ed6a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Scene\70. PlayerTest">
       <UniqueIdentifier>{8da5808b-3fa5-4c62-b2fc-d769bd219cee}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -112,7 +121,7 @@
       <Filter>02. GameObject\01. Stage\00.Terrain</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Scene_Monster.h">
-      <Filter>01. Scene\01. Scene_Monster</Filter>
+      <Filter>01. Scene\20. Scene_Monster</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Monster.h">
       <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster</Filter>
@@ -142,7 +151,16 @@
       <Filter>02. GameObject\01. Stage\02.Bullet</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\PlayerTest.h">
-      <Filter>01. Scene\02. PlayerTest</Filter>
+      <Filter>01. Scene\70. PlayerTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Scene_Proto.h">
+      <Filter>01. Scene\01.Scene_Proto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\TerrainPlayer.h">
+      <Filter>02. GameObject\01. Stage\03.Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\StageOne.h">
+      <Filter>01. Scene\50. StageOne</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -165,7 +183,7 @@
       <Filter>02. GameObject\01. Stage\00.Terrain</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Scene_Monster.cpp">
-      <Filter>01. Scene\01. Scene_Monster</Filter>
+      <Filter>01. Scene\20. Scene_Monster</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Monster.cpp">
       <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster</Filter>
@@ -195,7 +213,16 @@
       <Filter>02. GameObject\01. Stage\02.Bullet</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\PlayerTest.cpp">
-      <Filter>01. Scene\02. PlayerTest</Filter>
+      <Filter>01. Scene\70. PlayerTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Scene_Proto.cpp">
+      <Filter>01. Scene\01.Scene_Proto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\TerrainPlayer.cpp">
+      <Filter>02. GameObject\01. Stage\03.Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\StageOne.cpp">
+      <Filter>01. Scene\50. StageOne</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

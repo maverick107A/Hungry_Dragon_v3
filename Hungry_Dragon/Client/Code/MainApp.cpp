@@ -6,8 +6,15 @@
 //-------------------------------------------------------
 //여기에 스테이지 헤더파일 추가
 #include "Logo.h"
+
+#ifdef _DEBUG		// 테스트용입니다.
 #include "Scene_Monster.h"
 #include "PlayerTest.h"
+#include "StageOne.h"
+#endif // _DEBUG
+
+
+#include "Scene_Proto.h"
 //-------------------------------------------------------
 //매니저 헤더********************************************
 //-------------------------------------------------------
@@ -80,7 +87,7 @@ HRESULT CMainApp::Ready_Scene(LPDIRECT3DDEVICE9 pGraphicDev,
 {
 	Engine::CScene*		pScene = nullptr;
 
-	pScene = CPlayerTest::Create(pGraphicDev);
+	pScene = CScene_Proto::Create(pGraphicDev);
 	NULL_CHECK_RETURN(pScene, E_FAIL);
 
 	FAILED_CHECK_RETURN(Engine::Create_Management(ppManagementInstance), E_FAIL);

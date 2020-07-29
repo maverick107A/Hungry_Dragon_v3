@@ -3,6 +3,7 @@
 
 #include "Export_Function.h"
 #include "Terrain.h"
+#include "BaseLand.h"
 
 CBackGround::CBackGround(LPDIRECT3DDEVICE9 pGraphicDev)
 	: Engine::CGameObject(pGraphicDev)
@@ -48,7 +49,7 @@ HRESULT CBackGround::Add_Component(void)
 	Engine::CComponent*		pComponent = nullptr;
 
 	// buffer
-	pComponent = m_pBufferCom = dynamic_cast<Engine::CTerrain*>
+	pComponent = m_pBufferCom = dynamic_cast<Engine::CBaseLand*>
 		(Engine::Clone(RESOURCE_STATIC, L"BUFFER_TERRAIN"));
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Buffer", pComponent);

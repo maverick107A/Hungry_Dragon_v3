@@ -5,7 +5,7 @@
 
 BEGIN(Engine)
 
-class CTerrain;
+class CBaseLand;
 
 class ENGINE_DLL CCamera : public CComponent
 {
@@ -15,7 +15,7 @@ private:
 
 public:
 	HRESULT			Ready_Camera(void);
-	virtual _int	Update_Component(const _float& _fTimeDelta, LPDIRECT3DDEVICE9& _pGraphicDev, _vec3 _vPos, _vec3* _vLook, _vec3* _vUp, CTerrain* _pTerrain);
+	virtual _int	Update_Component(const _float& _fTimeDelta, LPDIRECT3DDEVICE9& _pGraphicDev, _vec3 _vPos, _vec3* _vLook, _vec3* _vUp, CBaseLand* _pTerrain);
 
 private:
 	POINT			m_tCenter = {};

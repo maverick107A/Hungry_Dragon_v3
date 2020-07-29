@@ -1,5 +1,5 @@
 #include "Camera.h"
-#include "Terrain.h"
+#include "BaseLand.h"
 
 USING(Engine)
 
@@ -15,11 +15,11 @@ Engine::CCamera::~CCamera(void)
 HRESULT Engine::CCamera::Ready_Camera(void)
 {
 	m_tCenter = { LONG(WINCX*0.5), LONG(WINCY*0.5) };
-
+	SetCursorPos(m_tCenter.x, m_tCenter.y);
 	return S_OK;
 }
 
-_int Engine::CCamera::Update_Component(const _float& fTimeDelta, LPDIRECT3DDEVICE9& pGraphicDev, _vec3 _vPos, _vec3* _vLook, _vec3* _Up, CTerrain* _pTerrain)
+_int Engine::CCamera::Update_Component(const _float& fTimeDelta, LPDIRECT3DDEVICE9& pGraphicDev, _vec3 _vPos, _vec3* _vLook, _vec3* _Up, CBaseLand* _pTerrain)
 {
 	POINT tPos = {};
 	GetCursorPos(&tPos);
@@ -48,7 +48,7 @@ _int Engine::CCamera::Update_Component(const _float& fTimeDelta, LPDIRECT3DDEVIC
 	m_vPos = _vPos - m_vDir*m_fCameraDis;
 
 	//faskjfsadlkfjaldskjf
-	int Vernum = (int(m_vPos.x*INVERSETILESIZE) + VERTEXSIZE*int(m_vPos.z*INVERSETILESIZE));
+	/*int Vernum = (int(m_vPos.x*INVERSETILESIZE) + VERTEXSIZE*int(m_vPos.z*INVERSETILESIZE));
 
 	D3DXVECTOR3 Vertex1 = { float(int(m_vPos.x*INVERSETILESIZE)*TILECX), 0.f, float(int(m_vPos.z*INVERSETILESIZE)*TILECZ) };
 	D3DXVECTOR3 Vertex2 = { float(int(m_vPos.x*INVERSETILESIZE)*TILECX + TILECX), 0.f, float(int(m_vPos.z*INVERSETILESIZE)*TILECZ) };
@@ -103,7 +103,7 @@ _int Engine::CCamera::Update_Component(const _float& fTimeDelta, LPDIRECT3DDEVIC
 		}
 		else if (m_fCameraDis < 10.f)
 			m_fCameraDis += 0.5f;
-	}
+	}*/
 	//sadkfjdsalkjfalkdsjfaldsk
 
 	m_vDir = m_vPos + m_vDir;

@@ -168,6 +168,7 @@ call CopyUtility.bat</Command>
   <ItemGroup>
     <ClCompile Include="..\Code\Camera.cpp" />
     <ClCompile Include="..\Code\Component.cpp" />
+    <ClCompile Include="..\Code\Dynamic_Behavior.cpp" />
     <ClCompile Include="..\Code\GameObject.cpp" />
     <ClCompile Include="..\Code\Layer.cpp" />
     <ClCompile Include="..\Code\Management.cpp" />
@@ -180,12 +181,16 @@ call CopyUtility.bat</Command>
     <ClCompile Include="..\Code\PlayerState.cpp" />
     <ClCompile Include="..\Code\Renderer.cpp" />
     <ClCompile Include="..\Code\Scene.cpp" />
+    <ClCompile Include="..\Code\Sector_Manager.cpp" />
+    <ClCompile Include="..\Code\Static_Behavior.cpp" />
+    <ClCompile Include="..\Code\Terrain_Manager.cpp" />
     <ClCompile Include="..\Code\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Header\Export_Utility.h" />
     <ClInclude Include="..\Code\Camera.h" />
     <ClInclude Include="..\Code\Component.h" />
+    <ClInclude Include="..\Code\Dynamic_Behavior.h" />
     <ClInclude Include="..\Code\GameObject.h" />
     <ClInclude Include="..\Code\Layer.h" />
     <ClInclude Include="..\Code\Management.h" />
@@ -198,6 +203,9 @@ call CopyUtility.bat</Command>
     <ClInclude Include="..\Code\PlayerState.h" />
     <ClInclude Include="..\Code\Renderer.h" />
     <ClInclude Include="..\Code\Scene.h" />
+    <ClInclude Include="..\Code\Sector_Manager.h" />
+    <ClInclude Include="..\Code\Static_Behavior.h" />
+    <ClInclude Include="..\Code\Terrain_Manager.h" />
     <ClInclude Include="..\Code\Transform.h" />
   </ItemGroup>
   <ItemGroup>
