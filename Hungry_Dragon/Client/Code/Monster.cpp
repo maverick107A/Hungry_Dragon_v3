@@ -76,7 +76,7 @@ void CMonster::Render_Object(void)
 
 void CMonster::Dead_Monster(const float & fTimeDelta)
 {
-	m_pTransform->Set_Scale(0.01f);
+	m_pTransform->Set_Minus_Scale(0.01f);
 
 
 	

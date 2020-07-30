@@ -17,7 +17,7 @@ HRESULT CFly_Monster::Ready_Object(void)
 	m_pTransform->m_vInfo[Engine::INFO_POS].x = m_vFirstPos.x;
 	m_pTransform->m_vInfo[Engine::INFO_POS].y = m_vFirstPos.y;
 	m_pTransform->m_vInfo[Engine::INFO_POS].z = m_vFirstPos.z;
-	m_pTransform->Set_Scale(0.5f);
+	m_pTransform->Set_Minus_Scale(0.5f);
 
 	return S_OK;
 }
