@@ -17,6 +17,9 @@ public:
 	HRESULT			Ready_Camera(void);
 	virtual _int	Update_Component(const _float& _fTimeDelta, LPDIRECT3DDEVICE9& _pGraphicDev, _vec3 _vPos, _vec3* _vLook, _vec3* _vUp, CBaseLand* _pTerrain);
 
+public:
+	_vec3			Get_Pos() { return m_vPos; }
+
 private:
 	POINT			m_tCenter = {};
 	float			m_fAngleY = 0.f;

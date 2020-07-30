@@ -62,7 +62,7 @@ void CPFly::Update_State(const float& fTimeDelta)
 	}
 	if (GetAsyncKeyState('E'))
 	{
-		m_pPlayer->Get_Transform()->m_vAddTrans = vDir;
+		m_pPlayer->Get_Transform()->m_vInCamPos = vDir;
 	}
 	if (bCheck)
 	{
