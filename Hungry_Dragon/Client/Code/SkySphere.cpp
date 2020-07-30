@@ -62,13 +62,13 @@ HRESULT CSkySphere::Add_Component(void)
 	Engine::CComponent*		pComponent = nullptr;
 
 	// buffer
-	FAILED_CHECK_RETURN(Clone_Component<CSkyCube>(&m_pBufferCom, RESOURCE_STATIC, L"BUFFER_SKYSPHERE", ID_STATIC, L"Com_Buffer"));
+	FAILED_CHECK_RETURN(Clone_Component<CSkyCube>(&m_pBufferCom, RESOURCE_STATIC, L"BUFFER_SKYSPHERE", ID_STATIC, L"Com_Buffer"), E_FAIL);
 	
 	// Texture
-	FAILED_CHECK_RETURN(Clone_Component<CTexture>(&m_pTextureCom, RESOURCE_STAGE, L"Texture_SkySphere", ID_STATIC, L"Com_Texture"));
+	FAILED_CHECK_RETURN(Clone_Component<CTexture>(&m_pTextureCom, RESOURCE_STAGE, L"Texture_SkySphere", ID_STATIC, L"Com_Texture"), E_FAIL);
 	
 	//Transform
-	FAILED_CHECK_RETURN(Register_Component<CTransform>(&m_pTransform, ID_DYNAMIC, L"Com_Transform"));
+	FAILED_CHECK_RETURN(Register_Component<CTransform>(&m_pTransform, ID_DYNAMIC, L"Com_Transform"), E_FAIL);
 
 	// ¿øº»
 	/*pComponent = m_pBufferCom = dynamic_cast<Engine::CSkyCube*>
