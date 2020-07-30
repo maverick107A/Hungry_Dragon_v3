@@ -93,7 +93,7 @@ _int Engine::CTransform::Update_Component(const _float& fTimeDelta)
 	}
 	//여기까지
 	//이동기 관련
-	m_vInfo[INFO_POS] += m_vInCamPos*0.1f;
+	//m_vInfo[INFO_POS] += m_vInCamPos*0.1f;
 	m_vInCamPos *= 0.9f;
 	return 0;
 }

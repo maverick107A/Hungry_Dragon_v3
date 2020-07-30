@@ -25,13 +25,13 @@ HRESULT CSkySphere::Ready_Object(void)
 
 _int CSkySphere::Update_Object(const _float& fTimeDelta)
 {
-	_matrix		matCamWorld;
-	m_pGraphicDev->GetTransform(D3DTS_VIEW, &matCamWorld);
-	D3DXMatrixInverse(&matCamWorld, NULL, &matCamWorld);
+	//_matrix		matCamWorld;
+	//m_pGraphicDev->GetTransform(D3DTS_VIEW, &matCamWorld);
+	//D3DXMatrixInverse(&matCamWorld, NULL, &matCamWorld);
 
-	m_pTransform->m_vInfo[INFO_POS] = { matCamWorld._41, matCamWorld._42, matCamWorld._43 };
-	
-	Engine::CGameObject::Update_Object(fTimeDelta);
+	//m_pTransform->m_vInfo[INFO_POS] = { matCamWorld._41, matCamWorld._42, matCamWorld._43 };
+	//
+	//Engine::CGameObject::Update_Object(fTimeDelta);
 
 	//Engine::Add_RenderGroup(Engine::RENDER_PRIORITY, this);
 
@@ -40,6 +40,15 @@ _int CSkySphere::Update_Object(const _float& fTimeDelta)
 
 void CSkySphere::Render_Object(void)
 {
+	//여기부터
+	_matrix		matCamWorld;
+	m_pGraphicDev->GetTransform(D3DTS_VIEW, &matCamWorld);
+	D3DXMatrixInverse(&matCamWorld, NULL, &matCamWorld);
+
+	m_pTransform->m_vInfo[INFO_POS] = { matCamWorld._41, matCamWorld._42, matCamWorld._43 };
+
+	Engine::CGameObject::Update_Object(float(0));
+	//여기까지 레이트업데이트에 넣어줘야함
 	m_pTransform->Set_Transform(m_pGraphicDev);
 	m_pGraphicDev->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	m_pGraphicDev->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);

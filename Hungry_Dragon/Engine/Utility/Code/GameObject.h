@@ -29,6 +29,7 @@ public:
 		CComponent* pCompo = static_cast<CComponent*>(*_pOut);
 		NULL_CHECK_RETURN(pCompo, E_FAIL);
 		m_mapComponent[_eCompID].emplace(_pComponentTag, pCompo);
+		return S_OK;
 	}
 	template <typename T>
 	HRESULT Clone_Component(T** _pOut, const _ushort& _eRscID, const _tchar* _pResourceTag, COMPONENTID _eCompID, const _tchar* _pComponentTag)
