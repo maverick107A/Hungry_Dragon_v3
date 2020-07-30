@@ -6,12 +6,15 @@ USING(Engine)
 
 Engine::CTerrain::CTerrain(LPDIRECT3DDEVICE9 pGraphicDev)
 	: CVIBuffer(pGraphicDev)
+	, m_bClone(false)
 {
 
 }
 
 Engine::CTerrain::CTerrain(const CTerrain& rhs)
 	: CVIBuffer(rhs)
+	, m_bClone(true)
+	, m_pPos(rhs.m_pPos)
 {
 	m_vecHeight = rhs.m_vecHeight;
 	m_pTex = rhs.m_pTex;
@@ -29,7 +32,7 @@ HRESULT Engine::CTerrain::Ready_Buffer(void)
 		m_pGraphicDev,
 		L"../Bin/Resource/Texture/Terrain/ColorHeight.bmp",
 		&m_pTex);
-
+	m_pPos = new _vec3[VERTEXSIZE * VERTEXSIZE];
 	//∏ ¿–±‚
 	FILE* FilePtr = nullptr;
 	fopen_s(&FilePtr, "../Bin/Resource/Texture/Terrain/ColorHeight.bmp", "rb");
@@ -75,6 +78,8 @@ HRESULT Engine::CTerrain::Ready_Buffer(void)
 		for (int j = 0; j < VERTEXSIZE; ++j)
 		{
 			pVertex[j + i * VERTEXSIZE].vPosition = _vec3(float(j)*TILECX, m_vecHeight[(j + i * VERTEXSIZE)], float(i)*TILECX);
+			m_pPos[j + i * VERTEXSIZE] = pVertex[j + i * VERTEXSIZE].vPosition;
+			
 			pVertex[j + i * VERTEXSIZE].vTexUV = { j / float(VERTEXSIZE - 1), 1 - i / float(VERTEXSIZE - 1) };
 			//pVertex[j + i * VERTEXSIZE].vPosition = _vec3(float(j), m_vecHeight[(j + (128 - i) * 129) * 4] * 0.05f, -float(i));
 			//pVertex[j + i * VERTEXSIZE].vTexUV = { j / 128.f,i / 128.f };
@@ -119,6 +124,10 @@ void Engine::CTerrain::Render_Buffer(void)
 
 void Engine::CTerrain::Free(void)
 {
+	if (false == m_bClone)
+		Safe_Delete_Array(m_pPos);
+
+
 	Safe_Release(m_pTex);
 	CVIBuffer::Free();
 }

@@ -61,9 +61,11 @@ _int CScene_Proto::Update_Scene(const _float& fTimeDelta) {
 
 void CScene_Proto::Render_Scene(void) {
 	Engine::CScene::Render_Scene();
+	Engine::Render_GameObject();
 }
 
 void CScene_Proto::Free(void) {
+	Engine::Clear_RenderGroup();
 	Engine::CScene::Free();
 }
 
@@ -82,6 +84,8 @@ HRESULT CScene_Proto::Ready_Layer_UI(const _tchar* pLayerTag) {
 
 	Engine::CGameObject*		pGameObject = nullptr;
 
+	
+
 	m_mapLayer.emplace(pLayerTag, pLayer);
 
 	return S_OK;
@@ -90,54 +94,44 @@ HRESULT CScene_Proto::Ready_Layer_UI(const _tchar* pLayerTag) {
 HRESULT CScene_Proto::Ready_Layer_Environment(const _tchar * pLayerTag) {
 	Engine::CLayer*		pLayer = Engine::CLayer::Create();
 	NULL_CHECK_RETURN(pLayer, E_FAIL);
-
-	Engine::CGameObject*		pGameObject = nullptr;
-
 	m_mapLayer.emplace(pLayerTag, pLayer);
+
+	// 템플릿으로 1줄 처리함 알아서들 쓰세염, 컴포넌트 버전도 만들어놓음
+	FAILED_CHECK_RETURN(Register_GameObject<CSkySphere>(pLayer, L"Skybox"), E_FAIL);
+
+
+	// 이렇게 게임오브젝트 뽑아올 수도 있음
+	//CSkySphere*		pGameObject = nullptr;
+	//FAILED_CHECK_RETURN(Register_GameObject<CSkySphere>(&pGameObject, pLayer, L"Skybox"), E_FAIL);
+
+	//pGameObject = CSkySphere::Create(m_pGraphicDev);
+	//NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	//FAILED_CHECK_RETURN(pLayer->Add_Object(L"Skybox", pGameObject), E_FAIL);
+
+	
 
 	return S_OK;
 }
 
 HRESULT CScene_Proto::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
-	Engine::CLayer*		pLayer = Engine::CLayer::Create();
 
+	Engine::CLayer*		pLayer = Engine::CLayer::Create();
 	NULL_CHECK_RETURN(pLayer, E_FAIL);
 	Engine::Set_Object_LayerMap(pLayer);
-
+	m_mapLayer.emplace(pLayerTag, pLayer);
 
 	Engine::CGameObject*		pGameObject = nullptr;
 
-	pGameObject = CBackGround::Create(m_pGraphicDev);
-	NULL_CHECK_RETURN(pGameObject, E_FAIL);
-	FAILED_CHECK_RETURN(pLayer->Add_Object(L"BackGround", pGameObject), E_FAIL);
+	FAILED_CHECK_RETURN(Register_GameObject<CBackGround>(pLayer, L"BackGround"), E_FAIL);
+	FAILED_CHECK_RETURN(Register_GameObject<CTestPlayer>(pLayer, L"TestPlayer"), E_FAIL);
 
-	pGameObject = CChase_Monster::Create(m_pGraphicDev);
-	NULL_CHECK_RETURN(pGameObject, E_FAIL);
-	FAILED_CHECK_RETURN(pLayer->Add_Object(L"ChaseMonster", pGameObject), E_FAIL);
-
-
-	pGameObject = CRun_Monster::Create(m_pGraphicDev);
-	NULL_CHECK_RETURN(pGameObject, E_FAIL);
-	FAILED_CHECK_RETURN(pLayer->Add_Object(L"RunMonster", pGameObject), E_FAIL);
-
-	pGameObject = CJump_Monster::Create(m_pGraphicDev);
-	NULL_CHECK_RETURN(pGameObject, E_FAIL);
-	FAILED_CHECK_RETURN(pLayer->Add_Object(L"JumpMonster", pGameObject), E_FAIL);
-
-	pGameObject = CTestPlayer::Create(m_pGraphicDev);
-	NULL_CHECK_RETURN(pGameObject, E_FAIL);
-	FAILED_CHECK_RETURN(pLayer->Add_Object(L"TestPlayer", pGameObject), E_FAIL);
-
-	m_mapLayer.emplace(pLayerTag, pLayer);
-
-
-
-	pGameObject = CFly_Monster::Create(m_pGraphicDev);
-	NULL_CHECK_RETURN(pGameObject, E_FAIL);
-	FAILED_CHECK_RETURN(pLayer->Add_Object(L"FlyMonster", pGameObject), E_FAIL);
+	FAILED_CHECK_RETURN(Register_GameObject<CChase_Monster>(pLayer, L"ChaseMonster"), E_FAIL);
+	FAILED_CHECK_RETURN(Register_GameObject<CRun_Monster>(pLayer, L"RunMonster"), E_FAIL);
+	FAILED_CHECK_RETURN(Register_GameObject<CJump_Monster>(pLayer, L"JumpMonster"), E_FAIL);
+	FAILED_CHECK_RETURN(Register_GameObject<CFly_Monster>(pLayer, L"FlyMonster"), E_FAIL);
 
 	
-
+	// 이건 알아서 하시고 오브젝트 풀 싱글턴이라 익스포트 헤더에 걸어서 와야할텐데?
 	for(int i = 0 ;  i < 100; ++i)
 	{	
 		Engine::CGameObject*		pBulletObject = nullptr;
@@ -147,7 +141,9 @@ HRESULT CScene_Proto::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 
 	}
 
-	m_mapLayer.emplace(pLayerTag, pLayer);
+	
+
+	
 
 	return S_OK;
 }
@@ -179,26 +175,32 @@ HRESULT CScene_Proto::Ready_Resource(LPDIRECT3DDEVICE9 pGraphicDev, RESOURCEID e
 		L"../Bin/Resource/Texture/Terrain/Terrain0.png"),
 		E_FAIL);
 
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(pGraphicDev,
+		RESOURCE_STAGE,
+		L"Texture_SkySphere",
+		Engine::TEX_CUBE,
+		L"../../Asset/Skybox/TestSkybox.dds"),
+		E_FAIL);
 
 
 	FAILED_CHECK_RETURN(Engine::Ready_Texture(pGraphicDev,
 		RESOURCE_STAGE,
 		L"Texture_BoxHead",
 		Engine::TEX_NORMAL,
-		L"../Bin/Resource/Texture/BoxHead.png"),
+		L"../Bin/Resource/Texture/HeadPng/Head%d.png" , 4),
 		E_FAIL);
 
-	FAILED_CHECK_RETURN(Engine::Ready_Texture(pGraphicDev,
-		RESOURCE_STAGE,
-		L"Texture_PlayerBox",
-		Engine::TEX_NORMAL,
-		L"../Bin/Resource/Texture/PlayerBox.png"),
-		E_FAIL);
 
 	FAILED_CHECK_RETURN(Engine::Ready_Buffer(pGraphicDev,
 		RESOURCE_STATIC,
 		L"BUFFER_TERRAIN",
 		Engine::BUFFER_FOREST),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Buffer(pGraphicDev,
+		RESOURCE_STATIC,
+		L"BUFFER_SKYSPHERE",
+		Engine::BUFFER_SKYSPHERE),
 		E_FAIL);
 
 	FAILED_CHECK_RETURN(Engine::Ready_Buffer(pGraphicDev,

@@ -28,6 +28,7 @@ public:
 	void	Dead_Bullet(void);
 public:
 	void	 Set_Pos(D3DXVECTOR3 _Pos);
+
 public:
 private:
 	HRESULT		Add_Component(void);
@@ -39,7 +40,7 @@ protected:
 	D3DXVECTOR3					m_vLook;
 	D3DXVECTOR3					vPlayerPos;
 	int							m_iEvent = 0;
-
+	float						 m_fDistance;
 public:
 	static CBullet*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 public:

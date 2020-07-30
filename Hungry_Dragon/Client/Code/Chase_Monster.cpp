@@ -16,41 +16,36 @@ CChase_Monster::~CChase_Monster(void)
 HRESULT CChase_Monster::Ready_Object(void)
 {
 	CMonster::Ready_Object();
-	m_pTransform->m_vInfo[Engine::INFO_POS].z = 30.0f;
-	m_pTransform->m_vInfo[Engine::INFO_POS].x = 30.0f;
+	m_pTransform->m_vInfo[Engine::INFO_POS].z = 1000.0f;
+	m_pTransform->m_vInfo[Engine::INFO_POS].x = 1000.0f;
 
 
-	m_pTransform->m_vScale.x *= 10.f;
-	m_pTransform->m_vScale.y *= 10.f;
-	m_pTransform->m_vScale.z *= 10.f;
+
+	m_pTransform->Set_Scale(0.0f);
 
 	return S_OK;
 }
 
 int CChase_Monster::Update_Object(const float & fTimeDelta)
 {
-
-	D3DXVECTOR3	vMonsterPos;
-	m_pTransform->Get_Info(Engine::INFO_POS, &vMonsterPos);
-
 	CMonster::Update_Object(fTimeDelta);
+	Ride_Terrain();
 
-	D3DXVECTOR3	vPlayerPos;
-	vPlayerPos = { m_vPlayerPos.x , 0 ,m_vPlayerPos.z };
+	if (m_bActivate)
+	{
+		if (fDistance < 3 || m_bDead)
+		{
+			m_pTransform->Set_Trans(&m_vPlayerPos);
+			Dead_Monster(fTimeDelta);
+			m_bDead = true;
+		}
+		else if (!m_bDead)
+		{
+			vPlayerPos = { m_vPlayerPos.x  , 0.f  , m_vPlayerPos.z };
+			m_pTransform->Chase_Target(&vPlayerPos, (fTimeDelta * 50.f));	
+		}
+	}
 
-	D3DXVECTOR3 Dir = vMonsterPos - m_vPlayerPos;
-	
-	float fDistance = D3DXVec3Length(&Dir);
-	if (fDistance < 15)
-	{
-		Dead_Monster();   
-	}
-	else
-	{
-		m_pTransform->Chase_Target(&vPlayerPos, (fTimeDelta * 15.f));
-	
-		return 0;
-	}
 
 	return m_iEvent;
 }
@@ -59,8 +54,9 @@ void CChase_Monster::Render_Object(void)
 {
 	m_pGraphicDev->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	m_pTransform->Set_Transform(m_pGraphicDev);
-	m_pTextureCom->Set_Texture();
+	m_pTextureCom->Set_Texture(1);
 	m_pBufferCom->Render_Buffer();
+	CMonster::Render_Object();
 	m_pGraphicDev->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 
 }

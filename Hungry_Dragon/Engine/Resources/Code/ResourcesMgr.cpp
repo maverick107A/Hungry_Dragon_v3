@@ -83,6 +83,9 @@ HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 	case BUFFER_ICEAGE:
 		//pResources = CRcTex::Create(pGraphicDev);
 		break;
+	case BUFFER_SKYSPHERE:
+		pResources = CSkyCube::Create(pGraphicDev);
+		break;
 	}
 
 	m_pmapResource[wContainerIdx].emplace(pBufferTag, pResources);

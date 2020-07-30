@@ -60,5 +60,6 @@ void		Set_Object_LayerMap(CLayer *  _Layer)
 void		Release_Utility(void)
 {
 	CManagement::GetInstance()->DestroyInstance();
+	CRenderer::GetInstance()->DestroyInstance();
 	CObjectPool::GetInstance()->DestroyInstance();
 }

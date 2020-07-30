@@ -31,6 +31,18 @@ namespace Engine
 
 	const _ulong	FVF_UV = D3DFVF_XYZ | D3DFVF_TEX1;
 
+
+	typedef struct tagVertexCube
+	{
+		_vec3		vPosition;
+		_vec3		vTexUV;
+
+	}VTXCUBE;
+
+	const _ulong	FVF_CUBE = D3DFVF_XYZ | D3DFVF_TEX1 | D3DFVF_TEXCOORDSIZE3(0);	// 텍스쳐 UV를 FLOAT형 3개의 값으로 표현하겠다는 옵션
+
+	
+
 	typedef struct tagVertexTex
 	{
 		_vec3		vPosition;

@@ -21,7 +21,6 @@ public:
 
 private:
 	float			m_fSpeed = 10.f;
-	float			m_fAngle = 0.f;
 
 public:
 	static CPLandRush*		Create(void);

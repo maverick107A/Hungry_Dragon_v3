@@ -14,14 +14,12 @@ CFly_Monster::~CFly_Monster(void)
 HRESULT CFly_Monster::Ready_Object(void)
 {
 	CMonster::Ready_Object();
-	m_pTransform->m_vInfo[Engine::INFO_POS].z = 30.0f;
-	m_pTransform->m_vInfo[Engine::INFO_POS].y = 100.0f;
-	m_pTransform->m_vInfo[Engine::INFO_POS].x = 94.0f;
+	m_pTransform->m_vInfo[Engine::INFO_POS].z = 1000.0f;
+	m_pTransform->m_vInfo[Engine::INFO_POS].x = 600.0f;
+	m_pTransform->m_vInfo[Engine::INFO_POS].y = 600.0f;
 
 
-	m_pTransform->m_vScale.x *= 10.f;
-	m_pTransform->m_vScale.y *= 10.f;
-	m_pTransform->m_vScale.z *= 10.f;
+	m_pTransform->Set_Scale(0.f);
 
 	return S_OK;
 }
@@ -36,40 +34,29 @@ int CFly_Monster::Update_Object(const float & fTimeDelta)
 		m_fShotingLate = 0;
 	}
 
-
-	D3DXVECTOR3	vMonsterPos;
-	m_pTransform->Get_Info(Engine::INFO_POS, &vMonsterPos);
-
 	CMonster::Update_Object(fTimeDelta);
 
-	D3DXVECTOR3	vPlayerPos;
-	vPlayerPos = { m_vPlayerPos.x , 0 ,m_vPlayerPos.z };
-
-	D3DXVECTOR3 Dir = vMonsterPos - m_vPlayerPos;
-
-	float fDistance = D3DXVec3Length(&Dir);
-
-	if (fDistance < 15)
+	if (fDistance < 3)
 	{
-		Dead_Monster();
+		Dead_Monster(fTimeDelta);
 	}
-	else if (fDistance >= 15 && fDistance < 60)
+	else if (fDistance >= 3 && fDistance < 60)
 	{
 		m_pTransform->Chase_Target(&m_vPlayerPos, -(fTimeDelta * 2.f));
 	}
-	else
-	{
-		return 0;
-	}
+
 
 	return m_iEvent;
 }
 
 void CFly_Monster::Render_Object(void)
 {
+	m_pGraphicDev->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	m_pTransform->Set_Transform(m_pGraphicDev);
-	m_pTextureCom->Set_Texture();
+	m_pTextureCom->Set_Texture(2);
 	m_pBufferCom->Render_Buffer();
+	CMonster::Render_Object();
+	m_pGraphicDev->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 }
 
 void CFly_Monster::Shooting(void)

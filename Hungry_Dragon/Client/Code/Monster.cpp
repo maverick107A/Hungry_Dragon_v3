@@ -22,7 +22,26 @@ HRESULT CMonster::Ready_Object(void)
 
 int CMonster::Update_Object(const float & fTimeDelta)
 {
+
+	D3DXVECTOR3	vMonsterPos;
+	m_pTransform->Get_Info(Engine::INFO_POS, &vMonsterPos);
+
+	D3DXVECTOR3	vPlayerPos;
+	vPlayerPos = { m_vPlayerPos.x , 0 ,m_vPlayerPos.z };
+
+	D3DXVECTOR3 Dir = vMonsterPos - m_vPlayerPos;
+
+	fDistance = D3DXVec3Length(&Dir);
+
+	if (fDistance < 200)
+	{
+		m_bActivate = true;
+	}
+	else
+		m_bActivate = false;
+
 	Engine::CGameObject::Update_Object(fTimeDelta);
+
 	return m_iEvent;
 }
 
@@ -30,23 +49,110 @@ int CMonster::Update_Object(const float & fTimeDelta)
 void CMonster::Render_Object(void)
 {
 
+
+
+	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end(); ++iter)
+	{
+		(*iter)->Render_Buffer();
+	}
+
+
 }
 
-void CMonster::Dead_Monster(void)
+void CMonster::Dead_Monster(const float & fTimeDelta)
 {
-
-	m_pTransform->Set_Trans(&m_vPlayerPos);
-
-	m_pTransform->m_vScale.x -= 0.4f;
-	m_pTransform->m_vScale.y -= 0.4f;
-	m_pTransform->m_vScale.z -= 0.4f;
+	m_pTransform->Set_Scale(0.01f);
 
 
-	if (m_pTransform->m_vScale.x < 3.f)
+	Engine::_vec3 vOrigin = Engine::_vec3(0.f, 0.f, 0.f);
+	Engine::BoundingBox tempBoundingBox;
+	tempBoundingBox.vMax = Engine::_vec3(100.f, 100.f, 100.f);
+	tempBoundingBox.vMin = Engine::_vec3(-100.f, -100.f, -100.f);
+	Engine::CResources* tempParticle = Engine::Get_Particle(m_pGraphicDev, Engine::PART_ATK, tempBoundingBox, vOrigin);
+
+	//나중엔 미리 올려 놓는 식으로 구현하자
+	static_cast<Engine::CAtkPart*>(tempParticle)->Set_Texture(L"../../Asset/snowflake.dds");
+	m_arrParticle.emplace_back(tempParticle);
+
+
+	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end();) {
+		int life = (*iter)->Update_Component(fTimeDelta);
+
+		if (life == 0) {
+			++iter;
+		}
+		else {
+			Safe_Release(*iter);
+			iter = m_arrParticle.erase(iter);
+		}
+
+	}
+
+
+	if (m_pTransform->m_vScale.x < 0)
 	{
 		m_iEvent = MONSTER_DEAD;
 	}
+
+
 }
+
+void CMonster::Ride_Terrain()
+{
+	m_pTerrain = static_cast<Engine::CBaseLand*>
+		(Engine::Get_Component(L"GameLogic",
+			L"BackGround",
+			L"Com_Buffer",
+			Engine::ID_STATIC));
+
+	if (m_pTerrain == nullptr)
+		return;
+
+	D3DXVECTOR3* vPos = &m_pTransform->m_vInfo[Engine::INFO_POS];
+
+
+	int Vernum = (int(vPos->x*INVERSETILESIZE) + VERTEXSIZE*int(vPos->z*INVERSETILESIZE));
+
+	D3DXVECTOR3 Vertex1 = { float(int(vPos->x*INVERSETILESIZE)*TILECX), 0.f, float(int(vPos->z*INVERSETILESIZE)*TILECZ) };
+	D3DXVECTOR3 Vertex2 = { float(int(vPos->x*INVERSETILESIZE)*TILECX + TILECX), 0.f, float(int(vPos->z*INVERSETILESIZE)*TILECZ) };
+	D3DXVECTOR3 Vertex3 = { float(int(vPos->x*INVERSETILESIZE)*TILECX), 0.f, float(int(vPos->z*INVERSETILESIZE)*TILECZ + TILECZ) };
+	D3DXVECTOR3 Vertex4 = { float(int(vPos->x*INVERSETILESIZE)*TILECX + TILECX), 0.f, float(int(vPos->z*INVERSETILESIZE)*TILECZ + TILECZ) };
+
+
+	D3DXVECTOR3 vTemp1 = *vPos - Vertex3;
+	D3DXVECTOR3	vTemp2 = { -1.f,0.f,-1.f };
+	if (D3DXVec3Dot(&vTemp1, &vTemp2) > 0)
+	{
+		Vertex1.y = (float)m_pTerrain->Get_TerrainHeight()[Vernum] + 1;
+		Vertex2.y = (float)m_pTerrain->Get_TerrainHeight()[Vernum + 1] + 1;
+		Vertex3.y = (float)m_pTerrain->Get_TerrainHeight()[Vernum + VERTEXSIZE] + 1;
+
+		vTemp1 = Vertex2 - Vertex1;
+		vTemp2 = Vertex3 - Vertex1;
+		D3DXVECTOR3 vNorm = {};
+		D3DXVec3Cross(&vNorm, &vTemp1, &vTemp2);
+
+		float fConst = D3DXVec3Dot(&vNorm, &Vertex1);
+		m_pTransform->m_vInfo[Engine::INFO_POS].y = ((fConst - vNorm.x*vPos->x - vNorm.z*vPos->z) / vNorm.y) + 1;
+
+	
+	}
+	else
+	{
+		Vertex2.y = (float)m_pTerrain->Get_TerrainHeight()[Vernum + 1] + 1;
+		Vertex3.y = (float)m_pTerrain->Get_TerrainHeight()[Vernum + VERTEXSIZE] + 1;
+		Vertex4.y = (float)m_pTerrain->Get_TerrainHeight()[Vernum + VERTEXSIZE + 1] + 1;
+
+		vTemp1 = Vertex3 - Vertex4;
+		vTemp2 = Vertex2 - Vertex4;
+		D3DXVECTOR3 vNorm = {};
+		D3DXVec3Cross(&vNorm, &vTemp1, &vTemp2);
+
+		float fConst = D3DXVec3Dot(&vNorm, &Vertex3);
+		m_pTransform->m_vInfo[Engine::INFO_POS].y = ((fConst - vNorm.x*vPos->x - vNorm.z*vPos->z) / vNorm.y) + 1;
+	}
+}
+
 
 
 
@@ -93,5 +199,14 @@ CMonster * CMonster::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 
 void CMonster::Free(void)
 {
+
+	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end();) {
+		Engine::Safe_Release((*iter));
+		iter = m_arrParticle.erase(iter);
+
+	}
+	m_arrParticle.clear();
+
+
 	Engine::CGameObject::Free();
 }

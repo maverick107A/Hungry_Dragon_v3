@@ -36,6 +36,14 @@ void CTransform::Set_Trans(const _vec3 * const newPos) {
 	m_vInfo[INFO_POS] = vPos;
 }
 
+void CTransform::Set_Scale(const _float _Scale)
+{
+	m_vScale.x -= _Scale;
+	m_vScale.y -= _Scale;
+	m_vScale.z -= _Scale;
+
+}
+
 HRESULT Engine::CTransform::Ready_Transform(void)
 {
 	D3DXMatrixIdentity(&m_matWorld);
@@ -121,6 +129,11 @@ void Engine::CTransform::Set_Transform(LPDIRECT3DDEVICE9& pGraphicDev)
 void Engine::CTransform::Get_Info(INFO eType, _vec3* pInfo)
 {
 	memcpy(pInfo, &m_matWorld.m[eType][0], sizeof(_vec3));
+}
+
+_matrix CTransform::Get_World()
+{
+	return m_matWorld;
 }
 
 void Engine::CTransform::Rotation(ROTATION eType, const _float& fAngle)

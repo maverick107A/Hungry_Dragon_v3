@@ -14,10 +14,14 @@ private:
 
 public:
 	void			Get_Info(INFO eType, _vec3* pInfo);
+	_matrix			Get_World();
+
 
 	void			Add_Trans(const _vec3* const pDir);
 	void			Add_Trans(const _float* const _x, const _float* const _y, const _float* const _z);
 	void			Set_Trans(const _vec3* const newPos);
+	void			Set_Scale(const _float _Scale);
+
 public:
 	HRESULT			Ready_Transform(void);
 	virtual _int	Update_Component(const _float& fTimeDelta);

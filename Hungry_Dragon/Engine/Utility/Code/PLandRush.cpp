@@ -53,7 +53,7 @@ void CPLandRush::Update_State(const float& fTimeDelta)
 			vDir *= 100.f;
 		}
 		vDir *= fTimeDelta*m_fSpeed;
-		m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS] += vDir*cosf(m_fAngle);
+		m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS] += vDir;
 		float fDis = sqrtf(vDir.x*vDir.x + vDir.y*vDir.y + vDir.z*vDir.z);
 		float fPlaneDis = sqrtf(vDir.x*vDir.x + vDir.z*vDir.z);
 		m_pPlayer->Get_Transform()->m_vAngle.x = 0.f;
@@ -90,7 +90,7 @@ void CPLandRush::Update_State(const float& fTimeDelta)
 				fAngleY += Pi * 2;
 			}
 		}
-		m_pPlayer->Get_Transform()->m_vAngle.x = m_fAngle = -(Pi*0.5f - fAngleX)*cosf(m_pPlayer->Get_Transform()->m_vAngle.y - fAngleY);
+		m_pPlayer->Get_Transform()->m_vAngle.x = -(Pi*0.5f - fAngleX)*cosf(m_pPlayer->Get_Transform()->m_vAngle.y - fAngleY);
 
 
 	}

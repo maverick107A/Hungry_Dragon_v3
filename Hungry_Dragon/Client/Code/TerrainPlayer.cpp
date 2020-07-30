@@ -93,11 +93,7 @@ HRESULT CTerrainPlayer::Add_Component(void)
 
 
 
-	//// Renderer
-	//pComponent = m_pRendererCom = Engine::Get_Renderer();
-	//NULL_CHECK_RETURN(pComponent, E_FAIL);
-	//pComponent->AddRef();
-	//m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Renderer", pComponent);
+	
 
 	return S_OK;
 }

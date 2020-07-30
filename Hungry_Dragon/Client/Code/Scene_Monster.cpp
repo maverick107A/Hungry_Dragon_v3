@@ -108,9 +108,9 @@ HRESULT CScene_Monster::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 
 	Engine::CGameObject*		pGameObject = nullptr;
 
-	pGameObject = CTerrain::Create(m_pGraphicDev);
-	NULL_CHECK_RETURN(pGameObject, E_FAIL);
-	FAILED_CHECK_RETURN(pLayer->Add_Object(L"Buffer_Terrain", pGameObject), E_FAIL);
+	//pGameObject = CTerrain::Create(m_pGraphicDev);
+	//NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	//FAILED_CHECK_RETURN(pLayer->Add_Object(L"Buffer_Terrain", pGameObject), E_FAIL);
 
 	pGameObject = CChase_Monster::Create(m_pGraphicDev);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);

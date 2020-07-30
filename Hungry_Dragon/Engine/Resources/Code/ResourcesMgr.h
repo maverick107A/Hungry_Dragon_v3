@@ -17,6 +17,7 @@
 #include "ForestLand.h"
 #include "TerrainTex.h"
 #include "CubeTex.h"
+#include "SkyCube.h"
 
 #include "Texture.h"
 
