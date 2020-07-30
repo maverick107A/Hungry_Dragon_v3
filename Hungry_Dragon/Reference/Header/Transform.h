@@ -34,7 +34,7 @@ public:
 	_vec3		m_vScale; 
 	_vec3		m_vAngle;
 	_vec3		m_vTrans;
-	_vec3		m_vAddTrans;
+	_vec3		m_vInCamPos;
 	_matrix		m_matWorld;
 
 public:

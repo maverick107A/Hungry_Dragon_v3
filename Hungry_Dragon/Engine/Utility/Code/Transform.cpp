@@ -5,7 +5,7 @@ USING(Engine)
 Engine::CTransform::CTransform(void)
 	: m_vScale(1.f, 1.f, 1.f)
 	, m_vAngle(0.f, 0.f, 0.f)
-	, m_vAddTrans(0.f,0.f,0.f)
+	, m_vInCamPos(0.f,0.f,0.f)
 {
 	
 }
@@ -81,10 +81,12 @@ _int Engine::CTransform::Update_Component(const _float& fTimeDelta)
 	//추가이동
 	for (int i = 0; i < 3; ++i)
 	{
-		m_matWorld.m[INFO_POS][i] += m_vAddTrans[i];
+		m_matWorld.m[INFO_POS][i] += m_vInCamPos[i];
 	}
 	//여기까지
-
+	//이동기 관련
+	m_vInfo[INFO_POS] += m_vInCamPos*0.1f;
+	m_vInCamPos *= 0.9f;
 	return 0;
 }
 
