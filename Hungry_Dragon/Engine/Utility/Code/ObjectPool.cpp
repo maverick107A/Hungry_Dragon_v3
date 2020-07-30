@@ -70,6 +70,26 @@ HRESULT CObjectPool::Set_Bullet_LayerMap(OBJID _Type, _int iCnt , _vec3 _Pos)
 	return S_OK;
 }
 
+HRESULT CObjectPool::Set_Monster_LayerMap(OBJID _Type, _int iCnt, _vec3 _Pos)
+{
+	if (0 == m_listObject[_Type].size())
+	{
+		return E_FAIL;
+	}
+	else if ((size_t)iCnt > m_listObject[_Type].size())
+	{
+		iCnt = m_listObject[_Type].size();
+	}
+	for (int i = 0; i < iCnt; ++i)
+	{
+		m_Layer->Add_Monster_Object(m_listObject[_Type].front(), _Pos);
+		m_listObject[_Type].pop_front();
+
+	}
+
+	return S_OK;
+}
+
 void CObjectPool::Set_Object_LayerMap(CLayer * _Layer)
 {
 	m_Layer = _Layer;

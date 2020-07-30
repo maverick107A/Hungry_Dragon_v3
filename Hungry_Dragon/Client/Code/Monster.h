@@ -50,8 +50,6 @@ public:
 	virtual void Free(void) override;
 public:
 	list<Engine::CResources*>  m_arrParticle;
-
-
 };
 
 #endif // Monster_h__

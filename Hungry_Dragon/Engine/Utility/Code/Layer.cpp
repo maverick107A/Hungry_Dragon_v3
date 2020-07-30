@@ -21,25 +21,45 @@ _int Engine::CLayer::Update_Layer(const _float& fTimeDelta)
 {
 	_int iEnd = 0;
 	_int iBulletEnd = 0;
+	_int iMonsterEnd = 0;
+
 
 	for (auto& iter = m_mapObject.begin(); iter != m_mapObject.end();)
 	{
 		iEnd = iter->second->Update_Object(fTimeDelta);
 		iter->second->Set_Player(m_vPlayerPos);
 
-		if (MONSTER_DEAD == iEnd)
+	
+		++iter;
+	}
+
+
+	for (auto& iter = m_listMonster.begin(); iter != m_listMonster.end();)
+	{
+		if (m_listMonster.begin() == m_listMonster.end())
+			return iEnd;
+
+
+		iMonsterEnd = (*iter)->Update_Object(fTimeDelta);
+		(*iter)->Set_Player(m_vPlayerPos);
+
+		if (MONSTER_DEAD == iMonsterEnd)
 		{
-			// 비활성리스트에 넣어주기 iter;
-			CObjectPool::GetInstance()->Add_Object_Pool(iter->second, OBJID::STAND_MONSTER);
-			iter = m_mapObject.erase(iter);
+			CObjectPool::GetInstance()->Add_Object_Pool(*iter, OBJID::STAND_MONSTER);
+			iter = m_listMonster.erase(iter);
 		}
 		else
 			++iter;
+
 	}
+
+
 
 
 	for (auto& iter = m_listBullet.begin(); iter != m_listBullet.end();)
 	{
+		
+
 		if (m_listBullet.begin() == m_listBullet.end())
 			return iEnd;
 
@@ -69,6 +89,8 @@ void Engine::CLayer::Render_Layer(void)
 	for (auto& iter : m_listBullet)
 		iter->Render_Object();
 	
+	for (auto& iter : m_listMonster)
+		iter->Render_Object();
 }
 
 CLayer* Engine::CLayer::Create(void)
@@ -93,6 +115,12 @@ void Engine::CLayer::Free(void)
 	 }
 	 m_listBullet.clear();
 
+	 for (auto& iter : m_listMonster)
+	 {
+		 Safe_Release(iter);
+	 }
+	 m_listMonster.clear();
+
 }
 
 HRESULT Engine::CLayer::Add_Object(const _tchar* pObjTag, CGameObject* pGameObject)
@@ -112,6 +140,17 @@ HRESULT Engine::CLayer::Add_Bullet_Object(CGameObject * pGameObject , _vec3 _pos
 
 	pGameObject->Set_Pos(_pos);
 	m_listBullet.push_back(pGameObject);
+
+	return S_OK;
+}
+
+HRESULT Engine::CLayer::Add_Monster_Object(CGameObject * pGameObject, _vec3 _pos)
+{
+	if (nullptr == pGameObject)
+		return E_FAIL;
+
+	pGameObject->Set_Pos(_pos);
+	m_listMonster.push_back(pGameObject);
 
 	return S_OK;
 }

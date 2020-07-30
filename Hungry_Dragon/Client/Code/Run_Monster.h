@@ -24,7 +24,7 @@ public:
 	virtual void Render_Object(void) override;
 
 public:
-	static CRun_Monster*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
+	static CRun_Monster*	Create(LPDIRECT3DDEVICE9 pGraphicDev, D3DXVECTOR3 _pos);
 private:
 	virtual void Free(void) override;
 

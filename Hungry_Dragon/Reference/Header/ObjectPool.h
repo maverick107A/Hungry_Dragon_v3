@@ -20,8 +20,9 @@ private:
 public:
 	HRESULT		Add_Object_Pool(CGameObject* pGameObject, OBJID _Type);
 	HRESULT		Add_Object_Layer(OBJID _Type, _int iCnt);
-	HRESULT		Set_Bullet_LayerMap(OBJID _Type, _int iCnt, _vec3 _Pos);
 	void		Set_Object_LayerMap(CLayer *  _Layer);
+	HRESULT		Set_Bullet_LayerMap(OBJID _Type, _int iCnt, _vec3 _Pos);
+	HRESULT		Set_Monster_LayerMap(OBJID _Type, _int iCnt, _vec3 _Pos);
 private:
 	CLayer*		m_Layer;
 	list<CGameObject*>  m_listObject[OBJID::OBJ_END];

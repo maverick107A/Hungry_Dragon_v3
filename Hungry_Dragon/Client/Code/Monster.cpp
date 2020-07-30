@@ -40,6 +40,21 @@ int CMonster::Update_Object(const float & fTimeDelta)
 	else
 		m_bActivate = false;
 
+
+
+
+
+
+
+	//if (fDistance > 5000000)
+	//{
+	//	m_iEvent = MONSTER_DEAD;
+	//}
+
+
+
+
+
 	Engine::CGameObject::Update_Object(fTimeDelta);
 
 	return m_iEvent;
@@ -64,35 +79,37 @@ void CMonster::Dead_Monster(const float & fTimeDelta)
 	m_pTransform->Set_Scale(0.01f);
 
 
-	Engine::_vec3 vOrigin = Engine::_vec3(0.f, 0.f, 0.f);
-	Engine::BoundingBox tempBoundingBox;
-	tempBoundingBox.vMax = Engine::_vec3(100.f, 100.f, 100.f);
-	tempBoundingBox.vMin = Engine::_vec3(-100.f, -100.f, -100.f);
-	Engine::CResources* tempParticle = Engine::Get_Particle(m_pGraphicDev, Engine::PART_ATK, tempBoundingBox, vOrigin);
+	
+	//	Engine::_vec3 vOrigin = Engine::_vec3(0.f, 0.f, 0.f);
+	//	Engine::BoundingBox tempBoundingBox;
+	//	tempBoundingBox.vMax = Engine::_vec3(100.f, 100.f, 100.f);
+	//	tempBoundingBox.vMin = Engine::_vec3(-100.f, -100.f, -100.f);
+	//	Engine::CResources* tempParticle = Engine::Get_Particle(m_pGraphicDev, Engine::PART_ATK, tempBoundingBox, vOrigin);
 
-	//나중엔 미리 올려 놓는 식으로 구현하자
-	static_cast<Engine::CAtkPart*>(tempParticle)->Set_Texture(L"../../Asset/snowflake.dds");
-	m_arrParticle.emplace_back(tempParticle);
+	//	//나중엔 미리 올려 놓는 식으로 구현하자
+	//	static_cast<Engine::CAtkPart*>(tempParticle)->Set_Texture(L"../../Asset/snowflake.dds");
+	//	m_arrParticle.emplace_back(tempParticle);
+	//
+
+	//for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end();) {
+	//	int life = (*iter)->Update_Component(fTimeDelta);
+
+	//	if (life == 0) {
+	//		++iter;
+	//	}
+	//	else {
+	//		Safe_Release(*iter);
+	//		iter = m_arrParticle.erase(iter);
+	//	}
+
+	//}
 
 
-	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end();) {
-		int life = (*iter)->Update_Component(fTimeDelta);
-
-		if (life == 0) {
-			++iter;
-		}
-		else {
-			Safe_Release(*iter);
-			iter = m_arrParticle.erase(iter);
-		}
-
-	}
-
-
-	if (m_pTransform->m_vScale.x < 0)
+	if (m_pTransform->m_vScale.x < 0 || m_pTransform->m_vScale.y < 0 || m_pTransform->m_vScale.z < 0)
 	{
-		m_iEvent = MONSTER_DEAD;
+ 		m_iEvent = MONSTER_DEAD;
 	}
+
 
 
 }

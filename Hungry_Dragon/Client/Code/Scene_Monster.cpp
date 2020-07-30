@@ -106,34 +106,34 @@ HRESULT CScene_Monster::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 	Engine::Set_Object_LayerMap(pLayer);
 
 
-	Engine::CGameObject*		pGameObject = nullptr;
+	//Engine::CGameObject*		pGameObject = nullptr;
 
-	//pGameObject = CTerrain::Create(m_pGraphicDev);
+	////pGameObject = CTerrain::Create(m_pGraphicDev);
+	////NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	////FAILED_CHECK_RETURN(pLayer->Add_Object(L"Buffer_Terrain", pGameObject), E_FAIL);
+
+	//pGameObject = CChase_Monster::Create(m_pGraphicDev);
 	//NULL_CHECK_RETURN(pGameObject, E_FAIL);
-	//FAILED_CHECK_RETURN(pLayer->Add_Object(L"Buffer_Terrain", pGameObject), E_FAIL);
-
-	pGameObject = CChase_Monster::Create(m_pGraphicDev);
-	NULL_CHECK_RETURN(pGameObject, E_FAIL);
-	FAILED_CHECK_RETURN(pLayer->Add_Object(L"ChaseMonster", pGameObject), E_FAIL);
+	//FAILED_CHECK_RETURN(pLayer->Add_Object(L"ChaseMonster", pGameObject), E_FAIL);
 
 
-	pGameObject = CRun_Monster::Create(m_pGraphicDev);
-	NULL_CHECK_RETURN(pGameObject, E_FAIL);
-	FAILED_CHECK_RETURN(pLayer->Add_Object(L"RunMonster", pGameObject), E_FAIL);
+	//pGameObject = CRun_Monster::Create(m_pGraphicDev);
+	//NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	//FAILED_CHECK_RETURN(pLayer->Add_Object(L"RunMonster", pGameObject), E_FAIL);
 
-	pGameObject = CJump_Monster::Create(m_pGraphicDev);
-	NULL_CHECK_RETURN(pGameObject, E_FAIL);
-	FAILED_CHECK_RETURN(pLayer->Add_Object(L"JumpMonster", pGameObject), E_FAIL);
+	////pGameObject = CJump_Monster::Create(m_pGraphicDev);
+	////NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	////FAILED_CHECK_RETURN(pLayer->Add_Object(L"JumpMonster", pGameObject), E_FAIL);
 
-	pGameObject = CPlayer::Create(m_pGraphicDev);
-	NULL_CHECK_RETURN(pGameObject, E_FAIL);
-	FAILED_CHECK_RETURN(pLayer->Add_Object(L"TestPlayer", pGameObject), E_FAIL);
+	//pGameObject = CPlayer::Create(m_pGraphicDev);
+	//NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	//FAILED_CHECK_RETURN(pLayer->Add_Object(L"TestPlayer", pGameObject), E_FAIL);
 
 
 
-	pGameObject = CFly_Monster::Create(m_pGraphicDev);
-	NULL_CHECK_RETURN(pGameObject, E_FAIL);
-	FAILED_CHECK_RETURN(pLayer->Add_Object(L"FlyMonster", pGameObject), E_FAIL);
+	//pGameObject = CFly_Monster::Create(m_pGraphicDev);
+	//NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	//FAILED_CHECK_RETURN(pLayer->Add_Object(L"FlyMonster", pGameObject), E_FAIL);
 
 	
 

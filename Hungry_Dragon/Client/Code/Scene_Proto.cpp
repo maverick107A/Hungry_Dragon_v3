@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Scene_Proto.h"
-
+#include <time.h>
 #include "Export_Function.h"
 
 CScene_Proto::CScene_Proto(LPDIRECT3DDEVICE9 pGraphicDev)
@@ -33,6 +33,7 @@ HRESULT CScene_Proto::Ready_Scene(void) {
 	m_pGraphicDev->SetTransform(D3DTS_PROJECTION, &matProj);
 	//m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 
+	
 	return S_OK;
 }
 
@@ -124,26 +125,62 @@ HRESULT CScene_Proto::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 
 	FAILED_CHECK_RETURN(Register_GameObject<CBackGround>(pLayer, L"BackGround"), E_FAIL);
 	FAILED_CHECK_RETURN(Register_GameObject<CTestPlayer>(pLayer, L"TestPlayer"), E_FAIL);
+	srand(unsigned(time(NULL)));
 
-	FAILED_CHECK_RETURN(Register_GameObject<CChase_Monster>(pLayer, L"ChaseMonster"), E_FAIL);
-	FAILED_CHECK_RETURN(Register_GameObject<CRun_Monster>(pLayer, L"RunMonster"), E_FAIL);
-	FAILED_CHECK_RETURN(Register_GameObject<CJump_Monster>(pLayer, L"JumpMonster"), E_FAIL);
-	FAILED_CHECK_RETURN(Register_GameObject<CFly_Monster>(pLayer, L"FlyMonster"), E_FAIL);
+	for (int i = 0; i < 100; ++i)
+	{
+		Engine::CGameObject*		pJumpMonsterObject = nullptr;
+		D3DXVECTOR3 vMonsterPos = { (i * (rand() % 10)) + 1000.f ,  600.f  , (i * (rand() % 10)) + 1000.f };
+		pJumpMonsterObject = CFly_Monster::Create(m_pGraphicDev, vMonsterPos);
+		NULL_CHECK_RETURN(pJumpMonsterObject, E_FAIL);
+		pLayer->Add_Monster_Object(pJumpMonsterObject, vMonsterPos);
+	}
+
+	for (int i = 0; i < 100; ++i)
+	{
+		Engine::CGameObject*		pJumpMonsterObject = nullptr;
+		D3DXVECTOR3 vMonsterPos = { (i * (rand() % 10)) + 1000.f ,  1000.f  , (i * (rand() % 10)) + 1000.f };
+		pJumpMonsterObject = CJump_Monster::Create(m_pGraphicDev , vMonsterPos);
+		NULL_CHECK_RETURN(pJumpMonsterObject, E_FAIL);
+		pLayer->Add_Monster_Object(pJumpMonsterObject , vMonsterPos);
+	}
+
+	for (int i = 0; i < 100; ++i)
+	{
+		Engine::CGameObject*		pJumpMonsterObject = nullptr;
+		D3DXVECTOR3 vMonsterPos = { (i * (rand() % 15)) + 1000.f ,  1000.f  , (i * (rand() % 10)) + 1000.f };
+		pJumpMonsterObject = CRun_Monster::Create(m_pGraphicDev, vMonsterPos);
+		NULL_CHECK_RETURN(pJumpMonsterObject, E_FAIL);
+		pLayer->Add_Monster_Object(pJumpMonsterObject, vMonsterPos);
+
+	}
+
+
+	for (int i = 0; i < 100; ++i)
+	{
+		Engine::CGameObject*		pJumpMonsterObject = nullptr;
+		D3DXVECTOR3 vMonsterPos = { (i * (rand() % 10)) + 1000.f ,  1000.f  , (i * (rand() % 15)) + 1000.f };
+		pJumpMonsterObject = CChase_Monster::Create(m_pGraphicDev, vMonsterPos);
+		NULL_CHECK_RETURN(pJumpMonsterObject, E_FAIL);
+		pLayer->Add_Monster_Object(pJumpMonsterObject, vMonsterPos);
+	}
+
 
 	
+
+
+
+
 	// 이건 알아서 하시고 오브젝트 풀 싱글턴이라 익스포트 헤더에 걸어서 와야할텐데?
-	for(int i = 0 ;  i < 100; ++i)
+	for(int i = 0 ;  i < 10000; ++i)
 	{	
 		Engine::CGameObject*		pBulletObject = nullptr;
 		pBulletObject = CNormal_Bullet::Create(m_pGraphicDev);
 		NULL_CHECK_RETURN(pBulletObject, E_FAIL);
-		CObjectPool::GetInstance()->Add_Object_Pool(pBulletObject, OBJID::NORMAL_BULLET);
+		Engine::Add_Object_Pool(pBulletObject, OBJID::NORMAL_BULLET);
 
 	}
 
-	
-
-	
 
 	return S_OK;
 }
@@ -187,7 +224,7 @@ HRESULT CScene_Proto::Ready_Resource(LPDIRECT3DDEVICE9 pGraphicDev, RESOURCEID e
 		RESOURCE_STAGE,
 		L"Texture_BoxHead",
 		Engine::TEX_NORMAL,
-		L"../Bin/Resource/Texture/HeadPng/Head%d.png" , 4),
+		L"../../Asset/HeadPng/Head%d.png",6),
 		E_FAIL);
 
 

@@ -26,7 +26,6 @@ HRESULT CNormal_Bullet::Ready_Object(void)
 	m_eState = IDLE_BULLET;
 	m_preState = IDLE_BULLET;
 
-	srand(unsigned(time(NULL)));
 
 
 	return S_OK;
@@ -34,20 +33,33 @@ HRESULT CNormal_Bullet::Ready_Object(void)
 
 int CNormal_Bullet::Update_Object(const float & fTimeDelta)
 {
+	CBullet::Update_Object(fTimeDelta);
+
+
 	if (m_bFirst)
 	{
 		m_pTransform->Set_Trans(&m_vFirstPos);
 		m_bFirst = false;
 		m_iEvent = 0;
 		m_eState = IDLE_BULLET;
-		m_FirstPos = m_vPlayerPos;
+		
+		Engine::CTransform*		pPlayerTransformCom;
+		pPlayerTransformCom = dynamic_cast<Engine::CTransform*>
+		(Engine::Get_Component(L"GameLogic",
+			L"TestPlayer",
+			L"Com_Transform",
+			Engine::ID_DYNAMIC));
+
+		pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);
+
+		m_FirstPos = m_vPlayerPos - m_pTransform->m_vInfo[Engine::INFO_POS];
 	}
 
-	CBullet::Update_Object(fTimeDelta);
+	
 
 	if (m_eState == IDLE_BULLET)
 	{
-		m_pTransform->Chase_Target(&m_FirstPos, (fTimeDelta * 100.f));
+		m_pTransform->Dir_Fly(&m_FirstPos, (fTimeDelta * 100.f));
 	}
 	else if (m_eState == DEAD_BULLET)
 	{
@@ -55,31 +67,22 @@ int CNormal_Bullet::Update_Object(const float & fTimeDelta)
 		Dead_Bullet();
 	}
 
-	//else if (m_eState == DEAD_BULLET)
-	//{
-	//	m_bFirst = true;
-	//	Dead_Bullet();
-	//}
+
 	//else if (m_eState == REFLECT_BULLET)
 	//{
 
 	//	//D3DXVec3Normalize(&Dir, &Dir);
-
 	//	m_pTransform->Add_Trans(&m_vReflDir);
-
 	//	m_pTransform->m_vScale.x *= 0.99f;
 	//	m_pTransform->m_vScale.y *= 0.99f;
 	//	m_pTransform->m_vScale.z *= 0.99f;
 
-
-	//	if (m_fDistance > 5 || m_pTransform->m_vScale.x < 0)
-	//	{
-	//		m_eState = DEAD_BULLET;
-	//	}
-
-
+	//if (m_fDistance < 5 || m_pTransform->m_vScale.x < 0)
+	//{
+	//	m_eState = DEAD_BULLET;
 	//}
 
+	//}
 
 	//if (m_fDistance < 13)
 	//{
@@ -88,11 +91,20 @@ int CNormal_Bullet::Update_Object(const float & fTimeDelta)
 	//	m_vReflDir *= 0.5f;
 	//}
 
-	//if (m_fDistance > 200)
-	//{
-	//	m_eState = DEAD_BULLET;
-	//}
 
+	D3DXVECTOR3 Dir = m_pTransform->m_vInfo[Engine::INFO_POS] - m_vPlayerPos;
+	m_fDistance = D3DXVec3Length(&Dir);
+
+
+
+	if (m_fDistance > 5000)
+	{
+		m_eState = DEAD_BULLET;
+	}
+	else if (m_fDistance < 5)
+	{
+		m_eState = DEAD_BULLET;
+	}
 
 	State_Change();
 

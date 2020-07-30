@@ -19,6 +19,7 @@ public:
 public:
 	HRESULT		Add_Object(const _tchar* pObjTag, CGameObject* pGameObject);
 	HRESULT		Add_Bullet_Object(CGameObject * pGameObject, _vec3 _pos);
+	HRESULT		Add_Monster_Object(CGameObject * pGameObject, _vec3 _pos);
 
 	HRESULT		Ready_Layer(void);
 	_int		Update_Layer(const _float& fTimeDelta);
@@ -28,6 +29,7 @@ public:
 private:
 	map<const _tchar*, CGameObject*>		m_mapObject;
 	list<CGameObject*>					m_listBullet;
+	list<CGameObject*>					m_listMonster;
 	//list<CGameObject*>					m_listItem;
 	//list<CGameObject*>					m_listNull;
 

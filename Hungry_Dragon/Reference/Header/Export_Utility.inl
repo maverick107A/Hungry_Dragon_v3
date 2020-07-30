@@ -1,3 +1,4 @@
+#include "Export_Utility.h"
 // Management
 // Get
 CComponent*			Get_Component(const _tchar* pLayerTag, const _tchar* pObjTag, const _tchar* pComponentTag, COMPONENTID eID)
@@ -45,15 +46,25 @@ HRESULT		Add_Object_Layer(OBJID _Type, _int iCnt)
 {
 	return CObjectPool::GetInstance()->Add_Object_Layer(_Type, iCnt);
 }
+HRESULT Add_Object_Pool(CGameObject * pGameObject, OBJID _Type)
+{
+	return CObjectPool::GetInstance()->Add_Object_Pool(pGameObject, _Type);
+}
 
 HRESULT Set_Bullet_LayerMap(OBJID _Type, _int iCnt, _vec3 _Pos)
 {
 	return CObjectPool::GetInstance()->Set_Bullet_LayerMap(_Type, iCnt, _Pos);
 }
 
+inline HRESULT Set_Monster_LayerMap(OBJID _Type, _int iCnt, _vec3 _Pos)
+{
+	return CObjectPool::GetInstance()->Set_Monster_LayerMap(_Type, iCnt, _Pos);
+}
+
 void		Set_Object_LayerMap(CLayer *  _Layer)
 {
 	return CObjectPool::GetInstance()->Set_Object_LayerMap(_Layer);
+
 }
 
 // Release
