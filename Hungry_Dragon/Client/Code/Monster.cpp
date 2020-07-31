@@ -30,7 +30,7 @@ int CMonster::Update_Object(const float & fTimeDelta)
 	vPlayerPos = { m_vPlayerPos.x , 0 ,m_vPlayerPos.z };
 
 	D3DXVECTOR3 Dir = vMonsterPos - m_vPlayerPos;
-
+	Dir.y = 0;
 	fDistance = D3DXVec3Length(&Dir);
 
 	if (fDistance < 200)
@@ -41,17 +41,11 @@ int CMonster::Update_Object(const float & fTimeDelta)
 		m_bActivate = false;
 
 
-
-
-
-
-
-	//if (fDistance > 5000000)
-	//{
-	//	m_iEvent = MONSTER_DEAD;
-	//}
-
-
+	if (fDistance > 5000)
+	{
+		m_bFirst = true;
+		m_iEvent = MONSTER_DEAD;
+	}
 
 
 
@@ -107,6 +101,7 @@ void CMonster::Dead_Monster(const float & fTimeDelta)
 
 	if (m_pTransform->m_vScale.x < 0 || m_pTransform->m_vScale.y < 0 || m_pTransform->m_vScale.z < 0)
 	{
+		m_bFirst = true;
  		m_iEvent = MONSTER_DEAD;
 	}
 
@@ -129,6 +124,12 @@ void CMonster::Ride_Terrain()
 
 
 	int Vernum = (int(vPos->x*INVERSETILESIZE) + VERTEXSIZE*int(vPos->z*INVERSETILESIZE));
+
+	if (Vernum < 0)
+		Vernum = 0;
+
+	if (Vernum > 16384)
+		Vernum = 16384;
 
 	D3DXVECTOR3 Vertex1 = { float(int(vPos->x*INVERSETILESIZE)*TILECX), 0.f, float(int(vPos->z*INVERSETILESIZE)*TILECZ) };
 	D3DXVECTOR3 Vertex2 = { float(int(vPos->x*INVERSETILESIZE)*TILECX + TILECX), 0.f, float(int(vPos->z*INVERSETILESIZE)*TILECZ) };

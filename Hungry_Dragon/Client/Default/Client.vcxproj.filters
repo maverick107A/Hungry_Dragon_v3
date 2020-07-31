@@ -34,9 +34,6 @@
     <Filter Include="02. GameObject\01. Stage">
       <UniqueIdentifier>{7aac664a-bdaf-425c-84a7-375cffc981a7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. GameObject\02. Public">
-      <UniqueIdentifier>{007abf82-1595-400b-b2b7-11c552ebdbaa}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. GameObject\01. Stage\01.Player">
       <UniqueIdentifier>{6de56e98-c663-416d-b20d-61bd5e802ece}</UniqueIdentifier>
     </Filter>
@@ -96,6 +93,12 @@
     </Filter>
     <Filter Include="02. GameObject\01. Stage\00. Background\00. Ocean">
       <UniqueIdentifier>{6273f2cd-0a4a-4fa3-857d-ad00bfc680af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\02. Public">
+      <UniqueIdentifier>{007abf82-1595-400b-b2b7-11c552ebdbaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\05.GameMgr">
+      <UniqueIdentifier>{b3e38d98-0162-4576-b32b-7bbadbdfe1a1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -174,6 +177,9 @@
     <ClInclude Include="..\Code\Ocean.h">
       <Filter>02. GameObject\01. Stage\00. Background\00. Ocean</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\GameMgr.h">
+      <Filter>02. GameObject\01. Stage\05.GameMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -241,6 +247,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Ocean.cpp">
       <Filter>02. GameObject\01. Stage\00. Background\00. Ocean</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\GameMgr.cpp">
+      <Filter>02. GameObject\01. Stage\05.GameMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

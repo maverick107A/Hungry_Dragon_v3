@@ -21,18 +21,27 @@ HRESULT CJump_Monster::Ready_Object(void)
 
 
 	// t스케일에 포스를 넣었지 뭐얌 
-	m_pTransform->m_vInfo[Engine::INFO_POS].x = m_vFirstPos.x;
-	m_pTransform->m_vInfo[Engine::INFO_POS].y = m_vFirstPos.y;
-	m_pTransform->m_vInfo[Engine::INFO_POS].z = m_vFirstPos.z;
-	m_pTransform->Set_Minus_Scale(0.5f);
+
 
 	return S_OK;
 }
 
 int CJump_Monster::Update_Object(const float & fTimeDelta)
 {
-	CMonster::Update_Object(fTimeDelta);
 
+
+	
+
+
+	if (m_bFirst)
+	{
+		m_pTransform->Set_Trans(&m_vFirstPos);
+		m_bFirst = false;
+		m_iEvent = 0;
+
+	}
+
+	CMonster::Update_Object(fTimeDelta);
 
 	if (m_bActivate)
 	{

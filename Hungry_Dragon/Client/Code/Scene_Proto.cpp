@@ -2,6 +2,7 @@
 #include "Scene_Proto.h"
 #include <time.h>
 #include "Export_Function.h"
+#include "GameMgr.h"
 
 CScene_Proto::CScene_Proto(LPDIRECT3DDEVICE9 pGraphicDev)
 	: Engine::CScene(pGraphicDev) {
@@ -97,6 +98,7 @@ _int CScene_Proto::Update_Scene(const _float& fTimeDelta) {
 
 	pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);
 
+	CGameMgr::GetInstance()->Game_Update(m_vPlayerPos);
 
 	Engine::CScene::Update_Scene(fTimeDelta);
 
@@ -132,6 +134,7 @@ void CScene_Proto::Render_Scene(void) {
 void CScene_Proto::Free(void) {
 	Engine::Clear_RenderGroup();
 	Engine::CScene::Free();
+	CGameMgr::DestroyInstance();
 	Safe_Release(m_pFogEffect);
 }
 
@@ -191,35 +194,12 @@ HRESULT CScene_Proto::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 	FAILED_CHECK_RETURN(Register_GameObject<CBackGround>(pLayer, L"BackGround"), E_FAIL);
 	FAILED_CHECK_RETURN(Register_GameObject<CTestPlayer>(pLayer, L"TestPlayer"), E_FAIL);
 	
-	srand(unsigned(time(NULL)));
+	//srand(unsigned(time(NULL)));
 
-	for (int i = 0; i < 100; ++i)
-	{
-		Engine::CGameObject*		pJumpMonsterObject = nullptr;
-		D3DXVECTOR3 vMonsterPos = { (i * (rand() % 10)) + 1000.f ,  600.f  , (i * (rand() % 10)) + 1000.f };
-		pJumpMonsterObject = CFly_Monster::Create(m_pGraphicDev, vMonsterPos);
-		NULL_CHECK_RETURN(pJumpMonsterObject, E_FAIL);
-		pLayer->Add_Monster_Object(pJumpMonsterObject, vMonsterPos);
-	}
 
-	for (int i = 0; i < 100; ++i)
-	{
-		Engine::CGameObject*		pJumpMonsterObject = nullptr;
-		D3DXVECTOR3 vMonsterPos = { (i * (rand() % 10)) + 1000.f ,  1000.f  , (i * (rand() % 10)) + 1000.f };
-		pJumpMonsterObject = CJump_Monster::Create(m_pGraphicDev , vMonsterPos);
-		NULL_CHECK_RETURN(pJumpMonsterObject, E_FAIL);
-		pLayer->Add_Monster_Object(pJumpMonsterObject , vMonsterPos);
-	}
 
-	for (int i = 0; i < 100; ++i)
-	{
-		Engine::CGameObject*		pJumpMonsterObject = nullptr;
-		D3DXVECTOR3 vMonsterPos = { (i * (rand() % 15)) + 1000.f ,  1000.f  , (i * (rand() % 10)) + 1000.f };
-		pJumpMonsterObject = CRun_Monster::Create(m_pGraphicDev, vMonsterPos);
-		NULL_CHECK_RETURN(pJumpMonsterObject, E_FAIL);
-		pLayer->Add_Monster_Object(pJumpMonsterObject, vMonsterPos);
 
-	}
+
 
 
 	for (int i = 0; i < 100; ++i)
@@ -228,11 +208,42 @@ HRESULT CScene_Proto::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 		D3DXVECTOR3 vMonsterPos = { (i * (rand() % 10)) + 1000.f ,  1000.f  , (i * (rand() % 15)) + 1000.f };
 		pJumpMonsterObject = CChase_Monster::Create(m_pGraphicDev, vMonsterPos);
 		NULL_CHECK_RETURN(pJumpMonsterObject, E_FAIL);
-		pLayer->Add_Monster_Object(pJumpMonsterObject, vMonsterPos);
+		Engine::Add_Object_Pool(pJumpMonsterObject, OBJID::STAND_MONSTER);
 	}
 
 
-	
+	//for (int i = 0; i < 100; ++i)
+	//{
+	//	Engine::CGameObject*		pJumpMonsterObject = nullptr;
+	//	D3DXVECTOR3 vMonsterPos = { (i * (rand() % 10)) + 1000.f ,  600.f  , (i * (rand() % 10)) + 1000.f };
+	//	pJumpMonsterObject = CFly_Monster::Create(m_pGraphicDev, vMonsterPos);
+	//	NULL_CHECK_RETURN(pJumpMonsterObject, E_FAIL);
+	//	Engine::Add_Object_Pool(pJumpMonsterObject, OBJID::STAND_MONSTER);
+	//	
+	//}
+
+	for (int i = 0; i < 100; ++i)
+	{
+		Engine::CGameObject*		pJumpMonsterObject = nullptr;
+		D3DXVECTOR3 vMonsterPos = { (i * (rand() % 10)) + 1000.f ,  1000.f  , (i * (rand() % 10)) + 1000.f };
+		pJumpMonsterObject = CJump_Monster::Create(m_pGraphicDev , vMonsterPos);
+		NULL_CHECK_RETURN(pJumpMonsterObject, E_FAIL);
+		Engine::Add_Object_Pool(pJumpMonsterObject, OBJID::STAND_MONSTER);
+	}
+
+
+
+
+
+	for (int i = 0; i < 100; ++i)
+	{
+		Engine::CGameObject*		pJumpMonsterObject = nullptr;
+		D3DXVECTOR3 vMonsterPos = { (i * (rand() % 15)) + 1000.f ,  1000.f  , (i * (rand() % 10)) + 1000.f };
+		pJumpMonsterObject = CRun_Monster::Create(m_pGraphicDev, vMonsterPos);
+		NULL_CHECK_RETURN(pJumpMonsterObject, E_FAIL);
+		Engine::Add_Object_Pool(pJumpMonsterObject, OBJID::STAND_MONSTER);
+
+	}
 
 
 

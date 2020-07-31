@@ -1,5 +1,6 @@
 #include "ObjectPool.h"
 #include "Export_Utility.h"
+#include <time.h>
 
 USING(Engine)
 
@@ -7,6 +8,7 @@ IMPLEMENT_SINGLETON(CObjectPool)
 
 CObjectPool::CObjectPool(void)
 {
+	srand(unsigned(time(NULL)));
 }
 
 
@@ -72,6 +74,8 @@ HRESULT CObjectPool::Set_Bullet_LayerMap(OBJID _Type, _int iCnt , _vec3 _Pos)
 
 HRESULT CObjectPool::Set_Monster_LayerMap(OBJID _Type, _int iCnt, _vec3 _Pos)
 {
+
+
 	if (0 == m_listObject[_Type].size())
 	{
 		return E_FAIL;
@@ -82,6 +86,7 @@ HRESULT CObjectPool::Set_Monster_LayerMap(OBJID _Type, _int iCnt, _vec3 _Pos)
 	}
 	for (int i = 0; i < iCnt; ++i)
 	{
+		_Pos = { _Pos.x + (rand() % 2000) , 0 , _Pos.z +  (rand() % 2000) };
 		m_Layer->Add_Monster_Object(m_listObject[_Type].front(), _Pos);
 		m_listObject[_Type].pop_front();
 

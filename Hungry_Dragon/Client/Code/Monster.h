@@ -42,6 +42,7 @@ protected:
 	int							m_iEvent = 0;
 	bool						m_bDead = false;
 	bool						m_bActivate = false;
+	bool						m_bFirst = true;
 	float						fDistance;
 
 public:

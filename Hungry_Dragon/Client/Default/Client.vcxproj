@@ -161,6 +161,7 @@
     <ClInclude Include="..\Code\Bullet.h" />
     <ClInclude Include="..\Code\Chase_Monster.h" />
     <ClInclude Include="..\Code\Fly_Monster.h" />
+    <ClInclude Include="..\Code\GameMgr.h" />
     <ClInclude Include="..\Code\Jump_Monster.h" />
     <ClInclude Include="..\Code\Logo.h" />
     <ClInclude Include="..\Code\MainApp.h" />
@@ -188,6 +189,7 @@
     <ClCompile Include="..\Code\Bullet.cpp" />
     <ClCompile Include="..\Code\Chase_Monster.cpp" />
     <ClCompile Include="..\Code\Fly_Monster.cpp" />
+    <ClCompile Include="..\Code\GameMgr.cpp" />
     <ClCompile Include="..\Code\Jump_Monster.cpp" />
     <ClCompile Include="..\Code\Logo.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />

@@ -15,10 +15,7 @@ CRun_Monster::~CRun_Monster(void)
 HRESULT CRun_Monster::Ready_Object(void)
 {
 	CMonster::Ready_Object();
-	m_pTransform->m_vInfo[Engine::INFO_POS].x = m_vFirstPos.x;
-	m_pTransform->m_vInfo[Engine::INFO_POS].y = m_vFirstPos.y;
-	m_pTransform->m_vInfo[Engine::INFO_POS].z = m_vFirstPos.z;
-	m_pTransform->Set_Minus_Scale(0.5f);
+
 
 	return S_OK;
 }
@@ -26,7 +23,17 @@ HRESULT CRun_Monster::Ready_Object(void)
 int CRun_Monster::Update_Object(const float & fTimeDelta)
 {
 
+
+	if (m_bFirst)
+	{
+		m_pTransform->Set_Trans(&m_vFirstPos);
+		m_bFirst = false;
+		m_iEvent = 0;
+
+	}
+
 	CMonster::Update_Object(fTimeDelta);
+
 	Ride_Terrain();
 
 	if (m_bActivate)
