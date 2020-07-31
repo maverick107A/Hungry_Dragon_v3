@@ -33,6 +33,45 @@ HRESULT CScene_Proto::Ready_Scene(void) {
 	m_pGraphicDev->SetTransform(D3DTS_PROJECTION, &matProj);
 	//m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 
+
+
+	//
+	// Create effect.
+	//
+	HRESULT hr;
+	ID3DXBuffer* errorBuffer = 0;
+	hr = D3DXCreateEffectFromFile(
+		m_pGraphicDev,
+		L"../../Asset/Shader/fog_base.txt",
+		0,                // no preprocessor definitions
+		0,                // no ID3DXInclude interface
+		D3DXSHADER_DEBUG, // compile flags
+		0,                // don't share parameters
+		&m_pFogEffect,
+		&errorBuffer);
+
+	// output any error messages
+	if (errorBuffer)
+	{
+		TCHAR szTemp[512];
+		MultiByteToWideChar(0, 0, (char*)errorBuffer->GetBufferPointer(), strlen((char*)errorBuffer->GetBufferPointer()), szTemp, strlen((char*)errorBuffer->GetBufferPointer()));
+		::MessageBox(0, szTemp, 0, 0);
+		//::MessageBox(0, (char*)errorBuffer->GetBufferPointer(), 0, 0);
+		Safe_Release(errorBuffer);
+	}
+
+	if (FAILED(hr))
+	{
+		::MessageBox(0, L"D3DXCreateEffectFromFile() - FAILED", 0, 0);
+		return;
+	}
+
+	// 
+	// Save Frequently Accessed Parameter Handles
+	//
+
+	m_hFogTechHandle = m_pFogEffect->GetTechniqueByName("Fog");
+
 	
 	return S_OK;
 }
@@ -45,6 +84,10 @@ _int CScene_Proto::Update_Scene(const _float& fTimeDelta) {
 		else
 			m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 		m_bWireFrame = !m_bWireFrame;
+	}
+	if (GetAsyncKeyState(VK_F8) & 0x0001)
+	{
+		m_bFogEnable = !m_bFogEnable;
 	}
 	pPlayerTransformCom = dynamic_cast<Engine::CTransform*>
 		(Engine::Get_Component(L"GameLogic",
@@ -61,13 +104,35 @@ _int CScene_Proto::Update_Scene(const _float& fTimeDelta) {
 }
 
 void CScene_Proto::Render_Scene(void) {
+
+
+	// set the technique to use
+	m_pFogEffect->SetTechnique(m_hFogTechHandle);
+
+	UINT numPasses = 0;
+	m_pFogEffect->Begin(&numPasses, 0);
+
+	D3DXMATRIX I;
+	D3DXMatrixIdentity(&I);
+	
+	if(m_bFogEnable)
+		m_pFogEffect->BeginPass(0);
+
 	Engine::CScene::Render_Scene();
 	Engine::Render_GameObject();
+
+	m_pFogEffect->End();
+		
+	
+	
+	
+	
 }
 
 void CScene_Proto::Free(void) {
 	Engine::Clear_RenderGroup();
 	Engine::CScene::Free();
+	Safe_Release(m_pFogEffect);
 }
 
 CScene_Proto* CScene_Proto::Create(LPDIRECT3DDEVICE9 pGraphicDev) {
@@ -99,7 +164,7 @@ HRESULT CScene_Proto::Ready_Layer_Environment(const _tchar * pLayerTag) {
 
 	// 템플릿으로 1줄 처리함 알아서들 쓰세염, 컴포넌트 버전도 만들어놓음
 	FAILED_CHECK_RETURN(Register_GameObject<CSkySphere>(pLayer, L"Skybox"), E_FAIL);
-
+	FAILED_CHECK_RETURN(Register_GameObject<COcean>(pLayer, L"BaseLayer"), E_FAIL);
 
 	// 이렇게 게임오브젝트 뽑아올 수도 있음
 	//CSkySphere*		pGameObject = nullptr;
@@ -125,6 +190,7 @@ HRESULT CScene_Proto::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 
 	FAILED_CHECK_RETURN(Register_GameObject<CBackGround>(pLayer, L"BackGround"), E_FAIL);
 	FAILED_CHECK_RETURN(Register_GameObject<CTestPlayer>(pLayer, L"TestPlayer"), E_FAIL);
+	
 	srand(unsigned(time(NULL)));
 
 	for (int i = 0; i < 100; ++i)
@@ -204,6 +270,15 @@ HRESULT CScene_Proto::Ready_Resource(LPDIRECT3DDEVICE9 pGraphicDev, RESOURCEID e
 		1),
 		E_FAIL);
 
+	FAILED_CHECK_RETURN(Engine::Ready_Buffer(pGraphicDev,
+		RESOURCE_STATIC,
+		L"Buffer_LandTex",
+		Engine::BUFFER_LANDTEX,
+		129,
+		129,
+		1000),
+		E_FAIL);
+
 
 	FAILED_CHECK_RETURN(Engine::Ready_Texture(pGraphicDev,
 		RESOURCE_STAGE,
@@ -225,6 +300,13 @@ HRESULT CScene_Proto::Ready_Resource(LPDIRECT3DDEVICE9 pGraphicDev, RESOURCEID e
 		L"Texture_BoxHead",
 		Engine::TEX_NORMAL,
 		L"../../Asset/HeadPng/Head%d.png",6),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(pGraphicDev,
+		RESOURCE_STAGE,
+		L"TEX_OCEAN",
+		Engine::TEX_NORMAL,
+		L"../../Asset/Terrain/water.bmp"),
 		E_FAIL);
 
 

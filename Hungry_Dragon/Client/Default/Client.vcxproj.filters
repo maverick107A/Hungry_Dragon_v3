@@ -40,9 +40,6 @@
     <Filter Include="02. GameObject\01. Stage\01.Player">
       <UniqueIdentifier>{6de56e98-c663-416d-b20d-61bd5e802ece}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. GameObject\01. Stage\00.Terrain">
-      <UniqueIdentifier>{bc2a9999-d260-4edf-a3bb-6ddbd6b0b943}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. GameObject\01. Stage\01. Scene_Monster">
       <UniqueIdentifier>{b6c97def-0aef-4b67-9b01-68dcab2a4532}</UniqueIdentifier>
     </Filter>
@@ -94,6 +91,12 @@
     <Filter Include="02. GameObject\01. Stage\04.SkySphere">
       <UniqueIdentifier>{7aa7f97f-bd8d-4e1e-b0d2-501f69181828}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. GameObject\01. Stage\00. Background">
+      <UniqueIdentifier>{bc2a9999-d260-4edf-a3bb-6ddbd6b0b943}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\00. Background\00. Ocean">
+      <UniqueIdentifier>{6273f2cd-0a4a-4fa3-857d-ad00bfc680af}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -121,7 +124,7 @@
       <Filter>02. GameObject\01. Stage\01.Player</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\BackGround.h">
-      <Filter>02. GameObject\01. Stage\00.Terrain</Filter>
+      <Filter>02. GameObject\01. Stage\00. Background</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Scene_Monster.h">
       <Filter>01. Scene\20. Scene_Monster</Filter>
@@ -168,6 +171,9 @@
     <ClInclude Include="..\Code\SkySphere.h">
       <Filter>02. GameObject\01. Stage\04.SkySphere</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\Ocean.h">
+      <Filter>02. GameObject\01. Stage\00. Background\00. Ocean</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -186,7 +192,7 @@
       <Filter>02. GameObject\01. Stage\01.Player</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\BackGround.cpp">
-      <Filter>02. GameObject\01. Stage\00.Terrain</Filter>
+      <Filter>02. GameObject\01. Stage\00. Background</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Scene_Monster.cpp">
       <Filter>01. Scene\20. Scene_Monster</Filter>
@@ -232,6 +238,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\SkySphere.cpp">
       <Filter>02. GameObject\01. Stage\04.SkySphere</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Ocean.cpp">
+      <Filter>02. GameObject\01. Stage\00. Background\00. Ocean</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

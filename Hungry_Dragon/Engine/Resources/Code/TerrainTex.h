@@ -25,7 +25,7 @@ private:
 	BITMAPFILEHEADER	m_fh;
 	BITMAPINFOHEADER	m_ih;
 	_float				m_Terrain_Interval;
-	_ulong *			m_pHight;
+	_ulong *			m_pHeight;
 	_ulong				m_dwCntZ;
 	_ulong				m_dwCntX;
 	

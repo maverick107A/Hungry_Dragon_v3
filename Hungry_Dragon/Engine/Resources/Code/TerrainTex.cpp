@@ -38,9 +38,9 @@ HRESULT Engine::CTerrainTex::Ready_Buffer(const _ulong& dwCntX, const _ulong& dw
 	ReadFile(m_hFile, &m_fh, sizeof(BITMAPFILEHEADER), &dwByte, NULL);
 	ReadFile(m_hFile, &m_ih, sizeof(BITMAPINFOHEADER), &dwByte, NULL);
 
-	m_pHight = new _ulong[m_ih.biWidth * m_ih.biHeight];
+	m_pHeight = new _ulong[m_ih.biWidth * m_ih.biHeight];
 
-	ReadFile(m_hFile, m_pHight, sizeof(_ulong) * m_ih.biWidth * m_ih.biHeight, &dwByte, NULL);
+	ReadFile(m_hFile, m_pHeight, sizeof(_ulong) * m_ih.biWidth * m_ih.biHeight, &dwByte, NULL);
 
 	CloseHandle(m_hFile);
 
@@ -57,7 +57,7 @@ HRESULT Engine::CTerrainTex::Ready_Buffer(const _ulong& dwCntX, const _ulong& dw
 			dwIndex = i * dwCntX + j;
 
 			pVertex[dwIndex].vPosition = _vec3(_float(j) * dwVtxItv,
-				(m_pHight[dwIndex] & 0x000000ff) / 20.f,
+				(m_pHeight[dwIndex] & 0x000000ff) / 20.f,
 				_float(i) * dwVtxItv);
 			pVertex[dwIndex].vTexUV = _vec2(_float(j) / (dwCntX - 1), _float(i) / (dwCntZ - 1));
 
@@ -115,7 +115,7 @@ _ulong CTerrainTex::Get_Height(const _float & _X, const _float & _Z)
 	
 	int iIndex = (int)(_Index_Y * m_dwCntZ) + (int)_Index_X;
 
-	return m_pHight[iIndex];
+	return m_pHeight[iIndex];
 }
 
 void CTerrainTex::Piking_Terrain(const _float  & _x, const _float & _z  ,  _float  & _Index_X,  _float &_Index_Y , _int  & _TriPoint)
@@ -189,7 +189,7 @@ CComponent* Engine::CTerrainTex::Clone(void)
 
 void Engine::CTerrainTex::Free(void)
 {
-	Safe_Delete_Array(m_pHight);
+	Safe_Delete_Array(m_pHeight);
 	CVIBuffer::Free();
 }
 
