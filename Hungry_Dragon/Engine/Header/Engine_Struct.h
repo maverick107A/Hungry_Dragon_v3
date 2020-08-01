@@ -144,6 +144,34 @@ namespace Engine
 		_vec3 vMin;
 		_vec3 vMax;
 	}BoundingBox;
+
+	typedef struct tagAddress{
+		//각 자리수를 통해 종류를 판단.
+		//1000	xxxx -> 레이어
+		//0100	xxxx -> 게임오브젝트
+		//0010	xxxx -> 컴포넌트
+		_char	StateFlag;
+		void*	LayerAddress;
+		void*	ObjAddress;
+		void*	ComponentAddress;
+
+		tagAddress(void* _address, void* _object = nullptr, void* _component = nullptr) {
+			LayerAddress = _address;
+			ObjAddress = _object;
+			ComponentAddress = _component;
+
+			StateFlag &= (char)0;
+			if (nullptr != ComponentAddress) {
+				StateFlag |= (char)32;
+			}
+			else if (nullptr != ObjAddress) {
+				StateFlag |= (char)64;
+			}
+			else {
+				StateFlag |= (char)128;
+			}
+		}
+	}tagAdd;
 }
 
 

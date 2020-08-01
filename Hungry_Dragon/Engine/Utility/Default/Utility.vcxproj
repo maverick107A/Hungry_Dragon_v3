@@ -185,6 +185,7 @@ call CopyUtility.bat</Command>
     <ClCompile Include="..\Code\Static_Behavior.cpp" />
     <ClCompile Include="..\Code\Terrain_Manager.cpp" />
     <ClCompile Include="..\Code\Transform.cpp" />
+    <ClCompile Include="..\Code\UtilBase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Header\Export_Utility.h" />
@@ -207,6 +208,7 @@ call CopyUtility.bat</Command>
     <ClInclude Include="..\Code\Static_Behavior.h" />
     <ClInclude Include="..\Code\Terrain_Manager.h" />
     <ClInclude Include="..\Code\Transform.h" />
+    <ClInclude Include="..\Code\UtilBase.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Header\Export_Utility.inl" />

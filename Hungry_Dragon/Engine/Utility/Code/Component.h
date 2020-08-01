@@ -2,11 +2,11 @@
 #define Component_h__
 
 #include "Engine_Define.h"
-#include "Base.h"
+#include "UtilBase.h"
 
 BEGIN(Engine)
 
-class ENGINE_DLL CComponent : public CBase
+class ENGINE_DLL CComponent : public CUtilBase
 {
 protected:
 	explicit CComponent(void);

@@ -1,11 +1,12 @@
 #ifndef Layer_h__
 #define Layer_h__
 
+#include "UtilBase.h"
 #include "GameObject.h"
 
 BEGIN(Engine)
 
-class ENGINE_DLL CLayer : public CBase
+class ENGINE_DLL CLayer : public CUtilBase
 {
 private:
 	explicit CLayer(void);

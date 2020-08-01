@@ -1,11 +1,12 @@
 #ifndef GameObject_h__
 #define GameObject_h__
 
+#include "UtilBase.h"
 #include "Component.h"
 
 BEGIN(Engine)
 
-class ENGINE_DLL CGameObject : public CBase
+class ENGINE_DLL CGameObject : public CUtilBase
 { 
 protected:
 	explicit CGameObject(LPDIRECT3DDEVICE9 pGraphicDev);
