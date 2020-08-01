@@ -32,7 +32,7 @@ int COcean::Update_Object(const float& fTimeDelta)
 
 	Engine::CGameObject::Update_Object(fTimeDelta);
 
-	m_pTransform->Add_Trans(&_vec3(1.f, 0.f, -1.f));
+	m_pTransform->Add_Trans(&_vec3(1.f, 0.f, -1.f));				// 셰이더로 바꾸기 전 임시
 	m_fLoopCnt += 1.f;
 	if (1000.f <= m_fLoopCnt)
 	{
@@ -48,7 +48,7 @@ void COcean::Render_Object(void)
 	m_pTransform->Set_Transform(m_pGraphicDev);
 	m_pTexture->Set_Texture();
 
-	m_pGraphicDev->SetRenderState(D3DRS_ZENABLE, FALSE);
+	m_pGraphicDev->SetRenderState(D3DRS_ZENABLE, FALSE);		// 렌더 순서에 의존하겠다
 
 	m_pBufferCom->Render_Buffer();
 
@@ -66,7 +66,7 @@ HRESULT COcean::Add_Component(void)
 	Engine::CComponent*		pComponent = nullptr;
 
 	// buffer
-	FAILED_CHECK_RETURN(Clone_Component<CLandTex>(&m_pBufferCom, RESOURCE_STATIC, L"Buffer_LandTex", ID_STATIC, L"Com_Buffer"), E_FAIL);
+	FAILED_CHECK_RETURN(Clone_Component<CTexture_Plane>(&m_pBufferCom, RESOURCE_STATIC, L"Buffer_LandTex", ID_STATIC, L"Com_Buffer"), E_FAIL);
 	FAILED_CHECK_RETURN(Clone_Component<CTexture>(&m_pTexture, RESOURCE_STAGE, L"TEX_OCEAN", ID_STATIC, L"Com_Texture"));
 	FAILED_CHECK_RETURN(Register_Component<CTransform>(&m_pTransform, ID_DYNAMIC, L"Com_Transform"), E_FAIL);
 

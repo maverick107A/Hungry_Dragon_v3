@@ -1,25 +1,25 @@
-#include "LandTex.h"
+#include "Texture_Plane.h"
 
 USING(Engine)
 
-Engine::CLandTex::CLandTex(LPDIRECT3DDEVICE9 pGraphicDev)
+Engine::CTexture_Plane::CTexture_Plane(LPDIRECT3DDEVICE9 pGraphicDev)
 	: CVIBuffer(pGraphicDev)
 {
 
 }
 
-Engine::CLandTex::CLandTex(const CLandTex& rhs)
+Engine::CTexture_Plane::CTexture_Plane(const CTexture_Plane& rhs)
 	: CVIBuffer(rhs)
 {
 
 }
 
-Engine::CLandTex::~CLandTex(void)
+Engine::CTexture_Plane::~CTexture_Plane(void)
 {
 
 }
 
-HRESULT Engine::CLandTex::Ready_Buffer(const _ulong& dwCntX, const _ulong& dwCntZ, const _ulong& dwVtxItv)
+HRESULT Engine::CTexture_Plane::Ready_Buffer(const _ulong& dwCntX, const _ulong& dwCntZ, const _ulong& dwVtxItv)
 {
 	m_dwVtxCnt = dwCntX * dwCntZ;
 	m_dwCntZ = dwCntZ;
@@ -89,12 +89,12 @@ HRESULT Engine::CLandTex::Ready_Buffer(const _ulong& dwCntX, const _ulong& dwCnt
 	return S_OK;
 }
 
-void Engine::CLandTex::Render_Buffer(void)
+void Engine::CTexture_Plane::Render_Buffer(void)
 {
 	CVIBuffer::Render_Buffer();
 }
 
-void CLandTex::Set_Height(void * _bitmap)
+void CTexture_Plane::Set_Height(void * _bitmap)
 {
 
 	std::vector<int>* pBit = (std::vector<int>*)(_bitmap);
@@ -142,14 +142,14 @@ void CLandTex::Set_Height(void * _bitmap)
 	m_pVB->Unlock();
 }
 
-void Engine::CLandTex::Free(void)
+void Engine::CTexture_Plane::Free(void)
 {
 	CVIBuffer::Free();
 }
 
-CLandTex* Engine::CLandTex::Create(LPDIRECT3DDEVICE9 pGraphicDev, const _ulong& dwCntX, const _ulong& dwCntZ, const _ulong& dwVtxItv)
+CTexture_Plane* Engine::CTexture_Plane::Create(LPDIRECT3DDEVICE9 pGraphicDev, const _ulong& dwCntX, const _ulong& dwCntZ, const _ulong& dwVtxItv)
 {
-	CLandTex*	pInstance = new CLandTex(pGraphicDev);
+	CTexture_Plane*	pInstance = new CTexture_Plane(pGraphicDev);
 
 	if (FAILED(pInstance->Ready_Buffer(dwCntX, dwCntZ, dwVtxItv)))
 		Safe_Release(pInstance);
@@ -157,8 +157,8 @@ CLandTex* Engine::CLandTex::Create(LPDIRECT3DDEVICE9 pGraphicDev, const _ulong& 
 	return pInstance;
 }
 
-CComponent* Engine::CLandTex::Clone(void)
+CComponent* Engine::CTexture_Plane::Clone(void)
 {
-	return new CLandTex(*this);
+	return new CTexture_Plane(*this);
 }
 

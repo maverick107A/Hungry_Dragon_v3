@@ -18,7 +18,7 @@
 #include "TerrainTex.h"
 #include "Texture_Cube.h"
 #include "SkyCube.h"
-#include "LandTex.h"
+#include "Texture_Plane.h"
 
 #include "Texture.h"
 

@@ -38,11 +38,12 @@ protected:
 
 
 protected:
-	_vec3					m_vOrigin;
-	BoundingBox				m_BoundingBox;
+	//주의! 월드 좌표 아님! 생성되는 곳 기준 로컬좌표로 넣어줄 것.
+	_vec3					m_vOrigin;			//파티클이 생성될 위치
+	BoundingBox				m_BoundingBox;		//파티클이 출력될 공간
 
 	float					m_fEmitRate;		//출현 주기
-	float					m_fSize;
+	float					m_fSize;			//파티클 사이즈
 	float					m_fSpeed;			//파티클 이동 속도
 	IDirect3DTexture9*		m_Tex=nullptr;
 	IDirect3DVertexBuffer9*	m_Vb;

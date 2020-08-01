@@ -6,7 +6,7 @@
 
 BEGIN(Engine)
 
-class CLandTex;
+class CTexture_Plane;
 class CTransform;
 class CTexture;
 
@@ -27,9 +27,9 @@ private:
 	HRESULT		Add_Component(void);
 
 private:
-	Engine::CLandTex*		m_pBufferCom = nullptr;
+	Engine::CTexture_Plane*		m_pBufferCom = nullptr;		// 바다 평면 128x128	
 	Engine::CTransform*		m_pTransform = nullptr;
-	Engine::CTexture*		m_pTexture = nullptr;
+	Engine::CTexture*		m_pTexture = nullptr; //텍스쳐 출력용(나중에 셰이더로 바꿀거임)
 	float m_fLoopCnt = 0.f;
 
 public:

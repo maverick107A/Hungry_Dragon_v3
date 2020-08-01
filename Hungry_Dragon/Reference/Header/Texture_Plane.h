@@ -1,16 +1,16 @@
-#ifndef LandTex_h__
-#define LandTex_h__
+#ifndef Texture_Plane_h__
+#define Texture_Plane_h__
 
 #include "VIBuffer.h"
 
 BEGIN(Engine)
 
-class ENGINE_DLL CLandTex : public CVIBuffer
+class ENGINE_DLL CTexture_Plane : public CVIBuffer
 {
 private:
-	explicit CLandTex(LPDIRECT3DDEVICE9 pGraphicDev);
-	explicit CLandTex(const CLandTex& rhs);
-	virtual ~CLandTex(void);
+	explicit CTexture_Plane(LPDIRECT3DDEVICE9 pGraphicDev);
+	explicit CTexture_Plane(const CTexture_Plane& rhs);
+	virtual ~CTexture_Plane(void);
 
 public:
 	HRESULT Ready_Buffer(const _ulong& dwCntX, const _ulong& dwCntZ, const _ulong& dwVtxItv);
@@ -23,7 +23,7 @@ private:
 	_ulong				m_dwCntX;
 
 public:
-	static CLandTex*	Create(LPDIRECT3DDEVICE9 pGraphicDev, const _ulong& dwCntX, const _ulong& dwCntZ, const _ulong& dwVtxItv);
+	static CTexture_Plane*	Create(LPDIRECT3DDEVICE9 pGraphicDev, const _ulong& dwCntX, const _ulong& dwCntZ, const _ulong& dwVtxItv);
 	virtual CComponent*	Clone(void)override;
 	virtual void Free(void) override;	
 };

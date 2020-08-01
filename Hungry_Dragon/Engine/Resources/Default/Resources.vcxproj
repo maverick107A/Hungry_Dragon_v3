@@ -179,7 +179,7 @@ call CopyResources.bat</Command>
     <ClCompile Include="..\Code\ForestLand.cpp" />
     <ClCompile Include="..\Code\GlacierTex.cpp" />
     <ClCompile Include="..\Code\IceAgeLand.cpp" />
-    <ClCompile Include="..\Code\LandTex.cpp" />
+    <ClCompile Include="..\Code\Texture_Plane.cpp" />
     <ClCompile Include="..\Code\MeteorBoard.cpp" />
     <ClCompile Include="..\Code\Particle.cpp" />
     <ClCompile Include="..\Code\Resources.cpp" />
@@ -209,7 +209,7 @@ call CopyResources.bat</Command>
     <ClInclude Include="..\Code\ForestLand.h" />
     <ClInclude Include="..\Code\GlacierTex.h" />
     <ClInclude Include="..\Code\IceAgeLand.h" />
-    <ClInclude Include="..\Code\LandTex.h" />
+    <ClInclude Include="..\Code\Texture_Plane.h" />
     <ClInclude Include="..\Code\MeteorBoard.h" />
     <ClInclude Include="..\Code\Particle.h" />
     <ClInclude Include="..\Code\Resources.h" />
