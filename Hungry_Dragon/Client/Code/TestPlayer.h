@@ -11,7 +11,7 @@ class CTexture;
 class CTransform;
 class CCamera;
 class CTerrain;
-class CAtkPart;
+class CAtk_Part;
 class CResources;
 
 END

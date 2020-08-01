@@ -55,7 +55,7 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 		Engine::CResources* tempParticle = Engine::Get_Particle(m_pGraphicDev, Engine::PART_ATK, tempBoundingBox, vOrigin);
 
 		//나중엔 미리 올려 놓는 식으로 구현하자
-		static_cast<Engine::CAtkPart*>(tempParticle)->Set_Texture(L"../../Asset/snowflake.dds");
+		static_cast<Engine::CAtk_Part*>(tempParticle)->Set_Texture(L"../../Asset/snowflake.dds");
 		m_arrParticle.emplace_back( tempParticle);
 	}
 

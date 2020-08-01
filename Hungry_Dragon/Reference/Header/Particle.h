@@ -41,9 +41,9 @@ protected:
 	_vec3					m_vOrigin;
 	BoundingBox				m_BoundingBox;
 
-	float					m_fEmitRate;
+	float					m_fEmitRate;		//출현 주기
 	float					m_fSize;
-	float					m_fSpeed;
+	float					m_fSpeed;			//파티클 이동 속도
 	IDirect3DTexture9*		m_Tex=nullptr;
 	IDirect3DVertexBuffer9*	m_Vb;
 	list<ATTRIBUTE>			m_arrParticle;

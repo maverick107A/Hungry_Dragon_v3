@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Scene_Proto.h"
-#include <time.h>
 #include "Export_Function.h"
 #include "GameMgr.h"
 
@@ -64,7 +63,7 @@ HRESULT CScene_Proto::Ready_Scene(void) {
 	if (FAILED(hr))
 	{
 		::MessageBox(0, L"D3DXCreateEffectFromFile() - FAILED", 0, 0);
-		return;
+		return E_FAIL;
 	}
 
 	// 
@@ -268,7 +267,7 @@ HRESULT CScene_Proto::Ready_Resource(LPDIRECT3DDEVICE9 pGraphicDev, RESOURCEID e
 	FAILED_CHECK_RETURN(Engine::Ready_Buffer(pGraphicDev,
 		RESOURCE_STATIC,
 		L"Buffer_CubeTex",
-		Engine::BUFFER_CUBETEX),
+		Engine::BUFFER_TEXCUBE),
 		E_FAIL);
 
 

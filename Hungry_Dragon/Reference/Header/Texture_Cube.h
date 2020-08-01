@@ -7,20 +7,20 @@
 BEGIN(Engine)
 
 
-class ENGINE_DLL CCubeTex : public CVIBuffer
+class ENGINE_DLL CTexture_Cube : public CVIBuffer
 {
 
 private:
-	explicit CCubeTex(LPDIRECT3DDEVICE9 pGraphicDev);
-	explicit CCubeTex(const CCubeTex& rhs);
-	virtual ~CCubeTex(void);
+	explicit CTexture_Cube(LPDIRECT3DDEVICE9 pGraphicDev);
+	explicit CTexture_Cube(const CTexture_Cube& rhs);
+	virtual ~CTexture_Cube(void);
 
 public:
 	virtual HRESULT Ready_Buffer(void) override;
 	virtual void Render_Buffer(void) override;
 
 public:
-	static CCubeTex*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
+	static CTexture_Cube*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 	virtual CComponent*	Clone(void)override;
 	virtual void Free(void) override;
 

@@ -1,23 +1,23 @@
-#include "CubeTex.h"
+#include "Texture_Cube.h"
 
 USING(Engine)
 
-CCubeTex::CCubeTex(LPDIRECT3DDEVICE9 pGraphicDev)
+CTexture_Cube::CTexture_Cube(LPDIRECT3DDEVICE9 pGraphicDev)
 	: CVIBuffer(pGraphicDev)
 {
 }
 
 
-CCubeTex::CCubeTex(const CCubeTex & rhs)
+CTexture_Cube::CTexture_Cube(const CTexture_Cube & rhs)
 	: CVIBuffer(rhs)
 {
 }
 
-CCubeTex::~CCubeTex(void)
+CTexture_Cube::~CTexture_Cube(void)
 {
 }
 
-HRESULT CCubeTex::Ready_Buffer(void)
+HRESULT CTexture_Cube::Ready_Buffer(void)
 {
 
 	// 인덱스 버퍼 및 버텍스 버퍼 초기화
@@ -126,14 +126,14 @@ HRESULT CCubeTex::Ready_Buffer(void)
 	return S_OK;
 }
 
-void CCubeTex::Render_Buffer(void)
+void CTexture_Cube::Render_Buffer(void)
 {
 	CVIBuffer::Render_Buffer();
 }
 
-CCubeTex * CCubeTex::Create(LPDIRECT3DDEVICE9 pGraphicDev)
+CTexture_Cube * CTexture_Cube::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 {
-	CCubeTex*	pInstance = new CCubeTex(pGraphicDev);
+	CTexture_Cube*	pInstance = new CTexture_Cube(pGraphicDev);
 
 	if (FAILED(pInstance->Ready_Buffer()))
 		Safe_Release(pInstance);
@@ -141,12 +141,12 @@ CCubeTex * CCubeTex::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 	return pInstance;
 }
 
-CComponent * CCubeTex::Clone(void)
+CComponent * CTexture_Cube::Clone(void)
 {
-	return new CCubeTex(*this);
+	return new CTexture_Cube(*this);
 }
 
-void CCubeTex::Free(void)
+void CTexture_Cube::Free(void)
 {
 	CVIBuffer::Free();
 }

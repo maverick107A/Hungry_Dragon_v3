@@ -1,13 +1,13 @@
-#include "AtkPart.h"
+#include "Atk_Part.h"
 
 USING(Engine)
 
-CAtkPart::CAtkPart(LPDIRECT3DDEVICE9 pGraphicDev) 
+CAtk_Part::CAtk_Part(LPDIRECT3DDEVICE9 pGraphicDev) 
 	:CParticle(pGraphicDev)
 {
 }
 
-CAtkPart::CAtkPart(const CAtkPart & rhs)
+CAtk_Part::CAtk_Part(const CAtk_Part & rhs)
 	:CParticle(rhs)
 {
 	m_arrParticle = rhs.m_arrParticle;
@@ -17,7 +17,7 @@ CAtkPart::CAtkPart(const CAtkPart & rhs)
 	
 }
 
-CAtkPart::CAtkPart(LPDIRECT3DDEVICE9 pGraphicDev, _vec3 vOrigin ,BoundingBox * boundingBox, int numParticle,float _fSize)
+CAtk_Part::CAtk_Part(LPDIRECT3DDEVICE9 pGraphicDev, _vec3 vOrigin ,BoundingBox * boundingBox, int numParticle,float _fSize)
 	:CParticle(pGraphicDev)
 {
 	m_BoundingBox = *boundingBox;
@@ -34,14 +34,14 @@ CAtkPart::CAtkPart(LPDIRECT3DDEVICE9 pGraphicDev, _vec3 vOrigin ,BoundingBox * b
 	}
 }
 
-CAtkPart::~CAtkPart(void) {
+CAtk_Part::~CAtk_Part(void) {
 }
 
-void CAtkPart::Set_BoundingBox(BoundingBox _boundingBox) {
+void CAtk_Part::Set_BoundingBox(BoundingBox _boundingBox) {
 	m_BoundingBox = _boundingBox;
 }
 
-void CAtkPart::Set_Origin(_vec3 _origin) {
+void CAtk_Part::Set_Origin(_vec3 _origin) {
 	m_vOrigin = _origin;
 
 	list<ATTRIBUTE>::iterator iter = m_arrParticle.begin();
@@ -51,7 +51,7 @@ void CAtkPart::Set_Origin(_vec3 _origin) {
 	}
 }
 
-void CAtkPart::Reset_Particle(ATTRIBUTE* _attribute) {
+void CAtk_Part::Reset_Particle(ATTRIBUTE* _attribute) {
 	_attribute->bAlive = true;
 
 	_attribute->vPosition = m_vOrigin;
@@ -69,16 +69,14 @@ void CAtkPart::Reset_Particle(ATTRIBUTE* _attribute) {
 	_attribute->fLifeTime = Engine::CTimerMgr::GetInstance()->Get_TimeDelta(L"Particle_Timer");
 }
 
-_int CAtkPart::Update_Component(const _float & _fTimeDelta) {
+_int CAtk_Part::Update_Component(const _float & _fTimeDelta) {
 	if (Is_Empty()) {
 		return -1;
 	}
 
 	list<ATTRIBUTE>::iterator iter = m_arrParticle.begin();
 	for (; iter != m_arrParticle.end();) {
-		if (m_BoundingBox.isPointInside(iter->vPosition) == false/*||iter->vPosition.y>m_vOrigin.y*/) {
-			//Reset_Particle(&(*iter));
-			//(*iter).bAlive = false;
+		if (m_BoundingBox.isPointInside(iter->vPosition) == false) {
 			iter = m_arrParticle.erase(iter);
 		}
 		else {
@@ -92,11 +90,11 @@ _int CAtkPart::Update_Component(const _float & _fTimeDelta) {
 	return 0;
 }
 
-CAtkPart * CAtkPart::Create(LPDIRECT3DDEVICE9 pGraphicDev, int numParticle,float _fSize) {
+CAtk_Part * CAtk_Part::Create(LPDIRECT3DDEVICE9 pGraphicDev, int numParticle,float _fSize) {
 	BoundingBox tempBoundingBox;
 	tempBoundingBox.vMax = { 0.f,0.f,0.f };
 	tempBoundingBox.vMin = { 0.f,0.f,0.f };
-	CAtkPart*	pInstance = new CAtkPart(pGraphicDev, _vec3(0.f,0.f,0.f) ,&tempBoundingBox, numParticle,_fSize);
+	CAtk_Part*	pInstance = new CAtk_Part(pGraphicDev, _vec3(0.f,0.f,0.f) ,&tempBoundingBox, numParticle,_fSize);
 
 	if (FAILED(pInstance->Ready_Buffer()))
 		Safe_Release(pInstance);
@@ -104,13 +102,13 @@ CAtkPart * CAtkPart::Create(LPDIRECT3DDEVICE9 pGraphicDev, int numParticle,float
 	return pInstance;
 }
 
-CResources * CAtkPart::Clone(_vec3 _origin, BoundingBox _boundingBox) {
-	CAtkPart* pClonedParticle= new CAtkPart(*this);
+CResources * CAtk_Part::Clone(_vec3 _origin, BoundingBox _boundingBox) {
+	CAtk_Part* pClonedParticle= new CAtk_Part(*this);
 	pClonedParticle->Set_BoundingBox(_boundingBox);
 	pClonedParticle->Set_Origin(_origin);
 	return pClonedParticle;
 }
 
-void CAtkPart::Free(void) {
+void CAtk_Part::Free(void) {
 	CParticle::Free();
 }

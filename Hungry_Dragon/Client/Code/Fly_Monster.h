@@ -7,7 +7,7 @@
 
 BEGIN(Engine)
 
-class CCubeTex;
+class CTexture_Cube;
 class CTexture;
 class CTransform;
 class CTerrainTex;

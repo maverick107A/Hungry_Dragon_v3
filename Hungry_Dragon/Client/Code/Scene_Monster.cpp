@@ -157,7 +157,7 @@ HRESULT CScene_Monster::Ready_Resource(LPDIRECT3DDEVICE9 pGraphicDev, RESOURCEID
 	FAILED_CHECK_RETURN(Engine::Ready_Buffer(pGraphicDev,
 		RESOURCE_STATIC,
 		L"Buffer_CubeTex",
-		Engine::BUFFER_CUBETEX),
+		Engine::BUFFER_TEXCUBE),
 		E_FAIL);
 
 

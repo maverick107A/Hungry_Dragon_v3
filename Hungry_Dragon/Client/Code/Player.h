@@ -7,7 +7,7 @@
 
 BEGIN(Engine)
 
-class CCubeTex;
+class CTexture_Cube;
 class CTexture;
 class CTransform;
 
@@ -33,7 +33,7 @@ private:
 private:
 	Engine::CTransform*		m_pTransform = nullptr;
 	Engine::CTexture*		m_pTextureCom = nullptr;
-	Engine::CCubeTex*			m_pBufferCom = nullptr;
+	Engine::CTexture_Cube*			m_pBufferCom = nullptr;
 	D3DXVECTOR3					m_vLook;
 public:
 	static CPlayer*	Create(LPDIRECT3DDEVICE9 pGraphicDev);

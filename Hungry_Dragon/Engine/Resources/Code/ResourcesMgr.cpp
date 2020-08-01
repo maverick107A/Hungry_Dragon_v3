@@ -48,23 +48,13 @@ HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 		pResources = CTerrain::Create(pGraphicDev);
 		break;
 	case BUFFER_RCCOL:
-		//pResources = CRcCol::Create(pGraphicDev);
-
-		//임시로 큐브 오브젝트 띄움
 		pResources = CCubeCol::Create(pGraphicDev);
-		break;
-
-	case BUFFER_RCTEX:
-		//pResources = CRcTex::Create(pGraphicDev);
-		break;
-	case BUFFER_TERRINTEX:
-		//pResources = CHeightMap::Create(pGraphicDev);
 		break;
 	case  BUFFER_CUBEDRA:
 		pResources = CCubeDra::Create(pGraphicDev);
 		break;
-	case BUFFER_CUBETEX:
-		pResources = CCubeTex::Create(pGraphicDev);
+	case BUFFER_TEXCUBE:
+		pResources = CTexture_Cube::Create(pGraphicDev);
 		break;
 	case BUFFER_TERRAINTEX:
 		pResources = CTerrainTex::Create(pGraphicDev, dwCntX, dwCntZ, dwVtxItv);
@@ -179,7 +169,7 @@ void CResourcesMgr::Load_Particle(LPDIRECT3DDEVICE9 pGraphicDev) {
 	for (int i = 0; i < PART_END; ++i) {
 		switch (i) {
 		case PART_ATK:
-			pParticle = CAtkPart::Create(pGraphicDev, 50);
+			pParticle = CAtk_Part::Create(pGraphicDev, 50);
 			break;
 		default:
 			pParticle = nullptr;

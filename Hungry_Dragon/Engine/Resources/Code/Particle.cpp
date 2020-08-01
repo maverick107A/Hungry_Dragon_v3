@@ -125,6 +125,7 @@ void CParticle::Render_End(void) {
 	m_pGraphicDev->SetRenderState(D3DRS_POINTSPRITEENABLE, false);
 }
 
+//파티클을 재활용하기 위해 개개의 파티클이 가진 속성을 원래대로 리셋해주는 함수
 void CParticle::Reset_Buffer(void) {
 	for (auto& iter : m_arrParticle) {
 		Reset_Particle(&(iter));

@@ -41,7 +41,8 @@ CMainApp::~CMainApp(void)
 
 HRESULT CMainApp::Ready_MainApp(void)
 {
-	FAILED_CHECK_RETURN(Set_DefaultSetting(&m_pGraphicDev), E_FAIL);
+	srand((unsigned int)time(NULL));
+	Set_DefaultSetting(&m_pGraphicDev);
 	FAILED_CHECK_RETURN(Ready_Scene(m_pGraphicDev, &m_pManagementClass), E_FAIL);
 	Engine::Load_Particle(m_pGraphicDev);
 

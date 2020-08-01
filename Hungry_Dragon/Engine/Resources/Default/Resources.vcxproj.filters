@@ -25,20 +25,8 @@
     <Filter Include="00. Resources\00. VIBuffer\01. CubeDra">
       <UniqueIdentifier>{ca1824d6-ac76-48e6-a532-88f456d7b6b7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00. Resources\01. Texture\00. CubeTex">
-      <UniqueIdentifier>{4e9eefee-a045-4010-98fe-be4eecb62b74}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00. Resources\01. Texture\01. TerrainTex">
-      <UniqueIdentifier>{97516da8-155b-4ed8-b97a-6f36aa3e1f2d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="00. Resources\02. Particle">
       <UniqueIdentifier>{e0bbf74c-4a82-4068-82de-210f3e591c81}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00. Resources\02. Particle\00. AtkPart">
-      <UniqueIdentifier>{9dec9d84-03db-4be6-a711-a6288816a69e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="00. Resources\50. TerrainCode">
-      <UniqueIdentifier>{bd822e16-2224-410e-aa82-d9dd19eb19fc}</UniqueIdentifier>
     </Filter>
     <Filter Include="00. Resources\00. VIBuffer\50. Land">
       <UniqueIdentifier>{977a85cf-1f9f-4eb3-b53f-476bc2a9e8b2}</UniqueIdentifier>
@@ -54,6 +42,18 @@
     </Filter>
     <Filter Include="00. Resources\00. VIBuffer\52. Sculpture">
       <UniqueIdentifier>{7c9e6c9e-6c4a-408a-a719-20eea80a666f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\00. VIBuffer\20. Texture_Cube">
+      <UniqueIdentifier>{4e9eefee-a045-4010-98fe-be4eecb62b74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="100. JunkBox">
+      <UniqueIdentifier>{83d4523a-6ac5-4733-aac5-e688c6f3daee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="100. JunkBox\01. TerrainTex">
+      <UniqueIdentifier>{97516da8-155b-4ed8-b97a-6f36aa3e1f2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\02. Particle\00. Atk_Part">
+      <UniqueIdentifier>{9dec9d84-03db-4be6-a711-a6288816a69e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -75,20 +75,14 @@
     <ClCompile Include="..\Code\CubeCol.cpp">
       <Filter>00. Resources\00. VIBuffer\02. CubeCol</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\CubeTex.cpp">
-      <Filter>00. Resources\01. Texture\00. CubeTex</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\TerrainTex.cpp">
-      <Filter>00. Resources\01. Texture\01. TerrainTex</Filter>
+      <Filter>100. JunkBox\01. TerrainTex</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Terrain.cpp">
       <Filter>00. Resources\00. VIBuffer\00. Terrain</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Particle.cpp">
       <Filter>00. Resources\02. Particle</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\AtkPart.cpp">
-      <Filter>00. Resources\02. Particle\00. AtkPart</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\BaseLand.cpp">
       <Filter>00. Resources\00. VIBuffer\50. Land</Filter>
@@ -138,6 +132,12 @@
     <ClCompile Include="..\Code\LandTex.cpp">
       <Filter>00. Resources\00. VIBuffer\00. Terrain</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\Texture_Cube.cpp">
+      <Filter>00. Resources\00. VIBuffer\20. Texture_Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Atk_Part.cpp">
+      <Filter>00. Resources\02. Particle\00. Atk_Part</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Code\Resources.h">
@@ -161,20 +161,14 @@
     <ClInclude Include="..\Code\CubeCol.h">
       <Filter>00. Resources\00. VIBuffer\02. CubeCol</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\CubeTex.h">
-      <Filter>00. Resources\01. Texture\00. CubeTex</Filter>
-    </ClInclude>
     <ClInclude Include="..\Code\TerrainTex.h">
-      <Filter>00. Resources\01. Texture\01. TerrainTex</Filter>
+      <Filter>100. JunkBox\01. TerrainTex</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Terrain.h">
       <Filter>00. Resources\00. VIBuffer\00. Terrain</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Particle.h">
       <Filter>00. Resources\02. Particle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\AtkPart.h">
-      <Filter>00. Resources\02. Particle\00. AtkPart</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\BaseLand.h">
       <Filter>00. Resources\00. VIBuffer\50. Land</Filter>
@@ -223,6 +217,12 @@
     </ClInclude>
     <ClInclude Include="..\Code\LandTex.h">
       <Filter>00. Resources\00. VIBuffer\00. Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Texture_Cube.h">
+      <Filter>00. Resources\00. VIBuffer\20. Texture_Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Atk_Part.h">
+      <Filter>00. Resources\02. Particle\00. Atk_Part</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

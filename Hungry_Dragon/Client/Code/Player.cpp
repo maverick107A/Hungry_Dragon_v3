@@ -53,7 +53,7 @@ HRESULT CPlayer::Add_Component(void)
 	Engine::CComponent*		pComponent = nullptr;
 
 	// buffer
-	pComponent = m_pBufferCom = dynamic_cast<Engine::CCubeTex*>
+	pComponent = m_pBufferCom = dynamic_cast<Engine::CTexture_Cube*>
 		(Engine::Clone(RESOURCE_STATIC, L"Buffer_CubeTex"));
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Buffer", pComponent);

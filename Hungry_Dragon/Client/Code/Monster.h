@@ -7,7 +7,7 @@
 
 BEGIN(Engine)
 
-class CCubeTex;
+class CTexture_Cube;
 class CTexture;
 class CTransform;
 class CResources;
@@ -34,7 +34,7 @@ private:
 	void		Key_Input(const float& fTimeDelta);
 protected:
 	Engine::CTransform*			m_pTransform = nullptr;
-	Engine::CCubeTex*			m_pBufferCom = nullptr;
+	Engine::CTexture_Cube*			m_pBufferCom = nullptr;
 	Engine::CTexture*			m_pTextureCom = nullptr;
 	Engine::CBaseLand*			m_pTerrain = nullptr;
 	D3DXVECTOR3					m_vLook;

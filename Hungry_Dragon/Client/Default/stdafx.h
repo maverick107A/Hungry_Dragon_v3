@@ -29,6 +29,7 @@
 #include <functional>
 #include <ctime>
 #include <fstream>
+#include <time.h>
 
 using namespace std;
 
