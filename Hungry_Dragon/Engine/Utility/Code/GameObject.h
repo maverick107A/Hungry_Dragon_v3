@@ -6,6 +6,8 @@
 
 BEGIN(Engine)
 
+class CLayer;
+
 class ENGINE_DLL CGameObject : public CUtilBase
 { 
 protected:
@@ -14,6 +16,7 @@ protected:
 
 public:
 	CComponent*			Get_Component(const _tchar* pComponentTag, COMPONENTID eID);
+	void				Set_Address(CLayer* _pLayer);
 
 public:
 	virtual HRESULT		Ready_Object(void);
@@ -30,6 +33,7 @@ public:
 		CComponent* pCompo = static_cast<CComponent*>(*_pOut);
 		NULL_CHECK_RETURN(pCompo, E_FAIL);
 		m_mapComponent[_eCompID].emplace(_pComponentTag, pCompo);
+		m_mapComponent->Set_Address(this);
 		return S_OK;
 	}
 	template <typename T>
@@ -40,15 +44,16 @@ public:
 		*_pOut = dynamic_cast<T*>(pCompo);
 		NULL_CHECK_RETURN(pCompo, E_FAIL);
 		m_mapComponent[_eCompID].emplace(_pComponentTag, pCompo);
+		m_mapComponent->Set_Address(this);
 		return S_OK;
 	}
 
 protected:
 	_vec3			m_vPlayerPos;
 	_vec3			m_vFirstPos;
-
 	LPDIRECT3DDEVICE9		m_pGraphicDev;
 	map<const _tchar*, CComponent*>		m_mapComponent[ID_END];
+
 private:
 	CComponent*		Find_Component(const _tchar* pComponentTag, COMPONENTID eID);
 

@@ -100,6 +100,12 @@ CLayer* Engine::CLayer::Create(void)
 	if (FAILED(pInstance->Ready_Layer()))
 		Safe_Release(pInstance);
 
+	m_AddressTag.StateFlag &= (char)0;
+	m_AddressTag.StateFlag |= (char)128;
+	m_AddressTag.LayerAddress = &pInstance;
+	m_AddressTag.ObjAddress = nullptr;
+	m_AddressTag.ComponentAddress = nullptr;
+
 	return pInstance;
 }
 

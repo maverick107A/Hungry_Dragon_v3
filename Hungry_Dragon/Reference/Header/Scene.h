@@ -12,10 +12,10 @@ protected:
 	virtual ~CScene(void);
 
 public:
-	CComponent*			Get_Component(const _tchar* pLayerTag,
-									const _tchar* pObjTag,
-									const _tchar* pComponentTag,
-									COMPONENTID eID);
+	CComponent*		Get_Component(const _tchar* pLayerTag,
+								const _tchar* pObjTag,
+								const _tchar* pComponentTag,
+								COMPONENTID eID);
 
 public:
 	virtual	HRESULT	Ready_Scene(void);
@@ -31,6 +31,7 @@ public:	// 편의성 함수 템플릿
 		CGameObject* _pObj = static_cast<CGameObject*>(*_ppOut);
 		NULL_CHECK_RETURN(_pObj, E_FAIL);
 		FAILED_CHECK_RETURN(_pLayer->Add_Object(_pTag, _pObj), E_FAIL);
+		_pObj->Set_Address(_pLayer);
 		return S_OK;
 	}
 	// 간소화 버전
@@ -40,6 +41,7 @@ public:	// 편의성 함수 템플릿
 		CGameObject* _pObj = static_cast<CGameObject*>(T::Create(m_pGraphicDev));
 		NULL_CHECK_RETURN(_pObj, E_FAIL);
 		FAILED_CHECK_RETURN(_pLayer->Add_Object(_pTag, _pObj), E_FAIL);
+		_pObj->Set_Address(_pLayer);
 		return S_OK;
 	}
 
