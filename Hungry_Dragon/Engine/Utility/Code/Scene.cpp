@@ -34,6 +34,12 @@ _int Engine::CScene::Update_Scene(const _float& fTimeDelta)
 	return iEnd;
 }
 
+void CScene::LateUpdate_Scene(const _float & fTimeDelta) {
+	for (auto& iter : m_mapLayer) {
+		iter.second->LateUpdate_Layer(fTimeDelta);
+	}
+}
+
 void Engine::CScene::Render_Scene(void)
 {
 	for (auto& iter : m_mapLayer)

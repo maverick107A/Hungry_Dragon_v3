@@ -18,6 +18,7 @@ public:
 
 public:
 	virtual _int	Update_Component(const _float& fTimeDelta) { return 0; }
+	virtual void	LateUpdate_Component(const _float& fTimeDelta) { return; }
 
 protected:
 	virtual CComponent*		Clone(void)PURE;

@@ -57,6 +57,10 @@ Engine::_int CMainApp::Update_MainApp(const Engine::_float& fTimeDelta)
 	return 0;
 }
 
+void CMainApp::LateUpdate_MainApp(const Engine::_float & fTimeDelta) {
+	m_pManagementClass->LateUpdate_Scene(fTimeDelta);
+}
+
 void CMainApp::Render_MainApp(void)
 {
 	Engine::Render_Begin(D3DXCOLOR(0.f, 0.f, 1.f, 1.f));

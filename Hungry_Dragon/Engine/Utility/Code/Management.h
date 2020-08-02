@@ -22,6 +22,7 @@ public:
 public:
 	HRESULT		Set_Scene(CScene* pScene);
 	_int		Update_Scene(const _float& fTimeDelta);
+	void		LateUpdate_Scene(const _float& fTimeDelta);
 	void		Render_Scene(void);
 
 private:

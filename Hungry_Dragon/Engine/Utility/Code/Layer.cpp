@@ -54,8 +54,6 @@ _int Engine::CLayer::Update_Layer(const _float& fTimeDelta)
 	}
 
 
-
-
 	for (auto& iter = m_listBullet.begin(); iter != m_listBullet.end();)
 	{
 		
@@ -79,6 +77,23 @@ _int Engine::CLayer::Update_Layer(const _float& fTimeDelta)
 
 
 	return iEnd;
+}
+
+void CLayer::LateUpdate_Layer(const _float & fTimeDelta) {
+	for (auto& iter = m_mapObject.begin(); iter != m_mapObject.end();++iter) {
+		iter->second->LateUpdate_Object(fTimeDelta);
+	}
+
+
+	for (auto& iter = m_listMonster.begin(); iter != m_listMonster.end();++iter) {
+		(*iter)->LateUpdate_Object(fTimeDelta);
+
+	}
+
+
+	for (auto& iter = m_listBullet.begin(); iter != m_listBullet.end();++iter) {
+		 (*iter)->LateUpdate_Object(fTimeDelta);
+	}
 }
 
 void Engine::CLayer::Render_Layer(void)

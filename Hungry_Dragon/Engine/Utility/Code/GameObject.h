@@ -21,6 +21,7 @@ public:
 public:
 	virtual HRESULT		Ready_Object(void);
 	virtual _int		Update_Object(const _float& fTimeDelta);
+	virtual void		LateUpdate_Object(const _float& fTimeDelta);
 	virtual void		Render_Object(void);
 	void				Set_Player(const _vec3 fPlayerPos) { m_vPlayerPos = fPlayerPos; }
 	void				Set_Pos(const _vec3 _Pos) { m_vFirstPos = _Pos; }

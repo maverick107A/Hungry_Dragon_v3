@@ -21,6 +21,7 @@ public:
 public:
 	virtual HRESULT		Ready_Object(void);
 	virtual _int		Update_Object(const _float& fTimeDelta);
+	virtual void		LateUpdate_Object(const _float& fTimeDelta);
 	virtual void		Render_Object(void);
 	void				Set_Player(const _vec3 fPlayerPos) { m_vPlayerPos = fPlayerPos; }
 	void				Set_Pos(const _vec3 _Pos) { m_vFirstPos = _Pos; }
@@ -33,7 +34,7 @@ public:
 		CComponent* pCompo = static_cast<CComponent*>(*_pOut);
 		NULL_CHECK_RETURN(pCompo, E_FAIL);
 		m_mapComponent[_eCompID].emplace(_pComponentTag, pCompo);
-		m_mapComponent->Set_Address(this);
+		pCompo->Set_Address(this);
 		return S_OK;
 	}
 	template <typename T>
@@ -44,7 +45,7 @@ public:
 		*_pOut = dynamic_cast<T*>(pCompo);
 		NULL_CHECK_RETURN(pCompo, E_FAIL);
 		m_mapComponent[_eCompID].emplace(_pComponentTag, pCompo);
-		m_mapComponent->Set_Address(this);
+		pCompo->Set_Address(this);
 		return S_OK;
 	}
 

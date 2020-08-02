@@ -33,6 +33,14 @@ _int Engine::CGameObject::Update_Object(const _float& fTimeDelta)
 	return iResult;
 }
 
+void CGameObject::LateUpdate_Object(const _float & fTimeDelta) {
+	for (auto& iter : m_mapComponent[ID_DYNAMIC]) {
+		iter.second->LateUpdate_Component(fTimeDelta);
+	}
+
+	return;
+}
+
 void Engine::CGameObject::Render_Object(void)
 {
 

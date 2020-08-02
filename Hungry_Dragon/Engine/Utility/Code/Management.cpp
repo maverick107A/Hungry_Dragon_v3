@@ -32,6 +32,10 @@ _int Engine::CManagement::Update_Scene(const _float& fTimeDelta)
 	return 0;
 }
 
+void CManagement::LateUpdate_Scene(const _float & fTimeDelta) {
+	m_pScene->LateUpdate_Scene(fTimeDelta);
+}
+
 void Engine::CManagement::Render_Scene(void)
 {
 	if (nullptr == m_pScene)
