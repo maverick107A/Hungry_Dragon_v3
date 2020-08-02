@@ -10,6 +10,12 @@ class ENGINE_DLL CUtilBase :public CBase {
 protected:
 	explicit CUtilBase(void);
 	virtual ~CUtilBase(void);
+
+public:
+	void* Get_Parent();
+
+protected:
+	tagAdd m_AddressTag;
 };
 
 END

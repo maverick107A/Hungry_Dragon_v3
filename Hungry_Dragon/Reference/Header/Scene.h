@@ -12,10 +12,10 @@ protected:
 	virtual ~CScene(void);
 
 public:
-	CComponent*		Get_Component(const _tchar* pLayerTag,
-								const _tchar* pObjTag,
-								const _tchar* pComponentTag,
-								COMPONENTID eID);
+	CComponent*			Get_Component(const _tchar* pLayerTag,
+									const _tchar* pObjTag,
+									const _tchar* pComponentTag,
+									COMPONENTID eID);
 
 public:
 	virtual	HRESULT	Ready_Scene(void);

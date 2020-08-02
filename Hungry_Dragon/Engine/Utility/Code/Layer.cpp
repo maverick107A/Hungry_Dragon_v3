@@ -100,12 +100,7 @@ CLayer* Engine::CLayer::Create(void)
 	if (FAILED(pInstance->Ready_Layer()))
 		Safe_Release(pInstance);
 
-	m_AddressTag.StateFlag &= (char)0;
-	m_AddressTag.StateFlag |= (char)128;
-	m_AddressTag.LayerAddress = &pInstance;
-	m_AddressTag.ObjAddress = nullptr;
-	m_AddressTag.ComponentAddress = nullptr;
-
+	pInstance->Set_Address();
 	return pInstance;
 }
 
@@ -159,6 +154,14 @@ HRESULT Engine::CLayer::Add_Monster_Object(CGameObject * pGameObject, _vec3 _pos
 	m_listMonster.push_back(pGameObject);
 
 	return S_OK;
+}
+
+void CLayer::Set_Address(void) {
+	m_AddressTag.StateFlag &= (char)0;
+	m_AddressTag.StateFlag |= (char)128;
+	m_AddressTag.LayerAddress = this;
+	m_AddressTag.ObjAddress = nullptr;
+	m_AddressTag.ComponentAddress = nullptr;
 }
 
 CComponent* Engine::CLayer::Get_Component(const _tchar* pObjTag, const _tchar* pComponentTag, COMPONENTID eID)

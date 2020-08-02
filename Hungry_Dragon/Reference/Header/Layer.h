@@ -13,30 +13,26 @@ private:
 	virtual ~CLayer(void);
 
 public:
-	CComponent*			Get_Component(const _tchar* pObjTag,
-										const _tchar* pComponentTag, 
-										COMPONENTID eID);
-
-public:
+	CComponent*	Get_Component(const _tchar* pObjTag,const _tchar* pComponentTag, COMPONENTID eID);
 	HRESULT		Add_Object(const _tchar* pObjTag, CGameObject* pGameObject);
 	HRESULT		Add_Bullet_Object(CGameObject * pGameObject, _vec3 _pos);
 	HRESULT		Add_Monster_Object(CGameObject * pGameObject, _vec3 _pos);
+	void		Set_Address(void);
 
+public:
 	HRESULT		Ready_Layer(void);
 	_int		Update_Layer(const _float& fTimeDelta);
 	void		Render_Layer(void);
+
+public:
 	void		Set_Player(const _vec3 fPlayerPos) { m_vPlayerPos = fPlayerPos; }
 
 private:
 	map<const _tchar*, CGameObject*>		m_mapObject;
 	list<CGameObject*>					m_listBullet;
 	list<CGameObject*>					m_listMonster;
-	//list<CGameObject*>					m_listItem;
-	//list<CGameObject*>					m_listNull;
-
-
-
 	_vec3			m_vPlayerPos;
+
 public:
 	static CLayer*		Create(void);
 	virtual void		Free(void);

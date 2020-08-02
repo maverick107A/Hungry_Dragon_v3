@@ -154,23 +154,6 @@ namespace Engine
 		void*	LayerAddress;
 		void*	ObjAddress;
 		void*	ComponentAddress;
-
-		tagAddress(void* _address, void* _object = nullptr, void* _component = nullptr) {
-			LayerAddress = _address;
-			ObjAddress = _object;
-			ComponentAddress = _component;
-
-			StateFlag &= (char)0;
-			if (nullptr != ComponentAddress) {
-				StateFlag |= (char)32;
-			}
-			else if (nullptr != ObjAddress) {
-				StateFlag |= (char)64;
-			}
-			else {
-				StateFlag |= (char)128;
-			}
-		}
 	}tagAdd;
 }
 

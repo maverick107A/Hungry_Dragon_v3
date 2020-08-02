@@ -3,7 +3,6 @@
 
 #include "Engine_Define.h"
 #include "UtilBase.h"
-#include "GameObject.h"
 
 BEGIN(Engine)
 class CGameObject;

@@ -17,6 +17,7 @@ public:
 	HRESULT		Add_Object(const _tchar* pObjTag, CGameObject* pGameObject);
 	HRESULT		Add_Bullet_Object(CGameObject * pGameObject, _vec3 _pos);
 	HRESULT		Add_Monster_Object(CGameObject * pGameObject, _vec3 _pos);
+	void		Set_Address(void);
 
 public:
 	HRESULT		Ready_Layer(void);

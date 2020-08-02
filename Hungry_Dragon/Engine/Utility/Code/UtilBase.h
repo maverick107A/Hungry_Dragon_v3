@@ -15,7 +15,7 @@ public:
 	void* Get_Parent();
 
 protected:
-	static tagAdd m_AddressTag;
+	tagAdd m_AddressTag;
 };
 
 END
