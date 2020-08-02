@@ -44,9 +44,26 @@ HRESULT		Ready_Frame(const _tchar* pFrameTag, const _float& fCallLimit)
 	return CFrameMgr::GetInstance()->Ready_Frame(pFrameTag, fCallLimit);
 }
 
+HRESULT	Ready_Font(LPDIRECT3DDEVICE9 pGraphicDev,
+	const _tchar* pFontTag,
+	const _tchar* pFontType,
+	const _uint& iWidth,
+	const _uint& iHeight,
+	const _uint& iWeight) {
+	return CFontMgr::GetInstance()->Ready_Font(pGraphicDev, pFontTag, pFontType, iWidth, iHeight, iWeight);
+}
+
+void	Render_Font(const _tchar* pFontTag,
+	const _tchar* pString,
+	const _vec2* pPos,
+	D3DXCOLOR Color) {
+	CFontMgr::GetInstance()->Render_Font(pFontTag, pString, pPos, Color);
+}
+
 // Release System
 void		Release_System(void)
 {
+	CFontMgr::GetInstance()->DestroyInstance();
 	CFrameMgr::GetInstance()->DestroyInstance();
 	CTimerMgr::GetInstance()->DestroyInstance();
 	CGraphicDev::GetInstance()->DestroyInstance();

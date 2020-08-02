@@ -19,6 +19,12 @@
     <Filter Include="02.Frame\Manager">
       <UniqueIdentifier>{86914b1c-25aa-4c35-a251-2fd1eada5d2b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. Font">
+      <UniqueIdentifier>{78fc0aa6-1050-453d-acc0-a6ad60df037d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Font\Manager">
+      <UniqueIdentifier>{5acc3dae-0f66-414e-a26e-fa4edf5d96f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\GraphicDev.cpp">
@@ -35,6 +41,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\FrameMgr.cpp">
       <Filter>02.Frame\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Font.cpp">
+      <Filter>03. Font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\FontMgr.cpp">
+      <Filter>03. Font\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -55,6 +67,12 @@
     </ClInclude>
     <ClInclude Include="..\Code\FrameMgr.h">
       <Filter>02.Frame\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Font.h">
+      <Filter>03. Font</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\FontMgr.h">
+      <Filter>03. Font\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

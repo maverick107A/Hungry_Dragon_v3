@@ -168,6 +168,8 @@ call CopySystem.bat</Command>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Code\Font.cpp" />
+    <ClCompile Include="..\Code\FontMgr.cpp" />
     <ClCompile Include="..\Code\Frame.cpp" />
     <ClCompile Include="..\Code\FrameMgr.cpp" />
     <ClCompile Include="..\Code\GraphicDev.cpp" />
@@ -176,6 +178,8 @@ call CopySystem.bat</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Header\Export_System.h" />
+    <ClInclude Include="..\Code\Font.h" />
+    <ClInclude Include="..\Code\FontMgr.h" />
     <ClInclude Include="..\Code\Frame.h" />
     <ClInclude Include="..\Code\FrameMgr.h" />
     <ClInclude Include="..\Code\GraphicDev.h" />

@@ -3,8 +3,6 @@
 
 #include "Define.h"
 #include "Scene.h"
-#include "BackGround.h"
-#include "TestPlayer.h"
 
 //-------------------------------------------------------
 //매니저 헤더********************************************
@@ -16,6 +14,8 @@
 //기타 헤더**********************************************
 //-------------------------------------------------------
 //여기에 기타 헤더 추가
+#include "BackGround.h"
+#include "TestPlayer.h"
 
 //-------------------------------------------------------
 
@@ -28,21 +28,32 @@ private:
 	virtual ~CLogo(void);
 
 public:
-	virtual HRESULT Ready_Scene(void) override;
-	virtual _int Update_Scene(const _float& fTimeDelta) override;
-	virtual void Render_Scene(void) override;
+	LOADINGID			Get_LoadingID(void) const { return m_eLoadingID; }
+	CRITICAL_SECTION*	Get_Crt(void) { return &m_Crt; }
+	_bool				Get_Finish(void) const { return m_bFinish; }
+	const _tchar*		Get_String(void) const { return m_szFinish; }
 
-private:
-	HRESULT	Ready_Resource(LPDIRECT3DDEVICE9 pGraphicDev, RESOURCEID eMax);
-	HRESULT	Ready_Layer_Environment(const _tchar* pLayerTag);
-	HRESULT	Ready_Layer_GameLogic(const _tchar* pLayerTag);
-	HRESULT	Ready_Layer_UI(const _tchar* pLayerTag);
+public:
+public:
+	HRESULT	Ready_Loading(LOADINGID eLoadingID);
+	_uint	Loading_ForStage(void);
+
+public:
+	static unsigned int CALLBACK Thread_Main(void* pArg);
 
 public:
 	static CLogo*		Create(LPDIRECT3DDEVICE9 pGraphicDev);
 
 private:
 	virtual void Free(void) override;
+
+private:
+	HANDLE				m_hThread;
+	CRITICAL_SECTION	m_Crt;
+	LOADINGID			m_eLoadingID;
+	LPDIRECT3DDEVICE9	m_pGraphicDev;
+	_bool				m_bFinish;
+	_tchar				m_szFinish[256];
 };
 
 #endif // Logo_h__

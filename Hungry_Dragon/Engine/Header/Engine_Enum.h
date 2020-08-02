@@ -17,6 +17,9 @@ namespace Engine
 
 	// 오브젝트풀용 구분 아이디
 	enum OBJID { JUMP_MONSTER, STAND_MONSTER, RUN_MONSTER, CHASE_MONSTER, NORMAL_BULLET, OBJ_END };
+
+	// 로딩씬 ID
+	enum LOADINGID { LOADING_STAGE, LOADING_BOSS, LOADING_END };
 }
 
 

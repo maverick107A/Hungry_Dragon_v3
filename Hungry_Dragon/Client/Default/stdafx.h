@@ -31,6 +31,8 @@
 #include <fstream>
 #include <time.h>
 
+#include <process.h>
+
 using namespace std;
 
 #ifdef _DEBUG
