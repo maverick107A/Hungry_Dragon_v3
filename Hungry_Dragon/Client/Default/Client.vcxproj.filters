@@ -162,9 +162,6 @@
     <ClInclude Include="..\Code\Bullet.h">
       <Filter>02. GameObject\01. Stage\02.Bullet</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\PlayerTest.h">
-      <Filter>01. Scene\70. PlayerTest</Filter>
-    </ClInclude>
     <ClInclude Include="..\Code\Scene_Proto.h">
       <Filter>01. Scene\01.Scene_Proto</Filter>
     </ClInclude>
@@ -185,6 +182,9 @@
     </ClInclude>
     <ClInclude Include="..\Code\Scene_Loading.h">
       <Filter>01. Scene\90. Scene_Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Scene_PlayerTest.h">
+      <Filter>01. Scene\70. PlayerTest</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -236,9 +236,6 @@
     <ClCompile Include="..\Code\Bullet.cpp">
       <Filter>02. GameObject\01. Stage\02.Bullet</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\PlayerTest.cpp">
-      <Filter>01. Scene\70. PlayerTest</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\Scene_Proto.cpp">
       <Filter>01. Scene\01.Scene_Proto</Filter>
     </ClCompile>
@@ -259,6 +256,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Scene_Loading.cpp">
       <Filter>01. Scene\90. Scene_Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Scene_PlayerTest.cpp">
+      <Filter>01. Scene\70. PlayerTest</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

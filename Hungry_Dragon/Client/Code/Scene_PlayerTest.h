@@ -1,5 +1,5 @@
-#ifndef PlayerTest_h__
-#define PlayerTest_h__
+#ifndef Scene_PlayerTest_h__
+#define Scene_PlayerTest_h__
 
 #include "Define.h"
 #include "Scene.h"
@@ -20,11 +20,11 @@
 
 using namespace Engine;
 
-class CPlayerTest : public Engine::CScene
+class CScene_PlayerTest : public Engine::CScene
 {
 private:
-	explicit CPlayerTest(LPDIRECT3DDEVICE9 pGraphicDev);
-	virtual ~CPlayerTest(void);
+	explicit CScene_PlayerTest(LPDIRECT3DDEVICE9 pGraphicDev);
+	virtual ~CScene_PlayerTest(void);
 
 public:
 	virtual HRESULT Ready_Scene(void) override;
@@ -41,10 +41,10 @@ private:
 	bool			m_bWireFrame = true;
 
 public:
-	static CPlayerTest*		Create(LPDIRECT3DDEVICE9 pGraphicDev);
+	static CScene_PlayerTest*		Create(LPDIRECT3DDEVICE9 pGraphicDev);
 
 private:
 	virtual void Free(void) override;
 };
 
-#endif // PlayerTest_h__
+#endif // Scene_PlayerTest_h__

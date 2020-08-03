@@ -79,12 +79,12 @@ _int Engine::CCamera::Update_Component(const _float& fTimeDelta, LPDIRECT3DDEVIC
 
 			if (m_vPos.y < fTerrainHieght)
 			{
-				m_fCameraDis -= 0.5f;
+				m_fCameraDis = 0.f;
 				if (m_fCameraDis < 0.f)
 					m_fCameraDis = 0.f;
 			}
-			else if (m_fCameraDis < 10.f)
-				m_fCameraDis += 0.5f;
+			else if (m_fCameraDis < 15.f)
+				m_fCameraDis += m_fCameraDisSpeed;
 		}
 		else
 		{
@@ -102,12 +102,12 @@ _int Engine::CCamera::Update_Component(const _float& fTimeDelta, LPDIRECT3DDEVIC
 
 			if (m_vPos.y < fTerrainHieght)
 			{
-				m_fCameraDis -= 0.5f;
+				m_fCameraDis = 0.f;
 				if (m_fCameraDis < 0.f)
 					m_fCameraDis = 0.f;
 			}
-			else if (m_fCameraDis < 10.f)
-				m_fCameraDis += 0.5f;
+			else if (m_fCameraDis < 15.f)
+				m_fCameraDis += m_fCameraDisSpeed;
 		}
 	}
 	//sadkfjdsalkjfalkdsjfaldsk

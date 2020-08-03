@@ -28,7 +28,8 @@ private:
 	float			m_fAngleY = 0.f;
 	float			m_fAngleX = 0.f;
 	float			m_fAngleZ = 0.f;
-	float			m_fCameraDis = 10.f;
+	float			m_fCameraDis = 15.f;
+	float			m_fCameraDisSpeed = 0.5f;
 	_vec3			m_vDir = {};
 	_vec3			m_vDir1 = {};
 	_vec3			m_vUpOrigin = { 0.f, 1.f, 0.f };
