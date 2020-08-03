@@ -71,6 +71,8 @@ void CScene_Monster::Free(void) {
 CScene_Monster* CScene_Monster::Create(LPDIRECT3DDEVICE9 pGraphicDev) {
 	CScene_Monster*	pInstance = new CScene_Monster(pGraphicDev);
 
+	Engine::Set_Scene(pInstance);
+
 	if (FAILED(pInstance->Ready_Scene()))
 		Engine::Safe_Release(pInstance);
 
