@@ -15,7 +15,7 @@ CRun_Monster::~CRun_Monster(void)
 HRESULT CRun_Monster::Ready_Object(void)
 {
 	CMonster::Ready_Object();
-
+	m_fSpeed = 30.f;
 
 	return S_OK;
 }
@@ -34,11 +34,11 @@ int CRun_Monster::Update_Object(const float & fTimeDelta)
 
 	CMonster::Update_Object(fTimeDelta);
 
-	Ride_Terrain();
+	m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
 
 	if (m_bActivate)
 	{
-		if (fDistance < 3 || m_bDead)
+		if (m_fPlayerDistance < 3 || m_bDead)
 		{
 			m_pTransform->Set_Trans(&m_vPlayerPos);
 			Dead_Monster(fTimeDelta);
@@ -47,7 +47,7 @@ int CRun_Monster::Update_Object(const float & fTimeDelta)
 		else if (!m_bDead)
 		{
 			vPlayerPos = { m_vPlayerPos.x  , 0.f  , m_vPlayerPos.z };
-			m_pTransform->Chase_Target(&vPlayerPos, -(fTimeDelta * 30.f));
+			m_pTransform->Chase_Target(&vPlayerPos, -(fTimeDelta * m_fSpeed));
 		}
 	}
 

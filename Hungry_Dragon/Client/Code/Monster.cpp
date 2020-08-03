@@ -23,17 +23,16 @@ HRESULT CMonster::Ready_Object(void)
 int CMonster::Update_Object(const float & fTimeDelta)
 {
 
+	Engine::CGameObject::Update_Object(fTimeDelta);
+
 	D3DXVECTOR3	vMonsterPos;
 	m_pTransform->Get_Info(Engine::INFO_POS, &vMonsterPos);
 
-	D3DXVECTOR3	vPlayerPos;
-	vPlayerPos = { m_vPlayerPos.x , 0 ,m_vPlayerPos.z };
-
 	D3DXVECTOR3 Dir = vMonsterPos - m_vPlayerPos;
+	m_fPlayerDistance = D3DXVec3Length(&Dir);
 	Dir.y = 0;
-	fDistance = D3DXVec3Length(&Dir);
-
-	if (fDistance < 200)
+	m_fDistance = D3DXVec3Length(&Dir);
+	if (m_fDistance < 200)
 	{
 		m_bActivate = true;
 	}
@@ -41,29 +40,26 @@ int CMonster::Update_Object(const float & fTimeDelta)
 		m_bActivate = false;
 
 
-	if (fDistance > 5000)
+	if (m_fDistance > 7000)
 	{
 		m_bFirst = true;
 		m_iEvent = MONSTER_DEAD;
 	}
 
 
-
-	Engine::CGameObject::Update_Object(fTimeDelta);
-
 	return m_iEvent;
 }
 
-
 void CMonster::Render_Object(void)
 {
-
-
-
 	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end(); ++iter)
 	{
 		(*iter)->Render_Buffer();
 	}
+}
+
+void CMonster::LateUpdate_Object(const float & fTimeDelta)
+{
 
 
 }
@@ -71,8 +67,6 @@ void CMonster::Render_Object(void)
 void CMonster::Dead_Monster(const float & fTimeDelta)
 {
 	m_pTransform->Set_Minus_Scale(0.01f);
-
-
 	
 	//	Engine::_vec3 vOrigin = Engine::_vec3(0.f, 0.f, 0.f);
 	//	Engine::BoundingBox tempBoundingBox;
@@ -98,7 +92,6 @@ void CMonster::Dead_Monster(const float & fTimeDelta)
 
 	//}
 
-
 	if (m_pTransform->m_vScale.x < 0 || m_pTransform->m_vScale.y < 0 || m_pTransform->m_vScale.z < 0)
 	{
 		m_bFirst = true;
@@ -109,7 +102,7 @@ void CMonster::Dead_Monster(const float & fTimeDelta)
 
 }
 
-void CMonster::Ride_Terrain()
+float CMonster::Ride_Terrain()
 {
 	m_pTerrain = static_cast<Engine::CBaseLand*>
 		(Engine::Get_Component(L"GameLogic",
@@ -118,7 +111,7 @@ void CMonster::Ride_Terrain()
 			Engine::ID_STATIC));
 
 	if (m_pTerrain == nullptr)
-		return;
+		return 0;
 
 	D3DXVECTOR3* vPos = &m_pTransform->m_vInfo[Engine::INFO_POS];
 
@@ -151,7 +144,7 @@ void CMonster::Ride_Terrain()
 		D3DXVec3Cross(&vNorm, &vTemp1, &vTemp2);
 
 		float fConst = D3DXVec3Dot(&vNorm, &Vertex1);
-		m_pTransform->m_vInfo[Engine::INFO_POS].y = ((fConst - vNorm.x*vPos->x - vNorm.z*vPos->z) / vNorm.y) + 1;
+		return ((fConst - vNorm.x*vPos->x - vNorm.z*vPos->z) / vNorm.y) + 1;
 
 	
 	}
@@ -167,12 +160,9 @@ void CMonster::Ride_Terrain()
 		D3DXVec3Cross(&vNorm, &vTemp1, &vTemp2);
 
 		float fConst = D3DXVec3Dot(&vNorm, &Vertex3);
-		m_pTransform->m_vInfo[Engine::INFO_POS].y = ((fConst - vNorm.x*vPos->x - vNorm.z*vPos->z) / vNorm.y) + 1;
+		return ((fConst - vNorm.x*vPos->x - vNorm.z*vPos->z) / vNorm.y) + 1;
 	}
 }
-
-
-
 
 HRESULT CMonster::Add_Component(void)
 {

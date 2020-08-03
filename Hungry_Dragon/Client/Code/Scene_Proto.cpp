@@ -119,8 +119,16 @@ void CScene_Proto::Render_Scene(void) {
 	if(m_bFogEnable)
 		m_pFogEffect->BeginPass(0);
 
-	Engine::CScene::Render_Scene();
-	Engine::Render_GameObject();
+	//Engine::CScene::Render_Scene();
+	//Engine::Render_GameObject();
+
+
+
+
+	m_mapLayer[L"Environment"]->Render_Layer();
+	m_mapLayer[L"GameLogic"]->Render_Layer();
+
+
 
 	m_pFogEffect->End();
 		
@@ -197,29 +205,26 @@ HRESULT CScene_Proto::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 
 
 
+	for (int i = 0; i < 100; ++i)
+	{
+		Engine::CGameObject*		pFly_MonsterObject = nullptr;
+		D3DXVECTOR3 vMonsterPos = { (i * (rand() % 15)) + 1000.f ,  1000.f  , (i * (rand() % 10)) + 1000.f };
+		pFly_MonsterObject = CFly_Monster::Create(m_pGraphicDev, vMonsterPos);
+		NULL_CHECK_RETURN(pFly_MonsterObject, E_FAIL);
+		Engine::Add_Object_Pool(pFly_MonsterObject, OBJID::STAND_MONSTER);
 
-
+	}
 
 
 	for (int i = 0; i < 100; ++i)
 	{
-		Engine::CGameObject*		pJumpMonsterObject = nullptr;
+		Engine::CGameObject*		pChase_MonsterObject = nullptr;
 		D3DXVECTOR3 vMonsterPos = { (i * (rand() % 10)) + 1000.f ,  1000.f  , (i * (rand() % 15)) + 1000.f };
-		pJumpMonsterObject = CChase_Monster::Create(m_pGraphicDev, vMonsterPos);
-		NULL_CHECK_RETURN(pJumpMonsterObject, E_FAIL);
-		Engine::Add_Object_Pool(pJumpMonsterObject, OBJID::STAND_MONSTER);
+		pChase_MonsterObject = CChase_Monster::Create(m_pGraphicDev, vMonsterPos);
+		NULL_CHECK_RETURN(pChase_MonsterObject, E_FAIL);
+		Engine::Add_Object_Pool(pChase_MonsterObject, OBJID::STAND_MONSTER);
 	}
 
-
-	//for (int i = 0; i < 100; ++i)
-	//{
-	//	Engine::CGameObject*		pJumpMonsterObject = nullptr;
-	//	D3DXVECTOR3 vMonsterPos = { (i * (rand() % 10)) + 1000.f ,  600.f  , (i * (rand() % 10)) + 1000.f };
-	//	pJumpMonsterObject = CFly_Monster::Create(m_pGraphicDev, vMonsterPos);
-	//	NULL_CHECK_RETURN(pJumpMonsterObject, E_FAIL);
-	//	Engine::Add_Object_Pool(pJumpMonsterObject, OBJID::STAND_MONSTER);
-	//	
-	//}
 
 	for (int i = 0; i < 100; ++i)
 	{
@@ -231,20 +236,15 @@ HRESULT CScene_Proto::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 	}
 
 
-
-
-
 	for (int i = 0; i < 100; ++i)
 	{
-		Engine::CGameObject*		pJumpMonsterObject = nullptr;
+		Engine::CGameObject*		pRun_MonsterObject = nullptr;
 		D3DXVECTOR3 vMonsterPos = { (i * (rand() % 15)) + 1000.f ,  1000.f  , (i * (rand() % 10)) + 1000.f };
-		pJumpMonsterObject = CRun_Monster::Create(m_pGraphicDev, vMonsterPos);
-		NULL_CHECK_RETURN(pJumpMonsterObject, E_FAIL);
-		Engine::Add_Object_Pool(pJumpMonsterObject, OBJID::STAND_MONSTER);
+		pRun_MonsterObject = CRun_Monster::Create(m_pGraphicDev, vMonsterPos);
+		NULL_CHECK_RETURN(pRun_MonsterObject, E_FAIL);
+		Engine::Add_Object_Pool(pRun_MonsterObject, OBJID::STAND_MONSTER);
 
 	}
-
-
 
 
 	// 이건 알아서 하시고 오브젝트 풀 싱글턴이라 익스포트 헤더에 걸어서 와야할텐데?
