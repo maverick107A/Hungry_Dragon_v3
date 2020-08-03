@@ -58,6 +58,8 @@ void CLogo::Free(void) {
 CLogo* CLogo::Create(LPDIRECT3DDEVICE9 pGraphicDev) {
 	CLogo*	pInstance = new CLogo(pGraphicDev);
 
+	Engine::Set_Scene(pInstance);
+
 	if (FAILED(pInstance->Ready_Scene()))
 		Engine::Safe_Release(pInstance);
 
