@@ -171,6 +171,7 @@
     <ClInclude Include="..\Code\Player.h" />
     <ClInclude Include="..\Code\PlayerTest.h" />
     <ClInclude Include="..\Code\Run_Monster.h" />
+    <ClInclude Include="..\Code\Scene_Loading.h" />
     <ClInclude Include="..\Code\Scene_Monster.h" />
     <ClInclude Include="..\Code\Scene_Proto.h" />
     <ClInclude Include="..\Code\SkySphere.h" />
@@ -199,6 +200,7 @@
     <ClCompile Include="..\Code\Player.cpp" />
     <ClCompile Include="..\Code\PlayerTest.cpp" />
     <ClCompile Include="..\Code\Run_Monster.cpp" />
+    <ClCompile Include="..\Code\Scene_Loading.cpp" />
     <ClCompile Include="..\Code\Scene_Monster.cpp" />
     <ClCompile Include="..\Code\Scene_Proto.cpp" />
     <ClCompile Include="..\Code\SkySphere.cpp" />

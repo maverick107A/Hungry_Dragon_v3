@@ -100,6 +100,9 @@
     <Filter Include="02. GameObject\01. Stage\05.GameMgr">
       <UniqueIdentifier>{b3e38d98-0162-4576-b32b-7bbadbdfe1a1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Scene\90. Scene_Loading">
+      <UniqueIdentifier>{c110545e-7a4b-4828-8604-509975a6d557}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -180,6 +183,9 @@
     <ClInclude Include="..\Code\GameMgr.h">
       <Filter>02. GameObject\01. Stage\05.GameMgr</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\Scene_Loading.h">
+      <Filter>01. Scene\90. Scene_Loading</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -250,6 +256,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\GameMgr.cpp">
       <Filter>02. GameObject\01. Stage\05.GameMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Scene_Loading.cpp">
+      <Filter>01. Scene\90. Scene_Loading</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

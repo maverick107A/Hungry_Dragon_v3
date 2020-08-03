@@ -16,7 +16,7 @@
 //여기에 기타 헤더 추가
 #include "BackGround.h"
 #include "TestPlayer.h"
-
+#include "Scene_Loading.h"
 //-------------------------------------------------------
 
 using namespace Engine;
@@ -28,18 +28,15 @@ private:
 	virtual ~CLogo(void);
 
 public:
-	LOADINGID			Get_LoadingID(void) const { return m_eLoadingID; }
-	CRITICAL_SECTION*	Get_Crt(void) { return &m_Crt; }
-	_bool				Get_Finish(void) const { return m_bFinish; }
-	const _tchar*		Get_String(void) const { return m_szFinish; }
+	virtual HRESULT Ready_Scene(void) override;
+	virtual _int Update_Scene(const _float& fTimeDelta) override;
+	virtual void Render_Scene(void) override;
 
-public:
-public:
-	HRESULT	Ready_Loading(LOADINGID eLoadingID);
-	_uint	Loading_ForStage(void);
-
-public:
-	static unsigned int CALLBACK Thread_Main(void* pArg);
+private:
+	HRESULT	Ready_Resource(LPDIRECT3DDEVICE9 pGraphicDev, RESOURCEID eMax);
+	HRESULT	Ready_Layer_Environment(const _tchar* pLayerTag) { return S_OK; }
+	HRESULT	Ready_Layer_GameLogic(const _tchar* pLayerTag) { return S_OK; }
+	HRESULT	Ready_Layer_UI(const _tchar* pLayerTag);
 
 public:
 	static CLogo*		Create(LPDIRECT3DDEVICE9 pGraphicDev);
@@ -48,12 +45,7 @@ private:
 	virtual void Free(void) override;
 
 private:
-	HANDLE				m_hThread;
-	CRITICAL_SECTION	m_Crt;
-	LOADINGID			m_eLoadingID;
-	LPDIRECT3DDEVICE9	m_pGraphicDev;
-	_bool				m_bFinish;
-	_tchar				m_szFinish[256];
+	CScene_Loading* m_pLoading;
 };
 
 #endif // Logo_h__
