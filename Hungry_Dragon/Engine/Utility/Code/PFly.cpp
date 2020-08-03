@@ -1,6 +1,7 @@
 #include "PFly.h"
 #include "Transform.h"
 #include "PlayerMain.h"
+#include "Camera.h"
 
 USING(Engine)
 
@@ -60,10 +61,20 @@ void CPFly::Update_State(const float& fTimeDelta)
 	{
 		bShift = true;
 	}
+	if (GetAsyncKeyState('Q'))
+	{
+		m_pPlayer->Get_Camera()->Set_AngleZPlus(0.1f);
+		m_pPlayer->Get_Transform()->m_vAngle.z += 0.1f;
+	}
 	if (GetAsyncKeyState('E'))
 	{
-		m_pPlayer->Get_Transform()->m_vInCamPos = vDir;
+		m_pPlayer->Get_Camera()->Set_AngleZPlus(-0.1f);
+		m_pPlayer->Get_Transform()->m_vAngle.z += -0.1f;
 	}
+	//if (GetAsyncKeyState('E'))
+	//{
+	//	m_pPlayer->Get_Transform()->m_vInCamPos = vDir;
+	//}
 	if (bCheck)
 	{
 		D3DXVec3Normalize(&vDir, &vDir);

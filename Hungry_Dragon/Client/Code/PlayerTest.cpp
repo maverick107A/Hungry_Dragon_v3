@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "PlayerTest.h"
-
+#include "Management.h"
 #include "Export_Function.h"
 
 CPlayerTest::CPlayerTest(LPDIRECT3DDEVICE9 pGraphicDev)
@@ -25,6 +25,7 @@ HRESULT CPlayerTest::Ready_Scene(void)
 
 	_matrix		 matProj;
 
+	//임시용 이거 나중에 따로 빼야함
 	D3DXMatrixPerspectiveFovLH(&matProj,
 		D3DXToRadian(45.f),
 		_float(WINCX) / WINCY,
@@ -39,6 +40,14 @@ HRESULT CPlayerTest::Ready_Scene(void)
 
 _int CPlayerTest::Update_Scene(const _float& fTimeDelta)
 {
+	if (GetAsyncKeyState('F') & 0x0001)
+	{
+		if (m_bWireFrame)
+			m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+		else
+			m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+		m_bWireFrame = !m_bWireFrame;
+	}
 	Engine::CScene::Update_Scene(fTimeDelta);
 
 	return 0;
@@ -58,8 +67,11 @@ CPlayerTest* CPlayerTest::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 {
 	CPlayerTest*	pInstance = new CPlayerTest(pGraphicDev);
 
+	(CManagement::GetInstance())->Set_Scene(pInstance);
+
 	if (FAILED(pInstance->Ready_Scene()))
 		Engine::Safe_Release(pInstance);
+
 
 	return pInstance;
 }
@@ -113,7 +125,7 @@ HRESULT CPlayerTest::Ready_Resource(LPDIRECT3DDEVICE9 pGraphicDev, RESOURCEID eM
 	FAILED_CHECK_RETURN(Engine::Ready_Buffer(pGraphicDev,
 		RESOURCE_STATIC,
 		L"BUFFER_TERRAIN",
-		Engine::BUFFER_TERRAIN),
+		Engine::BUFFER_FOREST),
 		E_FAIL);
 
 	FAILED_CHECK_RETURN(Engine::Ready_Buffer(pGraphicDev,

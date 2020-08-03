@@ -34,6 +34,7 @@ public:
 	const D3DXVECTOR3&			Get_Look() { return m_vLook; }
 	const D3DXVECTOR3&			Get_Up() { return m_vUp; }
 	CBaseLand*	Get_Terrain() { return m_pTerrain; }
+	CCamera*	Get_Camera() { return m_pCamera; }
 
 protected:
 	virtual void State_Change() {};

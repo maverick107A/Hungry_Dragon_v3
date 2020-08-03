@@ -92,15 +92,16 @@ HRESULT CMainApp::Set_DefaultSetting(LPDIRECT3DDEVICE9 * ppGraphicDev)
 HRESULT CMainApp::Ready_Scene(LPDIRECT3DDEVICE9 pGraphicDev, 
 							Engine::CManagement ** ppManagementInstance)
 {
-	Engine::CScene*		pScene = nullptr;
-
-	pScene = CLogo::Create(pGraphicDev);
-	NULL_CHECK_RETURN(pScene, E_FAIL);
-
 	FAILED_CHECK_RETURN(Engine::Create_Management(ppManagementInstance), E_FAIL);
 	(*ppManagementInstance)->AddRef();
 
-	FAILED_CHECK_RETURN((*ppManagementInstance)->Set_Scene(pScene), E_FAIL);
+	Engine::CScene*		pScene = nullptr;
+
+	pScene = CPlayerTest::Create(pGraphicDev);
+	NULL_CHECK_RETURN(pScene, E_FAIL);
+
+
+	/*FAILED_CHECK_RETURN((*ppManagementInstance)->Set_Scene(pScene), E_FAIL);*/
 
 	return S_OK;
 }

@@ -3,7 +3,6 @@
 
 #include "Define.h"
 #include "Scene.h"
-#include "BackGround.h"
 #include "TestPlayer.h"
 
 //-------------------------------------------------------
@@ -16,7 +15,7 @@
 //기타 헤더**********************************************
 //-------------------------------------------------------
 //여기에 기타 헤더 추가
-
+#include "BackGround.h"
 //-------------------------------------------------------
 
 using namespace Engine;
@@ -37,6 +36,9 @@ private:
 	HRESULT	Ready_Layer_Environment(const _tchar* pLayerTag);
 	HRESULT	Ready_Layer_GameLogic(const _tchar* pLayerTag);
 	HRESULT	Ready_Layer_UI(const _tchar* pLayerTag);
+
+private:
+	bool			m_bWireFrame = true;
 
 public:
 	static CPlayerTest*		Create(LPDIRECT3DDEVICE9 pGraphicDev);
