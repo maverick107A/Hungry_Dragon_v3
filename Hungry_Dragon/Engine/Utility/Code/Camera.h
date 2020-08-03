@@ -20,6 +20,9 @@ public:
 public:
 	_vec3			Get_Pos() { return m_vPos; }
 
+public:
+	void			Set_AngleZPlus(float _fAngle) { m_fAngleZ += _fAngle; }
+
 private:
 	POINT			m_tCenter = {};
 	float			m_fAngleY = 0.f;

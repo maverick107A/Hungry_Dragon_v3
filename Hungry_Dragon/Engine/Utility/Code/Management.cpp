@@ -1,4 +1,5 @@
 #include "Management.h"
+#include "Export_Utility.h"
 
 USING(Engine)
 IMPLEMENT_SINGLETON(CManagement)
@@ -16,6 +17,8 @@ Engine::CManagement::~CManagement(void)
 HRESULT Engine::CManagement::Set_Scene(CScene* pScene)
 {
 	Safe_Release(m_pScene);
+
+	Engine::Clear_RenderGroup();
 
 	m_pScene = pScene;
 

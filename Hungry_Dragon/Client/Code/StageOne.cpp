@@ -72,6 +72,8 @@ CStageOne* CStageOne::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 {
 	CStageOne*	pInstance = new CStageOne(pGraphicDev);
 
+	Engine::Set_Scene(pInstance);
+
 	if (FAILED(pInstance->Ready_Scene()))
 		Engine::Safe_Release(pInstance);
 

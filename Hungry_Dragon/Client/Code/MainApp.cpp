@@ -83,6 +83,7 @@ HRESULT CMainApp::Set_DefaultSetting(LPDIRECT3DDEVICE9 * ppGraphicDev)
 		
 	(*ppGraphicDev) = m_pDeviceClass->GetDevice();
 	(*ppGraphicDev)->AddRef();
+
 	(*ppGraphicDev)->SetRenderState(D3DRS_LIGHTING, FALSE);
 
 	return S_OK;
@@ -93,14 +94,14 @@ HRESULT CMainApp::Ready_Scene(LPDIRECT3DDEVICE9 pGraphicDev,
 {
 	Engine::CScene*		pScene = nullptr;
 
-	pScene = CScene_Proto::Create(pGraphicDev);
-	NULL_CHECK_RETURN(pScene, E_FAIL);
-
 	FAILED_CHECK_RETURN(Engine::Create_Management(ppManagementInstance), E_FAIL);
 	(*ppManagementInstance)->AddRef();
 
-	FAILED_CHECK_RETURN((*ppManagementInstance)->Set_Scene(pScene), E_FAIL);
+	pScene = CPlayerTest::Create(pGraphicDev);
+	NULL_CHECK_RETURN(pScene, E_FAIL);
 
+
+	//FAILED_CHECK_RETURN((*ppManagementInstance)->Set_Scene(pScene), E_FAIL);
 	return S_OK;
 }
 

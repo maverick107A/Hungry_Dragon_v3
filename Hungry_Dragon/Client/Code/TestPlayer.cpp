@@ -24,6 +24,12 @@ CTestPlayer::~CTestPlayer(void)
 
 HRESULT CTestPlayer::Ready_Object(void)
 {
+	m_pTerrain = static_cast<Engine::CBaseLand*>
+		(Engine::Get_Component(L"Environment",
+			L"BackGround",
+			L"Com_Buffer",
+			Engine::ID_STATIC));
+
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
 	m_pTransform->m_vInfo[Engine::INFO_POS].x = 264.f;
@@ -36,11 +42,6 @@ HRESULT CTestPlayer::Ready_Object(void)
 int CTestPlayer::Update_Object(const float& fTimeDelta)
 {
 	//임시용 레디때로 바꾸던가 밖에서 넣어줘야함
-	m_pTerrain = static_cast<Engine::CBaseLand*>
-		(Engine::Get_Component(L"GameLogic",
-			L"BackGround",
-			L"Com_Buffer",
-			Engine::ID_STATIC));
 
 	//Key_Input(fTimeDelta);
 
