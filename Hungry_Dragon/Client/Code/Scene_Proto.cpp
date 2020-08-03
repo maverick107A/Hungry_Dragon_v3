@@ -139,9 +139,13 @@ void CScene_Proto::Free(void) {
 
 CScene_Proto* CScene_Proto::Create(LPDIRECT3DDEVICE9 pGraphicDev) {
 	CScene_Proto*	pInstance = new CScene_Proto(pGraphicDev);
+	
+	Engine::Set_Scene(pInstance);
 
 	if (FAILED(pInstance->Ready_Scene()))
 		Engine::Safe_Release(pInstance);
+
+	
 
 	return pInstance;
 }

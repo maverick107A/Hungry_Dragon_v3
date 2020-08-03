@@ -13,6 +13,7 @@ BEGIN(Engine)
 // Get
 inline CComponent*			Get_Component(const _tchar* pLayerTag, const _tchar* pObjTag, const _tchar* pComponentTag,	COMPONENTID eID);
 // Set
+inline HRESULT		Set_Scene(CScene* pScene);
 // General
 inline HRESULT	Create_Management(CManagement** ppManagement);
 
