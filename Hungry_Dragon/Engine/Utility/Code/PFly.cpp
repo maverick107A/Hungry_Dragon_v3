@@ -63,13 +63,13 @@ void CPFly::Update_State(const float& fTimeDelta)
 	}
 	if (GetAsyncKeyState('Q'))
 	{
-		m_pPlayer->Get_Camera()->Set_AngleZPlus(0.1f);
-		m_pPlayer->Get_Transform()->m_vAngle.z += 0.1f;
+		m_pPlayer->Get_Camera()->Set_AngleZPlus(m_fAngleSpeed);
+		m_pPlayer->Get_Transform()->m_vAngle.z += m_fAngleSpeed;
 	}
 	if (GetAsyncKeyState('E'))
 	{
-		m_pPlayer->Get_Camera()->Set_AngleZPlus(-0.1f);
-		m_pPlayer->Get_Transform()->m_vAngle.z += -0.1f;
+		m_pPlayer->Get_Camera()->Set_AngleZPlus(-m_fAngleSpeed);
+		m_pPlayer->Get_Transform()->m_vAngle.z -= m_fAngleSpeed;
 	}
 	//if (GetAsyncKeyState('E'))
 	//{
@@ -80,13 +80,15 @@ void CPFly::Update_State(const float& fTimeDelta)
 		D3DXVec3Normalize(&vDir, &vDir);
 		if (bShift)
 		{
-			vDir *= 100.f;
+			vDir *= m_fBoostMulti;
 		}
-		vDir *= fTimeDelta*0.3f;
+		//속도적용
+		vDir *= fTimeDelta*m_fSpeed;
+		//가속
 		m_vSpeed += vDir;
-		float fLength = D3DXVec3Length(&m_vSpeed);
-		if (50.f < fLength)
-			m_vSpeed *= 50.f/fLength;
+		//감쇠
+		m_vSpeed*=m_fDamping;
+		//실제 적용
 		m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS] += m_vSpeed;
 		//여기까지 가속시스템
 
