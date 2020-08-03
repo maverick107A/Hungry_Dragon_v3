@@ -39,7 +39,7 @@ _int Engine::CLayer::Update_Layer(const _float& fTimeDelta)
 		if (m_listMonster.begin() == m_listMonster.end())
 			return iEnd;
 
-
+		int i = m_listMonster.size();
 		iMonsterEnd = (*iter)->Update_Object(fTimeDelta);
 		(*iter)->Set_Player(m_vPlayerPos);
 
@@ -56,7 +56,6 @@ _int Engine::CLayer::Update_Layer(const _float& fTimeDelta)
 
 	for (auto& iter = m_listBullet.begin(); iter != m_listBullet.end();)
 	{
-		
 
 		if (m_listBullet.begin() == m_listBullet.end())
 			return iEnd;
@@ -79,19 +78,23 @@ _int Engine::CLayer::Update_Layer(const _float& fTimeDelta)
 	return iEnd;
 }
 
-void CLayer::LateUpdate_Layer(const _float & fTimeDelta) {
-	for (auto& iter = m_mapObject.begin(); iter != m_mapObject.end();++iter) {
+void CLayer::LateUpdate_Layer(const _float & fTimeDelta) 
+{
+	for (auto& iter = m_mapObject.begin(); iter != m_mapObject.end();++iter) 
+	{
 		iter->second->LateUpdate_Object(fTimeDelta);
 	}
 
 
-	for (auto& iter = m_listMonster.begin(); iter != m_listMonster.end();++iter) {
+	for (auto& iter = m_listMonster.begin(); iter != m_listMonster.end();++iter) 
+	{
 		(*iter)->LateUpdate_Object(fTimeDelta);
 
 	}
 
 
-	for (auto& iter = m_listBullet.begin(); iter != m_listBullet.end();++iter) {
+	for (auto& iter = m_listBullet.begin(); iter != m_listBullet.end();++iter) 
+	{
 		 (*iter)->LateUpdate_Object(fTimeDelta);
 	}
 }
@@ -100,12 +103,11 @@ void Engine::CLayer::Render_Layer(void)
 {
 	for (auto& iter : m_mapObject)
 		iter.second->Render_Object();
-
-	for (auto& iter : m_listBullet)
-		iter->Render_Object();
-	
 	for (auto& iter : m_listMonster)
 		iter->Render_Object();
+	for (auto& iter : m_listBullet)
+		iter->Render_Object();
+
 }
 
 CLayer* Engine::CLayer::Create(void)
@@ -164,8 +166,8 @@ HRESULT Engine::CLayer::Add_Monster_Object(CGameObject * pGameObject, _vec3 _pos
 {
 	if (nullptr == pGameObject)
 		return E_FAIL;
-
 	pGameObject->Set_Pos(_pos);
+	//pGameObject->Reborn_Monster();
 	m_listMonster.push_back(pGameObject);
 
 	return S_OK;

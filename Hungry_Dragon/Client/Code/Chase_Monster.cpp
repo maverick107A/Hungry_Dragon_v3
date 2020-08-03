@@ -31,19 +31,17 @@ int CChase_Monster::Update_Object(const float & fTimeDelta)
 		m_pTransform->Set_Trans(&m_vFirstPos);
 		m_bFirst = false;
 		m_iEvent = 0;
-
 	}
 
 	CMonster::Update_Object(fTimeDelta);
 
 
-	Ride_Terrain();
-
+	m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();;
 	if (m_bActivate)
 	{
-		if (fDistance < 3 || m_bDead)
+		if (m_fPlayerDistance < 3 || m_bDead)
 		{
-			m_pTransform->Set_Trans(&m_vPlayerPos);
+
 			Dead_Monster(fTimeDelta);
 			m_bDead = true;
 		}
@@ -71,7 +69,16 @@ void CChase_Monster::Render_Object(void)
 
 HRESULT CChase_Monster::Add_Component(void)
 {
-	return E_NOTIMPL;
+	return E_FAIL;
+}
+
+void CChase_Monster::LateUpdate_Object(const float & fTimeDelta)
+{
+
+	if(m_bDead)
+	m_pTransform->Set_Trans(&m_vPlayerPos);
+
+
 }
 
 
@@ -91,10 +98,4 @@ CChase_Monster * CChase_Monster::Create(LPDIRECT3DDEVICE9 pGraphicDev, D3DXVECTO
 void CChase_Monster::Free(void)
 {
 	CMonster::Free();
-}
-
-
-float CChase_Monster::Move_Terrain(void)
-{
-	return 0;
 }

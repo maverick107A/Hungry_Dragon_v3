@@ -25,9 +25,11 @@ public:
 	virtual HRESULT Ready_Object(void) override;
 	virtual int Update_Object(const float& fTimeDelta) override;
 	virtual void Render_Object(void) override;
+	virtual void LateUpdate_Object(const float& fTimeDelta) override;
+
 public:
 	void	Dead_Monster(const float& fTimeDelta);
-	void		Ride_Terrain();
+	float		Ride_Terrain();
 public:
 private:
 	HRESULT		Add_Component(void);
@@ -43,7 +45,11 @@ protected:
 	bool						m_bDead = false;
 	bool						m_bActivate = false;
 	bool						m_bFirst = true;
-	float						fDistance;
+	float						m_fPlayerDistance;
+	float						m_fDistance;
+	float						m_fSpeed;
+	float						m_fScale;
+
 
 public:
 	static CMonster*	Create(LPDIRECT3DDEVICE9 pGraphicDev);

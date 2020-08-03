@@ -86,10 +86,9 @@ HRESULT CObjectPool::Set_Monster_LayerMap(OBJID _Type, _int iCnt, _vec3 _Pos)
 	}
 	for (int i = 0; i < iCnt; ++i)
 	{
-		_Pos = { _Pos.x + (rand() % 2000) , 0 , _Pos.z +  (rand() % 2000) };
-		m_Layer->Add_Monster_Object(m_listObject[_Type].front(), _Pos);
+		_vec3 _pPos = { _Pos.x + (rand() % 3000) , 0 , _Pos.z +  (rand() % 3000) };
+		m_Layer->Add_Monster_Object(m_listObject[_Type].front(), _pPos);
 		m_listObject[_Type].pop_front();
-
 	}
 
 	return S_OK;

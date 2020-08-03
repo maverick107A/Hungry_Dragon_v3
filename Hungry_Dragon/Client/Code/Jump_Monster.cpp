@@ -18,7 +18,7 @@ HRESULT CJump_Monster::Ready_Object(void)
 
 	CMonster::Ready_Object();
 
-
+	m_fSpeed = 20.f;
 
 	// t스케일에 포스를 넣었지 뭐얌 
 
@@ -29,8 +29,6 @@ HRESULT CJump_Monster::Ready_Object(void)
 int CJump_Monster::Update_Object(const float & fTimeDelta)
 {
 
-
-	
 
 
 	if (m_bFirst)
@@ -45,7 +43,7 @@ int CJump_Monster::Update_Object(const float & fTimeDelta)
 
 	if (m_bActivate)
 	{
-		if (fDistance < 3 || m_bDead)
+		if (m_fPlayerDistance < 3 || m_bDead)
 		{
 			m_pTransform->Set_Trans(&m_vPlayerPos);
 			Dead_Monster(fTimeDelta);
@@ -53,11 +51,11 @@ int CJump_Monster::Update_Object(const float & fTimeDelta)
 		else
 		{
 			D3DXVECTOR3 _vPlayerPos = { m_vPlayerPos.x ,  0.f , m_vPlayerPos.z };
-			m_pTransform->Chase_Target(&_vPlayerPos, (fTimeDelta * 20.f));
+			m_pTransform->Chase_Target(&_vPlayerPos, (fTimeDelta * m_fSpeed));
 
 			if (!m_bJump_check)
 			{
-				Ride_Terrain();
+				m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
 				m_bJump_check = true;
 				m_fJumpSpeed = m_fJumpPower;
 			}
@@ -71,7 +69,7 @@ int CJump_Monster::Update_Object(const float & fTimeDelta)
 
 	}
 	else
-		Ride_Terrain();
+		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
 
 
 
@@ -120,7 +118,7 @@ void CJump_Monster::Jump(const float& fTimeDelta)
 
 	if (vMonsterPos.y < m_fFirstY)
 	{
-		Ride_Terrain();
+		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
 		m_bJump_check = false;
 	}
 
