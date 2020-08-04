@@ -13,6 +13,7 @@ class CTransform;
 class CResources;
 class CTerrain;
 class CBaseLand;
+class CAtkPart;
 END
 class CMonster : public Engine::CGameObject
 {
@@ -36,15 +37,19 @@ private:
 	void		Key_Input(const float& fTimeDelta);
 protected:
 	Engine::CTransform*			m_pTransform = nullptr;
-	Engine::CTexture_Cube*			m_pBufferCom = nullptr;
+	Engine::CTexture_Cube*		m_pBufferCom = nullptr;
 	Engine::CTexture*			m_pTextureCom = nullptr;
 	Engine::CBaseLand*			m_pTerrain = nullptr;
+	Engine::CResources*			m_pParticle = nullptr;
+
 	D3DXVECTOR3					m_vLook;
 	D3DXVECTOR3					vPlayerPos;
 	int							m_iEvent = 0;
 	bool						m_bDead = false;
 	bool						m_bActivate = false;
 	bool						m_bFirst = true;
+
+	float						m_fParticle_Speed = 0;
 	float						m_fPlayerDistance;
 	float						m_fDistance;
 	float						m_fSpeed;

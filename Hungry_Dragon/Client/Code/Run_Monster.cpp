@@ -51,7 +51,6 @@ int CRun_Monster::Update_Object(const float & fTimeDelta)
 		}
 	}
 
-
 	return m_iEvent;
 }
 

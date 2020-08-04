@@ -122,9 +122,6 @@ void CScene_Proto::Render_Scene(void) {
 	//Engine::CScene::Render_Scene();
 	//Engine::Render_GameObject();
 
-
-
-
 	m_mapLayer[L"Environment"]->Render_Layer();
 	m_mapLayer[L"GameLogic"]->Render_Layer();
 

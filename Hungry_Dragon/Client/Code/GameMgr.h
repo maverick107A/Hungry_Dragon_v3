@@ -4,18 +4,28 @@
 
 #include "Engine_Define.h"
 
+BEGIN(Engine)
+
+class CResources;
+
+END
+
 class CGameMgr
 {
 	DECLARE_SINGLETON(CGameMgr)
 
 private:
 	explicit CGameMgr(void);
+	explicit CGameMgr(LPDIRECT3DDEVICE9 pGraphicDev);
 	virtual ~CGameMgr(void);
 
 public:
+	// 몬스터 뿌려 주는 곳
 	void Game_Update(D3DXVECTOR3 _vPlayerPos);
 
-
+private:
+	// 출력할 글디바.
+	LPDIRECT3DDEVICE9				m_pGraphicDev;
 };
 
 

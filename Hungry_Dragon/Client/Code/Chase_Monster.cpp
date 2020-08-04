@@ -16,7 +16,7 @@ CChase_Monster::~CChase_Monster(void)
 HRESULT CChase_Monster::Ready_Object(void)
 {
 	CMonster::Ready_Object();
-
+	m_fSpeed = 50.f;
 
 	return S_OK;
 }
@@ -48,7 +48,7 @@ int CChase_Monster::Update_Object(const float & fTimeDelta)
 		else if (!m_bDead)
 		{
 			vPlayerPos = { m_vPlayerPos.x  , 0.f  , m_vPlayerPos.z };
-			m_pTransform->Chase_Target(&vPlayerPos, (fTimeDelta * 50.f));	
+			m_pTransform->Chase_Target(&vPlayerPos, (fTimeDelta * m_fSpeed));
 		}
 	}
 
@@ -58,13 +58,10 @@ int CChase_Monster::Update_Object(const float & fTimeDelta)
 
 void CChase_Monster::Render_Object(void)
 {
-	m_pGraphicDev->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	m_pTransform->Set_Transform(m_pGraphicDev);
 	m_pTextureCom->Set_Texture(1);
 	m_pBufferCom->Render_Buffer();
 	CMonster::Render_Object();
-	m_pGraphicDev->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
-
 }
 
 HRESULT CChase_Monster::Add_Component(void)
@@ -74,14 +71,9 @@ HRESULT CChase_Monster::Add_Component(void)
 
 void CChase_Monster::LateUpdate_Object(const float & fTimeDelta)
 {
-
 	if(m_bDead)
 	m_pTransform->Set_Trans(&m_vPlayerPos);
-
-
 }
-
-
 
 CChase_Monster * CChase_Monster::Create(LPDIRECT3DDEVICE9 pGraphicDev, D3DXVECTOR3 _pos)
 {

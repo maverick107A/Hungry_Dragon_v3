@@ -21,14 +21,12 @@ HRESULT CFly_Monster::Ready_Object(void)
 
 int CFly_Monster::Update_Object(const float & fTimeDelta)
 {
-
 	if (m_bFirst)
 	{
  		m_pTransform->Set_Trans(&m_vFirstPos);
 		m_bFirst = false;
 		m_iEvent = 0;
 	}
-
 
 	CMonster::Update_Object(fTimeDelta);
 
@@ -48,8 +46,6 @@ int CFly_Monster::Update_Object(const float & fTimeDelta)
 			Dead_Monster(fTimeDelta);
 			m_bDead = true;
 		}
-
-
 	}
 	else 
 		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain() + m_fHeight;

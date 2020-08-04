@@ -173,14 +173,18 @@ void CParticle::Free(void) {
 	CResources::Free();
 }
 
-void CParticle::Romove_DeadParticle(void) {
+void CParticle::Romove_DeadParticle(void) 
+{
 	list<ATTRIBUTE>::iterator iter = m_arrParticle.begin();
 
-	for (; iter != m_arrParticle.end();) {
-		if ((*iter).bAlive) {
+	for (; iter != m_arrParticle.end();) 
+	{
+		if ((*iter).bAlive) 
+		{
 			++iter;
 		}
-		else {
+		else 
+		{
 			iter = m_arrParticle.erase(iter);
 		}
 	}

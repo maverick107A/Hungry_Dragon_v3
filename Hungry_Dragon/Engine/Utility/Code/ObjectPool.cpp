@@ -30,15 +30,16 @@ HRESULT CObjectPool::Add_Object_Pool(CGameObject * pGameObject, OBJID _Type)
 
 HRESULT CObjectPool::Add_Object_Layer(OBJID _Type, _int iCnt)
 {
-	if (0 == m_listObject[_Type].size())
+	int iSize = m_listObject[_Type].size();
+
+	if (0 == iSize)
 	{
 		return E_FAIL;
 	}
-	else if ((size_t)iCnt > m_listObject[_Type].size())
+	else if ((size_t)iCnt > iSize)
 	{
-		iCnt = m_listObject[_Type].size();
+		iCnt = iSize;
 	}
-
 
 	for (int i = 0; i < iCnt; ++i)
 	{
@@ -53,14 +54,14 @@ HRESULT CObjectPool::Add_Object_Layer(OBJID _Type, _int iCnt)
 
 HRESULT CObjectPool::Set_Bullet_LayerMap(OBJID _Type, _int iCnt , _vec3 _Pos)
 {
-
-	if (0 == m_listObject[_Type].size())
+	int iSize = m_listObject[_Type].size();
+	if (0 == iSize)
 	{
 		return E_FAIL;
 	}
-	else if ((size_t)iCnt > m_listObject[_Type].size())
+	else if ((size_t)iCnt > iSize)
 	{
-		iCnt = m_listObject[_Type].size();
+		iCnt = iSize;
 	}
 	for (int i = 0; i < iCnt; ++i)
 	{
@@ -74,15 +75,15 @@ HRESULT CObjectPool::Set_Bullet_LayerMap(OBJID _Type, _int iCnt , _vec3 _Pos)
 
 HRESULT CObjectPool::Set_Monster_LayerMap(OBJID _Type, _int iCnt, _vec3 _Pos)
 {
+	int iSize = m_listObject[_Type].size();
 
-
-	if (0 == m_listObject[_Type].size())
+	if (0 == iSize)
 	{
 		return E_FAIL;
 	}
-	else if ((size_t)iCnt > m_listObject[_Type].size())
+	else if ((size_t)iCnt > iSize)
 	{
-		iCnt = m_listObject[_Type].size();
+		iCnt = iSize;
 	}
 	for (int i = 0; i < iCnt; ++i)
 	{
