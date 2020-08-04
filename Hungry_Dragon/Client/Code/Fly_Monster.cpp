@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ #include "stdafx.h"
 #include "Fly_Monster.h"
 #include "Export_Function.h"
 
@@ -14,37 +14,45 @@ CFly_Monster::~CFly_Monster(void)
 HRESULT CFly_Monster::Ready_Object(void)
 {
 	CMonster::Ready_Object();
-	m_pTransform->m_vInfo[Engine::INFO_POS].x = m_vFirstPos.x;
-	m_pTransform->m_vInfo[Engine::INFO_POS].y = m_vFirstPos.y;
-	m_pTransform->m_vInfo[Engine::INFO_POS].z = m_vFirstPos.z;
-	m_pTransform->Set_Minus_Scale(0.5f);
+	m_fHeight = 100.f;
 
 	return S_OK;
 }
 
 int CFly_Monster::Update_Object(const float & fTimeDelta)
 {
+
+	if (m_bFirst)
+	{
+ 		m_pTransform->Set_Trans(&m_vFirstPos);
+		m_bFirst = false;
+		m_iEvent = 0;
+	}
+
+
 	CMonster::Update_Object(fTimeDelta);
-	
+
 	if (m_bActivate)
 	{
 		m_fShotingLate += fTimeDelta;
 		if (m_fShotingLate > 0.3f)
 		{
+			m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain() + m_fHeight;
 			Shooting();
 			m_fShotingLate = 0;
 		}
 
-
-
-		if (fDistance < 3)
+		if (m_fPlayerDistance < 3 || m_bDead)
 		{
-			m_pTransform->Set_Trans(&m_vPlayerPos);
+
 			Dead_Monster(fTimeDelta);
+			m_bDead = true;
 		}
 
-	}
 
+	}
+	else 
+		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain() + m_fHeight;
 
 	return m_iEvent;
 }

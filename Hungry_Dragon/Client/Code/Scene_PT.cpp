@@ -1,20 +1,20 @@
 #include "stdafx.h"
-#include "PlayerTest.h"
+#include "Scene_PT.h"
 #include "Management.h"
 #include "Export_Function.h"
 
-CPlayerTest::CPlayerTest(LPDIRECT3DDEVICE9 pGraphicDev)
+CScene_PT::CScene_PT(LPDIRECT3DDEVICE9 pGraphicDev)
 	: Engine::CScene(pGraphicDev)
 {
 
 }
 
-CPlayerTest::~CPlayerTest(void)
+CScene_PT::~CScene_PT(void)
 {
 
 }
 
-HRESULT CPlayerTest::Ready_Scene(void)
+HRESULT CScene_PT::Ready_Scene(void)
 {
 
 	FAILED_CHECK_RETURN(Engine::CScene::Ready_Scene(), E_FAIL);
@@ -38,7 +38,7 @@ HRESULT CPlayerTest::Ready_Scene(void)
 	return S_OK;
 }
 
-_int CPlayerTest::Update_Scene(const _float& fTimeDelta)
+_int CScene_PT::Update_Scene(const _float& fTimeDelta)
 {
 	if (GetAsyncKeyState('F') & 0x0001)
 	{
@@ -53,19 +53,19 @@ _int CPlayerTest::Update_Scene(const _float& fTimeDelta)
 	return 0;
 }
 
-void CPlayerTest::Render_Scene(void)
+void CScene_PT::Render_Scene(void)
 {
 	Engine::CScene::Render_Scene();
 }
 
-void CPlayerTest::Free(void)
+void CScene_PT::Free(void)
 {
 	Engine::CScene::Free();
 }
 
-CPlayerTest* CPlayerTest::Create(LPDIRECT3DDEVICE9 pGraphicDev)
+CScene_PT* CScene_PT::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 {
-	CPlayerTest*	pInstance = new CPlayerTest(pGraphicDev);
+	CScene_PT*	pInstance = new CScene_PT(pGraphicDev);
 
 	(CManagement::GetInstance())->Set_Scene(pInstance);
 
@@ -76,7 +76,7 @@ CPlayerTest* CPlayerTest::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 	return pInstance;
 }
 
-HRESULT CPlayerTest::Ready_Layer_UI(const _tchar* pLayerTag)
+HRESULT CScene_PT::Ready_Layer_UI(const _tchar* pLayerTag)
 {
 	Engine::CLayer*		pLayer = Engine::CLayer::Create();
 	NULL_CHECK_RETURN(pLayer, E_FAIL);
@@ -88,9 +88,21 @@ HRESULT CPlayerTest::Ready_Layer_UI(const _tchar* pLayerTag)
 	return S_OK;
 }
 
-HRESULT CPlayerTest::Ready_Layer_Environment(const _tchar * pLayerTag) {
+HRESULT CScene_PT::Ready_Layer_Environment(const _tchar * pLayerTag) {
 	Engine::CLayer*		pLayer = Engine::CLayer::Create();
 	NULL_CHECK_RETURN(pLayer, E_FAIL);
+
+	Engine::CGameObject*		pGameObject = nullptr;
+
+	m_mapLayer.emplace(pLayerTag, pLayer);
+
+	return S_OK;
+}
+
+HRESULT CScene_PT::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
+	Engine::CLayer*		pLayer = Engine::CLayer::Create();
+	NULL_CHECK_RETURN(pLayer, E_FAIL);
+	m_mapLayer.emplace(pLayerTag, pLayer);
 
 	Engine::CGameObject*		pGameObject = nullptr;
 
@@ -98,27 +110,14 @@ HRESULT CPlayerTest::Ready_Layer_Environment(const _tchar * pLayerTag) {
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(pLayer->Add_Object(L"BackGround", pGameObject), E_FAIL);
 
-	m_mapLayer.emplace(pLayerTag, pLayer);
-
-	return S_OK;
-}
-
-HRESULT CPlayerTest::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
-	Engine::CLayer*		pLayer = Engine::CLayer::Create();
-	NULL_CHECK_RETURN(pLayer, E_FAIL);
-
-	Engine::CGameObject*		pGameObject = nullptr;
-
 	pGameObject = CTestPlayer::Create(m_pGraphicDev);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(pLayer->Add_Object(L"Player", pGameObject), E_FAIL);
 
-	m_mapLayer.emplace(pLayerTag, pLayer);
-
 	return S_OK;
 }
 
-HRESULT CPlayerTest::Ready_Resource(LPDIRECT3DDEVICE9 pGraphicDev, RESOURCEID eMax)
+HRESULT CScene_PT::Ready_Resource(LPDIRECT3DDEVICE9 pGraphicDev, RESOURCEID eMax)
 {
 	Engine::Reserve_ContainerSize(eMax);
 

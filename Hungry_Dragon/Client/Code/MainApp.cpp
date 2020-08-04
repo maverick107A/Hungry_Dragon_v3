@@ -9,7 +9,8 @@
 
 #ifdef _DEBUG		// 테스트용입니다.
 #include "Scene_Monster.h"
-#include "PlayerTest.h"
+#include "Scene_PT.h"
+#include "StageOne.h"
 #endif // _DEBUG
 
 
@@ -100,6 +101,7 @@ HRESULT CMainApp::Ready_Scene(LPDIRECT3DDEVICE9 pGraphicDev,
 	(*ppManagementInstance)->AddRef();
 
 	pScene = CLogo::Create(pGraphicDev);
+	//pScene = CScene_PT::Create(pGraphicDev);
 	NULL_CHECK_RETURN(pScene, E_FAIL);
 
 	return S_OK;

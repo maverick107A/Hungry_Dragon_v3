@@ -119,13 +119,11 @@ void CScene_Proto::Render_Scene(void) {
 	if(m_bFogEnable)
 		m_pFogEffect->BeginPass(0);
 
-	/*Engine::CScene::Render_Scene();
-	Engine::Render_GameObject();*/
+
 	m_mapLayer[L"Environment"]->Render_Layer();
 	m_mapLayer[L"GameLogic"]->Render_Layer();
 
 	m_pFogEffect->End();
-	
 }
 
 void CScene_Proto::Free(void) {
@@ -199,32 +197,34 @@ HRESULT CScene_Proto::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 
 	for (int i = 0; i < 100; ++i)
 	{
-		Engine::CGameObject*		pJumpMonsterObject = nullptr;
-		D3DXVECTOR3 vMonsterPos = { (i * (rand() % 10)) + 1000.f ,  1000.f  , (i * (rand() % 15)) + 1000.f };
-		pJumpMonsterObject = CChase_Monster::Create(m_pGraphicDev, vMonsterPos);
-		NULL_CHECK_RETURN(pJumpMonsterObject, E_FAIL);
-		pJumpMonsterObject->Set_Address(pLayer);
-		Engine::Add_Object_Pool(pJumpMonsterObject, OBJID::STAND_MONSTER);
-	}
+		Engine::CGameObject*		pFly_MonsterObject = nullptr;
+		D3DXVECTOR3 vMonsterPos = { (i * (rand() % 15)) + 1000.f ,  1000.f  , (i * (rand() % 10)) + 1000.f };
+		pFly_MonsterObject = CFly_Monster::Create(m_pGraphicDev, vMonsterPos);
+		NULL_CHECK_RETURN(pFly_MonsterObject, E_FAIL);
+		pFly_MonsterObject->SetAddress(pLayer);
+		Engine::Add_Object_Pool(pFly_MonsterObject, OBJID::STAND_MONSTER);
 
-	for (int i = 0; i < 100; ++i) {
-		Engine::CGameObject*		pJumpMonsterObject = nullptr;
-		D3DXVECTOR3 vMonsterPos = { (i * (rand() % 10)) + 1000.f ,  1000.f  , (i * (rand() % 10)) + 1000.f };
-		pJumpMonsterObject = CJump_Monster::Create(m_pGraphicDev, vMonsterPos);
-		NULL_CHECK_RETURN(pJumpMonsterObject, E_FAIL);
-		pJumpMonsterObject->Set_Address(pLayer);
-		Engine::Add_Object_Pool(pJumpMonsterObject, OBJID::STAND_MONSTER);
 	}
 
 	for (int i = 0; i < 100; ++i)
 	{
-		Engine::CGameObject*		pJumpMonsterObject = nullptr;
-		D3DXVECTOR3 vMonsterPos = { (i * (rand() % 15)) + 1000.f ,  1000.f  , (i * (rand() % 10)) + 1000.f };
-		pJumpMonsterObject = CRun_Monster::Create(m_pGraphicDev, vMonsterPos);
-		NULL_CHECK_RETURN(pJumpMonsterObject, E_FAIL);
-		pJumpMonsterObject->Set_Address(pLayer);
-		Engine::Add_Object_Pool(pJumpMonsterObject, OBJID::STAND_MONSTER);
+		Engine::CGameObject*		pChase_MonsterObject = nullptr;
+		D3DXVECTOR3 vMonsterPos = { (i * (rand() % 10)) + 1000.f ,  1000.f  , (i * (rand() % 15)) + 1000.f };
+		pChase_MonsterObject = CChase_Monster::Create(m_pGraphicDev, vMonsterPos);
+		NULL_CHECK_RETURN(pChase_MonsterObject, E_FAIL);
+		pChaseMonster->SetAddress(pLayer);
+		Engine::Add_Object_Pool(pChase_MonsterObject, OBJID::STAND_MONSTER);
+	}
 
+
+	for (int i = 0; i < 100; ++i)
+	{
+		Engine::CGameObject*		pRun_MonsterObject = nullptr;
+		D3DXVECTOR3 vMonsterPos = { (i * (rand() % 15)) + 1000.f ,  1000.f  , (i * (rand() % 10)) + 1000.f };
+		pRun_MonsterObject = CRun_Monster::Create(m_pGraphicDev, vMonsterPos);
+		NULL_CHECK_RETURN(pRun_MonsterObject, E_FAIL);
+		pRun_Monster->SetAddress(pLayer);
+		Engine::Add_Object_Pool(pRun_MonsterObject, OBJID::STAND_MONSTER);
 	}
 
 
