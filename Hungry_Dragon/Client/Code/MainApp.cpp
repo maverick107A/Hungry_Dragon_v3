@@ -97,7 +97,7 @@ HRESULT CMainApp::Ready_Scene(LPDIRECT3DDEVICE9 pGraphicDev,
 	FAILED_CHECK_RETURN(Engine::Create_Management(ppManagementInstance), E_FAIL);
 	(*ppManagementInstance)->AddRef();
 
-	pScene = CScene_PT::Create(pGraphicDev);
+	pScene = CScene_Proto::Create(pGraphicDev);
 	NULL_CHECK_RETURN(pScene, E_FAIL);
 
 

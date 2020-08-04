@@ -61,12 +61,6 @@
     <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\02. Player">
       <UniqueIdentifier>{f43470de-c67f-49e7-80c4-44bdf63602f1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. GameObject\01. Stage\02.Bullet">
-      <UniqueIdentifier>{3dd03295-c4d4-4d43-aab0-c4d9415183e5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. GameObject\01. Stage\02.Bullet\00.Normal">
-      <UniqueIdentifier>{0572fbeb-61dd-4ec9-bf8f-1f99844d5286}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. GameObject\00. Logo">
       <UniqueIdentifier>{96d40a23-3640-4667-974e-ad3d40d42673}</UniqueIdentifier>
     </Filter>
@@ -100,7 +94,13 @@
     <Filter Include="01. Scene\90. Scene_Loading">
       <UniqueIdentifier>{c110545e-7a4b-4828-8604-509975a6d557}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Scene\Scene_PT">
+    <Filter Include="02. GameObject\01. Stage\01.Player\02.Bullet">
+      <UniqueIdentifier>{3dd03295-c4d4-4d43-aab0-c4d9415183e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\01.Player\02.Bullet\00.Normal">
+      <UniqueIdentifier>{0572fbeb-61dd-4ec9-bf8f-1f99844d5286}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Scene\70. Scene_PT">
       <UniqueIdentifier>{8da5808b-3fa5-4c62-b2fc-d769bd219cee}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -157,10 +157,10 @@
       <Filter>02. GameObject\01. Stage\01. Scene_Monster\01. Terrain</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\NormalBullet.h">
-      <Filter>02. GameObject\01. Stage\02.Bullet\00.Normal</Filter>
+      <Filter>02. GameObject\01. Stage\01.Player\02.Bullet\00.Normal</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Bullet.h">
-      <Filter>02. GameObject\01. Stage\02.Bullet</Filter>
+      <Filter>02. GameObject\01. Stage\01.Player\02.Bullet</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Scene_Proto.h">
       <Filter>01. Scene\01.Scene_Proto</Filter>
@@ -184,7 +184,7 @@
       <Filter>01. Scene\90. Scene_Loading</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Scene_PT.h">
-      <Filter>01. Scene\Scene_PT</Filter>
+      <Filter>01. Scene\70. Scene_PT</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -231,10 +231,10 @@
       <Filter>02. GameObject\01. Stage\01. Scene_Monster\01. Terrain</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\NormalBullet.cpp">
-      <Filter>02. GameObject\01. Stage\02.Bullet\00.Normal</Filter>
+      <Filter>02. GameObject\01. Stage\01.Player\02.Bullet\00.Normal</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Bullet.cpp">
-      <Filter>02. GameObject\01. Stage\02.Bullet</Filter>
+      <Filter>02. GameObject\01. Stage\01.Player\02.Bullet</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Scene_Proto.cpp">
       <Filter>01. Scene\01.Scene_Proto</Filter>
@@ -258,7 +258,7 @@
       <Filter>01. Scene\90. Scene_Loading</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Scene_PT.cpp">
-      <Filter>01. Scene\Scene_PT</Filter>
+      <Filter>01. Scene\70. Scene_PT</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

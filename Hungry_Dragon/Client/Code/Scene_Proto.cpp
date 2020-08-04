@@ -28,7 +28,7 @@ HRESULT CScene_Proto::Ready_Scene(void) {
 		D3DXToRadian(45.f),
 		_float(WINCX) / WINCY,
 		1.f,
-		100000.f);
+		10000.f);
 
 	m_pGraphicDev->SetTransform(D3DTS_PROJECTION, &matProj);
 	//m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
