@@ -17,6 +17,7 @@
 #include "BackGround.h"
 #include "TestPlayer.h"
 #include "Scene_Loading.h"
+#include "BackGround_Logo.h"
 //-------------------------------------------------------
 
 using namespace Engine;

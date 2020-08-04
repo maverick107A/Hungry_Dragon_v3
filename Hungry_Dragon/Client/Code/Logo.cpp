@@ -34,9 +34,9 @@ _int CLogo::Update_Scene(const _float& fTimeDelta) {
 			pScene = CScene_Proto::Create(m_pGraphicDev);
 			NULL_CHECK_RETURN(pScene, -1);
 
-			FAILED_CHECK_RETURN(Engine::Set_Scene(pScene), E_FAIL);
+			//FAILED_CHECK_RETURN(Engine::Set_Scene(pScene), E_FAIL);
 
-			return iExit;
+			return -1;
 		}
 	}
 
@@ -49,10 +49,11 @@ void CLogo::Render_Scene(void) {
 
 }
 
-void CLogo::Free(void) {
+void CLogo::Free(void) 
+{
+	Engine::Safe_Release(m_pLoading);
 	Engine::CScene::Free();
 
-	Engine::Safe_Release(m_pLoading);
 }
 
 CLogo* CLogo::Create(LPDIRECT3DDEVICE9 pGraphicDev) {
@@ -73,7 +74,7 @@ HRESULT CLogo::Ready_Layer_UI(const _tchar* pLayerTag) {
 	Engine::CGameObject*		pGameObject = nullptr;
 
 	// BackGround
-	pGameObject = CBackGround::Create(m_pGraphicDev);
+	pGameObject = CBackGround_Logo::Create(m_pGraphicDev);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(pLayer->Add_Object(L"BackGround", pGameObject), E_FAIL);
 
@@ -84,6 +85,19 @@ HRESULT CLogo::Ready_Layer_UI(const _tchar* pLayerTag) {
 
 HRESULT CLogo::Ready_Resource(LPDIRECT3DDEVICE9 pGraphicDev, RESOURCEID eMax) {
 	Engine::Reserve_ContainerSize(eMax);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Buffer(pGraphicDev,
+		RESOURCE_STATIC,
+		L"Buffer_TexSquare",
+		Engine::BUFFER_TEXSQUARE),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(pGraphicDev,
+		RESOURCE_LOGO,
+		L"Texture_Logo",
+		Engine::TEX_NORMAL,
+		L"../../Asset/Loading/Loading.png"),
+		E_FAIL);
 
 	return S_OK;
 }

@@ -25,7 +25,7 @@ CTestPlayer::~CTestPlayer(void)
 HRESULT CTestPlayer::Ready_Object(void)
 {
 	m_pTerrain = static_cast<Engine::CBaseLand*>
-		(Engine::Get_Component(L"Environment",
+		(Engine::Get_Component(L"GameLogic",
 			L"BackGround",
 			L"Com_Buffer",
 			Engine::ID_STATIC));

@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "Scene_Loading.h"
 
-#include "Export_Function.h"
-
 USING(Engine)
 
 CScene_Loading::CScene_Loading(LPDIRECT3DDEVICE9 pGraphicDev)
@@ -35,11 +33,45 @@ _uint CScene_Loading::Loading_ForStage(void)
 
 	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
 		RESOURCE_STATIC,
+		L"Buffer_CubeTex",
+		Engine::BUFFER_TEXCUBE),
+		E_FAIL);
+
+
+	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
+		RESOURCE_STATIC,
 		L"Buffer_TerrainTex",
 		Engine::BUFFER_TERRAINTEX,
 		129,
 		129,
 		1),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
+		RESOURCE_STATIC,
+		L"Buffer_LandTex",
+		Engine::BUFFER_LANDTEX,
+		129,
+		129,
+		1000),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
+		RESOURCE_STATIC,
+		L"BUFFER_TERRAIN",
+		Engine::BUFFER_FOREST),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
+		RESOURCE_STATIC,
+		L"BUFFER_SKYSPHERE",
+		Engine::BUFFER_SKYSPHERE),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
+		RESOURCE_STATIC,
+		L"BUFFER_CUBEDRA",
+		Engine::BUFFER_CUBEDRA),
 		E_FAIL);
 
 	lstrcpy(m_szFinish, L"Texture Loading............");
@@ -49,6 +81,28 @@ _uint CScene_Loading::Loading_ForStage(void)
 		L"Texture_Terrain",
 		Engine::TEX_NORMAL,
 		L"../Bin/Resource/Texture/Terrain/Terrain0.png"),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"Texture_SkySphere",
+		Engine::TEX_CUBE,
+		L"../../Asset/Skybox/TestSkybox.dds"),
+		E_FAIL);
+
+
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"Texture_BoxHead",
+		Engine::TEX_NORMAL,
+		L"../../Asset/HeadPng/Head%d.png", 6),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"TEX_OCEAN",
+		Engine::TEX_NORMAL,
+		L"../../Asset/Terrain/water.bmp"),
 		E_FAIL);
 
 	lstrcpy(m_szFinish, L"Loading Complete");

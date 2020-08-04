@@ -27,7 +27,7 @@ _int Engine::CLayer::Update_Layer(const _float& fTimeDelta)
 	for (auto& iter = m_mapObject.begin(); iter != m_mapObject.end();)
 	{
 		iEnd = iter->second->Update_Object(fTimeDelta);
-		iter->second->Set_Player(m_vPlayerPos);
+		//iter->second->Set_Player(m_vPlayerPos);
 
 	
 		++iter;
@@ -41,7 +41,7 @@ _int Engine::CLayer::Update_Layer(const _float& fTimeDelta)
 
 
 		iMonsterEnd = (*iter)->Update_Object(fTimeDelta);
-		(*iter)->Set_Player(m_vPlayerPos);
+		//(*iter)->Set_Player(m_vPlayerPos);
 
 		if (MONSTER_DEAD == iMonsterEnd)
 		{
@@ -63,7 +63,7 @@ _int Engine::CLayer::Update_Layer(const _float& fTimeDelta)
 
 
 		iBulletEnd = (*iter)->Update_Object(fTimeDelta);
-		(*iter)->Set_Player(m_vPlayerPos);
+		//(*iter)->Set_Player(m_vPlayerPos);
 
 		if (BULLET_DEAD == iBulletEnd)
 		{

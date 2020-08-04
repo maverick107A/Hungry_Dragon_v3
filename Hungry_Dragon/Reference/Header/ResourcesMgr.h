@@ -19,6 +19,7 @@
 #include "Texture_Cube.h"
 #include "SkyCube.h"
 #include "Texture_Plane.h"
+#include "Texture_Square.h"
 
 #include "Texture.h"
 

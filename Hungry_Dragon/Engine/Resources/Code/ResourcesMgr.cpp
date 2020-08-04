@@ -59,6 +59,9 @@ HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 	case BUFFER_TERRAINTEX:
 		pResources = CTerrainTex::Create(pGraphicDev, dwCntX, dwCntZ, dwVtxItv);
 		break;
+	case BUFFER_TEXSQUARE:
+		pResources = CTexture_Square::Create(pGraphicDev);
+		break;
 	case BUFFER_LANDTEX:
 		pResources = CTexture_Plane::Create(pGraphicDev, dwCntX, dwCntZ, dwVtxItv);
 		break;

@@ -2,6 +2,7 @@
 #define Loading_h__
 
 #include "Define.h"
+#include "Export_Function.h"
 #include "Base.h"
 
 using namespace Engine;

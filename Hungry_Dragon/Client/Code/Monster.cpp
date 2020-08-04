@@ -22,6 +22,7 @@ HRESULT CMonster::Ready_Object(void)
 
 int CMonster::Update_Object(const float & fTimeDelta)
 {
+	m_vPlayerPos=((Engine::CLayer*)(this->Get_Parent()))->Get_PlayerPos();
 
 	D3DXVECTOR3	vMonsterPos;
 	m_pTransform->Get_Info(Engine::INFO_POS, &vMonsterPos);
@@ -74,29 +75,29 @@ void CMonster::Dead_Monster(const float & fTimeDelta)
 
 
 	
-	//	Engine::_vec3 vOrigin = Engine::_vec3(0.f, 0.f, 0.f);
-	//	Engine::BoundingBox tempBoundingBox;
-	//	tempBoundingBox.vMax = Engine::_vec3(100.f, 100.f, 100.f);
-	//	tempBoundingBox.vMin = Engine::_vec3(-100.f, -100.f, -100.f);
-	//	Engine::CResources* tempParticle = Engine::Get_Particle(m_pGraphicDev, Engine::PART_ATK, tempBoundingBox, vOrigin);
+		Engine::_vec3 vOrigin = Engine::_vec3(0.f, 0.f, 0.f);
+		Engine::BoundingBox tempBoundingBox;
+		tempBoundingBox.vMax = Engine::_vec3(100.f, 100.f, 100.f);
+		tempBoundingBox.vMin = Engine::_vec3(-100.f, -100.f, -100.f);
+		Engine::CResources* tempParticle = Engine::Get_Particle(m_pGraphicDev, Engine::PART_ATK, tempBoundingBox, vOrigin);
 
-	//	//나중엔 미리 올려 놓는 식으로 구현하자
-	//	static_cast<Engine::CAtkPart*>(tempParticle)->Set_Texture(L"../../Asset/snowflake.dds");
-	//	m_arrParticle.emplace_back(tempParticle);
-	//
+		//나중엔 미리 올려 놓는 식으로 구현하자
+		static_cast<Engine::CAtk_Part*>(tempParticle)->Set_Texture(L"../../Asset/snowflake.dds");
+		m_arrParticle.emplace_back(tempParticle);
+	
 
-	//for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end();) {
-	//	int life = (*iter)->Update_Component(fTimeDelta);
+	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end();) {
+		int life = (*iter)->Update_Component(fTimeDelta);
 
-	//	if (life == 0) {
-	//		++iter;
-	//	}
-	//	else {
-	//		Safe_Release(*iter);
-	//		iter = m_arrParticle.erase(iter);
-	//	}
+		if (life == 0) {
+			++iter;
+		}
+		else {
+			Safe_Release(*iter);
+			iter = m_arrParticle.erase(iter);
+		}
 
-	//}
+	}
 
 
 	if (m_pTransform->m_vScale.x < 0 || m_pTransform->m_vScale.y < 0 || m_pTransform->m_vScale.z < 0)

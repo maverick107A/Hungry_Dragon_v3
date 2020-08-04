@@ -158,6 +158,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Code\BackGround.h" />
+    <ClInclude Include="..\Code\BackGround_Logo.h" />
     <ClInclude Include="..\Code\Bullet.h" />
     <ClInclude Include="..\Code\Chase_Monster.h" />
     <ClInclude Include="..\Code\Fly_Monster.h" />
@@ -175,7 +176,6 @@
     <ClInclude Include="..\Code\Scene_Monster.h" />
     <ClInclude Include="..\Code\Scene_Proto.h" />
     <ClInclude Include="..\Code\SkySphere.h" />
-    <ClInclude Include="..\Code\StageOne.h" />
     <ClInclude Include="..\Code\Terrain.h" />
     <ClInclude Include="..\Code\TerrainPlayer.h" />
     <ClInclude Include="..\Code\TestPlayer.h" />
@@ -187,6 +187,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\BackGround.cpp" />
+    <ClCompile Include="..\Code\BackGround_Logo.cpp" />
     <ClCompile Include="..\Code\Bullet.cpp" />
     <ClCompile Include="..\Code\Chase_Monster.cpp" />
     <ClCompile Include="..\Code\Fly_Monster.cpp" />
@@ -204,7 +205,6 @@
     <ClCompile Include="..\Code\Scene_Monster.cpp" />
     <ClCompile Include="..\Code\Scene_Proto.cpp" />
     <ClCompile Include="..\Code\SkySphere.cpp" />
-    <ClCompile Include="..\Code\StageOne.cpp" />
     <ClCompile Include="..\Code\Terrain.cpp" />
     <ClCompile Include="..\Code\TerrainPlayer.cpp" />
     <ClCompile Include="..\Code\TestPlayer.cpp" />

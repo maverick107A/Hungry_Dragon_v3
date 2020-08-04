@@ -79,9 +79,6 @@
     <Filter Include="01. Scene\20. Scene_Monster">
       <UniqueIdentifier>{91154392-52f1-43dc-9b58-bbffba06c1e7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Scene\50. StageOne">
-      <UniqueIdentifier>{bac2b7ef-17a0-4138-8ecd-1128cd6ed6a1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01. Scene\70. PlayerTest">
       <UniqueIdentifier>{8da5808b-3fa5-4c62-b2fc-d769bd219cee}</UniqueIdentifier>
     </Filter>
@@ -102,6 +99,9 @@
     </Filter>
     <Filter Include="01. Scene\90. Scene_Loading">
       <UniqueIdentifier>{c110545e-7a4b-4828-8604-509975a6d557}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\00. Logo\00. Logo_Background">
+      <UniqueIdentifier>{e64fed0d-f85e-43fd-ab19-204a6241f108}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -171,9 +171,6 @@
     <ClInclude Include="..\Code\TerrainPlayer.h">
       <Filter>02. GameObject\01. Stage\03.Terrain</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\StageOne.h">
-      <Filter>01. Scene\50. StageOne</Filter>
-    </ClInclude>
     <ClInclude Include="..\Code\SkySphere.h">
       <Filter>02. GameObject\01. Stage\04.SkySphere</Filter>
     </ClInclude>
@@ -185,6 +182,9 @@
     </ClInclude>
     <ClInclude Include="..\Code\Scene_Loading.h">
       <Filter>01. Scene\90. Scene_Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\BackGround_Logo.h">
+      <Filter>02. GameObject\00. Logo\00. Logo_Background</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -245,9 +245,6 @@
     <ClCompile Include="..\Code\TerrainPlayer.cpp">
       <Filter>02. GameObject\01. Stage\03.Terrain</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\StageOne.cpp">
-      <Filter>01. Scene\50. StageOne</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\SkySphere.cpp">
       <Filter>02. GameObject\01. Stage\04.SkySphere</Filter>
     </ClCompile>
@@ -259,6 +256,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Scene_Loading.cpp">
       <Filter>01. Scene\90. Scene_Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BackGround_Logo.cpp">
+      <Filter>02. GameObject\00. Logo\00. Logo_Background</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

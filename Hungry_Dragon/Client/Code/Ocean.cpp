@@ -67,7 +67,7 @@ HRESULT COcean::Add_Component(void)
 
 	// buffer
 	FAILED_CHECK_RETURN(Clone_Component<CTexture_Plane>(&m_pBufferCom, RESOURCE_STATIC, L"Buffer_LandTex", ID_STATIC, L"Com_Buffer"), E_FAIL);
-	FAILED_CHECK_RETURN(Clone_Component<CTexture>(&m_pTexture, RESOURCE_STAGE, L"TEX_OCEAN", ID_STATIC, L"Com_Texture"));
+	FAILED_CHECK_RETURN(Clone_Component<CTexture>(&m_pTexture, RESOURCE_STAGE, L"TEX_OCEAN", ID_STATIC, L"Com_Texture"),E_FAIL);
 	FAILED_CHECK_RETURN(Register_Component<CTransform>(&m_pTransform, ID_DYNAMIC, L"Com_Transform"), E_FAIL);
 
 	m_pTransform->m_vInfo[INFO_POS] = _vec3(-64000.f, 0.f,-64000.f);
