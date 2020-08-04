@@ -35,7 +35,7 @@ private:
 	void		Key_Input(const float& fTimeDelta);
 protected:
 	Engine::CTransform*			m_pTransform = nullptr;
-	Engine::CTexture_Cube*			m_pBufferCom = nullptr;
+	Engine::CTexture_Cube*		m_pBufferCom = nullptr;
 	Engine::CTexture*			m_pTextureCom = nullptr;
 	D3DXVECTOR3					m_vLook;
 	D3DXVECTOR3					vPlayerPos;
@@ -45,8 +45,6 @@ public:
 	static CBullet*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 public:
 	virtual void Free(void) override;
-
-
 
 };
 

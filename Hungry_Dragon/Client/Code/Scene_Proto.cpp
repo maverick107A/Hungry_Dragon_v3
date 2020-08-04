@@ -89,13 +89,6 @@ _int CScene_Proto::Update_Scene(const _float& fTimeDelta) {
 	{
 		m_bFogEnable = !m_bFogEnable;
 	}
-	pPlayerTransformCom = dynamic_cast<Engine::CTransform*>
-		(Engine::Get_Component(L"GameLogic",
-			L"TestPlayer",
-			L"Com_Transform",
-			Engine::ID_DYNAMIC));
-
-	pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);
 
 	CGameMgr::GetInstance()->Game_Update(m_vPlayerPos);
 
@@ -238,6 +231,10 @@ HRESULT CScene_Proto::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 		Engine::Add_Object_Pool(pBulletObject, OBJID::NORMAL_BULLET);
 
 	}
+
+	pPlayerTransformCom = static_cast<CTransform*>((pLayer->Get_Object(L"TestPlayer", Engine::Find_First, nullptr))->Get_Component(L"Com_Tranform", Engine::ID_DYNAMIC));
+
+	pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);
 
 
 	return S_OK;

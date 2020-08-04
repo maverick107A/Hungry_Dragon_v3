@@ -24,55 +24,76 @@ _int Engine::CLayer::Update_Layer(const _float& fTimeDelta)
 	_int iMonsterEnd = 0;
 
 
-	for (auto& iter = m_mapObject.begin(); iter != m_mapObject.end();)
+	for (auto& iter = m_mapObject.begin(); iter != m_mapObject.end();++iter)
 	{
-		iEnd = iter->second->Update_Object(fTimeDelta);
-		//iter->second->Set_Player(m_vPlayerPos);
 
-	
-		++iter;
-	}
-
-
-	for (auto& iter = m_listMonster.begin(); iter != m_listMonster.end();)
-	{
-		if (m_listMonster.begin() == m_listMonster.end())
-			return iEnd;
-
-		int i = m_listMonster.size();
-		iMonsterEnd = (*iter)->Update_Object(fTimeDelta);
-		//(*iter)->Set_Player(m_vPlayerPos);
-
-		if (MONSTER_DEAD == iMonsterEnd)
+		for (auto& iter_obj = (*iter).second.begin(); iter_obj != (*iter).second.end();)
 		{
-			CObjectPool::GetInstance()->Add_Object_Pool(*iter, OBJID::STAND_MONSTER);
-			iter = m_listMonster.erase(iter);
+			iEnd = (*iter_obj)->Update_Object(fTimeDelta);
+
+			if (iEnd == MONSTER_DEAD)
+			{
+				CObjectPool::GetInstance()->Add_Object_Pool(*iter_obj, OBJID::STAND_MONSTER);
+				iter_obj = (*iter).second.erase(iter_obj);
+			}
+			else if (iEnd == BULLET_DEAD)
+			{
+				CObjectPool::GetInstance()->Add_Object_Pool(*iter_obj, OBJID::STAND_MONSTER);
+				iter_obj = (*iter).second.erase(iter_obj);
+			}
+			else if (0 == iEnd)
+			{
+				++iter_obj;
+			}
+			else{
+				//일단 지우는 걸로 하고 만약 해당하는 오브젝트 종류의 오브젝트풀이 만들어진다면
+				//거기로 Add해줄 것
+				Safe_Release(*iter_obj);
+				iter_obj = (*iter).second.erase(iter_obj);
+
+			}
 		}
-		else
-			++iter;
 
 	}
 
 
-	for (auto& iter = m_listBullet.begin(); iter != m_listBullet.end();)
-	{
+	//for (auto& iter = m_listMonster.begin(); iter != m_listMonster.end();)
+	//{
+	//	if (m_listMonster.begin() == m_listMonster.end())
+	//		return iEnd;
 
-		if (m_listBullet.begin() == m_listBullet.end())
-			return iEnd;
+	//	iMonsterEnd = (*iter)->Update_Object(fTimeDelta);
+	//	//(*iter)->Set_Player(m_vPlayerPos);
+
+	//	if (MONSTER_DEAD == iMonsterEnd)
+	//	{
+	//		CObjectPool::GetInstance()->Add_Object_Pool(*iter, OBJID::STAND_MONSTER);
+	//		iter = m_listMonster.erase(iter);
+	//	}
+	//	else
+	//		++iter;
+
+	//}
 
 
-		iBulletEnd = (*iter)->Update_Object(fTimeDelta);
-		//(*iter)->Set_Player(m_vPlayerPos);
+	//for (auto& iter = m_listBullet.begin(); iter != m_listBullet.end();)
+	//{
 
-		if (BULLET_DEAD == iBulletEnd)
-		{
-			CObjectPool::GetInstance()->Add_Object_Pool(*iter, OBJID::NORMAL_BULLET);
-			iter =	m_listBullet.erase(iter);
-		}
-		else
-			++iter;
+	//	if (m_listBullet.begin() == m_listBullet.end())
+	//		return iEnd;
 
-	}
+
+	//	iBulletEnd = (*iter)->Update_Object(fTimeDelta);
+
+	//	if (BULLET_DEAD == iBulletEnd)
+	//	{
+	//		CObjectPool::GetInstance()->Add_Object_Pool(*iter, OBJID::NORMAL_BULLET);
+	//		iter =	m_listBullet.erase(iter);
+	//	}
+	//	else
+	//		++iter;
+
+	//}
 
 
 	return iEnd;
@@ -82,32 +103,24 @@ void CLayer::LateUpdate_Layer(const _float & fTimeDelta)
 {
 	for (auto& iter = m_mapObject.begin(); iter != m_mapObject.end();++iter) 
 	{
-		iter->second->LateUpdate_Object(fTimeDelta);
+		for (auto& iter_obj = iter->second.begin(); iter_obj != iter->second.end();++iter_obj)
+		{
+			(*iter_obj)->LateUpdate_Object(fTimeDelta);
+		}
 	}
 
-
-	for (auto& iter = m_listMonster.begin(); iter != m_listMonster.end();++iter) 
-	{
-		(*iter)->LateUpdate_Object(fTimeDelta);
-
-	}
-
-
-	for (auto& iter = m_listBullet.begin(); iter != m_listBullet.end();++iter) 
-	{
-		 (*iter)->LateUpdate_Object(fTimeDelta);
-	}
+	//충돌처리
 }
 
 void Engine::CLayer::Render_Layer(void)
 {
-	for (auto& iter : m_mapObject)
-		iter.second->Render_Object();
-	for (auto& iter : m_listMonster)
-		iter->Render_Object();
-	for (auto& iter : m_listBullet)
-		iter->Render_Object();
-
+	for (auto& iter = m_mapObject.begin(); iter != m_mapObject.end(); ++iter)
+	{
+		for (auto& iter_obj = iter->second.begin(); iter_obj != iter->second.end(); ++iter_obj)
+		{
+			(*iter_obj)->Render_Object();
+		}
+	}
 }
 
 CLayer* Engine::CLayer::Create(void)
@@ -123,22 +136,14 @@ CLayer* Engine::CLayer::Create(void)
 
 void Engine::CLayer::Free(void)
 {
-	for_each(m_mapObject.begin(), m_mapObject.end(), CDeleteMap());
+	for (auto& iter = m_mapObject.begin(); iter != m_mapObject.end(); ++iter)
+	{
+		for_each(iter->second.begin(), iter->second.end(), CDeleteObj());
+		iter->second.clear();
+	}
+
+	//for_each(m_mapObject.begin(), m_mapObject.end(), CDeleteMap());
 	m_mapObject.clear();
-
-
-	 for (auto& iter : m_listBullet)
-	 {
-		 Safe_Release(iter);
-	 }
-	 m_listBullet.clear();
-
-	 for (auto& iter : m_listMonster)
-	 {
-		 Safe_Release(iter);
-	 }
-	 m_listMonster.clear();
-
 }
 
 HRESULT Engine::CLayer::Add_Object(const _tchar* pObjTag, CGameObject* pGameObject)
@@ -146,32 +151,36 @@ HRESULT Engine::CLayer::Add_Object(const _tchar* pObjTag, CGameObject* pGameObje
 	if (nullptr == pGameObject)
 		return E_FAIL;
 
-	m_mapObject.emplace(pObjTag, pGameObject);
+	auto	iter = find_if(m_mapObject.begin(), m_mapObject.end(), CTag_Finder(pObjTag));
+
+	list<CGameObject*> targetList = iter->second;
+
+	targetList.emplace_back(pGameObject);
 
 	return S_OK;
 }
 
-HRESULT Engine::CLayer::Add_Bullet_Object(CGameObject * pGameObject , _vec3 _pos)
-{
-	if (nullptr == pGameObject)
-		return E_FAIL;
-
-	pGameObject->Set_Pos(_pos);
-	m_listBullet.push_back(pGameObject);
-
-	return S_OK;
-}
-
-HRESULT Engine::CLayer::Add_Monster_Object(CGameObject * pGameObject, _vec3 _pos)
-{
-	if (nullptr == pGameObject)
-		return E_FAIL;
-	pGameObject->Set_Pos(_pos);
-	//pGameObject->Reborn_Monster();
-	m_listMonster.push_back(pGameObject);
-
-	return S_OK;
-}
+//HRESULT Engine::CLayer::Add_Bullet_Object(CGameObject * pGameObject , _vec3 _pos)
+//{
+//	if (nullptr == pGameObject)
+//		return E_FAIL;
+//
+//	pGameObject->Set_Pos(_pos);
+//	m_listBullet.push_back(pGameObject);
+//
+//	return S_OK;
+//}
+//
+//HRESULT Engine::CLayer::Add_Monster_Object(CGameObject * pGameObject, _vec3 _pos)
+//{
+//	if (nullptr == pGameObject)
+//		return E_FAIL;
+//	pGameObject->Set_Pos(_pos);
+//	//pGameObject->Reborn_Monster();
+//	m_listMonster.push_back(pGameObject);
+//
+//	return S_OK;
+//}
 
 void CLayer::Set_Address(void) {
 	m_AddressTag.StateFlag &= (char)0;
@@ -181,12 +190,27 @@ void CLayer::Set_Address(void) {
 	m_AddressTag.ComponentAddress = nullptr;
 }
 
-CComponent* Engine::CLayer::Get_Component(const _tchar* pObjTag, const _tchar* pComponentTag, COMPONENTID eID)
+CGameObject * CLayer::Get_Object(const _tchar * _pObjTag, bool(*_functionPointer)(CGameObject *_caller, CGameObject *_callee), CGameObject * _callerObj)
 {
-	auto	iter = find_if(m_mapObject.begin(), m_mapObject.end(), CTag_Finder(pObjTag));
+	auto	iter = find_if(m_mapObject.begin(), m_mapObject.end(), CTag_Finder(_pObjTag));
 
 	if (iter == m_mapObject.end())
+	{
 		return nullptr;
+	}
 
-	return iter->second->Get_Component(pComponentTag, eID);
+	for (list<CGameObject*>::iterator iter_obj = iter->second.begin(); iter_obj != iter->second.end(); ++iter_obj)
+	{
+		if (_functionPointer(_callerObj, (*iter_obj)))
+		{
+			return (*iter_obj);
+		}
+	}
+
+	return nullptr;
+}
+
+CComponent* Engine::CLayer::Get_Component(CGameObject* _findObj,const _tchar* pComponentTag, COMPONENTID eID)
+{
+	return _findObj->Get_Component(pComponentTag, eID);
 }

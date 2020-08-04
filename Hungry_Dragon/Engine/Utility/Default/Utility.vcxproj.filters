@@ -61,6 +61,9 @@
     <Filter Include="02. UtilBase\02. Component\04. TerrainMgr">
       <UniqueIdentifier>{17d9424d-c3c4-4a17-be31-f3037a6f193e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="05. ColllisionMgr">
+      <UniqueIdentifier>{8d7b7bd7-eae3-492b-b518-ed13ea9ee861}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\Component.cpp">
@@ -122,6 +125,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\UtilBase.cpp">
       <Filter>02. UtilBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CollisionMgr.cpp">
+      <Filter>05. ColllisionMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -187,6 +193,9 @@
     </ClInclude>
     <ClInclude Include="..\Code\UtilBase.h">
       <Filter>02. UtilBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\CollisionMgr.h">
+      <Filter>05. ColllisionMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

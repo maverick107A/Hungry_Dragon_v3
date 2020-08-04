@@ -111,6 +111,25 @@ namespace Engine
 		}
 	};
 
+	class CDeleteObjMap
+	{
+	public:
+		explicit CDeleteObjMap(void) {}
+		~CDeleteObjMap(void) {}
+	public: // operator	
+		template <typename T>
+		void operator () (T& Pair)
+		{
+			_ulong dwRefCnt = 0;
+
+			dwRefCnt = Pair.second->Release();
+
+			if (0 == dwRefCnt)
+				Pair.second = NULL;
+		}
+		
+	};
+
 	static _vec3 Calcul_Normal(_vec3 _vector0,_vec3 _vector1,_vec3 _vector2) {
 		_vec3 v1 = _vector1 - _vector0;
 		_vec3 v2 = _vector2 - _vector1;

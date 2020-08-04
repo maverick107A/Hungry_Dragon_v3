@@ -1,5 +1,5 @@
 #include "ObjectPool.h"
-#include "Export_Utility.h"
+#include "Layer.h"
 #include <time.h>
 
 USING(Engine)
@@ -36,7 +36,7 @@ HRESULT CObjectPool::Add_Object_Layer(OBJID _Type, _int iCnt)
 	{
 		return E_FAIL;
 	}
-	else if ((size_t)iCnt > iSize)
+	else if (iCnt > iSize)
 	{
 		iCnt = iSize;
 	}
@@ -59,13 +59,15 @@ HRESULT CObjectPool::Set_Bullet_LayerMap(OBJID _Type, _int iCnt , _vec3 _Pos)
 	{
 		return E_FAIL;
 	}
-	else if ((size_t)iCnt > iSize)
+	else if (iCnt > iSize)
 	{
 		iCnt = iSize;
 	}
 	for (int i = 0; i < iCnt; ++i)
 	{
-		m_Layer->Add_Bullet_Object(m_listObject[_Type].front() , _Pos);
+		CGameObject* insertBullet= m_listObject[_Type].front();
+		insertBullet->Set_Pos(_Pos);
+		m_Layer->Add_Object(L"Bullet", insertBullet);
 		m_listObject[_Type].pop_front();
 
 	}
@@ -81,14 +83,16 @@ HRESULT CObjectPool::Set_Monster_LayerMap(OBJID _Type, _int iCnt, _vec3 _Pos)
 	{
 		return E_FAIL;
 	}
-	else if ((size_t)iCnt > iSize)
+	else if (iCnt > iSize)
 	{
 		iCnt = iSize;
 	}
 	for (int i = 0; i < iCnt; ++i)
 	{
 		_vec3 _pPos = { _Pos.x + (rand() % 3000) , 0 , _Pos.z +  (rand() % 3000) };
-		m_Layer->Add_Monster_Object(m_listObject[_Type].front(), _pPos);
+		CGameObject* insertedMonster = m_listObject[_Type].front();
+		insertedMonster->Set_Pos(_pPos);
+		m_Layer->Add_Object(L"Monster", insertedMonster);
 		m_listObject[_Type].pop_front();
 	}
 

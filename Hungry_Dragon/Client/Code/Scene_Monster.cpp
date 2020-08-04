@@ -46,13 +46,13 @@ HRESULT CScene_Monster::Ready_Scene(void) {
 
 _int CScene_Monster::Update_Scene(const _float& fTimeDelta) {
 
-	pPlayerTransformCom = dynamic_cast<Engine::CTransform*>
-		(Engine::Get_Component(L"GameLogic",
-			L"TestPlayer",
-			L"Com_Transform",
-			Engine::ID_DYNAMIC));
+	//pPlayerTransformCom = dynamic_cast<Engine::CTransform*>
+	//	(Engine::Get_Component(L"GameLogic",
+	//		L"TestPlayer",
+	//		L"Com_Transform",
+	//		Engine::ID_DYNAMIC));
 
-	pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);
+	//pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);
 
 
 	Engine::CScene::Update_Scene(fTimeDelta);

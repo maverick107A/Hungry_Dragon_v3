@@ -13,28 +13,25 @@ private:
 	virtual ~CLayer(void);
 
 public:
-	CComponent*	Get_Component(const _tchar* pObjTag,const _tchar* pComponentTag, COMPONENTID eID);
-	_vec3		Get_PlayerPos() { return m_vPlayerPos; }
-	HRESULT		Add_Object(const _tchar* pObjTag, CGameObject* pGameObject);
-	HRESULT		Add_Bullet_Object(CGameObject * pGameObject, _vec3 _pos);
-	HRESULT		Add_Monster_Object(CGameObject * pGameObject, _vec3 _pos);
-	void		Set_Address(void);
-	void		Set_Player(const _vec3 fPlayerPos) { m_vPlayerPos = fPlayerPos; }
+	//함수 포인터로 넘겨줄 _functionPointer가 특정 클래스의 멤버 함수일 경우 스태틱이어야 한다.
+	//GameObject간의 비교가 필요한 경우(ex) 총알과의 몬스터의 충돌 판정) _callerObj에 비교할 대상을 넣어 주면 된다.
+	CGameObject*	Get_Object(const _tchar* _pObjTag, bool(*_functionPointer)(CGameObject* _caller, CGameObject* _callee), CGameObject* _callerObj);
+	CComponent*		Get_Component(CGameObject* _findObj,const _tchar* pComponentTag, COMPONENTID eID);
+	_vec3			Get_PlayerPos() { return m_vPlayerPos; }
 
+	void			Set_Address(void);
+	void			Set_Player(const _vec3 fPlayerPos) { m_vPlayerPos = fPlayerPos; }
+
+	HRESULT			Add_Object(const _tchar* pObjTag, CGameObject* pGameObject);
 public:
-	HRESULT		Ready_Layer(void);
-	_int		Update_Layer(const _float& fTimeDelta);
-	void		LateUpdate_Layer(const _float& fTimeDelta);
-	void		Render_Layer(void);
-
-public:
-
+	HRESULT			Ready_Layer(void);
+	_int			Update_Layer(const _float& fTimeDelta);
+	void			LateUpdate_Layer(const _float& fTimeDelta);
+	void			Render_Layer(void);
 
 private:
-	map<const _tchar*, CGameObject*>		m_mapObject;
-	list<CGameObject*>					m_listBullet;
-	list<CGameObject*>					m_listMonster;
-	_vec3			m_vPlayerPos;
+	map<const _tchar*, list<CGameObject*>>		m_mapObject;
+	_vec3										m_vPlayerPos;
 
 public:
 	static CLayer*		Create(void);
