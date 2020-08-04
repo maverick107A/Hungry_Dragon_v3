@@ -22,6 +22,7 @@ HRESULT CMonster::Ready_Object(void)
 
 int CMonster::Update_Object(const float & fTimeDelta)
 {
+	m_vPlayerPos=((Engine::CLayer*)(this->Get_Parent()))->Get_PlayerPos();
 
 	Engine::CGameObject::Update_Object(fTimeDelta);
 
@@ -66,46 +67,39 @@ void CMonster::LateUpdate_Object(const float & fTimeDelta)
 
 void CMonster::Dead_Monster(const float & fTimeDelta)
 {
-	m_pTransform->Set_Minus_Scale(0.1f);
+	m_pTransform->Set_Minus_Scale(0.01f);
 	
-	m_fParticle_Speed += fTimeDelta;
-	if (m_fParticle_Speed > 0.5f)
-	{
 		Engine::_vec3 vOrigin = Engine::_vec3(0.f, 0.f, 0.f);
 		Engine::BoundingBox tempBoundingBox;
 		tempBoundingBox.vMax = Engine::_vec3(100.f, 100.f, 100.f);
 		tempBoundingBox.vMin = Engine::_vec3(-100.f, -100.f, -100.f);
 		Engine::CResources* tempParticle = Engine::Get_Particle(m_pGraphicDev, Engine::PART_ATK, tempBoundingBox, vOrigin);
+
 		//나중엔 미리 올려 놓는 식으로 구현하자
 		static_cast<Engine::CAtk_Part*>(tempParticle)->Set_Texture(L"../../Asset/snowflake.dds");
 		m_arrParticle.emplace_back(tempParticle);
-
-		m_fParticle_Speed = 0;
-	}
-
-
-	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end();) 
-	{
-		int life = (*iter)->Update_Component(fTimeDelta);
 	
-		if (life == 0) 
-		{
+
+	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end();) {
+		int life = (*iter)->Update_Component(fTimeDelta);
+
+		if (life == 0) {
 			++iter;
 		}
-		else 
-		{
+		else {
 			Safe_Release(*iter);
 			iter = m_arrParticle.erase(iter);
 		}
-	
+
 	}
-	
+
 	if (m_pTransform->m_vScale.x < 0 || m_pTransform->m_vScale.y < 0 || m_pTransform->m_vScale.z < 0)
 	{
 		m_bFirst = true;
-		m_fParticle_Speed = 0;
  		m_iEvent = MONSTER_DEAD;
 	}
+
+
 
 }
 

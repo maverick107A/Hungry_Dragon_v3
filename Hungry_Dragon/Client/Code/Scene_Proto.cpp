@@ -119,20 +119,11 @@ void CScene_Proto::Render_Scene(void) {
 	if(m_bFogEnable)
 		m_pFogEffect->BeginPass(0);
 
-	//Engine::CScene::Render_Scene();
-	//Engine::Render_GameObject();
 
 	m_mapLayer[L"Environment"]->Render_Layer();
 	m_mapLayer[L"GameLogic"]->Render_Layer();
 
-
-
 	m_pFogEffect->End();
-		
-	
-	
-	
-	
 }
 
 void CScene_Proto::Free(void) {
@@ -172,6 +163,7 @@ HRESULT CScene_Proto::Ready_Layer_Environment(const _tchar * pLayerTag) {
 	Engine::CLayer*		pLayer = Engine::CLayer::Create();
 	NULL_CHECK_RETURN(pLayer, E_FAIL);
 	m_mapLayer.emplace(pLayerTag, pLayer);
+	pLayer->Set_Address();
 
 	// 템플릿으로 1줄 처리함 알아서들 쓰세염, 컴포넌트 버전도 만들어놓음
 	FAILED_CHECK_RETURN(Register_GameObject<CSkySphere>(pLayer, L"Skybox"), E_FAIL);
@@ -196,15 +188,12 @@ HRESULT CScene_Proto::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 	NULL_CHECK_RETURN(pLayer, E_FAIL);
 	Engine::Set_Object_LayerMap(pLayer);
 	m_mapLayer.emplace(pLayerTag, pLayer);
+	pLayer->Set_Address();
 
 	Engine::CGameObject*		pGameObject = nullptr;
 
 	FAILED_CHECK_RETURN(Register_GameObject<CBackGround>(pLayer, L"BackGround"), E_FAIL);
 	FAILED_CHECK_RETURN(Register_GameObject<CTestPlayer>(pLayer, L"TestPlayer"), E_FAIL);
-	
-	//srand(unsigned(time(NULL)));
-
-
 
 	for (int i = 0; i < 100; ++i)
 	{
@@ -212,10 +201,10 @@ HRESULT CScene_Proto::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 		D3DXVECTOR3 vMonsterPos = { (i * (rand() % 15)) + 1000.f ,  1000.f  , (i * (rand() % 10)) + 1000.f };
 		pFly_MonsterObject = CFly_Monster::Create(m_pGraphicDev, vMonsterPos);
 		NULL_CHECK_RETURN(pFly_MonsterObject, E_FAIL);
+		pFly_MonsterObject->Set_Address(pLayer);
 		Engine::Add_Object_Pool(pFly_MonsterObject, OBJID::STAND_MONSTER);
 
 	}
-
 
 	for (int i = 0; i < 100; ++i)
 	{
@@ -223,17 +212,8 @@ HRESULT CScene_Proto::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 		D3DXVECTOR3 vMonsterPos = { (i * (rand() % 10)) + 1000.f ,  1000.f  , (i * (rand() % 15)) + 1000.f };
 		pChase_MonsterObject = CChase_Monster::Create(m_pGraphicDev, vMonsterPos);
 		NULL_CHECK_RETURN(pChase_MonsterObject, E_FAIL);
+		pChase_MonsterObject->Set_Address(pLayer);
 		Engine::Add_Object_Pool(pChase_MonsterObject, OBJID::STAND_MONSTER);
-	}
-
-
-	for (int i = 0; i < 100; ++i)
-	{
-		Engine::CGameObject*		pJumpMonsterObject = nullptr;
-		D3DXVECTOR3 vMonsterPos = { (i * (rand() % 10)) + 1000.f ,  1000.f  , (i * (rand() % 10)) + 1000.f };
-		pJumpMonsterObject = CJump_Monster::Create(m_pGraphicDev , vMonsterPos);
-		NULL_CHECK_RETURN(pJumpMonsterObject, E_FAIL);
-		Engine::Add_Object_Pool(pJumpMonsterObject, OBJID::STAND_MONSTER);
 	}
 
 
@@ -243,8 +223,8 @@ HRESULT CScene_Proto::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 		D3DXVECTOR3 vMonsterPos = { (i * (rand() % 15)) + 1000.f ,  1000.f  , (i * (rand() % 10)) + 1000.f };
 		pRun_MonsterObject = CRun_Monster::Create(m_pGraphicDev, vMonsterPos);
 		NULL_CHECK_RETURN(pRun_MonsterObject, E_FAIL);
+		pRun_MonsterObject->Set_Address(pLayer);
 		Engine::Add_Object_Pool(pRun_MonsterObject, OBJID::STAND_MONSTER);
-
 	}
 
 
@@ -254,6 +234,7 @@ HRESULT CScene_Proto::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 		Engine::CGameObject*		pBulletObject = nullptr;
 		pBulletObject = CNormal_Bullet::Create(m_pGraphicDev);
 		NULL_CHECK_RETURN(pBulletObject, E_FAIL);
+		pBulletObject->Set_Address(pLayer);
 		Engine::Add_Object_Pool(pBulletObject, OBJID::NORMAL_BULLET);
 
 	}
@@ -264,81 +245,6 @@ HRESULT CScene_Proto::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 
 HRESULT CScene_Proto::Ready_Resource(LPDIRECT3DDEVICE9 pGraphicDev, RESOURCEID eMax) {
 	Engine::Reserve_ContainerSize(eMax);
-
-	FAILED_CHECK_RETURN(Engine::Ready_Buffer(pGraphicDev,
-		RESOURCE_STATIC,
-		L"Buffer_CubeTex",
-		Engine::BUFFER_TEXCUBE),
-		E_FAIL);
-
-
-	FAILED_CHECK_RETURN(Engine::Ready_Buffer(pGraphicDev,
-		RESOURCE_STATIC,
-		L"Buffer_TerrainTex",
-		Engine::BUFFER_TERRAINTEX,
-		129,
-		129,
-		1),
-		E_FAIL);
-
-	FAILED_CHECK_RETURN(Engine::Ready_Buffer(pGraphicDev,
-		RESOURCE_STATIC,
-		L"Buffer_LandTex",
-		Engine::BUFFER_LANDTEX,
-		129,
-		129,
-		1000),
-		E_FAIL);
-
-
-	FAILED_CHECK_RETURN(Engine::Ready_Texture(pGraphicDev,
-		RESOURCE_STAGE,
-		L"Texture_Terrain",
-		Engine::TEX_NORMAL,
-		L"../Bin/Resource/Texture/Terrain/Terrain0.png"),
-		E_FAIL);
-
-	FAILED_CHECK_RETURN(Engine::Ready_Texture(pGraphicDev,
-		RESOURCE_STAGE,
-		L"Texture_SkySphere",
-		Engine::TEX_CUBE,
-		L"../../Asset/Skybox/TestSkybox.dds"),
-		E_FAIL);
-
-
-	FAILED_CHECK_RETURN(Engine::Ready_Texture(pGraphicDev,
-		RESOURCE_STAGE,
-		L"Texture_BoxHead",
-		Engine::TEX_NORMAL,
-		L"../../Asset/HeadPng/Head%d.png",6),
-		E_FAIL);
-
-	FAILED_CHECK_RETURN(Engine::Ready_Texture(pGraphicDev,
-		RESOURCE_STAGE,
-		L"TEX_OCEAN",
-		Engine::TEX_NORMAL,
-		L"../../Asset/Terrain/water.bmp"),
-		E_FAIL);
-
-
-	FAILED_CHECK_RETURN(Engine::Ready_Buffer(pGraphicDev,
-		RESOURCE_STATIC,
-		L"BUFFER_TERRAIN",
-		Engine::BUFFER_FOREST),
-		E_FAIL);
-
-	FAILED_CHECK_RETURN(Engine::Ready_Buffer(pGraphicDev,
-		RESOURCE_STATIC,
-		L"BUFFER_SKYSPHERE",
-		Engine::BUFFER_SKYSPHERE),
-		E_FAIL);
-
-	FAILED_CHECK_RETURN(Engine::Ready_Buffer(pGraphicDev,
-		RESOURCE_STATIC,
-		L"BUFFER_CUBEDRA",
-		Engine::BUFFER_CUBEDRA),
-		E_FAIL);
-
 
 	return S_OK;
 }

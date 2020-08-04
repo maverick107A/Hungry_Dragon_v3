@@ -27,6 +27,7 @@ public:
 
 private:
 	CScene*		m_pScene;
+	CScene*		m_pFormerScene;
 
 public:
 	virtual void	Free(void);

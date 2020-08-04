@@ -6,6 +6,9 @@
 #include "ObjectPool.h"
 #include "Transform.h"
 #include "Renderer.h"
+#include "Layer.h"
+#include "GameObject.h"
+#include "Component.h"
 
 BEGIN(Engine)
 

@@ -10,11 +10,11 @@ Engine::CUtilBase::CUtilBase(void)
 Engine::CUtilBase::~CUtilBase(void) {
 }
 
-void* CUtilBase::Get_Parent() {
+CUtilBase* CUtilBase::Get_Parent() {
 	if (nullptr != m_AddressTag.ComponentAddress)
-		return m_AddressTag.ObjAddress;
+		return (CUtilBase*)m_AddressTag.ObjAddress;
 	else if (nullptr != m_AddressTag.ObjAddress)
-		return m_AddressTag.LayerAddress;
+		return (CUtilBase*)m_AddressTag.LayerAddress;
 	else
 		return nullptr;
 }

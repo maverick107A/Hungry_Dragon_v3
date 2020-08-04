@@ -158,6 +158,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Code\BackGround.h" />
+    <ClInclude Include="..\Code\BackGround_Logo.h" />
     <ClInclude Include="..\Code\Bullet.h" />
     <ClInclude Include="..\Code\Chase_Monster.h" />
     <ClInclude Include="..\Code\Fly_Monster.h" />
@@ -169,7 +170,7 @@
     <ClInclude Include="..\Code\NormalBullet.h" />
     <ClInclude Include="..\Code\Ocean.h" />
     <ClInclude Include="..\Code\Player.h" />
-    <ClInclude Include="..\Code\PlayerTest.h" />
+    <ClInclude Include="..\Code\Scene_PT.h" />
     <ClInclude Include="..\Code\Run_Monster.h" />
     <ClInclude Include="..\Code\Scene_Loading.h" />
     <ClInclude Include="..\Code\Scene_Monster.h" />
@@ -187,6 +188,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\BackGround.cpp" />
+    <ClCompile Include="..\Code\BackGround_Logo.cpp" />
     <ClCompile Include="..\Code\Bullet.cpp" />
     <ClCompile Include="..\Code\Chase_Monster.cpp" />
     <ClCompile Include="..\Code\Fly_Monster.cpp" />
@@ -198,7 +200,7 @@
     <ClCompile Include="..\Code\NormalBullet.cpp" />
     <ClCompile Include="..\Code\Ocean.cpp" />
     <ClCompile Include="..\Code\Player.cpp" />
-    <ClCompile Include="..\Code\PlayerTest.cpp" />
+    <ClCompile Include="..\Code\Scene_PT.cpp" />
     <ClCompile Include="..\Code\Run_Monster.cpp" />
     <ClCompile Include="..\Code\Scene_Loading.cpp" />
     <ClCompile Include="..\Code\Scene_Monster.cpp" />

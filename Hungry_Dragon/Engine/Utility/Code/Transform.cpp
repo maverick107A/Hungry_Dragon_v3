@@ -70,6 +70,7 @@ _int Engine::CTransform::Update_Component(const _float& fTimeDelta)
 
 	// È¸Àü
 	_matrix		matRot[ROT_END];
+
 	D3DXMatrixRotationX(&matRot[ROT_X], m_vAngle.x);
 	D3DXMatrixRotationY(&matRot[ROT_Y], m_vAngle.y);
 	D3DXMatrixRotationZ(&matRot[ROT_Z], m_vAngle.z);

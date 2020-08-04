@@ -71,15 +71,15 @@ HRESULT Engine::CTexture_Plane::Ready_Buffer(const _ulong& dwCntX, const _ulong&
 			dwIndex = i * dwCntX + j;
 
 			// 오른쪽 위
-			pIndex[dwTriCnt]._0 = dwIndex + dwCntX;
-			pIndex[dwTriCnt]._1 = dwIndex + dwCntX + 1;
-			pIndex[dwTriCnt]._2 = dwIndex + 1;
+			pIndex[dwTriCnt]._0 = (_ushort)(dwIndex + dwCntX);
+			pIndex[dwTriCnt]._1 = (_ushort)(dwIndex + dwCntX + 1);
+			pIndex[dwTriCnt]._2 = (_ushort)(dwIndex + 1);
 			dwTriCnt++;
 
 			// 왼쪽 아래
-			pIndex[dwTriCnt]._0 = dwIndex + dwCntX;
-			pIndex[dwTriCnt]._1 = dwIndex + 1;
-			pIndex[dwTriCnt]._2 = dwIndex;
+			pIndex[dwTriCnt]._0 = (_ushort)(dwIndex + dwCntX);
+			pIndex[dwTriCnt]._1 = (_ushort)dwIndex + 1;
+			pIndex[dwTriCnt]._2 = (_ushort)dwIndex;
 			dwTriCnt++;
 		}
 	}

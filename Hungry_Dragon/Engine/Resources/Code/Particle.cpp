@@ -138,6 +138,10 @@ void CParticle::Add_Particle() {
 	m_arrParticle.emplace_back(attribute);
 }
 
+void CParticle::Empty_Particle(void) {
+	m_arrParticle.clear();
+}
+
 bool CParticle::Is_Empty(void) {
 	return m_arrParticle.empty();
 }

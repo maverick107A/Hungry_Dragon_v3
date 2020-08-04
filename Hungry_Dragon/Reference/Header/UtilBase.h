@@ -12,7 +12,7 @@ protected:
 	virtual ~CUtilBase(void);
 
 public:
-	void* Get_Parent();
+	CUtilBase* Get_Parent();
 
 protected:
 	tagAdd m_AddressTag;

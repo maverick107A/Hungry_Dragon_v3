@@ -137,21 +137,11 @@ void CPFly::Update_State(const float& fTimeDelta)
 					m_pPlayer->Get_Transform()->m_vAngle.y -= Pi*2;
 			}
 		}
-		//D3DXVECTOR3 vMoveDir = { 0.f,0.f,1.f };
-		//D3DXMATRIX MatRotX, MatRotY, MatTotal;
-		//D3DXMatrixRotationX(&MatRotX, m_pPlayer->Get_Transform()->m_vAngle.x);
-		//D3DXMatrixRotationY(&MatRotY, m_pPlayer->Get_Transform()->m_vAngle.y);
-		//MatTotal = MatRotY*MatRotX;
-
-		//D3DXVec3TransformNormal(&vMoveDir, &vMoveDir, &MatTotal);
-		//m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS] += vMoveDir;
-
 	}
 	else
 	{
 		m_pPlayer->Set_Sate(CPlayerMain::STATE_FLYIDLE);
 	}
-	//아무 쓸모없는 변수
 	if (Land_Check())
 		m_pPlayer->Set_Sate(CPlayerMain::STATE_LANDRUSH);
 }

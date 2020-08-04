@@ -66,11 +66,12 @@ HRESULT CPlayer::Add_Component(void)
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Texture", pComponent);
 
-
 	//Transform
-	pComponent = m_pTransform = Engine::CTransform::Create();
-	NULL_CHECK_RETURN(pComponent, E_FAIL);
-	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_Transform", pComponent);
+
+	Register_Component<Engine::CTransform>(&m_pTransform, Engine::ID_DYNAMIC, L"Com_Transform");
+	//pComponent = m_pTransform = Engine::CTransform::Create();
+	//NULL_CHECK_RETURN(pComponent, E_FAIL);
+	//m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_Transform", pComponent);
 
 
 	return S_OK;
