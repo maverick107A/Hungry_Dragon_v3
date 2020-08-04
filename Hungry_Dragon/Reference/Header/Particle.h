@@ -11,6 +11,14 @@ protected:
 	virtual ~CParticle(void);
 
 public:
+	virtual void	Add_Particle();
+	float			Get_RandomFloat(float lowBound, float highBound);
+	void			Get_RandomVector(_vec3* _out, _vec3* _min, _vec3* _max);
+
+	void			Set_Texture(_tchar* texFileName);
+	void			Set_Size(_float _fSize);
+
+public:
 	virtual HRESULT Ready_Buffer(void);
 	virtual void	Render_Buffer(void);
 	virtual void	Render_Begin(void);
@@ -19,14 +27,11 @@ public:
 
 public:
 	virtual void	Reset_Particle(ATTRIBUTE* _attribute)PURE;
-	virtual void	Add_Particle();
+	void			Empty_Particle(void);
 	bool			Is_Empty(void);
 	bool			Is_Dead(void);
-	void			Set_Texture(_tchar* texFileName);
-	void			Set_Size(_float _fSize);
 	DWORD			FloatToDword(float& f);
-	float			Get_RandomFloat(float lowBound, float highBound);
-	void			Get_RandomVector(_vec3* _out, _vec3* _min, _vec3* _max);
+
 
 public:
 	virtual CResources*	Clone(_vec3 _origin, BoundingBox _boundingBox)PURE;
@@ -34,8 +39,6 @@ public:
 
 protected:
 	virtual void Romove_DeadParticle(void);
-
-
 
 protected:
 	//주의! 월드 좌표 아님! 생성되는 곳 기준 로컬좌표로 넣어줄 것.

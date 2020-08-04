@@ -86,6 +86,9 @@ HRESULT CMainApp::Set_DefaultSetting(LPDIRECT3DDEVICE9 * ppGraphicDev)
 
 	(*ppGraphicDev)->SetRenderState(D3DRS_LIGHTING, FALSE);
 
+	FAILED_CHECK_RETURN(Engine::Ready_Font((*ppGraphicDev), L"Font_Default", L"¹ÙÅÁ", 15, 20, FW_HEAVY), E_FAIL);
+	FAILED_CHECK_RETURN(Engine::Ready_Font((*ppGraphicDev), L"Font_Jinji", L"±Ã¼­", 30, 30, FW_THIN), E_FAIL);
+
 	return S_OK;
 }
 
@@ -97,11 +100,10 @@ HRESULT CMainApp::Ready_Scene(LPDIRECT3DDEVICE9 pGraphicDev,
 	FAILED_CHECK_RETURN(Engine::Create_Management(ppManagementInstance), E_FAIL);
 	(*ppManagementInstance)->AddRef();
 
-	pScene = CScene_Proto::Create(pGraphicDev);
+	pScene = CLogo::Create(pGraphicDev);
+	//pScene = CScene_PT::Create(pGraphicDev);
 	NULL_CHECK_RETURN(pScene, E_FAIL);
 
-
-	//FAILED_CHECK_RETURN((*ppManagementInstance)->Set_Scene(pScene), E_FAIL);
 	return S_OK;
 }
 
