@@ -82,9 +82,6 @@
     <Filter Include="01. Scene\50. StageOne">
       <UniqueIdentifier>{bac2b7ef-17a0-4138-8ecd-1128cd6ed6a1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Scene\70. PlayerTest">
-      <UniqueIdentifier>{8da5808b-3fa5-4c62-b2fc-d769bd219cee}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. GameObject\01. Stage\04.SkySphere">
       <UniqueIdentifier>{7aa7f97f-bd8d-4e1e-b0d2-501f69181828}</UniqueIdentifier>
     </Filter>
@@ -102,6 +99,9 @@
     </Filter>
     <Filter Include="01. Scene\90. Scene_Loading">
       <UniqueIdentifier>{c110545e-7a4b-4828-8604-509975a6d557}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Scene\Scene_PT">
+      <UniqueIdentifier>{8da5808b-3fa5-4c62-b2fc-d769bd219cee}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -183,8 +183,8 @@
     <ClInclude Include="..\Code\Scene_Loading.h">
       <Filter>01. Scene\90. Scene_Loading</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\Scene_PlayerTest.h">
-      <Filter>01. Scene\70. PlayerTest</Filter>
+    <ClInclude Include="..\Code\Scene_PT.h">
+      <Filter>01. Scene\Scene_PT</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -257,8 +257,8 @@
     <ClCompile Include="..\Code\Scene_Loading.cpp">
       <Filter>01. Scene\90. Scene_Loading</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Scene_PlayerTest.cpp">
-      <Filter>01. Scene\70. PlayerTest</Filter>
+    <ClCompile Include="..\Code\Scene_PT.cpp">
+      <Filter>01. Scene\Scene_PT</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

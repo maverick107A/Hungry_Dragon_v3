@@ -169,7 +169,7 @@
     <ClInclude Include="..\Code\NormalBullet.h" />
     <ClInclude Include="..\Code\Ocean.h" />
     <ClInclude Include="..\Code\Player.h" />
-    <ClInclude Include="..\Code\Scene_PlayerTest.h" />
+    <ClInclude Include="..\Code\Scene_PT.h" />
     <ClInclude Include="..\Code\Run_Monster.h" />
     <ClInclude Include="..\Code\Scene_Loading.h" />
     <ClInclude Include="..\Code\Scene_Monster.h" />
@@ -198,7 +198,7 @@
     <ClCompile Include="..\Code\NormalBullet.cpp" />
     <ClCompile Include="..\Code\Ocean.cpp" />
     <ClCompile Include="..\Code\Player.cpp" />
-    <ClCompile Include="..\Code\Scene_PlayerTest.cpp" />
+    <ClCompile Include="..\Code\Scene_PT.cpp" />
     <ClCompile Include="..\Code\Run_Monster.cpp" />
     <ClCompile Include="..\Code\Scene_Loading.cpp" />
     <ClCompile Include="..\Code\Scene_Monster.cpp" />

@@ -9,7 +9,7 @@
 
 #ifdef _DEBUG		// 테스트용입니다.
 #include "Scene_Monster.h"
-#include "Scene_PlayerTest.h"
+#include "Scene_PT.h"
 #include "StageOne.h"
 #endif // _DEBUG
 
@@ -97,7 +97,7 @@ HRESULT CMainApp::Ready_Scene(LPDIRECT3DDEVICE9 pGraphicDev,
 	FAILED_CHECK_RETURN(Engine::Create_Management(ppManagementInstance), E_FAIL);
 	(*ppManagementInstance)->AddRef();
 
-	pScene = CScene_PlayerTest::Create(pGraphicDev);
+	pScene = CScene_PT::Create(pGraphicDev);
 	NULL_CHECK_RETURN(pScene, E_FAIL);
 
 
