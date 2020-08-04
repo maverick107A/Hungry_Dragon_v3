@@ -1,10 +1,6 @@
 #include "Export_Utility.h"
 // Management
-// Get
-CComponent*			Get_Component(const _tchar* pLayerTag, const _tchar* pObjTag, CGameObject* _pObj ,const _tchar* pComponentTag, COMPONENTID eID)
-{
-	return CManagement::GetInstance()->Get_Component(pLayerTag, pObjTag, _pObj,pComponentTag, eID);
-}
+
 
 // Set
 HRESULT		Set_Scene(CScene* pScene) {

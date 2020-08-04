@@ -153,9 +153,17 @@ HRESULT Engine::CLayer::Add_Object(const _tchar* pObjTag, CGameObject* pGameObje
 
 	auto	iter = find_if(m_mapObject.begin(), m_mapObject.end(), CTag_Finder(pObjTag));
 
-	list<CGameObject*> targetList = iter->second;
+	if (iter == m_mapObject.end())
+	{
+		m_mapObject.emplace(pObjTag, list<CGameObject*>());
 
-	targetList.emplace_back(pGameObject);
+		auto iter_find = find_if(m_mapObject.begin(), m_mapObject.end(), CTag_Finder(pObjTag));
+		iter_find->second.emplace_back(pGameObject);
+	}
+	else
+	{
+		iter->second.emplace_back(pGameObject);
+	}
 
 	return S_OK;
 }

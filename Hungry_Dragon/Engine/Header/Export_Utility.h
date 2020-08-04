@@ -14,10 +14,16 @@
 BEGIN(Engine)
 
 // Management
-// Get
-inline CComponent*	Get_Component(const _tchar* pLayerTag, const _tchar* pObjTag, CGameObject* _pObj, _tchar* pComponentTag,	COMPONENTID eID);
+
 // Set
 inline HRESULT		Set_Scene(CScene* pScene);
+// Get
+
+inline CComponent*	Get_Component(const _tchar* pLayerTag, const _tchar* pObjTag, CGameObject* _pObj, _tchar* pComponentTag, COMPONENTID eID)
+{
+	return CManagement::GetInstance()->Get_Component(pLayerTag, pObjTag, _pObj, pComponentTag, eID);
+ }
+
 // General
 inline HRESULT	Create_Management(CManagement** ppManagement);
 

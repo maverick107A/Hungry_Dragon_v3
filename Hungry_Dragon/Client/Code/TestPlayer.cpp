@@ -24,8 +24,7 @@ CTestPlayer::~CTestPlayer(void)
 
 HRESULT CTestPlayer::Ready_Object(void)
 {
-	CGameObject* pGroundObj = ((Engine::CLayer*)(Get_Parent()))->Get_Object(L"BackGround", Engine::Find_First, nullptr);
-	m_pTerrain = static_cast<Engine::CBaseLand*>(pGroundObj->Get_Component(L"Com_Buffer",Engine::ID_STATIC));
+	
 
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
@@ -39,7 +38,9 @@ HRESULT CTestPlayer::Ready_Object(void)
 int CTestPlayer::Update_Object(const float& fTimeDelta)
 {
 	//임시용 레디때로 바꾸던가 밖에서 넣어줘야함
-
+	CGameObject* pGroundObj = ((Engine::CLayer*)(Get_Parent()))->Get_Object(L"BackGround", Engine::Find_First, nullptr);
+	m_pTerrain = static_cast<Engine::CBaseLand*>(pGroundObj->Get_Component(L"Com_Buffer", Engine::ID_STATIC));
+	
 	//Key_Input(fTimeDelta);
 
 	//Ride_Terrain();
