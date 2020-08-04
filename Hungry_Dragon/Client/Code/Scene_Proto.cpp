@@ -201,7 +201,7 @@ HRESULT CScene_Proto::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 		D3DXVECTOR3 vMonsterPos = { (i * (rand() % 15)) + 1000.f ,  1000.f  , (i * (rand() % 10)) + 1000.f };
 		pFly_MonsterObject = CFly_Monster::Create(m_pGraphicDev, vMonsterPos);
 		NULL_CHECK_RETURN(pFly_MonsterObject, E_FAIL);
-		pFly_MonsterObject->SetAddress(pLayer);
+		pFly_MonsterObject->Set_Address(pLayer);
 		Engine::Add_Object_Pool(pFly_MonsterObject, OBJID::STAND_MONSTER);
 
 	}
@@ -212,7 +212,7 @@ HRESULT CScene_Proto::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 		D3DXVECTOR3 vMonsterPos = { (i * (rand() % 10)) + 1000.f ,  1000.f  , (i * (rand() % 15)) + 1000.f };
 		pChase_MonsterObject = CChase_Monster::Create(m_pGraphicDev, vMonsterPos);
 		NULL_CHECK_RETURN(pChase_MonsterObject, E_FAIL);
-		pChaseMonster->SetAddress(pLayer);
+		pChase_MonsterObject->Set_Address(pLayer);
 		Engine::Add_Object_Pool(pChase_MonsterObject, OBJID::STAND_MONSTER);
 	}
 
@@ -223,7 +223,7 @@ HRESULT CScene_Proto::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 		D3DXVECTOR3 vMonsterPos = { (i * (rand() % 15)) + 1000.f ,  1000.f  , (i * (rand() % 10)) + 1000.f };
 		pRun_MonsterObject = CRun_Monster::Create(m_pGraphicDev, vMonsterPos);
 		NULL_CHECK_RETURN(pRun_MonsterObject, E_FAIL);
-		pRun_Monster->SetAddress(pLayer);
+		pRun_MonsterObject->Set_Address(pLayer);
 		Engine::Add_Object_Pool(pRun_MonsterObject, OBJID::STAND_MONSTER);
 	}
 

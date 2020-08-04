@@ -81,7 +81,7 @@
     </Filter>
     <Filter Include="01. Scene\70. PlayerTest">
       <UniqueIdentifier>{8da5808b-3fa5-4c62-b2fc-d769bd219cee}</UniqueIdentifier>
-   </Filter>
+    </Filter>
     <Filter Include="01. Scene\50. StageOne">
       <UniqueIdentifier>{bac2b7ef-17a0-4138-8ecd-1128cd6ed6a1}</UniqueIdentifier>
     </Filter>
@@ -105,7 +105,7 @@
     </Filter>
     <Filter Include="02. GameObject\00. Logo\00. Logo_Background">
       <UniqueIdentifier>{e64fed0d-f85e-43fd-ab19-204a6241f108}</UniqueIdentifier>
-</Filter>
+    </Filter>
     <Filter Include="01. Scene\Scene_PT">
       <UniqueIdentifier>{8da5808b-3fa5-4c62-b2fc-d769bd219cee}</UniqueIdentifier>
     </Filter>
@@ -189,6 +189,9 @@
     <ClInclude Include="..\Code\BackGround_Logo.h">
       <Filter>02. GameObject\00. Logo\00. Logo_Background</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\StageOne.h">
+      <Filter>01. Scene\50. StageOne</Filter>
+    </ClInclude>
     <ClInclude Include="..\Code\Scene_PT.h">
       <Filter>01. Scene\Scene_PT</Filter>
     </ClInclude>
@@ -262,6 +265,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\BackGround_Logo.cpp">
       <Filter>02. GameObject\00. Logo\00. Logo_Background</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\StageOne.cpp">
+      <Filter>01. Scene\50. StageOne</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Scene_PT.cpp">
       <Filter>01. Scene\Scene_PT</Filter>
