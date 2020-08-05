@@ -35,6 +35,7 @@ public:
 private:
 	HRESULT		Add_Component(void);
 	void		Key_Input(const float& fTimeDelta);
+
 protected:
 	Engine::CTransform*			m_pTransform = nullptr;
 	Engine::CTexture_Cube*		m_pBufferCom = nullptr;

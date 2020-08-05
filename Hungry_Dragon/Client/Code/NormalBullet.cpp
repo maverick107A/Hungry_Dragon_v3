@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "NormalBullet.h"
 #include "Export_Function.h"
-#include <time.h>
 
 CNormal_Bullet::CNormal_Bullet(LPDIRECT3DDEVICE9 pGraphicDev)
 	:CBullet(pGraphicDev)
@@ -43,12 +42,11 @@ int CNormal_Bullet::Update_Object(const float & fTimeDelta)
 		m_iEvent = 0;
 		m_eState = IDLE_BULLET;
 		
-		Engine::CTransform*		pPlayerTransformCom;
-		pPlayerTransformCom = dynamic_cast<Engine::CTransform*>
-		(Engine::Get_Component(L"GameLogic",
-			L"TestPlayer",
-			L"Com_Transform",
-			Engine::ID_DYNAMIC));
+
+		//게임 로직레이어에서 찾는거 맞음?
+		//만약 이 노말 불렛이 게임 로직 레이어에 만들어진거 아니면 오류날 거임.
+		CGameObject* pPlayer = ((Engine::CLayer*)(Get_Parent()))->Get_Object(L"TestPlayer", Engine::Find_First, nullptr);
+		Engine::CTransform* pPlayerTransformCom = static_cast<Engine::CTransform*>(pPlayer->Get_Component(L"Com_Transform", Engine::ID_DYNAMIC));
 
 		pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);
 

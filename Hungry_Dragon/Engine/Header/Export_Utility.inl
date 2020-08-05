@@ -1,10 +1,7 @@
 #include "Export_Utility.h"
 // Management
-// Get
-CComponent*			Get_Component(const _tchar* pLayerTag, const _tchar* pObjTag, const _tchar* pComponentTag, COMPONENTID eID)
-{
-	return CManagement::GetInstance()->Get_Component(pLayerTag, pObjTag, pComponentTag, eID);
-}
+
+
 // Set
 HRESULT		Set_Scene(CScene* pScene) {
 	return CManagement::GetInstance()->Set_Scene(pScene);
@@ -71,9 +68,15 @@ void		Set_Object_LayerMap(CLayer *  _Layer)
 
 }
 
+inline bool Find_First(CGameObject * _caller, CGameObject * _callee)
+{
+	return Engine::CCollisionMgr::Find_First(_caller,_callee);
+}
+
 // Release
 void		Release_Utility(void)
 {
+	CCollisionMgr::GetInstance()->DestroyInstance();
 	CManagement::GetInstance()->DestroyInstance();
 	CRenderer::GetInstance()->DestroyInstance();
 	CObjectPool::GetInstance()->DestroyInstance();

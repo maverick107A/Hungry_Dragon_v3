@@ -4,8 +4,6 @@
 #include "Define.h"
 #include "GameObject.h"
 
-#include "Export_Function.h"
-
 BEGIN(Engine)
 
 class CTexture_Square;

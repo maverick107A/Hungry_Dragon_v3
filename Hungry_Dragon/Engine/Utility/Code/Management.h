@@ -16,6 +16,7 @@ private:
 public:
 	CComponent*			Get_Component(const _tchar* pLayerTag,
 									const _tchar* pObjTag,
+									CGameObject* _pObj,
 									const _tchar* pComponentTag,
 									COMPONENTID eID);
 

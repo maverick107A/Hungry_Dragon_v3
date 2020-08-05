@@ -89,14 +89,9 @@ _int CScene_Proto::Update_Scene(const _float& fTimeDelta) {
 	{
 		m_bFogEnable = !m_bFogEnable;
 	}
-	pPlayerTransformCom = dynamic_cast<Engine::CTransform*>
-		(Engine::Get_Component(L"GameLogic",
-			L"TestPlayer",
-			L"Com_Transform",
-			Engine::ID_DYNAMIC));
 
+	//플레이어 위치 최신화
 	pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);
-
 	CGameMgr::GetInstance()->Game_Update(m_vPlayerPos);
 
 	Engine::CScene::Update_Scene(fTimeDelta);
@@ -247,6 +242,11 @@ HRESULT CScene_Proto::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 		Engine::Add_Object_Pool(pBulletObject, OBJID::NORMAL_BULLET);
 
 	}
+
+	CGameObject* tempPlayer = pLayer->Get_Object(L"TestPlayer", Engine::Find_First, nullptr);
+	pPlayerTransformCom = static_cast<CTransform*>(tempPlayer->Get_Component(L"Com_Transform", Engine::ID_DYNAMIC));
+
+	pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);
 
 
 	return S_OK;

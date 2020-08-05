@@ -118,11 +118,8 @@ void CMonster::Dead_Monster(const float & fTimeDelta)
 
 float CMonster::Ride_Terrain()
 {
-	m_pTerrain = static_cast<Engine::CBaseLand*>
-		(Engine::Get_Component(L"GameLogic",
-			L"BackGround",
-			L"Com_Buffer",
-			Engine::ID_STATIC));
+	CGameObject* pGroundObj=((Engine::CLayer*)(Get_Parent()))->Get_Object(L"BackGround", Engine::Find_First, nullptr);
+	m_pTerrain = static_cast<Engine::CBaseLand*>(pGroundObj->Get_Component(L"Com_Buffer", Engine::ID_STATIC));
 
 	if (m_pTerrain == nullptr)
 		return 0;

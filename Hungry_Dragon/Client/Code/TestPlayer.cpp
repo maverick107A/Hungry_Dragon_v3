@@ -24,11 +24,7 @@ CTestPlayer::~CTestPlayer(void)
 
 HRESULT CTestPlayer::Ready_Object(void)
 {
-	m_pTerrain = static_cast<Engine::CBaseLand*>
-		(Engine::Get_Component(L"GameLogic",
-			L"BackGround",
-			L"Com_Buffer",
-			Engine::ID_STATIC));
+	
 
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
@@ -42,7 +38,9 @@ HRESULT CTestPlayer::Ready_Object(void)
 int CTestPlayer::Update_Object(const float& fTimeDelta)
 {
 	//임시용 레디때로 바꾸던가 밖에서 넣어줘야함
-
+	CGameObject* pGroundObj = ((Engine::CLayer*)(Get_Parent()))->Get_Object(L"BackGround", Engine::Find_First, nullptr);
+	m_pTerrain = static_cast<Engine::CBaseLand*>(pGroundObj->Get_Component(L"Com_Buffer", Engine::ID_STATIC));
+	
 	//Key_Input(fTimeDelta);
 
 	//Ride_Terrain();
@@ -270,11 +268,8 @@ void CTestPlayer::Key_Input(const float& fTimeDelta)
 
 void CTestPlayer::Ride_Terrain()
 {
-	m_pTerrain = static_cast<Engine::CBaseLand*>
-		(Engine::Get_Component(L"Environment",
-			L"BackGround",
-			L"Com_Buffer",
-			Engine::ID_STATIC));
+	CGameObject* pGroundObj = ((Engine::CLayer*)(Get_Parent()))->Get_Object(L"BackGround", Engine::Find_First, nullptr);
+	m_pTerrain = static_cast<Engine::CBaseLand*>(pGroundObj->Get_Component(L"Com_Buffer", Engine::ID_STATIC));
 
 	D3DXVECTOR3* vPos = &m_pTransform->m_vInfo[Engine::INFO_POS];
 
