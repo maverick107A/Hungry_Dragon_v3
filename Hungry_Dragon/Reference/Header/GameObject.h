@@ -26,6 +26,7 @@ public:
 	void				Set_Player(const _vec3 fPlayerPos) { m_vPlayerPos = fPlayerPos; }
 	void				Set_Pos(const _vec3 _Pos) { m_vFirstPos = _Pos; }
 
+
 public:
 	template <typename T>
 	HRESULT Register_Component(T** _pOut, COMPONENTID _eCompID, const _tchar* _pComponentTag)

@@ -33,6 +33,8 @@ int CMonster::Update_Object(const float & fTimeDelta)
 	m_fPlayerDistance = D3DXVec3Length(&Dir);
 	Dir.y = 0;
 	m_fDistance = D3DXVec3Length(&Dir);
+
+
 	if (m_fDistance < 200)
 	{
 		m_bActivate = true;
@@ -43,10 +45,16 @@ int CMonster::Update_Object(const float & fTimeDelta)
 
 	if (m_fDistance > 7000)
 	{
+		m_fParticle_Speed = 0;
 		m_bFirst = true;
 		m_iEvent = MONSTER_DEAD;
 	}
 
+	if (m_fPlayerDistance < 3)
+	{
+		Dead_Monster(fTimeDelta);
+		m_bDead = true;
+	}
 
 	return m_iEvent;
 }
@@ -61,14 +69,18 @@ void CMonster::Render_Object(void)
 
 void CMonster::LateUpdate_Object(const float & fTimeDelta)
 {
-
-
+	if(m_bDead)
+	m_pTransform->Set_Trans(&m_vPlayerPos);
 }
 
 void CMonster::Dead_Monster(const float & fTimeDelta)
 {
-	m_pTransform->Set_Minus_Scale(0.01f);
-	
+	//m_pTransform->Set_Trans(&m_vPlayerPos);
+	m_pTransform->Set_Add_Scale(-0.1f);
+	m_fParticle_Speed += fTimeDelta;
+
+	if(m_fParticle_Speed > 0.5f)
+	{
 		Engine::_vec3 vOrigin = Engine::_vec3(0.f, 0.f, 0.f);
 		Engine::BoundingBox tempBoundingBox;
 		tempBoundingBox.vMax = Engine::_vec3(100.f, 100.f, 100.f);
@@ -78,7 +90,8 @@ void CMonster::Dead_Monster(const float & fTimeDelta)
 		//나중엔 미리 올려 놓는 식으로 구현하자
 		static_cast<Engine::CAtk_Part*>(tempParticle)->Set_Texture(L"../../Asset/snowflake.dds");
 		m_arrParticle.emplace_back(tempParticle);
-	
+		m_fParticle_Speed = 0;
+	}
 
 	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end();) {
 		int life = (*iter)->Update_Component(fTimeDelta);
@@ -94,12 +107,12 @@ void CMonster::Dead_Monster(const float & fTimeDelta)
 	}
 
 	if (m_pTransform->m_vScale.x < 0 || m_pTransform->m_vScale.y < 0 || m_pTransform->m_vScale.z < 0)
-	{
+	{		
+		m_fParticle_Speed = 0;
 		m_bFirst = true;
  		m_iEvent = MONSTER_DEAD;
+		// 파티클 비워주는 함수 추가.
 	}
-
-
 
 }
 

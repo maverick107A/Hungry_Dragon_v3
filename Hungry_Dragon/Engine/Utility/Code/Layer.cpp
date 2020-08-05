@@ -167,7 +167,6 @@ HRESULT Engine::CLayer::Add_Monster_Object(CGameObject * pGameObject, _vec3 _pos
 	if (nullptr == pGameObject)
 		return E_FAIL;
 	pGameObject->Set_Pos(_pos);
-	//pGameObject->Reborn_Monster();
 	m_listMonster.push_back(pGameObject);
 
 	return S_OK;

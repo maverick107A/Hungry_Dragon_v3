@@ -32,20 +32,17 @@ int CFly_Monster::Update_Object(const float & fTimeDelta)
 
 	if (m_bActivate)
 	{
-		m_fShotingLate += fTimeDelta;
-		if (m_fShotingLate > 0.3f)
+		if (!m_bDead)
 		{
-			m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain() + m_fHeight;
-			Shooting();
-			m_fShotingLate = 0;
+			m_fShotingLate += fTimeDelta;
+			if (m_fShotingLate > 0.3f)
+			{
+				m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain() + m_fHeight;
+				Shooting();
+				m_fShotingLate = 0;
+			}
 		}
 
-		if (m_fPlayerDistance < 3 || m_bDead)
-		{
-
-			Dead_Monster(fTimeDelta);
-			m_bDead = true;
-		}
 	}
 	else 
 		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain() + m_fHeight;

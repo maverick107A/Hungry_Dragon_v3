@@ -34,6 +34,7 @@ private:
 	float					m_fJumpSpeed = 0.1f;
 	float					m_fAccel = 0.01f;
 	float					m_fFirstY;
+	D3DXVECTOR3				m_vChasePos;
 };
 
 

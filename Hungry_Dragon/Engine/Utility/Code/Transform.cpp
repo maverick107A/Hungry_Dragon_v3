@@ -36,11 +36,20 @@ void CTransform::Set_Trans(const _vec3 * const newPos) {
 	m_vInfo[INFO_POS] = vPos;
 }
 
-void CTransform::Set_Minus_Scale(const _float _Scale)
+void CTransform::Set_Scale(const _float _Scale)
 {
-	m_vScale.x -= _Scale;
-	m_vScale.y -= _Scale;
-	m_vScale.z -= _Scale;
+	m_vScale.x = _Scale;
+	m_vScale.y = _Scale;
+	m_vScale.z = _Scale;
+
+}
+
+
+void CTransform::Set_Add_Scale(const _float _Scale)
+{
+	m_vScale.x += _Scale;
+	m_vScale.y += _Scale;
+	m_vScale.z += _Scale;
 
 }
 

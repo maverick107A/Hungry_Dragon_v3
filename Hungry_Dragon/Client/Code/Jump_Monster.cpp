@@ -40,31 +40,19 @@ int CJump_Monster::Update_Object(const float & fTimeDelta)
 	CMonster::Update_Object(fTimeDelta);
 
 	if (m_bActivate)
-	{
-		if (m_fPlayerDistance < 3 || m_bDead)
+	{		
+		if(!m_bJump_check)
 		{
-			m_pTransform->Set_Trans(&m_vPlayerPos);
-			Dead_Monster(fTimeDelta);
-		}
-		else
-		{
-			D3DXVECTOR3 _vPlayerPos = { m_vPlayerPos.x ,  0.f , m_vPlayerPos.z };
-			m_pTransform->Chase_Target(&_vPlayerPos, (fTimeDelta * m_fSpeed));
-
-			if (!m_bJump_check)
-			{
-				m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
-				m_bJump_check = true;
-				m_fJumpSpeed = m_fJumpPower;
-			}
-			else
-			{
-				m_fFirstY = m_pTransform->m_vInfo[Engine::INFO_POS].y;
-				Jump(fTimeDelta);
-				return 0;
-			}
+			m_vChasePos = { m_vPlayerPos.x ,  0.f , m_vPlayerPos.z };
+			m_fJumpSpeed = m_fJumpPower;
+			m_bJump_check = true;
 		}
 
+		if(m_bJump_check)
+		{
+			m_pTransform->Chase_Target(&m_vChasePos, (fTimeDelta * m_fSpeed));
+			Jump(fTimeDelta);
+		}		
 	}
 	else
 		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
@@ -111,6 +99,8 @@ void CJump_Monster::Jump(const float& fTimeDelta)
 	D3DXVECTOR3	vMovePos = { 0.f, m_fJumpSpeed, 0.f };
 
 	m_pTransform->Add_Trans(&vMovePos);
+
+	m_fFirstY = Ride_Terrain();
 
 	if (vMonsterPos.y < m_fFirstY)
 	{
