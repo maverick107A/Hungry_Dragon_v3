@@ -22,7 +22,7 @@ HRESULT Engine::CManagement::Set_Scene(CScene* pScene)
 
 	m_pScene = pScene;
 	m_pFormerScene = m_pScene;
-	
+	m_pScene->Initialize_Scene();
 
 	return S_OK;
 }
