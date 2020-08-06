@@ -17,10 +17,10 @@ CBackGround_Logo::~CBackGround_Logo(void) {
 HRESULT CBackGround_Logo::Ready_Object(void) {
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
-	//m_pTransform->m_vScale.x = 2.f;
-	//m_pTransform->m_vScale.y = 2.f;
+	m_pTransform->m_vScale.x = 2.f;
+	m_pTransform->m_vScale.y = 2.f;
 
-	//m_pTransform->m_vInfo[Engine::INFO_POS].z = 0.2f;
+	m_pTransform->m_vInfo[Engine::INFO_POS].z = 0.2f;
 	//m_pTransform->m_vAngle.z = D3DXToRadian(45.f);
 
 	return S_OK;
