@@ -38,7 +38,7 @@ _int Engine::CLayer::Update_Layer(const _float& fTimeDelta)
 			}
 			else if (iEnd == BULLET_DEAD)
 			{
-				CObjectPool::GetInstance()->Add_Object_Pool(*iter_obj, OBJID::STAND_MONSTER);
+				CObjectPool::GetInstance()->Add_Object_Pool(*iter_obj, OBJID::NORMAL_BULLET);
 				iter_obj = (*iter).second.erase(iter_obj);
 			}
 			else if (0 == iEnd)

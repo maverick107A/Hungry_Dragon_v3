@@ -21,6 +21,13 @@ bool Engine::CCollisionMgr::Find_First(CGameObject * _caller, CGameObject * _cal
 	return true;
 }
 
+bool CCollisionMgr::PBullet_Monster(CGameObject * _pPBullet, CGameObject * _pMonster)
+{
+	_pPBullet->Get_Component(L"Com_Transform", Engine::ID_DYNAMIC);
+	_pMonster->Get_Component(L"Com_Transform", Engine::ID_DYNAMIC);
+	return false;
+}
+
 
 void Engine::CCollisionMgr::Free(void)
 {
