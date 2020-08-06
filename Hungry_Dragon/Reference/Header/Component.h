@@ -17,6 +17,7 @@ public:
 	void Set_Address(CGameObject* _pObject);
 
 public:
+	virtual void	Initialize_Component(void) { return; }
 	virtual _int	Update_Component(const _float& fTimeDelta) { return 0; }
 	virtual void	LateUpdate_Component(const _float& fTimeDelta) { return; }
 

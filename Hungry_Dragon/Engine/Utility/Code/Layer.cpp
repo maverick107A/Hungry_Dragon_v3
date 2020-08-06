@@ -17,6 +17,17 @@ HRESULT Engine::CLayer::Ready_Layer(void)
 	return S_OK;
 }
 
+void CLayer::Initialize_Layer(void)
+{
+	for (map<const _tchar*, list<CGameObject*>>::iterator iter = m_mapObject.begin(); iter != m_mapObject.end(); ++iter)
+	{
+		for (list<CGameObject*>::iterator iter_Obj = iter->second.begin(); iter_Obj != iter->second.end(); ++iter_Obj)
+		{
+			(*iter_Obj)->Initialize_Object();
+		}
+	}
+}
+
 _int Engine::CLayer::Update_Layer(const _float& fTimeDelta)
 {
 	_int iEnd = 0;

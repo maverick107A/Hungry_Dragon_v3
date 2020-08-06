@@ -79,7 +79,7 @@ void CMonster::Dead_Monster(const float & fTimeDelta)
 	m_pTransform->Set_Add_Scale(-0.1f);
 	m_fParticle_Speed += fTimeDelta;
 
-	if(m_fParticle_Speed > 0.5f)
+	if(m_fParticle_Speed > 0.1f)
 	{
 		Engine::_vec3 vOrigin = Engine::_vec3(0.f, 0.f, 0.f);
 		Engine::BoundingBox tempBoundingBox;
@@ -87,7 +87,6 @@ void CMonster::Dead_Monster(const float & fTimeDelta)
 		tempBoundingBox.vMin = Engine::_vec3(-100.f, -100.f, -100.f);
 		Engine::CResources* tempParticle = Engine::Get_Particle(m_pGraphicDev, Engine::PART_ATK, tempBoundingBox, vOrigin);
 
-		//나중엔 미리 올려 놓는 식으로 구현하자
 		static_cast<Engine::CAtk_Part*>(tempParticle)->Set_Texture(L"../../Asset/snowflake.dds");
 		m_arrParticle.emplace_back(tempParticle);
 		m_fParticle_Speed = 0;
@@ -112,6 +111,12 @@ void CMonster::Dead_Monster(const float & fTimeDelta)
 		m_bFirst = true;
  		m_iEvent = MONSTER_DEAD;
 		// 파티클 비워주는 함수 추가.
+		for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end();)
+		{
+			Engine::Safe_Release((*iter));
+			iter = m_arrParticle.erase(iter);
+		}
+		m_arrParticle.clear();
 	}
 
 }
@@ -222,7 +227,6 @@ void CMonster::Free(void)
 	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end();) {
 		Engine::Safe_Release((*iter));
 		iter = m_arrParticle.erase(iter);
-
 	}
 	m_arrParticle.clear();
 
