@@ -18,6 +18,12 @@ HRESULT Engine::CScene::Ready_Scene(void)
 	return S_OK;
 }
 
+void CScene::Initialize_Scene(void)
+{
+	for (auto& iter : m_mapLayer)
+		iter.second->Initialize_Layer();
+}
+
 _int Engine::CScene::Update_Scene(const _float& fTimeDelta)
 {
 	_int iEnd = 0;

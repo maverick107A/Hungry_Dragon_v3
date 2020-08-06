@@ -18,6 +18,17 @@ HRESULT Engine::CGameObject::Ready_Object(void)
 	return S_OK;
 }
 
+void CGameObject::Initialize_Object(void)
+{
+	for (int i = 0; i < ID_END; ++i)
+	{
+		for (map<const _tchar*, CComponent*>::iterator iter = m_mapComponent[i].begin();iter!=m_mapComponent[i].end();++iter)
+		{
+			iter->second->Initialize_Component();
+		}
+	}
+}
+
 _int Engine::CGameObject::Update_Object(const _float& fTimeDelta)
 {
 	_int iResult = 0;
