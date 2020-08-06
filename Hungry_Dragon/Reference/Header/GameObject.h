@@ -7,6 +7,7 @@
 BEGIN(Engine)
 
 class CLayer;
+class CTransform;
 
 class ENGINE_DLL CGameObject : public CUtilBase
 { 
@@ -54,6 +55,7 @@ public:
 protected:
 	_vec3			m_vPlayerPos;
 	_vec3			m_vFirstPos;
+	CTransform*				m_pTransform = nullptr;
 	LPDIRECT3DDEVICE9		m_pGraphicDev;
 	map<const _tchar*, CComponent*>		m_mapComponent[ID_END];
 

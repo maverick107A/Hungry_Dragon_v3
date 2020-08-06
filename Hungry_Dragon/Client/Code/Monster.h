@@ -37,7 +37,6 @@ private:
 	void		Key_Input(const float& fTimeDelta);
 
 protected:
-	Engine::CTransform*			m_pTransform = nullptr;
 	Engine::CTexture_Cube*		m_pBufferCom = nullptr;
 	Engine::CTexture*			m_pTextureCom = nullptr;
 	Engine::CBaseLand*			m_pTerrain = nullptr;

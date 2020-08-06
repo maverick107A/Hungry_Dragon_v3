@@ -42,7 +42,6 @@ protected:
 
 protected:
 	CVIBuffer*				m_pBufferCom = nullptr;
-	CTransform*				m_pTransform = nullptr;
 	CCamera*				m_pCamera = nullptr;
 	CBaseLand*				m_pTerrain = nullptr;
 	CPlayerState*			m_pState = nullptr;
