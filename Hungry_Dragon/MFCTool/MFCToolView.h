@@ -3,7 +3,7 @@
 //
 
 #pragma once
-#define MFC_h__
+
 
 BEGIN(Engine)
 
@@ -11,6 +11,7 @@ class CGraphicDev;
 class CCubeCol;
 class CVIBuffer;
 class CCamera;
+class CTransform;
 
 END
 
@@ -55,8 +56,9 @@ public:
 private:
 	Engine::CGraphicDev*	m_pDeviceClass = nullptr;
 	LPDIRECT3DDEVICE9		m_pGraphicDev = nullptr;
-	Engine::CVIBuffer*		m_pBuffer;
-	Engine::CCamera*		m_pCamera;
+	Engine::CVIBuffer*		m_pBuffer=nullptr;
+	Engine::CTransform*		m_pTransform = nullptr;
+	Engine::CCamera*		m_pCamera=nullptr;
 
 public:
 	afx_msg void OnTimer(UINT_PTR nIDEvent);

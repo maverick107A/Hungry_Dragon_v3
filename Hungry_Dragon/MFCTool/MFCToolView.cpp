@@ -61,7 +61,10 @@ CMFCToolView::~CMFCToolView()
 	Engine::Safe_Release(m_pBuffer);
 	Engine::Safe_Release(m_pGraphicDev);
 	Engine::Safe_Release(m_pDeviceClass);
+	Engine::Safe_Release(m_pTransform);
+	Engine::Safe_Release(m_pCamera);
 
+	Engine::Release_Utility();
 	Engine::Release_Resources();
 	Engine::Release_System();
 }
@@ -86,6 +89,7 @@ void CMFCToolView::OnDraw(CDC* /*pDC*/)
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
 	Engine::Render_Begin(D3DXCOLOR(0.f, 0.f, 1.f, 1.f));
 
+	m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 	m_pBuffer->Render_Buffer();
 
 	Engine::Render_End();
@@ -159,6 +163,7 @@ void CMFCToolView::OnInitialUpdate() {
 	Engine::Ready_Buffer(m_pGraphicDev, RESOURCE_STATIC, L"Test_Buffer", Engine::BUFFER_TEXCUBE);
 
 	m_pBuffer = static_cast<Engine::CVIBuffer*>(Engine::Clone(RESOURCE_STATIC, L"Test_Buffer"));
+	m_pTransform = Engine::CTransform::Create();
 
 	Engine::Load_Particle(m_pGraphicDev);
 
@@ -176,21 +181,98 @@ void CMFCToolView::OnInitialUpdate() {
 
 	m_pCamera = Engine::CCamera::Create();
 
-
 	m_pGraphicDev->SetTransform(D3DTS_PROJECTION, &matProj);
 }
 
 
 void CMFCToolView::OnTimer(UINT_PTR nIDEvent) {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	_vec3 posVec;
+	_vec3 lookVec;
+	_vec3 rightVec;
+	_vec3 upVec;
 
-	if (Engine::Get_DIMouseState(DIM_RB) & 0x80)
+	m_pTransform->Update_Component(0.f);
+	m_pTransform->Get_Info(Engine::INFO_POS, &posVec);
+
+	m_pCamera->Update_Component1(0.f, m_pGraphicDev, posVec, &lookVec, &upVec, nullptr);
+	D3DXVec3Cross(&rightVec,&_vec3(0.f, 1.f, 0.f), &lookVec);
+	D3DXVec3Normalize(&rightVec, &rightVec);
+
+	/*if (Engine::Get_DIMouseState(DIM_RB) & 0x80)
 	{
 		if (Engine::Get_DIKeyState(DIK_W) & 0x80)
 		{
-			m_pCamera->
+			m_pTransform->Add_Trans(&lookVec);
 		}
+
+		if (Engine::Get_DIKeyState(DIK_S) & 0x80)
+		{
+			m_pTransform->Add_Trans(&(-1*lookVec));
+		}
+
+		if (Engine::Get_DIKeyState(DIK_D) & 0x80)
+		{
+			m_pTransform->Add_Trans(&rightVec);
+		}
+
+		if (Engine::Get_DIKeyState(DIK_A) & 0x80)
+		{
+			m_pTransform->Add_Trans(&(-1 * rightVec));
+		}
+
+		if (Engine::Get_DIKeyState(DIK_Q) & 0x80)
+		{
+			m_pTransform->Add_Trans(&upVec);
+		}
+
+		if (Engine::Get_DIKeyState(DIK_E) & 0x80)
+		{
+			m_pTransform->Add_Trans(&(-1 * upVec));
+		}
+
+	}*/
+
+	lookVec *= 0.2f;
+	rightVec *= 0.2f;
+	upVec *= 0.2f;
+
+	if (GetAsyncKeyState(VK_RBUTTON) & 0x8000)
+	{
+		if (GetAsyncKeyState('W') & 0x8000)
+		{
+			m_pTransform->Add_Trans(&lookVec);
+		}
+
+		if (GetAsyncKeyState('S') & 0x8000)
+		{
+			m_pTransform->Add_Trans(&(-1 * lookVec));
+		}
+
+		if (GetAsyncKeyState('D') & 0x8000)
+		{
+			m_pTransform->Add_Trans(&rightVec);
+		}
+
+		if (GetAsyncKeyState('A') & 0x8000)
+		{
+			m_pTransform->Add_Trans(&(-1 * rightVec));
+		}
+
+		if (GetAsyncKeyState('Q') & 0x8000)
+		{
+			m_pTransform->Add_Trans(&upVec);
+		}
+
+		if (GetAsyncKeyState('E') & 0x8000)
+		{
+			m_pTransform->Add_Trans(&(-1 * upVec));
+		}
+
 	}
+
+	Invalidate(FALSE);
+
 
 	CView::OnTimer(nIDEvent);
 }
