@@ -6,6 +6,7 @@
 #include "TimerMgr.h"
 #include "FrameMgr.h"
 #include "FontMgr.h"
+#include "InputDev.h"
 
 BEGIN(Engine)
 
@@ -44,6 +45,16 @@ inline void	Render_Font(const _tchar* pFontTag,
 	const _tchar* pString,
 	const _vec2* pPos,
 	D3DXCOLOR Color);
+
+//InputDevice
+//Get
+inline _byte	Get_DIKeyState(_ubyte byKeyID);
+inline _byte	Get_DIMouseState(MOUSEKEYSTATE eMouse);
+inline _long	Get_DIMouseMove(MOUSEMOVESTATE eMouseState);
+//Set
+//General
+inline HRESULT Ready_InputDev(HINSTANCE hInst, HWND hWnd);
+inline 	void	Set_InputDev(void);
 
 // Release System
 inline void		Release_System(void);

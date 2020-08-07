@@ -28,7 +28,16 @@ _int CLogo::Update_Scene(const _float& fTimeDelta) {
 	_int iExit = Engine::CScene::Update_Scene(fTimeDelta);
 
 	if (true == m_pLoading->Get_Finish()) {
-		if (GetAsyncKeyState(VK_RETURN) & 0x8000) {
+		/*if (GetAsyncKeyState(VK_RETURN) & 0x8000) {
+			Engine::CScene*		pScene = nullptr;
+
+			pScene = CScene_Proto::Create(m_pGraphicDev);
+			NULL_CHECK_RETURN(pScene, -1);
+			return -1;
+		}*/
+
+		if (Engine::Get_DIKeyState(DIK_RETURN) & 0x80)
+		{
 			Engine::CScene*		pScene = nullptr;
 
 			pScene = CScene_Proto::Create(m_pGraphicDev);

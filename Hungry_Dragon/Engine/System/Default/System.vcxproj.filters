@@ -25,6 +25,9 @@
     <Filter Include="03. Font\Manager">
       <UniqueIdentifier>{5acc3dae-0f66-414e-a26e-fa4edf5d96f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04. InputDev">
+      <UniqueIdentifier>{06718b7a-38d9-4e1c-9c54-a72092639fd5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\GraphicDev.cpp">
@@ -47,6 +50,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\FontMgr.cpp">
       <Filter>03. Font\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\InputDev.cpp">
+      <Filter>04. InputDev</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -73,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="..\Code\FontMgr.h">
       <Filter>03. Font\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\InputDev.h">
+      <Filter>04. InputDev</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

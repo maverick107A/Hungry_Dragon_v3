@@ -41,6 +41,7 @@ public:
 		pCompo->Set_Address(this);
 		return S_OK;
 	}
+
 	template <typename T>
 	HRESULT Clone_Component(T** _pOut, const _ushort& _eRscID, const _tchar* _pResourceTag, COMPONENTID _eCompID, const _tchar* _pComponentTag)
 	{

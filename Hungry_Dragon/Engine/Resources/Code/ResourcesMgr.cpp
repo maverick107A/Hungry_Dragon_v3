@@ -172,7 +172,10 @@ void CResourcesMgr::Load_Particle(LPDIRECT3DDEVICE9 pGraphicDev) {
 	for (int i = 0; i < PART_END; ++i) {
 		switch (i) {
 		case PART_ATK:
-			pParticle = CAtk_Part::Create(pGraphicDev, 50);
+			pParticle = CPart_Atk::Create(pGraphicDev, 50);
+			break;
+		case PART_WIND:
+			pParticle = CPart_Wind::Create(pGraphicDev, 70,100.f);
 			break;
 		default:
 			pParticle = nullptr;
