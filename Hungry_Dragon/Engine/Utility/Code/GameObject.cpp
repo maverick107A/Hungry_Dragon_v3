@@ -88,6 +88,11 @@ CComponent* Engine::CGameObject::Get_Component(const _tchar* pComponentTag, COMP
 	return pComponent;
 }
 
+CTransform * CGameObject::Get_Transform()
+{
+	return m_pTransform;
+}
+
 void CGameObject::Set_Address(CLayer * _pLayer) {
 	m_AddressTag.StateFlag &= (char)0;
 	m_AddressTag.StateFlag |= (char)64;

@@ -1,5 +1,6 @@
 #include "CollisionMgr.h"
 #include "GameObject.h"
+#include "Transform.h"
 
 USING(Engine)
 
@@ -21,11 +22,15 @@ bool Engine::CCollisionMgr::Find_First(CGameObject * _caller, CGameObject * _cal
 	return true;
 }
 
-bool CCollisionMgr::PBullet_Monster(CGameObject * _pPBullet, CGameObject * _pMonster)
+bool CCollisionMgr::Player_Monster(CGameObject * _pPlayer, CGameObject * _pMonster)
 {
-	_pPBullet->Get_Component(L"Com_Transform", Engine::ID_DYNAMIC);
-	_pMonster->Get_Component(L"Com_Transform", Engine::ID_DYNAMIC);
-	return false;
+	_vec3 vPlayerPos, vMonsterPos, vDis;
+	_pPlayer->Get_Transform()->Get_Info(Engine::INFO_POS, &vPlayerPos);
+	_pMonster->Get_Transform()->Get_Info(Engine::INFO_POS, &vMonsterPos);
+	vDis = vPlayerPos - vMonsterPos;
+	//if(powf(vDis.x,2)+ powf(vDis.y, 2)+ powf(vDis.z, 2) < 4 )
+
+	return (powf(vDis.x, 2) + powf(vDis.y, 2) + powf(vDis.z, 2) < 4);
 }
 
 

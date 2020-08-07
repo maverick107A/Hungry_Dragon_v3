@@ -1,5 +1,7 @@
 #include "Layer.h"
 #include "ObjectPool.h"
+#include "CollisionMgr.h"
+
 USING(Engine)
 
 Engine::CLayer::CLayer(void)
@@ -121,6 +123,18 @@ void CLayer::LateUpdate_Layer(const _float & fTimeDelta)
 	}
 
 	//충돌처리
+	//list<CGameObject*>	listMonster = find_if(m_mapObject.begin(), m_mapObject.end(), CTag_Finder(L"Monster"))->second;
+	//list<CGameObject*>	listPlayer = find_if(m_mapObject.begin(), m_mapObject.end(), CTag_Finder(L"TestPlayer"))->second;
+	//for (auto& pPlayer : listPlayer)
+	//{
+	//	for (auto& pMonster : listMonster)
+	//	{
+	//		if(CCollisionMgr::Player_Monster(pPlayer, pMonster))
+	//		{
+	//		}
+	//	}
+	//}
+
 }
 
 void Engine::CLayer::Render_Layer(void)

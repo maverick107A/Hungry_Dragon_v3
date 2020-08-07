@@ -52,8 +52,8 @@ int CMonster::Update_Object(const float & fTimeDelta)
 
 	if (m_fPlayerDistance < 3)
 	{
-		Dead_Monster(fTimeDelta);
-		m_bDead = true;
+		//Dead_Monster(fTimeDelta);
+		//m_bDead = true;
 	}
 
 	return m_iEvent;

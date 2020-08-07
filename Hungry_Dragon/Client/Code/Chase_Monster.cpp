@@ -27,6 +27,7 @@ int CChase_Monster::Update_Object(const float & fTimeDelta)
 	if (m_bFirst)
 	{
 		m_pTransform->Set_Trans(&m_vFirstPos);
+		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
 		m_pTransform->Set_Scale(1);  
 		m_bFirst = false;	
 		m_bDead = false;
@@ -42,12 +43,6 @@ int CChase_Monster::Update_Object(const float & fTimeDelta)
 		m_pTransform->Chase_Target(&vPlayerPos, (fTimeDelta * m_fSpeed));
 		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
 		
-	}
-	else
-	{
-		
-		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
-
 	}
 
 	return m_iEvent;

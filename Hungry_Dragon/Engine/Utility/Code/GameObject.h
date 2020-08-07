@@ -17,6 +17,7 @@ protected:
 
 public:
 	CComponent*			Get_Component(const _tchar* pComponentTag, COMPONENTID eID);
+	CTransform*			Get_Transform();
 	void				Set_Address(CLayer* _pLayer);
 
 public:
