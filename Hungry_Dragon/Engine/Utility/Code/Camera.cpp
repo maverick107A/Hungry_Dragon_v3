@@ -75,7 +75,7 @@ void CCamera::Move_Camera_InMFC(LPDIRECT3DDEVICE9 & pGraphicDev, _vec3 _vPos, _v
 {
 	POINT tPos = {};
 	GetCursorPos(&tPos);
-
+	m_fCameraDis = 0.f;
 	if (GetAsyncKeyState(VK_RBUTTON))
 	{
 		m_fAngleY += (tPos.x - m_tCenter.x)*0.01f*cosf(m_fAngleZ) + (tPos.y - m_tCenter.y)*0.01f*sinf(m_fAngleZ);
