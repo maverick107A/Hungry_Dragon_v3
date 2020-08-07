@@ -8,6 +8,7 @@
 #include "Renderer.h"
 #include "Layer.h"
 #include "GameObject.h"
+#include "Camera.h"
 #include "Component.h"
 #include "CollisionMgr.h"
 

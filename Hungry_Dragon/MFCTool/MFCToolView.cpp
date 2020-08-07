@@ -156,9 +156,11 @@ void CMFCToolView::OnInitialUpdate() {
 	m_pGraphicDev->SetRenderState(D3DRS_LIGHTING, FALSE);
 
 	Engine::Reserve_ContainerSize(RESOURCE_END);
-	Engine::Ready_Buffer(m_pGraphicDev, RESOURCE_STATIC, L"Test_Buffer", Engine::BUFFER_RCCOL);
+	Engine::Ready_Buffer(m_pGraphicDev, RESOURCE_STATIC, L"Test_Buffer", Engine::BUFFER_TEXCUBE);
 
 	m_pBuffer = static_cast<Engine::CVIBuffer*>(Engine::Clone(RESOURCE_STATIC, L"Test_Buffer"));
+
+	Engine::Load_Particle(m_pGraphicDev);
 
 	_matrix  matProj;
 
@@ -171,7 +173,9 @@ void CMFCToolView::OnInitialUpdate() {
 	RECT clientScreen;
 	GetClientRect(&clientScreen);
 	ClientToScreen(&clientScreen);
-	m_tCenter = { (LONG)((clientScreen.left+clientScreen.right)*0.5f),  (LONG)((clientScreen.top + clientScreen.bottom)*0.5f) };
+
+	m_pCamera = Engine::CCamera::Create();
+
 
 	m_pGraphicDev->SetTransform(D3DTS_PROJECTION, &matProj);
 }
@@ -180,78 +184,13 @@ void CMFCToolView::OnInitialUpdate() {
 void CMFCToolView::OnTimer(UINT_PTR nIDEvent) {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 
-	//P키로 카메라 토글
-	if (GetAsyncKeyState('P')&0x8000) {
-		m_bCam = true;
+	if (Engine::Get_DIMouseState(DIM_RB) & 0x80)
+	{
+		if (Engine::Get_DIKeyState(DIK_W) & 0x80)
+		{
+			m_pCamera->
+		}
 	}
-
-	if (GetAsyncKeyState('O') & 0x8000) {
-		m_bCam = false;
-	}
-
-	if (m_bCam) {
-		POINT tPos = {};
-		GetCursorPos(&tPos);
-		/*m_fAngleY += (tPos.x - m_tCenter.x)*0.01f*cosf(m_fAngleZ) + (tPos.y - m_tCenter.y)*0.01f*sinf(m_fAngleZ);
-		m_fAngleX += (tPos.y - m_tCenter.y)*0.01f*cosf(m_fAngleZ) + -(tPos.x - m_tCenter.x)*0.01f*sinf(m_fAngleZ);*/
-		m_fAngleY += (tPos.x - m_tCenter.x)*0.005f + (tPos.y - m_tCenter.y)*0.005f;
-		m_fAngleX += (tPos.y - m_tCenter.y)*0.005f + -(tPos.x - m_tCenter.x)*0.005f;
-
-		D3DXMATRIX vRotZ;
-		D3DXMatrixRotationZ(&vRotZ, m_fAngleZ);
-		D3DXVec3TransformNormal(&m_vUp, &m_vUpOrigin, &vRotZ);
-
-
-
-		D3DXMATRIX vRotX, vRotY, vRotTotal;
-		D3DXMatrixRotationX(&vRotX, m_fAngleX);
-		//D3DXVec3TransformNormal(&m_vDir, &m_vLook, &vRot);
-
-
-		D3DXMatrixRotationY(&vRotY, m_fAngleY);
-
-		vRotTotal = vRotX*vRotY;
-		D3DXVec3TransformNormal(&m_vDir, &m_vLook, &vRotTotal);
-		//업백터
-		D3DXVec3TransformNormal(&m_vUpCam, &m_vUp, &vRotTotal);
-
-		SetCursorPos(m_tCenter.x, m_tCenter.y);
-
-		m_vDirCam = m_vDir;
-		m_vDirCam = m_vPos + m_vDir;
-
-		_matrix		matView, matProj;
-
-
-
-		if (GetAsyncKeyState(VK_SHIFT))
-			m_vDir *= 2.f;
-
-		if (GetAsyncKeyState('W'))
-			m_vPos += 0.1f*m_vDir;
-		if (GetAsyncKeyState('S'))
-			m_vPos -= 0.1f*m_vDir;
-
-		D3DXVECTOR3 rightVec;
-		D3DXVec3Cross(&rightVec, &m_vUpCam, &m_vDir);
-
-		if (GetAsyncKeyState('A'))
-			m_vPos -= 0.1f*rightVec;
-		if (GetAsyncKeyState('D'))
-			m_vPos += 0.1f*rightVec;
-
-		if (GetAsyncKeyState(VK_SPACE))
-			m_vPos.y += 0.1f;
-
-		if (GetAsyncKeyState(VK_CONTROL))
-			m_vPos.y -= 0.1f;
-
-		D3DXMATRIX V;
-		D3DXMatrixLookAtLH(&V, &m_vPos, &m_vDirCam, &m_vUpCam);
-		m_pGraphicDev->SetTransform(D3DTS_VIEW, &V);
-	}
-
-	InvalidateRect(nullptr,FALSE);
 
 	CView::OnTimer(nIDEvent);
 }

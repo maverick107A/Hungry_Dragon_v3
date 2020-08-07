@@ -47,7 +47,22 @@ _int Engine::CCamera::Update_Component(const _float& fTimeDelta, LPDIRECT3DDEVIC
 
 	m_vPos = _vPos - m_vDir*m_fCameraDis;
 
-	//faskjfsadlkfjaldskjf
+	//지형타기
+#ifndef MFC_h__
+	Ride_Terrain(_pTerrain);
+#endif
+
+	m_vDir = m_vPos + m_vDir;
+
+	D3DXMATRIX V;
+	D3DXMatrixLookAtLH(&V, &m_vPos, &m_vDir, &m_vUp1);
+	pGraphicDev->SetTransform(D3DTS_VIEW, &V);
+
+	return 0;
+}
+
+void CCamera::Ride_Terrain(CBaseLand* _pTerrain)
+{
 	int Vernum = (int(m_vPos.x*INVERSETILESIZE) + VERTEXSIZE*int(m_vPos.z*INVERSETILESIZE));
 
 	if (0 > Vernum || VERTEXSIZE*(VERTEXSIZE - 1) - 1 < Vernum)
@@ -65,9 +80,9 @@ _int Engine::CCamera::Update_Component(const _float& fTimeDelta, LPDIRECT3DDEVIC
 		D3DXVECTOR3	vTemp2 = { -1.f,0.f,-1.f };
 		if (D3DXVec3Dot(&vTemp1, &vTemp2) > 0)
 		{
-			Vertex1.y = _pTerrain->Get_TerrainHeight()[Vernum]+1.f;
-			Vertex2.y = _pTerrain->Get_TerrainHeight()[Vernum + 1]+1.f;
-			Vertex3.y = _pTerrain->Get_TerrainHeight()[Vernum + 129]+1.f;
+			Vertex1.y = _pTerrain->Get_TerrainHeight()[Vernum] + 1.f;
+			Vertex2.y = _pTerrain->Get_TerrainHeight()[Vernum + 1] + 1.f;
+			Vertex3.y = _pTerrain->Get_TerrainHeight()[Vernum + 129] + 1.f;
 
 			vTemp1 = Vertex2 - Vertex1;
 			vTemp2 = Vertex3 - Vertex1;
@@ -110,15 +125,6 @@ _int Engine::CCamera::Update_Component(const _float& fTimeDelta, LPDIRECT3DDEVIC
 				m_fCameraDis += m_fCameraDisSpeed;
 		}
 	}
-	//sadkfjdsalkjfalkdsjfaldsk
-
-	m_vDir = m_vPos + m_vDir;
-
-	D3DXMATRIX V;
-	D3DXMatrixLookAtLH(&V, &m_vPos, &m_vDir, &m_vUp1);
-	pGraphicDev->SetTransform(D3DTS_VIEW, &V);
-
-	return 0;
 }
 
 CCamera* Engine::CCamera::Create(void)

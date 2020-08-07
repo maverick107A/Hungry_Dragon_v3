@@ -24,6 +24,9 @@ public:
 	void			Set_AngleZPlus(float _fAngle) { m_fAngleZ += _fAngle; }
 
 private:
+	void			Ride_Terrain(CBaseLand* _pTerrain);
+
+private:
 	POINT			m_tCenter = {};
 	float			m_fAngleY = 0.f;
 	float			m_fAngleX = 0.f;
