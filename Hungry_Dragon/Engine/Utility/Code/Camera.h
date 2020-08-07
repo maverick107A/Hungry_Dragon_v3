@@ -24,6 +24,8 @@ public:
 	void			Set_AngleZPlus(float _fAngle) { m_fAngleZ += _fAngle; }
 
 private:
+	void			Move_Camera(LPDIRECT3DDEVICE9& pGraphicDev, _vec3 _vPos, _vec3* _vLook, _vec3* _Up);
+	void			Move_Camera_InMFC(LPDIRECT3DDEVICE9& pGraphicDev, _vec3 _vPos, _vec3* _vLook, _vec3* _Up);
 	void			Ride_Terrain(CBaseLand* _pTerrain);
 
 private:

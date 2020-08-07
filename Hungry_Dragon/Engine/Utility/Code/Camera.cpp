@@ -21,6 +21,27 @@ HRESULT Engine::CCamera::Ready_Camera(void)
 
 _int Engine::CCamera::Update_Component(const _float& fTimeDelta, LPDIRECT3DDEVICE9& pGraphicDev, _vec3 _vPos, _vec3* _vLook, _vec3* _Up, CBaseLand* _pTerrain)
 {
+
+#ifndef MFC_h__
+	//카메라 이동
+	Move_Camera(pGraphicDev, _vPos, _vLook, _Up);
+	//지형타기
+	Ride_Terrain(_pTerrain);
+#else
+	Move_Camera_InMFC(pGraphicDev, _vPos, _vLook, _Up);
+#endif
+
+	//m_vDir = m_vPos + m_vDir;
+
+	D3DXMATRIX V;
+	D3DXMatrixLookAtLH(&V, &m_vPos, &m_vDir, &m_vUp1);
+	pGraphicDev->SetTransform(D3DTS_VIEW, &V);
+
+	return 0;
+}
+
+void CCamera::Move_Camera(LPDIRECT3DDEVICE9 & pGraphicDev, _vec3 _vPos, _vec3 * _vLook, _vec3 * _Up)
+{
 	POINT tPos = {};
 	GetCursorPos(&tPos);
 	m_fAngleY += (tPos.x - m_tCenter.x)*0.01f*cosf(m_fAngleZ) + (tPos.y - m_tCenter.y)*0.01f*sinf(m_fAngleZ);
@@ -47,18 +68,42 @@ _int Engine::CCamera::Update_Component(const _float& fTimeDelta, LPDIRECT3DDEVIC
 
 	m_vPos = _vPos - m_vDir*m_fCameraDis;
 
-	//지형타기
-#ifndef MFC_h__
-	Ride_Terrain(_pTerrain);
-#endif
-
 	m_vDir = m_vPos + m_vDir;
+}
 
-	D3DXMATRIX V;
-	D3DXMatrixLookAtLH(&V, &m_vPos, &m_vDir, &m_vUp1);
-	pGraphicDev->SetTransform(D3DTS_VIEW, &V);
+void CCamera::Move_Camera_InMFC(LPDIRECT3DDEVICE9 & pGraphicDev, _vec3 _vPos, _vec3 * _vLook, _vec3 * _Up)
+{
+	POINT tPos = {};
+	GetCursorPos(&tPos);
 
-	return 0;
+	if (GetAsyncKeyState(VK_RBUTTON))
+	{
+		m_fAngleY += (tPos.x - m_tCenter.x)*0.01f*cosf(m_fAngleZ) + (tPos.y - m_tCenter.y)*0.01f*sinf(m_fAngleZ);
+		m_fAngleX += (tPos.y - m_tCenter.y)*0.01f*cosf(m_fAngleZ) + -(tPos.x - m_tCenter.x)*0.01f*sinf(m_fAngleZ);
+
+		D3DXMATRIX vRotZ;
+		D3DXMatrixRotationZ(&vRotZ, m_fAngleZ);
+		D3DXVec3TransformNormal(&m_vUp, &m_vUpOrigin, &vRotZ);
+
+		D3DXMATRIX vRotX, vRotY, vRotTotal;
+		D3DXMatrixRotationX(&vRotX, m_fAngleX);
+		D3DXMatrixRotationY(&vRotY, m_fAngleY);
+
+		vRotTotal = vRotX*vRotY;
+		D3DXVec3TransformNormal(&m_vDir, &m_vLook, &vRotTotal);
+		//업백터
+		D3DXVec3TransformNormal(&m_vUp1, &m_vUp, &vRotTotal);
+		*_Up = m_vUp1;
+
+		m_vDir1 = m_vDir;
+		memcpy(_vLook, &m_vDir, sizeof(D3DXVECTOR3));
+
+		m_vPos = _vPos - m_vDir*m_fCameraDis;
+
+		m_vDir = m_vPos + m_vDir;
+	}
+	m_tCenter = tPos;
+	SetCursorPos(m_tCenter.x, m_tCenter.y);
 }
 
 void CCamera::Ride_Terrain(CBaseLand* _pTerrain)
