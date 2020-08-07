@@ -87,7 +87,7 @@ void CMonster::Dead_Monster(const float & fTimeDelta)
 		tempBoundingBox.vMin = Engine::_vec3(-100.f, -100.f, -100.f);
 		Engine::CResources* tempParticle = Engine::Get_Particle(m_pGraphicDev, Engine::PART_ATK, tempBoundingBox, vOrigin);
 
-		static_cast<Engine::CAtk_Part*>(tempParticle)->Set_Texture(L"../../Asset/snowflake.dds");
+		static_cast<Engine::CPart_Atk*>(tempParticle)->Set_Texture(L"../../Asset/snowflake.dds");
 		m_arrParticle.emplace_back(tempParticle);
 		m_fParticle_Speed = 0;
 	}

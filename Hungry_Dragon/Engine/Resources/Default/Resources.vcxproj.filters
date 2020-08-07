@@ -52,9 +52,6 @@
     <Filter Include="100. JunkBox\01. TerrainTex">
       <UniqueIdentifier>{97516da8-155b-4ed8-b97a-6f36aa3e1f2d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00. Resources\02. Particle\00. Atk_Part">
-      <UniqueIdentifier>{9dec9d84-03db-4be6-a711-a6288816a69e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="00. Resources\03. Billboard\00. MeteorBoard">
       <UniqueIdentifier>{f9e98599-5e32-49e1-97ce-5da90adc170a}</UniqueIdentifier>
     </Filter>
@@ -66,6 +63,12 @@
     </Filter>
     <Filter Include="00. Resources\00. VIBuffer\90. Texture_Square">
       <UniqueIdentifier>{cd531f57-80a2-45c4-8b0b-74eb13295f17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\02. Particle\00. Part_Atk">
+      <UniqueIdentifier>{9dec9d84-03db-4be6-a711-a6288816a69e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\02. Particle\01. Part_Wind">
+      <UniqueIdentifier>{f3fb3540-780d-4a87-a8b1-4d2779849aeb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -138,9 +141,6 @@
     <ClCompile Include="..\Code\Texture_Cube.cpp">
       <Filter>00. Resources\00. VIBuffer\20. Texture_Cube</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Atk_Part.cpp">
-      <Filter>00. Resources\02. Particle\00. Atk_Part</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\MeteorBoard.cpp">
       <Filter>00. Resources\03. Billboard\00. MeteorBoard</Filter>
     </ClCompile>
@@ -152,6 +152,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\Texture_Square.cpp">
       <Filter>00. Resources\00. VIBuffer\90. Texture_Square</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Part_Atk.cpp">
+      <Filter>00. Resources\02. Particle\00. Part_Atk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Part_Wind.cpp">
+      <Filter>00. Resources\02. Particle\01. Part_Wind</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -227,9 +233,6 @@
     <ClInclude Include="..\Code\Texture_Cube.h">
       <Filter>00. Resources\00. VIBuffer\20. Texture_Cube</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\Atk_Part.h">
-      <Filter>00. Resources\02. Particle\00. Atk_Part</Filter>
-    </ClInclude>
     <ClInclude Include="..\Code\MeteorBoard.h">
       <Filter>00. Resources\03. Billboard\00. MeteorBoard</Filter>
     </ClInclude>
@@ -241,6 +244,12 @@
     </ClInclude>
     <ClInclude Include="..\Code\Texture_Square.h">
       <Filter>00. Resources\00. VIBuffer\90. Texture_Square</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Part_Atk.h">
+      <Filter>00. Resources\02. Particle\00. Part_Atk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Part_Wind.h">
+      <Filter>00. Resources\02. Particle\01. Part_Wind</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

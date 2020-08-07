@@ -20,6 +20,9 @@
 
 #pragma warning(disable : 4251)
 
+#define DIRECTINPUT_VERSION	0x0800
+#include <dinput.h>
+
 
 using namespace std;
 

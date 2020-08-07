@@ -2,7 +2,6 @@
 #include "TestPlayer.h"
 
 #include "Export_Function.h"
-#include "AtkPart.h"
 #include "CubeDra.h"
 #include "Camera.h"
 #include "PlayerState.h"
@@ -46,17 +45,17 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 	//Ride_Terrain();
 
 	//R 키 누르면 생성
-	if ((GetAsyncKeyState('R') & 0x8000) ) {
-		Engine::_vec3 vOrigin=Engine::_vec3(0.f,0.f,0.f);
-		Engine::BoundingBox tempBoundingBox;
-		tempBoundingBox.vMax = Engine::_vec3(100.f,100.f,100.f);
-		tempBoundingBox.vMin = Engine::_vec3(-100.f, -100.f, -100.f);
-		Engine::CResources* tempParticle = Engine::Get_Particle(m_pGraphicDev, Engine::PART_ATK, tempBoundingBox, vOrigin);
+	//if ((GetAsyncKeyState('R') & 0x8000) ) {
+	//	Engine::_vec3 vOrigin=Engine::_vec3(0.f,0.f,3.f);
+	//	Engine::BoundingBox tempBoundingBox;
+	//	tempBoundingBox.vMax = Engine::_vec3(WINCX,WINCY,100.f);
+	//	tempBoundingBox.vMin = Engine::_vec3(-WINCX, -WINCY, -100.f);
+	//	Engine::CResources* tempParticle = Engine::Get_Particle(m_pGraphicDev, Engine::PART_WIND, tempBoundingBox, vOrigin);
 
-		//나중엔 미리 올려 놓는 식으로 구현하자
-		static_cast<Engine::CAtk_Part*>(tempParticle)->Set_Texture(L"../../Asset/snowflake.dds");
-		m_arrParticle.emplace_back( tempParticle);
-	}
+	//	//나중엔 미리 올려 놓는 식으로 구현하자
+	//	static_cast<Engine::CPart_Wind*>(tempParticle)->Set_Texture(L"../../Asset/snowflake.dds");
+	//	m_arrParticle.emplace_back( tempParticle);
+	//}
 
 	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end();) {
 		int life = (*iter)->Update_Component(fTimeDelta);
