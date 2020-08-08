@@ -19,9 +19,13 @@ HRESULT Engine::CCamera::Ready_Camera(void)
 	return S_OK;
 }
 
-_int Engine::CCamera::Update_Component1(const _float& fTimeDelta, LPDIRECT3DDEVICE9& pGraphicDev, _vec3 _vPos, _vec3* _vLook, _vec3* _Up, CBaseLand* _pTerrain)
+_int Engine::CCamera::Update_Camera(const _float& fTimeDelta, LPDIRECT3DDEVICE9& pGraphicDev, _vec3 _vPos, _vec3* _vLook, _vec3* _Up, CBaseLand* _pTerrain)
 {
-	Move_Camera_InMFC(pGraphicDev, _vPos, _vLook, _Up);
+	//Move_Camera_InMFC(pGraphicDev, _vPos, _vLook, _Up);
+		Move_Camera(pGraphicDev, _vPos, _vLook, _Up);
+		//지형타기
+		Ride_Terrain(_pTerrain);
+
 //#ifndef MFC_h__
 //	//카메라 이동
 //	Move_Camera(pGraphicDev, _vPos, _vLook, _Up);

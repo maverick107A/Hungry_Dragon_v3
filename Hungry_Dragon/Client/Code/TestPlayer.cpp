@@ -70,7 +70,7 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 	}
 
 	m_pState->Update_State(fTimeDelta);
-	m_pCamera->Update_Component(fTimeDelta, m_pGraphicDev, m_pTransform->m_vInfo[Engine::INFO_POS], &m_vLook, &m_vUp, m_pTerrain);
+	m_pCamera->Update_Camera(fTimeDelta, m_pGraphicDev, m_pTransform->m_vInfo[Engine::INFO_POS], &m_vLook, &m_vUp, m_pTerrain);
 	//
 	State_Change();
 

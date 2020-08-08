@@ -195,7 +195,7 @@ void CMFCToolView::OnTimer(UINT_PTR nIDEvent) {
 	m_pTransform->Update_Component(0.f);
 	m_pTransform->Get_Info(Engine::INFO_POS, &posVec);
 
-	m_pCamera->Update_Component1(0.f, m_pGraphicDev, posVec, &lookVec, &upVec, nullptr);
+	m_pCamera->Update_Camera(0.f, m_pGraphicDev, posVec, &lookVec, &upVec, nullptr);
 	D3DXVec3Cross(&rightVec,&_vec3(0.f, 1.f, 0.f), &lookVec);
 	D3DXVec3Normalize(&rightVec, &rightVec);
 
