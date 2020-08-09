@@ -13,13 +13,10 @@ class CResources;
 class CTerrain;
 class CBaseLand;
 class CAtkPart;
-
 END
-
 class CMonster : public Engine::CGameObject
 {
 	enum STATE { MONSTER_IDLE, MONSTER_MOVE, MONSTER_RUN, MONSTER_ATTACK, MONSTER_JUMP, MONSTER_STAN , MONSTER_END };
-
 protected:
 	explicit CMonster(LPDIRECT3DDEVICE9 pGraphicDev);
 	virtual ~CMonster(void);

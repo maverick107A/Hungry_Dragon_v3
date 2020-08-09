@@ -173,6 +173,7 @@ call CopyUtility.bat</Command>
     <ClCompile Include="..\Code\GameObject.cpp" />
     <ClCompile Include="..\Code\Layer.cpp" />
     <ClCompile Include="..\Code\Management.cpp" />
+    <ClCompile Include="..\Code\MonsterMain.cpp" />
     <ClCompile Include="..\Code\ObjectPool.cpp" />
     <ClCompile Include="..\Code\PFly.cpp" />
     <ClCompile Include="..\Code\PFlyIdle.cpp" />
@@ -197,6 +198,7 @@ call CopyUtility.bat</Command>
     <ClInclude Include="..\Code\GameObject.h" />
     <ClInclude Include="..\Code\Layer.h" />
     <ClInclude Include="..\Code\Management.h" />
+    <ClInclude Include="..\Code\MonsterMain.h" />
     <ClInclude Include="..\Code\ObjectPool.h" />
     <ClInclude Include="..\Code\PFly.h" />
     <ClInclude Include="..\Code\PFlyIdle.h" />

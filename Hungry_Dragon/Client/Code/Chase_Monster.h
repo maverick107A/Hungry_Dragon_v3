@@ -3,7 +3,7 @@
 
 
 #include "Define.h"
-#include "Monster.h"
+#include "MonsterMain.h"
 
 BEGIN(Engine)
 
@@ -14,7 +14,7 @@ class CTerrainTex;
 
 END
 
-class  CChase_Monster : public CMonster
+class  CChase_Monster : public Engine::CMonsterMain
 {
 private:
 	explicit CChase_Monster(LPDIRECT3DDEVICE9 pGraphicDev);

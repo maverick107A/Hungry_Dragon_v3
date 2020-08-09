@@ -1,26 +1,24 @@
-#include "stdafx.h"
-
-#include "Monster.h"
+#include "MonsterMain.h"
 
 #include "Export_Function.h"
 
-CMonster::CMonster(LPDIRECT3DDEVICE9 pGraphicDev)
+Engine::CMonsterMain::CMonsterMain(LPDIRECT3DDEVICE9 pGraphicDev)
 	: Engine::CGameObject(pGraphicDev)
 	, m_vLook(0.f, 0.f, 0.f)
 {
 }
 
-CMonster::~CMonster(void)
+Engine::CMonsterMain::~CMonsterMain(void)
 {
 }
 
-HRESULT CMonster::Ready_Object(void)
+HRESULT Engine::CMonsterMain::Ready_Object(void)
 {
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 	return S_OK;
 }
 
-int CMonster::Update_Object(const float & fTimeDelta)
+int Engine::CMonsterMain::Update_Object(const float & fTimeDelta)
 {
 	m_vPlayerPos=((Engine::CLayer*)(this->Get_Parent()))->Get_PlayerPos();
 
@@ -37,29 +35,39 @@ int CMonster::Update_Object(const float & fTimeDelta)
 
 	if (m_fDistance < 200)
 	{
+		m_eState = MONSTER_ACTIVATE;
 		m_bActivate = true;  
 	}
 	else
+	{		
+		m_eState = MONSTER_IDLE;
 		m_bActivate = false;
-
+	}
 
 	if (m_fDistance > 7000)
 	{
 		m_fParticle_Speed = 0;
 		m_bFirst = true;
+		m_eState = MONSTER_REBORN;
 		m_iEvent = MONSTER_DEAD;
 	}
 
 	if (m_fPlayerDistance < 3)
 	{
-		//Dead_Monster(fTimeDelta);
-		//m_bDead = true;
+		// m_eState = MONSTER_DEACTIVATE;
+		// Dead_Monster(fTimeDelta);
+		// m_bDead = true;
 	}
+
+
+
+
+	State_Change();
 
 	return m_iEvent;
 }
 
-void CMonster::Render_Object(void)
+void Engine::CMonsterMain::Render_Object(void)
 {
 	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end(); ++iter)
 	{
@@ -67,13 +75,21 @@ void CMonster::Render_Object(void)
 	}
 }
 
-void CMonster::LateUpdate_Object(const float & fTimeDelta)
+void Engine::CMonsterMain::LateUpdate_Object(const float & fTimeDelta)
 {
-	if(m_bDead)
+	if(m_eState == MONSTER_DEACTIVATE)
 	m_pTransform->Set_Trans(&m_vPlayerPos);
 }
 
-void CMonster::Dead_Monster(const float & fTimeDelta)
+void Engine::CMonsterMain::State_Change()
+{
+	if (m_preState != m_eState)
+	{
+		m_preState = m_eState;
+	}
+}
+
+void Engine::CMonsterMain::Dead_Monster(const float & fTimeDelta)
 {
 	//m_pTransform->Set_Trans(&m_vPlayerPos);
 	m_pTransform->Set_Add_Scale(-0.1f);
@@ -110,7 +126,10 @@ void CMonster::Dead_Monster(const float & fTimeDelta)
 		m_fParticle_Speed = 0;
 		m_bFirst = true;
  		m_iEvent = MONSTER_DEAD;
-		// 파티클 비워주는 함수 추가.
+		m_eState = MONSTER_REBORN;
+
+
+		// 파티클 비워주는 함수.
 		for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end();)
 		{
 			Engine::Safe_Release((*iter));
@@ -121,7 +140,7 @@ void CMonster::Dead_Monster(const float & fTimeDelta)
 
 }
 
-float CMonster::Ride_Terrain()
+float Engine::CMonsterMain::Ride_Terrain()
 {
 	CGameObject* pGroundObj=((Engine::CLayer*)(Get_Parent()))->Get_Object(L"BackGround", Engine::Find_First, nullptr);
 	m_pTerrain = static_cast<Engine::CBaseLand*>(pGroundObj->Get_Component(L"Com_Buffer", Engine::ID_STATIC));
@@ -180,7 +199,7 @@ float CMonster::Ride_Terrain()
 	}
 }
 
-HRESULT CMonster::Add_Component(void)
+HRESULT Engine::CMonsterMain::Add_Component(void)
 {
 	Engine::CComponent*		pComponent = nullptr;
 
@@ -206,14 +225,14 @@ HRESULT CMonster::Add_Component(void)
 	return S_OK;
 }
 
-void CMonster::Key_Input(const float & fTimeDelta)
+void Engine::CMonsterMain::Key_Input(const float & fTimeDelta)
 {
 
 }
 
-CMonster * CMonster::Create(LPDIRECT3DDEVICE9 pGraphicDev)
+Engine::CMonsterMain * Engine::CMonsterMain::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 {
-	CMonster*		pInstance = new CMonster(pGraphicDev);
+	CMonsterMain*		pInstance = new CMonsterMain(pGraphicDev);
 
 	if (FAILED(pInstance->Ready_Object()))
 		Engine::Safe_Release(pInstance);
@@ -221,7 +240,7 @@ CMonster * CMonster::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 	return pInstance;
 }
 
-void CMonster::Free(void)
+void Engine::CMonsterMain::Free(void)
 {
 
 	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end();) {

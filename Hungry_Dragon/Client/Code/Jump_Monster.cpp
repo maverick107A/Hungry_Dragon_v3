@@ -5,7 +5,7 @@
 #include "Jump_Monster.h"
 
 CJump_Monster::CJump_Monster(LPDIRECT3DDEVICE9 pGraphicDev)
-	:CMonster(pGraphicDev)
+	: Engine::CMonsterMain::(pGraphicDev)
 {
 }
 
@@ -16,12 +16,10 @@ CJump_Monster::~CJump_Monster(void)
 HRESULT CJump_Monster::Ready_Object(void)
 {
 
-	CMonster::Ready_Object();
-
+	Engine::CMonsterMain::Ready_Object();
+	Add_Component();
 	m_fSpeed = 20.f;
-
-	// t스케일에 포스를 넣었지 뭐얌 
-
+	m_eState = MONSTER_REBORN;
 
 	return S_OK;
 }
@@ -32,15 +30,19 @@ int CJump_Monster::Update_Object(const float & fTimeDelta)
 	if (m_bFirst)
 	{
 		m_pTransform->Set_Trans(&m_vFirstPos);
-		m_bFirst = false;
-		m_iEvent = 0;
+		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
+		m_pTransform->Set_Scale(1);
+		//m_bFirst = false;	
+		//m_bDead = false;
+		m_iEvent = OBJ_NOEVENT;
+		m_eState = MONSTER_IDLE;
 
 	}
 
-	CMonster::Update_Object(fTimeDelta);
+	Engine::CMonsterMain::Update_Object(fTimeDelta);
 
-	if (m_bActivate)
-	{		
+	if (m_eState == MONSTER_ACTIVATE)
+	{
 		if(!m_bJump_check)
 		{
 			m_vChasePos = { m_vPlayerPos.x ,  0.f , m_vPlayerPos.z };
@@ -65,9 +67,32 @@ void CJump_Monster::Render_Object(void)
 	m_pTransform->Set_Transform(m_pGraphicDev);
 	m_pTextureCom->Set_Texture(5);
 	m_pBufferCom->Render_Buffer();
-	CMonster::Render_Object();
+	Engine::CMonsterMain::Render_Object();
 }
 
+HRESULT CJump_Monster::Add_Component(void)
+{
+	Engine::CComponent*		pComponent = nullptr;
+
+	// buffer
+	pComponent = m_pBufferCom = dynamic_cast<Engine::CTexture_Cube*>
+		(Engine::Clone(RESOURCE_STATIC, L"Buffer_CubeTex"));
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Buffer", pComponent);
+
+	// Texture
+	pComponent = m_pTextureCom = dynamic_cast<Engine::CTexture*>
+		(Engine::Clone(RESOURCE_STAGE, L"Texture_BoxHead"));
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Texture", pComponent);
+
+
+	return S_OK;
+}
+void CJump_Monster::LateUpdate_Object(const float & fTimeDelta)
+{
+	Engine::CMonsterMain::LateUpdate_Object(fTimeDelta);
+}
 CJump_Monster * CJump_Monster::Create(LPDIRECT3DDEVICE9 pGraphicDev, D3DXVECTOR3 _pos)
 {
 	CJump_Monster*		pInstance = new CJump_Monster(pGraphicDev);
@@ -82,7 +107,7 @@ CJump_Monster * CJump_Monster::Create(LPDIRECT3DDEVICE9 pGraphicDev, D3DXVECTOR3
 
 void CJump_Monster::Free(void)
 {
-	CMonster::Free();
+	Engine::CMonsterMain::Free();
 }
 
 void CJump_Monster::Jump(const float& fTimeDelta)

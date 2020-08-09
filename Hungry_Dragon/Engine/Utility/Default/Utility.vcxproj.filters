@@ -64,6 +64,9 @@
     <Filter Include="02. UtilBase\02. Component\04. TerrainMgr">
       <UniqueIdentifier>{17d9424d-c3c4-4a17-be31-f3037a6f193e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. UtilBase\01. GameObject\01.Monster">
+      <UniqueIdentifier>{fcb9cbea-b837-4bd4-bb85-365954e13e92}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\Component.cpp">
@@ -128,6 +131,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\CollisionMgr.cpp">
       <Filter>05. ColllisionMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MonsterMain.cpp">
+      <Filter>02. UtilBase\01. GameObject\01.Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -196,6 +202,9 @@
     </ClInclude>
     <ClInclude Include="..\Code\CollisionMgr.h">
       <Filter>05. ColllisionMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\MonsterMain.h">
+      <Filter>02. UtilBase\01. GameObject\01.Monster</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

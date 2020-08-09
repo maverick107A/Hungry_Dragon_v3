@@ -43,8 +43,6 @@ int CNormal_Bullet::Update_Object(const float & fTimeDelta)
 		m_eState = IDLE_BULLET;
 		
 
-		//게임 로직레이어에서 찾는거 맞음?
-		//만약 이 노말 불렛이 게임 로직 레이어에 만들어진거 아니면 오류날 거임.
 		CGameObject* pPlayer = ((Engine::CLayer*)(Get_Parent()))->Get_Object(L"TestPlayer", Engine::Find_First, nullptr);
 		Engine::CTransform* pPlayerTransformCom = static_cast<Engine::CTransform*>(pPlayer->Get_Component(L"Com_Transform", Engine::ID_DYNAMIC));
 
@@ -125,8 +123,6 @@ void CNormal_Bullet::State_Change()
 {
 	if (m_preState != m_eState && m_preState != DEAD_BULLET)
 	{
-
-
 		m_preState = m_eState;
 	}
 

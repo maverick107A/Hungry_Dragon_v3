@@ -1,5 +1,5 @@
-#ifndef Monster_h__
-#define Monster_h__
+#ifndef MonsterMain_h__
+#define MonsterMain_h__
 
 #include "GameObject.h"
 
@@ -14,26 +14,29 @@ class CTerrain;
 class CBaseLand;
 class CAtkPart;
 
-END
-
-class CMonster : public Engine::CGameObject
+class ENGINE_DLL CMonsterMain : public Engine::CGameObject
 {
-	enum STATE { MONSTER_IDLE, MONSTER_MOVE, MONSTER_RUN, MONSTER_ATTACK, MONSTER_JUMP, MONSTER_STAN , MONSTER_END };
+protected:
+	enum MONSTERSTATE { MONSTER_IDLE, MONSTER_REBORN , MONSTER_ACTIVATE , MONSTER_DEACTIVATE, MONSTER_END };
 
 protected:
-	explicit CMonster(LPDIRECT3DDEVICE9 pGraphicDev);
-	virtual ~CMonster(void);
+	explicit CMonsterMain(LPDIRECT3DDEVICE9 pGraphicDev);
+	virtual ~CMonsterMain(void);
 
 public:
 	virtual HRESULT Ready_Object(void) override;
 	virtual int Update_Object(const float& fTimeDelta) override;
 	virtual void Render_Object(void) override;
 	virtual void LateUpdate_Object(const float& fTimeDelta) override;
-
+	virtual void State_Change();
 public:
-	void	Dead_Monster(const float& fTimeDelta);
+	void	    Dead_Monster(const float& fTimeDelta);
 	float		Ride_Terrain();
 public:
+	void Set_State(MONSTERSTATE _State) { m_eState = _State ; }
+	MONSTERSTATE Get_State() { return m_eState; }
+
+
 private:
 	HRESULT		Add_Component(void);
 	void		Key_Input(const float& fTimeDelta);
@@ -47,9 +50,14 @@ protected:
 	D3DXVECTOR3					m_vLook;
 	D3DXVECTOR3					vPlayerPos;
 	int							m_iEvent = 0;
+
 	bool						m_bDead = false;
 	bool						m_bActivate = false;
 	bool						m_bFirst = true;
+
+	MONSTERSTATE						m_preState;
+	MONSTERSTATE						m_eState;
+
 
 	float						m_fParticle_Speed = 0;
 	float						m_fPlayerDistance;
@@ -59,11 +67,12 @@ protected:
 
 
 public:
-	static CMonster*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
+	static CMonsterMain*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 public:
 	virtual void Free(void) override;
 public:
 	list<Engine::CResources*>  m_arrParticle;
 };
 
-#endif // Monster_h__
+END
+#endif // MonsterMain_h__

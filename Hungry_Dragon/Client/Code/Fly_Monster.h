@@ -3,7 +3,7 @@
 
 
 #include "Define.h"
-#include "Monster.h"
+#include "MonsterMain.h"
 
 BEGIN(Engine)
 
@@ -14,7 +14,7 @@ class CTerrainTex;
 
 END
 
-class  CFly_Monster : public CMonster
+class  CFly_Monster  : public Engine::CMonsterMain
 {
 private:
 	explicit CFly_Monster(LPDIRECT3DDEVICE9 pGraphicDev);
@@ -23,6 +23,9 @@ public:
 	virtual HRESULT Ready_Object(void) override;
 	virtual int Update_Object(const float& fTimeDelta) override;
 	virtual void Render_Object(void) override;
+private:
+	HRESULT		Add_Component(void);
+	void LateUpdate_Object(const float & fTimeDelta);
 public:
 	void Shooting(void);
 

@@ -3,7 +3,7 @@
 
 
 #include "Define.h"
-#include "Monster.h"
+#include "MonsterMain.h"
 
 BEGIN(Engine)
 
@@ -13,7 +13,7 @@ class CTransform;
 
 END
 
-class  CJump_Monster : public CMonster
+class  CJump_Monster : public Engine::CMonsterMain
 {
 private:
 	explicit CJump_Monster(LPDIRECT3DDEVICE9 pGraphicDev);
@@ -22,7 +22,9 @@ public:
 	virtual HRESULT Ready_Object(void) override;
 	virtual int Update_Object(const float& fTimeDelta) override;
 	virtual void Render_Object(void) override;
-
+private:
+	HRESULT		Add_Component(void);
+	void LateUpdate_Object(const float & fTimeDelta);
 public:
 	static CJump_Monster*	Create(LPDIRECT3DDEVICE9 pGraphicDev , D3DXVECTOR3 _pos);
 private:
