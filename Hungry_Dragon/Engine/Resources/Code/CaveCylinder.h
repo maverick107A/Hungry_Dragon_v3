@@ -17,6 +17,10 @@ public:
 	virtual HRESULT Ready_Buffer(void) override;
 	virtual void Render_Buffer(void) override;
 
+public:
+	float Get_Height() { return m_fHeight; }
+	float Get_Radius() { return m_fRadius; }
+
 private:
 	float m_fHeight = 0.f;
 	UINT m_uStackCount = 0;

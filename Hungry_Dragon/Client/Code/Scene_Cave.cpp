@@ -4,6 +4,7 @@
 #include "Export_Function.h"
 #include "SkySphere.h"
 #include "Cave.h"
+#include "Vent.h"
 
 CScene_Cave::CScene_Cave(LPDIRECT3DDEVICE9 pGraphicDev)
 	: Engine::CScene(pGraphicDev)
@@ -33,7 +34,7 @@ HRESULT CScene_Cave::Ready_Scene(void)
 		D3DXToRadian(45.f),
 		_float(WINCX) / WINCY,
 		1.f,
-		10000.f);
+		1000.f);
 
 
 	m_pGraphicDev->SetTransform(D3DTS_PROJECTION, &matProj);
@@ -41,7 +42,9 @@ HRESULT CScene_Cave::Ready_Scene(void)
 
 	D3DXMATRIX V;
 	D3DXVECTOR3 m_vPos(0,1,-1);
-	D3DXVECTOR3 m_vDir(0,-1,10);
+	D3DXVECTOR3 m_vDir(0,-1,4);
+	//D3DXVECTOR3 m_vPos(1, 0, 10);
+	//D3DXVECTOR3 m_vDir(-1, -1, 10);
 	D3DXVECTOR3 m_vUp1(0,1,0);
 	D3DXMatrixLookAtLH(&V, &m_vPos, &m_vDir, &m_vUp1);
 	m_pGraphicDev->SetTransform(D3DTS_VIEW, &V);
@@ -109,8 +112,9 @@ HRESULT CScene_Cave::Ready_Layer_Environment(const _tchar * pLayerTag) {
 	FAILED_CHECK_RETURN(Register_GameObject<CSkySphere>(pLayer, L"Skybox"), E_FAIL);
 	
 	// Cylinder(Cave)
-	FAILED_CHECK_RETURN(Register_GameObject<CCave>(pLayer, L"Cave"), E_FAIL);
-
+	FAILED_CHECK_RETURN(Register_GameObject<CCave>(&m_pCave, pLayer, L"Cave"), E_FAIL);
+	FAILED_CHECK_RETURN(Register_GameObject<CVent>(&m_pVent, pLayer, L"Vent"), E_FAIL);
+	m_pVent->Set_Trans(_vec3(0.f,0.f, m_pCave->Get_EndPoint()+4000.f));
 	m_mapLayer.emplace(pLayerTag, pLayer);
 
 	return S_OK;

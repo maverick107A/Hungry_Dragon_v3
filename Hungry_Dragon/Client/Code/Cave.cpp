@@ -19,26 +19,35 @@ CCave::~CCave(void)
 HRESULT CCave::Ready_Object(void)
 {
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
-	m_pTransform->Set_Trans(&_vec3(0.f,0.f,500.f));
-	m_pTransformBeyond->Set_Trans(&_vec3(0.f, 0.f, 1490.f));
+	m_fCaveLength = m_pBufferCom->Get_Height();
+	m_pTransform->Set_Trans(&_vec3(0.f,0.f, m_fCaveLength*0.5f));
+	m_pTransformBeyond->Set_Trans(&_vec3(0.f, 0.f, m_fCaveLength*1.5f ));
 	m_fForwardSpeed = 100.f;
 	return S_OK;
 }
 
 _int CCave::Update_Object(const _float& fTimeDelta)
 {
+	if (!m_bActive)
+	{
+		return 0;
+	}
+
 	m_pTransform->Add_Trans(&_vec3(0.f, 0.f, -m_fForwardSpeed*fTimeDelta));
 	m_pTransformBeyond->Add_Trans(&_vec3(0.f, 0.f, -m_fForwardSpeed*fTimeDelta));
 
-	if (-500.f >= m_pTransform->Get_World()._43)
+	if (m_bLoop)
 	{
-		m_pTransform->Add_Trans(&_vec3(0.f, 0.f, 2000.f));
-		
-	}
-	if (-510.f >= m_pTransformBeyond->Get_World()._43)
-	{
-		m_pTransformBeyond->Add_Trans(&_vec3(0.f, 0.f, 2000.f));
+		if (-m_fCaveLength*0.5f >= m_pTransform->Get_World()._43)
+		{
+			m_pTransform->Add_Trans(&_vec3(0.f, 0.f, m_fCaveLength*2.f));
 
+		}
+		if (-m_fCaveLength*0.5f >= m_pTransformBeyond->Get_World()._43)
+		{
+			m_pTransformBeyond->Add_Trans(&_vec3(0.f, 0.f, m_fCaveLength*2.f));
+
+		}
 	}
 
 	return 0;
@@ -46,6 +55,10 @@ _int CCave::Update_Object(const _float& fTimeDelta)
 
 void CCave::Render_Object(void)
 {
+	if (!m_bActive)
+	{
+		return;
+	}
 
 	Engine::CGameObject::Update_Object(float(0));
 	//여기까지 레이트업데이트에 넣어줘야함
@@ -65,6 +78,18 @@ void CCave::Free(void)
 	Engine::CGameObject::Free();
 }
 
+
+void CCave::Set_Trans(_vec3 & _vPos)
+{
+	m_pTransform->Set_Trans(&_vPos);
+	m_pTransformBeyond->Set_Trans(&_vec3(_vPos.x, _vPos.y, _vPos.z + m_fCaveLength*1.f));
+}
+
+float CCave::Get_EndPoint()
+{
+	return m_pTransform->Get_World()._43 > m_pTransformBeyond->Get_World()._43 ? 
+		   m_pTransform->Get_World()._43 : m_pTransformBeyond->Get_World()._43 ;
+}
 
 HRESULT CCave::Add_Component(void)
 {

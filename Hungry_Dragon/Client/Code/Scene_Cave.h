@@ -20,6 +20,10 @@
 
 using namespace Engine;
 
+class CCave;
+class CVent;
+
+
 class CScene_Cave : public Engine::CScene
 {
 private:
@@ -40,6 +44,9 @@ private:
 public:
 	static CScene_Cave*		Create(LPDIRECT3DDEVICE9 pGraphicDev);
 
+private:
+	CCave* m_pCave = nullptr;
+	CVent* m_pVent = nullptr;
 
 private:
 	virtual void Free(void) override;

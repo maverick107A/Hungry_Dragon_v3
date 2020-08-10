@@ -32,6 +32,7 @@ _int CLogo::Update_Scene(const _float& fTimeDelta) {
 		if (GetAsyncKeyState(VK_RETURN) & 0x8000) {
 			Engine::CScene*		pScene = nullptr;
 
+			//pScene = CScene_Proto::Create(m_pGraphicDev);
 			pScene = CScene_Cave::Create(m_pGraphicDev);
 			NULL_CHECK_RETURN(pScene, -1);
 			return -1;

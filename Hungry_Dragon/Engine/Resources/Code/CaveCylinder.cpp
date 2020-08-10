@@ -107,7 +107,7 @@ HRESULT Engine::CCaveCylinder::Ready_Buffer(void)			// 어쨋든 원기둥 내면 그리는
 			float r = fOld_r*(1.f+ fRand);
 			vertex.vPosition = D3DXVECTOR3(r*c, r*s, z);
 
-			UINT uColor = 96 * (1+ fRand*5.f);
+			UINT uColor = 96 * (1- fRand*5.f);
 			vertex.dwColor = D3DCOLOR_XRGB(uColor, uColor, uColor);
 
 			pVertex[m_uVtxNum] = vertex;

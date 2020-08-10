@@ -86,6 +86,10 @@ HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 		pResources = CCaveCylinder::Create(pGraphicDev);
 
 		break;
+	case BUFFER_VENTCUBE:
+		pResources = CVentCube::Create(pGraphicDev);
+
+		break;
 	}
 
 	m_pmapResource[wContainerIdx].emplace(pBufferTag, pResources);

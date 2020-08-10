@@ -10,6 +10,9 @@ class CCaveCylinder;
 class CTransform;
 
 END
+
+USING(Engine)
+
 class CCave : public Engine::CGameObject
 {
 private:
@@ -21,6 +24,11 @@ public:
 	virtual Engine::_int Update_Object(const Engine::_float& fTimeDelta) override;
 	virtual void Render_Object(void) override;
 	
+public:
+	void Set_Loop(bool _bLoop) { m_bLoop = _bLoop; }		// 루프끝내기
+	void Set_Active(bool _bActive) { m_bActive = _bActive; }		// 업뎃
+	void Set_Trans(_vec3& _vPos);
+	float Get_EndPoint();
 
 private:
 	HRESULT		Add_Component(void);
@@ -31,6 +39,9 @@ private:
 	Engine::CTransform*		m_pTransformBeyond = nullptr;
 	float					m_fForwardSpeed = 1.f;
 	float					m_fUpdateTick = 0.f;
+	bool					m_bLoop = true;
+	bool					m_bActive = true;
+	float					m_fCaveLength = 0.f;
 
 public:
 	static CCave*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
