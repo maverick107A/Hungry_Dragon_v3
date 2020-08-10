@@ -43,6 +43,8 @@ BEGIN_MESSAGE_MAP(CPreForm, CFormView)
 	ON_LBN_SELCHANGE(IDC_LIST2, &CPreForm::OnLbnSelchangeIndexList)
 	ON_BN_CLICKED(IDC_BUTTON3, &CPreForm::OnBnClickedIndexSave)
 	ON_BN_CLICKED(IDC_BUTTON4, &CPreForm::OnBnClickedIndexDel)
+	ON_BN_CLICKED(IDC_BUTTON2, &CPreForm::OnBnClickedVertexDel)
+	ON_BN_CLICKED(IDC_BUTTON5, &CPreForm::OnBnClickedMeshSave)
 END_MESSAGE_MAP()
 
 
@@ -82,7 +84,6 @@ void CPreForm::OnBnClickedVertexAdd() {
 	CString tempString;
 
 	m_VertexPosX.GetWindowTextW(tempString);
-	if(_wtoi(tempString))
 	tempVertex.vPosition.x=(float)_wtoi(tempString);
 
 	m_VertexPosY.GetWindowTextW(tempString);
@@ -246,8 +247,11 @@ void CPreForm::OnBnClickedIndexSave() {
 void CPreForm::OnBnClickedIndexDel() {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	//선택안할때를 넣어주자
-
-	Erase_Index(m_indexListBox.GetCurSel());
+	int index = m_indexListBox.GetCurSel();
+	if (index >= 0 && index < m_indexCount)
+	{
+		Erase_Index(index);
+	}
 }
 
 void CPreForm::Erase_Index(int _delIndex) {
@@ -261,5 +265,95 @@ void CPreForm::Erase_Index(int _delIndex) {
 	--m_indexCount;
 	for (int i = m_indexCount; i >= 0; --i) {
 		m_indexListBox.DeleteString(i);
+	}
+
+	int index = 0;
+	for (iter_find = m_listIndex.begin(); iter_find != m_listIndex.end(); ++iter_find)
+	{
+		CString tempString;
+		tempString.Format(_T("%d"), index);
+		m_indexListBox.AddString(tempString);
+		++index;
+	}
+}
+
+
+void CPreForm::OnBnClickedVertexDel()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	int index = m_vertexListBox.GetCurSel();
+	list<Engine::VTXCOL>::iterator iter_find = m_listVertex.begin();
+
+	if (index < 0 || index >= m_vertexCount)
+	{
+		return;
+	}
+
+	for (int i = m_vertexCount-1; i >= 0; --i)
+	{
+		m_vertexListBox.DeleteString(i);
+
+		if (i == index)
+		{
+			iter_find=m_listVertex.erase(iter_find);
+		}
+		else
+		{
+			++iter_find;
+		}	
+	}
+
+	--m_vertexCount;
+	
+	for (int i = 0; i < m_vertexCount; ++i)
+	{
+		CString tempString;
+		tempString.Format(_T("%d"), i);
+		m_vertexListBox.AddString(tempString);
+	}
+
+	list<Engine::INDEX16>::iterator iter_list = m_listIndex.begin();
+	for (int i = 0; i < m_vertexCount; ++i)
+	{
+		//삭제 내일 구현합시다.
+	}
+}
+
+
+void CPreForm::OnBnClickedMeshSave()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	CFileDialog Dlg(FALSE, L"dat", L"*.dat", OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, L"Data File(*.dat)|*.dat||", this);
+	TCHAR szPath[MAX_PATH] = L"";
+
+	GetCurrentDirectory(MAX_PATH, szPath);
+	PathRemoveFileSpec(szPath);
+	lstrcat(szPath, L"\\Data");
+	Dlg.m_ofn.lpstrInitialDir = szPath;
+
+	if (IDOK == Dlg.DoModal())
+	{
+		CString strPath = Dlg.GetPathName();
+		HANDLE hFile = CreateFile(strPath.GetString(), GENERIC_WRITE, 0, 0, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
+
+		if (INVALID_HANDLE_VALUE == hFile)
+		{
+			AfxMessageBox(L"파일 잘못 열음!");
+			return;
+		}
+
+		DWORD dwByte = 0;
+		for (list<Engine::VTXCOL>::iterator iter = m_listVertex.begin(); iter != m_listVertex.end(); ++iter)
+		{
+			WriteFile(hFile, &(*iter), sizeof(Engine::VTXCOL), &dwByte, nullptr);
+		}
+
+		WriteFile(hFile, &m_indexCount, sizeof(int), &dwByte, nullptr);
+		for (list<Engine::INDEX16>::iterator iter = m_listIndex.begin(); iter != m_listIndex.end(); ++iter)
+		{
+			WriteFile(hFile, &(*iter), sizeof(Engine::INDEX16), &dwByte, nullptr);
+		}
+	
+		CloseHandle(hFile);
 	}
 }

@@ -37,6 +37,8 @@ public:
 	afx_msg void OnLbnSelchangeIndexList();
 	afx_msg void OnBnClickedIndexSave();
 	afx_msg void OnBnClickedIndexDel();
+	afx_msg void OnBnClickedVertexDel();
+	afx_msg void OnBnClickedMeshSave();
 
 	void Erase_Index(int _delIndex);
 
@@ -55,6 +57,8 @@ public:
 	CEdit					m_Index2;
 
 	
+	
+
 	
 };
 
