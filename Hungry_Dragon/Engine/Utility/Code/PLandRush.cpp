@@ -57,7 +57,7 @@ void CPLandRush::Update_State(const float& fTimeDelta)
 		D3DXVec3Normalize(&vDir, &vDir);
 		if (bShift)
 		{
-			vDir *= 100.f;
+			vDir *= m_fBoostMulti;
 		}
 		vDir *= fTimeDelta*m_fSpeed;
 		m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS] += vDir;

@@ -2,6 +2,7 @@
 #include "Transform.h"
 #include "PlayerMain.h"
 #include "Camera.h"
+#include "Export_System.h"
 
 USING(Engine)
 
@@ -37,12 +38,12 @@ void CPFly::Update_State(const float& fTimeDelta)
 
 	bool bCheck = false;
 	bool bShift = false;
-	if (GetAsyncKeyState('W'))
+	if (Engine::Get_DIKeyState(DIK_W))
 	{
 		vDir += vRight;
 		bCheck = true;
 	}
-	else if (GetAsyncKeyState('S'))
+	else if (Engine::Get_DIKeyState(DIK_S))
 	{
 		vDir -= vRight;
 		bCheck = true;
@@ -57,7 +58,7 @@ void CPFly::Update_State(const float& fTimeDelta)
 	//	vDir += vRight;
 	//	bCheck = true;
 	//}
-	if (GetAsyncKeyState(VK_SPACE))
+	if (Engine::Get_DIKeyState(DIK_SPACE))
 	{
 		vDir += D3DXVECTOR3(0.f, 1.f, 0.f);
 		bCheck = true;
