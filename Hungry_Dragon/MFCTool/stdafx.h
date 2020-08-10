@@ -53,4 +53,10 @@ using namespace std;
 #endif
 #endif
 
+#ifdef  UNICODE
+typedef const wchar_t* LPCTSTR;
+#else
+typedef const char* LPCTSTR;
+#endif
+
 

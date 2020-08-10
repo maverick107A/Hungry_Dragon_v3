@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include "MFCToolDoc.h"
 
 BEGIN(Engine)
 
