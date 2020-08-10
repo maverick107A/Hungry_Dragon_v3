@@ -16,6 +16,7 @@ private:
 public:
 	HRESULT			Ready_Camera(void);
 	virtual _int	Update_Camera(const _float& _fTimeDelta, LPDIRECT3DDEVICE9& _pGraphicDev, _vec3 _vPos, _vec3* _vLook, _vec3* _vUp, CBaseLand* _pTerrain);
+	virtual _int	Update_CameraMFC(LPDIRECT3DDEVICE9& _pGraphicDev, _vec3 _vPos, _vec3* _vLook, _vec3* _vUp);
 
 public:
 	_vec3			Get_Pos() { return m_vPos; }
