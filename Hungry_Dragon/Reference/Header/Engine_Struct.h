@@ -71,7 +71,6 @@ namespace Engine
 		_ushort		_0;
 		_ushort		_1;
 		_ushort		_2;
-
 	}INDEX16;
 
 	typedef struct INDEX32
@@ -79,7 +78,6 @@ namespace Engine
 		_ulong		_0;
 		_ulong		_1;
 		_ulong		_2;
-
 	}INDEX32;
 
 	//각각의 부품 정보를 저장할 구조체
