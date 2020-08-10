@@ -52,12 +52,12 @@ int Engine::CMonsterMain::Update_Object(const float & fTimeDelta)
 		m_iEvent = MONSTER_DEAD;
 	}
 
-	if (m_fPlayerDistance < 3)
-	{
-		// m_eState = MONSTER_DEACTIVATE;
-		// Dead_Monster(fTimeDelta);
-		// m_bDead = true;
-	}
+	//if (m_fPlayerDistance < 3)
+	//{
+	//	 m_eState = MONSTER_DEACTIVATE;
+	//	 Dead_Monster(fTimeDelta);
+	//	 m_bDead = true;
+	//}
 
 
 
@@ -197,6 +197,13 @@ float Engine::CMonsterMain::Ride_Terrain()
 		float fConst = D3DXVec3Dot(&vNorm, &Vertex3);
 		return ((fConst - vNorm.x*vPos->x - vNorm.z*vPos->z) / vNorm.y) + 1;
 	}
+}
+
+void Engine::CMonsterMain::Kill_Monster(const float & fTimeDelta)
+{
+	 m_eState = MONSTER_DEACTIVATE;
+	 Dead_Monster(fTimeDelta);
+	 m_bDead = true;
 }
 
 HRESULT Engine::CMonsterMain::Add_Component(void)

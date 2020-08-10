@@ -29,9 +29,14 @@ public:
 	virtual void Render_Object(void) override;
 	virtual void LateUpdate_Object(const float& fTimeDelta) override;
 	virtual void State_Change();
+
 public:
 	void	    Dead_Monster(const float& fTimeDelta);
 	float		Ride_Terrain();
+
+	//가의묵이 추가한 충돌확인용 임시 함수
+	void		Kill_Monster(const float& fTimeDelta);
+
 public:
 	void Set_State(MONSTERSTATE _State) { m_eState = _State ; }
 	MONSTERSTATE Get_State() { return m_eState; }
