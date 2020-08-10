@@ -28,16 +28,23 @@ void CPLandRush::Update_State(const float& fTimeDelta)
 {
 	//¶¥ÀÌµ¿
 	D3DXVECTOR3 vDir = { 0.f,0.f,0.f };
+
+	D3DXVECTOR3 vRight = { 0.f,0.f,0.f };
+
+	vRight.y = sinf(m_pPlayer->Get_AngleX());
+	vRight.x = cosf(m_pPlayer->Get_AngleY());
+	vRight.z = sinf(m_pPlayer->Get_AngleY());
+
 	bool bCheck = false;
 	bool bShift = false;
 	if (GetAsyncKeyState('W'))
 	{
-		vDir += m_pPlayer->Get_Look();
+		vDir += vRight;
 		bCheck = true;
 	}
 	else if (GetAsyncKeyState('S'))
 	{
-		vDir -= m_pPlayer->Get_Look();
+		vDir -= vRight;
 		bCheck = true;
 	}
 	if (GetAsyncKeyState(VK_SHIFT))

@@ -40,24 +40,6 @@
     <Filter Include="02. UtilBase\02. Component\01. Camera">
       <UniqueIdentifier>{4e08a7a3-52f4-4831-bf4e-079a226f9723}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. UtilBase\02. Component\02.State">
-      <UniqueIdentifier>{c53d4e61-51f9-4dfa-aaf3-0d27ed7f1a85}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. UtilBase\02. Component\02.State\00.PlayerState">
-      <UniqueIdentifier>{27f34ac7-26b3-4bc4-a823-cd46ee23126e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. UtilBase\02. Component\02.State\00.PlayerState\00.FlyIdle">
-      <UniqueIdentifier>{9aaf4ac8-4770-4942-954c-f340b2234470}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. UtilBase\02. Component\02.State\00.PlayerState\01.Fly">
-      <UniqueIdentifier>{38383493-ca2e-4558-86e8-ebca7899db32}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. UtilBase\02. Component\02.State\00.PlayerState\02.LandIdle">
-      <UniqueIdentifier>{708bac98-3229-457e-bc56-3f1f3a13f2a4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. UtilBase\02. Component\02.State\00.PlayerState\03.LandRush">
-      <UniqueIdentifier>{3acf5e4c-ead5-42b6-a013-d035c63b9a4e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. UtilBase\02. Component\03. Behavior">
       <UniqueIdentifier>{4d246ed3-8638-4422-a103-638155617460}</UniqueIdentifier>
     </Filter>
@@ -66,6 +48,24 @@
     </Filter>
     <Filter Include="02. UtilBase\01. GameObject\01.Monster">
       <UniqueIdentifier>{fcb9cbea-b837-4bd4-bb85-365954e13e92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. UtilBase\02. Component\02. State">
+      <UniqueIdentifier>{c53d4e61-51f9-4dfa-aaf3-0d27ed7f1a85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. UtilBase\02. Component\02. State\00.PlayerState">
+      <UniqueIdentifier>{27f34ac7-26b3-4bc4-a823-cd46ee23126e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. UtilBase\02. Component\02. State\00.PlayerState\00.FlyIdle">
+      <UniqueIdentifier>{9aaf4ac8-4770-4942-954c-f340b2234470}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. UtilBase\02. Component\02. State\00.PlayerState\01.Fly">
+      <UniqueIdentifier>{38383493-ca2e-4558-86e8-ebca7899db32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. UtilBase\02. Component\02. State\00.PlayerState\02.LandIdle">
+      <UniqueIdentifier>{708bac98-3229-457e-bc56-3f1f3a13f2a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. UtilBase\02. Component\02. State\00.PlayerState\03.LandRush">
+      <UniqueIdentifier>{3acf5e4c-ead5-42b6-a013-d035c63b9a4e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -100,19 +100,19 @@
       <Filter>02. UtilBase\01. GameObject\00.Player</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\PFlyIdle.cpp">
-      <Filter>02. UtilBase\02. Component\02.State\00.PlayerState\00.FlyIdle</Filter>
+      <Filter>02. UtilBase\02. Component\02. State\00.PlayerState\00.FlyIdle</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\PFly.cpp">
-      <Filter>02. UtilBase\02. Component\02.State\00.PlayerState\01.Fly</Filter>
+      <Filter>02. UtilBase\02. Component\02. State\00.PlayerState\01.Fly</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\PLandIdle.cpp">
-      <Filter>02. UtilBase\02. Component\02.State\00.PlayerState\02.LandIdle</Filter>
+      <Filter>02. UtilBase\02. Component\02. State\00.PlayerState\02.LandIdle</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\PLandRush.cpp">
-      <Filter>02. UtilBase\02. Component\02.State\00.PlayerState\03.LandRush</Filter>
+      <Filter>02. UtilBase\02. Component\02. State\00.PlayerState\03.LandRush</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\PlayerState.cpp">
-      <Filter>02. UtilBase\02. Component\02.State\00.PlayerState</Filter>
+      <Filter>02. UtilBase\02. Component\02. State\00.PlayerState</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Static_Behavior.cpp">
       <Filter>02. UtilBase\02. Component\03. Behavior</Filter>
@@ -171,19 +171,19 @@
       <Filter>02. UtilBase\01. GameObject\00.Player</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\PFlyIdle.h">
-      <Filter>02. UtilBase\02. Component\02.State\00.PlayerState\00.FlyIdle</Filter>
+      <Filter>02. UtilBase\02. Component\02. State\00.PlayerState\00.FlyIdle</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\PFly.h">
-      <Filter>02. UtilBase\02. Component\02.State\00.PlayerState\01.Fly</Filter>
+      <Filter>02. UtilBase\02. Component\02. State\00.PlayerState\01.Fly</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\PLandIdle.h">
-      <Filter>02. UtilBase\02. Component\02.State\00.PlayerState\02.LandIdle</Filter>
+      <Filter>02. UtilBase\02. Component\02. State\00.PlayerState\02.LandIdle</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\PLandRush.h">
-      <Filter>02. UtilBase\02. Component\02.State\00.PlayerState\03.LandRush</Filter>
+      <Filter>02. UtilBase\02. Component\02. State\00.PlayerState\03.LandRush</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\PlayerState.h">
-      <Filter>02. UtilBase\02. Component\02.State\00.PlayerState</Filter>
+      <Filter>02. UtilBase\02. Component\02. State\00.PlayerState</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Dynamic_Behavior.h">
       <Filter>02. UtilBase\02. Component\03. Behavior</Filter>

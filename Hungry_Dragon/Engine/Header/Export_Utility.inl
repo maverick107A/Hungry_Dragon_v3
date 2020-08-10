@@ -73,11 +73,6 @@ inline bool Find_First(CGameObject * _caller, CGameObject * _callee)
 	return Engine::CCollisionMgr::Find_First(_caller,_callee);
 }
 
-inline bool Player_Monster(CGameObject * _caller, CGameObject * _callee)
-{
-	return Engine::CCollisionMgr::Player_Monster(_caller, _callee);
-}
-
 // Release
 void		Release_Utility(void)
 {

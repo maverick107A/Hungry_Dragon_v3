@@ -3,7 +3,7 @@
 
 Engine::CPlayerMain::CPlayerMain(LPDIRECT3DDEVICE9 pGraphicDev)
 	: CGameObject(pGraphicDev)
-	, m_vLook(0.f, 0.f, 0.f)
+	//, m_vLook(0.f, 0.f, 0.f)
 {
 
 }

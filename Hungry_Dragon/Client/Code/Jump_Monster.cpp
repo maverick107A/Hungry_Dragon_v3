@@ -5,7 +5,7 @@
 #include "Jump_Monster.h"
 
 CJump_Monster::CJump_Monster(LPDIRECT3DDEVICE9 pGraphicDev)
-	: Engine::CMonsterMain::(pGraphicDev)
+	: Engine::CMonsterMain(pGraphicDev)
 {
 }
 
