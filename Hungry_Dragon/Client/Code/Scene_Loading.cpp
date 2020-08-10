@@ -69,6 +69,12 @@ _uint CScene_Loading::Loading_ForStage(void)
 		E_FAIL);
 
 	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"BUFFER_CAVECYLINDER",
+		Engine::BUFFER_CAVECYLINDER),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
 		RESOURCE_STATIC,
 		L"BUFFER_CUBEDRA",
 		Engine::BUFFER_CUBEDRA),

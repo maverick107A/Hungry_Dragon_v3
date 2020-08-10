@@ -3,7 +3,6 @@
 
 #include "Export_Function.h"
 #include "ForestLand.h"
-#include "StageOne.h"
 
 CTerrainPlayer::CTerrainPlayer(LPDIRECT3DDEVICE9 pGraphicDev)
 	: Engine::CGameObject(pGraphicDev)

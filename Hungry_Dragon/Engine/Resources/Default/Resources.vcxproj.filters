@@ -70,6 +70,9 @@
     <Filter Include="00. Resources\02. Particle\01. Part_Wind">
       <UniqueIdentifier>{f3fb3540-780d-4a87-a8b1-4d2779849aeb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00. Resources\00. VIBuffer\53. CaveCylinder">
+      <UniqueIdentifier>{aa60487b-e241-4c01-967a-325101d817c1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\Resources.cpp">
@@ -158,6 +161,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Part_Wind.cpp">
       <Filter>00. Resources\02. Particle\01. Part_Wind</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CaveCylinder.cpp">
+      <Filter>00. Resources\00. VIBuffer\53. CaveCylinder</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -250,6 +256,9 @@
     </ClInclude>
     <ClInclude Include="..\Code\Part_Wind.h">
       <Filter>00. Resources\02. Particle\01. Part_Wind</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\CaveCylinder.h">
+      <Filter>00. Resources\00. VIBuffer\53. CaveCylinder</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
