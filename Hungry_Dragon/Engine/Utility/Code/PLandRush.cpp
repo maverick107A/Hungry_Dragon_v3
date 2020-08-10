@@ -31,9 +31,9 @@ void CPLandRush::Update_State(const float& fTimeDelta)
 
 	D3DXVECTOR3 vRight = { 0.f,0.f,0.f };
 
-	vRight.y = sinf(m_pPlayer->Get_AngleX());
-	vRight.x = cosf(m_pPlayer->Get_AngleY());
-	vRight.z = sinf(m_pPlayer->Get_AngleY());
+	vRight.y = -sinf(m_pPlayer->Get_AngleX());
+	vRight.x = sinf(m_pPlayer->Get_AngleY());
+	vRight.z = cosf(m_pPlayer->Get_AngleY());
 
 	bool bCheck = false;
 	bool bShift = false;

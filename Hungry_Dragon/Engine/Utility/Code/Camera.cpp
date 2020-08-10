@@ -44,6 +44,16 @@ _int Engine::CCamera::Update_Camera(const _float& fTimeDelta, LPDIRECT3DDEVICE9&
 	return 0;
 }
 
+_int CCamera::Update_CameraMFC(LPDIRECT3DDEVICE9 & _pGraphicDev, _vec3 _vPos, _vec3 * _vLook, _vec3 * _vUp) {
+	Move_Camera_InMFC(_pGraphicDev, _vPos, _vLook, _vUp);
+
+	D3DXMATRIX V;
+	D3DXMatrixLookAtLH(&V, &m_vPos, &m_vDir, &m_vUp);
+	_pGraphicDev->SetTransform(D3DTS_VIEW, &V);
+
+	return 0;
+}
+
 void CCamera::Move_Camera(LPDIRECT3DDEVICE9 & pGraphicDev, _vec3 _vPos, float* _fAngleX, float* _fAngleY)
 {
 	POINT tPos = {};

@@ -195,9 +195,13 @@ void CMFCToolView::OnTimer(UINT_PTR nIDEvent) {
 	m_pTransform->Update_Component(0.f);
 	m_pTransform->Get_Info(Engine::INFO_POS, &posVec);
 
-	m_pCamera->Update_Camera(0.f, m_pGraphicDev, posVec, &lookVec, &upVec, nullptr);
+	m_pCamera->Update_CameraMFC(m_pGraphicDev, posVec, &lookVec, &upVec);
 	D3DXVec3Cross(&rightVec,&_vec3(0.f, 1.f, 0.f), &lookVec);
 	D3DXVec3Normalize(&rightVec, &rightVec);
+
+	lookVec *= 0.2f;
+	rightVec *= 0.2f;
+	upVec *= 0.2f;
 
 	/*if (Engine::Get_DIMouseState(DIM_RB) & 0x80)
 	{
@@ -233,9 +237,7 @@ void CMFCToolView::OnTimer(UINT_PTR nIDEvent) {
 
 	}*/
 
-	lookVec *= 0.2f;
-	rightVec *= 0.2f;
-	upVec *= 0.2f;
+
 
 	if (GetAsyncKeyState(VK_RBUTTON) & 0x8000)
 	{
@@ -269,6 +271,10 @@ void CMFCToolView::OnTimer(UINT_PTR nIDEvent) {
 			m_pTransform->Add_Trans(&(-1 * upVec));
 		}
 
+	}
+
+	if (GetAsyncKeyState(VK_SPACE) & 0x8000) {
+		m_pTransform->Set_Trans(&_vec3(0.f, 0.f, -5.f));
 	}
 
 	Invalidate(FALSE);

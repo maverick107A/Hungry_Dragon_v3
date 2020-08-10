@@ -15,7 +15,6 @@ CJump_Monster::~CJump_Monster(void)
 
 HRESULT CJump_Monster::Ready_Object(void)
 {
-
 	Engine::CMonsterMain::Ready_Object();
 	Add_Component();
 	m_fSpeed = 20.f;
