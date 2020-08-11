@@ -96,6 +96,10 @@ void Particle_Create()
 
 
 
+
+
+
+
 inline bool Find_First(CGameObject * _caller, CGameObject * _callee)
 {
 	return Engine::CCollisionMgr::Find_First(_caller,_callee);
@@ -108,7 +112,5 @@ void		Release_Utility(void)
 	CManagement::GetInstance()->DestroyInstance();
 	CRenderer::GetInstance()->DestroyInstance();
 	CObjectPool::GetInstance()->DestroyInstance();
-
 	CParticleMgr::GetInstance()->DestroyInstance();
-
 }
