@@ -39,7 +39,7 @@ HRESULT Engine::CFrameMgr::Ready_Frame(const _tchar* pFrameTag, const _float& fC
 CFrame* Engine::CFrameMgr::Find_Frame(const _tchar* pFrameTag)
 {
 	auto	iter = find_if(m_mapFrame.begin(), m_mapFrame.end(), CTag_Finder(pFrameTag));
-	
+
 	if (iter == m_mapFrame.end())
 		return nullptr;
 

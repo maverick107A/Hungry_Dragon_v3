@@ -96,10 +96,6 @@ HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 
 
 		break;
-	case BUFFER_OBSTACLECUBE:
-		pResources = CObstacleCube::Create(pGraphicDev);
-
-		break;
 	}
 
 	m_pmapResource[wContainerIdx].emplace(pBufferTag, pResources);

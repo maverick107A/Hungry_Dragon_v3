@@ -5,7 +5,6 @@
 #include "SkySphere.h"
 #include "Cave.h"
 #include "Vent.h"
-#include "Obstacle.h"
 #include "CavePlayer.h"
 
 CScene_Cave::CScene_Cave(LPDIRECT3DDEVICE9 pGraphicDev)
@@ -116,14 +115,9 @@ HRESULT CScene_Cave::Ready_Layer_Environment(const _tchar * pLayerTag) {
 	// Cylinder(Cave)
 	FAILED_CHECK_RETURN(Register_GameObject<CCave>(&m_pCave, pLayer, L"Cave"), E_FAIL);
 	FAILED_CHECK_RETURN(Register_GameObject<CVent>(&m_pVent, pLayer, L"Vent"), E_FAIL);
-	
-	
-
-	//m_pVent->Set_Trans(_vec3(0.f,0.f, m_pCave->Get_EndPoint()+4000.f));
+	m_pVent->Set_Trans(_vec3(0.f,0.f, m_pCave->Get_EndPoint()+4000.f));
 	m_mapLayer.emplace(pLayerTag, pLayer);
 
-	//m_pGraphicDev->SetSamplerState(0, D3DSAMP_MIPFILTER, D3DTEXF_NONE);
-	
 	return S_OK;
 }
 
