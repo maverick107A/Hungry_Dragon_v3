@@ -20,8 +20,8 @@ technique Fog
         // Fog States
 
         FogVertexMode = LINEAR; // linear fog function
-        FogStart      = 2000.0f;  
-        FogEnd        = 12000.0f;
+        FogStart      = 100.0f;  
+        FogEnd        = 1000.0f;
 
         FogColor      = 0x00000000; // gray
         FogEnable     = true;       // enable

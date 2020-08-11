@@ -139,6 +139,9 @@
     <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\01.BoardMonster">
       <UniqueIdentifier>{199066d6-f703-4107-b297-5cb7c1cb8a42}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. GameObject\01. Stage\08.Obstacle">
+      <UniqueIdentifier>{d1c627c0-451a-4602-8e16-35bb9e226584}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -237,6 +240,12 @@
     <ClInclude Include="..\Code\Bat_Monster.h">
       <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\01.BoardMonster</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\PlayerUI.h">
+      <Filter>99. Etc\헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Obstacle.h">
+      <Filter>02. GameObject\01. Stage\08.Obstacle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -325,6 +334,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\Bat_Monster.cpp">
       <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\01.BoardMonster</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\PlayerUI.cpp">
+      <Filter>99. Etc\소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Obstacle.cpp">
+      <Filter>02. GameObject\01. Stage\08.Obstacle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
