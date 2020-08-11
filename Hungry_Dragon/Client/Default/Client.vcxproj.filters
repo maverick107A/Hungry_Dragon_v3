@@ -133,6 +133,9 @@
     <Filter Include="02. GameObject\01. Stage\01.Player\01. CavePlayer">
       <UniqueIdentifier>{f5b8d36c-ef58-4879-a700-d2c839d83edc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. GameObject\01. Stage\50. Obstacle">
+      <UniqueIdentifier>{fe4121c5-fec0-4fb9-9dba-b3625704978c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -228,6 +231,9 @@
     <ClInclude Include="..\Code\CavePlayer.h">
       <Filter>02. GameObject\01. Stage\01.Player\01. CavePlayer</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\Obstacle.h">
+      <Filter>02. GameObject\01. Stage\50. Obstacle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -313,6 +319,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\CavePlayer.cpp">
       <Filter>02. GameObject\01. Stage\01.Player\01. CavePlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Obstacle.cpp">
+      <Filter>02. GameObject\01. Stage\50. Obstacle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

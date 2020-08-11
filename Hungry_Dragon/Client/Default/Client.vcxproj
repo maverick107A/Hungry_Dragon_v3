@@ -170,6 +170,7 @@
     <ClInclude Include="..\Code\MainApp.h" />
     <ClInclude Include="..\Code\Monster.h" />
     <ClInclude Include="..\Code\NormalBullet.h" />
+    <ClInclude Include="..\Code\Obstacle.h" />
     <ClInclude Include="..\Code\Ocean.h" />
     <ClInclude Include="..\Code\Player.h" />
     <ClInclude Include="..\Code\Scene_Cave.h" />
@@ -203,6 +204,7 @@
     <ClCompile Include="..\Code\MainApp.cpp" />
     <ClCompile Include="..\Code\Monster.cpp" />
     <ClCompile Include="..\Code\NormalBullet.cpp" />
+    <ClCompile Include="..\Code\Obstacle.cpp" />
     <ClCompile Include="..\Code\Ocean.cpp" />
     <ClCompile Include="..\Code\Player.cpp" />
     <ClCompile Include="..\Code\Scene_Cave.cpp" />

@@ -3,6 +3,7 @@
 
 #include "Define.h"
 #include "GameObject.h"
+#include "Obstacle.h"
 
 BEGIN(Engine)
 
@@ -32,6 +33,14 @@ public:
 	void Set_Speed(float _fSpeed) { m_fForwardSpeed = _fSpeed; }
 	float Get_EndPoint();
 
+public:
+	void Ready_Obstacles();
+	void Release_Obstacles();
+
+	void Instantiate_Obstacle(_vec3& vPos, _float fRotX, _float fRotY);
+	void Deactivate_Obstacle();
+
+
 private:
 	HRESULT		Add_Component(void);
 
@@ -46,7 +55,16 @@ private:
 	bool					m_bActive = true;
 	float					m_fCaveLength = 0.f;
 
-
+	// 간단한 오브젝트 풀링
+	vector<CObstacle*>				m_vecObs;
+	vector<CObstacle*>::iterator	m_iterHead;		// 맨 앞 활성자
+	vector<CObstacle*>::iterator	m_iterTail;		// 맨 앞 비활성자
+	list<CObstacle*>				m_listActiveObs;
+	CObstacle*						m_pObs;
+	_bool							m_bFull = false;
+	_float							m_fSummonTick = 0.f;
+	_float							m_fSummonTime = 1.f;
+	_bool							m_bDelayDeact = false;
 public:
 	static CVent*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 private:
