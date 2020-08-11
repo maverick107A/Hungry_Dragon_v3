@@ -35,7 +35,6 @@ void CPreForm::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CPreForm, CFormView)
-	ON_EN_CHANGE(IDC_MFCEDITBROWSE1, &CPreForm::OnEnChangeBrowseMesh)
 	ON_BN_CLICKED(IDC_BUTTON6, &CPreForm::OnBnClickedVertexAdd)
 	ON_LBN_SELCHANGE(IDC_LIST1, &CPreForm::OnLbnSelchangeVertexList)
 	ON_BN_CLICKED(IDC_BUTTON1, &CPreForm::OnBnClickedVertexSave)
@@ -45,6 +44,7 @@ BEGIN_MESSAGE_MAP(CPreForm, CFormView)
 	ON_BN_CLICKED(IDC_BUTTON4, &CPreForm::OnBnClickedIndexDel)
 	ON_BN_CLICKED(IDC_BUTTON2, &CPreForm::OnBnClickedVertexDel)
 	ON_BN_CLICKED(IDC_BUTTON5, &CPreForm::OnBnClickedMeshSave)
+	ON_BN_CLICKED(IDC_BUTTON9, &CPreForm::OnBnClickedMeshLoad)
 END_MESSAGE_MAP()
 
 
@@ -66,11 +66,6 @@ void CPreForm::Dump(CDumpContext& dc) const
 
 
 // CPreForm 메시지 처리기입니다.
-
-//dat파일 불러오기
-void CPreForm::OnEnChangeBrowseMesh() {
-
-}
 
 //버텍스 새로 추가
 void CPreForm::OnBnClickedVertexAdd() {
@@ -246,7 +241,6 @@ void CPreForm::OnBnClickedIndexSave() {
 
 void CPreForm::OnBnClickedIndexDel() {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	//선택안할때를 넣어주자
 	int index = m_indexListBox.GetCurSel();
 	if (index >= 0 && index < m_indexCount)
 	{
@@ -267,15 +261,43 @@ void CPreForm::Erase_Index(int _delIndex) {
 		m_indexListBox.DeleteString(i);
 	}
 
+	Add_IndexToListBox();
+}
+
+void CPreForm::Add_VertexToListBox() {
 	int index = 0;
-	for (iter_find = m_listIndex.begin(); iter_find != m_listIndex.end(); ++iter_find)
-	{
+	for (; index != m_vertexCount; ++index) {
+		CString tempString;
+		tempString.Format(_T("%d"), index);
+		m_vertexListBox.AddString(tempString);
+	}
+}
+
+void CPreForm::Add_IndexToListBox() {
+	int index = 0;
+	for (; index != m_indexCount; ++index) {
 		CString tempString;
 		tempString.Format(_T("%d"), index);
 		m_indexListBox.AddString(tempString);
-		++index;
 	}
 }
+
+bool CPreForm::Check_Index16(Engine::INDEX16 _index, int _vertexNum)
+{
+	Engine::_ushort sVertexNum=(Engine::_ushort)_vertexNum;
+	if (_index._0 == sVertexNum)
+		return true;
+
+	if (_index._1 == sVertexNum)
+		return true;
+
+	if (_index._2 == sVertexNum)
+		return true;
+
+	return false;
+}
+
+
 
 
 void CPreForm::OnBnClickedVertexDel()
@@ -305,18 +327,38 @@ void CPreForm::OnBnClickedVertexDel()
 
 	--m_vertexCount;
 	
-	for (int i = 0; i < m_vertexCount; ++i)
-	{
-		CString tempString;
-		tempString.Format(_T("%d"), i);
-		m_vertexListBox.AddString(tempString);
-	}
+	Add_VertexToListBox();
 
 	list<Engine::INDEX16>::iterator iter_list = m_listIndex.begin();
-	for (int i = 0; i < m_vertexCount; ++i)
+	m_indexListBox.ResetContent();
+	for (int i = 0; i < m_indexCount; ++i)
 	{
-		//삭제 내일 구현합시다.
+		if (Check_Index16((*iter_list), index))
+		{
+			iter_list = m_listIndex.erase(iter_list);
+		}
+		else
+		{
+			if ((*iter_list)._0 > index)
+			{
+				--(*iter_list)._0;
+			}
+
+			if ((*iter_list)._1 > index)
+			{
+				--(*iter_list)._1;
+			}
+
+			if ((*iter_list)._2 > index)
+			{
+				--(*iter_list)._2;
+			}
+			++iter_list;
+		}
 	}
+
+	m_indexCount = (int)m_listIndex.size();
+	Add_IndexToListBox();
 }
 
 
@@ -343,6 +385,7 @@ void CPreForm::OnBnClickedMeshSave()
 		}
 
 		DWORD dwByte = 0;
+		WriteFile(hFile, &m_vertexCount, sizeof(int), &dwByte, nullptr);
 		for (list<Engine::VTXCOL>::iterator iter = m_listVertex.begin(); iter != m_listVertex.end(); ++iter)
 		{
 			WriteFile(hFile, &(*iter), sizeof(Engine::VTXCOL), &dwByte, nullptr);
@@ -357,3 +400,59 @@ void CPreForm::OnBnClickedMeshSave()
 		CloseHandle(hFile);
 	}
 }
+
+
+void CPreForm::OnBnClickedMeshLoad() {
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	UpdateData(TRUE);
+	CFileDialog Dlg(TRUE, L"dat", L"*.dat", OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, L"Data File(*.dat)|*.dat||", this);
+	TCHAR szPath[MAX_PATH] = L"";
+	GetCurrentDirectory(MAX_PATH, szPath);
+	PathRemoveFileSpec(szPath);
+	lstrcat(szPath, L"\\Data");
+	Dlg.m_ofn.lpstrInitialDir = szPath; // 내가 만든 경로로 ㄱㄱ 
+
+	if (IDOK == Dlg.DoModal()) {
+		m_vertexCount = 0;
+		m_listVertex.clear();
+		m_vertexListBox.ResetContent();
+		m_indexCount = 0;
+		m_listIndex.clear();
+		m_indexListBox.ResetContent();
+
+
+		CString strPath = Dlg.GetPathName();
+		HANDLE hFile = CreateFile(strPath.GetString(), GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
+
+		if (INVALID_HANDLE_VALUE == hFile) {
+			return;
+		}
+
+		DWORD dwByte = 0;
+
+		ReadFile(hFile, &m_vertexCount, sizeof(int), &dwByte, nullptr);
+
+		for (int i = 0; i < m_vertexCount; ++i) 
+		{
+			Engine::VTXCOL tempVertex;
+			ReadFile(hFile, &tempVertex, sizeof(Engine::VTXCOL), &dwByte, nullptr);
+			m_listVertex.emplace_back(tempVertex);
+		}
+
+		ReadFile(hFile, &m_indexCount, sizeof(int), &dwByte, nullptr);
+
+		for (int i = 0; i < m_indexCount; ++i)
+		{
+			Engine::INDEX16 tempIndex;
+			ReadFile(hFile, &tempIndex, sizeof(Engine::INDEX16), &dwByte, nullptr);
+			m_listIndex.emplace_back(tempIndex);
+		}
+
+		CloseHandle(hFile);
+
+		Add_VertexToListBox();
+		Add_IndexToListBox();
+	}
+	UpdateData(FALSE);
+}
+

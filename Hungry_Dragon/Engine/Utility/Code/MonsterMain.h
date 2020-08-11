@@ -8,6 +8,7 @@ BEGIN(Engine)
 
 class CTexture_Cube;
 class CTexture;
+class CMonsterBoard;
 class CTransform;
 class CResources;
 class CTerrain;
@@ -47,7 +48,10 @@ private:
 	void		Key_Input(const float& fTimeDelta);
 
 protected:
-	Engine::CTexture_Cube*		m_pBufferCom = nullptr;
+	Engine::CTexture_Cube*		m_pBufferCubeCom = nullptr;
+	Engine::CMonsterBoard*		m_pBufferBoradCom = nullptr;
+
+	
 	Engine::CTexture*			m_pTextureCom = nullptr;
 	Engine::CBaseLand*			m_pTerrain = nullptr;
 	Engine::CResources*			m_pParticle = nullptr;
@@ -56,10 +60,7 @@ protected:
 	D3DXVECTOR3					vPlayerPos;
 	int							m_iEvent = 0;
 
-	bool						m_bDead = false;
-	bool						m_bActivate = false;
-	bool						m_bFirst = true;
-
+	FRAME								m_tFrame;
 	MONSTERSTATE						m_preState;
 	MONSTERSTATE						m_eState;
 
@@ -69,14 +70,13 @@ protected:
 	float						m_fDistance;
 	float						m_fSpeed;
 	float						m_fScale;
-
+	float						m_prefScale;
 
 public:
 	static CMonsterMain*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 public:
 	virtual void Free(void) override;
-public:
-	list<Engine::CResources*>  m_arrParticle;
+
 };
 
 END

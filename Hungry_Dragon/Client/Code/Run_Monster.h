@@ -26,7 +26,7 @@ private:
 	HRESULT		Add_Component(void);
 	void LateUpdate_Object(const float & fTimeDelta);
 public:
-	static CRun_Monster*	Create(LPDIRECT3DDEVICE9 pGraphicDev, D3DXVECTOR3 _pos);
+	static CRun_Monster*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 private:
 	virtual void Free(void) override;
 
