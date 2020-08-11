@@ -182,6 +182,7 @@
     <ClInclude Include="..\Code\Terrain.h" />
     <ClInclude Include="..\Code\TerrainPlayer.h" />
     <ClInclude Include="..\Code\TestPlayer.h" />
+    <ClInclude Include="..\Code\PlayerUI.h" />
     <ClInclude Include="..\Code\Vent.h" />
     <ClInclude Include="..\Header\Define.h" />
     <ClInclude Include="Client.h" />
@@ -215,6 +216,7 @@
     <ClCompile Include="..\Code\Terrain.cpp" />
     <ClCompile Include="..\Code\TerrainPlayer.cpp" />
     <ClCompile Include="..\Code\TestPlayer.cpp" />
+    <ClCompile Include="..\Code\PlayerUI.cpp" />
     <ClCompile Include="..\Code\Vent.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="stdafx.cpp">
