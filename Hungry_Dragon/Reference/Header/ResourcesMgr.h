@@ -20,7 +20,7 @@
 #include "SkyCube.h"
 #include "Texture_Plane.h"
 #include "Texture_Square.h"
-
+#include "MonsterBoard.h"
 #include "Texture.h"
 
 #include "Part_Atk.h"

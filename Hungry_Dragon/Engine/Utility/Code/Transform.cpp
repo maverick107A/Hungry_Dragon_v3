@@ -167,7 +167,7 @@ const _matrix * CTransform::Compute_LookAtTarget(const _vec3 * pTargetPos)
 void CTransform::Chase_Target(const _vec3 * pTargetPos, const _float & fSpeed)
 {
 	_vec3		vDir = *pTargetPos - m_vInfo[INFO_POS];
-
+	vDir.y = 0;
 	m_vInfo[INFO_POS] += *D3DXVec3Normalize(&vDir, &vDir) * fSpeed;
 
 	//_matrix		matScale, matRot, matTrans;

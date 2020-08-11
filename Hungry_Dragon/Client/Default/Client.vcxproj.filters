@@ -43,18 +43,6 @@
     <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster">
       <UniqueIdentifier>{05b9bf4e-b12f-417a-83db-bd3eef034c8c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\01. Chase">
-      <UniqueIdentifier>{c5100102-17dd-47fc-aead-a71714ad1276}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\02. Running">
-      <UniqueIdentifier>{87c8498e-e0ba-4b9f-a4c6-419710cb5b94}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\03. Jumping">
-      <UniqueIdentifier>{16b008d2-d748-431f-aae7-6a35ff54d643}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\04. Fly">
-      <UniqueIdentifier>{8bc9e4e4-7f36-4baa-aa4a-e2271510a183}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\01. Terrain">
       <UniqueIdentifier>{c2aa2371-a97d-42d1-afb9-facbee36ad90}</UniqueIdentifier>
     </Filter>
@@ -109,6 +97,27 @@
     <Filter Include="01. Scene\Scene_PT">
       <UniqueIdentifier>{8da5808b-3fa5-4c62-b2fc-d769bd219cee}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\01.BilboardMonster">
+      <UniqueIdentifier>{18f5c414-e61f-4984-a51c-dea0f937afb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00. CubeMonster">
+      <UniqueIdentifier>{447af21f-3654-4ea6-8efc-3f04d1410ae7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00. CubeMonster\01. Chase">
+      <UniqueIdentifier>{c5100102-17dd-47fc-aead-a71714ad1276}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00. CubeMonster\02. Running">
+      <UniqueIdentifier>{87c8498e-e0ba-4b9f-a4c6-419710cb5b94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00. CubeMonster\03. Jumping">
+      <UniqueIdentifier>{16b008d2-d748-431f-aae7-6a35ff54d643}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00. CubeMonster\04. Fly">
+      <UniqueIdentifier>{8bc9e4e4-7f36-4baa-aa4a-e2271510a183}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\01.BilboardMonster\00.Bat_Monster">
+      <UniqueIdentifier>{2325b8c0-8ee3-4e6a-9acc-5c7c392e753c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -142,16 +151,16 @@
       <Filter>01. Scene\20. Scene_Monster</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Chase_Monster.h">
-      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\01. Chase</Filter>
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00. CubeMonster\01. Chase</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Run_Monster.h">
-      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\02. Running</Filter>
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00. CubeMonster\02. Running</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Jump_Monster.h">
-      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\03. Jumping</Filter>
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00. CubeMonster\03. Jumping</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Fly_Monster.h">
-      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\04. Fly</Filter>
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00. CubeMonster\04. Fly</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Player.h">
       <Filter>02. GameObject\01. Stage\01. Scene_Monster\02. Player</Filter>
@@ -192,6 +201,12 @@
     <ClInclude Include="..\Code\Monster.h">
       <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\GameMgr.h">
+      <Filter>02. GameObject\01. Stage\05.GameMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Bat_Monster.h">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\01.BilboardMonster\00.Bat_Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -216,16 +231,16 @@
       <Filter>01. Scene\20. Scene_Monster</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Chase_Monster.cpp">
-      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\01. Chase</Filter>
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00. CubeMonster\01. Chase</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Run_Monster.cpp">
-      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\02. Running</Filter>
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00. CubeMonster\02. Running</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Jump_Monster.cpp">
-      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\03. Jumping</Filter>
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00. CubeMonster\03. Jumping</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Fly_Monster.cpp">
-      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\04. Fly</Filter>
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00. CubeMonster\04. Fly</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Player.cpp">
       <Filter>02. GameObject\01. Stage\01. Scene_Monster\02. Player</Filter>
@@ -268,6 +283,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Monster.cpp">
       <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Bat_Monster.cpp">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\01.BilboardMonster\00.Bat_Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

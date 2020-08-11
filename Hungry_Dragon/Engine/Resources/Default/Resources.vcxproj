@@ -168,6 +168,7 @@ call CopyResources.bat</Command>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Code\MonsterBoard.cpp" />
     <ClCompile Include="..\Code\Part_Atk.cpp" />
     <ClCompile Include="..\Code\BaseBoard.cpp" />
     <ClCompile Include="..\Code\BaseLand.cpp" />
@@ -200,6 +201,7 @@ call CopyResources.bat</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Header\Export_Resources.h" />
+    <ClInclude Include="..\Code\MonsterBoard.h" />
     <ClInclude Include="..\Code\Part_Atk.h" />
     <ClInclude Include="..\Code\BaseBoard.h" />
     <ClInclude Include="..\Code\BaseLand.h" />

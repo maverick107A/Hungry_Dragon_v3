@@ -68,6 +68,10 @@ void		Set_Object_LayerMap(CLayer *  _Layer)
 
 }
 
+
+
+//Collision
+
 inline bool Find_First(CGameObject * _caller, CGameObject * _callee)
 {
 	return Engine::CCollisionMgr::Find_First(_caller,_callee);
@@ -78,6 +82,30 @@ inline bool Player_Monster(CGameObject * _caller, CGameObject * _callee)
 	return Engine::CCollisionMgr::Player_Monster(_caller, _callee);
 }
 
+
+
+//Particle
+
+
+void Particle_Update(const float& fTimeDelta)
+{
+	CParticleMgr::GetInstance()->Particle_Update(fTimeDelta);
+}
+
+void Particle_Render()
+{
+	CParticleMgr::GetInstance()->Particle_Render();
+}
+
+void Particle_Create(Engine::CResources* _tempParticle)
+{
+	CParticleMgr::GetInstance()->Particle_Create(_tempParticle);
+}
+
+
+
+
+
 // Release
 void		Release_Utility(void)
 {
@@ -85,4 +113,6 @@ void		Release_Utility(void)
 	CManagement::GetInstance()->DestroyInstance();
 	CRenderer::GetInstance()->DestroyInstance();
 	CObjectPool::GetInstance()->DestroyInstance();
+	CParticleMgr::GetInstance()->DestroyInstance();
+
 }
