@@ -36,6 +36,7 @@ public:
 
 private:
 	D3DXMATRIX		matBilboard;
+	float m_fHeight = 0;
 private:
 	virtual void Free(void) override;
 

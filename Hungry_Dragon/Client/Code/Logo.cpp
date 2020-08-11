@@ -19,6 +19,8 @@ HRESULT CLogo::Ready_Scene(void) {
 	FAILED_CHECK_RETURN(Ready_Resource(m_pGraphicDev, RESOURCE_END), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_Layer_UI(L"UI"), E_FAIL);
 
+
+
 	m_pLoading = CScene_Loading::Create(m_pGraphicDev, LOADING_STAGE);
 	NULL_CHECK_RETURN(m_pLoading, E_FAIL);
 
@@ -32,8 +34,8 @@ _int CLogo::Update_Scene(const _float& fTimeDelta) {
 		if (GetAsyncKeyState(VK_RETURN) & 0x8000) {
 			Engine::CScene*		pScene = nullptr;
 
-			//pScene = CScene_Proto::Create(m_pGraphicDev);
-			pScene = CScene_Cave::Create(m_pGraphicDev);
+			pScene = CScene_Proto::Create(m_pGraphicDev);
+			//pScene = CScene_Cave::Create(m_pGraphicDev);
 			NULL_CHECK_RETURN(pScene, -1);
 			return -1;
 		}

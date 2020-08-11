@@ -23,16 +23,24 @@ HRESULT CFly_Monster::Ready_Object(void)
 
 int CFly_Monster::Update_Object(const float & fTimeDelta)
 {
-	if (m_eState == MONSTER_REBORN)
+
+	if (m_eState == MONSTER_REBORN && m_eState != MONSTER_DEACTIVATE)
 	{
- 		m_pTransform->Set_Trans(&m_vFirstPos);
-		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain() + m_fHeight; 
+		m_pTransform->Set_Trans(&m_vFirstPos);
+		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain() + m_fHeight; ;
 		m_pTransform->Set_Scale(1);
 		m_iEvent = OBJ_NOEVENT;
 		m_eState = MONSTER_IDLE;
 	}
 
-	Engine::CMonsterMain::Update_Object(fTimeDelta);
+
+	if (MONSTER_DEAD == Engine::CMonsterMain::Update_Object(fTimeDelta))
+	{
+		m_eState = MONSTER_REBORN;
+
+		return m_iEvent;
+	}
+
 
 	if (m_eState == MONSTER_ACTIVATE)
 	{

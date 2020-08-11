@@ -16,7 +16,7 @@ HRESULT CRun_Monster::Ready_Object(void)
 {
 	Engine::CMonsterMain::Ready_Object();
 	Add_Component();
-	m_fSpeed = 30.f;
+	m_fSpeed = 10.f;
 	m_eState = MONSTER_REBORN;
 	return S_OK;
 }
@@ -25,19 +25,22 @@ int CRun_Monster::Update_Object(const float & fTimeDelta)
 {
 
 
-	if (m_eState == MONSTER_REBORN)
+	if (m_eState == MONSTER_REBORN && m_eState != MONSTER_DEACTIVATE)
 	{
 		m_pTransform->Set_Trans(&m_vFirstPos);
 		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
 		m_pTransform->Set_Scale(1);
 		m_iEvent = OBJ_NOEVENT;
 		m_eState = MONSTER_IDLE;
-		m_iEvent = 0;
-
 	}
 
-	Engine::CMonsterMain::Update_Object(fTimeDelta);
 
+	if (MONSTER_DEAD == Engine::CMonsterMain::Update_Object(fTimeDelta))
+	{
+		m_eState = MONSTER_REBORN;
+
+		return m_iEvent;
+	}
 
 
 	if (m_eState == MONSTER_ACTIVATE)

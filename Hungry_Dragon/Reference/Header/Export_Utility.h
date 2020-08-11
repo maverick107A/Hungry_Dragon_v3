@@ -50,10 +50,10 @@ inline  void		Set_Object_LayerMap(CLayer *  _Layer);
 inline  static bool	Find_First(CGameObject* _caller,CGameObject* _callee);
 
 //Particle
-
+inline void Ready_ParticleMgr(LPDIRECT3DDEVICE9 _pGraphicDev);
 inline void Particle_Update(const float& fTimeDelta);
 inline void Particle_Render();
-inline void Particle_Create(Engine::CResources* _tempParticle);
+inline void Particle_Create();
 
 // Release
 inline void		Release_Utility(void);

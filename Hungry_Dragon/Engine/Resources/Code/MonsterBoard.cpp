@@ -99,6 +99,10 @@ HRESULT CMonsterBoard::Update_Animation(const _float & fTimeDelta)
 	pVertex[2] = VTXTEX(1.0f, 1.0f, -1.0f       , 0.0f, 0.0f, -1.0f,          m_fTexU *  (int)m_fFrameUCnt        , m_fTexV *  m_fFrameVCnt);
 	pVertex[3] = VTXTEX(1.0f, -1.0f, -1.0f      , 0.0f, 0.0f, -1.0f,          m_fTexU *  (int)m_fFrameUCnt        , m_fTexV * (m_fFrameVCnt - 1));
 
+
+
+
+
 	m_pVB->Unlock();
 
 

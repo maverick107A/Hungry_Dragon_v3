@@ -18,13 +18,14 @@ private:
 	explicit CParticleMgr(void);
 	virtual ~CParticleMgr(void);
 public:
+	void Ready_ParticleMgr(LPDIRECT3DDEVICE9 _pGraphicDev);
 	void Particle_Update(const float& fTimeDelta);
 	void Particle_Render();
-	void Particle_Create(Engine::CResources* _tempParticle);
+	void Particle_Create();
 
 private:
 	list<Engine::CResources*>  m_arrParticle;
-
+	LPDIRECT3DDEVICE9		m_pGraphicDev;
 public:
 	virtual void Free(void) override;
 };

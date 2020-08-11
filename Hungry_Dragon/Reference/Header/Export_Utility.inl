@@ -70,23 +70,12 @@ void		Set_Object_LayerMap(CLayer *  _Layer)
 
 
 
-//Collision
-
-inline bool Find_First(CGameObject * _caller, CGameObject * _callee)
-{
-	return Engine::CCollisionMgr::Find_First(_caller,_callee);
-}
-
-
-inline bool Player_Monster(CGameObject * _caller, CGameObject * _callee)
-{
-	return Engine::CCollisionMgr::Player_Monster(_caller, _callee);
-}
-
-
 
 //Particle
-
+void Ready_ParticleMgr(LPDIRECT3DDEVICE9 _pGraphicDev)
+{
+	CParticleMgr::GetInstance()->Ready_ParticleMgr(_pGraphicDev);
+}
 
 void Particle_Update(const float& fTimeDelta)
 {
@@ -98,12 +87,23 @@ void Particle_Render()
 	CParticleMgr::GetInstance()->Particle_Render();
 }
 
-void Particle_Create(Engine::CResources* _tempParticle)
+void Particle_Create()
 {
-	CParticleMgr::GetInstance()->Particle_Create(_tempParticle);
+	CParticleMgr::GetInstance()->Particle_Create();
 }
 
 
+
+
+
+
+
+
+
+inline bool Find_First(CGameObject * _caller, CGameObject * _callee)
+{
+	return Engine::CCollisionMgr::Find_First(_caller,_callee);
+}
 
 // Release
 void		Release_Utility(void)
@@ -113,5 +113,4 @@ void		Release_Utility(void)
 	CRenderer::GetInstance()->DestroyInstance();
 	CObjectPool::GetInstance()->DestroyInstance();
 	CParticleMgr::GetInstance()->DestroyInstance();
-
 }

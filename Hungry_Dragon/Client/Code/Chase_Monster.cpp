@@ -24,27 +24,32 @@ HRESULT CChase_Monster::Ready_Object(void)
 
 int CChase_Monster::Update_Object(const float & fTimeDelta)
 {
-
-	if (m_eState == MONSTER_REBORN)
+	if (m_eState == MONSTER_REBORN && m_eState != MONSTER_DEACTIVATE)
 	{
 		m_pTransform->Set_Trans(&m_vFirstPos);
 		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
-		m_pTransform->Set_Scale(1);  
-		//m_bFirst = false;	
-		//m_bDead = false;
+		m_pTransform->Set_Scale(1);
 		m_iEvent = OBJ_NOEVENT;
 		m_eState = MONSTER_IDLE;
 	}
 
-	Engine::CMonsterMain::Update_Object(fTimeDelta);
+
+	if(MONSTER_DEAD == Engine::CMonsterMain::Update_Object(fTimeDelta))
+	{
+		m_eState = MONSTER_REBORN;
+
+		return m_iEvent;
+	}
 
 
-	if (m_eState == MONSTER_ACTIVATE)
+
+
+	if (m_eState == MONSTER_ACTIVATE && m_eState != MONSTER_DEACTIVATE)
 	{
 		vPlayerPos = { m_vPlayerPos.x  , 0.f  , m_vPlayerPos.z };
 		m_pTransform->Chase_Target(&vPlayerPos, (fTimeDelta * m_fSpeed));
 		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
-		
+
 	}
 
 	return m_iEvent;
@@ -52,7 +57,6 @@ int CChase_Monster::Update_Object(const float & fTimeDelta)
 
 void CChase_Monster::Render_Object(void)
 {
-	
 	m_pTransform->Set_Transform(m_pGraphicDev);
 	m_pTextureCom->Set_Texture(1);
 	m_pBufferCubeCom->Render_Buffer();
