@@ -1,4 +1,5 @@
 #include "MonsterMain.h"
+
 #include "Export_Function.h"
 
 Engine::CMonsterMain::CMonsterMain(LPDIRECT3DDEVICE9 pGraphicDev)
@@ -19,13 +20,9 @@ HRESULT Engine::CMonsterMain::Ready_Object(void)
 
 int Engine::CMonsterMain::Update_Object(const float & fTimeDelta)
 {
-
-
-	m_vPlayerPos = ((Engine::CLayer*)(this->Get_Parent()))->Get_PlayerPos();
+	m_vPlayerPos=((Engine::CLayer*)(this->Get_Parent()))->Get_PlayerPos();
 
 	Engine::CGameObject::Update_Object(fTimeDelta);
-
-
 
 	D3DXVECTOR3	vMonsterPos;
 	m_pTransform->Get_Info(Engine::INFO_POS, &vMonsterPos);
@@ -35,34 +32,34 @@ int Engine::CMonsterMain::Update_Object(const float & fTimeDelta)
 	Dir.y = 0;
 	m_fDistance = D3DXVec3Length(&Dir);
 
-	if (m_eState != MONSTER_DYING &&  m_eState != MONSTER_DEACTIVATE)
+
+	if (m_fDistance < 200)
 	{
-		if (m_fDistance < 200 && m_eState != MONSTER_DYING)
-		{
-			m_eState = MONSTER_ACTIVATE;
-
-		}
-		else if (m_eState != MONSTER_DYING)
-		{
-			m_eState = MONSTER_IDLE;
-
-		}
+		m_eState = MONSTER_ACTIVATE;
+		m_bActivate = true;  
 	}
+	else
+	{		
+		m_eState = MONSTER_IDLE;
+		m_bActivate = false;
+	}
+
 	if (m_fDistance > 7000)
 	{
 		m_fParticle_Speed = 0;
+		m_bFirst = true;
 		m_eState = MONSTER_REBORN;
 		m_iEvent = MONSTER_DEAD;
 	}
 
-
 	//if (m_fPlayerDistance < 3)
 	//{
-	//	Engine::Particle_Update(fTimeDelta);
-	//	m_eState = MONSTER_DEACTIVATE;
-	//	Dead_Monster(fTimeDelta);
-	//
+	//	 m_eState = MONSTER_DEACTIVATE;
+	//	 Dead_Monster(fTimeDelta);
+	//	 m_bDead = true;
 	//}
+
+
 
 
 	State_Change();
@@ -72,17 +69,16 @@ int Engine::CMonsterMain::Update_Object(const float & fTimeDelta)
 
 void Engine::CMonsterMain::Render_Object(void)
 {
-	//if (m_preState == MONSTER_DEACTIVATE)
-	//{
-	//	Engine::Particle_Render();
-	//}
-	Engine::Particle_Render();
+	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end(); ++iter)
+	{
+		(*iter)->Render_Buffer();
+	}
 }
 
 void Engine::CMonsterMain::LateUpdate_Object(const float & fTimeDelta)
 {
-	if (m_eState == MONSTER_DEACTIVATE)
-		m_pTransform->Set_Trans(&m_vPlayerPos);
+	if(m_eState == MONSTER_DEACTIVATE)
+	m_pTransform->Set_Trans(&m_vPlayerPos);
 }
 
 void Engine::CMonsterMain::State_Change()
@@ -95,34 +91,58 @@ void Engine::CMonsterMain::State_Change()
 
 void Engine::CMonsterMain::Dead_Monster(const float & fTimeDelta)
 {
-	m_pTransform->Set_Trans(&m_vPlayerPos);
-	m_pTransform->Set_Add_Scale(-0.01f);
-	m_prefScale = m_pTransform->m_vScale.x;
+	//m_pTransform->Set_Trans(&m_vPlayerPos);
+	m_pTransform->Set_Add_Scale(-0.1f);
 	m_fParticle_Speed += fTimeDelta;
 
-	if (m_fParticle_Speed > 0.1f)
+	if(m_fParticle_Speed > 0.1f)
 	{
+		Engine::_vec3 vOrigin = Engine::_vec3(0.f, 0.f, 0.f);
+		Engine::BoundingBox tempBoundingBox;
+		tempBoundingBox.vMax = Engine::_vec3(100.f, 100.f, 100.f);
+		tempBoundingBox.vMin = Engine::_vec3(-100.f, -100.f, -100.f);
+		Engine::CResources* tempParticle = Engine::Get_Particle(m_pGraphicDev, Engine::PART_ATK, tempBoundingBox, vOrigin);
 
-
-		// 파티클 매니져
-		Engine::Particle_Create();
-
+		static_cast<Engine::CPart_Atk*>(tempParticle)->Set_Texture(L"../../Asset/snowflake.dds");
+		m_arrParticle.emplace_back(tempParticle);
 		m_fParticle_Speed = 0;
 	}
 
+	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end();) {
+		int life = (*iter)->Update_Component(fTimeDelta);
+
+		if (life == 0) {
+			++iter;
+		}
+		else {
+			Safe_Release(*iter);
+			iter = m_arrParticle.erase(iter);
+		}
+
+	}
 
 	if (m_pTransform->m_vScale.x < 0 || m_pTransform->m_vScale.y < 0 || m_pTransform->m_vScale.z < 0)
-	{
+	{		
 		m_fParticle_Speed = 0;
-		m_iEvent = MONSTER_DEAD;
-		m_eState = MONSTER_DYING;
+		m_bFirst = true;
+ 		m_iEvent = MONSTER_DEAD;
+		m_eState = MONSTER_REBORN;
+
+
+		// 파티클 비워주는 함수.
+		for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end();)
+		{
+			Engine::Safe_Release((*iter));
+			iter = m_arrParticle.erase(iter);
+		}
+		m_arrParticle.clear();
 	}
 
 }
 
 float Engine::CMonsterMain::Ride_Terrain()
 {
-	CGameObject* pGroundObj = ((Engine::CLayer*)(Get_Parent()))->Get_Object(L"BackGround", Engine::Find_First, nullptr);
+	CGameObject* pGroundObj=((Engine::CLayer*)(Get_Parent()))->Get_Object(L"BackGround", Engine::Find_First, nullptr);
 	m_pTerrain = static_cast<Engine::CBaseLand*>(pGroundObj->Get_Component(L"Com_Buffer", Engine::ID_STATIC));
 
 	if (m_pTerrain == nullptr)
@@ -161,7 +181,7 @@ float Engine::CMonsterMain::Ride_Terrain()
 		float fConst = D3DXVec3Dot(&vNorm, &Vertex1);
 		return ((fConst - vNorm.x*vPos->x - vNorm.z*vPos->z) / vNorm.y) + 1;
 
-
+	
 	}
 	else
 	{
@@ -181,20 +201,33 @@ float Engine::CMonsterMain::Ride_Terrain()
 
 void Engine::CMonsterMain::Kill_Monster(const float & fTimeDelta)
 {
-	Engine::Particle_Update(fTimeDelta);
-	m_eState = MONSTER_DEACTIVATE;
-	Dead_Monster(fTimeDelta);
-
+	 m_eState = MONSTER_DEACTIVATE;
+	 Dead_Monster(fTimeDelta);
+	 m_bDead = true;
 }
 
 HRESULT Engine::CMonsterMain::Add_Component(void)
 {
 	Engine::CComponent*		pComponent = nullptr;
 
+	//// buffer
+	//pComponent = m_pBufferCom = dynamic_cast<Engine::CTexture_Cube*>
+	//	(Engine::Clone(RESOURCE_STATIC, L"Buffer_CubeTex"));
+	//NULL_CHECK_RETURN(pComponent, E_FAIL);
+	//m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Buffer", pComponent);
+
+	//// Texture
+	//pComponent = m_pTextureCom = dynamic_cast<Engine::CTexture*>
+	//	(Engine::Clone(RESOURCE_STAGE, L"Texture_BoxHead"));
+	//NULL_CHECK_RETURN(pComponent, E_FAIL);
+	//m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Texture", pComponent);
+
 	//Transform
 	pComponent = m_pTransform = Engine::CTransform::Create();
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_Transform", pComponent);
+
+	//m_pBufferCom
 
 	return S_OK;
 }
@@ -216,5 +249,13 @@ Engine::CMonsterMain * Engine::CMonsterMain::Create(LPDIRECT3DDEVICE9 pGraphicDe
 
 void Engine::CMonsterMain::Free(void)
 {
+
+	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end();) {
+		Engine::Safe_Release((*iter));
+		iter = m_arrParticle.erase(iter);
+	}
+	m_arrParticle.clear();
+
+
 	Engine::CGameObject::Free();
 }

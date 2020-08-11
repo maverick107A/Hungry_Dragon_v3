@@ -23,24 +23,18 @@ HRESULT CFly_Monster::Ready_Object(void)
 
 int CFly_Monster::Update_Object(const float & fTimeDelta)
 {
-
-	if (m_eState == MONSTER_REBORN && m_eState != MONSTER_DEACTIVATE)
+	if (m_eState == MONSTER_REBORN)
 	{
-		m_pTransform->Set_Trans(&m_vFirstPos);
-		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain() + m_fHeight; ;
+ 		m_pTransform->Set_Trans(&m_vFirstPos);
+		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain() + m_fHeight; 
 		m_pTransform->Set_Scale(1);
+		//m_bFirst = false;	
+		//m_bDead = false;
 		m_iEvent = OBJ_NOEVENT;
 		m_eState = MONSTER_IDLE;
 	}
 
-
-	if (MONSTER_DEAD == Engine::CMonsterMain::Update_Object(fTimeDelta))
-	{
-		m_eState = MONSTER_REBORN;
-
-		return m_iEvent;
-	}
-
+	Engine::CMonsterMain::Update_Object(fTimeDelta);
 
 	if (m_eState == MONSTER_ACTIVATE)
 	{
@@ -62,7 +56,7 @@ void CFly_Monster::Render_Object(void)
 {
 	m_pTransform->Set_Transform(m_pGraphicDev);
 	m_pTextureCom->Set_Texture(2);
-	m_pBufferCubeCom->Render_Buffer();
+	m_pBufferCom->Render_Buffer();
 	Engine::CMonsterMain::Render_Object();
 }
 
@@ -71,7 +65,7 @@ HRESULT CFly_Monster::Add_Component(void)
 	Engine::CComponent*		pComponent = nullptr;
 
 	// buffer
-	pComponent = m_pBufferCubeCom = dynamic_cast<Engine::CTexture_Cube*>
+	pComponent = m_pBufferCom = dynamic_cast<Engine::CTexture_Cube*>
 		(Engine::Clone(RESOURCE_STATIC, L"Buffer_CubeTex"));
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Buffer", pComponent);
@@ -101,9 +95,11 @@ void CFly_Monster::Shooting(void)
 }
 
 
-CFly_Monster * CFly_Monster::Create(LPDIRECT3DDEVICE9 pGraphicDev)
+CFly_Monster * CFly_Monster::Create(LPDIRECT3DDEVICE9 pGraphicDev, D3DXVECTOR3 _pos)
 {
 	CFly_Monster*		pInstance = new CFly_Monster(pGraphicDev);
+
+	pInstance->Set_Pos(_pos);
 
 	if (FAILED(pInstance->Ready_Object()))
 		Engine::Safe_Release(pInstance);

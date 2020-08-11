@@ -30,12 +30,12 @@ Engine::CCaveCylinder::~CCaveCylinder(void)
 HRESULT Engine::CCaveCylinder::Ready_Buffer(void)			// 어쨋든 원기둥 내면 그리는거임 영어로 주석 달아놓음
 {
 	// 실린더 세팅
-	m_fHeight = 2000.f;		// 원기둥 시야
-	m_uStackCount = 200;		// 절단면
+	m_fHeight = 1000.f;		// 원기둥 시야
+	m_uStackCount = 100;		// 절단면
 	m_fStackHeight = m_fHeight / m_uStackCount;	
-	m_fRadius = 25.f;			// 원기둥 반지름
+	m_fRadius = 10.f;			// 원기둥 반지름
 	m_uRingCount = m_uStackCount + 1;
-	m_uSliceCount = 48;			// 세로 절단면
+	m_uSliceCount = 24;			// 세로 절단면
 	m_uVtxNum = 0;
 
 	// Compute vertices for each stack ring starting at the bottom and moving up.

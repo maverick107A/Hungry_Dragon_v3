@@ -30,7 +30,7 @@ public:
 	void Shooting(void);
 
 public:
-	static CFly_Monster*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
+	static CFly_Monster*	Create(LPDIRECT3DDEVICE9 pGraphicDev, D3DXVECTOR3 _pos);
 
 private:
 	virtual void Free(void) override;

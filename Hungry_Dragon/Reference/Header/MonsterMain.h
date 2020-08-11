@@ -8,7 +8,6 @@ BEGIN(Engine)
 
 class CTexture_Cube;
 class CTexture;
-class CMonsterBoard;
 class CTransform;
 class CResources;
 class CTerrain;
@@ -18,7 +17,7 @@ class CAtkPart;
 class ENGINE_DLL CMonsterMain : public Engine::CGameObject
 {
 protected:
-	enum MONSTERSTATE { MONSTER_IDLE, MONSTER_REBORN , MONSTER_ACTIVATE , MONSTER_DEACTIVATE, MONSTER_DYING , MONSTER_END };
+	enum MONSTERSTATE { MONSTER_IDLE, MONSTER_REBORN , MONSTER_ACTIVATE , MONSTER_DEACTIVATE, MONSTER_END };
 
 protected:
 	explicit CMonsterMain(LPDIRECT3DDEVICE9 pGraphicDev);
@@ -48,10 +47,7 @@ private:
 	void		Key_Input(const float& fTimeDelta);
 
 protected:
-	Engine::CTexture_Cube*		m_pBufferCubeCom = nullptr;
-	Engine::CMonsterBoard*		m_pBufferBoradCom = nullptr;
-
-	
+	Engine::CTexture_Cube*		m_pBufferCom = nullptr;
 	Engine::CTexture*			m_pTextureCom = nullptr;
 	Engine::CBaseLand*			m_pTerrain = nullptr;
 	Engine::CResources*			m_pParticle = nullptr;
@@ -60,7 +56,10 @@ protected:
 	D3DXVECTOR3					vPlayerPos;
 	int							m_iEvent = 0;
 
-	FRAME								m_tFrame;
+	bool						m_bDead = false;
+	bool						m_bActivate = false;
+	bool						m_bFirst = true;
+
 	MONSTERSTATE						m_preState;
 	MONSTERSTATE						m_eState;
 
@@ -70,13 +69,14 @@ protected:
 	float						m_fDistance;
 	float						m_fSpeed;
 	float						m_fScale;
-	float						m_prefScale;
+
 
 public:
 	static CMonsterMain*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 public:
 	virtual void Free(void) override;
-
+public:
+	list<Engine::CResources*>  m_arrParticle;
 };
 
 END

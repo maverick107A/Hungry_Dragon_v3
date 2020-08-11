@@ -82,22 +82,15 @@ HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 	case BUFFER_SKYSPHERE:
 		pResources = CSkyCube::Create(pGraphicDev);
 		break;
-
-	case SPRITE_ANIM :
-		pResources = CMonsterBoard::Create(pGraphicDev, dwCntX, dwCntZ);
-		break;
-
 	case BUFFER_CAVECYLINDER:
 		pResources = CCaveCylinder::Create(pGraphicDev);
+
 		break;
 	case BUFFER_VENTCUBE:
 		pResources = CVentCube::Create(pGraphicDev);
 		break;
 	case BUFFER_CUSTOMMESH:
 		pResources = CVICustom::Create(pGraphicDev,L"../../Asset/VIMesh/Test.dat");
-		break;
-	case BUFFER_OBSTACLECUBE:
-		pResources = CObstacleCube::Create(pGraphicDev);
 		break;
 	}
 
@@ -132,10 +125,8 @@ void Engine::CResourcesMgr::Free(void)
 	Safe_Delete_Array(m_pmapResource);
 }
 
-CResources* CResourcesMgr::Get_Particle(LPDIRECT3DDEVICE9 pGraphicDev, PARTICLEID _ePartID, BoundingBox _boundingBox, _vec3 _vOrigin) 
-{
-	if ((size_t)_ePartID >= m_vecParticle.size())
-	{
+CResources* CResourcesMgr::Get_Particle(LPDIRECT3DDEVICE9 pGraphicDev, PARTICLEID _ePartID, BoundingBox _boundingBox, _vec3 _vOrigin) {
+	if ((size_t)_ePartID >= m_vecParticle.size()) {
 		return nullptr;
 	}
 

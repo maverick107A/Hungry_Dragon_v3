@@ -73,9 +73,6 @@
     <Filter Include="02. UtilBase\02. Component\01. Camera\01. CaveCamera">
       <UniqueIdentifier>{d7eb16a6-4dbc-4998-9111-af3eac7ebaef}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. UtilBase\06. ParticleMgr">
-      <UniqueIdentifier>{390361e5-fdcd-405b-a574-e944c6c95db3}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\Component.cpp">
@@ -149,9 +146,6 @@
     </ClCompile>
     <ClCompile Include="..\Code\CaveCamera.cpp">
       <Filter>02. UtilBase\02. Component\01. Camera\01. CaveCamera</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\ParticleMgr.cpp">
-      <Filter>02. UtilBase\06. ParticleMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -229,9 +223,6 @@
     </ClInclude>
     <ClInclude Include="..\Code\CaveCamera.h">
       <Filter>02. UtilBase\02. Component\01. Camera\01. CaveCamera</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\ParticleMgr.h">
-      <Filter>02. UtilBase\06. ParticleMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
