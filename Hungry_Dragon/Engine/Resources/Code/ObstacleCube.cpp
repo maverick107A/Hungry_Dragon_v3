@@ -1,31 +1,31 @@
-#include "VentCube.h"
+#include "ObstacleCube.h"
 
 USING(Engine)
 
-Engine::CVentCube::CVentCube(LPDIRECT3DDEVICE9 pGraphicDev)
+Engine::CObstacleCube::CObstacleCube(LPDIRECT3DDEVICE9 pGraphicDev)
 	: CVIBuffer(pGraphicDev)
 {
 
 }
 
-Engine::CVentCube::CVentCube(const CVentCube& rhs)
+Engine::CObstacleCube::CObstacleCube(const CObstacleCube& rhs)
 	: CVIBuffer(rhs)
 {
 	m_fHeight = rhs.m_fHeight;		// 큐브길이
 }
 
-Engine::CVentCube::~CVentCube(void)
+Engine::CObstacleCube::~CObstacleCube(void)
 {
 
 }
 
 
 // 코드 알고싶으면 dx11 방울책 예제소스의 GeometryGenerator 코드를 보면 다양한 모양의 코드가 있으니까 가져다 쓰심됨
-HRESULT Engine::CVentCube::Ready_Buffer(void)			// 어쨋든 원기둥 내면 그리는거임 영어로 주석 달아놓음
+HRESULT Engine::CObstacleCube::Ready_Buffer(void)			// 어쨋든 원기둥 내면 그리는거임 영어로 주석 달아놓음
 {
-	// 실린더 세팅
-	m_fHeight = 2000.f;		// 원기둥 시야
-	m_fRadius = 15.f;
+	
+	m_fHeight = 30.f;		
+	m_fRadius = 4.f;
 	float fSliceCnt = m_fHeight / m_fRadius * 0.5f;
 
 	// Compute vertices for each stack ring starting at the bottom and moving up.
@@ -66,33 +66,33 @@ HRESULT Engine::CVentCube::Ready_Buffer(void)			// 어쨋든 원기둥 내면 그리는거임
 
 	m_pIB->Lock(0, 0, (void**)&pIndex, 0);
 
-	pIndex[0] = { 3,2,6 };
-	pIndex[1] = { 3,6,7 };
-	pIndex[2] = { 2,1,5 };
-	pIndex[3] = { 2,5,6 };
-	pIndex[4] = { 1,0,4 };
-	pIndex[5] = { 1,4,5 };
-	pIndex[6] = { 0,3,7 };
-	pIndex[7] = { 0,7,4 };
+	pIndex[0] = { 3,6,2 };
+	pIndex[1] = { 3,7,6 };
+	pIndex[2] = { 2,5,1 };
+	pIndex[3] = { 2,6,5 };
+	pIndex[4] = { 1,4,0 };
+	pIndex[5] = { 1,5,4 };
+	pIndex[6] = { 0,7,3 };
+	pIndex[7] = { 0,4,7 };
 
 	m_pIB->Unlock();
 
 	return S_OK;
 }
 
-void Engine::CVentCube::Render_Buffer(void)
+void Engine::CObstacleCube::Render_Buffer(void)
 {
 	CVIBuffer::Render_Buffer();
 }
 
-void Engine::CVentCube::Free(void)
+void Engine::CObstacleCube::Free(void)
 {
 	CVIBuffer::Free();
 }
 
-CVentCube* Engine::CVentCube::Create(LPDIRECT3DDEVICE9 pGraphicDev)
+CObstacleCube* Engine::CObstacleCube::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 {
-	CVentCube*	pInstance = new CVentCube(pGraphicDev);
+	CObstacleCube*	pInstance = new CObstacleCube(pGraphicDev);
 
 	if (FAILED(pInstance->Ready_Buffer()))
 		Safe_Release(pInstance);
@@ -100,8 +100,8 @@ CVentCube* Engine::CVentCube::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 	return pInstance;
 }
 
-CComponent* Engine::CVentCube::Clone(void)
+CComponent* Engine::CObstacleCube::Clone(void)
 {
-	return new CVentCube(*this);
+	return new CObstacleCube(*this);
 }
 

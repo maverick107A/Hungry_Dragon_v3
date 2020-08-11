@@ -26,6 +26,7 @@
 #include "CavePlayer.h"
 #include "SkySphere.h"
 #include "Ocean.h"
+#include "PlayerUI.h"
 //-------------------------------------------------------
 
 using namespace Engine;
