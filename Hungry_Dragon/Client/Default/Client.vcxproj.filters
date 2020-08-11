@@ -109,6 +109,12 @@
     <Filter Include="01. Scene\Scene_PT">
       <UniqueIdentifier>{8da5808b-3fa5-4c62-b2fc-d769bd219cee}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. GameObject\01. Stage\01.Player\00. Player">
+      <UniqueIdentifier>{4ff975f7-89a0-4f4f-b9d6-4ad2a4dc165c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\01.Player\01. CavePlayer">
+      <UniqueIdentifier>{eb78cec4-8ae6-4342-a38a-22c237c9b104}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -192,6 +198,9 @@
     <ClInclude Include="..\Code\Monster.h">
       <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\CavePlayer.h">
+      <Filter>02. GameObject\01. Stage\01.Player\01. CavePlayer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -268,6 +277,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Monster.cpp">
       <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CavePlayer.cpp">
+      <Filter>02. GameObject\01. Stage\01.Player\01. CavePlayer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

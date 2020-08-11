@@ -22,6 +22,7 @@
 #include "NormalBullet.h"
 #include "Fly_Monster.h"
 #include "TestPlayer.h"
+#include "CavePlayer.h"
 #include "SkySphere.h"
 #include "Ocean.h"
 //-------------------------------------------------------

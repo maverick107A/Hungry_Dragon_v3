@@ -23,6 +23,7 @@ protected:
 
 public:
 	virtual HRESULT Ready_Object(void) { return 0; }
+	virtual void Initialize_Object(void) { return; }
 	virtual int Update_Object(const float& fTimeDelta) { return 0; }
 	virtual void Render_Object(void) {}
 
