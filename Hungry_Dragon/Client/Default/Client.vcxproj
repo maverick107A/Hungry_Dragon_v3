@@ -161,6 +161,7 @@
     <ClInclude Include="..\Code\BackGround_Logo.h" />
     <ClInclude Include="..\Code\Bullet.h" />
     <ClInclude Include="..\Code\Cave.h" />
+    <ClInclude Include="..\Code\CavePlayer.h" />
     <ClInclude Include="..\Code\Chase_Monster.h" />
     <ClInclude Include="..\Code\Fly_Monster.h" />
     <ClInclude Include="..\Code\GameMgr.h" />
@@ -193,6 +194,7 @@
     <ClCompile Include="..\Code\BackGround_Logo.cpp" />
     <ClCompile Include="..\Code\Bullet.cpp" />
     <ClCompile Include="..\Code\Cave.cpp" />
+    <ClCompile Include="..\Code\CavePlayer.cpp" />
     <ClCompile Include="..\Code\Chase_Monster.cpp" />
     <ClCompile Include="..\Code\Fly_Monster.cpp" />
     <ClCompile Include="..\Code\GameMgr.cpp" />

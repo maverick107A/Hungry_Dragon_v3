@@ -138,15 +138,16 @@ void CLayer::LateUpdate_Layer(const _float & fTimeDelta)
 
 
 	//다른 버전
-	map<const _tchar*, list<CGameObject*>>::iterator a = find_if(m_mapObject.begin(), m_mapObject.end(), CTag_Finder(L"TestPlayer"));
 
-	if (a == m_mapObject.end())
-		return;
-
-	CMonsterMain* b = static_cast<CMonsterMain*>(Get_Object(L"Monster", CCollisionMgr::Player_MonsterCol, (find_if(m_mapObject.begin(), m_mapObject.end(), CTag_Finder(L"TestPlayer"))->second).front()));
-
-	if (b)
-		b->Kill_Monster(fTimeDelta);
+	auto& iter = find_if(m_mapObject.begin(), m_mapObject.end(), CTag_Finder(L"TestPlayer"));
+	if (iter != m_mapObject.end())
+	{
+		CMonsterMain* pMonster = static_cast<CMonsterMain*>(Get_Object(L"Monster", CCollisionMgr::Player_MonsterCol, iter->second.front()));
+	
+		if (pMonster)
+			pMonster->Kill_Monster(fTimeDelta);
+	}
+	
 
 }
 

@@ -70,6 +70,9 @@
     <Filter Include="02. UtilBase\02. Component\02. State\00.PlayerState\04.CaveRush">
       <UniqueIdentifier>{ecea96f9-7955-428e-b598-e7746ad43ef1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. UtilBase\02. Component\01. Camera\01. CaveCamera">
+      <UniqueIdentifier>{d7eb16a6-4dbc-4998-9111-af3eac7ebaef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\Component.cpp">
@@ -140,6 +143,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\PCaveRush.cpp">
       <Filter>02. UtilBase\02. Component\02. State\00.PlayerState\04.CaveRush</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CaveCamera.cpp">
+      <Filter>02. UtilBase\02. Component\01. Camera\01. CaveCamera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -214,6 +220,9 @@
     </ClInclude>
     <ClInclude Include="..\Code\PCaveRush.h">
       <Filter>02. UtilBase\02. Component\02. State\00.PlayerState\04.CaveRush</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\CaveCamera.h">
+      <Filter>02. UtilBase\02. Component\01. Camera\01. CaveCamera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

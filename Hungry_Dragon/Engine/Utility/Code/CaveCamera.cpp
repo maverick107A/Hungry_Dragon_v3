@@ -1,41 +1,27 @@
-#include "Camera.h"
+#include "CaveCamera.h"
 #include "BaseLand.h"
 
 USING(Engine)
 
-Engine::CCamera::CCamera(void)
+Engine::CCaveCamera::CCaveCamera(void)
 {
 }
 
-Engine::CCamera::~CCamera(void)
+Engine::CCaveCamera::~CCaveCamera(void)
 {
 
 }
 
-HRESULT Engine::CCamera::Ready_Camera(void)
+HRESULT Engine::CCaveCamera::Ready_Camera(void)
 {
 	m_tCenter = { LONG(WINCX*0.5), LONG(WINCY*0.5) };
 	SetCursorPos(m_tCenter.x, m_tCenter.y);
 	return S_OK;
 }
 
-_int Engine::CCamera::Update_Camera(const _float& fTimeDelta, LPDIRECT3DDEVICE9& pGraphicDev, _vec3 _vPos, float* _fAngleX, float* _fAngleY, CBaseLand* _pTerrain)
+_int Engine::CCaveCamera::Update_Camera(const _float& fTimeDelta, LPDIRECT3DDEVICE9& pGraphicDev, _vec3 _vPos, float* _fAngleX, float* _fAngleY, CBaseLand* _pTerrain)
 {
-	//Move_Camera_InMFC(pGraphicDev, _vPos, _vLook, _Up);
 	Move_Camera(pGraphicDev, _vPos, _fAngleX, _fAngleY);
-	//지형타기
-	Ride_Terrain(_pTerrain);
-
-//#ifndef MFC_h__
-//	//카메라 이동
-//	Move_Camera(pGraphicDev, _vPos, _vLook, _Up);
-//	//지형타기
-//	Ride_Terrain(_pTerrain);
-//#else
-//	Move_Camera_InMFC(pGraphicDev, _vPos, _vLook, _Up);
-//#endif
-
-	//m_vDir = m_vPos + m_vDir;
 
 	D3DXMATRIX V;
 	D3DXMatrixLookAtLH(&V, &m_vPos, &m_vDir, &m_vUp);
@@ -44,7 +30,7 @@ _int Engine::CCamera::Update_Camera(const _float& fTimeDelta, LPDIRECT3DDEVICE9&
 	return 0;
 }
 
-_int CCamera::Update_CameraMFC(LPDIRECT3DDEVICE9 & _pGraphicDev, _vec3 _vPos, _vec3 * _vLook, _vec3 * _vUp) {
+_int CCaveCamera::Update_CameraMFC(LPDIRECT3DDEVICE9 & _pGraphicDev, _vec3 _vPos, _vec3 * _vLook, _vec3 * _vUp) {
 	Move_Camera_InMFC(_pGraphicDev, _vPos, _vLook, _vUp);
 
 	D3DXMATRIX V;
@@ -54,7 +40,7 @@ _int CCamera::Update_CameraMFC(LPDIRECT3DDEVICE9 & _pGraphicDev, _vec3 _vPos, _v
 	return 0;
 }
 
-void CCamera::Move_Camera(LPDIRECT3DDEVICE9 & pGraphicDev, _vec3 _vPos, float* _fAngleX, float* _fAngleY)
+void CCaveCamera::Move_Camera(LPDIRECT3DDEVICE9 & pGraphicDev, _vec3 _vPos, float* _fAngleX, float* _fAngleY)
 {
 	POINT tPos = {};
 	GetCursorPos(&tPos);
@@ -88,7 +74,7 @@ void CCamera::Move_Camera(LPDIRECT3DDEVICE9 & pGraphicDev, _vec3 _vPos, float* _
 	m_vDir = m_vPos + m_vDir;
 }
 
-void CCamera::Move_Camera_InMFC(LPDIRECT3DDEVICE9 & pGraphicDev, _vec3 _vPos, _vec3 * _vLook, _vec3 * _Up)
+void CCaveCamera::Move_Camera_InMFC(LPDIRECT3DDEVICE9 & pGraphicDev, _vec3 _vPos, _vec3 * _vLook, _vec3 * _Up)
 {
 	POINT tPos = {};
 	GetCursorPos(&tPos);
@@ -120,7 +106,7 @@ void CCamera::Move_Camera_InMFC(LPDIRECT3DDEVICE9 & pGraphicDev, _vec3 _vPos, _v
 	SetCursorPos(m_tCenter.x, m_tCenter.y);
 }
 
-void CCamera::Ride_Terrain(CBaseLand* _pTerrain)
+void CCaveCamera::Ride_Terrain(CBaseLand* _pTerrain)
 {
 	int Vernum = (int(m_vPos.x*INVERSETILESIZE) + VERTEXSIZE*int(m_vPos.z*INVERSETILESIZE));
 
@@ -186,9 +172,9 @@ void CCamera::Ride_Terrain(CBaseLand* _pTerrain)
 	}
 }
 
-CCamera* Engine::CCamera::Create(void)
+CCaveCamera* Engine::CCaveCamera::Create(void)
 {
-	CCamera*	pInstance = new CCamera;
+	CCaveCamera*	pInstance = new CCaveCamera;
 
 	if (FAILED(pInstance->Ready_Camera()))
 		Engine::Safe_Release(pInstance);
@@ -196,12 +182,12 @@ CCamera* Engine::CCamera::Create(void)
 	return pInstance;
 }
 
-void Engine::CCamera::Free(void)
+void Engine::CCaveCamera::Free(void)
 {
 
 }
 
-CComponent* Engine::CCamera::Clone(void)
+CComponent* Engine::CCaveCamera::Clone(void)
 {
-	return new CCamera(*this);
+	return new CCaveCamera(*this);
 }

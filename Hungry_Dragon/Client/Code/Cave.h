@@ -28,6 +28,7 @@ public:
 	void Set_Loop(bool _bLoop) { m_bLoop = _bLoop; }		// 루프끝내기
 	void Set_Active(bool _bActive) { m_bActive = _bActive; }		// 업뎃
 	void Set_Trans(_vec3& _vPos);
+	void Set_Speed(float _fSpeed) { m_fForwardSpeed = _fSpeed; }
 	float Get_EndPoint();
 
 private:
