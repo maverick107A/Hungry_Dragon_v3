@@ -171,6 +171,7 @@
     <ClInclude Include="..\Code\MainApp.h" />
     <ClInclude Include="..\Code\Monster.h" />
     <ClInclude Include="..\Code\NormalBullet.h" />
+    <ClInclude Include="..\Code\Obstacle.h" />
     <ClInclude Include="..\Code\Ocean.h" />
     <ClInclude Include="..\Code\Player.h" />
     <ClInclude Include="..\Code\Scene_Cave.h" />
@@ -183,6 +184,7 @@
     <ClInclude Include="..\Code\Terrain.h" />
     <ClInclude Include="..\Code\TerrainPlayer.h" />
     <ClInclude Include="..\Code\TestPlayer.h" />
+    <ClInclude Include="..\Code\PlayerUI.h" />
     <ClInclude Include="..\Code\Vent.h" />
     <ClInclude Include="..\Header\Define.h" />
     <ClInclude Include="Client.h" />
@@ -205,6 +207,7 @@
     <ClCompile Include="..\Code\MainApp.cpp" />
     <ClCompile Include="..\Code\Monster.cpp" />
     <ClCompile Include="..\Code\NormalBullet.cpp" />
+    <ClCompile Include="..\Code\Obstacle.cpp" />
     <ClCompile Include="..\Code\Ocean.cpp" />
     <ClCompile Include="..\Code\Player.cpp" />
     <ClCompile Include="..\Code\Scene_Cave.cpp" />
@@ -217,6 +220,7 @@
     <ClCompile Include="..\Code\Terrain.cpp" />
     <ClCompile Include="..\Code\TerrainPlayer.cpp" />
     <ClCompile Include="..\Code\TestPlayer.cpp" />
+    <ClCompile Include="..\Code\PlayerUI.cpp" />
     <ClCompile Include="..\Code\Vent.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="stdafx.cpp">

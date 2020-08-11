@@ -151,6 +151,8 @@ HRESULT CScene_Proto::Ready_Layer_UI(const _tchar* pLayerTag) {
 
 	m_mapLayer.emplace(pLayerTag, pLayer);
 
+	FAILED_CHECK_RETURN(Register_GameObject<CPlayerUI>(pLayer, L"PlayerUI"), E_FAIL);
+
 	return S_OK;
 }
 
