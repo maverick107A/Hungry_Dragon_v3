@@ -82,9 +82,6 @@
     <Filter Include="01. Scene\70. PlayerTest">
       <UniqueIdentifier>{8da5808b-3fa5-4c62-b2fc-d769bd219cee}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Scene\50. StageOne">
-      <UniqueIdentifier>{bac2b7ef-17a0-4138-8ecd-1128cd6ed6a1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. GameObject\01. Stage\04.SkySphere">
       <UniqueIdentifier>{7aa7f97f-bd8d-4e1e-b0d2-501f69181828}</UniqueIdentifier>
     </Filter>
@@ -109,11 +106,29 @@
     <Filter Include="01. Scene\Scene_PT">
       <UniqueIdentifier>{8da5808b-3fa5-4c62-b2fc-d769bd219cee}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. GameObject\01. Stage\01.Player\00. Player">
-      <UniqueIdentifier>{4ff975f7-89a0-4f4f-b9d6-4ad2a4dc165c}</UniqueIdentifier>
+    <Filter Include="01. Scene\02. Scene_Forest">
+      <UniqueIdentifier>{8763cec5-a2a1-4192-a6cd-cc6cebdd2aae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. GameObject\01. Stage\01.Player\01. CavePlayer">
-      <UniqueIdentifier>{eb78cec4-8ae6-4342-a38a-22c237c9b104}</UniqueIdentifier>
+    <Filter Include="01. Scene\03. Scene_Cave">
+      <UniqueIdentifier>{b3030010-b54c-4f93-b948-3cd6a96e112a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Scene\04. Scene_Cloud">
+      <UniqueIdentifier>{22a5ed4e-7e0b-4630-ad47-7edcdca71be2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Scene\05. Scene_Volcano">
+      <UniqueIdentifier>{a1fd4ff7-25f1-4246-98e2-ce08026c75fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Scene\06. Scene_Iceland">
+      <UniqueIdentifier>{8173bc68-0d3e-4f0d-ba76-965475504e7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Scene\50. Scene_Terrain">
+      <UniqueIdentifier>{bac2b7ef-17a0-4138-8ecd-1128cd6ed6a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\06.Cave">
+      <UniqueIdentifier>{da02d5b2-f55c-4e59-b255-1904fd62782c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\07.Vent">
+      <UniqueIdentifier>{96d3a98e-db12-4a73-9fed-f11c3d52641b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -189,17 +204,23 @@
     <ClInclude Include="..\Code\BackGround_Logo.h">
       <Filter>02. GameObject\00. Logo\00. Logo_Background</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\StageOne.h">
-      <Filter>01. Scene\50. StageOne</Filter>
-    </ClInclude>
     <ClInclude Include="..\Code\Scene_PT.h">
       <Filter>01. Scene\Scene_PT</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Monster.h">
       <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\CavePlayer.h">
-      <Filter>02. GameObject\01. Stage\01.Player\01. CavePlayer</Filter>
+    <ClInclude Include="..\Code\Scene_Cave.h">
+      <Filter>01. Scene\03. Scene_Cave</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\GameMgr.h">
+      <Filter>02. GameObject\01. Stage\05.GameMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Cave.h">
+      <Filter>02. GameObject\01. Stage\06.Cave</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Vent.h">
+      <Filter>02. GameObject\01. Stage\07.Vent</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -269,17 +290,20 @@
     <ClCompile Include="..\Code\BackGround_Logo.cpp">
       <Filter>02. GameObject\00. Logo\00. Logo_Background</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\StageOne.cpp">
-      <Filter>01. Scene\50. StageOne</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\Scene_PT.cpp">
       <Filter>01. Scene\Scene_PT</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Monster.cpp">
       <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\CavePlayer.cpp">
-      <Filter>02. GameObject\01. Stage\01.Player\01. CavePlayer</Filter>
+    <ClCompile Include="..\Code\Scene_Cave.cpp">
+      <Filter>01. Scene\03. Scene_Cave</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Cave.cpp">
+      <Filter>02. GameObject\01. Stage\06.Cave</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Vent.cpp">
+      <Filter>02. GameObject\01. Stage\07.Vent</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

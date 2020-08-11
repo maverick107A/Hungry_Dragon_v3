@@ -10,11 +10,11 @@
     <Filter Include="02. View">
       <UniqueIdentifier>{cc2ab89d-86de-4fb6-b288-f596f5b500db}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. View\00. MainView">
-      <UniqueIdentifier>{0856d096-be96-4a1e-a0ed-c9be200c83e5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="99. Default">
       <UniqueIdentifier>{8ec5c619-4a59-4d1c-8746-6ad1c54fe6ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. View\00. PreForm">
+      <UniqueIdentifier>{0856d096-be96-4a1e-a0ed-c9be200c83e5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -23,9 +23,6 @@
     </ClInclude>
     <ClInclude Include="MFCToolDoc.h">
       <Filter>01. Doc</Filter>
-    </ClInclude>
-    <ClInclude Include="MFCToolView.h">
-      <Filter>02. View\00. MainView</Filter>
     </ClInclude>
     <ClInclude Include="MFCTool.h">
       <Filter>99. Default</Filter>
@@ -39,6 +36,12 @@
     <ClInclude Include="targetver.h">
       <Filter>99. Default</Filter>
     </ClInclude>
+    <ClInclude Include="MFCToolView.h">
+      <Filter>02. View</Filter>
+    </ClInclude>
+    <ClInclude Include="PreForm.h">
+      <Filter>02. View\00. PreForm</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainFrm.cpp">
@@ -47,14 +50,17 @@
     <ClCompile Include="MFCToolDoc.cpp">
       <Filter>01. Doc</Filter>
     </ClCompile>
-    <ClCompile Include="MFCToolView.cpp">
-      <Filter>02. View\00. MainView</Filter>
-    </ClCompile>
     <ClCompile Include="MFCTool.cpp">
       <Filter>99. Default</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>99. Default</Filter>
+    </ClCompile>
+    <ClCompile Include="MFCToolView.cpp">
+      <Filter>02. View</Filter>
+    </ClCompile>
+    <ClCompile Include="PreForm.cpp">
+      <Filter>02. View\00. PreForm</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

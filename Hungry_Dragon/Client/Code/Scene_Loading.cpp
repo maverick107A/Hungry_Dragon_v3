@@ -69,6 +69,18 @@ _uint CScene_Loading::Loading_ForStage(void)
 		E_FAIL);
 
 	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"BUFFER_CAVECYLINDER",
+		Engine::BUFFER_CAVECYLINDER),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"BUFFER_VENTCUBE",
+		Engine::BUFFER_VENTCUBE),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
 		RESOURCE_STATIC,
 		L"BUFFER_CUBEDRA",
 		Engine::BUFFER_CUBEDRA),
@@ -103,6 +115,13 @@ _uint CScene_Loading::Loading_ForStage(void)
 		L"TEX_OCEAN",
 		Engine::TEX_NORMAL,
 		L"../../Asset/Terrain/water.bmp"),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"TEX_VENT",
+		Engine::TEX_NORMAL,
+		L"../../Asset/Environment/Passage.png"),
 		E_FAIL);
 
 	lstrcpy(m_szFinish, L"Loading Complete");

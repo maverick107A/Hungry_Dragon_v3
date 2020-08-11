@@ -168,6 +168,7 @@ call CopyResources.bat</Command>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Code\CaveCylinder.cpp" />
     <ClCompile Include="..\Code\Part_Atk.cpp" />
     <ClCompile Include="..\Code\BaseBoard.cpp" />
     <ClCompile Include="..\Code\BaseLand.cpp" />
@@ -195,11 +196,13 @@ call CopyResources.bat</Command>
     <ClCompile Include="..\Code\Texture_Square.cpp" />
     <ClCompile Include="..\Code\TreeBoard.cpp" />
     <ClCompile Include="..\Code\UnitSector.cpp" />
+    <ClCompile Include="..\Code\VentCube.cpp" />
     <ClCompile Include="..\Code\VIBuffer.cpp" />
     <ClCompile Include="..\Code\VolcanoLand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Header\Export_Resources.h" />
+    <ClInclude Include="..\Code\CaveCylinder.h" />
     <ClInclude Include="..\Code\Part_Atk.h" />
     <ClInclude Include="..\Code\BaseBoard.h" />
     <ClInclude Include="..\Code\BaseLand.h" />
@@ -227,6 +230,7 @@ call CopyResources.bat</Command>
     <ClInclude Include="..\Code\Texture_Square.h" />
     <ClInclude Include="..\Code\TreeBoard.h" />
     <ClInclude Include="..\Code\UnitSector.h" />
+    <ClInclude Include="..\Code\VentCube.h" />
     <ClInclude Include="..\Code\VIBuffer.h" />
     <ClInclude Include="..\Code\VolcanoLand.h" />
   </ItemGroup>
