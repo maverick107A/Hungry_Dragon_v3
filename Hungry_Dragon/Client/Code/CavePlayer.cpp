@@ -3,7 +3,7 @@
 
 #include "Export_Function.h"
 #include "CubeDra.h"
-#include "Camera.h"
+#include "CaveCamera.h"
 #include "PlayerState.h"
 #include "PCaveRush.h"
 
@@ -24,24 +24,22 @@ HRESULT CCavePlayer::Ready_Object(void)
 
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
-	m_pTransform->m_vInfo[Engine::INFO_POS].x = 264.f;
-	m_pTransform->m_vInfo[Engine::INFO_POS].y = 700.f;
-	m_pTransform->m_vInfo[Engine::INFO_POS].z = 264.f;
+	m_pTransform->m_vInfo[Engine::INFO_POS].x = 0.f;
+	m_pTransform->m_vInfo[Engine::INFO_POS].y = 0.f;
+	m_pTransform->m_vInfo[Engine::INFO_POS].z = 0.f;
 
-	m_pTransform->Set_Scale(10.f);
+	//m_pTransform->Set_Scale(10.f);
 
 	return S_OK;
 }
 
 void CCavePlayer::Initialize_Object(void)
 {
-	CGameObject* pGroundObj = ((Engine::CLayer*)(Get_Parent()))->Get_Object(L"BackGround", Engine::Find_First, nullptr);
-	m_pTerrain = static_cast<Engine::CBaseLand*>(pGroundObj->Get_Component(L"Com_Buffer", Engine::ID_STATIC));
 }
 
 int CCavePlayer::Update_Object(const float& fTimeDelta)
 {
-	m_pCamera->Update_Camera(fTimeDelta, m_pGraphicDev, m_pTransform->m_vInfo[Engine::INFO_POS], &m_fAngleX, &m_fAngleY, m_pTerrain);
+	m_pCaveCamera->Update_Camera(fTimeDelta, m_pGraphicDev, m_pTransform->m_vInfo[Engine::INFO_POS], &m_fAngleX, &m_fAngleY, m_pTerrain);
 	m_pState->Update_State(fTimeDelta);
 	//
 	State_Change();
@@ -100,7 +98,7 @@ HRESULT CCavePlayer::Add_Component(void)
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_Transform", pComponent);
 
 	//Camera
-	pComponent = m_pCamera = Engine::CCamera::Create();
+	pComponent = m_pCaveCamera = Engine::CCaveCamera::Create();
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_Camera", pComponent);
 

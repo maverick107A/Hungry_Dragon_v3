@@ -188,7 +188,7 @@ HRESULT CScene_Proto::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 	Engine::CGameObject*		pGameObject = nullptr;
 
 	FAILED_CHECK_RETURN(Register_GameObject<CBackGround>(pLayer, L"BackGround"), E_FAIL);
-	FAILED_CHECK_RETURN(Register_GameObject<CCavePlayer>(pLayer, L"TestPlayer"), E_FAIL);
+	FAILED_CHECK_RETURN(Register_GameObject<CTestPlayer>(pLayer, L"TestPlayer"), E_FAIL);
 
 	//for (int i = 0; i < 100; ++i)
 	//{

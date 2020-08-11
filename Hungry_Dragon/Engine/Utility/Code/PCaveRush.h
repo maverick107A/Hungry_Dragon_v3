@@ -23,8 +23,8 @@ private:
 	float					m_fAngle = 0.f;
 	float					m_fAngularSpeed = 0.f;
 	float					m_fSpeed = 0.f;
-	float					m_fMaxSpeed = 100.f;
-	float					m_fAccle = 50.f;
+	float					m_fMaxSpeed = 10.f;
+	float					m_fAccle = 10.f;
 
 public:
 	static CPCaveRush*		Create(void);

@@ -9,6 +9,7 @@ class CVIBuffer;
 class CTexture;
 class CTransform;
 class CCamera;
+class CCaveCamera;
 class CBaseLand;
 class CPlayerState;
 
@@ -46,6 +47,7 @@ protected:
 protected:
 	CVIBuffer*				m_pBufferCom = nullptr;
 	CCamera*				m_pCamera = nullptr;
+	CCaveCamera*			m_pCaveCamera = nullptr;
 	CBaseLand*				m_pTerrain = nullptr;
 	CPlayerState*			m_pState = nullptr;
 	//D3DXVECTOR3				m_vLook;

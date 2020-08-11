@@ -27,6 +27,12 @@ void CPCaveRush::Enter_State(CPlayerMain* _pPlayer)
 
 void CPCaveRush::Update_State(const float& fTimeDelta)
 {
+	if (Engine::Get_DIKeyState(DIK_LSHIFT))
+	{
+		m_fAccle = 2.f*10.f;
+	}
+	else
+		m_fAccle = 10.f;
 	if (Engine::Get_DIKeyState(DIK_W))
 	{
 		m_fSpeed += m_fAccle*fTimeDelta;
@@ -47,17 +53,18 @@ void CPCaveRush::Update_State(const float& fTimeDelta)
 	}
 
 	m_fAngularSpeed *= 0.95f;
+	m_fSpeed *= 0.7f;
 
 	/*if (m_fAngularSpeed > 3.f)
 		m_fAngularSpeed = 3.f;
 	if (m_fAngularSpeed < -3.f)
 		m_fAngularSpeed = -3.f;*/
-
 	m_fAngle += m_fAngularSpeed*fTimeDelta;
 
 	m_pPlayer->Get_Transform()->Add_Trans(&_vec3(0.f, 0.f, m_fSpeed));
-	m_pPlayer->Get_Transform()->m_vInCamPos.x = 30 * cosf(m_fAngle+Pi*0.5f);
-	m_pPlayer->Get_Transform()->m_vInCamPos.y = 30 * sinf(-m_fAngle-Pi*0.5f);
+	m_pPlayer->Get_Transform()->m_vInCamPos.x = 6 * cosf(m_fAngle+Pi*0.5f);
+	m_pPlayer->Get_Transform()->m_vInCamPos.y = 6 * sinf(-m_fAngle-Pi*0.5f);
+	m_pPlayer->Get_Transform()->m_vAngle.z = -m_fAngle;
 }
 
 void CPCaveRush::Out_State()

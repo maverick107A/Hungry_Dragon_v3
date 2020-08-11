@@ -22,9 +22,9 @@ HRESULT Engine::CCamera::Ready_Camera(void)
 _int Engine::CCamera::Update_Camera(const _float& fTimeDelta, LPDIRECT3DDEVICE9& pGraphicDev, _vec3 _vPos, float* _fAngleX, float* _fAngleY, CBaseLand* _pTerrain)
 {
 	//Move_Camera_InMFC(pGraphicDev, _vPos, _vLook, _Up);
-		Move_Camera(pGraphicDev, _vPos, _fAngleX, _fAngleY);
-		//지형타기
-	//	Ride_Terrain(_pTerrain);
+	Move_Camera(pGraphicDev, _vPos, _fAngleX, _fAngleY);
+	//지형타기
+	Ride_Terrain(_pTerrain);
 
 //#ifndef MFC_h__
 //	//카메라 이동

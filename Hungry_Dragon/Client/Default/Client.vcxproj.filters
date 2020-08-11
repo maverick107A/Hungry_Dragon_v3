@@ -130,6 +130,9 @@
     <Filter Include="02. GameObject\01. Stage\07.Vent">
       <UniqueIdentifier>{96d3a98e-db12-4a73-9fed-f11c3d52641b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. GameObject\01. Stage\01.Player\01. CavePlayer">
+      <UniqueIdentifier>{f5b8d36c-ef58-4879-a700-d2c839d83edc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -222,6 +225,9 @@
     <ClInclude Include="..\Code\Vent.h">
       <Filter>02. GameObject\01. Stage\07.Vent</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\CavePlayer.h">
+      <Filter>02. GameObject\01. Stage\01.Player\01. CavePlayer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -304,6 +310,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Vent.cpp">
       <Filter>02. GameObject\01. Stage\07.Vent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CavePlayer.cpp">
+      <Filter>02. GameObject\01. Stage\01.Player\01. CavePlayer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
