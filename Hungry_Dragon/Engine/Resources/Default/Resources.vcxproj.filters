@@ -82,6 +82,9 @@
     <Filter Include="00. Resources\03. Billboard\01. Monster Board">
       <UniqueIdentifier>{1527f2c7-32d3-4daa-8ea1-6ff05d2e1a1d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00. Resources\00. VIBuffer\55. ObsCube">
+      <UniqueIdentifier>{2282a9dd-982b-4617-b935-d3096e5e199e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\Resources.cpp">
@@ -179,6 +182,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\MonsterBoard.cpp">
       <Filter>00. Resources\03. Billboard\01. Monster Board</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ObstacleCube.cpp">
+      <Filter>00. Resources\00. VIBuffer\55. ObsCube</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -280,6 +286,9 @@
     </ClInclude>
     <ClInclude Include="..\Code\MonsterBoard.h">
       <Filter>00. Resources\03. Billboard\01. Monster Board</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\ObstacleCube.h">
+      <Filter>00. Resources\00. VIBuffer\55. ObsCube</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
