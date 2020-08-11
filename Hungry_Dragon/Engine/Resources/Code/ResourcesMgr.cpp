@@ -82,8 +82,19 @@ HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 	case BUFFER_SKYSPHERE:
 		pResources = CSkyCube::Create(pGraphicDev);
 		break;
+
 	case SPRITE_ANIM :
 		pResources = CMonsterBoard::Create(pGraphicDev, dwCntX, dwCntZ);
+		break;
+
+	case BUFFER_CAVECYLINDER:
+		pResources = CCaveCylinder::Create(pGraphicDev);
+
+		break;
+	case BUFFER_VENTCUBE:
+		pResources = CVentCube::Create(pGraphicDev);
+
+
 		break;
 	}
 

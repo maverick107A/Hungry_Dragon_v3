@@ -1,6 +1,7 @@
 #include "Layer.h"
 #include "ObjectPool.h"
 #include "CollisionMgr.h"
+#include "MonsterMain.h"
 
 USING(Engine)
 
@@ -123,17 +124,30 @@ void CLayer::LateUpdate_Layer(const _float & fTimeDelta)
 	}
 
 	//충돌처리
-	//list<CGameObject*>	listMonster = find_if(m_mapObject.begin(), m_mapObject.end(), CTag_Finder(L"Monster"))->second;
-	//list<CGameObject*>	listPlayer = find_if(m_mapObject.begin(), m_mapObject.end(), CTag_Finder(L"TestPlayer"))->second;
-	//for (auto& pPlayer : listPlayer)
-	//{
-	//	for (auto& pMonster : listMonster)
-	//	{
-	//		if(CCollisionMgr::Player_Monster(pPlayer, pMonster))
-	//		{
-	//		}
-	//	}
-	//}
+	//map<const _tchar*, list<CGameObject*>>::iterator mapMonster = find_if(m_mapObject.begin(), m_mapObject.end(), CTag_Finder(L"Monster"));
+	//if (mapMonster == m_mapObject.end())
+	//	return;
+	//list<CGameObject*>	listMonster = mapMonster->second;
+
+	//map<const _tchar*, list<CGameObject*>>::iterator mapPlayer = find_if(m_mapObject.begin(), m_mapObject.end(), CTag_Finder(L"TestPlayer"));
+	//if (mapPlayer == m_mapObject.end())
+	//	return;
+	//list<CGameObject*>	listPlayer = mapPlayer->second;
+
+	//CCollisionMgr::Player_Monster(&listPlayer, &listMonster, fTimeDelta);
+
+
+	//다른 버전
+
+	auto& iter = find_if(m_mapObject.begin(), m_mapObject.end(), CTag_Finder(L"TestPlayer"));
+	if (iter != m_mapObject.end())
+	{
+		CMonsterMain* pMonster = static_cast<CMonsterMain*>(Get_Object(L"Monster", CCollisionMgr::Player_MonsterCol, iter->second.front()));
+	
+		if (pMonster)
+			pMonster->Kill_Monster(fTimeDelta);
+	}
+	
 
 }
 

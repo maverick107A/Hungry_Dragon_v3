@@ -19,12 +19,12 @@ HRESULT Engine::CCamera::Ready_Camera(void)
 	return S_OK;
 }
 
-_int Engine::CCamera::Update_Camera(const _float& fTimeDelta, LPDIRECT3DDEVICE9& pGraphicDev, _vec3 _vPos, _vec3* _vLook, _vec3* _Up, CBaseLand* _pTerrain)
+_int Engine::CCamera::Update_Camera(const _float& fTimeDelta, LPDIRECT3DDEVICE9& pGraphicDev, _vec3 _vPos, float* _fAngleX, float* _fAngleY, CBaseLand* _pTerrain)
 {
 	//Move_Camera_InMFC(pGraphicDev, _vPos, _vLook, _Up);
-		Move_Camera(pGraphicDev, _vPos, _vLook, _Up);
-		//지형타기
-		Ride_Terrain(_pTerrain);
+	Move_Camera(pGraphicDev, _vPos, _fAngleX, _fAngleY);
+	//지형타기
+	Ride_Terrain(_pTerrain);
 
 //#ifndef MFC_h__
 //	//카메라 이동
@@ -38,18 +38,37 @@ _int Engine::CCamera::Update_Camera(const _float& fTimeDelta, LPDIRECT3DDEVICE9&
 	//m_vDir = m_vPos + m_vDir;
 
 	D3DXMATRIX V;
-	D3DXMatrixLookAtLH(&V, &m_vPos, &m_vDir, &m_vUp1);
+	D3DXMatrixLookAtLH(&V, &m_vPos, &m_vDir, &m_vUp);
 	pGraphicDev->SetTransform(D3DTS_VIEW, &V);
 
 	return 0;
 }
 
-void CCamera::Move_Camera(LPDIRECT3DDEVICE9 & pGraphicDev, _vec3 _vPos, _vec3 * _vLook, _vec3 * _Up)
+_int CCamera::Update_CameraMFC(LPDIRECT3DDEVICE9 & _pGraphicDev, _vec3 _vPos, _vec3 * _vLook, _vec3 * _vUp) {
+	Move_Camera_InMFC(_pGraphicDev, _vPos, _vLook, _vUp);
+
+	D3DXMATRIX V;
+	D3DXMatrixLookAtLH(&V, &m_vPos, &m_vDir, &m_vUp);
+	_pGraphicDev->SetTransform(D3DTS_VIEW, &V);
+
+	return 0;
+}
+
+void CCamera::Move_Camera(LPDIRECT3DDEVICE9 & pGraphicDev, _vec3 _vPos, float* _fAngleX, float* _fAngleY)
 {
 	POINT tPos = {};
 	GetCursorPos(&tPos);
-	m_fAngleY += (tPos.x - m_tCenter.x)*0.01f*cosf(m_fAngleZ) + (tPos.y - m_tCenter.y)*0.01f*sinf(m_fAngleZ);
-	m_fAngleX += (tPos.y - m_tCenter.y)*0.01f*cosf(m_fAngleZ) + -(tPos.x - m_tCenter.x)*0.01f*sinf(m_fAngleZ);
+	m_fAngleYReal += ((tPos.x - m_tCenter.x)*0.004f*cosf(m_fAngleZ) + (tPos.y - m_tCenter.y)*0.004f*sinf(m_fAngleZ))*cosf(m_fAngleXReal);
+	m_fAngleXReal += (tPos.y - m_tCenter.y)*0.004f*cosf(m_fAngleZ) + -(tPos.x - m_tCenter.x)*0.004f*sinf(m_fAngleZ);
+
+	*_fAngleX = m_fAngleXReal;
+	*_fAngleY = m_fAngleYReal;
+
+	float DeltaAngleX = m_fAngleXReal - m_fAngleX;
+	float DeltaAngleY = m_fAngleYReal - m_fAngleY;
+
+	m_fAngleX += DeltaAngleX*0.05f;
+	m_fAngleY += DeltaAngleY*0.05f;
 
 	D3DXMATRIX vRotZ;
 	D3DXMatrixRotationZ(&vRotZ, m_fAngleZ);
@@ -62,16 +81,10 @@ void CCamera::Move_Camera(LPDIRECT3DDEVICE9 & pGraphicDev, _vec3 _vPos, _vec3 * 
 	vRotTotal = vRotX*vRotY;
 	D3DXVec3TransformNormal(&m_vDir, &m_vLook, &vRotTotal);
 	//업백터
-	D3DXVec3TransformNormal(&m_vUp1, &m_vUp, &vRotTotal);
-	*_Up = m_vUp1;
+	D3DXVec3TransformNormal(&m_vUp, &m_vUp, &vRotTotal);
 
 	SetCursorPos(m_tCenter.x, m_tCenter.y);
-
-	m_vDir1 = m_vDir;
-	memcpy(_vLook, &m_vDir, sizeof(D3DXVECTOR3));
-
 	m_vPos = _vPos - m_vDir*m_fCameraDis;
-
 	m_vDir = m_vPos + m_vDir;
 }
 
@@ -96,14 +109,11 @@ void CCamera::Move_Camera_InMFC(LPDIRECT3DDEVICE9 & pGraphicDev, _vec3 _vPos, _v
 		vRotTotal = vRotX*vRotY;
 		D3DXVec3TransformNormal(&m_vDir, &m_vLook, &vRotTotal);
 		//업백터
-		D3DXVec3TransformNormal(&m_vUp1, &m_vUp, &vRotTotal);
-		*_Up = m_vUp1;
+		D3DXVec3TransformNormal(&m_vUp, &m_vUp, &vRotTotal);
+		*_Up = m_vUp;
 
-		m_vDir1 = m_vDir;
 		memcpy(_vLook, &m_vDir, sizeof(D3DXVECTOR3));
-
 		m_vPos = _vPos - m_vDir*m_fCameraDis;
-
 		m_vDir = m_vPos + m_vDir;
 	}
 	m_tCenter = tPos;
@@ -147,7 +157,7 @@ void CCamera::Ride_Terrain(CBaseLand* _pTerrain)
 				if (m_fCameraDis < 0.f)
 					m_fCameraDis = 0.f;
 			}
-			else if (m_fCameraDis < 15.f)
+			else if (m_fCameraDis < 100.f)
 				m_fCameraDis += m_fCameraDisSpeed;
 		}
 		else
@@ -170,7 +180,7 @@ void CCamera::Ride_Terrain(CBaseLand* _pTerrain)
 				if (m_fCameraDis < 0.f)
 					m_fCameraDis = 0.f;
 			}
-			else if (m_fCameraDis < 15.f)
+			else if (m_fCameraDis < 100.f)
 				m_fCameraDis += m_fCameraDisSpeed;
 		}
 	}

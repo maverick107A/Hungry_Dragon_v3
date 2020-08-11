@@ -1,5 +1,5 @@
-#ifndef StageOne_h__
-#define StageOne_h__
+#ifndef Scene_Cave_h__
+#define Scene_Cave_h__
 
 #include "Define.h"
 #include "Scene.h"
@@ -20,11 +20,15 @@
 
 using namespace Engine;
 
-class CStageOne : public Engine::CScene
+class CCave;
+class CVent;
+
+
+class CScene_Cave : public Engine::CScene
 {
 private:
-	explicit CStageOne(LPDIRECT3DDEVICE9 pGraphicDev);
-	virtual ~CStageOne(void);
+	explicit CScene_Cave(LPDIRECT3DDEVICE9 pGraphicDev);
+	virtual ~CScene_Cave(void);
 
 public:
 	virtual HRESULT Ready_Scene(void) override;
@@ -37,10 +41,12 @@ private:
 	HRESULT	Ready_Layer_GameLogic(const _tchar* pLayerTag);
 	HRESULT	Ready_Layer_UI(const _tchar* pLayerTag);
 	
-	Engine::CGameObject* m_pTestObj = 0;
 public:
-	static CStageOne*		Create(LPDIRECT3DDEVICE9 pGraphicDev);
+	static CScene_Cave*		Create(LPDIRECT3DDEVICE9 pGraphicDev);
 
+private:
+	CCave* m_pCave = nullptr;
+	CVent* m_pVent = nullptr;
 
 private:
 	virtual void Free(void) override;

@@ -167,6 +167,7 @@ call CopyUtility.bat</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\Camera.cpp" />
+    <ClCompile Include="..\Code\CaveCamera.cpp" />
     <ClCompile Include="..\Code\CollisionMgr.cpp" />
     <ClCompile Include="..\Code\Component.cpp" />
     <ClCompile Include="..\Code\Dynamic_Behavior.cpp" />
@@ -175,7 +176,7 @@ call CopyUtility.bat</Command>
     <ClCompile Include="..\Code\Management.cpp" />
     <ClCompile Include="..\Code\MonsterMain.cpp" />
     <ClCompile Include="..\Code\ObjectPool.cpp" />
-    <ClCompile Include="..\Code\ParticleMgr.cpp" />
+    <ClCompile Include="..\Code\PCaveRush.cpp" />
     <ClCompile Include="..\Code\PFly.cpp" />
     <ClCompile Include="..\Code\PFlyIdle.cpp" />
     <ClCompile Include="..\Code\PLandIdle.cpp" />
@@ -193,6 +194,7 @@ call CopyUtility.bat</Command>
   <ItemGroup>
     <ClInclude Include="..\..\Header\Export_Utility.h" />
     <ClInclude Include="..\Code\Camera.h" />
+    <ClInclude Include="..\Code\CaveCamera.h" />
     <ClInclude Include="..\Code\CollisionMgr.h" />
     <ClInclude Include="..\Code\Component.h" />
     <ClInclude Include="..\Code\Dynamic_Behavior.h" />
@@ -201,7 +203,7 @@ call CopyUtility.bat</Command>
     <ClInclude Include="..\Code\Management.h" />
     <ClInclude Include="..\Code\MonsterMain.h" />
     <ClInclude Include="..\Code\ObjectPool.h" />
-    <ClInclude Include="..\Code\ParticleMgr.h" />
+    <ClInclude Include="..\Code\PCaveRush.h" />
     <ClInclude Include="..\Code\PFly.h" />
     <ClInclude Include="..\Code\PFlyIdle.h" />
     <ClInclude Include="..\Code\PLandIdle.h" />

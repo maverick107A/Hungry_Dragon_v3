@@ -31,6 +31,8 @@ HRESULT CTestPlayer::Ready_Object(void)
 	m_pTransform->m_vInfo[Engine::INFO_POS].y = 700.f;
 	m_pTransform->m_vInfo[Engine::INFO_POS].z = 264.f;
 
+	m_pTransform->Set_Scale(10.f);
+
 	return S_OK;
 }
 
@@ -69,8 +71,8 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 		}
 	}
 
+	m_pCamera->Update_Camera(fTimeDelta, m_pGraphicDev, m_pTransform->m_vInfo[Engine::INFO_POS], &m_fAngleX, &m_fAngleY, m_pTerrain);
 	m_pState->Update_State(fTimeDelta);
-	m_pCamera->Update_Camera(fTimeDelta, m_pGraphicDev, m_pTransform->m_vInfo[Engine::INFO_POS], &m_vLook, &m_vUp, m_pTerrain);
 	//
 	State_Change();
 
@@ -177,92 +179,92 @@ CTestPlayer* CTestPlayer::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 
 void CTestPlayer::Key_Input(const float& fTimeDelta)
 {
-	D3DXVECTOR3 vDir = { 0.f,0.f,0.f };
-	bool bCheck = false;
-	if (GetAsyncKeyState('W'))
-	{
-		vDir += m_vLook;
-		bCheck = true;
-	}
+	//D3DXVECTOR3 vDir = { 0.f,0.f,0.f };
+	//bool bCheck = false;
+	//if (GetAsyncKeyState('W'))
+	//{
+	//	vDir += m_vLook;
+	//	bCheck = true;
+	//}
 
-	if (GetAsyncKeyState('S'))
-	{
-		vDir -= m_vLook;
-		bCheck = true;
-	}
+	//if (GetAsyncKeyState('S'))
+	//{
+	//	vDir -= m_vLook;
+	//	bCheck = true;
+	//}
 
-	if (GetAsyncKeyState(VK_SPACE))
-	{
-		vDir += D3DXVECTOR3(0.f, 1.f, 0.f);
-		//vDir += m_vUp;
-		/*m_pTransform->m_vInfo[Engine::INFO_POS].y += fTimeDelta*m_fSpeed;*/
-		bCheck = true;
-		m_bLand = false;
-	}
-	if (GetAsyncKeyState(VK_SHIFT))
-	{
-		m_bShift = true;
-	}
-	if (bCheck)
-	{
-		if (m_bLand)
-		{
-			vDir.y = 0.f;
-			D3DXVec3Normalize(&vDir, &vDir);
-			vDir *= fTimeDelta*m_fSpeed;;
-			if (m_bShift)
-			{
-				vDir *= 200.f;
-				m_bShift = false;
-			}
-			m_pTransform->m_vInfo[Engine::INFO_POS] += vDir;
-			float fDis = sqrtf(vDir.x*vDir.x + vDir.y*vDir.y + vDir.z*vDir.z);
-			float fPlaneDis = sqrtf(vDir.x*vDir.x + vDir.z*vDir.z);
-			float fAngleX = acosf(fPlaneDis / fDis);
-			if (0 < vDir.y)
-				fAngleX *= -1;
-			//m_pTransform->m_vAngle.x = fAngleX;
-			m_pTransform->m_vAngle.x = 0.f;
-			if (0.f != fPlaneDis)
-			{
-				float fAngleY = acosf(vDir.z / fPlaneDis);
-				if (0 > vDir.x)
-					fAngleY *= -1;
-				m_pTransform->m_vAngle.y = fAngleY;
-				//m_pTransform->m_vAngle.y = m_pCamera->m_fAngleY;
-			}
+	//if (GetAsyncKeyState(VK_SPACE))
+	//{
+	//	vDir += D3DXVECTOR3(0.f, 1.f, 0.f);
+	//	//vDir += m_vUp;
+	//	/*m_pTransform->m_vInfo[Engine::INFO_POS].y += fTimeDelta*m_fSpeed;*/
+	//	bCheck = true;
+	//	m_bLand = false;
+	//}
+	//if (GetAsyncKeyState(VK_SHIFT))
+	//{
+	//	m_bShift = true;
+	//}
+	//if (bCheck)
+	//{
+	//	if (m_bLand)
+	//	{
+	//		vDir.y = 0.f;
+	//		D3DXVec3Normalize(&vDir, &vDir);
+	//		vDir *= fTimeDelta*m_fSpeed;;
+	//		if (m_bShift)
+	//		{
+	//			vDir *= 200.f;
+	//			m_bShift = false;
+	//		}
+	//		m_pTransform->m_vInfo[Engine::INFO_POS] += vDir;
+	//		float fDis = sqrtf(vDir.x*vDir.x + vDir.y*vDir.y + vDir.z*vDir.z);
+	//		float fPlaneDis = sqrtf(vDir.x*vDir.x + vDir.z*vDir.z);
+	//		float fAngleX = acosf(fPlaneDis / fDis);
+	//		if (0 < vDir.y)
+	//			fAngleX *= -1;
+	//		//m_pTransform->m_vAngle.x = fAngleX;
+	//		m_pTransform->m_vAngle.x = 0.f;
+	//		if (0.f != fPlaneDis)
+	//		{
+	//			float fAngleY = acosf(vDir.z / fPlaneDis);
+	//			if (0 > vDir.x)
+	//				fAngleY *= -1;
+	//			m_pTransform->m_vAngle.y = fAngleY;
+	//			//m_pTransform->m_vAngle.y = m_pCamera->m_fAngleY;
+	//		}
 
-			bCheck = false;
-		}
-		else
-		{
-			D3DXVec3Normalize(&vDir, &vDir);
-			if (m_bShift)
-			{
-				vDir *= 200.f;
-				m_bShift = false;
-			}
-			vDir *= fTimeDelta*m_fSpeed;;
-			m_pTransform->m_vInfo[Engine::INFO_POS] += vDir;
-			float fDis = sqrtf(vDir.x*vDir.x + vDir.y*vDir.y + vDir.z*vDir.z);
-			float fPlaneDis = sqrtf(vDir.x*vDir.x + vDir.z*vDir.z);
-			float fAngleX = acosf(fPlaneDis / fDis);
-			if (0 < vDir.y)
-				fAngleX *= -1;
-			m_pTransform->m_vAngle.x = fAngleX;
-			//m_pTransform->m_vAngle.x = m_pCamera->m_fAngleX;
-			if (0.f != fPlaneDis)
-			{
-				float fAngleY = acosf(vDir.z / fPlaneDis);
-				if (0 > vDir.x)
-					fAngleY *= -1;
-				m_pTransform->m_vAngle.y = fAngleY;
-				//m_pTransform->m_vAngle.y = m_pCamera->m_fAngleY;
-			}
+	//		bCheck = false;
+	//	}
+	//	else
+	//	{
+	//		D3DXVec3Normalize(&vDir, &vDir);
+	//		if (m_bShift)
+	//		{
+	//			vDir *= 200.f;
+	//			m_bShift = false;
+	//		}
+	//		vDir *= fTimeDelta*m_fSpeed;;
+	//		m_pTransform->m_vInfo[Engine::INFO_POS] += vDir;
+	//		float fDis = sqrtf(vDir.x*vDir.x + vDir.y*vDir.y + vDir.z*vDir.z);
+	//		float fPlaneDis = sqrtf(vDir.x*vDir.x + vDir.z*vDir.z);
+	//		float fAngleX = acosf(fPlaneDis / fDis);
+	//		if (0 < vDir.y)
+	//			fAngleX *= -1;
+	//		m_pTransform->m_vAngle.x = fAngleX;
+	//		//m_pTransform->m_vAngle.x = m_pCamera->m_fAngleX;
+	//		if (0.f != fPlaneDis)
+	//		{
+	//			float fAngleY = acosf(vDir.z / fPlaneDis);
+	//			if (0 > vDir.x)
+	//				fAngleY *= -1;
+	//			m_pTransform->m_vAngle.y = fAngleY;
+	//			//m_pTransform->m_vAngle.y = m_pCamera->m_fAngleY;
+	//		}
 
-			bCheck = false;
-		}
-	}
+	//		bCheck = false;
+	//	}
+	//}
 }
 
 void CTestPlayer::Ride_Terrain()

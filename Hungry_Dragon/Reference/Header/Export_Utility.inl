@@ -77,6 +77,7 @@ inline bool Find_First(CGameObject * _caller, CGameObject * _callee)
 	return Engine::CCollisionMgr::Find_First(_caller,_callee);
 }
 
+
 inline bool Player_Monster(CGameObject * _caller, CGameObject * _callee)
 {
 	return Engine::CCollisionMgr::Player_Monster(_caller, _callee);
@@ -101,8 +102,6 @@ void Particle_Create(Engine::CResources* _tempParticle)
 {
 	CParticleMgr::GetInstance()->Particle_Create(_tempParticle);
 }
-
-
 
 
 

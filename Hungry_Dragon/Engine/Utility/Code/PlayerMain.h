@@ -9,6 +9,7 @@ class CVIBuffer;
 class CTexture;
 class CTransform;
 class CCamera;
+class CCaveCamera;
 class CBaseLand;
 class CPlayerState;
 
@@ -23,6 +24,7 @@ protected:
 
 public:
 	virtual HRESULT Ready_Object(void) { return 0; }
+	virtual void Initialize_Object(void) { return; }
 	virtual int Update_Object(const float& fTimeDelta) { return 0; }
 	virtual void Render_Object(void) {}
 
@@ -31,8 +33,10 @@ public:
 
 public:
 	CTransform* Get_Transform() { return m_pTransform; }
-	const D3DXVECTOR3&			Get_Look() { return m_vLook; }
-	const D3DXVECTOR3&			Get_Up() { return m_vUp; }
+	//const D3DXVECTOR3&			Get_Look() { return m_vLook; }
+	//const D3DXVECTOR3&			Get_Up() { return m_vUp; }
+	const float&			Get_AngleX() { return m_fAngleX; }
+	const float&			Get_AngleY() { return m_fAngleY; }
 	CBaseLand*	Get_Terrain() { return m_pTerrain; }
 	CCamera*	Get_Camera() { return m_pCamera; }
 
@@ -43,10 +47,13 @@ protected:
 protected:
 	CVIBuffer*				m_pBufferCom = nullptr;
 	CCamera*				m_pCamera = nullptr;
+	CCaveCamera*			m_pCaveCamera = nullptr;
 	CBaseLand*				m_pTerrain = nullptr;
 	CPlayerState*			m_pState = nullptr;
-	D3DXVECTOR3				m_vLook;
-	D3DXVECTOR3				m_vUp;
+	//D3DXVECTOR3				m_vLook;
+	//D3DXVECTOR3				m_vUp;
+	float					m_fAngleX = 0.f;
+	float					m_fAngleY = 0.f;
 	bool					m_bLand = false;
 	bool					m_bShift = false;
 	float					m_fSpeed = 10.f;

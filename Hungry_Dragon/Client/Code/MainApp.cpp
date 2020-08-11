@@ -10,11 +10,17 @@
 #ifdef _DEBUG		// 테스트용입니다.
 #include "Scene_Monster.h"
 #include "Scene_PT.h"
-#include "StageOne.h"
+
 #endif // _DEBUG
 
 
 #include "Scene_Proto.h"
+//#include "Scene_Forest.h"
+#include "Scene_Cave.h"
+//#include "Scene_Cloud.h"
+//#include "Scene_Volcano.h"
+//#include "Scene_Iceland.h"
+
 //-------------------------------------------------------
 //매니저 헤더********************************************
 //-------------------------------------------------------

@@ -48,7 +48,6 @@ inline  void		Set_Object_LayerMap(CLayer *  _Layer);
 
 //Collision
 inline  static bool	Find_First(CGameObject* _caller,CGameObject* _callee);
-inline	static bool	Player_Monster(CGameObject* _caller, CGameObject* _callee);
 
 //Particle
 
