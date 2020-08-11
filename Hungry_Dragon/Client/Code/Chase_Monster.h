@@ -28,7 +28,7 @@ private:
 	HRESULT		Add_Component(void);
 
 public:
-	static CChase_Monster*	Create(LPDIRECT3DDEVICE9 pGraphicDev, D3DXVECTOR3 _pos);
+	static CChase_Monster*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 private:
 	virtual void Free(void) override;
 

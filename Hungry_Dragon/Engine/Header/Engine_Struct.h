@@ -153,6 +153,17 @@ namespace Engine
 		void*	ObjAddress;
 		void*	ComponentAddress;
 	}tagAdd;
+
+
+	typedef struct tagFrame
+	{
+		float fStartFrame;
+		float fMaxFrame;
+		float fFrameSpeed;
+
+	}FRAME;
+
+
 }
 
 

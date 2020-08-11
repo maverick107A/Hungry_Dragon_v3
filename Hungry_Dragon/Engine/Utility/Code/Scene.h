@@ -48,6 +48,15 @@ public:	// 편의성 함수 템플릿
 		return S_OK;
 	}
 
+	template<typename T>
+	HRESULT Register_ObjectPool(CLayer* _pLayer, const OBJID _pId)
+	{
+		Engine::CGameObject*		_pObj = nullptr;
+		_pObj = T::Create(m_pGraphicDev);
+		NULL_CHECK_RETURN(_pObj, E_FAIL);
+		_pObj->Set_Address(_pLayer);
+		Engine::Add_Object_Pool(_pObj, _pId);
+	}
 
 protected:
 	LPDIRECT3DDEVICE9				m_pGraphicDev;

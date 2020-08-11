@@ -1,7 +1,5 @@
 #include "stdafx.h"
-
 #include "Monster.h"
-
 #include "Export_Function.h"
 
 CMonster::CMonster(LPDIRECT3DDEVICE9 pGraphicDev)
@@ -55,7 +53,7 @@ int CMonster::Update_Object(const float & fTimeDelta)
 		//Dead_Monster(fTimeDelta);
 		//m_bDead = true;
 	}
-
+	
 	return m_iEvent;
 }
 
@@ -82,17 +80,25 @@ void CMonster::Dead_Monster(const float & fTimeDelta)
 	if(m_fParticle_Speed > 0.1f)
 	{
 		Engine::_vec3 vOrigin = Engine::_vec3(0.f, 0.f, 0.f);
+
+
 		Engine::BoundingBox tempBoundingBox;
 		tempBoundingBox.vMax = Engine::_vec3(100.f, 100.f, 100.f);
 		tempBoundingBox.vMin = Engine::_vec3(-100.f, -100.f, -100.f);
-		Engine::CResources* tempParticle = Engine::Get_Particle(m_pGraphicDev, Engine::PART_ATK, tempBoundingBox, vOrigin);
 
+
+		Engine::CResources* tempParticle = Engine::Get_Particle(m_pGraphicDev, Engine::PART_ATK, tempBoundingBox, vOrigin);
 		static_cast<Engine::CPart_Atk*>(tempParticle)->Set_Texture(L"../../Asset/snowflake.dds");
-		m_arrParticle.emplace_back(tempParticle);
+
+
+		
+
+
 		m_fParticle_Speed = 0;
 	}
 
-	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end();) {
+	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end();) 
+	{
 		int life = (*iter)->Update_Component(fTimeDelta);
 
 		if (life == 0) {

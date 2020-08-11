@@ -4,12 +4,6 @@
 
 #include "Engine_Define.h"
 
-BEGIN(Engine)
-
-class CResources;
-
-END
-
 class CGameMgr
 {
 	DECLARE_SINGLETON(CGameMgr)
