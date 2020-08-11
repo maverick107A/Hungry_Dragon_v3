@@ -76,9 +76,6 @@
     <Filter Include="00. Resources\00. VIBuffer\54. VentCube">
       <UniqueIdentifier>{5547bb62-6096-4937-a088-f780ae8b8d0c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00. Resources\00. VIBuffer\91. VIMesh">
-      <UniqueIdentifier>{74a205b8-8c4b-4a1a-bcbb-220e778a93f5}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\Resources.cpp">
@@ -173,9 +170,6 @@
     </ClCompile>
     <ClCompile Include="..\Code\VentCube.cpp">
       <Filter>00. Resources\00. VIBuffer\54. VentCube</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\VICustom.cpp">
-      <Filter>00. Resources\00. VIBuffer\91. VIMesh</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -274,9 +268,6 @@
     </ClInclude>
     <ClInclude Include="..\Code\VentCube.h">
       <Filter>00. Resources\00. VIBuffer\54. VentCube</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\VICustom.h">
-      <Filter>00. Resources\00. VIBuffer\91. VIMesh</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -63,7 +63,6 @@ private:
 
 public:
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
-	void		Reset_Buffer(list<Engine::VTXCOL> _listVertex,list<Engine::INDEX16> _listIndex);
 };
 
 #ifndef _DEBUG  // MFCToolView.cpp의 디버그 버전
