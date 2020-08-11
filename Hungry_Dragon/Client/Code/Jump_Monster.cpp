@@ -26,13 +26,11 @@ HRESULT CJump_Monster::Ready_Object(void)
 int CJump_Monster::Update_Object(const float & fTimeDelta)
 {
 
-	if (m_bFirst)
+	if (m_eState == MONSTER_REBORN)
 	{
 		m_pTransform->Set_Trans(&m_vFirstPos);
 		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
 		m_pTransform->Set_Scale(1);
-		//m_bFirst = false;	
-		//m_bDead = false;
 		m_iEvent = OBJ_NOEVENT;
 		m_eState = MONSTER_IDLE;
 
@@ -65,7 +63,7 @@ void CJump_Monster::Render_Object(void)
 {
 	m_pTransform->Set_Transform(m_pGraphicDev);
 	m_pTextureCom->Set_Texture(5);
-	m_pBufferCom->Render_Buffer();
+	m_pBufferCubeCom->Render_Buffer();
 	Engine::CMonsterMain::Render_Object();
 }
 
@@ -74,7 +72,7 @@ HRESULT CJump_Monster::Add_Component(void)
 	Engine::CComponent*		pComponent = nullptr;
 
 	// buffer
-	pComponent = m_pBufferCom = dynamic_cast<Engine::CTexture_Cube*>
+	pComponent = m_pBufferCubeCom = dynamic_cast<Engine::CTexture_Cube*>
 		(Engine::Clone(RESOURCE_STATIC, L"Buffer_CubeTex"));
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Buffer", pComponent);
@@ -88,15 +86,19 @@ HRESULT CJump_Monster::Add_Component(void)
 
 	return S_OK;
 }
+
+
 void CJump_Monster::LateUpdate_Object(const float & fTimeDelta)
 {
 	Engine::CMonsterMain::LateUpdate_Object(fTimeDelta);
 }
-CJump_Monster * CJump_Monster::Create(LPDIRECT3DDEVICE9 pGraphicDev, D3DXVECTOR3 _pos)
+
+
+
+CJump_Monster * CJump_Monster::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 {
 	CJump_Monster*		pInstance = new CJump_Monster(pGraphicDev);
 
-	pInstance->Set_Pos(_pos);
 
 	if (FAILED(pInstance->Ready_Object()))
 		Engine::Safe_Release(pInstance);
@@ -104,10 +106,18 @@ CJump_Monster * CJump_Monster::Create(LPDIRECT3DDEVICE9 pGraphicDev, D3DXVECTOR3
 	return pInstance;
 }
 
+
+
+
+
 void CJump_Monster::Free(void)
 {
 	Engine::CMonsterMain::Free();
 }
+
+
+
+
 
 void CJump_Monster::Jump(const float& fTimeDelta)
 {

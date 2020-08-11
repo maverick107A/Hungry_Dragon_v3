@@ -159,6 +159,7 @@
   <ItemGroup>
     <ClInclude Include="..\Code\BackGround.h" />
     <ClInclude Include="..\Code\BackGround_Logo.h" />
+    <ClInclude Include="..\Code\Bat_Monster.h" />
     <ClInclude Include="..\Code\Bullet.h" />
     <ClInclude Include="..\Code\Cave.h" />
     <ClInclude Include="..\Code\CavePlayer.h" />
@@ -193,6 +194,7 @@
   <ItemGroup>
     <ClCompile Include="..\Code\BackGround.cpp" />
     <ClCompile Include="..\Code\BackGround_Logo.cpp" />
+    <ClCompile Include="..\Code\Bat_Monster.cpp" />
     <ClCompile Include="..\Code\Bullet.cpp" />
     <ClCompile Include="..\Code\Cave.cpp" />
     <ClCompile Include="..\Code\CavePlayer.cpp" />
