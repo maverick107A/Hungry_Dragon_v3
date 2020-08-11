@@ -70,7 +70,6 @@
     <Filter Include="00. Resources\00. VIBuffer\54. VentCube">
       <UniqueIdentifier>{5547bb62-6096-4937-a088-f780ae8b8d0c}</UniqueIdentifier>
     </Filter>
-<<<<<<< HEAD
     <Filter Include="00. Resources\03. Billboard\00. Terrain Board">
       <UniqueIdentifier>{60d86853-7a3a-496d-b3f9-8a4b1f38524e}</UniqueIdentifier>
     </Filter>
@@ -82,10 +81,6 @@
     </Filter>
     <Filter Include="00. Resources\03. Billboard\01. Monster Board">
       <UniqueIdentifier>{1527f2c7-32d3-4daa-8ea1-6ff05d2e1a1d}</UniqueIdentifier>
-=======
-    <Filter Include="00. Resources\00. VIBuffer\55. ObstacleCube">
-      <UniqueIdentifier>{7208a88e-b9a6-4dbc-bcea-ecb5aa79ef78}</UniqueIdentifier>
->>>>>>> d3306626680271defbbb3848a1b571fdb950f3bf
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -179,16 +174,11 @@
     <ClCompile Include="..\Code\VentCube.cpp">
       <Filter>00. Resources\00. VIBuffer\54. VentCube</Filter>
     </ClCompile>
-<<<<<<< HEAD
     <ClCompile Include="..\Code\BaseBoard.cpp">
       <Filter>00. Resources\03. Billboard\00. Terrain Board</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\MonsterBoard.cpp">
       <Filter>00. Resources\03. Billboard\01. Monster Board</Filter>
-=======
-    <ClCompile Include="..\Code\ObstacleCube.cpp">
-      <Filter>00. Resources\00. VIBuffer\55. ObstacleCube</Filter>
->>>>>>> d3306626680271defbbb3848a1b571fdb950f3bf
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -285,16 +275,11 @@
     <ClInclude Include="..\Code\VentCube.h">
       <Filter>00. Resources\00. VIBuffer\54. VentCube</Filter>
     </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="..\Code\BaseBoard.h">
       <Filter>00. Resources\03. Billboard\00. Terrain Board</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\MonsterBoard.h">
       <Filter>00. Resources\03. Billboard\01. Monster Board</Filter>
-=======
-    <ClInclude Include="..\Code\ObstacleCube.h">
-      <Filter>00. Resources\00. VIBuffer\55. ObstacleCube</Filter>
->>>>>>> d3306626680271defbbb3848a1b571fdb950f3bf
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
