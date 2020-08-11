@@ -22,6 +22,7 @@
 #include "VentCube.h"
 #include "Texture_Plane.h"
 #include "Texture_Square.h"
+#include "VICustom.h"
 
 #include "Texture.h"
 

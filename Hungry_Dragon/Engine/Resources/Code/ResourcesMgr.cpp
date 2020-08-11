@@ -88,7 +88,9 @@ HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 		break;
 	case BUFFER_VENTCUBE:
 		pResources = CVentCube::Create(pGraphicDev);
-
+		break;
+	case BUFFER_CUSTOMMESH:
+		pResources = CVICustom::Create(pGraphicDev,L"../../Asset/VIMesh/Test.dat");
 		break;
 	}
 
