@@ -43,18 +43,6 @@
     <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster">
       <UniqueIdentifier>{05b9bf4e-b12f-417a-83db-bd3eef034c8c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\01. Chase">
-      <UniqueIdentifier>{c5100102-17dd-47fc-aead-a71714ad1276}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\02. Running">
-      <UniqueIdentifier>{87c8498e-e0ba-4b9f-a4c6-419710cb5b94}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\03. Jumping">
-      <UniqueIdentifier>{16b008d2-d748-431f-aae7-6a35ff54d643}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\04. Fly">
-      <UniqueIdentifier>{8bc9e4e4-7f36-4baa-aa4a-e2271510a183}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\01. Terrain">
       <UniqueIdentifier>{c2aa2371-a97d-42d1-afb9-facbee36ad90}</UniqueIdentifier>
     </Filter>
@@ -70,9 +58,6 @@
     <Filter Include="02. GameObject\00. Logo">
       <UniqueIdentifier>{96d40a23-3640-4667-974e-ad3d40d42673}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. GameObject\01. Stage\03.Terrain">
-      <UniqueIdentifier>{469736e8-ed0a-45d7-88ea-3a633d005092}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01. Scene\01.Scene_Proto">
       <UniqueIdentifier>{4b8d3310-6267-4c3c-b336-49e7cffdbe50}</UniqueIdentifier>
     </Filter>
@@ -82,20 +67,11 @@
     <Filter Include="01. Scene\70. PlayerTest">
       <UniqueIdentifier>{8da5808b-3fa5-4c62-b2fc-d769bd219cee}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. GameObject\01. Stage\04.SkySphere">
-      <UniqueIdentifier>{7aa7f97f-bd8d-4e1e-b0d2-501f69181828}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. GameObject\01. Stage\00. Background">
       <UniqueIdentifier>{bc2a9999-d260-4edf-a3bb-6ddbd6b0b943}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. GameObject\01. Stage\00. Background\00. Ocean">
-      <UniqueIdentifier>{6273f2cd-0a4a-4fa3-857d-ad00bfc680af}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. GameObject\02. Public">
       <UniqueIdentifier>{007abf82-1595-400b-b2b7-11c552ebdbaa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. GameObject\01. Stage\05.GameMgr">
-      <UniqueIdentifier>{b3e38d98-0162-4576-b32b-7bbadbdfe1a1}</UniqueIdentifier>
     </Filter>
     <Filter Include="01. Scene\90. Scene_Loading">
       <UniqueIdentifier>{c110545e-7a4b-4828-8604-509975a6d557}</UniqueIdentifier>
@@ -124,14 +100,56 @@
     <Filter Include="01. Scene\50. Scene_Terrain">
       <UniqueIdentifier>{bac2b7ef-17a0-4138-8ecd-1128cd6ed6a1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. GameObject\01. Stage\06.Cave">
-      <UniqueIdentifier>{da02d5b2-f55c-4e59-b255-1904fd62782c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. GameObject\01. Stage\07.Vent">
-      <UniqueIdentifier>{96d3a98e-db12-4a73-9fed-f11c3d52641b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. GameObject\01. Stage\01.Player\01. CavePlayer">
       <UniqueIdentifier>{f5b8d36c-ef58-4879-a700-d2c839d83edc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster">
+      <UniqueIdentifier>{1130835c-a70f-4b69-9b0f-a20ed9b8f406}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\01. Chase">
+      <UniqueIdentifier>{c5100102-17dd-47fc-aead-a71714ad1276}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\02. Running">
+      <UniqueIdentifier>{87c8498e-e0ba-4b9f-a4c6-419710cb5b94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\04. Fly">
+      <UniqueIdentifier>{8bc9e4e4-7f36-4baa-aa4a-e2271510a183}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\03. Jumping">
+      <UniqueIdentifier>{16b008d2-d748-431f-aae7-6a35ff54d643}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\01.BoardMonster">
+      <UniqueIdentifier>{199066d6-f703-4107-b297-5cb7c1cb8a42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Scene\08. Scene_Option">
+      <UniqueIdentifier>{3b8c2e0a-b164-4b2a-b852-7bace6236efe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Scene\07. Scene_Intro">
+      <UniqueIdentifier>{940311cb-3c40-4cd5-ad3d-4e7304b318dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\51.SkySphere">
+      <UniqueIdentifier>{7aa7f97f-bd8d-4e1e-b0d2-501f69181828}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\52.Cave">
+      <UniqueIdentifier>{da02d5b2-f55c-4e59-b255-1904fd62782c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\53.Vent">
+      <UniqueIdentifier>{96d3a98e-db12-4a73-9fed-f11c3d52641b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\54.Obstacle">
+      <UniqueIdentifier>{d1c627c0-451a-4602-8e16-35bb9e226584}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\05.GameMgr">
+      <UniqueIdentifier>{b3e38d98-0162-4576-b32b-7bbadbdfe1a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\55.Terrain_Locater">
+      <UniqueIdentifier>{469736e8-ed0a-45d7-88ea-3a633d005092}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\50.Ocean">
+      <UniqueIdentifier>{6273f2cd-0a4a-4fa3-857d-ad00bfc680af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\56.Terrain_Parts">
+      <UniqueIdentifier>{f3725a6f-4a39-464d-b6ca-22f49ca9bc1b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -166,16 +184,16 @@
       <Filter>01. Scene\20. Scene_Monster</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Chase_Monster.h">
-      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\01. Chase</Filter>
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\01. Chase</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Run_Monster.h">
-      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\02. Running</Filter>
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\02. Running</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Jump_Monster.h">
-      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\03. Jumping</Filter>
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\03. Jumping</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Fly_Monster.h">
-      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\04. Fly</Filter>
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\04. Fly</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Player.h">
       <Filter>02. GameObject\01. Stage\01. Scene_Monster\02. Player</Filter>
@@ -192,14 +210,11 @@
     <ClInclude Include="..\Code\Scene_Proto.h">
       <Filter>01. Scene\01.Scene_Proto</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\TerrainPlayer.h">
-      <Filter>02. GameObject\01. Stage\03.Terrain</Filter>
-    </ClInclude>
     <ClInclude Include="..\Code\SkySphere.h">
-      <Filter>02. GameObject\01. Stage\04.SkySphere</Filter>
+      <Filter>02. GameObject\01. Stage\51.SkySphere</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Ocean.h">
-      <Filter>02. GameObject\01. Stage\00. Background\00. Ocean</Filter>
+      <Filter>02. GameObject\01. Stage\50.Ocean</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Scene_Loading.h">
       <Filter>01. Scene\90. Scene_Loading</Filter>
@@ -220,13 +235,31 @@
       <Filter>02. GameObject\01. Stage\05.GameMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Cave.h">
-      <Filter>02. GameObject\01. Stage\06.Cave</Filter>
+      <Filter>02. GameObject\01. Stage\52.Cave</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Vent.h">
-      <Filter>02. GameObject\01. Stage\07.Vent</Filter>
+      <Filter>02. GameObject\01. Stage\53.Vent</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\CavePlayer.h">
       <Filter>02. GameObject\01. Stage\01.Player\01. CavePlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Bat_Monster.h">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\01.BoardMonster</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\PlayerUI.h">
+      <Filter>99. Etc\헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Obstacle.h">
+      <Filter>02. GameObject\01. Stage\54.Obstacle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Scene_Forest.h">
+      <Filter>01. Scene\02. Scene_Forest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Terrain_Locater.h">
+      <Filter>02. GameObject\01. Stage\55.Terrain_Locater</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Terrain_Parts.h">
+      <Filter>02. GameObject\01. Stage\56.Terrain_Parts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -252,16 +285,16 @@
       <Filter>01. Scene\20. Scene_Monster</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Chase_Monster.cpp">
-      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\01. Chase</Filter>
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\01. Chase</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Run_Monster.cpp">
-      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\02. Running</Filter>
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\02. Running</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Jump_Monster.cpp">
-      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\03. Jumping</Filter>
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\03. Jumping</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Fly_Monster.cpp">
-      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\04. Fly</Filter>
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\04. Fly</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Player.cpp">
       <Filter>02. GameObject\01. Stage\01. Scene_Monster\02. Player</Filter>
@@ -278,14 +311,11 @@
     <ClCompile Include="..\Code\Scene_Proto.cpp">
       <Filter>01. Scene\01.Scene_Proto</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\TerrainPlayer.cpp">
-      <Filter>02. GameObject\01. Stage\03.Terrain</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\SkySphere.cpp">
-      <Filter>02. GameObject\01. Stage\04.SkySphere</Filter>
+      <Filter>02. GameObject\01. Stage\51.SkySphere</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Ocean.cpp">
-      <Filter>02. GameObject\01. Stage\00. Background\00. Ocean</Filter>
+      <Filter>02. GameObject\01. Stage\50.Ocean</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\GameMgr.cpp">
       <Filter>02. GameObject\01. Stage\05.GameMgr</Filter>
@@ -306,13 +336,31 @@
       <Filter>01. Scene\03. Scene_Cave</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Cave.cpp">
-      <Filter>02. GameObject\01. Stage\06.Cave</Filter>
+      <Filter>02. GameObject\01. Stage\52.Cave</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Vent.cpp">
-      <Filter>02. GameObject\01. Stage\07.Vent</Filter>
+      <Filter>02. GameObject\01. Stage\53.Vent</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\CavePlayer.cpp">
       <Filter>02. GameObject\01. Stage\01.Player\01. CavePlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Bat_Monster.cpp">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\01.BoardMonster</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\PlayerUI.cpp">
+      <Filter>99. Etc\소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Obstacle.cpp">
+      <Filter>02. GameObject\01. Stage\54.Obstacle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Scene_Forest.cpp">
+      <Filter>01. Scene\02. Scene_Forest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Terrain_Locater.cpp">
+      <Filter>02. GameObject\01. Stage\55.Terrain_Locater</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Terrain_Parts.cpp">
+      <Filter>02. GameObject\01. Stage\56.Terrain_Parts</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

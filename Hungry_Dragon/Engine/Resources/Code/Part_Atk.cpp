@@ -76,11 +76,14 @@ _int CPart_Atk::Update_Component(const _float & _fTimeDelta) {
 	}
 
 	list<ATTRIBUTE>::iterator iter = m_arrParticle.begin();
-	for (; iter != m_arrParticle.end();) {
-		if (m_BoundingBox.isPointInside(iter->vPosition) == false) {
+	for (; iter != m_arrParticle.end();) 
+	{
+		if (m_BoundingBox.isPointInside(iter->vPosition) == false)
+		{
 			iter = m_arrParticle.erase(iter);
 		}
-		else {
+		else 
+		{
 			iter->vPosition += iter->vVelocity*_fTimeDelta;
 			iter->vVelocity.y -= GRAVITY;
 

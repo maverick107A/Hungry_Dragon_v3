@@ -68,6 +68,38 @@ void		Set_Object_LayerMap(CLayer *  _Layer)
 
 }
 
+
+
+
+//Particle
+void Ready_ParticleMgr(LPDIRECT3DDEVICE9 _pGraphicDev)
+{
+	CParticleMgr::GetInstance()->Ready_ParticleMgr(_pGraphicDev);
+}
+
+void Particle_Update(const float& fTimeDelta)
+{
+	CParticleMgr::GetInstance()->Particle_Update(fTimeDelta);
+}
+
+void Particle_Render()
+{
+	CParticleMgr::GetInstance()->Particle_Render();
+}
+
+void Particle_Create()
+{
+	CParticleMgr::GetInstance()->Particle_Create();
+}
+
+
+
+
+
+
+
+
+
 inline bool Find_First(CGameObject * _caller, CGameObject * _callee)
 {
 	return Engine::CCollisionMgr::Find_First(_caller,_callee);
@@ -80,4 +112,5 @@ void		Release_Utility(void)
 	CManagement::GetInstance()->DestroyInstance();
 	CRenderer::GetInstance()->DestroyInstance();
 	CObjectPool::GetInstance()->DestroyInstance();
+	CParticleMgr::GetInstance()->DestroyInstance();
 }

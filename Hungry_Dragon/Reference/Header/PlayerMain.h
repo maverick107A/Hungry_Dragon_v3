@@ -8,8 +8,7 @@ BEGIN(Engine)
 class CVIBuffer;
 class CTexture;
 class CTransform;
-class CCamera;
-class CCaveCamera;
+class CCameraMain;
 class CBaseLand;
 class CPlayerState;
 
@@ -38,7 +37,7 @@ public:
 	const float&			Get_AngleX() { return m_fAngleX; }
 	const float&			Get_AngleY() { return m_fAngleY; }
 	CBaseLand*	Get_Terrain() { return m_pTerrain; }
-	CCamera*	Get_Camera() { return m_pCamera; }
+	CCameraMain*	Get_Camera() { return m_pCamera; }
 
 protected:
 	virtual void State_Change() {};
@@ -46,8 +45,7 @@ protected:
 
 protected:
 	CVIBuffer*				m_pBufferCom = nullptr;
-	CCamera*				m_pCamera = nullptr;
-	CCaveCamera*			m_pCaveCamera = nullptr;
+	CCameraMain*			m_pCamera = nullptr;
 	CBaseLand*				m_pTerrain = nullptr;
 	CPlayerState*			m_pState = nullptr;
 	//D3DXVECTOR3				m_vLook;
