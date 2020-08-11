@@ -119,8 +119,6 @@ void CScene_Proto::Render_Scene(void) {
 	m_mapLayer[L"GameLogic"]->Render_Layer();
 
 	m_pFogEffect->End();
-	m_mapLayer[L"UI"]->Render_Layer();
-
 }
 
 void CScene_Proto::Free(void) {
