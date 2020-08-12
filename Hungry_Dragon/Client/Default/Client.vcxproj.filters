@@ -154,6 +154,15 @@
     <Filter Include="02. GameObject\01. Stage\99. PlayerUI">
       <UniqueIdentifier>{82788b45-0f7e-4ccf-9a45-27915f8149fc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\64.Golem">
+      <UniqueIdentifier>{ea864947-c7c1-4a64-bf59-071f3184e9bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\64.Golem\83.LeftArm">
+      <UniqueIdentifier>{6ad8c02f-332c-44c5-8a4f-a0381e7a8bef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\64.Golem\84.RightArm">
+      <UniqueIdentifier>{4836af12-4c7e-4ab5-a2f5-95d8272877d6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -264,6 +273,15 @@
     <ClInclude Include="..\Code\PlayerUI.h">
       <Filter>02. GameObject\01. Stage\99. PlayerUI</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\Golem.h">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\64.Golem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\GolemLeftArm.h">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\64.Golem\83.LeftArm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\GolemRightArm.h">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\64.Golem\84.RightArm</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -364,6 +382,15 @@
     </ClCompile>
     <ClCompile Include="..\Code\PlayerUI.cpp">
       <Filter>02. GameObject\01. Stage\99. PlayerUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Golem.cpp">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\64.Golem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\GolemLeftArm.cpp">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\64.Golem\83.LeftArm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\GolemRightArm.cpp">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\64.Golem\84.RightArm</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

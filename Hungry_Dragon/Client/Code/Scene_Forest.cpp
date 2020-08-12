@@ -210,10 +210,12 @@ HRESULT CScene_Forest::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 	FAILED_CHECK_RETURN(Register_GameObject<CTerrain_Locater>(pLayer, L"BackGround"), E_FAIL);
 	FAILED_CHECK_RETURN(Register_GameObject<CTestPlayer>(pLayer, L"TestPlayer"), E_FAIL);
 
-	for (int i = 0; i < 5; ++i)
+	for (int i = 0; i < 50; ++i)
 	{
 		//FAILED_CHECK_RETURN(Register_ObjectPool<CBat_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
-		FAILED_CHECK_RETURN(Register_ObjectPool<CChase_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
+		FAILED_CHECK_RETURN(Register_ObjectPool<CGolem>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
+		
+		//FAILED_CHECK_RETURN(Register_ObjectPool<CChase_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
 		//FAILED_CHECK_RETURN(Register_ObjectPool<CRun_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
 		//FAILED_CHECK_RETURN(Register_ObjectPool<CJump_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
 		//FAILED_CHECK_RETURN(Register_ObjectPool<CFly_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);

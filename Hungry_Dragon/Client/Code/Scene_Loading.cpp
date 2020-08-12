@@ -103,6 +103,18 @@ _uint CScene_Loading::Loading_ForStage(void)
 		Engine::BUFFER_OBSTACLECUBE),
 		E_FAIL);
 
+	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"BUFFER_ROCKMESH",
+		Engine::BUFFER_ROCKMESH),
+		E_FAIL);
+
+//	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
+//		RESOURCE_STAGE,
+//		L"BUFFER_DIAMESH",
+//		Engine::BUFFER_DIAMESH),
+//		E_FAIL);
+	
 
 	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
 		RESOURCE_STATIC,

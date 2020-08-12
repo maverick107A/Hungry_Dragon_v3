@@ -87,7 +87,7 @@ HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 		break;
 
 	case SPRITE_ANIM :
-		pResources = CMonsterBoard::Create(pGraphicDev, dwCntX, dwCntZ);
+		pResources = CMonsterBoard::Create(pGraphicDev, (_float)dwCntX, (_float)dwCntZ);
 		break;
 
 	case BUFFER_CAVECYLINDER:
@@ -97,13 +97,19 @@ HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 	case BUFFER_VENTCUBE:
 		pResources = CVentCube::Create(pGraphicDev);
 		break;
-	case BUFFER_CUSTOMMESH:
-		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/Test.dat");
-		break;
+	//case BUFFER_CUSTOMMESH:
+	//	pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/Test.dat");
+	//	break;
 	case BUFFER_OBSTACLECUBE:
 		pResources = CObstacleCube::Create(pGraphicDev);
-
 		break;
+	//case BUFFER_DIAMESH:
+	//	pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/Diamond.dat");
+	//	break;
+	case BUFFER_ROCKMESH:
+		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/Rock12.dat");
+		break;
+
 	}
 
 	m_pmapResource[wContainerIdx].emplace(pBufferTag, pResources);
