@@ -50,6 +50,7 @@ private:
 	Engine::CTransform*		m_pTransform = nullptr;
 	Engine::CTransform*		m_pTransformBeyond = nullptr;
 	Engine::CTexture*		m_pTex = nullptr;
+	Engine::CTexture*		m_pObsTex = nullptr;
 	float					m_fForwardSpeed = 1.f;
 	float					m_fUpdateTick = 0.f;
 	bool					m_bLoop = true;

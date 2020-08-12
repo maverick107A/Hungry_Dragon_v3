@@ -182,7 +182,7 @@ void CHeightCol::Set_Height(const _tchar* _pPath)
 			for (int k = 0; k < 6; ++k)
 			{
 				fHeightRate[k] = fHeight255[k] / (float)255.f;
-				fHeightLerp[k] = 0.f; // = (float)(m_vecHeight[k] % 51) / 51.f;
+				fHeightLerp[k] = 0;// (float)(m_vecHeight[k] % 51) / 51.f;
 
 				// 높이 설정
 				pVertex[dwIdx+k].vPosition.y = fHeightRate[k] * 2560.f;
@@ -213,26 +213,40 @@ void CHeightCol::Set_Height(const _tchar* _pPath)
 			_vec3 vVertexN;
 			D3DXVec3Cross(&vVertexN, &vVertexU, &vVertexV);
 			D3DXVec3Normalize(&vVertexN, &vVertexN);
-			float fCosR = D3DXVec3Dot(&vVertexN, &vLightDirection);
+			float fCosR = -D3DXVec3Dot(&vVertexN, &vLightDirection);
 
 			vVertexU = pVertex[dwIdx + 4].vPosition - pVertex[dwIdx + 3].vPosition;
 			vVertexV = pVertex[dwIdx + 5].vPosition - pVertex[dwIdx + 4].vPosition;
 			D3DXVec3Cross(&vVertexN, &vVertexU, &vVertexV);
 			D3DXVec3Normalize(&vVertexN, &vVertexN);
-			float fCosL = D3DXVec3Dot(&vVertexN, &vLightDirection);
+			float fCosL = -D3DXVec3Dot(&vVertexN, &vLightDirection);
 			
 			// 색 평균 적용 + 음영 적용
 			_uint uIdxColorR = (((pVertex[dwIdx].dwColor & 0x00ff0000) >> 16) + ((pVertex[dwIdx + 1].dwColor & 0x00ff0000) >> 16) + ((pVertex[dwIdx + 2].dwColor & 0x00ff0000) >> 16))/3.f;
 			_uint uIdxColorG = (((pVertex[dwIdx].dwColor & 0x0000ff00) >> 8) + ((pVertex[dwIdx + 1].dwColor & 0x0000ff00) >> 8) + ((pVertex[dwIdx + 2].dwColor & 0x0000ff00) >> 8))/3.f;
 			_uint uIdxColorB = ((pVertex[dwIdx].dwColor & 0x000000ff) + (pVertex[dwIdx + 1].dwColor & 0x000000ff) + (pVertex[dwIdx + 2].dwColor & 0x000000ff))/3.f;
-			pVertex[dwIdx].dwColor = D3DCOLOR_XRGB((_uint)(uIdxColorR*fCosR), (_uint)(uIdxColorG*fCosR), (_uint)(uIdxColorB*fCosR));
+			
+			// 현재 칼라 받아서 빛에 따라 색 계산해서 곱해주기 (음영 적용)
+			D3DXCOLOR tColorR(pVertex[dwIdx].dwColor);
+			tColorR *= fCosR;
+			pVertex[dwIdx].dwColor = D3DCOLOR_XRGB((_uint)(tColorR.r * 255.f), (_uint)(tColorR.g* 255.f), (_uint)(tColorR.b* 255.f));
+
+
+			//pVertex[dwIdx].dwColor = D3DCOLOR_XRGB((_uint)(uIdxColorR*fCosR), (_uint)(uIdxColorG*fCosR), (_uint)(uIdxColorB*fCosR));
 			
 
 
 			uIdxColorR = (((pVertex[dwIdx+3].dwColor & 0x00ff0000) >> 16) + ((pVertex[dwIdx + 4].dwColor & 0x00ff0000) >> 16) + ((pVertex[dwIdx + 5].dwColor & 0x00ff0000) >> 16)) / 3.f;
 			uIdxColorG = (((pVertex[dwIdx+3].dwColor & 0x0000ff00) >> 8) + ((pVertex[dwIdx + 4].dwColor & 0x0000ff00) >> 8) + ((pVertex[dwIdx + 5].dwColor & 0x0000ff00) >> 8)) / 3.f;
 			uIdxColorB = ((pVertex[dwIdx+3].dwColor & 0x000000ff) + (pVertex[dwIdx + 4].dwColor & 0x000000ff) + (pVertex[dwIdx + 5].dwColor & 0x000000ff)) / 3.f;
-			pVertex[dwIdx+3].dwColor = D3DCOLOR_XRGB((_uint)(uIdxColorR*fCosL), (_uint)(uIdxColorG*fCosL), (_uint)(uIdxColorB*fCosL));
+			
+			// 현재 칼라 받아서 빛에 따라 색 계산해서 곱해주기 (음영 적용)
+			D3DXCOLOR tColorL(pVertex[dwIdx+3].dwColor);
+			tColorL *= fCosL;
+			pVertex[dwIdx+3].dwColor = D3DCOLOR_XRGB((_uint)(tColorL.r * 255.f), (_uint)(tColorL.g* 255.f), (_uint)(tColorL.b* 255.f));
+
+			
+			//pVertex[dwIdx+3].dwColor = D3DCOLOR_XRGB((_uint)(uIdxColorR*fCosL), (_uint)(uIdxColorG*fCosL), (_uint)(uIdxColorB*fCosL));
 
 
 

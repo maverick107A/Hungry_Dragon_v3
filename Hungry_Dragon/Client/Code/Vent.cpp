@@ -27,6 +27,10 @@ HRESULT CVent::Ready_Object(void)
 	m_fSummonTick = 0.f;
 	Ready_Obstacles();
 
+	m_pGraphicDev->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
+	m_pGraphicDev->SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_SELECTARG1);
+	m_pGraphicDev->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+	m_pGraphicDev->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
 	return S_OK;
 }
 
@@ -152,11 +156,14 @@ void CVent::Render_Object(void)
 	m_pTransformBeyond->Set_Transform(m_pGraphicDev);
 	m_pBufferCom->Render_Buffer();
 	
+	m_pObsTex->Set_Texture();
+	m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
+	
 	for (auto& pObs : m_listActiveObs)
 	{
 		pObs->Render_Object();
 	}
-
+	m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
 	
 }
 
@@ -263,6 +270,7 @@ HRESULT CVent::Add_Component(void)
 
 	// tex
 	FAILED_CHECK_RETURN(Clone_Component<CTexture>(&m_pTex, RESOURCE_STAGE, L"TEX_VENT", ID_STATIC, L"Com_Texture"), E_FAIL);
+	FAILED_CHECK_RETURN(Clone_Component<CTexture>(&m_pObsTex, RESOURCE_STAGE, L"TEX_OBS", ID_STATIC, L"Com_Texture2"), E_FAIL);
 
 
 	m_pTransform->m_vAngle.y = D3DX_PI;
