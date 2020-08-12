@@ -21,7 +21,7 @@ public:
 	void Ready_ParticleMgr(LPDIRECT3DDEVICE9 _pGraphicDev);
 	void Particle_Update(const float& fTimeDelta);
 	void Particle_Render();
-	void Particle_Create();
+	void Particle_Create(const _vec3 _pos);
 
 private:
 	list<Engine::CResources*>  m_arrParticle;

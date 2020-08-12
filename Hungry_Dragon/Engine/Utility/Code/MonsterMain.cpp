@@ -76,7 +76,7 @@ void Engine::CMonsterMain::Render_Object(void)
 	//{
 	//	Engine::Particle_Render();
 	//}
-	Engine::Particle_Render();
+	
 }
 
 void Engine::CMonsterMain::LateUpdate_Object(const float & fTimeDelta)
@@ -102,10 +102,10 @@ void Engine::CMonsterMain::Dead_Monster(const float & fTimeDelta)
 
 	if (m_fParticle_Speed > 0.1f)
 	{
-
-
 		// 파티클 매니져
-		Engine::Particle_Create();
+		D3DXVECTOR3	vMonsterPos;
+		m_pTransform->Get_Info(Engine::INFO_POS, &vMonsterPos);
+		Engine::Particle_Create(vMonsterPos);
 
 		m_fParticle_Speed = 0;
 	}
@@ -181,7 +181,7 @@ float Engine::CMonsterMain::Ride_Terrain()
 
 void Engine::CMonsterMain::Kill_Monster(const float & fTimeDelta)
 {
-	Engine::Particle_Update(fTimeDelta);
+	//Engine::Particle_Update(fTimeDelta);
 	m_eState = MONSTER_DEACTIVATE;
 	Dead_Monster(fTimeDelta);
 
