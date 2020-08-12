@@ -389,6 +389,14 @@ void CPreForm::Change_ColorDirectToMFC(DWORD * _direct, DWORD * _mfc)
 	*_mfc |= Red;
 }
 
+void CPreForm::Pick_Vertex(int _pickIndex)
+{
+	if (_pickIndex<0 || _pickIndex>m_vertexCount)
+		return;
+	m_vertexListBox.SetCurSel(_pickIndex);
+	OnLbnSelchangeVertexList();
+}
+
 list<Engine::VTXCOL> CPreForm::Get_Vertex()
 {
 	return m_listVertex;

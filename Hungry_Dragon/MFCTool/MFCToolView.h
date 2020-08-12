@@ -6,6 +6,8 @@
 
 #include "MFCToolDoc.h"
 
+class CPreForm;
+
 BEGIN(Engine)
 
 class CGraphicDev;
@@ -62,16 +64,22 @@ private:
 	Engine::CTransform*		m_pTransformCamera = nullptr;
 	Engine::CTransform*		m_pTransformWorld = nullptr;
 	Engine::CCamera*		m_pCamera=nullptr;
+	CPreForm*				m_pPreform=nullptr;
 	bool					m_bWire=false;
 	bool					m_bCull=true;
+	vector<Engine::VTXCOL>	m_vecVertex;
+	list<Engine::INDEX16>	m_listIndex;
+	list<Engine::_vec3>		m_listNormal;
 
 public:
-	afx_msg void OnTimer(UINT_PTR nIDEvent);
-	void		Reset_Buffer(list<Engine::VTXCOL> _listVertex,list<Engine::INDEX16> _listIndex);
-	void		Set_Wire(bool _wire);
-	void		Set_Cull(bool _cull);
-	void		Begin_Draw();
-	void		End_Draw();
+	afx_msg void		OnTimer(UINT_PTR nIDEvent);
+	void				Reset_Buffer(list<Engine::VTXCOL> _listVertex,list<Engine::INDEX16> _listIndex);
+	void				Set_Preform(CPreForm* _preform);
+	void				Set_Wire(bool _wire);
+	void				Set_Cull(bool _cull);
+	void				Begin_Draw();
+	void				End_Draw();
+	int					Get_VertexNum();
 };
 
 #ifndef _DEBUG  // MFCToolView.cpp의 디버그 버전
