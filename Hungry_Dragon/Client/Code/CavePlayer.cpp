@@ -28,7 +28,7 @@ HRESULT CCavePlayer::Ready_Object(void)
 	m_pTransform->m_vInfo[Engine::INFO_POS].y = 0.f;
 	m_pTransform->m_vInfo[Engine::INFO_POS].z = 0.f;
 
-	m_pTransform->Set_Scale(2.f);
+	m_pTransform->Set_Scale(3.f);
 
 	return S_OK;
 }

@@ -59,8 +59,8 @@ void CPCaveRush::Update_State(const float& fTimeDelta)
 	m_fAngle += m_fAngularSpeed*fTimeDelta;
 
 	m_pPlayer->Get_Transform()->Add_Trans(&_vec3(0.f, 0.f, m_fSpeed));
-	m_pPlayer->Get_Transform()->m_vInCamPos.x = 7 * cosf(m_fAngle+Pi*0.5f);
-	m_pPlayer->Get_Transform()->m_vInCamPos.y = 7 * sinf(-m_fAngle-Pi*0.5f);
+	m_pPlayer->Get_Transform()->m_vInCamPos.x = 5 * cosf(m_fAngle+Pi*0.5f);
+	m_pPlayer->Get_Transform()->m_vInCamPos.y = 5 * sinf(-m_fAngle-Pi*0.5f);
 	m_pPlayer->Get_Transform()->m_vAngle.z = -m_fAngle;
 
 	m_pPlayer->Get_Camera()->Set_AfterAngle(2, -m_fAngle);

@@ -30,11 +30,6 @@ HRESULT CVent::Ready_Object(void)
 	return S_OK;
 }
 
-void CVent::Initialize_Object(void)
-{
-
-}
-
 _int CVent::Update_Object(const _float& fTimeDelta)
 {
 	if (!m_bActive)
@@ -64,14 +59,14 @@ _int CVent::Update_Object(const _float& fTimeDelta)
 		pObs->Update_Object(fTimeDelta);
 		if (pObs->Get_Transform()->Get_World()._43 < -10.f)
 		{
-			++m_uDelayDeactNum;
+			m_bDelayDeact = true;
 		}
 	}
-	for (_uint i = 0; i < m_uDelayDeactNum; ++i)
+	if (m_bDelayDeact)
 	{
+		m_bDelayDeact = false;
 		Deactivate_Obstacle();
 	}
-	m_uDelayDeactNum = 0;
 
 
 	m_fSummonTick += fTimeDelta;
