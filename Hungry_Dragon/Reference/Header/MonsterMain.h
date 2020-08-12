@@ -14,6 +14,7 @@ class CResources;
 class CTerrain;
 class CBaseLand;
 class CAtkPart;
+class CVICustom;
 
 class ENGINE_DLL CMonsterMain : public Engine::CGameObject
 {
@@ -50,6 +51,8 @@ private:
 protected:
 	Engine::CTexture_Cube*		m_pBufferCubeCom = nullptr;
 	Engine::CMonsterBoard*		m_pBufferBoradCom = nullptr;
+	Engine::CVICustom*			m_pBufferMeshCom = nullptr;
+
 
 	
 	Engine::CTexture*			m_pTextureCom = nullptr;

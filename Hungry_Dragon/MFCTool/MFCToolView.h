@@ -63,7 +63,7 @@ private:
 	Engine::CTransform*		m_pTransformWorld = nullptr;
 	Engine::CCamera*		m_pCamera=nullptr;
 	bool					m_bWire=false;
-	bool					m_bCull=true;
+	bool					m_bCull=false;
 
 public:
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
