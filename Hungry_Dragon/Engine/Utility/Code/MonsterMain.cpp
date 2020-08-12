@@ -67,7 +67,7 @@ int Engine::CMonsterMain::Update_Object(const float & fTimeDelta)
 
 	D3DXVECTOR3	vParticlePos;
 	m_pTransform->Get_Info(Engine::INFO_POS, &vParticlePos);
-	Engine::Particle_Create(vParticlePos);
+	Engine::Particle_Create(D3DXVECTOR3(0.f , 10.f , 0.f));
 	
 	State_Change();
 
