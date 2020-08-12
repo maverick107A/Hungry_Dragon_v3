@@ -16,6 +16,8 @@
 //여기에 기타 헤더 추가
 #include "Monster.h"
 #include "Chase_Monster.h"
+#include "Golem.h"
+
 #include "Bat_Monster.h"
 #include "Run_Monster.h"
 #include "Jump_Monster.h"
