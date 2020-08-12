@@ -22,7 +22,7 @@ HRESULT CCave::Ready_Object(void)
 	m_fCaveLength = m_pBufferCom->Get_Height();
 	m_pTransform->Set_Trans(&_vec3(0.f,0.f, m_fCaveLength*0.5f));
 	m_pTransformBeyond->Set_Trans(&_vec3(0.f, 0.f, m_fCaveLength*1.5f ));
-	m_fForwardSpeed = 100.f;
+	m_fForwardSpeed = 400.f;
 	return S_OK;
 }
 

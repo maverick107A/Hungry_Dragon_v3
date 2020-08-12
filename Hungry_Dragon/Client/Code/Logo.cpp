@@ -37,7 +37,7 @@ _int CLogo::Update_Scene(const _float& fTimeDelta) {
 
 			//pScene = CScene_Proto::Create(m_pGraphicDev);
 
-			pScene = CScene_Forest::Create(m_pGraphicDev);
+			pScene = CScene_Cave::Create(m_pGraphicDev);
 
 			//pScene = CScene_Cave::Create(m_pGraphicDev);
 			NULL_CHECK_RETURN(pScene, -1);
