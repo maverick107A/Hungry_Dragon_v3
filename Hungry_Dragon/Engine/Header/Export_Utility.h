@@ -53,7 +53,7 @@ inline  static bool	Find_First(CGameObject* _caller,CGameObject* _callee);
 inline void Ready_ParticleMgr(LPDIRECT3DDEVICE9 _pGraphicDev);
 inline void Particle_Update(const float& fTimeDelta);
 inline void Particle_Render();
-inline void Particle_Create();
+inline void Particle_Create(const _vec3 _pos);
 
 // Release
 inline void		Release_Utility(void);

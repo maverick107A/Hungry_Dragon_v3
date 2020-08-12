@@ -14,13 +14,13 @@ CScene_Forest::~CScene_Forest(void) {
 
 HRESULT CScene_Forest::Ready_Scene(void) {
 
+	Engine::Ready_ParticleMgr(m_pGraphicDev);
+
 	FAILED_CHECK_RETURN(Engine::CScene::Ready_Scene(), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_Resource(m_pGraphicDev, RESOURCE_END), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_Layer_Environment(L"Environment"), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_Layer_GameLogic(L"GameLogic"), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_Layer_UI(L"UI"), E_FAIL);
-
-
 	// 임시 적용
 	_matrix		 matProj;
 
@@ -101,14 +101,17 @@ _int CScene_Forest::Update_Scene(const _float& fTimeDelta) {
 	//플레이어 위치 최신화
 	pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);
 	CGameMgr::GetInstance()->Game_Update(m_vPlayerPos);
-
+	
+	Engine::Particle_Update(fTimeDelta);
 	Engine::CScene::Update_Scene(fTimeDelta);
 
+	
 	return 0;
 }
 
 void CScene_Forest::Render_Scene(void) {
 
+	
 
 	// set the technique to use
 	m_pFogEffect->SetTechnique(m_hFogTechHandle);
@@ -122,10 +125,14 @@ void CScene_Forest::Render_Scene(void) {
 	if(m_bFogEnable)
 		m_pFogEffect->BeginPass(0);
 
+	_matrix matWorld;
+	D3DXMatrixIdentity(&matWorld);
+	m_pGraphicDev->SetTransform(D3DTS_WORLD, &matWorld);
+	Engine::Particle_Render();
 
 	m_mapLayer[L"Environment"]->Render_Layer();
 	m_mapLayer[L"GameLogic"]->Render_Layer();
-
+	
 	m_pFogEffect->End();
 
 	m_mapLayer[L"UI"]->Render_Layer();

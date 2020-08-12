@@ -28,7 +28,7 @@ HRESULT CScene_Proto::Ready_Scene(void) {
 		D3DXToRadian(45.f),
 		_float(WINCX) / WINCY,
 		1.f,
-		10000.f);
+		100000.f);
 
 	m_pGraphicDev->SetTransform(D3DTS_PROJECTION, &matProj);
 	//m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
@@ -100,7 +100,6 @@ _int CScene_Proto::Update_Scene(const _float& fTimeDelta) {
 }
 
 void CScene_Proto::Render_Scene(void) {
-
 
 	// set the technique to use
 	m_pFogEffect->SetTechnique(m_hFogTechHandle);
@@ -198,7 +197,7 @@ HRESULT CScene_Proto::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 	for (int i = 0; i < 5; ++i)
 	{
 		//FAILED_CHECK_RETURN(Register_ObjectPool<CBat_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
-		FAILED_CHECK_RETURN(Register_ObjectPool<CChase_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
+		//FAILED_CHECK_RETURN(Register_ObjectPool<CChase_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
 		//FAILED_CHECK_RETURN(Register_ObjectPool<CRun_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
 		//FAILED_CHECK_RETURN(Register_ObjectPool<CJump_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
 		//FAILED_CHECK_RETURN(Register_ObjectPool<CFly_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);

@@ -22,8 +22,8 @@ HRESULT CVent::Ready_Object(void)
 	m_fCaveLength = m_pBufferCom->Get_Height();
 	m_pTransform->Set_Trans(&_vec3(0.f,0.f, m_fCaveLength*0.5f));
 	m_pTransformBeyond->Set_Trans(&_vec3(0.f, 0.f, m_fCaveLength*1.5f));
-	m_fForwardSpeed = 100.f;
-	m_fSummonTime = 2.f;
+	m_fForwardSpeed = 400.f;
+	m_fSummonTime = 1.f;
 	m_fSummonTick = 0.f;
 	Ready_Obstacles();
 

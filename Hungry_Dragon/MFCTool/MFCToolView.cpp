@@ -19,7 +19,6 @@
 
 #include "Export_Function.h"
 
-
 //-------------------------------------------------------
 //기타 헤더**********************************************
 //-------------------------------------------------------
@@ -59,9 +58,11 @@ CMFCToolView::CMFCToolView()
 CMFCToolView::~CMFCToolView()
 {
 	Engine::Safe_Release(m_pBuffer);
+	Engine::Safe_Release(m_pBufferLand);
 	Engine::Safe_Release(m_pGraphicDev);
 	Engine::Safe_Release(m_pDeviceClass);
-	Engine::Safe_Release(m_pTransform);
+	Engine::Safe_Release(m_pTransformCamera);
+	Engine::Safe_Release(m_pTransformWorld);
 	Engine::Safe_Release(m_pCamera);
 
 	Engine::Release_Utility();
@@ -86,11 +87,30 @@ void CMFCToolView::OnDraw(CDC* /*pDC*/)
 	if (!pDoc)
 		return;
 
+	
+
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
 	Engine::Render_Begin(D3DXCOLOR(0.f, 0.f, 1.f, 1.f));
+	//m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+
+	Engine::_vec3 posForLand = Engine::_vec3(-50.f, 0.f, -50.f);
+	m_pTransformWorld->Add_Trans(&posForLand);
+	m_pTransformWorld->Update_Component(0.f);
 
 	m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
-	m_pBuffer->Render_Buffer();
+	m_pTransformWorld->Set_Transform(m_pGraphicDev);
+	
+	m_pBufferLand->Render_Buffer();
+
+	posForLand *= -1.f;
+	m_pTransformWorld->Add_Trans(&posForLand);
+	m_pTransformWorld->Update_Component(0.f);
+	m_pTransformWorld->Set_Transform(m_pGraphicDev);
+
+	Begin_Draw();
+	if(m_pBuffer!=nullptr)
+		m_pBuffer->Render_Buffer();
+	End_Draw();
 
 	Engine::Render_End();
 }
@@ -144,7 +164,7 @@ void CMFCToolView::OnInitialUpdate() {
 	//g_hWnd = m_hWnd;
 	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
 
-	SetTimer(0, 1, nullptr);
+
 	
 	Engine::Ready_GraphicDev(m_hWnd,
 		Engine::MODE_WIN,
@@ -160,10 +180,12 @@ void CMFCToolView::OnInitialUpdate() {
 	m_pGraphicDev->SetRenderState(D3DRS_LIGHTING, FALSE);
 
 	Engine::Reserve_ContainerSize(RESOURCE_END);
-	Engine::Ready_Buffer(m_pGraphicDev, RESOURCE_STATIC, L"Test_Buffer", Engine::BUFFER_TEXCUBE);
+	Engine::Ready_Buffer(m_pGraphicDev, RESOURCE_STATIC, L"Test_Map", Engine::BUFFER_KOREA,101,101,1);
 
-	m_pBuffer = static_cast<Engine::CVIBuffer*>(Engine::Clone(RESOURCE_STATIC, L"Test_Buffer"));
-	m_pTransform = Engine::CTransform::Create();
+	m_pBufferLand = static_cast<Engine::CVIBuffer*>(Engine::Clone(RESOURCE_STATIC, L"Test_Map"));
+	m_pBuffer = static_cast<Engine::CVIBuffer*>(Engine::Create_Preview(m_pGraphicDev, L"../Asset/VIMesh/Test.dat"));
+	m_pTransformCamera = Engine::CTransform::Create();
+	m_pTransformWorld = Engine::CTransform::Create();
 
 	Engine::Load_Particle(m_pGraphicDev);
 
@@ -182,6 +204,8 @@ void CMFCToolView::OnInitialUpdate() {
 	m_pCamera = Engine::CCamera::Create();
 
 	m_pGraphicDev->SetTransform(D3DTS_PROJECTION, &matProj);
+
+	SetTimer(0, 1, nullptr);
 }
 
 
@@ -192,8 +216,9 @@ void CMFCToolView::OnTimer(UINT_PTR nIDEvent) {
 	_vec3 rightVec;
 	_vec3 upVec;
 
-	m_pTransform->Update_Component(0.f);
-	m_pTransform->Get_Info(Engine::INFO_POS, &posVec);
+	if (m_pBuffer != nullptr)
+		m_pTransformCamera->Update_Component(0.f);
+	m_pTransformCamera->Get_Info(Engine::INFO_POS, &posVec);
 
 	m_pCamera->Update_CameraMFC(m_pGraphicDev, posVec, &lookVec, &upVec);
 	D3DXVec3Cross(&rightVec,&_vec3(0.f, 1.f, 0.f), &lookVec);
@@ -207,32 +232,32 @@ void CMFCToolView::OnTimer(UINT_PTR nIDEvent) {
 	{
 		if (Engine::Get_DIKeyState(DIK_W) & 0x80)
 		{
-			m_pTransform->Add_Trans(&lookVec);
+			m_pTransformCamera->Add_Trans(&lookVec);
 		}
 
 		if (Engine::Get_DIKeyState(DIK_S) & 0x80)
 		{
-			m_pTransform->Add_Trans(&(-1*lookVec));
+			m_pTransformCamera->Add_Trans(&(-1*lookVec));
 		}
 
 		if (Engine::Get_DIKeyState(DIK_D) & 0x80)
 		{
-			m_pTransform->Add_Trans(&rightVec);
+			m_pTransformCamera->Add_Trans(&rightVec);
 		}
 
 		if (Engine::Get_DIKeyState(DIK_A) & 0x80)
 		{
-			m_pTransform->Add_Trans(&(-1 * rightVec));
+			m_pTransformCamera->Add_Trans(&(-1 * rightVec));
 		}
 
 		if (Engine::Get_DIKeyState(DIK_Q) & 0x80)
 		{
-			m_pTransform->Add_Trans(&upVec);
+			m_pTransformCamera->Add_Trans(&upVec);
 		}
 
 		if (Engine::Get_DIKeyState(DIK_E) & 0x80)
 		{
-			m_pTransform->Add_Trans(&(-1 * upVec));
+			m_pTransformCamera->Add_Trans(&(-1 * upVec));
 		}
 
 	}*/
@@ -243,42 +268,83 @@ void CMFCToolView::OnTimer(UINT_PTR nIDEvent) {
 	{
 		if (GetAsyncKeyState('W') & 0x8000)
 		{
-			m_pTransform->Add_Trans(&lookVec);
+			m_pTransformCamera->Add_Trans(&lookVec);
 		}
 
 		if (GetAsyncKeyState('S') & 0x8000)
 		{
-			m_pTransform->Add_Trans(&(-1 * lookVec));
+			m_pTransformCamera->Add_Trans(&(-1 * lookVec));
 		}
 
 		if (GetAsyncKeyState('D') & 0x8000)
 		{
-			m_pTransform->Add_Trans(&rightVec);
+			m_pTransformCamera->Add_Trans(&rightVec);
 		}
 
 		if (GetAsyncKeyState('A') & 0x8000)
 		{
-			m_pTransform->Add_Trans(&(-1 * rightVec));
+			m_pTransformCamera->Add_Trans(&(-1 * rightVec));
 		}
 
 		if (GetAsyncKeyState('Q') & 0x8000)
 		{
-			m_pTransform->Add_Trans(&upVec);
+			m_pTransformCamera->Add_Trans(&upVec);
 		}
 
 		if (GetAsyncKeyState('E') & 0x8000)
 		{
-			m_pTransform->Add_Trans(&(-1 * upVec));
+			m_pTransformCamera->Add_Trans(&(-1 * upVec));
 		}
 
 	}
 
 	if (GetAsyncKeyState(VK_SPACE) & 0x8000) {
-		m_pTransform->Set_Trans(&_vec3(0.f, 0.f, -5.f));
+		m_pTransformCamera->Set_Trans(&_vec3(0.f, 0.f, -5.f));
+		m_pCamera->Set_Angle(0, 0.f);
+		m_pCamera->Set_Angle(1, 0.f);
+		m_pCamera->Set_Angle(2, 0.f);
 	}
 
 	Invalidate(FALSE);
 
 
 	CView::OnTimer(nIDEvent);
+}
+
+void CMFCToolView::Reset_Buffer(list<Engine::VTXCOL> _listVertex, list<Engine::INDEX16> _listIndex)
+{
+	Engine::Safe_Release(m_pBuffer);
+
+	m_pBuffer = static_cast<CVIBuffer*>(Engine::Create_Preview(m_pGraphicDev, _listVertex, _listIndex));
+}
+
+void CMFCToolView::Set_Wire(bool _wire)
+{
+	m_bWire = _wire;
+}
+
+void CMFCToolView::Set_Cull(bool _cull)
+{
+	m_bCull = _cull;
+}
+
+void CMFCToolView::Begin_Draw()
+{
+	if (m_bWire)
+		m_pGraphicDev->SetRenderState(D3DRS_FILLMODE,D3DFILL_WIREFRAME);
+	else
+		m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+
+	if (m_bCull)
+		m_pGraphicDev->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+	else
+		m_pGraphicDev->SetRenderState(D3DRS_CULLMODE, D3DCULL_CW);
+
+}
+
+void CMFCToolView::End_Draw()
+{
+	m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+	m_pGraphicDev->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+
 }

@@ -37,6 +37,8 @@ inline CResources*	Get_Particle(LPDIRECT3DDEVICE9 pGraphicDev,
 	BoundingBox _boundingBox,
 	_vec3 _vOrigin);
 
+inline CResources* Create_Preview(LPDIRECT3DDEVICE9 pGraphicDev, LPCTSTR _address);
+inline CResources* Create_Preview(LPDIRECT3DDEVICE9 pGraphicDev, list<VTXCOL> _listVertex, list<INDEX16> _listIndex);
 
 // Release
 inline void		Release_Resources(void);

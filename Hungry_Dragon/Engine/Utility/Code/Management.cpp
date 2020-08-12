@@ -35,7 +35,6 @@ _int Engine::CManagement::Update_Scene(const _float& fTimeDelta)
 	m_pScene->Update_Scene(fTimeDelta);
 
 	if (m_pScene != m_pFormerScene) {
-		Safe_Release(m_pFormerScene);
 		m_pFormerScene = m_pScene;
 	}
 
