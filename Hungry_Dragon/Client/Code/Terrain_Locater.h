@@ -1,45 +1,44 @@
-#ifndef TerrainPlayer_h__
-#define TerrainPlayer_h__
+#ifndef Terrain_Locater_h__
+#define Terrain_Locater_h__
 
 #include "Define.h"
 #include "GameObject.h"
 
 BEGIN(Engine)
 
-class CForestLand;
-class CTexture;
+class CHeightCol;
 class CTransform;
 class CRenderer;
 
 END
 
+class CTerrain_Parts;
+
 USING(Engine)
 
-class CTerrainPlayer : public Engine::CGameObject
+class CTerrain_Locater : public Engine::CGameObject
 {
 private:
-	explicit CTerrainPlayer(LPDIRECT3DDEVICE9 pGraphicDev);
-	virtual ~CTerrainPlayer(void);
+	explicit CTerrain_Locater(LPDIRECT3DDEVICE9 pGraphicDev);
+	virtual ~CTerrain_Locater(void);
 
 public:
 	virtual HRESULT Ready_Object(void) override;
 	virtual _int Update_Object(const _float& fTimeDelta) override;
 	virtual void Render_Object(void) override;
-	
+
 
 private:
 	HRESULT		Add_Component(void);
 
 private:
-	Engine::CForestLand*			m_pBufferCom = nullptr;
+	Engine::CHeightCol*		m_pDummy = nullptr;
 	Engine::CTransform*		m_pTransform = nullptr;
-	Engine::CRenderer*		m_pRendererCom = nullptr;
-	Engine::CTexture*		m_pSkyTex;
 
-	ID3DXMesh*		m_pSkyBox;
+	CTerrain_Parts*	m_pParts[50] = { 0 };
 
 public:
-	static CTerrainPlayer*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
+	static CTerrain_Locater*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 private:
 	virtual void Free(void) override;
 

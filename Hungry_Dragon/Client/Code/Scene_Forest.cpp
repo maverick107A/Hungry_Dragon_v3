@@ -1,18 +1,18 @@
 #include "stdafx.h"
-#include "Scene_Proto.h"
+#include "Scene_Forest.h"
 #include "Export_Function.h"
 #include "GameMgr.h"
 
-CScene_Proto::CScene_Proto(LPDIRECT3DDEVICE9 pGraphicDev)
+CScene_Forest::CScene_Forest(LPDIRECT3DDEVICE9 pGraphicDev)
 	: Engine::CScene(pGraphicDev) {
 
 }
 
-CScene_Proto::~CScene_Proto(void) {
+CScene_Forest::~CScene_Forest(void) {
 
 }
 
-HRESULT CScene_Proto::Ready_Scene(void) {
+HRESULT CScene_Forest::Ready_Scene(void) {
 
 	FAILED_CHECK_RETURN(Engine::CScene::Ready_Scene(), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_Resource(m_pGraphicDev, RESOURCE_END), E_FAIL);
@@ -76,7 +76,7 @@ HRESULT CScene_Proto::Ready_Scene(void) {
 	return S_OK;
 }
 
-_int CScene_Proto::Update_Scene(const _float& fTimeDelta) {
+_int CScene_Forest::Update_Scene(const _float& fTimeDelta) {
 	if (GetAsyncKeyState('F') & 0x0001)
 	{
 		if(m_bWireFrame)
@@ -84,6 +84,14 @@ _int CScene_Proto::Update_Scene(const _float& fTimeDelta) {
 		else
 			m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 		m_bWireFrame = !m_bWireFrame;
+	}
+	if (GetAsyncKeyState(VK_F5) & 0x0001)
+	{
+		m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+	}
+	if (GetAsyncKeyState(VK_F6) & 0x0001)
+	{
+		m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 	}
 	if (GetAsyncKeyState(VK_F8) & 0x0001)
 	{
@@ -94,18 +102,13 @@ _int CScene_Proto::Update_Scene(const _float& fTimeDelta) {
 	pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);
 	CGameMgr::GetInstance()->Game_Update(m_vPlayerPos);
 
-	Engine::Particle_Create(m_vPlayerPos);
-
-	Engine::Particle_Update(fTimeDelta);
-
 	Engine::CScene::Update_Scene(fTimeDelta);
 
 	return 0;
 }
 
-void CScene_Proto::Render_Scene(void) {
+void CScene_Forest::Render_Scene(void) {
 
-	Engine::Particle_Render();
 
 	// set the technique to use
 	m_pFogEffect->SetTechnique(m_hFogTechHandle);
@@ -129,15 +132,15 @@ void CScene_Proto::Render_Scene(void) {
 
 }
 
-void CScene_Proto::Free(void) {
+void CScene_Forest::Free(void) {
 	Engine::Clear_RenderGroup();
 	Engine::CScene::Free();
 	CGameMgr::DestroyInstance();
 	Safe_Release(m_pFogEffect);
 }
 
-CScene_Proto* CScene_Proto::Create(LPDIRECT3DDEVICE9 pGraphicDev) {
-	CScene_Proto*	pInstance = new CScene_Proto(pGraphicDev);
+CScene_Forest* CScene_Forest::Create(LPDIRECT3DDEVICE9 pGraphicDev) {
+	CScene_Forest*	pInstance = new CScene_Forest(pGraphicDev);
 	
 	Engine::Set_Scene(pInstance);
 
@@ -149,7 +152,7 @@ CScene_Proto* CScene_Proto::Create(LPDIRECT3DDEVICE9 pGraphicDev) {
 	return pInstance;
 }
 
-HRESULT CScene_Proto::Ready_Layer_UI(const _tchar* pLayerTag) {
+HRESULT CScene_Forest::Ready_Layer_UI(const _tchar* pLayerTag) {
 	Engine::CLayer*		pLayer = Engine::CLayer::Create();
 	NULL_CHECK_RETURN(pLayer, E_FAIL);
 
@@ -164,7 +167,7 @@ HRESULT CScene_Proto::Ready_Layer_UI(const _tchar* pLayerTag) {
 	return S_OK;
 }
 
-HRESULT CScene_Proto::Ready_Layer_Environment(const _tchar * pLayerTag) {
+HRESULT CScene_Forest::Ready_Layer_Environment(const _tchar * pLayerTag) {
 	Engine::CLayer*		pLayer = Engine::CLayer::Create();
 	NULL_CHECK_RETURN(pLayer, E_FAIL);
 	m_mapLayer.emplace(pLayerTag, pLayer);
@@ -187,7 +190,7 @@ HRESULT CScene_Proto::Ready_Layer_Environment(const _tchar * pLayerTag) {
 	return S_OK;
 }
 
-HRESULT CScene_Proto::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
+HRESULT CScene_Forest::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 
 	Engine::CLayer*		pLayer = Engine::CLayer::Create();
 	NULL_CHECK_RETURN(pLayer, E_FAIL);
@@ -197,13 +200,13 @@ HRESULT CScene_Proto::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 
 	Engine::CGameObject*		pGameObject = nullptr;
 
-	FAILED_CHECK_RETURN(Register_GameObject<CBackGround>(pLayer, L"BackGround"), E_FAIL);
+	FAILED_CHECK_RETURN(Register_GameObject<CTerrain_Locater>(pLayer, L"BackGround"), E_FAIL);
 	FAILED_CHECK_RETURN(Register_GameObject<CTestPlayer>(pLayer, L"TestPlayer"), E_FAIL);
 
 	for (int i = 0; i < 5; ++i)
 	{
 		//FAILED_CHECK_RETURN(Register_ObjectPool<CBat_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
-		//FAILED_CHECK_RETURN(Register_ObjectPool<CChase_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
+		FAILED_CHECK_RETURN(Register_ObjectPool<CChase_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
 		//FAILED_CHECK_RETURN(Register_ObjectPool<CRun_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
 		//FAILED_CHECK_RETURN(Register_ObjectPool<CJump_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
 		//FAILED_CHECK_RETURN(Register_ObjectPool<CFly_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
@@ -222,7 +225,7 @@ HRESULT CScene_Proto::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 	return S_OK;
 }
 
-HRESULT CScene_Proto::Ready_Resource(LPDIRECT3DDEVICE9 pGraphicDev, RESOURCEID eMax) {
+HRESULT CScene_Forest::Ready_Resource(LPDIRECT3DDEVICE9 pGraphicDev, RESOURCEID eMax) {
 	Engine::Reserve_ContainerSize(eMax);
 
 	return S_OK;

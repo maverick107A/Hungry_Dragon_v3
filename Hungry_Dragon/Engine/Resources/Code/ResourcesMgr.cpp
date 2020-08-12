@@ -68,6 +68,9 @@ HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 	case BUFFER_FOREST:
 		pResources = CForestLand::Create(pGraphicDev);
 		break;
+	case BUFFER_KOREA:	// 맵툴 대신에 일케 자동화 구조를 짜서 깔아봄 Forest 대용 Forest 버퍼는 프로토타입용으로 쓰였음
+		pResources = CHeightCol::Create(pGraphicDev, dwCntX, dwCntZ, dwVtxItv);
+		break;
 	case BUFFER_RIFT:
 		//pResources = CTriCol::Create(pGraphicDev);
 		break;

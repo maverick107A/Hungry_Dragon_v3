@@ -7,6 +7,7 @@
 #include "Vent.h"
 #include "Obstacle.h"
 #include "CavePlayer.h"
+#include "PlayerUI.h"
 
 CScene_Cave::CScene_Cave(LPDIRECT3DDEVICE9 pGraphicDev)
 	: Engine::CScene(pGraphicDev)
@@ -36,7 +37,7 @@ HRESULT CScene_Cave::Ready_Scene(void)
 		D3DXToRadian(45.f),
 		_float(WINCX) / WINCY,
 		1.f,
-		1000.f);
+		10000.f);
 
 
 	m_pGraphicDev->SetTransform(D3DTS_PROJECTION, &matProj);
@@ -50,6 +51,45 @@ HRESULT CScene_Cave::Ready_Scene(void)
 	D3DXVECTOR3 m_vUp1(0,1,0);
 	D3DXMatrixLookAtLH(&V, &m_vPos, &m_vDir, &m_vUp1);
 	m_pGraphicDev->SetTransform(D3DTS_VIEW, &V);
+
+
+	//
+	// Create effect.
+	//
+	HRESULT hr;
+	ID3DXBuffer* errorBuffer = 0;
+	hr = D3DXCreateEffectFromFile(
+		m_pGraphicDev,
+		L"../../Asset/Shader/fog_dark.txt",
+		0,                // no preprocessor definitions
+		0,                // no ID3DXInclude interface
+		D3DXSHADER_DEBUG, // compile flags
+		0,                // don't share parameters
+		&m_pFogEffect,
+		&errorBuffer);
+
+	// output any error messages
+	if (errorBuffer)
+	{
+		TCHAR szTemp[512];
+		MultiByteToWideChar(0, 0, (char*)errorBuffer->GetBufferPointer(), strlen((char*)errorBuffer->GetBufferPointer()), szTemp, strlen((char*)errorBuffer->GetBufferPointer()));
+		::MessageBox(0, szTemp, 0, 0);
+		//::MessageBox(0, (char*)errorBuffer->GetBufferPointer(), 0, 0);
+		Safe_Release(errorBuffer);
+	}
+
+	if (FAILED(hr))
+	{
+		::MessageBox(0, L"D3DXCreateEffectFromFile() - FAILED", 0, 0);
+		return E_FAIL;
+	}
+
+	// 
+	// Save Frequently Accessed Parameter Handles
+	//
+
+	m_hFogTechHandle = m_pFogEffect->GetTechniqueByName("Fog");
+
 
 
 	return S_OK;
@@ -73,12 +113,33 @@ _int CScene_Cave::Update_Scene(const _float& fTimeDelta)
 
 void CScene_Cave::Render_Scene(void)
 {
-	Engine::CScene::Render_Scene();
+	// set the technique to use
+	m_pFogEffect->SetTechnique(m_hFogTechHandle);
+
+	UINT numPasses = 0;
+	m_pFogEffect->Begin(&numPasses, 0);
+
+	D3DXMATRIX I;
+	D3DXMatrixIdentity(&I);
+
+	if (m_bFogEnable)
+		m_pFogEffect->BeginPass(0);
+
+
+	m_mapLayer[L"Environment"]->Render_Layer();
+	m_mapLayer[L"GameLogic"]->Render_Layer();
+
+	m_pFogEffect->End();
+
+	m_mapLayer[L"UI"]->Render_Layer();
+
 }
 
 void CScene_Cave::Free(void)
 {
 	Engine::CScene::Free();
+
+	Safe_Release(m_pFogEffect);
 }
 
 CScene_Cave* CScene_Cave::Create(LPDIRECT3DDEVICE9 pGraphicDev)
@@ -99,6 +160,8 @@ HRESULT CScene_Cave::Ready_Layer_UI(const _tchar* pLayerTag)
 	NULL_CHECK_RETURN(pLayer, E_FAIL);
 
 	Engine::CGameObject*		pGameObject = nullptr;
+
+	FAILED_CHECK_RETURN(Register_GameObject<CPlayerUI>(pLayer, L"PlayerUI"), E_FAIL);
 
 	m_mapLayer.emplace(pLayerTag, pLayer);
 
