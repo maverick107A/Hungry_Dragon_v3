@@ -24,7 +24,7 @@
 //-------------------------------------------------------
 //여기에 기타 헤더 추가
 
-
+#include "PreForm.h"
 //-------------------------------------------------------
 
 USING(Engine)
@@ -265,8 +265,21 @@ void CMFCToolView::OnTimer(UINT_PTR nIDEvent) {
 
 
 
+	if (GetAsyncKeyState('0') & 0x8000)
+	{
+		m_pPreform->Pick_Vertex(0);
+	}
+
+	if (GetAsyncKeyState(VK_MBUTTON) & 0x8000)
+	{
+		int tempNum = Get_VertexNum();
+		m_pPreform->Pick_Vertex(tempNum);
+	}
+
 	if (GetAsyncKeyState(VK_RBUTTON) & 0x8000)
 	{
+		
+
 		if (GetAsyncKeyState('W') & 0x8000)
 		{
 			m_pTransformCamera->Add_Trans(&lookVec);
@@ -316,7 +329,29 @@ void CMFCToolView::Reset_Buffer(list<Engine::VTXCOL> _listVertex, list<Engine::I
 {
 	Engine::Safe_Release(m_pBuffer);
 
+	m_vecVertex.clear();
+	m_vecVertex.reserve(_listVertex.size());
+
+	for (list<Engine::VTXCOL>::iterator iter_vtx = _listVertex.begin(); iter_vtx != _listVertex.end(); ++iter_vtx)
+	{
+		m_vecVertex.emplace_back((*iter_vtx));
+	}
+
+	m_listNormal.clear();
+	m_listIndex = _listIndex;
+	for (list<Engine::INDEX16>::iterator iter_index = m_listIndex.begin(); iter_index != m_listIndex.end(); ++iter_index)
+	{
+		m_listNormal.emplace_back(Engine::Calcul_Normal(m_vecVertex[(*iter_index)._0].vPosition
+														, m_vecVertex[(*iter_index)._1].vPosition
+														, m_vecVertex[(*iter_index)._2].vPosition));
+	}
+
 	m_pBuffer = static_cast<CVIBuffer*>(Engine::Create_Preview(m_pGraphicDev, _listVertex, _listIndex));
+}
+
+void CMFCToolView::Set_Preform(CPreForm * _preform)
+{
+	m_pPreform = _preform;
 }
 
 void CMFCToolView::Set_Wire(bool _wire)
@@ -348,4 +383,69 @@ void CMFCToolView::End_Draw()
 	m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 	m_pGraphicDev->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 
+}
+
+int CMFCToolView::Get_VertexNum()
+{
+	//우리가 찾은 클릭한 버텍스 번호를 저장할 변수
+	int vertexNum = -1;
+
+	//해당 버텍스와 마우스 사이의 거리를 저장할 변수
+	float minLength = 0.2f;
+
+	//인덱스 접근을 위해 리스트를 벡터로 변환해서 넣어줘야한다.
+	vector<bool> tempVecVertex;
+	tempVecVertex.reserve(m_vecVertex.size());
+	for (size_t i = 0; i < m_vecVertex.size(); ++i)
+	{
+		tempVecVertex.emplace_back(false);
+	}
+
+	//마우스의 위치를 받음
+	POINT pt{};
+	::GetCursorPos(&pt);
+	::ScreenToClient(m_hWnd,&pt);
+
+	Engine::_vec3 vMouse{(float)pt.x,(float)pt.y,0.f};
+
+	//카메라의 룩벡터를 받아옴
+	Engine::_vec3 tempLook;
+	m_pTransformCamera->Get_Info(Engine::INFO_LOOK, &tempLook);
+
+	//전체 면의 법선 벡터를 순회하며 카메라와 내적을 수행
+	list<Engine::INDEX16>::iterator iter_Idx = m_listIndex.begin();
+	for (list<Engine::_vec3>::iterator iter_normal = m_listNormal.begin(); iter_normal != m_listNormal.end(); ++iter_normal,++iter_Idx)
+	{
+		if (D3DXVec3Dot(&(*iter_normal), &tempLook) < 0)
+		{
+			tempVecVertex[(*iter_Idx)._0] = true;
+			tempVecVertex[(*iter_Idx)._1] = true;
+			tempVecVertex[(*iter_Idx)._2] = true;
+		}
+	}
+
+	//앞면에 있는 버텍스를 순회하며 가장 가까운 버텍스를 찾는다.
+	for (size_t i = 0; i < m_vecVertex.size(); ++i)
+	{
+		if (tempVecVertex[i])
+		{
+			_matrix matProj, matView;
+			
+			m_pGraphicDev->GetTransform(D3DTS_VIEW, &matView);
+			m_pGraphicDev->GetTransform(D3DTS_PROJECTION, &matProj);
+			//뷰포트 변환법
+
+			D3DXVec3TransformCoord(&m_vecVertex[i].vPosition, &m_vecVertex[i].vPosition, &matView);
+			D3DXVec3TransformCoord(&m_vecVertex[i].vPosition, &m_vecVertex[i].vPosition, &matProj);
+			//뷰포트로
+
+			float length = D3DXVec3Length(&(m_vecVertex[i].vPosition - vMouse));
+			if (length <= minLength)
+			{
+				vertexNum = i;
+			}
+		}
+	}
+	
+	return vertexNum;
 }
