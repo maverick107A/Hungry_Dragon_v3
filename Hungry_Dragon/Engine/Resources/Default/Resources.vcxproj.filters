@@ -85,6 +85,9 @@
     <Filter Include="00. Resources\00. VIBuffer\55. ObsCube">
       <UniqueIdentifier>{2282a9dd-982b-4617-b935-d3096e5e199e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00. Resources\00. VIBuffer\56. HeightCol">
+      <UniqueIdentifier>{f16e813e-6663-473b-983a-fed114d0b3d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\Resources.cpp">
@@ -185,6 +188,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\ObstacleCube.cpp">
       <Filter>00. Resources\00. VIBuffer\55. ObsCube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\HeightCol.cpp">
+      <Filter>00. Resources\00. VIBuffer\56. HeightCol</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -289,6 +295,9 @@
     </ClInclude>
     <ClInclude Include="..\Code\ObstacleCube.h">
       <Filter>00. Resources\00. VIBuffer\55. ObsCube</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\HeightCol.h">
+      <Filter>00. Resources\00. VIBuffer\56. HeightCol</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

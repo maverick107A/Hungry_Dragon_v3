@@ -79,13 +79,13 @@ HRESULT CObstacle::Add_Component(void)
 	Engine::CComponent*		pComponent = nullptr;
 
 	// buffer
-	FAILED_CHECK_RETURN(Clone_Component<CObstacleCube>(&m_pBufferCom, RESOURCE_STAGE, L"BUFFER_OBSTACLECUBE", ID_STATIC, L"Com_Buffer"), E_FAIL);
+	FAILED_CHECK(Clone_Component<CObstacleCube>(&m_pBufferCom, RESOURCE_STAGE, L"BUFFER_OBSTACLECUBE", ID_STATIC, L"Com_Buffer"));
 	
 	//Transform
-	FAILED_CHECK_RETURN(Register_Component<CTransform>(&m_pTransform, ID_DYNAMIC, L"Com_Transform"), E_FAIL);
+	FAILED_CHECK(Register_Component<CTransform>(&m_pTransform, ID_DYNAMIC, L"Com_Transform"));
 
 	// tex
-	FAILED_CHECK_RETURN(Clone_Component<CTexture>(&m_pTex, RESOURCE_STAGE, L"TEX_VENT", ID_STATIC, L"Com_Texture"), E_FAIL);
+	FAILED_CHECK(Clone_Component<CTexture>(&m_pTex, RESOURCE_STAGE, L"TEX_VENT", ID_STATIC, L"Com_Texture"));
 
 	return S_OK;
 }

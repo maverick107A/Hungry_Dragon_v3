@@ -25,6 +25,7 @@
 #include "Texture_Square.h"
 #include "MonsterBoard.h"
 #include "Texture.h"
+#include "HeightCol.h"
 
 #include "Part_Atk.h"
 #include "Part_Wind.h"

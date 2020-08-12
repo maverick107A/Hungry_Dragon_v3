@@ -72,6 +72,15 @@ _uint CScene_Loading::Loading_ForStage(void)
 
 	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
 		RESOURCE_STATIC,
+		L"BUFFER_KOREA",
+		Engine::BUFFER_KOREA,
+		129,
+		129,
+		100),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
+		RESOURCE_STATIC,
 		L"BUFFER_SKYSPHERE",
 		Engine::BUFFER_SKYSPHERE),
 		E_FAIL);
