@@ -24,6 +24,7 @@
 #include "Texture_Plane.h"
 #include "Texture_Square.h"
 #include "MonsterBoard.h"
+#include "VICustom.h"
 #include "Texture.h"
 #include "HeightCol.h"
 
