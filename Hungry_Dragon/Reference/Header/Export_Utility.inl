@@ -87,9 +87,9 @@ void Particle_Render()
 	CParticleMgr::GetInstance()->Particle_Render();
 }
 
-void Particle_Create()
+void Particle_Create(const _vec3 _pos)
 {
-	CParticleMgr::GetInstance()->Particle_Create();
+	CParticleMgr::GetInstance()->Particle_Create(_pos);
 }
 
 
