@@ -151,6 +151,9 @@
     <Filter Include="02. GameObject\01. Stage\56.Terrain_Parts">
       <UniqueIdentifier>{f3725a6f-4a39-464d-b6ca-22f49ca9bc1b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. GameObject\01. Stage\99. PlayerUI">
+      <UniqueIdentifier>{82788b45-0f7e-4ccf-9a45-27915f8149fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -246,9 +249,6 @@
     <ClInclude Include="..\Code\Bat_Monster.h">
       <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\01.BoardMonster</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\PlayerUI.h">
-      <Filter>99. Etc\헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="..\Code\Obstacle.h">
       <Filter>02. GameObject\01. Stage\54.Obstacle</Filter>
     </ClInclude>
@@ -260,6 +260,9 @@
     </ClInclude>
     <ClInclude Include="..\Code\Terrain_Parts.h">
       <Filter>02. GameObject\01. Stage\56.Terrain_Parts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\PlayerUI.h">
+      <Filter>02. GameObject\01. Stage\99. PlayerUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -347,9 +350,6 @@
     <ClCompile Include="..\Code\Bat_Monster.cpp">
       <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\01.BoardMonster</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\PlayerUI.cpp">
-      <Filter>99. Etc\소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\Obstacle.cpp">
       <Filter>02. GameObject\01. Stage\54.Obstacle</Filter>
     </ClCompile>
@@ -361,6 +361,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Terrain_Parts.cpp">
       <Filter>02. GameObject\01. Stage\56.Terrain_Parts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\PlayerUI.cpp">
+      <Filter>02. GameObject\01. Stage\99. PlayerUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
