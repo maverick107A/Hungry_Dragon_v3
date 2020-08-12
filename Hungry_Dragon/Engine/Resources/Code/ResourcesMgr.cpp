@@ -68,9 +68,6 @@ HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 	case BUFFER_FOREST:
 		pResources = CForestLand::Create(pGraphicDev);
 		break;
-	case BUFFER_KOREA:	// 맵툴 대신에 일케 자동화 구조를 짜서 깔아봄 Forest 대용 Forest 버퍼는 프로토타입용으로 쓰였음
-		pResources = CHeightCol::Create(pGraphicDev, dwCntX, dwCntZ, dwVtxItv);
-		break;
 	case BUFFER_RIFT:
 		//pResources = CTriCol::Create(pGraphicDev);
 		break;
@@ -85,23 +82,15 @@ HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 	case BUFFER_SKYSPHERE:
 		pResources = CSkyCube::Create(pGraphicDev);
 		break;
-
-	case SPRITE_ANIM :
-		pResources = CMonsterBoard::Create(pGraphicDev, dwCntX, dwCntZ);
-		break;
-
 	case BUFFER_CAVECYLINDER:
 		pResources = CCaveCylinder::Create(pGraphicDev);
 
 		break;
 	case BUFFER_VENTCUBE:
 		pResources = CVentCube::Create(pGraphicDev);
-
-
 		break;
-	case BUFFER_OBSTACLECUBE:
-		pResources = CObstacleCube::Create(pGraphicDev);
-
+	case BUFFER_CUSTOMMESH:
+		pResources = CVICustom::Create(pGraphicDev,L"../../Asset/VIMesh/Test.dat");
 		break;
 	}
 
@@ -136,10 +125,8 @@ void Engine::CResourcesMgr::Free(void)
 	Safe_Delete_Array(m_pmapResource);
 }
 
-CResources* CResourcesMgr::Get_Particle(LPDIRECT3DDEVICE9 pGraphicDev, PARTICLEID _ePartID, BoundingBox _boundingBox, _vec3 _vOrigin) 
-{
-	if ((size_t)_ePartID >= m_vecParticle.size())
-	{
+CResources* CResourcesMgr::Get_Particle(LPDIRECT3DDEVICE9 pGraphicDev, PARTICLEID _ePartID, BoundingBox _boundingBox, _vec3 _vOrigin) {
+	if ((size_t)_ePartID >= m_vecParticle.size()) {
 		return nullptr;
 	}
 

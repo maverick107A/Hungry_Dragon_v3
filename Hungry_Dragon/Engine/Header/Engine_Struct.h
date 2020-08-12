@@ -8,15 +8,6 @@ namespace Engine
 		_vec3		vPosition;
 		_ulong		dwColor;
 
-		tagVertexColor() {}
-		tagVertexColor(_float _x, _float _y, _float _z, _ulong _c) {
-			vPosition.x = _x;
-			vPosition.y = _y;
-			vPosition.z = _z;
-
-			dwColor = _c;
-		}
-
 	}VTXCOL;
 
 	const _ulong	FVF_COL = D3DFVF_XYZ | D3DFVF_DIFFUSE | D3DFVF_TEX0;
@@ -27,7 +18,7 @@ namespace Engine
 		_vec3		vPosition;
 		_vec2		vTexUV;
 
-		tagVertexUV(_float _x, _float _y, _float _z, _float _u, _float _v) {
+		tagVertexUV(float _x, float _y, float _z, float _u, float _v) {
 			vPosition.x = _x;
 			vPosition.y = _y;
 			vPosition.z = _z;
@@ -58,7 +49,7 @@ namespace Engine
 		_vec3		vNormal;
 		_vec2		vTexUV;
 
-		tagVertexTex(_float _x, _float _y, _float _z, _float _nx, _float _ny, _float _nz, _float _u, _float _v) {
+		tagVertexTex(float _x, float _y, float _z, float _nx, float _ny, float _nz, float _u, float _v) {
 			vPosition.x = _x;
 			vPosition.y = _y;
 			vPosition.z = _z;
@@ -162,17 +153,6 @@ namespace Engine
 		void*	ObjAddress;
 		void*	ComponentAddress;
 	}tagAdd;
-
-
-	typedef struct tagFrame
-	{
-		float fStartFrame;
-		float fMaxFrame;
-		float fFrameSpeed;
-
-	}FRAME;
-
-
 }
 
 

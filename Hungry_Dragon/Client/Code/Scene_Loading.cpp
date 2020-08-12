@@ -58,25 +58,8 @@ _uint CScene_Loading::Loading_ForStage(void)
 
 	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
 		RESOURCE_STATIC,
-		L"Sprite_Bat",
-		Engine::SPRITE_ANIM,
-		9,
-		6),
-		E_FAIL);
-
-	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
-		RESOURCE_STATIC,
 		L"BUFFER_TERRAIN",
 		Engine::BUFFER_FOREST),
-		E_FAIL);
-
-	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
-		RESOURCE_STATIC,
-		L"BUFFER_KOREA",
-		Engine::BUFFER_KOREA,
-		129,
-		129,
-		100),
 		E_FAIL);
 
 	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
@@ -96,13 +79,6 @@ _uint CScene_Loading::Loading_ForStage(void)
 		L"BUFFER_VENTCUBE",
 		Engine::BUFFER_VENTCUBE),
 		E_FAIL);
-
-	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
-		RESOURCE_STAGE,
-		L"BUFFER_OBSTACLECUBE",
-		Engine::BUFFER_OBSTACLECUBE),
-		E_FAIL);
-
 
 	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
 		RESOURCE_STATIC,
@@ -126,26 +102,12 @@ _uint CScene_Loading::Loading_ForStage(void)
 		L"../../Asset/Skybox/TestSkybox.dds"),
 		E_FAIL);
 
-	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
-		RESOURCE_STAGE,
-		L"Texture_Bat",
-		Engine::TEX_NORMAL,
-		L"../../Asset/Monster/Bat.png"),
-		E_FAIL);
-
 
 	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
 		RESOURCE_STAGE,
 		L"Texture_BoxHead",
 		Engine::TEX_NORMAL,
 		L"../../Asset/HeadPng/Head%d.png", 6),
-		E_FAIL);
-
-	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
-		RESOURCE_STAGE,
-		L"Texture_Portal",
-		Engine::TEX_NORMAL,
-		L"../../Asset/Portal/%d.png", 10),
 		E_FAIL);
 
 	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,

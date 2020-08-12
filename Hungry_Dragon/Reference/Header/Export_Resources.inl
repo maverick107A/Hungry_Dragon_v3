@@ -47,6 +47,16 @@ inline CResources * Get_Particle(LPDIRECT3DDEVICE9 pGraphicDev, PARTICLEID _ePar
 	return CResourcesMgr::GetInstance()->Get_Particle(pGraphicDev, _ePartID, _boundingBox, _vOrigin);
 }
 
+inline CResources * Create_Preview(LPDIRECT3DDEVICE9 pGraphicDev, LPCTSTR _address)
+{
+	return CVICustom::Create(pGraphicDev,_address);
+}
+
+inline CResources * Create_Preview(LPDIRECT3DDEVICE9 pGraphicDev, list<VTXCOL> _listVertex, list<INDEX16> _listIndex)
+{
+	return CVICustom::Create(pGraphicDev,_listVertex,_listIndex);
+}
+
 // Release
 void		Release_Resources(void)
 {

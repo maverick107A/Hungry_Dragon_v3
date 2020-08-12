@@ -28,7 +28,7 @@ HRESULT CCavePlayer::Ready_Object(void)
 	m_pTransform->m_vInfo[Engine::INFO_POS].y = 0.f;
 	m_pTransform->m_vInfo[Engine::INFO_POS].z = 0.f;
 
-	m_pTransform->Set_Scale(3.f);
+	//m_pTransform->Set_Scale(10.f);
 
 	return S_OK;
 }
@@ -39,7 +39,7 @@ void CCavePlayer::Initialize_Object(void)
 
 int CCavePlayer::Update_Object(const float& fTimeDelta)
 {
-	m_pCamera->Update_Camera(fTimeDelta, m_pGraphicDev, m_pTransform->m_vInfo[Engine::INFO_POS], &m_fAngleX, &m_fAngleY, m_pTerrain);
+	m_pCaveCamera->Update_Camera(fTimeDelta, m_pGraphicDev, m_pTransform->m_vInfo[Engine::INFO_POS], &m_fAngleX, &m_fAngleY, m_pTerrain);
 	m_pState->Update_State(fTimeDelta);
 	//
 	State_Change();
@@ -98,7 +98,7 @@ HRESULT CCavePlayer::Add_Component(void)
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_Transform", pComponent);
 
 	//Camera
-	pComponent = m_pCamera = Engine::CCaveCamera::Create();
+	pComponent = m_pCaveCamera = Engine::CCaveCamera::Create();
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_Camera", pComponent);
 

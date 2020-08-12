@@ -52,6 +52,7 @@ HRESULT CMainApp::Ready_MainApp(void)
 	FAILED_CHECK_RETURN(Ready_Scene(m_pGraphicDev, &m_pManagementClass), E_FAIL);
 	Engine::Load_Particle(m_pGraphicDev);
 
+
 	return S_OK;
 }
 

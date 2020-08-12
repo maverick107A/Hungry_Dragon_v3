@@ -1,8 +1,6 @@
 #include "Layer.h"
 #include "ObjectPool.h"
 #include "CollisionMgr.h"
-#include "ParticleMgr.h"
-
 #include "MonsterMain.h"
 
 USING(Engine)
@@ -151,20 +149,17 @@ void CLayer::LateUpdate_Layer(const _float & fTimeDelta)
 	}
 	
 
-
 }
 
 void Engine::CLayer::Render_Layer(void)
 {
-	
-
 	for (auto& iter = m_mapObject.begin(); iter != m_mapObject.end(); ++iter)
 	{
 		for (auto& iter_obj = iter->second.begin(); iter_obj != iter->second.end(); ++iter_obj)
 		{
 			(*iter_obj)->Render_Object();
 		}
-	}	
+	}
 }
 
 CLayer* Engine::CLayer::Create(void)

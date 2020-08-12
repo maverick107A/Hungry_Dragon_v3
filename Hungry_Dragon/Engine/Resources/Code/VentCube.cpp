@@ -24,8 +24,8 @@ Engine::CVentCube::~CVentCube(void)
 HRESULT Engine::CVentCube::Ready_Buffer(void)			// 어쨋든 원기둥 내면 그리는거임 영어로 주석 달아놓음
 {
 	// 실린더 세팅
-	m_fHeight = 2000.f;		// 원기둥 시야
-	m_fRadius = 15.f;
+	m_fHeight = 1000.f;		// 원기둥 시야
+	m_fRadius = 5.f;
 	float fSliceCnt = m_fHeight / m_fRadius * 0.5f;
 
 	// Compute vertices for each stack ring starting at the bottom and moving up.

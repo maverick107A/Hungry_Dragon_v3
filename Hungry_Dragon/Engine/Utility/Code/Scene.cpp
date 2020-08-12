@@ -1,5 +1,5 @@
 #include "Scene.h"
-#include "ParticleMgr.h"
+
 USING(Engine)
 
 Engine::CScene::CScene(LPDIRECT3DDEVICE9 pGraphicDev)
@@ -15,7 +15,6 @@ Engine::CScene::~CScene(void)
 
 HRESULT Engine::CScene::Ready_Scene(void)
 {
-	CParticleMgr::GetInstance()->Ready_ParticleMgr(m_pGraphicDev);
 	return S_OK;
 }
 
@@ -27,7 +26,6 @@ void CScene::Initialize_Scene(void)
 
 _int Engine::CScene::Update_Scene(const _float& fTimeDelta)
 {
-
 	_int iEnd = 0;
 
 	for (auto& iter : m_mapLayer)
@@ -38,8 +36,6 @@ _int Engine::CScene::Update_Scene(const _float& fTimeDelta)
 		if (iEnd & 0x80000000)
 			return iEnd;
 	}
-
-	
 
 	return iEnd;
 }
@@ -54,8 +50,6 @@ void Engine::CScene::Render_Scene(void)
 {
 	for (auto& iter : m_mapLayer)
 		iter.second->Render_Layer();
-
-
 }
 
 void Engine::CScene::Free(void)
