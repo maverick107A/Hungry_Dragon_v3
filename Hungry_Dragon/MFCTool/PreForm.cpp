@@ -84,13 +84,13 @@ void CPreForm::OnBnClickedVertexAdd() {
 	CString tempString;
 
 	m_VertexPosX.GetWindowTextW(tempString);
-	tempVertex.vPosition.x=(float)_wtoi(tempString);
+	tempVertex.vPosition.x=_ttof(tempString);
 
 	m_VertexPosY.GetWindowTextW(tempString);
-	tempVertex.vPosition.y = (float)_wtoi(tempString);
+	tempVertex.vPosition.y = _ttof(tempString);
 
 	m_VertexPosZ.GetWindowTextW(tempString);
-	tempVertex.vPosition.z = (float)_wtoi(tempString);
+	tempVertex.vPosition.z = _ttof(tempString);
 
 	DWORD temp = m_colorButton.GetColor();
 	
@@ -114,13 +114,13 @@ void CPreForm::OnLbnSelchangeVertexList() {
 
 	CString tempString;
 
-	tempString.Format(_T("%d"), (int)(*iter_find).vPosition.x);
+	tempString.Format(_T("%f"), (*iter_find).vPosition.x);
 	m_VertexPosX.SetWindowTextW(tempString);
 
-	tempString.Format(_T("%d"), (int)(*iter_find).vPosition.y);
+	tempString.Format(_T("%f"), (*iter_find).vPosition.y);
 	m_VertexPosY.SetWindowTextW(tempString);
 
-	tempString.Format(_T("%d"), (int)(*iter_find).vPosition.z);
+	tempString.Format(_T("%f"), (*iter_find).vPosition.z);
 	m_VertexPosZ.SetWindowTextW(tempString);
 
 	DWORD temp;
