@@ -58,12 +58,20 @@ private:
 	Engine::CGraphicDev*	m_pDeviceClass = nullptr;
 	LPDIRECT3DDEVICE9		m_pGraphicDev = nullptr;
 	Engine::CVIBuffer*		m_pBuffer=nullptr;
-	Engine::CTransform*		m_pTransform = nullptr;
+	Engine::CVIBuffer*		m_pBufferLand = nullptr;
+	Engine::CTransform*		m_pTransformCamera = nullptr;
+	Engine::CTransform*		m_pTransformWorld = nullptr;
 	Engine::CCamera*		m_pCamera=nullptr;
+	bool					m_bWire=false;
+	bool					m_bCull=true;
 
 public:
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	void		Reset_Buffer(list<Engine::VTXCOL> _listVertex,list<Engine::INDEX16> _listIndex);
+	void		Set_Wire(bool _wire);
+	void		Set_Cull(bool _cull);
+	void		Begin_Draw();
+	void		End_Draw();
 };
 
 #ifndef _DEBUG  // MFCToolView.cpp의 디버그 버전

@@ -94,18 +94,12 @@ _int CScene_Proto::Update_Scene(const _float& fTimeDelta) {
 	pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);
 	CGameMgr::GetInstance()->Game_Update(m_vPlayerPos);
 
-	Engine::Particle_Create(m_vPlayerPos);
-
-	Engine::Particle_Update(fTimeDelta);
-
 	Engine::CScene::Update_Scene(fTimeDelta);
 
 	return 0;
 }
 
 void CScene_Proto::Render_Scene(void) {
-
-	Engine::Particle_Render();
 
 	// set the technique to use
 	m_pFogEffect->SetTechnique(m_hFogTechHandle);
