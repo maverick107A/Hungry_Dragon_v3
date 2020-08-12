@@ -19,7 +19,6 @@
 
 #include "Export_Function.h"
 
-
 //-------------------------------------------------------
 //기타 헤더**********************************************
 //-------------------------------------------------------
@@ -89,8 +88,10 @@ void CMFCToolView::OnDraw(CDC* /*pDC*/)
 	// TODO: 여기에 원시 데이터에 대한 그리기 코드를 추가합니다.
 	Engine::Render_Begin(D3DXCOLOR(0.f, 0.f, 1.f, 1.f));
 
-	m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
-	m_pBuffer->Render_Buffer();
+	//m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+
+	if(m_pBuffer!=nullptr)
+		m_pBuffer->Render_Buffer();
 
 	Engine::Render_End();
 }
@@ -144,7 +145,7 @@ void CMFCToolView::OnInitialUpdate() {
 	//g_hWnd = m_hWnd;
 	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
 
-	SetTimer(0, 1, nullptr);
+
 	
 	Engine::Ready_GraphicDev(m_hWnd,
 		Engine::MODE_WIN,
@@ -160,9 +161,10 @@ void CMFCToolView::OnInitialUpdate() {
 	m_pGraphicDev->SetRenderState(D3DRS_LIGHTING, FALSE);
 
 	Engine::Reserve_ContainerSize(RESOURCE_END);
-	Engine::Ready_Buffer(m_pGraphicDev, RESOURCE_STATIC, L"Test_Buffer", Engine::BUFFER_TEXCUBE);
+	/*Engine::Ready_Buffer(m_pGraphicDev, RESOURCE_STATIC, L"Test_Buffer", Engine::BUFFER_CUSTOMMESH);
+	m_pBuffer = static_cast<Engine::CVIBuffer*>(Engine::Clone(RESOURCE_STATIC, L"Test_Buffer"));*/
 
-	m_pBuffer = static_cast<Engine::CVIBuffer*>(Engine::Clone(RESOURCE_STATIC, L"Test_Buffer"));
+	m_pBuffer = static_cast<Engine::CVIBuffer*>(Engine::Create_Preview(m_pGraphicDev, L"../Asset/VIMesh/Test.dat"));
 	m_pTransform = Engine::CTransform::Create();
 
 	Engine::Load_Particle(m_pGraphicDev);
@@ -182,6 +184,8 @@ void CMFCToolView::OnInitialUpdate() {
 	m_pCamera = Engine::CCamera::Create();
 
 	m_pGraphicDev->SetTransform(D3DTS_PROJECTION, &matProj);
+
+	SetTimer(0, 1, nullptr);
 }
 
 
@@ -192,7 +196,8 @@ void CMFCToolView::OnTimer(UINT_PTR nIDEvent) {
 	_vec3 rightVec;
 	_vec3 upVec;
 
-	m_pTransform->Update_Component(0.f);
+	if (m_pBuffer != nullptr)
+		m_pTransform->Update_Component(0.f);
 	m_pTransform->Get_Info(Engine::INFO_POS, &posVec);
 
 	m_pCamera->Update_CameraMFC(m_pGraphicDev, posVec, &lookVec, &upVec);
@@ -281,4 +286,11 @@ void CMFCToolView::OnTimer(UINT_PTR nIDEvent) {
 
 
 	CView::OnTimer(nIDEvent);
+}
+
+void CMFCToolView::Reset_Buffer(list<Engine::VTXCOL> _listVertex, list<Engine::INDEX16> _listIndex)
+{
+	Engine::Safe_Release(m_pBuffer);
+
+	m_pBuffer = static_cast<CVIBuffer*>(Engine::Create_Preview(m_pGraphicDev, _listVertex, _listIndex));
 }
