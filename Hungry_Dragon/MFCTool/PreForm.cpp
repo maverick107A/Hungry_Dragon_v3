@@ -84,13 +84,13 @@ void CPreForm::OnBnClickedVertexAdd() {
 	CString tempString;
 
 	m_VertexPosX.GetWindowTextW(tempString);
-	tempVertex.vPosition.x=_ttof(tempString);
+	tempVertex.vPosition.x=(float)_ttof(tempString);
 
 	m_VertexPosY.GetWindowTextW(tempString);
-	tempVertex.vPosition.y = _ttof(tempString);
+	tempVertex.vPosition.y = (float)_ttof(tempString);
 
 	m_VertexPosZ.GetWindowTextW(tempString);
-	tempVertex.vPosition.z = _ttof(tempString);
+	tempVertex.vPosition.z = (float)_ttof(tempString);
 
 	DWORD temp = m_colorButton.GetColor();
 	
@@ -144,13 +144,13 @@ void CPreForm::OnBnClickedVertexSave() {
 	CString tempString;
 
 	m_VertexPosX.GetWindowTextW(tempString);
-	(*iter_find).vPosition.x = (float)_wtoi(tempString);
+	(*iter_find).vPosition.x = (float)_ttof(tempString);
 
 	m_VertexPosY.GetWindowTextW(tempString);
-	(*iter_find).vPosition.y = (float)_wtoi(tempString);
+	(*iter_find).vPosition.y = (float)_ttof(tempString);
 
 	m_VertexPosZ.GetWindowTextW(tempString);
-	(*iter_find).vPosition.z = (float)_wtoi(tempString);
+	(*iter_find).vPosition.z = (float)_ttof(tempString);
 
 	DWORD temp = m_colorButton.GetColor();
 	Change_ColorMFCToDirect(&temp, &(*iter_find).dwColor);
@@ -569,7 +569,7 @@ void CPreForm::OnBnClickedBtnWire()
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	if (m_pToolView != nullptr)
 	{
-		m_pToolView->Set_Wire(m_bWire.GetCheck());
+		m_pToolView->Set_Wire(m_bWire.GetCheck()==BST_CHECKED);
 	}
 }
 
@@ -579,6 +579,6 @@ void CPreForm::OnBnClickedBtnCul()
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	if (m_pToolView != nullptr)
 	{
-		m_pToolView->Set_Cull(m_bCul.GetCheck());
+		m_pToolView->Set_Cull(m_bCul.GetCheck() == BST_CHECKED);
 	}
 }
