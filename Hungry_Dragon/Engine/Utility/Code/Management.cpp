@@ -22,6 +22,7 @@ HRESULT Engine::CManagement::Set_Scene(CScene* pScene)
 
 	m_pScene = pScene;
 	m_pFormerScene = m_pScene;
+	m_pScene->Initialize_Scene();
 
 	return S_OK;
 }
@@ -31,16 +32,12 @@ _int Engine::CManagement::Update_Scene(const _float& fTimeDelta)
 	if (nullptr == m_pScene)
 		return -1;
 
-	if (m_pScene != m_pFormerScene)
-	{
-		Safe_Release(m_pFormerScene);
-		m_pFormerScene = m_pScene;
-		m_pScene->Initialize_Scene();
-	}
-
 	m_pScene->Update_Scene(fTimeDelta);
 
-
+	if (m_pScene != m_pFormerScene) {
+		Safe_Release(m_pFormerScene);
+		m_pFormerScene = m_pScene;
+	}
 
 	return 0;
 }

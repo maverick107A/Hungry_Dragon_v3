@@ -70,7 +70,16 @@
     <Filter Include="02. UtilBase\02. Component\02. State\00.PlayerState\04.CaveRush">
       <UniqueIdentifier>{ecea96f9-7955-428e-b598-e7746ad43ef1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. UtilBase\02. Component\01. Camera\01. CaveCamera">
+    <Filter Include="02. UtilBase\06. ParticleMgr">
+      <UniqueIdentifier>{390361e5-fdcd-405b-a574-e944c6c95db3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. UtilBase\02. Component\01. Camera\00. CameraMain">
+      <UniqueIdentifier>{90a41a8f-db4f-42ca-9e13-ddfddab424ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. UtilBase\02. Component\01. Camera\01. Camera">
+      <UniqueIdentifier>{c333b8cc-8a42-4f90-9191-91bc2211a860}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. UtilBase\02. Component\01. Camera\02. CaveCamera">
       <UniqueIdentifier>{d7eb16a6-4dbc-4998-9111-af3eac7ebaef}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -98,9 +107,6 @@
     </ClCompile>
     <ClCompile Include="..\Code\ObjectPool.cpp">
       <Filter>04.ObjectPool</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Camera.cpp">
-      <Filter>02. UtilBase\02. Component\01. Camera</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\PlayerMain.cpp">
       <Filter>02. UtilBase\01. GameObject\00.Player</Filter>
@@ -145,7 +151,16 @@
       <Filter>02. UtilBase\02. Component\02. State\00.PlayerState\04.CaveRush</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\CaveCamera.cpp">
-      <Filter>02. UtilBase\02. Component\01. Camera\01. CaveCamera</Filter>
+      <Filter>02. UtilBase\02. Component\01. Camera\02. CaveCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ParticleMgr.cpp">
+      <Filter>02. UtilBase\06. ParticleMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CameraMain.cpp">
+      <Filter>02. UtilBase\02. Component\01. Camera\00. CameraMain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Camera.cpp">
+      <Filter>02. UtilBase\02. Component\01. Camera\01. Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -175,9 +190,6 @@
     </ClInclude>
     <ClInclude Include="..\Code\ObjectPool.h">
       <Filter>04.ObjectPool</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\Camera.h">
-      <Filter>02. UtilBase\02. Component\01. Camera</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\PlayerMain.h">
       <Filter>02. UtilBase\01. GameObject\00.Player</Filter>
@@ -222,7 +234,16 @@
       <Filter>02. UtilBase\02. Component\02. State\00.PlayerState\04.CaveRush</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\CaveCamera.h">
-      <Filter>02. UtilBase\02. Component\01. Camera\01. CaveCamera</Filter>
+      <Filter>02. UtilBase\02. Component\01. Camera\02. CaveCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\ParticleMgr.h">
+      <Filter>02. UtilBase\06. ParticleMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\CameraMain.h">
+      <Filter>02. UtilBase\02. Component\01. Camera\00. CameraMain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Camera.h">
+      <Filter>02. UtilBase\02. Component\01. Camera\01. Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

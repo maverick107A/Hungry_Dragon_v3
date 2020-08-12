@@ -16,7 +16,7 @@ HRESULT CRun_Monster::Ready_Object(void)
 {
 	Engine::CMonsterMain::Ready_Object();
 	Add_Component();
-	m_fSpeed = 30.f;
+	m_fSpeed = 10.f;
 	m_eState = MONSTER_REBORN;
 	return S_OK;
 }
@@ -25,19 +25,22 @@ int CRun_Monster::Update_Object(const float & fTimeDelta)
 {
 
 
-	if (m_eState == MONSTER_REBORN)
+	if (m_eState == MONSTER_REBORN && m_eState != MONSTER_DEACTIVATE)
 	{
 		m_pTransform->Set_Trans(&m_vFirstPos);
 		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
 		m_pTransform->Set_Scale(1);
 		m_iEvent = OBJ_NOEVENT;
 		m_eState = MONSTER_IDLE;
-		m_iEvent = 0;
-
 	}
 
-	Engine::CMonsterMain::Update_Object(fTimeDelta);
 
+	if (MONSTER_DEAD == Engine::CMonsterMain::Update_Object(fTimeDelta))
+	{
+		m_eState = MONSTER_REBORN;
+
+		return m_iEvent;
+	}
 
 
 	if (m_eState == MONSTER_ACTIVATE)
@@ -48,9 +51,7 @@ int CRun_Monster::Update_Object(const float & fTimeDelta)
 		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
 		
 	}
-	else 
-		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
-
+	
 
 	return m_iEvent;
 }
@@ -59,7 +60,7 @@ void CRun_Monster::Render_Object(void)
 {
 	m_pTransform->Set_Transform(m_pGraphicDev);
 	m_pTextureCom->Set_Texture(4);
-	m_pBufferCom->Render_Buffer();
+	m_pBufferCubeCom->Render_Buffer();
 	Engine::CMonsterMain::Render_Object();
 }
 
@@ -68,7 +69,7 @@ HRESULT CRun_Monster::Add_Component(void)
 	Engine::CComponent*		pComponent = nullptr;
 
 	// buffer
-	pComponent = m_pBufferCom = dynamic_cast<Engine::CTexture_Cube*>
+	pComponent = m_pBufferCubeCom = dynamic_cast<Engine::CTexture_Cube*>
 		(Engine::Clone(RESOURCE_STATIC, L"Buffer_CubeTex"));
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Buffer", pComponent);
@@ -90,11 +91,10 @@ void CRun_Monster::LateUpdate_Object(const float & fTimeDelta)
 
 
 
-CRun_Monster * CRun_Monster::Create(LPDIRECT3DDEVICE9 pGraphicDev , D3DXVECTOR3 _pos)
+CRun_Monster * CRun_Monster::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 {
 	CRun_Monster*		pInstance = new CRun_Monster(pGraphicDev);
 
-	pInstance->Set_Pos(_pos);
 
 	if (FAILED(pInstance->Ready_Object()))
 		Engine::Safe_Release(pInstance);

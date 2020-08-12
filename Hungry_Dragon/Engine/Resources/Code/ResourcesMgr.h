@@ -20,11 +20,12 @@
 #include "SkyCube.h"
 #include "CaveCylinder.h"
 #include "VentCube.h"
+#include "ObstacleCube.h"
 #include "Texture_Plane.h"
 #include "Texture_Square.h"
-#include "VICustom.h"
-
+#include "MonsterBoard.h"
 #include "Texture.h"
+#include "HeightCol.h"
 
 #include "Part_Atk.h"
 #include "Part_Wind.h"

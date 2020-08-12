@@ -32,7 +32,6 @@ void CPreForm::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT5, m_Index1);
 	DDX_Control(pDX, IDC_EDIT6, m_Index2);
 	DDX_Control(pDX, IDC_LIST2, m_indexListBox);
-	DDX_Control(pDX, IDC_MFCCOLORBUTTON1, m_colorButton);
 }
 
 BEGIN_MESSAGE_MAP(CPreForm, CFormView)
@@ -46,7 +45,6 @@ BEGIN_MESSAGE_MAP(CPreForm, CFormView)
 	ON_BN_CLICKED(IDC_BUTTON2, &CPreForm::OnBnClickedVertexDel)
 	ON_BN_CLICKED(IDC_BUTTON5, &CPreForm::OnBnClickedMeshSave)
 	ON_BN_CLICKED(IDC_BUTTON9, &CPreForm::OnBnClickedMeshLoad)
-	ON_BN_CLICKED(IDC_BUTTON8, &CPreForm::OnBnClickedSetPreview)
 END_MESSAGE_MAP()
 
 
@@ -89,9 +87,7 @@ void CPreForm::OnBnClickedVertexAdd() {
 	m_VertexPosZ.GetWindowTextW(tempString);
 	tempVertex.vPosition.z = (float)_wtoi(tempString);
 
-	DWORD temp = m_colorButton.GetColor();
-	
-	Change_ColorMFCToDirect(&temp, &tempVertex.dwColor);
+	tempVertex.dwColor = D3DXCOLOR(255.f, 255.f, 255.f, 255.f);
 
 	m_listVertex.emplace_back(tempVertex);
 }
@@ -100,10 +96,6 @@ void CPreForm::OnBnClickedVertexAdd() {
 void CPreForm::OnLbnSelchangeVertexList() {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	int index = m_vertexListBox.GetCurSel();
-
-	if (index < 0 || index >= m_vertexCount)
-		return;
-
 	list<Engine::VTXCOL>::iterator iter_find = m_listVertex.begin();
 	int i = 0;
 	for (; i != index; ++i, ++iter_find) {
@@ -120,19 +112,13 @@ void CPreForm::OnLbnSelchangeVertexList() {
 	tempString.Format(_T("%d"), (int)(*iter_find).vPosition.z);
 	m_VertexPosZ.SetWindowTextW(tempString);
 
-	DWORD temp;
-	Change_ColorDirectToMFC(&(*iter_find).dwColor, &temp);
-	m_colorButton.SetColor(temp);
+	//해당 버텍스에 선택됐음을 표기하는 것도 필요할 듯
 }
 
 //이미 존재하는 버텍스의 값을 변경하고 저장
 void CPreForm::OnBnClickedVertexSave() {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	int index = m_vertexListBox.GetCurSel();
-
-	if (index < 0 || index >= (int)m_listVertex.size())
-		return;
-
 	list<Engine::VTXCOL>::iterator iter_find = m_listVertex.begin();
 	int i = 0;
 	for (; i != index; ++i, ++iter_find) {
@@ -148,9 +134,6 @@ void CPreForm::OnBnClickedVertexSave() {
 
 	m_VertexPosZ.GetWindowTextW(tempString);
 	(*iter_find).vPosition.z = (float)_wtoi(tempString);
-
-	DWORD temp = m_colorButton.GetColor();
-	Change_ColorMFCToDirect(&temp, &(*iter_find).dwColor);
 }
 
 
@@ -199,14 +182,9 @@ void CPreForm::OnBnClickedIndexAdd() {
 void CPreForm::OnLbnSelchangeIndexList() {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	int index = m_indexListBox.GetCurSel();
-
-	if (index < 0 || index >= m_indexCount)
-		return;
-
 	list<Engine::INDEX16>::iterator iter_find = m_listIndex.begin();
 	int i = 0;
-	for (; i != index; ++i, ++iter_find)
-	{
+	for (; i != index; ++i, ++iter_find) {
 	}
 
 	CString tempString;
@@ -225,10 +203,6 @@ void CPreForm::OnLbnSelchangeIndexList() {
 void CPreForm::OnBnClickedIndexSave() {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	int listIndex = m_indexListBox.GetCurSel();
-
-	if (listIndex < 0 || listIndex >= (int)m_listIndex.size())
-		return;
-
 	list<Engine::INDEX16>::iterator iter_find = m_listIndex.begin();
 	int i = 0;
 	for (; i != listIndex; ++i, ++iter_find) {
@@ -308,11 +282,6 @@ void CPreForm::Add_IndexToListBox() {
 	}
 }
 
-void CPreForm::Set_ToolView(CMFCToolView * _toolView)
-{
-	m_pToolView = _toolView;
-}
-
 bool CPreForm::Check_Index16(Engine::INDEX16 _index, int _vertexNum)
 {
 	Engine::_ushort sVertexNum=(Engine::_ushort)_vertexNum;
@@ -328,69 +297,6 @@ bool CPreForm::Check_Index16(Engine::INDEX16 _index, int _vertexNum)
 	return false;
 }
 
-void CPreForm::Change_ColorMFCToDirect(DWORD * _mfc, DWORD * _direct)
-{
-	DWORD temp = *_mfc;
-	*_direct = (DWORD)0;
-
-	DWORD Red = (DWORD)(255);
-	DWORD Green = (DWORD)(255);
-	DWORD Blue = (DWORD)(255);
-
-	Red = Red & temp;
-	temp >>= 8;
-
-	Green = Green&temp;
-	temp >>= 8;
-
-	Blue = Blue&temp;
-
-	*_direct |= (DWORD)255;
-	*_direct <<= 8;
-
-	*_direct |= Red;
-	*_direct <<= 8;
-
-	*_direct |= Green;
-	*_direct <<= 8;
-	
-	*_direct |= Blue;
-}
-
-void CPreForm::Change_ColorDirectToMFC(DWORD * _direct, DWORD * _mfc)
-{
-	DWORD temp = *_direct;
-	*_mfc = (DWORD)0;
-
-	DWORD Red = (DWORD)(255);
-	DWORD Green = (DWORD)(255);
-	DWORD Blue = (DWORD)(255);
-
-	Blue = Blue&temp;
-	temp >>= 8;
-
-	Green = Green&temp;
-	temp >>= 8;
-
-	Red = Red&temp;
-
-	
-	
-	*_mfc <<= 8;
-	*_mfc |= Blue;
-
-	*_mfc <<= 8;
-	*_mfc |= Green;
-
-	*_mfc <<= 8;
-	*_mfc |= Red;
-}
-
-list<Engine::VTXCOL> CPreForm::Get_Vertex()
-{
-	return m_listVertex;
-}
-
 
 
 
@@ -398,7 +304,6 @@ void CPreForm::OnBnClickedVertexDel()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	int index = m_vertexListBox.GetCurSel();
-
 	list<Engine::VTXCOL>::iterator iter_find = m_listVertex.begin();
 
 	if (index < 0 || index >= m_vertexCount)
@@ -406,9 +311,10 @@ void CPreForm::OnBnClickedVertexDel()
 		return;
 	}
 
-	m_vertexListBox.ResetContent();
-	for (int i = 0; i<m_vertexCount; ++i)
+	for (int i = m_vertexCount-1; i >= 0; --i)
 	{
+		m_vertexListBox.DeleteString(i);
+
 		if (i == index)
 		{
 			iter_find=m_listVertex.erase(iter_find);
@@ -550,12 +456,3 @@ void CPreForm::OnBnClickedMeshLoad() {
 	UpdateData(FALSE);
 }
 
-
-void CPreForm::OnBnClickedSetPreview()
-{
-	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	if (m_pToolView != nullptr)
-	{
-		m_pToolView->Reset_Buffer(m_listVertex, m_listIndex);
-	}
-}

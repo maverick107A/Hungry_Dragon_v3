@@ -48,6 +48,11 @@ private:
 	CCave* m_pCave = nullptr;
 	CVent* m_pVent = nullptr;
 
+	bool			m_bFogEnable = true;
+	ID3DXEffect*	m_pFogEffect = 0;
+	D3DXHANDLE		m_hFogTechHandle = 0;
+
+
 private:
 	virtual void Free(void) override;
 };
