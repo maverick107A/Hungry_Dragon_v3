@@ -14,7 +14,6 @@ IMPLEMENT_DYNCREATE(CPreForm, CFormView)
 CPreForm::CPreForm()
 	: CFormView(IDD_PREFORM)
 {
-
 }
 
 CPreForm::~CPreForm()
@@ -32,8 +31,9 @@ void CPreForm::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT5, m_Index1);
 	DDX_Control(pDX, IDC_EDIT6, m_Index2);
 	DDX_Control(pDX, IDC_LIST2, m_indexListBox);
-	//	DDX_Control(pDX, IDC_MFCCOLORBUTTON1, m_colorButton);
 	DDX_Control(pDX, IDC_MFCCOLORBUTTON1, m_colorButton);
+	DDX_Control(pDX, IDC_CHECK1, m_bWire);
+	DDX_Control(pDX, IDC_CHECK2, m_bCul);
 }
 
 BEGIN_MESSAGE_MAP(CPreForm, CFormView)
@@ -48,6 +48,8 @@ BEGIN_MESSAGE_MAP(CPreForm, CFormView)
 	ON_BN_CLICKED(IDC_BUTTON5, &CPreForm::OnBnClickedMeshSave)
 	ON_BN_CLICKED(IDC_BUTTON9, &CPreForm::OnBnClickedMeshLoad)
 	ON_BN_CLICKED(IDC_BUTTON8, &CPreForm::OnBnClickedSetPreview)
+	ON_BN_CLICKED(IDC_CHECK1, &CPreForm::OnBnClickedBtnWire)
+	ON_BN_CLICKED(IDC_CHECK2, &CPreForm::OnBnClickedBtnCul)
 END_MESSAGE_MAP()
 
 
@@ -558,5 +560,25 @@ void CPreForm::OnBnClickedSetPreview()
 	if (m_pToolView != nullptr)
 	{
 		m_pToolView->Reset_Buffer(m_listVertex, m_listIndex);
+	}
+}
+
+
+void CPreForm::OnBnClickedBtnWire()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	if (m_pToolView != nullptr)
+	{
+		m_pToolView->Set_Wire(m_bWire.GetCheck());
+	}
+}
+
+
+void CPreForm::OnBnClickedBtnCul()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	if (m_pToolView != nullptr)
+	{
+		m_pToolView->Set_Cull(m_bCul.GetCheck());
 	}
 }

@@ -42,6 +42,8 @@ public:
 	afx_msg void OnBnClickedMeshSave();
 	afx_msg void OnBnClickedMeshLoad();
 	afx_msg void OnBnClickedSetPreview();
+	afx_msg void OnBnClickedBtnWire();
+	afx_msg void OnBnClickedBtnCul();
 
 	void Erase_Index(int _delIndex);
 	void Add_VertexToListBox();
@@ -59,7 +61,6 @@ public:
 	CEdit					m_VertexPosX;
 	CEdit					m_VertexPosY;
 	CEdit					m_VertexPosZ;
-	//CMFCColorButton			m_colorButton;
 	CMFCColorButton			m_colorButton;
 
 	CListBox				m_indexListBox;
@@ -68,9 +69,10 @@ public:
 	CEdit					m_Index0;
 	CEdit					m_Index1;
 	CEdit					m_Index2;
-
 	CMFCToolView*			m_pToolView;
 
+	CButton					m_bWire;
+	CButton					m_bCul;
 };
 
 
