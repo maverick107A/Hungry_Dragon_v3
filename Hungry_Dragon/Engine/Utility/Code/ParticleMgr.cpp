@@ -19,7 +19,7 @@ Engine::CParticleMgr::~CParticleMgr(void)
 
 void CParticleMgr::Ready_ParticleMgr(LPDIRECT3DDEVICE9 _pGraphicDev)
 {
-	//m_pGraphicDev = _pGraphicDev;
+	m_pGraphicDev = _pGraphicDev;
 }
 
 void CParticleMgr::Particle_Update(const float & fTimeDelta)
@@ -40,9 +40,7 @@ void CParticleMgr::Particle_Update(const float & fTimeDelta)
 
 void CParticleMgr::Particle_Render()
 {
-	//_matrix matWorld;
-	//D3DXMatrixIdentity(&matWorld);
-	//m_pGraphicDev->SetTransform(D3DTS_WORLD, &matWorld);
+
 	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end(); ++iter)
 	{
 		(*iter)->Render_Buffer();
@@ -51,9 +49,10 @@ void CParticleMgr::Particle_Render()
 
 void CParticleMgr::Particle_Create(const _vec3 _pos)
 {
-	
+	//Engine::Particle_Render();
 
-	Engine::_vec3 vOrigin = _vec3(0.f, 0.f, 0.f);;
+
+	Engine::_vec3 vOrigin = _pos;
 	Engine::BoundingBox tempBoundingBox;
 	tempBoundingBox.vMax = Engine::_vec3(100.f, 100.f, 100.f);
 	tempBoundingBox.vMin = Engine::_vec3(-100.f, -100.f, -100.f);

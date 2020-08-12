@@ -27,9 +27,9 @@ HRESULT CTestPlayer::Ready_Object(void)
 
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
-	m_pTransform->m_vInfo[Engine::INFO_POS].x = 264.f;
-	m_pTransform->m_vInfo[Engine::INFO_POS].y = 700.f;
-	m_pTransform->m_vInfo[Engine::INFO_POS].z = 264.f;
+	m_pTransform->m_vInfo[Engine::INFO_POS].x = 0.f;
+	m_pTransform->m_vInfo[Engine::INFO_POS].y = 0.f;
+	m_pTransform->m_vInfo[Engine::INFO_POS].z = 0.f;
 
 	m_pTransform->Set_Scale(10.f);
 

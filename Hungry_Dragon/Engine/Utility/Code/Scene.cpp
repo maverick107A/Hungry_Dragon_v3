@@ -15,7 +15,6 @@ Engine::CScene::~CScene(void)
 
 HRESULT Engine::CScene::Ready_Scene(void)
 {
-	CParticleMgr::GetInstance()->Ready_ParticleMgr(m_pGraphicDev);
 	return S_OK;
 }
 
