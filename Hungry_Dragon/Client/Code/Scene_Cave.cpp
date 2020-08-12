@@ -7,6 +7,7 @@
 #include "Vent.h"
 #include "Obstacle.h"
 #include "CavePlayer.h"
+#include "PlayerUI.h"
 
 CScene_Cave::CScene_Cave(LPDIRECT3DDEVICE9 pGraphicDev)
 	: Engine::CScene(pGraphicDev)
@@ -99,6 +100,8 @@ HRESULT CScene_Cave::Ready_Layer_UI(const _tchar* pLayerTag)
 	NULL_CHECK_RETURN(pLayer, E_FAIL);
 
 	Engine::CGameObject*		pGameObject = nullptr;
+
+	FAILED_CHECK_RETURN(Register_GameObject<CPlayerUI>(pLayer, L"PlayerUI"), E_FAIL);
 
 	m_mapLayer.emplace(pLayerTag, pLayer);
 

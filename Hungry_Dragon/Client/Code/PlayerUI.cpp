@@ -20,24 +20,8 @@ HRESULT CPlayerUI::Ready_Object(void)
 {
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
-	return S_OK;
-}
+	D3DXCreateSprite(m_pGraphicDev, &m_pSprite);
 
-void CPlayerUI::Initialize_Object(void)
-{
-
-}
-
-int CPlayerUI::Update_Object(const float& fTimeDelta)
-{
-	//여기서 정보받을거야 ㅋ
-	Engine::CGameObject::Update_Object(fTimeDelta);
-
-	return 0;
-}
-
-void CPlayerUI::Render_Object(void)
-{
 	D3DXCreateTextureFromFile(
 		m_pGraphicDev,
 		L"../Bin/Resource/Texture/Bar/Red.png",
@@ -51,53 +35,68 @@ void CPlayerUI::Render_Object(void)
 		L"../Bin/Resource/Texture/Bar/Yellow.png",
 		&m_pYellowTex);
 
-	//if (FAILED(D3DXGetImageInfoFromFile(wstrFilePath.c_str(), &m_pTexInfo->tImageInfo)))
+	return S_OK;
+}
+
+void CPlayerUI::Initialize_Object(void)
+{
+}
+
+int CPlayerUI::Update_Object(const float& fTimeDelta)
+{
+	//여기서 정보받을거야 ㅋ
+	Engine::CGameObject::Update_Object(fTimeDelta);
+
+	return 0;
+}
+
+void CPlayerUI::Render_Object(void)
+{
+	//if (GetAsyncKeyState(VK_LBUTTON))
 	//{
-	//	wstring wstrErrMessage = wstrFilePath + L"Load Failed";
-	//	ERR_MSG(wstrErrMessage.c_str());
-	//	return E_FAIL;
+	//	TCHAR szBuff[32] = L"";
+	//	wsprintf(szBuff, L"x :%d, y :%d", int(m_fRight), int(m_fUp));
+	//	MessageBox(nullptr, szBuff, L"XY", 0);
 	//}
-	//if (FAILED(D3DXCreateTextureFromFileEx(
-	//	CGraphic_Device::Get_Instance()->Get_Device(),
-	//	wstrFilePath.c_str(),
-	//	m_pTexInfo->tImageInfo.Width,
-	//	m_pTexInfo->tImageInfo.Height,
-	//	m_pTexInfo->tImageInfo.MipLevels,
-	//	0,
-	//	m_pTexInfo->tImageInfo.Format,
-	//	D3DPOOL_MANAGED,
-	//	D3DX_DEFAULT, D3DX_DEFAULT,
-	//	0,
-	//	&m_pTexInfo->tImageInfo,
-	//	nullptr,
-	//	&m_pTexInfo->pTexture)))
-	//{
-	//	wstring wstrErr_Message = wstrFilePath + L"CreateTexture Failed";
-	//	ERR_MSG(wstrErr_Message.c_str());
-	//	return E_FAIL;
-	//}
+	//if (GetAsyncKeyState(VK_RIGHT))
+	//	m_fRight += 1.f;
+	//if (GetAsyncKeyState(VK_LEFT))
+	//	m_fRight -= 1.f;
+
+	//if (GetAsyncKeyState(VK_UP))
+	//	m_fUp -= 10.f;
+	//if (GetAsyncKeyState(VK_DOWN))
+	//	m_fUp += 10.f;
+	//m_pGraphicDev->Clear(0, nullptr, D3DCLEAR_TARGET | D3DCLEAR_STENCIL | D3DCLEAR_ZBUFFER, D3DCOLOR_ARGB(255, 255, 255, 255), 0.f, 0);
+
+	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
+
+	D3DXMATRIX matTrans = {};
+
+
+	D3DXMatrixTranslation(&matTrans, 100.f, 50.f, 0.f);
+	m_pSprite->SetTransform(&matTrans);
+	m_pSprite->Draw(m_pRedTex, nullptr, nullptr, nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	D3DXMatrixTranslation(&matTrans, 100.f, 80.f, 0.f);
+	m_pSprite->SetTransform(&matTrans);
+	m_pSprite->Draw(m_pGreenTex, nullptr, nullptr, nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	D3DXMatrixTranslation(&matTrans, 300, 880, 0.f);
+	m_pSprite->SetTransform(&matTrans);
+	m_pSprite->Draw(m_pYellowTex, nullptr, nullptr, nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
 
 
 
-
-	//const TEXINFO* pTexInfo = CTexture_Manager::Get_Instance()->Get_TexInfo(L"Player", m_pFrame, m_tFrame.fStartFrame);
-	//if (nullptr == pTexInfo)
-	//	return;
-
-	//float fCenterX = pTexInfo->tImageInfo.Width*0.5f;
-	//float fCenterY = pTexInfo->tImageInfo.Height*0.5f;
-
-	//D3DXMatrixScaling(&matScale, 1000.f / (vTemp.z), 1000.f / (vTemp.z), 0.f);
-	//D3DXMatrixTranslation(&matTrans, vTemp.x*1000.f / (vTemp.z) + WINCX*0.5f, vTemp.y*1000.f / (vTemp.z) + WINCY*0.5f, 0.f);
-
-	//m_tInfo.matWorld = matScale*matRotZ*matTrans;
-
-	//CGraphic_Device::Get_Instance()->Get_Sprite()->SetTransform(&m_tInfo.matWorld);
-	//CGraphic_Device::Get_Instance()->Get_Sprite()->Draw(pTexInfo->pTexture, nullptr, &D3DXVECTOR3(fCenterX, fCenterY, 0.f), nullptr, D3DCOLOR_ARGB(255, 100, 100, 100));
+	m_pSprite->End();
 }
 
 void CPlayerUI::Free(void)
 {
+	m_pYellowTex->Release();
+	m_pRedTex->Release();
+	m_pGreenTex->Release();
+	m_pSprite->Release();
 	Engine::CGameObject::Free();
 }
 

@@ -30,6 +30,9 @@ private:
 	IDirect3DTexture9*	m_pRedTex;
 	IDirect3DTexture9*	m_pGreenTex;
 	IDirect3DTexture9*	m_pYellowTex;
+	LPD3DXSPRITE		m_pSprite = nullptr;
+	float				m_fRight = 0.f;
+	float				m_fUp = 0.f;
 
 public:
 	static CPlayerUI*	Create(LPDIRECT3DDEVICE9 pGraphicDev);

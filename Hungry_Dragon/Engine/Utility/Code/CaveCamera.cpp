@@ -37,10 +37,10 @@ void CCaveCamera::Move_Camera(LPDIRECT3DDEVICE9 & pGraphicDev, _vec3 _vPos, floa
 {
 	if (m_bLock)
 		return;
-	POINT tPos = {};
-	GetCursorPos(&tPos);
-	m_vAfterAngle.y += (tPos.x - m_tCenter.x)*0.004f*cosf(m_vAngle.z) + (tPos.y - m_tCenter.y)*0.004f*sinf(m_vAngle.z);
-	m_vAfterAngle.x += (tPos.y - m_tCenter.y)*0.004f*cosf(m_vAngle.z) + -(tPos.x - m_tCenter.x)*0.004f*sinf(m_vAngle.z);
+	//POINT tPos = {};
+	//GetCursorPos(&tPos);
+	//m_vAfterAngle.y += (tPos.x - m_tCenter.x)*0.004f*cosf(m_vAngle.z) + (tPos.y - m_tCenter.y)*0.004f*sinf(m_vAngle.z);
+	//m_vAfterAngle.x += (tPos.y - m_tCenter.y)*0.004f*cosf(m_vAngle.z) + -(tPos.x - m_tCenter.x)*0.004f*sinf(m_vAngle.z);
 
 	*_fAngleX = m_vAfterAngle.x;
 	*_fAngleY = m_vAfterAngle.y;
@@ -66,7 +66,7 @@ void CCaveCamera::Move_Camera(LPDIRECT3DDEVICE9 & pGraphicDev, _vec3 _vPos, floa
 	//¾÷¹éÅÍ
 	D3DXVec3TransformNormal(&m_vUp, &m_vUp, &vRotTotal);
 
-	SetCursorPos(m_tCenter.x, m_tCenter.y);
+	//SetCursorPos(m_tCenter.x, m_tCenter.y);
 	m_vPos = _vPos - m_vDir*m_fCameraDis;
 	m_vDir = m_vPos + m_vDir;
 }
