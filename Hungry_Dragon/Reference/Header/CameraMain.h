@@ -24,11 +24,13 @@ public:
 	void			Set_AngleZPlus(float _fAngle) { m_vAngle.z += _fAngle; }
 	void			Set_Angle(int _iIndex, float _fAngle) { m_vAngle[_iIndex] = _fAngle; }
 	void			Set_AfterAngle(int _iIndex, float _fAngle) { m_vAfterAngle[_iIndex] = _fAngle; }
+	void			Set_Shock() { m_bShock = true; }
 
 protected:
 	virtual void	Move_Camera(LPDIRECT3DDEVICE9& pGraphicDev, _vec3 _vPos, float* _fAngleX, float* _fAngleY) {}
 	void			Ride_Terrain(CBaseLand* _pTerrain);
-	
+	void			Shock_Cam();
+
 protected:
 	POINT			m_tCenter = {};
 	//float			m_fAngleY = 0.f;
@@ -48,6 +50,13 @@ protected:
 	_vec3			m_vPos = { 0.f,50.f,0.f };
 	bool			m_bTCol = false;
 	bool			m_bLock = false;
+
+
+
+	bool			m_bShock = false;
+	bool			m_bCheck = false;
+	int				m_iTime = 0;
+	_vec3			m_vShock = {0.f,0.f,0.f};
 
 public:
 	static CCameraMain*		Create(void) { return nullptr; }

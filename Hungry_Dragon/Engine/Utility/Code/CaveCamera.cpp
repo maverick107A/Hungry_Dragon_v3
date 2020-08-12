@@ -16,18 +16,26 @@ HRESULT Engine::CCaveCamera::Ready_Camera(void)
 {
 	m_tCenter = { LONG(WINCX*0.5), LONG(WINCY*0.5) };
 	SetCursorPos(m_tCenter.x, m_tCenter.y);
+	m_vShock = { 0.f,0.f,0.f };
 	return S_OK;
 }
 
 _int Engine::CCaveCamera::Update_Camera(const _float& fTimeDelta, LPDIRECT3DDEVICE9& pGraphicDev, _vec3 _vPos, float* _fAngleX, float* _fAngleY, CBaseLand* _pTerrain)
 {
+	if (GetAsyncKeyState(VK_F2))
+	{
+		m_bShock = true;
+	}
+
+	Shock_Cam();
+
 	if (GetAsyncKeyState(VK_F1) & 0x0001)
 		m_bLock = !m_bLock;
 
 	Move_Camera(pGraphicDev, _vPos, _fAngleX, _fAngleY);
 
 	D3DXMATRIX V;
-	D3DXMatrixLookAtLH(&V, &m_vPos, &m_vDir, &m_vUp);
+	D3DXMatrixLookAtLH(&V, &m_vPos, &_vPos, &m_vUp);
 	pGraphicDev->SetTransform(D3DTS_VIEW, &V);
 
 	return 0;
@@ -68,7 +76,8 @@ void CCaveCamera::Move_Camera(LPDIRECT3DDEVICE9 & pGraphicDev, _vec3 _vPos, floa
 
 	//SetCursorPos(m_tCenter.x, m_tCenter.y);
 	m_vPos = _vPos - m_vDir*m_fCameraDis;
-	m_vDir = m_vPos + m_vDir;
+	m_vPos += m_vShock;
+	//m_vDir = m_vPos + m_vDir;
 }
 
 CCaveCamera* Engine::CCaveCamera::Create(void)

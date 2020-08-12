@@ -49,6 +49,7 @@ private:
 	Engine::CVentCube*		m_pBufferCom = nullptr;
 	Engine::CTransform*		m_pTransform = nullptr;
 	Engine::CTransform*		m_pTransformBeyond = nullptr;
+	Engine::CTransform*		m_pPlayerTrans = nullptr;
 	Engine::CTexture*		m_pTex = nullptr;
 	float					m_fForwardSpeed = 1.f;
 	float					m_fUpdateTick = 0.f;
