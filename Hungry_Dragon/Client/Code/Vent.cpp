@@ -30,6 +30,11 @@ HRESULT CVent::Ready_Object(void)
 	return S_OK;
 }
 
+void CVent::Initialize_Object(void)
+{
+
+}
+
 _int CVent::Update_Object(const _float& fTimeDelta)
 {
 	if (!m_bActive)
