@@ -59,14 +59,14 @@ _int CVent::Update_Object(const _float& fTimeDelta)
 		pObs->Update_Object(fTimeDelta);
 		if (pObs->Get_Transform()->Get_World()._43 < -10.f)
 		{
-			m_bDelayDeact = true;
+			++m_uDelayDeactNum;
 		}
 	}
-	if (m_bDelayDeact)
+	for (_uint i = 0; i < m_uDelayDeactNum; ++i)
 	{
-		m_bDelayDeact = false;
 		Deactivate_Obstacle();
 	}
+	m_uDelayDeactNum = 0;
 
 
 	m_fSummonTick += fTimeDelta;

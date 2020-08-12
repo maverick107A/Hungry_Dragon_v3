@@ -64,7 +64,7 @@ private:
 	_bool							m_bFull = false;
 	_float							m_fSummonTick = 0.f;
 	_float							m_fSummonTime = 1.f;
-	_bool							m_bDelayDeact = false;
+	_uint							m_uDelayDeactNum = 0;
 public:
 	static CVent*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 private:
