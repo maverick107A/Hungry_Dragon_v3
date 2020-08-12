@@ -16,7 +16,7 @@ public:
 	//함수 포인터로 넘겨줄 _functionPointer가 특정 클래스의 멤버 함수일 경우 스태틱이어야 한다.
 	//GameObject간의 비교가 필요한 경우(ex) 총알과의 몬스터의 충돌 판정) _callerObj에 비교할 대상을 넣어 주면 된다.
 	CGameObject*	Get_Object(const _tchar* _pObjTag, bool(*_functionPointer)(CGameObject* _caller, CGameObject* _callee), CGameObject* _callerObj);
-	CComponent*		Get_Component(CGameObject* _findObj,const _tchar* pComponentTag, COMPONENTID eID);
+	CComponent*		Get_Component(const _tchar* pObjTag,const _tchar* pComponentTag, COMPONENTID eID);
 	_vec3			Get_PlayerPos() { return m_vPlayerPos; }
 
 	void			Set_Address(void);
