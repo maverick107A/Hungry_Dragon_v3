@@ -86,13 +86,13 @@ void CCameraMain::Shock_Cam()
 
 
 		if (m_bCheck)
-			m_vShock.x = 10.f;
+			m_vShock.x = 0.5f;
 		else
-			m_vShock.x = -10.f;
-		m_bCheck = false;
+			m_vShock.x = -0.5f;
+		m_bCheck = !m_bCheck;
 
 
-		if (m_iTime > 30)
+		if (m_iTime > 5)
 		{
 			m_bShock = false;
 			m_vShock.x = 0.f;
