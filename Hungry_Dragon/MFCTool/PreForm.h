@@ -1,8 +1,9 @@
 #pragma once
 #include "afxwin.h"
 #include "afxeditbrowsectrl.h"
+#include "afxcolorbutton.h"
 
-
+#include "MFCToolView.h"
 
 // CPreForm Æû ºäÀÔ´Ï´Ù.
 
@@ -40,11 +41,19 @@ public:
 	afx_msg void OnBnClickedVertexDel();
 	afx_msg void OnBnClickedMeshSave();
 	afx_msg void OnBnClickedMeshLoad();
+	afx_msg void OnBnClickedSetPreview();
+	afx_msg void OnBnClickedBtnWire();
+	afx_msg void OnBnClickedBtnCul();
 
 	void Erase_Index(int _delIndex);
 	void Add_VertexToListBox();
 	void Add_IndexToListBox();
+	void Set_ToolView(CMFCToolView* _toolView);
 	bool Check_Index16(Engine::INDEX16 _index,int _vertexNum);
+	void Change_ColorMFCToDirect(DWORD* _mfc, DWORD* _direct);
+	void Change_ColorDirectToMFC(DWORD* _direct, DWORD* _mfc);
+
+	list<Engine::VTXCOL> Get_Vertex();
 
 	CListBox				m_vertexListBox;
 	Engine::_int			m_vertexCount=0;
@@ -52,6 +61,7 @@ public:
 	CEdit					m_VertexPosX;
 	CEdit					m_VertexPosY;
 	CEdit					m_VertexPosZ;
+	CMFCColorButton			m_colorButton;
 
 	CListBox				m_indexListBox;
 	Engine::_int			m_indexCount=0;
@@ -59,7 +69,10 @@ public:
 	CEdit					m_Index0;
 	CEdit					m_Index1;
 	CEdit					m_Index2;
-	
+	CMFCToolView*			m_pToolView;
+
+	CButton					m_bWire;
+	CButton					m_bCul;
 };
 
 

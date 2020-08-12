@@ -201,6 +201,7 @@ call CopyResources.bat</Command>
     <ClCompile Include="..\Code\UnitSector.cpp" />
     <ClCompile Include="..\Code\VentCube.cpp" />
     <ClCompile Include="..\Code\VIBuffer.cpp" />
+    <ClCompile Include="..\Code\VICustom.cpp" />
     <ClCompile Include="..\Code\VolcanoLand.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -238,6 +239,7 @@ call CopyResources.bat</Command>
     <ClInclude Include="..\Code\UnitSector.h" />
     <ClInclude Include="..\Code\VentCube.h" />
     <ClInclude Include="..\Code\VIBuffer.h" />
+    <ClInclude Include="..\Code\VICustom.h" />
     <ClInclude Include="..\Code\VolcanoLand.h" />
   </ItemGroup>
   <ItemGroup>

@@ -19,7 +19,7 @@ CObstacle::~CObstacle(void)
 HRESULT CObstacle::Ready_Object(void)
 {
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
-	m_fForwardSpeed = 100.f;
+	m_fForwardSpeed = 400.f;
 	return S_OK;
 }
 
