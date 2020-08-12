@@ -44,7 +44,7 @@ void CObstacle::Render_Object(void)
 	Engine::CGameObject::Update_Object(float(0));
 	//여기까지 레이트업데이트에 넣어줘야함
 	
-	//m_pTex->Set_Texture();
+	m_pTex->Set_Texture();
 	
 	m_pTransform->Set_Transform(m_pGraphicDev);
 	m_pBufferCom->Render_Buffer();

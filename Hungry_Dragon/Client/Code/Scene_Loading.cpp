@@ -174,14 +174,6 @@ _uint CScene_Loading::Loading_ForStage(void)
 		L"../../Asset/Environment/Passage.png"),
 		E_FAIL);
 
-	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
-		RESOURCE_STAGE,
-		L"TEX_OBS",
-		Engine::TEX_NORMAL,
-		L"../../Asset/Environment/Passage_Through.png"),
-		E_FAIL);
-
-
 	lstrcpy(m_szFinish, L"Loading Complete");
 
 	m_bFinish = true;

@@ -172,11 +172,7 @@ namespace Engine
 
 	}FRAME;
 
-	typedef struct tagLay
-	{
-		_vec3 vOrigin;
-		_vec3 vDirection;
-	}LAY;
+
 }
 
 

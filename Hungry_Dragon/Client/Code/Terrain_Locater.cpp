@@ -72,8 +72,7 @@ HRESULT CTerrain_Locater::Add_Component(void)
 	for (int i = 0; i < 50; ++i)
 	{
 		m_pParts[i] = CTerrain_Parts::Create(m_pGraphicDev);
-		wsprintf(szBuf, L"../../Asset/Terrain/Korea/KoreaHeight_%.2d.bmp", i + 1);
-		//wsprintf(szBuf, L"../../Asset/Terrain/Australia/Australia_%.2d.bmp", i + 1);
+		wsprintf(szBuf, L"../../Asset/Terrain/Korea/KoreaHeight_%.2d.bmp", i+1);
 		m_pParts[i]->Set_HeightMap(szBuf);
 		m_pParts[i]->Set_Trans(_vec3(12800.f*((i%5)-2),0.f, -12800.f*((i/5)-5)));
 	}

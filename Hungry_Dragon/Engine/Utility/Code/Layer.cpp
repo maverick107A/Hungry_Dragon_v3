@@ -262,12 +262,7 @@ CGameObject * CLayer::Get_Object(const _tchar * _pObjTag, bool(*_functionPointer
 	return nullptr;
 }
 
-CComponent* Engine::CLayer::Get_Component(const _tchar* pObjTag,const _tchar* pComponentTag, COMPONENTID eID)
+CComponent* Engine::CLayer::Get_Component(CGameObject* _findObj,const _tchar* pComponentTag, COMPONENTID eID)
 {
-	auto	iter = find_if(m_mapObject.begin(), m_mapObject.end(), CTag_Finder(pObjTag));
-
-	if (iter == m_mapObject.end())
-		return nullptr;
-
-	return (iter->second).front()->Get_Component(pComponentTag, eID);
+	return _findObj->Get_Component(pComponentTag, eID);
 }

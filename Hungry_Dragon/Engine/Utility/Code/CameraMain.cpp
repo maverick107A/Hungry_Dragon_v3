@@ -77,26 +77,3 @@ void CCameraMain::Ride_Terrain(CBaseLand* _pTerrain)
 		}
 	}
 }
-
-void CCameraMain::Shock_Cam()
-{
-	if (m_bShock)
-	{
-		m_iTime += 1;
-
-
-		if (m_bCheck)
-			m_vShock.x = 0.5f;
-		else
-			m_vShock.x = -0.5f;
-		m_bCheck = !m_bCheck;
-
-
-		if (m_iTime > 5)
-		{
-			m_bShock = false;
-			m_vShock.x = 0.f;
-			m_iTime = 0;
-		}
-	}
-}

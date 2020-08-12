@@ -24,15 +24,15 @@ HRESULT CPlayerUI::Ready_Object(void)
 
 	D3DXCreateTextureFromFile(
 		m_pGraphicDev,
-		L"../../Asset/Bar/Red.png",
+		L"../Bin/Resource/Texture/Bar/Red.png",
 		&m_pRedTex);
 	D3DXCreateTextureFromFile(
 		m_pGraphicDev,
-		L"../../Asset/Bar/Green.png",
+		L"../Bin/Resource/Texture/Bar/Green.png",
 		&m_pGreenTex);
 	D3DXCreateTextureFromFile(
 		m_pGraphicDev,
-		L"../../Asset/Bar/Yellow.png",
+		L"../Bin/Resource/Texture/Bar/Yellow.png",
 		&m_pYellowTex);
 
 	return S_OK;

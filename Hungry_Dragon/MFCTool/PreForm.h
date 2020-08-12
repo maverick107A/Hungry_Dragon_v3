@@ -52,7 +52,6 @@ public:
 	bool Check_Index16(Engine::INDEX16 _index,int _vertexNum);
 	void Change_ColorMFCToDirect(DWORD* _mfc, DWORD* _direct);
 	void Change_ColorDirectToMFC(DWORD* _direct, DWORD* _mfc);
-	void Pick_Vertex(int _pickIndex);
 
 	list<Engine::VTXCOL> Get_Vertex();
 

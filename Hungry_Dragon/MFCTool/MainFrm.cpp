@@ -88,6 +88,5 @@ BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext) {
 	m_MainSplitter.CreateView(0, 0, RUNTIME_CLASS(CMFCToolView), CSize(WINCX-450, WINCY), pContext);
 	m_MainSplitter.CreateView(0, 1, RUNTIME_CLASS(CPreForm), CSize(450, WINCY), pContext);
 	static_cast<CPreForm*>(m_MainSplitter.GetPane(0, 1))->Set_ToolView(static_cast<CMFCToolView*>(m_MainSplitter.GetPane(0, 0)));
-	static_cast<CMFCToolView*>(m_MainSplitter.GetPane(0, 0))->Set_Preform(static_cast<CPreForm*>(m_MainSplitter.GetPane(0, 1)));
 	return true;
 }
