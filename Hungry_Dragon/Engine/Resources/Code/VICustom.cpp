@@ -21,6 +21,7 @@ CVICustom::CVICustom(const CVICustom& rhs)
 	{
 		m_listIndex.emplace_back((*iter_idx));
 	}
+
 }
 
 CVICustom::~CVICustom(void)

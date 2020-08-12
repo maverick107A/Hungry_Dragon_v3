@@ -98,6 +98,7 @@ void CMFCToolView::OnDraw(CDC* /*pDC*/)
 	m_pTransformWorld->Update_Component(0.f);
 
 	m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+
 	m_pTransformWorld->Set_Transform(m_pGraphicDev);
 	
 	m_pBufferLand->Render_Buffer();

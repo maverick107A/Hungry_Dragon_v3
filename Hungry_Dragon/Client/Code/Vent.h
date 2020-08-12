@@ -23,6 +23,7 @@ private:
 
 public:
 	virtual HRESULT Ready_Object(void) override;
+	virtual void Initialize_Object(void);
 	virtual Engine::_int Update_Object(const Engine::_float& fTimeDelta) override;
 	virtual void Render_Object(void) override;
 	
@@ -48,6 +49,7 @@ private:
 	Engine::CVentCube*		m_pBufferCom = nullptr;
 	Engine::CTransform*		m_pTransform = nullptr;
 	Engine::CTransform*		m_pTransformBeyond = nullptr;
+	Engine::CTransform*		m_pPlayerTrans = nullptr;
 	Engine::CTexture*		m_pTex = nullptr;
 	float					m_fForwardSpeed = 1.f;
 	float					m_fUpdateTick = 0.f;
@@ -64,7 +66,7 @@ private:
 	_bool							m_bFull = false;
 	_float							m_fSummonTick = 0.f;
 	_float							m_fSummonTime = 1.f;
-	_bool							m_bDelayDeact = false;
+	_uint							m_uDelayDeactNum = 0;
 public:
 	static CVent*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 private:

@@ -66,7 +66,7 @@ private:
 	Engine::CCamera*		m_pCamera=nullptr;
 	CPreForm*				m_pPreform=nullptr;
 	bool					m_bWire=false;
-	bool					m_bCull=true;
+	bool					m_bCull = false;
 	vector<Engine::VTXCOL>	m_vecVertex;
 	list<Engine::INDEX16>	m_listIndex;
 	list<Engine::_vec3>		m_listNormal;
