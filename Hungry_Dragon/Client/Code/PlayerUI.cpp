@@ -52,7 +52,6 @@ int CPlayerUI::Update_Object(const float& fTimeDelta)
 
 void CPlayerUI::Render_Object(void)
 {
-	return;
 	//if (GetAsyncKeyState(VK_LBUTTON))
 	//{
 	//	TCHAR szBuff[32] = L"";
@@ -94,9 +93,9 @@ void CPlayerUI::Render_Object(void)
 
 void CPlayerUI::Free(void)
 {
-	//m_pYellowTex->Release();
-	//m_pRedTex->Release();
-	//m_pGreenTex->Release();
+	m_pYellowTex->Release();
+	m_pRedTex->Release();
+	m_pGreenTex->Release();
 	m_pSprite->Release();
 	Engine::CGameObject::Free();
 }
