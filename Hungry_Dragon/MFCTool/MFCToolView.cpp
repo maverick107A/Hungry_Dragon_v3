@@ -96,6 +96,8 @@ void CMFCToolView::OnDraw(CDC* /*pDC*/)
 	Engine::_vec3 posForLand = Engine::_vec3(-50.f, 0.f, -50.f);
 	m_pTransformWorld->Add_Trans(&posForLand);
 	m_pTransformWorld->Update_Component(0.f);
+
+	m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 	m_pTransformWorld->Set_Transform(m_pGraphicDev);
 	
 	m_pBufferLand->Render_Buffer();
@@ -178,7 +180,7 @@ void CMFCToolView::OnInitialUpdate() {
 	m_pGraphicDev->SetRenderState(D3DRS_LIGHTING, FALSE);
 
 	Engine::Reserve_ContainerSize(RESOURCE_END);
-	Engine::Ready_Buffer(m_pGraphicDev, RESOURCE_STATIC, L"Test_Map", Engine::BUFFER_KOREA,2,2,100);
+	Engine::Ready_Buffer(m_pGraphicDev, RESOURCE_STATIC, L"Test_Map", Engine::BUFFER_KOREA,101,101,1);
 
 	m_pBufferLand = static_cast<Engine::CVIBuffer*>(Engine::Clone(RESOURCE_STATIC, L"Test_Map"));
 	m_pBuffer = static_cast<Engine::CVIBuffer*>(Engine::Create_Preview(m_pGraphicDev, L"../Asset/VIMesh/Test.dat"));
