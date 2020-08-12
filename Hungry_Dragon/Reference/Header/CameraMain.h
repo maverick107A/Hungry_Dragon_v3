@@ -37,7 +37,7 @@ protected:
 	//float			m_fAngleXReal = 0.f;
 	//float			m_fAngleYReal = 0.f;
 	//float			m_fAngleZReal = 0.f;
-	float			m_fCameraDis = 15.f;
+	float			m_fCameraDis = 25.f;
 	float			m_fCameraDisSpeed = 0.5f;
 	_vec3			m_vAngle = {0.f,0.f,0.f};
 	_vec3			m_vAfterAngle = {0.f,0.f,0.f};
