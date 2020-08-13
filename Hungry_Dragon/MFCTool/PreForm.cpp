@@ -126,6 +126,17 @@ void CPreForm::OnLbnSelchangeVertexList() {
 	DWORD temp;
 	Change_ColorDirectToMFC(&(*iter_find).dwColor, &temp);
 	m_colorButton.SetColor(temp);
+
+	if (m_pickIndex != -1)
+	{
+		GiveBack_Color(m_pickIndex);
+	}
+
+	m_pickIndex = index;
+	m_pickColor = (*iter_find).dwColor;
+	(*iter_find).dwColor = (DWORD)16711935;
+
+	OnBnClickedSetPreview();
 }
 
 //이미 존재하는 버텍스의 값을 변경하고 저장
@@ -153,7 +164,7 @@ void CPreForm::OnBnClickedVertexSave() {
 	(*iter_find).vPosition.z = (float)_ttof(tempString);
 
 	DWORD temp = m_colorButton.GetColor();
-	Change_ColorMFCToDirect(&temp, &(*iter_find).dwColor);
+	Change_ColorMFCToDirect(&temp, &m_pickColor);
 }
 
 
@@ -389,6 +400,21 @@ void CPreForm::Change_ColorDirectToMFC(DWORD * _direct, DWORD * _mfc)
 	*_mfc |= Red;
 }
 
+void CPreForm::GiveBack_Color(int _index)
+{
+	if (_index >= (int)m_listVertex.size())
+	{
+		return;
+	}
+
+	list<Engine::VTXCOL>::iterator iter_vtx = m_listVertex.begin();
+	for (int i = 0; i != _index; ++i, ++iter_vtx)
+	{
+	}
+
+	(*iter_vtx).dwColor = m_pickColor;
+}
+
 list<Engine::VTXCOL> CPreForm::Get_Vertex()
 {
 	return m_listVertex;
@@ -408,6 +434,8 @@ void CPreForm::OnBnClickedVertexDel()
 	{
 		return;
 	}
+
+	m_pickIndex = -1;
 
 	m_vertexListBox.ResetContent();
 	for (int i = 0; i<m_vertexCount; ++i)

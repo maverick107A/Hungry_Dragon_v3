@@ -54,6 +54,8 @@ inline CResources * Create_Preview(LPDIRECT3DDEVICE9 pGraphicDev, LPCTSTR _addre
 
 inline CResources * Create_Preview(LPDIRECT3DDEVICE9 pGraphicDev, list<VTXCOL> _listVertex, list<INDEX16> _listIndex)
 {
+	if ((int)_listIndex.size() <= 0)
+		return nullptr;
 	return CVICustom::Create(pGraphicDev, _listVertex, _listIndex);
 }
 

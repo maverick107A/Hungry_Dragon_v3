@@ -216,8 +216,7 @@ void CMFCToolView::OnTimer(UINT_PTR nIDEvent) {
 	_vec3 rightVec;
 	_vec3 upVec;
 
-	if (m_pBuffer != nullptr)
-		m_pTransformCamera->Update_Component(0.f);
+	m_pTransformCamera->Update_Component(0.f);
 	m_pTransformCamera->Get_Info(Engine::INFO_POS, &posVec);
 
 	m_pCamera->Update_CameraMFC(m_pGraphicDev, posVec, &lookVec, &upVec);

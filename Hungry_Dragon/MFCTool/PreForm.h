@@ -52,6 +52,7 @@ public:
 	bool Check_Index16(Engine::INDEX16 _index,int _vertexNum);
 	void Change_ColorMFCToDirect(DWORD* _mfc, DWORD* _direct);
 	void Change_ColorDirectToMFC(DWORD* _direct, DWORD* _mfc);
+	void GiveBack_Color(int _index);
 
 	list<Engine::VTXCOL> Get_Vertex();
 
@@ -73,6 +74,9 @@ public:
 
 	CButton					m_bWire;
 	CButton					m_bCul;
+
+	int						m_pickIndex = -1;
+	Engine::_ulong			m_pickColor;
 };
 
 
