@@ -65,13 +65,23 @@ void Engine::CScene::Free(void)
 	Safe_Release(m_pGraphicDev);
 }
 
-CComponent* Engine::CScene::Get_Component(const _tchar* pLayerTag, const _tchar* pObjTag, Engine::CGameObject* _pObj, const _tchar* pComponentTag, COMPONENTID eID)
+CComponent* Engine::CScene::Get_Component(const _tchar* pLayerTag, const _tchar* pObjTag, const _tchar* pComponentTag, COMPONENTID eID)
 {
 	auto	iter = find_if(m_mapLayer.begin(), m_mapLayer.end(), CTag_Finder(pLayerTag));
 
 	if (iter == m_mapLayer.end())
 		return nullptr;
 
-	return iter->second->Get_Component(_pObj, pComponentTag, eID);
+	return iter->second->Get_Component(pObjTag, pComponentTag, eID);
+}
+
+CGameObject * CScene::Get_Object(const _tchar * pLayerTag, const _tchar * pObjTag)
+{
+	auto	iter = find_if(m_mapLayer.begin(), m_mapLayer.end(), CTag_Finder(pLayerTag));
+
+	if (iter == m_mapLayer.end())
+		return nullptr;
+
+	return iter->second->Get_Object(pObjTag);
 }
 

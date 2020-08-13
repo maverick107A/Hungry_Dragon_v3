@@ -56,11 +56,18 @@ void Engine::CManagement::Free(void)
 	Safe_Release(m_pScene);
 }
 
-CComponent* Engine::CManagement::Get_Component(const _tchar* pLayerTag, const _tchar* pObjTag, CGameObject* _pObj ,const _tchar* pComponentTag, COMPONENTID eID)
+CComponent* Engine::CManagement::Get_Component(const _tchar* pLayerTag, const _tchar* pObjTag, const _tchar* pComponentTag, COMPONENTID eID)
 {
 	if (nullptr == m_pScene)
 		return nullptr;
 
-	return m_pScene->Get_Component(pLayerTag, pObjTag, _pObj ,pComponentTag, eID);
+	return m_pScene->Get_Component(pLayerTag, pObjTag, pComponentTag, eID);
 }
 
+CGameObject * CManagement::Get_Object(const _tchar * pLayerTag, const _tchar * pObjTag)
+{
+	if (nullptr == m_pScene)
+		return nullptr;
+
+	return m_pScene->Get_Object(pLayerTag, pObjTag);
+}

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Vent.h"
+#include "PlayerMain.h"
 
 #include "Export_Function.h"
 
@@ -36,7 +37,8 @@ HRESULT CVent::Ready_Object(void)
 
 void CVent::Initialize_Object(void)
 {
-
+	m_pPlayerTrans = static_cast<Engine::CTransform*>(Engine::Get_Component(L"GameLogic", L"TestPlayer", L"Com_Transform",Engine::ID_DYNAMIC));
+	m_pPlayer = static_cast<Engine::CPlayerMain*>(Engine::Get_Object(L"GameLogic", L"TestPlayer"));
 }
 
 _int CVent::Update_Object(const _float& fTimeDelta)
@@ -69,6 +71,49 @@ _int CVent::Update_Object(const _float& fTimeDelta)
 		if (pObs->Get_Transform()->Get_World()._43 < -10.f)
 		{
 			++m_uDelayDeactNum;
+			//충돌처리
+			int i = 0;
+			if (pObs->Get_Transform()->m_vInfo[Engine::INFO_POS].x == 10.f)
+				i = 0;
+			else if (pObs->Get_Transform()->m_vInfo[Engine::INFO_POS].x == -10.f)
+				i = 1;
+			else if (pObs->Get_Transform()->m_vInfo[Engine::INFO_POS].y == 10.f)
+				i = 2;
+			else if (pObs->Get_Transform()->m_vInfo[Engine::INFO_POS].y == -10.f)
+				i = 3;
+			else
+				i = 4;
+			switch(i)
+			{
+			case 0:
+				if (m_pPlayerTrans->m_vInCamPos.x > 3.5)
+					m_pPlayer->Get_Camera()->Set_Shock();
+				break;
+			case 1:
+				if (m_pPlayerTrans->m_vInCamPos.x < -3.5)
+					m_pPlayer->Get_Camera()->Set_Shock();
+				break;
+			case 2:
+				if (m_pPlayerTrans->m_vInCamPos.y > 3.5)
+					m_pPlayer->Get_Camera()->Set_Shock();
+				break;
+			case 3:
+				if (m_pPlayerTrans->m_vInCamPos.y < -3.5)
+					m_pPlayer->Get_Camera()->Set_Shock();
+				break;
+			case 4:
+				if (pObs->Get_Transform()->m_vAngle.x)
+				{
+					if (abs(m_pPlayerTrans->m_vInCamPos.x) < 3.5)
+						m_pPlayer->Get_Camera()->Set_Shock();
+				}
+				else
+				{
+					if (abs(m_pPlayerTrans->m_vInCamPos.y) < 3.5)
+						m_pPlayer->Get_Camera()->Set_Shock();
+				}
+				break;
+			}
 		}
 	}
 	for (_uint i = 0; i < m_uDelayDeactNum; ++i)

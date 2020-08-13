@@ -21,6 +21,14 @@ HRESULT Engine::CCaveCamera::Ready_Camera(void)
 
 _int Engine::CCaveCamera::Update_Camera(const _float& fTimeDelta, LPDIRECT3DDEVICE9& pGraphicDev, _vec3 _vPos, float* _fAngleX, float* _fAngleY, CBaseLand* _pTerrain)
 {
+	if (GetAsyncKeyState(VK_F2) & 0x0001)
+	{
+		m_bShock = true;
+		m_fShockAngle = 5.f;
+	}
+
+	Shock_Cam();
+
 	if (GetAsyncKeyState(VK_F1) & 0x0001)
 		m_bLock = !m_bLock;
 
@@ -47,7 +55,7 @@ void CCaveCamera::Move_Camera(LPDIRECT3DDEVICE9 & pGraphicDev, _vec3 _vPos, floa
 
 	float DeltaAngleX = m_vAfterAngle.x - m_vAngle.x;
 	float DeltaAngleY = m_vAfterAngle.y - m_vAngle.y;
-	float DeltaAngleZ = m_vAfterAngle.z - m_vAngle.z;
+	float DeltaAngleZ = m_vAfterAngle.z - m_vAngle.z + m_fShockAngle;
 
 	m_vAngle.x += DeltaAngleX*0.05f;
 	m_vAngle.y += DeltaAngleY*0.05f;

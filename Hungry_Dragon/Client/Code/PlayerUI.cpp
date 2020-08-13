@@ -24,15 +24,15 @@ HRESULT CPlayerUI::Ready_Object(void)
 
 	D3DXCreateTextureFromFile(
 		m_pGraphicDev,
-		L"../Bin/Resource/Texture/Bar/Red.png",
+		L"../../Asset/Bar/Red.png",
 		&m_pRedTex);
 	D3DXCreateTextureFromFile(
 		m_pGraphicDev,
-		L"../Bin/Resource/Texture/Bar/Green.png",
+		L"../../Asset/Bar/Green.png",
 		&m_pGreenTex);
 	D3DXCreateTextureFromFile(
 		m_pGraphicDev,
-		L"../Bin/Resource/Texture/Bar/Yellow.png",
+		L"../../Asset/Bar/Yellow.png",
 		&m_pYellowTex);
 
 	return S_OK;
@@ -52,7 +52,6 @@ int CPlayerUI::Update_Object(const float& fTimeDelta)
 
 void CPlayerUI::Render_Object(void)
 {
-	return;
 	//if (GetAsyncKeyState(VK_LBUTTON))
 	//{
 	//	TCHAR szBuff[32] = L"";
@@ -94,9 +93,9 @@ void CPlayerUI::Render_Object(void)
 
 void CPlayerUI::Free(void)
 {
-	//m_pYellowTex->Release();
-	//m_pRedTex->Release();
-	//m_pGreenTex->Release();
+	m_pYellowTex->Release();
+	m_pRedTex->Release();
+	m_pGreenTex->Release();
 	m_pSprite->Release();
 	Engine::CGameObject::Free();
 }
