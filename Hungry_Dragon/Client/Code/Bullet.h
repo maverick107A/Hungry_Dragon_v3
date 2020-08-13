@@ -33,6 +33,7 @@ public:
 private:
 	HRESULT		Add_Component(void);
 	void		Key_Input(const float& fTimeDelta);
+
 protected:
 	Engine::CTransform*			m_pTransform = nullptr;
 	Engine::CTexture_Cube*		m_pBufferCom = nullptr;
@@ -41,6 +42,7 @@ protected:
 	D3DXVECTOR3					vPlayerPos;
 	int							m_iEvent = 0;
 	float						 m_fDistance;
+
 public:
 	static CBullet*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 public:

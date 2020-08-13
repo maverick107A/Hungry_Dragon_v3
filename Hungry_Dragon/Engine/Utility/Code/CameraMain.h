@@ -16,6 +16,7 @@ protected:
 public:
 	HRESULT			Ready_Camera(void) { return 0; }
 	virtual _int	Update_Camera(const _float& _fTimeDelta, LPDIRECT3DDEVICE9& _pGraphicDev, _vec3 _vPos, float* _fAngleX, float* _fAngleY, CBaseLand* _pTerrain) { return 0; }
+	virtual _int	Update_Camera(const _float& _fTimeDelta, LPDIRECT3DDEVICE9& _pGraphicDev, _vec3 _vPos, _vec3* _vLook, _vec3* _vUp, CBaseLand* _pTerrain) { return 0; }
 
 public:
 	_vec3			Get_Pos() { return m_vPos; }

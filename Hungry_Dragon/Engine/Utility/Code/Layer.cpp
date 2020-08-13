@@ -57,6 +57,11 @@ _int Engine::CLayer::Update_Layer(const _float& fTimeDelta)
 				CObjectPool::GetInstance()->Add_Object_Pool(*iter_obj, OBJID::NORMAL_BULLET);
 				iter_obj = (*iter).second.erase(iter_obj);
 			}
+			else if (iEnd == PLAYERBULLET_DEAD)
+			{
+				Safe_Release(*iter_obj);
+				iter_obj = (*iter).second.erase(iter_obj);
+			}
 			else if (0 == iEnd)
 			{
 				++iter_obj;

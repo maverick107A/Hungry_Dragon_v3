@@ -30,6 +30,7 @@ namespace Engine
 	typedef		D3DXMATRIX				_matrix;
 
 #define OBJ_NOEVENT		0
+#define PLAYERBULLET_DEAD 14
 #define MONSTER_DEAD	15
 #define BULLET_DEAD		16
 
