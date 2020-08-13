@@ -29,6 +29,12 @@ private:
 
 public:
 	static CGolem*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
+
+private:
+	D3DXVECTOR3 m_vBodyPos;
+
+	D3DXVECTOR3 m_vLeftArmPos;
+	D3DXVECTOR3 m_vRightArmPos;
 private:
 	virtual void Free(void) override;
 

@@ -45,7 +45,6 @@ int Engine::CMonsterMain::Update_Object(const float & fTimeDelta)
 		else if (m_eState != MONSTER_DYING)
 		{
 			m_eState = MONSTER_IDLE;
-
 		}
 	}
 	if (m_fDistance > 7000)
@@ -63,11 +62,11 @@ int Engine::CMonsterMain::Update_Object(const float & fTimeDelta)
 	//	Dead_Monster(fTimeDelta);
 	//
 	//}
-
-
-	D3DXVECTOR3	vParticlePos;
-	m_pTransform->Get_Info(Engine::INFO_POS, &vParticlePos);
-	Engine::Particle_Create(D3DXVECTOR3(0.f , 10.f , 0.f));
+	//
+	//
+	//D3DXVECTOR3	vParticlePos;
+	//m_pTransform->Get_Info(Engine::INFO_POS, &vParticlePos);
+	//Engine::Particle_Create(D3DXVECTOR3(0.f , 10.f , 0.f));
 	
 	State_Change();
 
@@ -85,8 +84,14 @@ void Engine::CMonsterMain::Render_Object(void)
 
 void Engine::CMonsterMain::LateUpdate_Object(const float & fTimeDelta)
 {
+
+
+	m_vPlayerPos = ((Engine::CLayer*)(this->Get_Parent()))->Get_PlayerPos();
 	if (m_eState == MONSTER_DEACTIVATE)
+	{
 		m_pTransform->Set_Trans(&m_vPlayerPos);
+		m_pTransform->Update_Component(fTimeDelta);
+	}
 }
 
 void Engine::CMonsterMain::State_Change()
@@ -100,22 +105,17 @@ void Engine::CMonsterMain::State_Change()
 void Engine::CMonsterMain::Dead_Monster(const float & fTimeDelta)
 {
 	m_pTransform->Set_Trans(&m_vPlayerPos);
-	m_pTransform->Set_Add_Scale(-0.01f);
-	m_prefScale = m_pTransform->m_vScale.x;
-	m_fParticle_Speed += fTimeDelta;
+	m_pTransform->Set_Scale(m_fScale);
 
-	if (m_fParticle_Speed > 0.1f)
-	{
-		// 파티클 매니져
-		//
-		//
+	//m_fParticle_Speed += fTimeDelta;
 
-
-		m_fParticle_Speed = 0;
-	}
+	//if (m_fParticle_Speed > 0.1f)
+	//{
+	//	m_fParticle_Speed = 0;
+	//}
 
 
-	if (m_pTransform->m_vScale.x < 0 || m_pTransform->m_vScale.y < 0 || m_pTransform->m_vScale.z < 0)
+	if (m_fMonster_HP < 0)
 	{
 		m_fParticle_Speed = 0;
 		m_iEvent = MONSTER_DEAD;
@@ -186,6 +186,9 @@ float Engine::CMonsterMain::Ride_Terrain()
 void Engine::CMonsterMain::Kill_Monster(const float & fTimeDelta)
 {
 	m_eState = MONSTER_DEACTIVATE;
+	m_fMonster_HP -= m_fDamaged;
+	m_fScale = m_fMonster_HP / m_fMonster_MaxHP;
+	m_fScale = m_fMaxScale * m_fScale;
 	Dead_Monster(fTimeDelta);
 
 }

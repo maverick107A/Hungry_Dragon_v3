@@ -13,7 +13,7 @@ class CResources;
 class CTerrain;
 class CBaseLand;
 class CAtkPart;
-
+class CVICustom;
 END
 
 class CMonster : public Engine::CGameObject
@@ -43,7 +43,7 @@ protected:
 	Engine::CTexture*			m_pTextureCom = nullptr;
 	Engine::CBaseLand*			m_pTerrain = nullptr;
 	Engine::CResources*			m_pParticle = nullptr;
-
+	Engine::CVICustom*			m_pBufferMeshCom = nullptr;
 	D3DXVECTOR3					m_vLook;
 	D3DXVECTOR3					vPlayerPos;
 	int							m_iEvent = 0;

@@ -110,6 +110,19 @@ _uint CScene_Loading::Loading_ForStage(void)
 		Engine::BUFFER_CUBEDRA),
 		E_FAIL);
 
+
+	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"BUFFER_ROCKMESH",
+		Engine::BUFFER_ROCKMESH),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"BUFFER_DIAMESH",
+		Engine::BUFFER_DIAMESH),
+		E_FAIL);
+
 	lstrcpy(m_szFinish, L"Texture Loading............");
 
 	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,

@@ -76,16 +76,16 @@ int CBat_Monster::Update_Object(const float & fTimeDelta)
 
 void CBat_Monster::Render_Object(void)
 {	
-	//m_pTransform->Set_Transform(m_pGraphicDev);
+	m_pTransform->Set_Transform(m_pGraphicDev);
 	//
 	//m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 	//
 	//m_pGraphicDev->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	//m_pGraphicDev->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
 	//
-	//m_pTextureCom->Set_Texture((int)m_tFrame.fStartFrame);
-	//m_pBufferBoradCom->Render_Buffer();
-	//Engine::CMonsterMain::Render_Object();
+	m_pTextureCom->Set_Texture((int)m_tFrame.fStartFrame);
+	m_pBufferBoradCom->Render_Buffer();
+	Engine::CMonsterMain::Render_Object();
 	//
 	//m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 

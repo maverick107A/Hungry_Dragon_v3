@@ -102,7 +102,12 @@ HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 		break;
 	case BUFFER_OBSTACLECUBE:
 		pResources = CObstacleCube::Create(pGraphicDev);
-
+		break;
+	case BUFFER_DIAMESH:
+		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/Diamond.dat");
+		break;
+	case BUFFER_ROCKMESH:
+		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/Rock12.dat");
 		break;
 	}
 

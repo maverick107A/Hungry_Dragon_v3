@@ -14,6 +14,7 @@ class CResources;
 class CTerrain;
 class CBaseLand;
 class CAtkPart;
+class CVICustom;
 
 class ENGINE_DLL CMonsterMain : public Engine::CGameObject
 {
@@ -50,8 +51,7 @@ private:
 protected:
 	Engine::CTexture_Cube*		m_pBufferCubeCom = nullptr;
 	Engine::CMonsterBoard*		m_pBufferBoradCom = nullptr;
-
-	
+	Engine::CVICustom*			m_pBufferMeshCom = nullptr;
 	Engine::CTexture*			m_pTextureCom = nullptr;
 	Engine::CBaseLand*			m_pTerrain = nullptr;
 	Engine::CResources*			m_pParticle = nullptr;
@@ -60,17 +60,21 @@ protected:
 	D3DXVECTOR3					vPlayerPos;
 	int							m_iEvent = 0;
 
-	FRAME								m_tFrame;
-	MONSTERSTATE						m_preState;
-	MONSTERSTATE						m_eState;
+	FRAME						m_tFrame;
+	MONSTERSTATE				m_preState;
+	MONSTERSTATE				m_eState;
 
 
 	float						m_fParticle_Speed = 0;
 	float						m_fPlayerDistance;
 	float						m_fDistance;
 	float						m_fSpeed;
+
+	float						m_fMonster_HP;
+	float						m_fMonster_MaxHP;
 	float						m_fScale;
-	float						m_prefScale;
+	float						m_fMaxScale;
+	float						m_fDamaged;
 
 public:
 	static CMonsterMain*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
