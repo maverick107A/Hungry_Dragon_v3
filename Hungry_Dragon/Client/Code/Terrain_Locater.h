@@ -6,7 +6,6 @@
 
 BEGIN(Engine)
 
-class CHeightCol;
 class CTransform;
 class CRenderer;
 class CBaseLand;
@@ -39,7 +38,6 @@ private:
 	HRESULT		Add_Component(void);
 
 private:
-	Engine::CHeightCol*		m_pDummy = nullptr;
 	Engine::CTransform*		m_pTransform = nullptr;
 	Engine::CTransform*		m_pPlayerTrans = nullptr;
 

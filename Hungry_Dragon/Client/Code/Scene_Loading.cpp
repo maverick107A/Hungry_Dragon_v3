@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Scene_Loading.h"
+#include "Ingame_Flow.h"
 
 USING(Engine)
 
@@ -194,6 +195,8 @@ _uint CScene_Loading::Loading_ForStage(void)
 		L"../../Asset/Environment/Passage_Through.png"),
 		E_FAIL);
 
+	CIngame_Flow::GetInstance()->Load_ForestTerrain();
+	CIngame_Flow::GetInstance()->Load_TreeList();
 
 	lstrcpy(m_szFinish, L"Loading Complete");
 

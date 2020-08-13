@@ -2,6 +2,7 @@
 #include "Tree_Locater.h"
 #include "Tree_Object.h"
 #include "Terrain_Locater.h"
+#include "Ingame_Flow.h"
 
 #include "Export_Function.h"
 
@@ -40,7 +41,7 @@ _int CTree_Locater::Update_Object(const _float& fTimeDelta)
 	
 	for(auto& iIdx : m_pTerrainLocater->Get_RenderIdx())
 	{
-		for (auto& pTree : m_arrRenderGroupIdx[iIdx])
+		for (auto& pTree : *m_hRenderGroupIdx[iIdx])
 		{
 			pTree->Update_Object(fTimeDelta);
 		}
@@ -61,7 +62,7 @@ void CTree_Locater::Render_Object(void)
 	//}
 	for (auto& iIdx : m_pTerrainLocater->Get_RenderIdx())
 	{
-		for (auto& pTree : m_arrRenderGroupIdx[iIdx])
+		for (auto& pTree : *m_hRenderGroupIdx[iIdx])
 		{
 			pTree->Render_Object();
 		}
@@ -70,41 +71,24 @@ void CTree_Locater::Render_Object(void)
 }
 
 void CTree_Locater::Locate_Tree()
-{
-	
-	
+{	
 	for (int i = 0; i < 50; ++i)
 	{
-		vector<int> vecHeight = m_pTerrainLocater->Get_PartsHeight(i);
-
-		for (int j = 0; j < 128; ++j)
-		{
-			for (int k = 0; k < 128; ++k)
-			{
-				if (5 > (rand() % 100))
-				{
-					CTree_Object* pTree = CTree_Object::Create(m_pGraphicDev);
-					// 인덱스 안맞음 고쳐야함
-					pTree->Set_Trans(_vec3(100*k - 12800*(2-(i%5)),vecHeight[j*129 + k] / 255.f*2560.f,100*j + 12800 * (5 - (i / 5))));
-					pTree->Set_Scale(10);
-					pTree->Update_Object(0);
-					m_arrRenderGroupIdx[i].emplace_back(pTree);
-				}
-			}
-		}
+		m_hRenderGroupIdx[i] = CIngame_Flow::GetInstance()->GetEntry_TreeList(i);
 	}
 }
 
 void CTree_Locater::Free(void)
 {
-	for (int i = 0; i < 50; ++i)
+	// 인게임 플로우가 알아서 관리
+	/*for (int i = 0; i < 50; ++i)
 	{
 		for (auto& pAuto : m_arrRenderGroupIdx[i])
 		{
 			Safe_Release(pAuto);
 		}
 		m_arrRenderGroupIdx[i].clear();
-	}
+	}*/
 
 
 

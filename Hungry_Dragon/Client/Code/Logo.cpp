@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Logo.h"
-#include "Scene_Forest.h"
-#include "Scene_Cave.h"
+#include "Ingame_Flow.h"
 
 #include "Export_Function.h"
 
@@ -34,13 +33,12 @@ _int CLogo::Update_Scene(const _float& fTimeDelta) {
 		if (GetAsyncKeyState(VK_RETURN) & 0x8000) {
 			Engine::CScene*		pScene = nullptr;
 
+			//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_PROTO);
+			//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_FOREST);
+			//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_CAVE);
+			CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_CLOUD);
 
-			//pScene = CScene_Proto::Create(m_pGraphicDev);
-
-			//pScene = CScene_Cave::Create(m_pGraphicDev);
-
-			pScene = CScene_Forest::Create(m_pGraphicDev);
-			NULL_CHECK_RETURN(pScene, -1);
+			
 			return -1;
 		}
 

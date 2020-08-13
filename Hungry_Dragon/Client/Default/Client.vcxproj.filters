@@ -139,9 +139,6 @@
     <Filter Include="02. GameObject\01. Stage\54.Obstacle">
       <UniqueIdentifier>{d1c627c0-451a-4602-8e16-35bb9e226584}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. GameObject\01. Stage\05.GameMgr">
-      <UniqueIdentifier>{b3e38d98-0162-4576-b32b-7bbadbdfe1a1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. GameObject\01. Stage\55.Terrain_Locater">
       <UniqueIdentifier>{469736e8-ed0a-45d7-88ea-3a633d005092}</UniqueIdentifier>
     </Filter>
@@ -162,6 +159,12 @@
     </Filter>
     <Filter Include="02. GameObject\01. Stage\02.Bullet\01. Beam">
       <UniqueIdentifier>{e8edd6b5-041f-4c84-b89f-950d3427bb4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97. WorkFlow">
+      <UniqueIdentifier>{f74e9fa3-e799-4f54-9417-49d36c6ca335}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. GameMgr">
+      <UniqueIdentifier>{b3e38d98-0162-4576-b32b-7bbadbdfe1a1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -244,7 +247,7 @@
       <Filter>01. Scene\03. Scene_Cave</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\GameMgr.h">
-      <Filter>02. GameObject\01. Stage\05.GameMgr</Filter>
+      <Filter>03. GameMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Cave.h">
       <Filter>02. GameObject\01. Stage\52.Cave</Filter>
@@ -281,6 +284,12 @@
     </ClInclude>
     <ClInclude Include="..\Code\Tree_Object.h">
       <Filter>02. GameObject\01. Stage\58. Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Ingame_Flow.h">
+      <Filter>97. WorkFlow</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Scene_Cloud.h">
+      <Filter>01. Scene\04. Scene_Cloud</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -339,7 +348,7 @@
       <Filter>02. GameObject\01. Stage\50.Ocean</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\GameMgr.cpp">
-      <Filter>02. GameObject\01. Stage\05.GameMgr</Filter>
+      <Filter>03. GameMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Scene_Loading.cpp">
       <Filter>01. Scene\90. Scene_Loading</Filter>
@@ -391,6 +400,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\Tree_Object.cpp">
       <Filter>02. GameObject\01. Stage\58. Tree</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Ingame_Flow.cpp">
+      <Filter>97. WorkFlow</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Scene_Cloud.cpp">
+      <Filter>01. Scene\04. Scene_Cloud</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

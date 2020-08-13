@@ -61,7 +61,7 @@ HRESULT Engine::CCaveCylinder::Ready_Buffer(void)			// 어쨋든 원기둥 내면 그리는
 	// 접합부
 	for (UINT i = 0; i < 1; ++i)
 	{
-		float z = -0.5f*m_fHeight;
+		float fHeightZ = -0.5f*m_fHeight;
 		float fOld_r = m_fRadius;
 
 		// vertices of ring
@@ -72,11 +72,11 @@ HRESULT Engine::CCaveCylinder::Ready_Buffer(void)			// 어쨋든 원기둥 내면 그리는
 		{
 			VTXCOL vertex;
 
-			float c = cosf(j*dTheta);
-			float s = sinf(j*dTheta);
+			float fCos = cosf(j*dTheta);
+			float fSin = sinf(j*dTheta);
 			
-			float r = fOld_r*(1.f);
-			vertex.vPosition = D3DXVECTOR3(r*c, r*s, z);
+			float fRandomR = fOld_r*(1.f);
+			vertex.vPosition = D3DXVECTOR3(fRandomR*fCos, fRandomR*fSin, fHeightZ);
 
 			UINT uColor = 96 * (1);
 			vertex.dwColor = D3DCOLOR_XRGB(uColor, uColor, uColor);
@@ -90,7 +90,7 @@ HRESULT Engine::CCaveCylinder::Ready_Buffer(void)			// 어쨋든 원기둥 내면 그리는
 	// 몸통부
 	for (UINT i = 1; i < m_uRingCount-1; ++i)
 	{
-		float z = -0.5f*m_fHeight + i*m_fStackHeight;
+		float fHeightZ = -0.5f*m_fHeight + i*m_fStackHeight;
 		float fOld_r = m_fRadius;
 
 		// vertices of ring
@@ -101,11 +101,11 @@ HRESULT Engine::CCaveCylinder::Ready_Buffer(void)			// 어쨋든 원기둥 내면 그리는
 		{
 			VTXCOL vertex;
 
-			float c = cosf(j*dTheta);
-			float s = sinf(j*dTheta);
+			float fCos = cosf(j*dTheta);
+			float fSin = sinf(j*dTheta);
 			float fRand = (float)(rand() % 20 - 10) *0.02f;
-			float r = fOld_r*(1.f+ fRand);
-			vertex.vPosition = D3DXVECTOR3(r*c, r*s, z);
+			float fRandomR = fOld_r*(1.f+ fRand);
+			vertex.vPosition = D3DXVECTOR3(fRandomR*fCos, fRandomR*fSin, fHeightZ);
 
 			UINT uColor = 96 * (1- fRand*5.f);
 			vertex.dwColor = D3DCOLOR_XRGB(uColor, uColor, uColor);
@@ -120,7 +120,7 @@ HRESULT Engine::CCaveCylinder::Ready_Buffer(void)			// 어쨋든 원기둥 내면 그리는
 	// 접합부
 	for (UINT i = m_uRingCount-1; i < m_uRingCount; ++i)
 	{
-		float z = -0.5f*m_fHeight;
+		float fHeightZ = -0.5f*m_fHeight;
 		float fOld_r = m_fRadius;
 
 		// vertices of ring
@@ -131,11 +131,11 @@ HRESULT Engine::CCaveCylinder::Ready_Buffer(void)			// 어쨋든 원기둥 내면 그리는
 		{
 			VTXCOL vertex;
 
-			float c = cosf(j*dTheta);
-			float s = sinf(j*dTheta);
+			float fCos = cosf(j*dTheta);
+			float fSin = sinf(j*dTheta);
 
-			float r = fOld_r*(1.f);
-			vertex.vPosition = D3DXVECTOR3(r*c, r*s, z);
+			float fRandomR = fOld_r*(1.f);
+			vertex.vPosition = D3DXVECTOR3(fRandomR*fCos, fRandomR*fSin, fHeightZ);
 
 			UINT uColor = 96 * (1);
 			vertex.dwColor = D3DCOLOR_XRGB(uColor, uColor, uColor);

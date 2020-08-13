@@ -1,19 +1,19 @@
 #include "stdafx.h"
-#include "Scene_Forest.h"
+#include "Scene_Cloud.h"
 #include "Export_Function.h"
 #include "GameMgr.h"
 #include "Ingame_Flow.h"
 
-CScene_Forest::CScene_Forest(LPDIRECT3DDEVICE9 pGraphicDev)
+CScene_Cloud::CScene_Cloud(LPDIRECT3DDEVICE9 pGraphicDev)
 	: Engine::CScene(pGraphicDev) {
 
 }
 
-CScene_Forest::~CScene_Forest(void) {
+CScene_Cloud::~CScene_Cloud(void) {
 
 }
 
-HRESULT CScene_Forest::Ready_Scene(void) {
+HRESULT CScene_Cloud::Ready_Scene(void) {
 
 	Engine::Ready_ParticleMgr(m_pGraphicDev);
 
@@ -77,7 +77,7 @@ HRESULT CScene_Forest::Ready_Scene(void) {
 	return S_OK;
 }
 
-_int CScene_Forest::Update_Scene(const _float& fTimeDelta) {
+_int CScene_Cloud::Update_Scene(const _float& fTimeDelta) {
 	if (GetAsyncKeyState('F') & 0x0001)
 	{
 		if(m_bWireFrame)
@@ -96,7 +96,7 @@ _int CScene_Forest::Update_Scene(const _float& fTimeDelta) {
 	}
 	if (GetAsyncKeyState(VK_F7) & 0x0001)
 	{
-		CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_CAVE);
+		CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_FOREST);
 	}
 	if (GetAsyncKeyState(VK_F8) & 0x0001)
 	{
@@ -116,14 +116,14 @@ _int CScene_Forest::Update_Scene(const _float& fTimeDelta) {
 	return 0;
 }
 
-void CScene_Forest::LateUpdate_Scene(const _float & fTimeDelta)
+void CScene_Cloud::LateUpdate_Scene(const _float & fTimeDelta)
 {
 	Engine::Particle_LateUpdate(fTimeDelta);
 	CScene::LateUpdate_Scene(fTimeDelta);
 
 }
 
-void CScene_Forest::Render_Scene(void) {
+void CScene_Cloud::Render_Scene(void) {
 
 	
 
@@ -152,15 +152,15 @@ void CScene_Forest::Render_Scene(void) {
 	m_mapLayer[L"UI"]->Render_Layer();
 }
 
-void CScene_Forest::Free(void) {
+void CScene_Cloud::Free(void) {
 	Engine::Clear_RenderGroup();
 	Engine::CScene::Free();
 	CGameMgr::DestroyInstance();
 	Safe_Release(m_pFogEffect);
 }
 
-CScene_Forest* CScene_Forest::Create(LPDIRECT3DDEVICE9 pGraphicDev) {
-	CScene_Forest*	pInstance = new CScene_Forest(pGraphicDev);
+CScene_Cloud* CScene_Cloud::Create(LPDIRECT3DDEVICE9 pGraphicDev) {
+	CScene_Cloud*	pInstance = new CScene_Cloud(pGraphicDev);
 	
 	Engine::Set_Scene(pInstance);
 
@@ -173,7 +173,7 @@ CScene_Forest* CScene_Forest::Create(LPDIRECT3DDEVICE9 pGraphicDev) {
 	return pInstance;
 }
 
-HRESULT CScene_Forest::Ready_Layer_UI(const _tchar* pLayerTag) {
+HRESULT CScene_Cloud::Ready_Layer_UI(const _tchar* pLayerTag) {
 	Engine::CLayer*		pLayer = Engine::CLayer::Create();
 	NULL_CHECK_RETURN(pLayer, E_FAIL);
 
@@ -188,7 +188,7 @@ HRESULT CScene_Forest::Ready_Layer_UI(const _tchar* pLayerTag) {
 	return S_OK;
 }
 
-HRESULT CScene_Forest::Ready_Layer_Environment(const _tchar * pLayerTag) {
+HRESULT CScene_Cloud::Ready_Layer_Environment(const _tchar * pLayerTag) {
 	Engine::CLayer*		pLayer = Engine::CLayer::Create();
 	NULL_CHECK_RETURN(pLayer, E_FAIL);
 	m_mapLayer.emplace(pLayerTag, pLayer);
@@ -211,7 +211,7 @@ HRESULT CScene_Forest::Ready_Layer_Environment(const _tchar * pLayerTag) {
 	return S_OK;
 }
 
-HRESULT CScene_Forest::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
+HRESULT CScene_Cloud::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 
 	Engine::CLayer*		pLayer = Engine::CLayer::Create();
 	NULL_CHECK_RETURN(pLayer, E_FAIL);
@@ -221,25 +221,10 @@ HRESULT CScene_Forest::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 
 	Engine::CGameObject*		pGameObject = nullptr;
 
-	FAILED_CHECK_RETURN(Register_GameObject<CTerrain_Locater>(pLayer, L"BackGround"), E_FAIL);
-	FAILED_CHECK_RETURN(Register_GameObject<CTree_Locater>(pLayer, L"TreeObject"), E_FAIL);		// 무조건 터레인 로케이터 뒤에
-	FAILED_CHECK_RETURN(Register_GameObject<CTestPlayer>(pLayer, L"TestPlayer"), E_FAIL);
+	// 지형없이 안터지는 플레이어 설정해주세요
 
-	for (int i = 0; i < 250; ++i)
-	{
-		FAILED_CHECK_RETURN(Register_ObjectPool<CGolem>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
-		FAILED_CHECK_RETURN(Register_ObjectPool<CChase_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
-		FAILED_CHECK_RETURN(Register_ObjectPool<CRun_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
-		FAILED_CHECK_RETURN(Register_ObjectPool<CJump_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
-		FAILED_CHECK_RETURN(Register_ObjectPool<CFly_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
-	}
-	
-	for(int i = 0 ;  i < 10000; ++i)
-	{	
-		FAILED_CHECK_RETURN(Register_ObjectPool<CNormal_Bullet>(pLayer, OBJID::NORMAL_BULLET), E_FAIL);
-	}
-
-	CGameObject* tempPlayer = pLayer->Get_Object(L"TestPlayer", Engine::Find_First, nullptr);
+	CTestPlayer* tempPlayer = nullptr;
+	FAILED_CHECK_RETURN(Register_GameObject<CTestPlayer>(&tempPlayer, pLayer, L"TestPlayer"), E_FAIL);
 	pPlayerTransformCom = static_cast<CTransform*>(tempPlayer->Get_Component(L"Com_Transform", Engine::ID_DYNAMIC));
 	pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);
 
@@ -247,7 +232,7 @@ HRESULT CScene_Forest::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 	return S_OK;
 }
 
-HRESULT CScene_Forest::Ready_Resource(LPDIRECT3DDEVICE9 pGraphicDev, RESOURCEID eMax) {
+HRESULT CScene_Cloud::Ready_Resource(LPDIRECT3DDEVICE9 pGraphicDev, RESOURCEID eMax) {
 	Engine::Reserve_ContainerSize(eMax);
 
 	return S_OK;

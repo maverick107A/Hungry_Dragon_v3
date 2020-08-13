@@ -167,6 +167,7 @@
     <ClInclude Include="..\Code\Fly_Monster.h" />
     <ClInclude Include="..\Code\GameMgr.h" />
     <ClInclude Include="..\Code\Golem.h" />
+    <ClInclude Include="..\Code\Ingame_Flow.h" />
     <ClInclude Include="..\Code\Jump_Monster.h" />
     <ClInclude Include="..\Code\Logo.h" />
     <ClInclude Include="..\Code\MainApp.h" />
@@ -176,6 +177,7 @@
     <ClInclude Include="..\Code\Ocean.h" />
     <ClInclude Include="..\Code\Player.h" />
     <ClInclude Include="..\Code\Scene_Cave.h" />
+    <ClInclude Include="..\Code\Scene_Cloud.h" />
     <ClInclude Include="..\Code\Scene_Forest.h" />
     <ClInclude Include="..\Code\Scene_PT.h" />
     <ClInclude Include="..\Code\Run_Monster.h" />
@@ -208,6 +210,7 @@
     <ClCompile Include="..\Code\Fly_Monster.cpp" />
     <ClCompile Include="..\Code\GameMgr.cpp" />
     <ClCompile Include="..\Code\Golem.cpp" />
+    <ClCompile Include="..\Code\Ingame_Flow.cpp" />
     <ClCompile Include="..\Code\Jump_Monster.cpp" />
     <ClCompile Include="..\Code\Logo.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />
@@ -217,6 +220,7 @@
     <ClCompile Include="..\Code\Ocean.cpp" />
     <ClCompile Include="..\Code\Player.cpp" />
     <ClCompile Include="..\Code\Scene_Cave.cpp" />
+    <ClCompile Include="..\Code\Scene_Cloud.cpp" />
     <ClCompile Include="..\Code\Scene_Forest.cpp" />
     <ClCompile Include="..\Code\Scene_PT.cpp" />
     <ClCompile Include="..\Code\Run_Monster.cpp" />

@@ -38,7 +38,7 @@ private:
 	Engine::CTransform*		m_pTransform = nullptr;
 	Engine::CTransform*		m_pPlayerTrans = nullptr;
 	CTerrain_Locater*		m_pTerrainLocater = nullptr;
-	list<CTree_Object*> m_arrRenderGroupIdx[50];
+	list<CTree_Object*>*	m_hRenderGroupIdx[50];			// hanged 혹은 handle 두가지 의미 통용
 
 public:
 	static CTree_Locater*	Create(LPDIRECT3DDEVICE9 pGraphicDev);

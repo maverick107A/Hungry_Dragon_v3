@@ -57,6 +57,7 @@ public:	// 편의성 함수 템플릿
 		NULL_CHECK_RETURN(_pObj, E_FAIL);
 		_pObj->Set_Address(_pLayer);
 		Engine::Add_Object_Pool(_pObj, _pId);
+		return S_OK;
 	}
 
 protected:

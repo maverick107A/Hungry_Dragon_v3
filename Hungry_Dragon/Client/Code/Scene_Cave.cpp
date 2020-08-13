@@ -8,6 +8,7 @@
 #include "Obstacle.h"
 #include "CavePlayer.h"
 #include "PlayerUI.h"
+#include "Ingame_Flow.h"
 
 CScene_Cave::CScene_Cave(LPDIRECT3DDEVICE9 pGraphicDev)
 	: Engine::CScene(pGraphicDev)
@@ -107,11 +108,60 @@ _int CScene_Cave::Update_Scene(const _float& fTimeDelta)
 	{
 		m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 	}
+	if (GetAsyncKeyState(VK_F7) & 0x0001)
+	{
+		CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_CLOUD);
+	}
+	if (GetAsyncKeyState(VK_F8) & 0x0001)
+	{
+		m_ePhaseNum = (SCENEPHASE)(((int)m_ePhaseNum + 1) % 3);
+		switch (m_ePhaseNum)		// Ready 부분
+		{
+		case CScene_Cave::PHASE_1:
+			m_pVent->Set_Active(false);
+			m_pVent->Set_ObsLoop(false);
+			break;
+		case CScene_Cave::PHASE_2:
+			m_pVent->Set_Trans(_vec3(0.f, 0.f, 4000.f));
+			m_pVent->Set_Active(true);
+			m_pVent->Set_ObsLoop(false);
+			break;
+		case CScene_Cave::PHASE_3:
+			m_pVent->Set_Trans(_vec3(0.f, 0.f, 0.f));
+			m_pVent->Set_Active(true);
+			m_pVent->Set_ObsLoop(true);
+			break;
+		default:
+			break;
+		}
+	}
 	//플레이어 위치 최신화
 	pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);
+	switch (m_ePhaseNum)
+	{
+	case CScene_Cave::PHASE_1:			// 카메라 Z회전 안함
+		CGameMgr::GetInstance()->Cave_ObjPool_Update(m_vPlayerPos);
+		break;
+	case CScene_Cave::PHASE_2:			// 카메라 횡스크롤
+		CGameMgr::GetInstance()->Cave_ObjPool_Update(m_vPlayerPos);	// 횡스크롤로 변경
 
-	CGameMgr::GetInstance()->Cave_ObjPool_Update(m_vPlayerPos);
+		break;
+	case CScene_Cave::PHASE_3:			// 카메라 Z회전 함
+										// 여기 몬스터 안나오게 해줘
+		break;
+	default:
+		break;
+	}
+	
 	return 0;
+}
+
+void CScene_Cave::LateUpdate_Scene(const _float & fTimeDelta)
+{
+	Engine::Particle_LateUpdate(fTimeDelta);
+	CScene::LateUpdate_Scene(fTimeDelta);
+
+	
 }
 
 void CScene_Cave::Render_Scene(void)
@@ -143,6 +193,7 @@ void CScene_Cave::Free(void)
 	Engine::CScene::Free();
 
 	Safe_Release(m_pFogEffect);
+	CGameMgr::DestroyInstance();
 }
 
 CScene_Cave* CScene_Cave::Create(LPDIRECT3DDEVICE9 pGraphicDev)
@@ -191,6 +242,7 @@ HRESULT CScene_Cave::Ready_Layer_Environment(const _tchar * pLayerTag) {
 	}
 
 	//m_pVent->Set_Trans(_vec3(0.f,0.f, m_pCave->Get_EndPoint()+4000.f));
+	m_pVent->Set_Active(false);
 	m_mapLayer.emplace(pLayerTag, pLayer);
 
 	//m_pGraphicDev->SetSamplerState(0, D3DSAMP_MIPFILTER, D3DTEXF_NONE);

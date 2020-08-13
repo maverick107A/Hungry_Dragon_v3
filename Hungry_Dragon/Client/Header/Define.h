@@ -5,11 +5,17 @@ extern HWND			g_hWnd;
 extern HINSTANCE	g_hInst;
 
 enum RESOURCEID { RESOURCE_STATIC, RESOURCE_LOGO, RESOURCE_STAGE, RESOURCE_END };
-
+namespace SCENENUM
+{
+	enum ID { SCENE_LOGO, SCENE_FOREST, SCENE_CAVE, SCENE_CLOUD, SCENE_VOLCANO, SCENE_ICELAND, SCENE_PROTO, SCENE_END };
+}
 #define TILECX 200
 #define TILECZ 200
 #define VERTEXSIZE 129
 #define Pi 3.141592f
 #define INVERSETILESIZE 0.005f
+
+//#define DEBUG_WITHOUT_FOREST 0	// 포레스트 리소스 디버깅
+#define DEBUG_WITHOUT_FOREST 1		// 이러면 포레스트 리소스 로딩 안하고 빠르게 씬 불러옴 대신 포레스트 씬 터지니 주의
 
 #endif // Define_h__

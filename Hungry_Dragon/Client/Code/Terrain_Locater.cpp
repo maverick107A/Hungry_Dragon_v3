@@ -4,6 +4,7 @@
 #include "Export_Function.h"
 #include "HeightCol.h"
 #include "Terrain_Parts.h"
+#include "Ingame_Flow.h"
 
 CTerrain_Locater::CTerrain_Locater(LPDIRECT3DDEVICE9 pGraphicDev)
 	: Engine::CGameObject(pGraphicDev)
@@ -286,10 +287,11 @@ void CTerrain_Locater::Render_Object(void)
 
 void CTerrain_Locater::Free(void)
 {
-	for (int i = 0; i < 50; ++i)
+	// 현재 인게임 플로우에서 소멸중
+	/*for (int i = 0; i < 50; ++i)
 	{
 		Safe_Release(m_pParts[i]);
-	}
+	}*/
 
 
 	Engine::CGameObject::Free();
@@ -317,40 +319,12 @@ HRESULT CTerrain_Locater::Add_Component(void)
 {
 	Engine::CComponent*		pComponent = nullptr;
 
-	FAILED_CHECK(Clone_Component<CHeightCol>(&m_pDummy, RESOURCE_STATIC, L"BUFFER_KOREA", ID_STATIC, L"Com_Buffer"));
-	m_pDummy->Set_Height(L"../../Asset/Terrain/Korea/KoreaHeight_51.bmp");
 	
 
-	// buffer
-	TCHAR szBuf[256] = L"";
-	for (int i = 0; i < 50; ++i)
-	{
-		m_pParts[i] = CTerrain_Parts::Create(m_pGraphicDev);
-		wsprintf(szBuf, L"../../Asset/Terrain/Korea/KoreaHeight_%.2d.bmp", i + 1);
-		//wsprintf(szBuf, L"../../Asset/Terrain/Australia/Australia_%.2d.bmp", i + 1);
-		m_pParts[i]->Set_HeightMap(szBuf);
-		//m_pParts[i]->Set_HeightMap(L"../../Asset/Terrain/Korea/KoreaHeight_51.bmp");
-		m_pParts[i]->Set_Trans(_vec3(12800.f*((i%5)-2),0.f, -12800.f*((i/5)-5)));
-	}
-
-	// 접합부 용접작업 ㅠㅠ
-	for (int i = 0; i < 10; ++i)
-	{
-		for (int j = 0; j < 4; ++j)
-		{
-			m_pParts[i*5+j]->Weld_Edge(m_pParts[i * 5 + j + 1], true);
-		}
-	}
-	for (int i = 0; i < 9; ++i)
-	{
-		for (int j = 0; j < 5; ++j)
-		{
-			m_pParts[i * 5 + j]->Weld_Edge(m_pParts[(i+1) * 5 + j], false);
-		}
-	}
+	memcpy(m_pParts,CIngame_Flow::GetInstance()->GetEntry_ForestTerrain(),sizeof(CTerrain_Parts*)*50);
 
 
-	
+
 	
 
 	//Transform

@@ -51,8 +51,7 @@ _int CVent::Update_Object(const _float& fTimeDelta)
 	m_pTransform->Add_Trans(&_vec3(0.f, 0.f, -m_fForwardSpeed*fTimeDelta));
 	m_pTransformBeyond->Add_Trans(&_vec3(0.f, 0.f, -m_fForwardSpeed*fTimeDelta));
 
-	if (m_bLoop)
-	{
+	
 		if (-m_fCaveLength*0.5f >= m_pTransform->Get_World()._43)
 		{
 			m_pTransform->Add_Trans(&_vec3(0.f, 0.f, m_fCaveLength*2.f));
@@ -63,7 +62,7 @@ _int CVent::Update_Object(const _float& fTimeDelta)
 			m_pTransformBeyond->Add_Trans(&_vec3(0.f, 0.f, m_fCaveLength*2.f));
 
 		}
-	}
+	
 	
 	bool	bCheck = false;
 	for (auto& pObs : m_listActiveObs)
@@ -128,63 +127,70 @@ _int CVent::Update_Object(const _float& fTimeDelta)
 	}
 	m_uDelayDeactNum = 0;
 
-
-	m_fSummonTick += fTimeDelta;
-	if (m_fSummonTick >= m_fSummonTime)
+	if (m_bLoop)
 	{
-		int iRand = rand() % 20;
-		switch (iRand)
+		if (fTimeDelta > 1.f)
 		{
-			// 1개짜리
-		case 0:
-			Instantiate_Obstacle(_vec3(0.f, 0.f, 1000.f), D3DX_PI*0.5f, 0.f);
-			break;
-		case 1:
-			Instantiate_Obstacle(_vec3(10.f, 0.f, 1000.f), D3DX_PI*0.5f, 0.f);
-			break;
-		case 2:
-			Instantiate_Obstacle(_vec3(-10.f, 0.f, 1000.f), D3DX_PI*0.5f, 0.f);
-			break;
-		case 3:
-			Instantiate_Obstacle(_vec3(0.f, 10.f, 1000.f), 0.f, D3DX_PI*0.5f);
-			break;
-		case 4:
-			Instantiate_Obstacle(_vec3(0.f, -10.f, 1000.f), 0.f, D3DX_PI*0.5f);
-			break;
-		case 5:
-			Instantiate_Obstacle(_vec3(0.f, 0.f, 1000.f), 0.f, D3DX_PI*0.5f);
-			break;
-		case 6:
-			Instantiate_Obstacle(_vec3(0.f, 0.f, 1000.f), D3DX_PI*0.5f, 0.f);
-			Instantiate_Obstacle(_vec3(10.f, 0.f, 1000.f), D3DX_PI*0.5f, 0.f);
-			break;
-		case 7:
-			Instantiate_Obstacle(_vec3(0.f, 0.f, 1000.f), D3DX_PI*0.5f, 0.f);
-			Instantiate_Obstacle(_vec3(-10.f, 0.f, 1000.f), D3DX_PI*0.5f, 0.f);
-			break;
-		case 8:
-			Instantiate_Obstacle(_vec3(0.f, 0.f, 1000.f), 0.f, D3DX_PI*0.5f);
-			Instantiate_Obstacle(_vec3(0.f, 10.f, 1000.f), 0.f, D3DX_PI*0.5f);
-			break;
-		case 9:
-			Instantiate_Obstacle(_vec3(0.f, 0.f, 1000.f), 0.f, D3DX_PI*0.5f);
-			Instantiate_Obstacle(_vec3(0.f, -10.f, 1000.f), 0.f, D3DX_PI*0.5f);
-			break;
-
-		case 10:
-			Instantiate_Obstacle(_vec3(-10.f, 0.f, 1000.f), D3DX_PI*0.5f, 0.f);
-			Instantiate_Obstacle(_vec3(10.f, 0.f, 1000.f), D3DX_PI*0.5f, 0.f);
-			break;
-		case 11:
-			Instantiate_Obstacle(_vec3(0.f, 10.f, 1000.f), 0.f, D3DX_PI*0.5f);
-			Instantiate_Obstacle(_vec3(0.f, -10.f, 1000.f), 0.f, D3DX_PI*0.5f);
-			break;
-		default:
-
-			break;
+			return 0;
 		}
-		
-		m_fSummonTick -= m_fSummonTime;
+
+		m_fSummonTick += fTimeDelta;
+		if (m_fSummonTick >= m_fSummonTime)
+		{
+			int iRand = rand() % 20;
+			switch (iRand)
+			{
+				// 1개짜리
+			case 0:
+				Instantiate_Obstacle(_vec3(0.f, 0.f, 1000.f), D3DX_PI*0.5f, 0.f);
+				break;
+			case 1:
+				Instantiate_Obstacle(_vec3(10.f, 0.f, 1000.f), D3DX_PI*0.5f, 0.f);
+				break;
+			case 2:
+				Instantiate_Obstacle(_vec3(-10.f, 0.f, 1000.f), D3DX_PI*0.5f, 0.f);
+				break;
+			case 3:
+				Instantiate_Obstacle(_vec3(0.f, 10.f, 1000.f), 0.f, D3DX_PI*0.5f);
+				break;
+			case 4:
+				Instantiate_Obstacle(_vec3(0.f, -10.f, 1000.f), 0.f, D3DX_PI*0.5f);
+				break;
+			case 5:
+				Instantiate_Obstacle(_vec3(0.f, 0.f, 1000.f), 0.f, D3DX_PI*0.5f);
+				break;
+			case 6:
+				Instantiate_Obstacle(_vec3(0.f, 0.f, 1000.f), D3DX_PI*0.5f, 0.f);
+				Instantiate_Obstacle(_vec3(10.f, 0.f, 1000.f), D3DX_PI*0.5f, 0.f);
+				break;
+			case 7:
+				Instantiate_Obstacle(_vec3(0.f, 0.f, 1000.f), D3DX_PI*0.5f, 0.f);
+				Instantiate_Obstacle(_vec3(-10.f, 0.f, 1000.f), D3DX_PI*0.5f, 0.f);
+				break;
+			case 8:
+				Instantiate_Obstacle(_vec3(0.f, 0.f, 1000.f), 0.f, D3DX_PI*0.5f);
+				Instantiate_Obstacle(_vec3(0.f, 10.f, 1000.f), 0.f, D3DX_PI*0.5f);
+				break;
+			case 9:
+				Instantiate_Obstacle(_vec3(0.f, 0.f, 1000.f), 0.f, D3DX_PI*0.5f);
+				Instantiate_Obstacle(_vec3(0.f, -10.f, 1000.f), 0.f, D3DX_PI*0.5f);
+				break;
+
+			case 10:
+				Instantiate_Obstacle(_vec3(-10.f, 0.f, 1000.f), D3DX_PI*0.5f, 0.f);
+				Instantiate_Obstacle(_vec3(10.f, 0.f, 1000.f), D3DX_PI*0.5f, 0.f);
+				break;
+			case 11:
+				Instantiate_Obstacle(_vec3(0.f, 10.f, 1000.f), 0.f, D3DX_PI*0.5f);
+				Instantiate_Obstacle(_vec3(0.f, -10.f, 1000.f), 0.f, D3DX_PI*0.5f);
+				break;
+			default:
+
+				break;
+			}
+
+			m_fSummonTick -= m_fSummonTime;
+		}
 	}
 
 

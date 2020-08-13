@@ -14,18 +14,14 @@
 #endif // _DEBUG
 
 
-#include "Scene_Proto.h"
-//#include "Scene_Forest.h"
-#include "Scene_Cave.h"
-//#include "Scene_Cloud.h"
-//#include "Scene_Volcano.h"
-//#include "Scene_Iceland.h"
+
 
 //-------------------------------------------------------
 //매니저 헤더********************************************
 //-------------------------------------------------------
 //여기에 매니저 헤더 추가
 #include "Export_Function.h"
+#include "Ingame_Flow.h"
 
 //-------------------------------------------------------
 //기타 헤더**********************************************
@@ -51,30 +47,39 @@ HRESULT CMainApp::Ready_MainApp(void)
 	Set_DefaultSetting(&m_pGraphicDev);
 	FAILED_CHECK_RETURN(Ready_Scene(m_pGraphicDev, &m_pManagementClass), E_FAIL);
 	Engine::Load_Particle(m_pGraphicDev);
-
+	CIngame_Flow::GetInstance()->Init_Flow(m_pGraphicDev);
 	return S_OK;
 }
 
 Engine::_int CMainApp::Update_MainApp(const Engine::_float& fTimeDelta)
 {
 	Engine::Set_InputDev();
-
+	CIngame_Flow::GetInstance()->Update_BeforeScene(fTimeDelta);
 	m_pManagementClass->Update_Scene(fTimeDelta);
+	CIngame_Flow::GetInstance()->Update_AfterScene(fTimeDelta);
 
 	return 0;
 }
 
 void CMainApp::LateUpdate_MainApp(const Engine::_float & fTimeDelta) {
+	CIngame_Flow::GetInstance()->LateUpdate_BeforeScene(fTimeDelta);
 	m_pManagementClass->LateUpdate_Scene(fTimeDelta);
+	CIngame_Flow::GetInstance()->LateUpdate_AfterScene(fTimeDelta);
+
 }
 
 void CMainApp::Render_MainApp(void)
 {
 	Engine::Render_Begin(D3DXCOLOR(0.f, 0.f, 1.f, 1.f));
 
+	CIngame_Flow::GetInstance()->Render_BeforeScene();
 	m_pManagementClass->Render_Scene();
+	CIngame_Flow::GetInstance()->Render_AfterScene();
 
 	Engine::Render_End();
+
+	// 그릴거 다 그리고 맨 마지막에 이벤트 갱신
+	CIngame_Flow::GetInstance()->Update_Event();
 }
 
 HRESULT CMainApp::Set_DefaultSetting(LPDIRECT3DDEVICE9 * ppGraphicDev)
@@ -127,6 +132,9 @@ CMainApp* CMainApp::Create(void)
 
 void CMainApp::Free(void)
 {
+	CIngame_Flow::GetInstance()->Release_AllResources();
+	CIngame_Flow::DestroyInstance();
+
 	Engine::Safe_Release(m_pGraphicDev);
 
 	Engine::Safe_Release(m_pDeviceClass);
