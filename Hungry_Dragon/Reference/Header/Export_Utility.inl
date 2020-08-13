@@ -20,6 +20,11 @@ HRESULT	Create_Management(CManagement** ppManagement)
 	return S_OK;
 }
 
+inline void	Initialize()
+{
+	CManagement::GetInstance()->Initialize();
+}
+
 // Renderer
 // Get
 CRenderer*		Get_Renderer(void)

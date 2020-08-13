@@ -4,6 +4,7 @@
 #include "Export_Function.h"
 #include "Terrain.h"
 #include "BaseLand.h"
+#include "PlayerMain.h"
 
 CPlayerUI::CPlayerUI(LPDIRECT3DDEVICE9 pGraphicDev)
 	: Engine::CGameObject(pGraphicDev)
@@ -40,11 +41,11 @@ HRESULT CPlayerUI::Ready_Object(void)
 
 void CPlayerUI::Initialize_Object(void)
 {
+	m_pPlayer = static_cast<Engine::CPlayerMain*>(Engine::Get_Object(L"GameLogic", L"TestPlayer"));
 }
 
 int CPlayerUI::Update_Object(const float& fTimeDelta)
 {
-	//여기서 정보받을거야 ㅋ
 	Engine::CGameObject::Update_Object(fTimeDelta);
 
 	return 0;
@@ -58,10 +59,10 @@ void CPlayerUI::Render_Object(void)
 	//	wsprintf(szBuff, L"x :%d, y :%d", int(m_fRight), int(m_fUp));
 	//	MessageBox(nullptr, szBuff, L"XY", 0);
 	//}
-	//if (GetAsyncKeyState(VK_RIGHT))
-	//	m_fRight += 1.f;
-	//if (GetAsyncKeyState(VK_LEFT))
-	//	m_fRight -= 1.f;
+	if (GetAsyncKeyState(VK_RIGHT))
+		m_fRight += 1.f;
+	if (GetAsyncKeyState(VK_LEFT))
+		m_fRight -= 1.f;
 
 	//if (GetAsyncKeyState(VK_UP))
 	//	m_fUp -= 10.f;
@@ -73,10 +74,11 @@ void CPlayerUI::Render_Object(void)
 
 	D3DXMATRIX matTrans = {};
 
+	RECT tRect = { 0,0,int(m_pPlayer->Get_Hp()*3.f),30 };
 
 	D3DXMatrixTranslation(&matTrans, 100.f, 50.f, 0.f);
 	m_pSprite->SetTransform(&matTrans);
-	m_pSprite->Draw(m_pRedTex, nullptr, nullptr, nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
+	m_pSprite->Draw(m_pRedTex, &tRect, nullptr, nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
 
 	D3DXMatrixTranslation(&matTrans, 100.f, 80.f, 0.f);
 	m_pSprite->SetTransform(&matTrans);

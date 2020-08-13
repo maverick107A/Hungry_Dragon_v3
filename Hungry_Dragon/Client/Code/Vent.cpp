@@ -64,7 +64,8 @@ _int CVent::Update_Object(const _float& fTimeDelta)
 
 		}
 	}
-
+	
+	bool	bCheck = false;
 	for (auto& pObs : m_listActiveObs)
 	{
 		pObs->Update_Object(fTimeDelta);
@@ -87,34 +88,39 @@ _int CVent::Update_Object(const _float& fTimeDelta)
 			{
 			case 0:
 				if (m_pPlayerTrans->m_vInCamPos.x > 3.5)
-					m_pPlayer->Get_Camera()->Set_Shock();
+					bCheck = true;
 				break;
 			case 1:
 				if (m_pPlayerTrans->m_vInCamPos.x < -3.5)
-					m_pPlayer->Get_Camera()->Set_Shock();
+					bCheck = true;
 				break;
 			case 2:
 				if (m_pPlayerTrans->m_vInCamPos.y > 3.5)
-					m_pPlayer->Get_Camera()->Set_Shock();
+					bCheck = true;
 				break;
 			case 3:
 				if (m_pPlayerTrans->m_vInCamPos.y < -3.5)
-					m_pPlayer->Get_Camera()->Set_Shock();
+					bCheck = true;
 				break;
 			case 4:
 				if (pObs->Get_Transform()->m_vAngle.x)
 				{
 					if (abs(m_pPlayerTrans->m_vInCamPos.x) < 3.5)
-						m_pPlayer->Get_Camera()->Set_Shock();
+						bCheck = true;
 				}
 				else
 				{
 					if (abs(m_pPlayerTrans->m_vInCamPos.y) < 3.5)
-						m_pPlayer->Get_Camera()->Set_Shock();
+						bCheck = true;
 				}
 				break;
 			}
 		}
+	}
+	if (bCheck)
+	{
+		m_pPlayer->Get_Camera()->Set_Shock();
+		m_pPlayer->Add_Hp(-50);
 	}
 	for (_uint i = 0; i < m_uDelayDeactNum; ++i)
 	{

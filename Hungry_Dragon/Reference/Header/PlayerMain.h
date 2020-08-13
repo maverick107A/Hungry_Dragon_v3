@@ -28,7 +28,14 @@ public:
 	virtual void Render_Object(void) {}
 
 public:
+	int Get_Hp() { return m_iHp; }
+	int	Get_Stamina() { return m_iStamina; }
+
+public:
 	void Set_Sate(STATE _eState) { m_eState = _eState; }
+
+public:
+	void Add_Hp(int _iHp) { m_iHp += _iHp; }
 
 public:
 	CTransform* Get_Transform() { return m_pTransform; }
@@ -56,6 +63,9 @@ protected:
 	bool					m_bShift = false;
 	float					m_fSpeed = 10.f;
 	STATE					m_eState = STATE_END;
+
+	int						m_iHp = 100;
+	int						m_iStamina = 100;
 
 public:
 	static CPlayerMain*	Create(LPDIRECT3DDEVICE9 pGraphicDev);

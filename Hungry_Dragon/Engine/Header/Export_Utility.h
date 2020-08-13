@@ -31,7 +31,7 @@ inline CGameObject*	Get_Object(const _tchar* pLayerTag, const _tchar* pObjTag)
 
 // General
 inline HRESULT	Create_Management(CManagement** ppManagement);
-
+inline void	Initialize();
 
 // Renderer
 // Get

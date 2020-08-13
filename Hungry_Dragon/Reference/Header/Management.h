@@ -27,6 +27,9 @@ public:
 	void		LateUpdate_Scene(const _float& fTimeDelta);
 	void		Render_Scene(void);
 
+public:
+	void		Initialize();
+
 private:
 	CScene*		m_pScene;
 	CScene*		m_pFormerScene;

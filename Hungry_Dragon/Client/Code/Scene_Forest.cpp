@@ -154,7 +154,8 @@ CScene_Forest* CScene_Forest::Create(LPDIRECT3DDEVICE9 pGraphicDev) {
 	if (FAILED(pInstance->Ready_Scene()))
 		Engine::Safe_Release(pInstance);
 
-	
+
+	Engine::Initialize();
 
 	return pInstance;
 }
