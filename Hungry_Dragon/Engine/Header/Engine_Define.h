@@ -37,11 +37,11 @@ const D3DXCOLOR YELLOW  (255,255,255,0);
 const D3DXCOLOR CYAN  (255,0,255,255);
 const D3DXCOLOR MAGENTA  (255,255,0,255);
 
-#define TILECX 200
-#define TILECZ 200
+#define TILECX 100
+#define TILECZ 100
 #define VERTEXSIZE 129
 #define Pi 3.141592f
-#define GRAVITY 3.5f
-#define INVERSETILESIZE 0.005f
+#define GRAVITY 5.f
+#define INVERSETILESIZE 0.01f
 
 #endif // Engine_Define_h__

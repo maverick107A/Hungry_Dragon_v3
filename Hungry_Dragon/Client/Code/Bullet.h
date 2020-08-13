@@ -31,7 +31,7 @@ public:
 
 public:
 private:
-	HRESULT		Add_Component(void);
+	virtual		HRESULT		Add_Component(void);
 	void		Key_Input(const float& fTimeDelta);
 
 protected:

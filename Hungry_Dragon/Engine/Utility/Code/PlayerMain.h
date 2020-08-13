@@ -3,6 +3,8 @@
 
 #include "GameObject.h"
 
+class CTerrain_Locater;
+
 BEGIN(Engine)
 
 class CVIBuffer;
@@ -54,6 +56,7 @@ protected:
 protected:
 	CVIBuffer*				m_pBufferCom = nullptr;
 	CCameraMain*			m_pCamera = nullptr;
+	CTerrain_Locater*		m_pTerrrrrrrain = nullptr;
 	CBaseLand*				m_pTerrain = nullptr;
 	CPlayerState*			m_pState = nullptr;
 	D3DXVECTOR3				m_vLook;

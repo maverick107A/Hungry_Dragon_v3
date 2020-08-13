@@ -296,7 +296,6 @@ void CTerrain_Locater::Free(void)
 
 }
 
-
 vector<int> CTerrain_Locater::Get_PartsHeight(_uint _uNum)
 {
 	if (0 > _uNum || 49 < _uNum)
@@ -304,6 +303,14 @@ vector<int> CTerrain_Locater::Get_PartsHeight(_uint _uNum)
 		abort();
 	}
 	return m_pParts[_uNum]->Get_HeightVector();
+}
+
+
+Engine::CBaseLand* CTerrain_Locater::Get_Terrain()
+{
+	if (m_uCurrSectorNum == -1)
+		return nullptr;
+	return m_pParts[m_uCurrSectorNum]->Get_BufferCom();
 }
 
 HRESULT CTerrain_Locater::Add_Component(void)

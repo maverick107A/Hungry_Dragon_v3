@@ -9,6 +9,7 @@ BEGIN(Engine)
 class CHeightCol;
 class CTransform;
 class CRenderer;
+class CBaseLand;
 
 END
 
@@ -31,6 +32,7 @@ public:
 public:
 	_uint Get_CurrSectorNum() { return m_uCurrSectorNum; }
 	vector<int> Get_PartsHeight(_uint _uNum);
+	Engine::CBaseLand*	Get_Terrain();
 
 private:
 	HRESULT		Add_Component(void);

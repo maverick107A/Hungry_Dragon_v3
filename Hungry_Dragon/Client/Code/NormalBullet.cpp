@@ -116,7 +116,28 @@ void CNormal_Bullet::Render_Object(void)
 
 HRESULT CNormal_Bullet::Add_Component(void)
 {
-	return E_NOTIMPL;
+	Engine::CComponent*		pComponent = nullptr;
+
+	// buffer
+	pComponent = m_pBufferCom = dynamic_cast<Engine::CTexture_Cube*>
+		(Engine::Clone(RESOURCE_STATIC, L"Buffer_CubeTex"));
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Buffer", pComponent);
+
+	// Texture
+	pComponent = m_pTextureCom = dynamic_cast<Engine::CTexture*>
+		(Engine::Clone(RESOURCE_STAGE, L"Texture_BoxHead"));
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Texture", pComponent);
+
+	//Transform
+	pComponent = m_pTransform = Engine::CTransform::Create();
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_Transform", pComponent);
+
+	//m_pBufferCom
+
+	return S_OK;
 }
 
 void CNormal_Bullet::State_Change()

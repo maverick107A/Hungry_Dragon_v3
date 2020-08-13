@@ -9,6 +9,7 @@
 #include "PFly.h"
 #include "PLandIdle.h"
 #include "PLandRush.h"
+#include "Terrain_Locater.h"
 
 CTestPlayer::CTestPlayer(LPDIRECT3DDEVICE9 pGraphicDev)
 	: CPlayerMain(pGraphicDev)
@@ -38,12 +39,13 @@ HRESULT CTestPlayer::Ready_Object(void)
 
 void CTestPlayer::Initialize_Object(void)
 {
-	CGameObject* pGroundObj = ((Engine::CLayer*)(Get_Parent()))->Get_Object(L"BackGround", Engine::Find_First, nullptr);
-	m_pTerrain = static_cast<Engine::CBaseLand*>(pGroundObj->Get_Component(L"Com_Buffer", Engine::ID_STATIC));
+	m_pTerrrrrrrain = static_cast<CTerrain_Locater*>(((Engine::CLayer*)(Get_Parent()))->Get_Object(L"BackGround", Engine::Find_First, nullptr));
+	//m_pTerrain = static_cast<Engine::CBaseLand*>(pGroundObj->Get_Component(L"Com_Buffer", Engine::ID_STATIC));
 }
 
 int CTestPlayer::Update_Object(const float& fTimeDelta)
 {
+	m_pTerrain = m_pTerrrrrrrain->Get_Terrain();
 	//Key_Input(fTimeDelta);
 
 	//Ride_Terrain();

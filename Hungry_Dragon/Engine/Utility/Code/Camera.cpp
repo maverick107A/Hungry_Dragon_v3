@@ -16,6 +16,7 @@ HRESULT Engine::CCamera::Ready_Camera(void)
 {
 	m_tCenter = { LONG(WINCX*0.5), LONG(WINCY*0.5) };
 	SetCursorPos(m_tCenter.x, m_tCenter.y);
+	m_fCameraDis = 100.f;
 	return S_OK;
 }
 
@@ -26,7 +27,7 @@ _int Engine::CCamera::Update_Camera(const _float& _fTimeDelta, LPDIRECT3DDEVICE9
 
 	Move_Camera(_pGraphicDev, _vPos, _fAngleX, _fAngleY);
 	//지형타기
-	Ride_Terrain(_pTerrain);
+	//Ride_Terrain(_pTerrain);
 
 	D3DXMATRIX V;
 	D3DXMatrixLookAtLH(&V, &m_vPos, &m_vDir, &m_vUp);
