@@ -1,8 +1,0 @@
-MFC 프로젝트 추가
-Copy.bat에 MFCTool\bin로 lib 복사하는 코드 추가 
-Resources 프로젝트에 MFC 출력 테스트용으로 VIBuffer를 상속 받는 CubeCol 클래스 추가
-Resources 프로젝트의 ResourcesMgr 클래스의 ReadyBuffer함수에 임시 큐브 생성하는 코드 추가
-Engine_Define에 색깔 값 미리 정의 (검정, 하양, 투명, 빨강, 초록, 파랑, 노랑, 시안, 마젠타)
-Engine_Function에 면 법선을 구하는 Calcul_Normal 함수 추가
-Engine_Struct의 VTXTEX 구조체에 vNormal _vec3값 추가
-Engine_Struct에 구조체 _cube,_sphere,_cylinder 추가
