@@ -8,7 +8,7 @@ USING(Engine)
 
 Engine::CPFly::CPFly(void)
 {
-	
+
 }
 
 Engine::CPFly::CPFly(const CPFly& rhs)
@@ -33,8 +33,17 @@ void CPFly::Update_State(const float& fTimeDelta)
 	//D3DXVec3Cross(&vRight, &m_pPlayer->Get_Up(), &m_pPlayer->Get_Look());
 
 	vRight.y = -sinf(m_pPlayer->Get_AngleX());
-	vRight.x = sinf(m_pPlayer->Get_AngleY());
-	vRight.z = cosf(m_pPlayer->Get_AngleY());
+
+	if (cosf(m_pPlayer->Get_AngleX()) > 0)
+	{
+		vRight.x = sinf(m_pPlayer->Get_AngleY());
+		vRight.z = cosf(m_pPlayer->Get_AngleY());
+	}
+	else
+	{
+		vRight.x = -sinf(m_pPlayer->Get_AngleY());
+		vRight.z = -cosf(m_pPlayer->Get_AngleY());
+	}
 
 	bool bCheck = false;
 	bool bShift = false;
@@ -60,49 +69,69 @@ void CPFly::Update_State(const float& fTimeDelta)
 	//}
 	if (Engine::Get_DIKeyState(DIK_SPACE))
 	{
-		vDir += D3DXVECTOR3(0.f, 1.f, 0.f);
-		bCheck = true;
+		//vDir += D3DXVECTOR3(0.f, 1.f, 0.f);
+		//bCheck = true;
 	}
 	if (GetAsyncKeyState(VK_SHIFT))
 	{
 		bShift = true;
 	}
-	if (GetAsyncKeyState('Q'))
-	{
-		m_pPlayer->Get_Camera()->Set_AngleZPlus(m_fAngleSpeed);
-		m_pPlayer->Get_Transform()->m_vAngle.z += m_fAngleSpeed;
-	}
-	if (GetAsyncKeyState('E'))
-	{
-		m_pPlayer->Get_Camera()->Set_AngleZPlus(-m_fAngleSpeed);
-		m_pPlayer->Get_Transform()->m_vAngle.z -= m_fAngleSpeed;
-	}
+	//if (GetAsyncKeyState('Q'))
+	//{
+	//	m_pPlayer->Get_Camera()->Set_AngleZPlus(m_fAngleSpeed*0.4f);
+	//	m_pPlayer->Get_Transform()->m_vAngle.z += m_fAngleSpeed*0.4f;
+	//}
 	//if (GetAsyncKeyState('E'))
 	//{
-	//	m_pPlayer->Get_Transform()->m_vInCamPos = vDir;
-	//}
+	//	m_pPlayer->Get_Camera()->Set_AngleZPlus(-m_fAngleSpeed*0.4f);
+	//	m_pPlayer->Get_Transform()->m_vAngle.z -= m_fAngleSpeed*0.4f;
+	// 
+	if (GetAsyncKeyState('E'))
+	{
+		m_pPlayer->Get_Transform()->m_vInCamPos = vDir*100.f;
+	}
 	if (bCheck)
 	{
 		D3DXVec3Normalize(&vDir, &vDir);
 		if (bShift)
 		{
 			vDir *= m_fBoostMulti;
+			m_pPlayer->Add_Stamina(-2);
 		}
+		else
+			m_pPlayer->Add_Stamina(1);
 		//속도적용
 		vDir *= fTimeDelta*m_fSpeed;
 		//가속
 		m_vSpeed += vDir;
 		//감쇠
-		m_vSpeed*=m_fDamping;
+		m_vSpeed *= m_fDamping;
 		//실제 적용
 		m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS] += m_vSpeed;
 		//여기까지 가속시스템
 
-		float fDis = sqrtf(m_vSpeed.x*m_vSpeed.x + m_vSpeed.y*m_vSpeed.y + m_vSpeed.z*m_vSpeed.z);
-		float fPlaneDis = sqrtf(m_vSpeed.x*m_vSpeed.x + m_vSpeed.z*m_vSpeed.z);
-		float fAngleX = acosf(fPlaneDis / fDis);
-		if (0 < m_vSpeed.y)
-			fAngleX *= -1;
+		float fAngleX = m_pPlayer->Get_AngleX();
+		if (abs(m_pPlayer->Get_Transform()->m_vAngle.x - fAngleX) < m_fAngleSpeed)
+			m_pPlayer->Get_Transform()->m_vAngle.x = fAngleX;
+		else if (m_pPlayer->Get_Transform()->m_vAngle.x < fAngleX)
+			m_pPlayer->Get_Transform()->m_vAngle.x += m_fAngleSpeed;
+		else
+			m_pPlayer->Get_Transform()->m_vAngle.x -= m_fAngleSpeed;
+
+		float fAngleY = m_pPlayer->Get_AngleY();
+		if (abs(m_pPlayer->Get_Transform()->m_vAngle.y - fAngleY) < m_fAngleSpeed)
+			m_pPlayer->Get_Transform()->m_vAngle.y = fAngleY;
+		else if (m_pPlayer->Get_Transform()->m_vAngle.y < fAngleY)
+			m_pPlayer->Get_Transform()->m_vAngle.y += m_fAngleSpeed;
+		else
+			m_pPlayer->Get_Transform()->m_vAngle.y -= m_fAngleSpeed;
+
+		//구버전
+		//float fDis = sqrtf(m_vSpeed.x*m_vSpeed.x + m_vSpeed.y*m_vSpeed.y + m_vSpeed.z*m_vSpeed.z);
+		//float fPlaneDis = sqrtf(m_vSpeed.x*m_vSpeed.x + m_vSpeed.z*m_vSpeed.z);
+		//float fAngleX = acosf(fPlaneDis / fDis);
+		//if (0 < m_vSpeed.y)
+		//	fAngleX *= -1;
 		//부드러운 이동 시작
 		//if (abs(m_pPlayer->Get_Transform()->m_vAngle.x - fAngleX) < m_fAngleSpeed)
 		//	m_pPlayer->Get_Transform()->m_vAngle.x = fAngleX;
@@ -116,43 +145,40 @@ void CPFly::Update_State(const float& fTimeDelta)
 		//끝
 		//안부드러운 이동
 		//m_pPlayer->Get_Transform()->m_vAngle.x = fAngleX;
+		//m_pPlayer->Get_Transform()->m_vAngle.x = m_pPlayer->Get_AngleX();
 
-		m_pPlayer->Get_Transform()->m_vAngle.x = m_pPlayer->Get_AngleX();
-
-		if (0.f != fPlaneDis)
-		{
-			float fAngleY = acosf(m_vSpeed.z / fPlaneDis);
-			if (0 > m_vSpeed.x)
-			{
-				fAngleY *= -1;
-				fAngleY += Pi*2;
-			}
-			//부드러운이동 시작
-			//if (abs(m_pPlayer->Get_Transform()->m_vAngle.y - fAngleY) < m_fAngleSpeed)
-			//	m_pPlayer->Get_Transform()->m_vAngle.y = fAngleY;
-			//else
-			//{
-			//	if ((m_pPlayer->Get_Transform()->m_vAngle.y - fAngleY) > Pi)
-			//		m_pPlayer->Get_Transform()->m_vAngle.y += m_fAngleSpeed;
-			//	else if ((m_pPlayer->Get_Transform()->m_vAngle.y - fAngleY) < -Pi)
-			//		m_pPlayer->Get_Transform()->m_vAngle.y -= m_fAngleSpeed;
-
-			//	else if ((m_pPlayer->Get_Transform()->m_vAngle.y - fAngleY) > 0)
-			//		m_pPlayer->Get_Transform()->m_vAngle.y -= m_fAngleSpeed;
-			//	else
-			//		m_pPlayer->Get_Transform()->m_vAngle.y += m_fAngleSpeed;
-
-			//	if (m_pPlayer->Get_Transform()->m_vAngle.y < 0)
-			//		m_pPlayer->Get_Transform()->m_vAngle.y += Pi*2;
-			//	if (m_pPlayer->Get_Transform()->m_vAngle.y > Pi*2)
-			//		m_pPlayer->Get_Transform()->m_vAngle.y -= Pi*2;
-			//}
-			//끝
-			//안부드러운 이동
-			//m_pPlayer->Get_Transform()->m_vAngle.y = fAngleY;
-			m_pPlayer->Get_Transform()->m_vAngle.y = m_pPlayer->Get_AngleY();
-
-		}
+		//구버전
+		//if (0.f != fPlaneDis)
+		//{
+		//	float fAngleY = acosf(m_vSpeed.z / fPlaneDis);
+		//	if (0 > m_vSpeed.x)
+		//	{
+		//		fAngleY *= -1;
+		//		fAngleY += Pi*2;
+		//	}
+		//	//부드러운이동 시작
+		//	if (abs(m_pPlayer->Get_Transform()->m_vAngle.y - fAngleY) < m_fAngleSpeed+1)
+		//		m_pPlayer->Get_Transform()->m_vAngle.y = fAngleY;
+		//	else
+		//	{
+		//		if ((m_pPlayer->Get_Transform()->m_vAngle.y - fAngleY) > Pi)
+		//			m_pPlayer->Get_Transform()->m_vAngle.y += m_fAngleSpeed;
+		//		else if ((m_pPlayer->Get_Transform()->m_vAngle.y - fAngleY) < -Pi)
+		//			m_pPlayer->Get_Transform()->m_vAngle.y -= m_fAngleSpeed;
+		//		else if ((m_pPlayer->Get_Transform()->m_vAngle.y - fAngleY) > 0)
+		//			m_pPlayer->Get_Transform()->m_vAngle.y -= m_fAngleSpeed;
+		//		else
+		//			m_pPlayer->Get_Transform()->m_vAngle.y += m_fAngleSpeed;
+		//		if (m_pPlayer->Get_Transform()->m_vAngle.y < 0)
+		//			m_pPlayer->Get_Transform()->m_vAngle.y += Pi*2;
+		//		if (m_pPlayer->Get_Transform()->m_vAngle.y > Pi*2)
+		//			m_pPlayer->Get_Transform()->m_vAngle.y -= Pi*2;
+		//	}
+		//	//끝
+		//	//안부드러운 이동
+		//	m_pPlayer->Get_Transform()->m_vAngle.y = fAngleY;
+		//	m_pPlayer->Get_Transform()->m_vAngle.y = m_pPlayer->Get_AngleY();
+		//}
 	}
 	else
 	{

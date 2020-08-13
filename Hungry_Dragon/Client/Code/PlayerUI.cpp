@@ -84,9 +84,11 @@ void CPlayerUI::Render_Object(void)
 	m_pSprite->SetTransform(&matTrans);
 	m_pSprite->Draw(m_pGreenTex, nullptr, nullptr, nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
 
+	tRect = { 0,0,int(m_pPlayer->Get_Stamina()),20 };
+
 	D3DXMatrixTranslation(&matTrans, 300, 880, 0.f);
 	m_pSprite->SetTransform(&matTrans);
-	m_pSprite->Draw(m_pYellowTex, nullptr, nullptr, nullptr, D3DCOLOR_ARGB(100, 255, 255, 255));
+	m_pSprite->Draw(m_pYellowTex, &tRect, nullptr, nullptr, D3DCOLOR_ARGB(100, 255, 255, 255));
 
 
 

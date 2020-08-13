@@ -24,6 +24,6 @@ Engine::CPlayerMain* Engine::CPlayerMain::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 
 	if (FAILED(pInstance->Ready_Object()))
 		Engine::Safe_Release(pInstance);
-
+ 
 	return pInstance;
 }

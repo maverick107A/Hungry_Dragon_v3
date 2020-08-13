@@ -36,6 +36,7 @@ public:
 
 public:
 	void Add_Hp(int _iHp) { m_iHp += _iHp; }
+	void Add_Stamina(int _iStamina) { m_iStamina += _iStamina; }
 
 public:
 	CTransform* Get_Transform() { return m_pTransform; }
@@ -65,7 +66,7 @@ protected:
 	STATE					m_eState = STATE_END;
 
 	int						m_iHp = 100;
-	int						m_iStamina = 100;
+	int						m_iStamina = 1000;
 
 public:
 	static CPlayerMain*	Create(LPDIRECT3DDEVICE9 pGraphicDev);

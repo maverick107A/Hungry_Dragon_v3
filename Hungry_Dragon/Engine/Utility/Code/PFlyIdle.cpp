@@ -33,6 +33,7 @@ void CPFlyIdle::Update_State(const float& fTimeDelta)
 	m_pPlayer->Get_Transform()->m_vAngle.x = 0.f;
 	m_pPlayer->Get_Transform()->m_vInCamPos.y += 0.1f*sinf(m_fAngle);
 	m_fAngle += 0.1f;
+	m_pPlayer->Add_Stamina(1);
 }
 
 void CPFlyIdle::Out_State()
