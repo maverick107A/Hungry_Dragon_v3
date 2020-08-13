@@ -154,16 +154,14 @@
     <Filter Include="02. GameObject\01. Stage\99. PlayerUI">
       <UniqueIdentifier>{82788b45-0f7e-4ccf-9a45-27915f8149fc}</UniqueIdentifier>
     </Filter>
-<<<<<<< Updated upstream
     <Filter Include="02. GameObject\01. Stage\58. Tree">
       <UniqueIdentifier>{7512c7d6-23af-4fef-9125-bab69c4c23e9}</UniqueIdentifier>
     </Filter>
     <Filter Include="02. GameObject\01. Stage\57. Tree_Locator">
       <UniqueIdentifier>{41a99606-7d17-43c6-aac9-88086f34acbb}</UniqueIdentifier>
-=======
+    </Filter>
     <Filter Include="02. GameObject\01. Stage\02.Bullet\01. Beam">
       <UniqueIdentifier>{e8edd6b5-041f-4c84-b89f-950d3427bb4c}</UniqueIdentifier>
->>>>>>> Stashed changes
     </Filter>
   </ItemGroup>
   <ItemGroup>

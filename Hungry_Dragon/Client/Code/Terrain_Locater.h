@@ -31,6 +31,7 @@ public:
 
 public:
 	_uint Get_CurrSectorNum() { return m_uCurrSectorNum; }
+	list<_uint>& Get_RenderIdx() { return m_lstRenderIdx; }
 	vector<int> Get_PartsHeight(_uint _uNum);
 	Engine::CBaseLand*	Get_Terrain();
 

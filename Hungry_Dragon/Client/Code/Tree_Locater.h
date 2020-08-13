@@ -12,7 +12,7 @@ class CRenderer;
 END
 
 class CTree_Object;
-class CTerrain_Parts;
+class CTerrain_Locater;
 
 USING(Engine)
 
@@ -37,7 +37,7 @@ private:
 private:
 	Engine::CTransform*		m_pTransform = nullptr;
 	Engine::CTransform*		m_pPlayerTrans = nullptr;
-
+	CTerrain_Locater*		m_pTerrainLocater = nullptr;
 	list<CTree_Object*> m_arrRenderGroupIdx[50];
 
 public:
