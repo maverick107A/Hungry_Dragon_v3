@@ -17,6 +17,7 @@ public:
 
 	void			Set_Texture(_tchar* texFileName);
 	void			Set_Size(_float _fSize);
+	void			Set_Empty();
 
 public:
 	virtual HRESULT Ready_Buffer(void);

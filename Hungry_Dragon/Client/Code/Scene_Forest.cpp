@@ -98,15 +98,24 @@ _int CScene_Forest::Update_Scene(const _float& fTimeDelta) {
 		m_bFogEnable = !m_bFogEnable;
 	}
 
+	Engine::Particle_Update(fTimeDelta);
+
 	//플레이어 위치 최신화
 	pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);
 	CGameMgr::GetInstance()->Game_Update(m_vPlayerPos);
 	
-	Engine::Particle_Update(fTimeDelta);
+	
 	Engine::CScene::Update_Scene(fTimeDelta);
 
 	
 	return 0;
+}
+
+void CScene_Forest::LateUpdate_Scene(const _float & fTimeDelta)
+{
+	Engine::Particle_LateUpdate(fTimeDelta);
+	CScene::LateUpdate_Scene(fTimeDelta);
+
 }
 
 void CScene_Forest::Render_Scene(void) {
@@ -136,7 +145,6 @@ void CScene_Forest::Render_Scene(void) {
 	m_pFogEffect->End();
 
 	m_mapLayer[L"UI"]->Render_Layer();
-
 }
 
 void CScene_Forest::Free(void) {

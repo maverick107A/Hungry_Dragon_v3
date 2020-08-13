@@ -87,14 +87,24 @@ void Particle_Update(const float& fTimeDelta)
 	CParticleMgr::GetInstance()->Particle_Update(fTimeDelta);
 }
 
+inline void Particle_LateUpdate(const float & fTimeDelta)
+{
+	CParticleMgr::GetInstance()->Particle_LateUpdate(fTimeDelta);
+}
+
 void Particle_Render()
 {
 	CParticleMgr::GetInstance()->Particle_Render();
 }
 
-void Particle_Create(const _vec3 _pos)
+inline bool Set_ParticleTrans(CResources * _particle, _vec3 _pos)
 {
-	CParticleMgr::GetInstance()->Particle_Create(_pos);
+	return CParticleMgr::GetInstance()->Set_ParticleTrans(_particle, _pos);
+}
+
+CResources* Particle_Create(const _vec3 _pos)
+{
+	return CParticleMgr::GetInstance()->Particle_Create(_pos);
 }
 
 

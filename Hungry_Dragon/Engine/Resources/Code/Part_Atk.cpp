@@ -27,8 +27,8 @@ CPart_Atk
 	m_vOffset = 0;
 	m_BatchSize = 10;
 
-	m_fWidth = 5.f;
-	m_fHeight = 10.f;
+	m_fWidth = 100.f;
+	m_fHeight = 1500.f;
 
 	for (int i = 0; i < numParticle; ++i) {
 		Add_Particle();
@@ -63,7 +63,7 @@ void CPart_Atk::Reset_Particle(ATTRIBUTE* _attribute) {
 
 	_attribute->vVelocity.x = (ftempRand_r*cosf(ftempRand_t))*m_fWidth;
 	_attribute->vVelocity.y = ((ftempRand_r*sinf(ftempRand_t))*m_fHeight+m_fSpeed);
-	_attribute->vVelocity.z = (ftempRand_z*sinf(ftempRand_t))*m_fWidth;
+	_attribute->vVelocity.z = (ftempRand_z*cosf(ftempRand_t))*m_fWidth;
 
 	_attribute->tColor = D3DXCOLOR(255.f, 0.f, 0.f, 255.f-(rand()*50/RAND_MAX));
 
@@ -80,7 +80,8 @@ _int CPart_Atk::Update_Component(const _float & _fTimeDelta) {
 	{
 		if (m_BoundingBox.isPointInside(iter->vPosition) == false)
 		{
-			iter = m_arrParticle.erase(iter);
+			//iter = m_arrParticle.erase(iter);
+			Reset_Particle(&(*iter));
 		}
 		else 
 		{

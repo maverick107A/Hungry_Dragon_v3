@@ -171,6 +171,11 @@ void CParticle::Set_Size(_float _fSize) {
 	}
 }
 
+void CParticle::Set_Empty()
+{
+	m_arrParticle.clear();
+}
+
 void CParticle::Free(void) {
 	Safe_Release(m_Tex);
 	Safe_Release(m_Vb);

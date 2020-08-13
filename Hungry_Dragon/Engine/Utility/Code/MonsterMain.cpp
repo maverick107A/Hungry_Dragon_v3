@@ -64,9 +64,6 @@ int Engine::CMonsterMain::Update_Object(const float & fTimeDelta)
 	//}
 	//
 	//
-	//D3DXVECTOR3	vParticlePos;
-	//m_pTransform->Get_Info(Engine::INFO_POS, &vParticlePos);
-	//Engine::Particle_Create(D3DXVECTOR3(0.f , 10.f , 0.f));
 	
 	State_Change();
 
@@ -92,13 +89,38 @@ void Engine::CMonsterMain::LateUpdate_Object(const float & fTimeDelta)
 		m_pTransform->Set_Trans(&m_vPlayerPos);
 		m_pTransform->Update_Component(fTimeDelta);
 	}
+
+	D3DXVECTOR3	vParticlePos;
+	m_pTransform->Get_Info(Engine::INFO_POS, &vParticlePos);
+	if (m_pParticle != nullptr)
+	{
+		if (false == Engine::Set_ParticleTrans(m_pParticle, vParticlePos))
+		{
+			m_pParticle = nullptr;
+		}
+	}
 }
 
 void Engine::CMonsterMain::State_Change()
 {
+		
+
 	if (m_preState != m_eState)
 	{
+		
+		if (m_eState == MONSTER_DEACTIVATE)
+		{
+			m_pParticle = Engine::Particle_Create(_vec3(0.f, 0.f, 0.f));
+		}
+
+		if (m_eState == MONSTER_DYING&&nullptr!=m_pParticle)
+		{
+			static_cast<Engine::CParticle*>(m_pParticle)->Set_Empty();
+		}
+
 		m_preState = m_eState;
+	
+	
 	}
 }
 
@@ -107,12 +129,7 @@ void Engine::CMonsterMain::Dead_Monster(const float & fTimeDelta)
 	m_pTransform->Set_Trans(&m_vPlayerPos);
 	m_pTransform->Set_Scale(m_fScale);
 
-	//m_fParticle_Speed += fTimeDelta;
 
-	//if (m_fParticle_Speed > 0.1f)
-	//{
-	//	m_fParticle_Speed = 0;
-	//}
 
 
 	if (m_fMonster_HP < 0)
@@ -190,7 +207,6 @@ void Engine::CMonsterMain::Kill_Monster(const float & fTimeDelta)
 	m_fScale = m_fMonster_HP / m_fMonster_MaxHP;
 	m_fScale = m_fMaxScale * m_fScale;
 	Dead_Monster(fTimeDelta);
-
 }
 
 HRESULT Engine::CMonsterMain::Add_Component(void)

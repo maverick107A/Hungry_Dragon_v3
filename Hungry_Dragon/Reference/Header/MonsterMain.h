@@ -76,6 +76,8 @@ protected:
 	float						m_fMaxScale;
 	float						m_fDamaged;
 
+
+
 public:
 	static CMonsterMain*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 public:

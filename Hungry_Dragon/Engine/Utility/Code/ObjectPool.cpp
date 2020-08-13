@@ -99,6 +99,10 @@ HRESULT CObjectPool::Set_Monster_LayerMap(OBJID _Type, _int iCnt, _vec3 _Pos)
 	return S_OK;
 }
 
+
+
+
+
 void CObjectPool::Set_Object_LayerMap(CLayer * _Layer)
 {
 	m_Layer = _Layer;

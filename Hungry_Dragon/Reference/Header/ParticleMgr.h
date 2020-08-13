@@ -8,6 +8,7 @@ BEGIN(Engine)
 
 class CGameObject;
 class CResources;
+class CTransform;
 class CAtkPart;
 
 class ENGINE_DLL CParticleMgr : public CBase
@@ -17,15 +18,23 @@ class ENGINE_DLL CParticleMgr : public CBase
 private:
 	explicit CParticleMgr(void);
 	virtual ~CParticleMgr(void);
+
 public:
 	void Ready_ParticleMgr(LPDIRECT3DDEVICE9 _pGraphicDev);
 	void Particle_Update(const float& fTimeDelta);
+	void Particle_LateUpdate(const float& fTimeDelta);
 	void Particle_Render();
-	void Particle_Create(const _vec3 _pos);
+	CResources* Particle_Create(const _vec3 _pos);
+
+public:
+	bool Set_ParticleTrans(CResources* _particle,_vec3 _pos);
 
 private:
 	list<Engine::CResources*>  m_arrParticle;
+	vector<Engine::_vec3>	m_vecTrans;
 	LPDIRECT3DDEVICE9		m_pGraphicDev;
+	CTransform*				m_pParticleTrans;
+
 public:
 	virtual void Free(void) override;
 };

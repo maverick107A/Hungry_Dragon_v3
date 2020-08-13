@@ -6,6 +6,7 @@
 #include <vector>
 #include <list>
 #include <map>
+#include <queue>
 #include <string>
 #include <algorithm>
 #include <functional>
@@ -40,7 +41,7 @@ const D3DXCOLOR MAGENTA  (255,255,0,255);
 #define TILECZ 200
 #define VERTEXSIZE 129
 #define Pi 3.141592f
-#define GRAVITY 5.f
+#define GRAVITY 0.5f
 #define INVERSETILESIZE 0.005f
 
 #endif // Engine_Define_h__
