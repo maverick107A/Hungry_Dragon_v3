@@ -1,0 +1,317 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="00. Resources">
+      <UniqueIdentifier>{db949b0a-963c-4990-a3ae-fcc0f50cf80e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. ResourcesMgr">
+      <UniqueIdentifier>{ed27f495-059e-4fd9-8618-d483e9ccde60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99. Export">
+      <UniqueIdentifier>{294b9dbb-578b-4490-beb3-77fc78777376}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\00. VIBuffer">
+      <UniqueIdentifier>{089f5e49-4d7e-48b9-9d2d-e5982a1305b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\01. Texture">
+      <UniqueIdentifier>{e71cc84e-7a0a-4040-8b0f-32e30cdd4e2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\00. VIBuffer\02. CubeCol">
+      <UniqueIdentifier>{75f8c4c9-e548-43a6-8e18-d379ab5004cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\00. VIBuffer\00. Terrain">
+      <UniqueIdentifier>{329c2def-0cb7-4f8d-8d22-0e319bc6270d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\00. VIBuffer\01. CubeDra">
+      <UniqueIdentifier>{ca1824d6-ac76-48e6-a532-88f456d7b6b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\02. Particle">
+      <UniqueIdentifier>{e0bbf74c-4a82-4068-82de-210f3e591c81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\00. VIBuffer\50. Land">
+      <UniqueIdentifier>{977a85cf-1f9f-4eb3-b53f-476bc2a9e8b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\03. Billboard">
+      <UniqueIdentifier>{15913e37-01e8-4031-a380-ea3c0f83e119}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\04. Sector">
+      <UniqueIdentifier>{ef499313-1de3-48fc-b4b5-b99b3d9eb3d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\00. VIBuffer\51. SkyCube">
+      <UniqueIdentifier>{b7db04ef-75f4-4789-a8fb-cde7bc0a61ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\00. VIBuffer\52. Sculpture">
+      <UniqueIdentifier>{7c9e6c9e-6c4a-408a-a719-20eea80a666f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\00. VIBuffer\20. Texture_Cube">
+      <UniqueIdentifier>{4e9eefee-a045-4010-98fe-be4eecb62b74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="100. JunkBox">
+      <UniqueIdentifier>{83d4523a-6ac5-4733-aac5-e688c6f3daee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="100. JunkBox\01. TerrainTex">
+      <UniqueIdentifier>{97516da8-155b-4ed8-b97a-6f36aa3e1f2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\00. VIBuffer\03. Texture_Plane">
+      <UniqueIdentifier>{b79e6145-e047-4d3b-9a36-28b7b90cce6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\00. VIBuffer\90. Texture_Square">
+      <UniqueIdentifier>{cd531f57-80a2-45c4-8b0b-74eb13295f17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\02. Particle\00. Part_Atk">
+      <UniqueIdentifier>{9dec9d84-03db-4be6-a711-a6288816a69e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\02. Particle\01. Part_Wind">
+      <UniqueIdentifier>{f3fb3540-780d-4a87-a8b1-4d2779849aeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\00. VIBuffer\53. CaveCylinder">
+      <UniqueIdentifier>{aa60487b-e241-4c01-967a-325101d817c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\00. VIBuffer\54. VentCube">
+      <UniqueIdentifier>{5547bb62-6096-4937-a088-f780ae8b8d0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\03. Billboard\00. Terrain Board">
+      <UniqueIdentifier>{60d86853-7a3a-496d-b3f9-8a4b1f38524e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\03. Billboard\00. Terrain Board\01. TreeBoard">
+      <UniqueIdentifier>{6c7322db-59e4-4272-ada4-e2512b25d8f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\03. Billboard\00. Terrain Board\00. MeteorBoard">
+      <UniqueIdentifier>{f9e98599-5e32-49e1-97ce-5da90adc170a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\03. Billboard\01. Monster Board">
+      <UniqueIdentifier>{1527f2c7-32d3-4daa-8ea1-6ff05d2e1a1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\00. VIBuffer\55. ObsCube">
+      <UniqueIdentifier>{2282a9dd-982b-4617-b935-d3096e5e199e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\00. VIBuffer\56. HeightCol">
+      <UniqueIdentifier>{f16e813e-6663-473b-983a-fed114d0b3d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\00. VIBuffer\91. VICustom">
+      <UniqueIdentifier>{33281f5c-858e-4847-b8f6-46a5d89dfcf8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Code\Resources.cpp">
+      <Filter>00. Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\VIBuffer.cpp">
+      <Filter>00. Resources\00. VIBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ResourcesMgr.cpp">
+      <Filter>01. ResourcesMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Texture.cpp">
+      <Filter>00. Resources\01. Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CubeDra.cpp">
+      <Filter>00. Resources\00. VIBuffer\01. CubeDra</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CubeCol.cpp">
+      <Filter>00. Resources\00. VIBuffer\02. CubeCol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\TerrainTex.cpp">
+      <Filter>100. JunkBox\01. TerrainTex</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Terrain.cpp">
+      <Filter>00. Resources\00. VIBuffer\00. Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Particle.cpp">
+      <Filter>00. Resources\02. Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BaseLand.cpp">
+      <Filter>00. Resources\00. VIBuffer\50. Land</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ForestLand.cpp">
+      <Filter>00. Resources\00. VIBuffer\50. Land</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\RiftLand.cpp">
+      <Filter>00. Resources\00. VIBuffer\50. Land</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\VolcanoLand.cpp">
+      <Filter>00. Resources\00. VIBuffer\50. Land</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\IceAgeLand.cpp">
+      <Filter>00. Resources\00. VIBuffer\50. Land</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BoardSector.cpp">
+      <Filter>00. Resources\04. Sector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BaseSector.cpp">
+      <Filter>00. Resources\04. Sector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\RoadSector.cpp">
+      <Filter>00. Resources\04. Sector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\UnitSector.cpp">
+      <Filter>00. Resources\04. Sector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\SkyCube.cpp">
+      <Filter>00. Resources\00. VIBuffer\51. SkyCube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\GlacierTex.cpp">
+      <Filter>00. Resources\00. VIBuffer\52. Sculpture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\RockTex.cpp">
+      <Filter>00. Resources\00. VIBuffer\52. Sculpture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Texture_Cube.cpp">
+      <Filter>00. Resources\00. VIBuffer\20. Texture_Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MeteorBoard.cpp">
+      <Filter>00. Resources\03. Billboard\00. Terrain Board\00. MeteorBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\TreeBoard.cpp">
+      <Filter>00. Resources\03. Billboard\00. Terrain Board\01. TreeBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Texture_Plane.cpp">
+      <Filter>00. Resources\00. VIBuffer\03. Texture_Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Texture_Square.cpp">
+      <Filter>00. Resources\00. VIBuffer\90. Texture_Square</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Part_Atk.cpp">
+      <Filter>00. Resources\02. Particle\00. Part_Atk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Part_Wind.cpp">
+      <Filter>00. Resources\02. Particle\01. Part_Wind</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CaveCylinder.cpp">
+      <Filter>00. Resources\00. VIBuffer\53. CaveCylinder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\VentCube.cpp">
+      <Filter>00. Resources\00. VIBuffer\54. VentCube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BaseBoard.cpp">
+      <Filter>00. Resources\03. Billboard\00. Terrain Board</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MonsterBoard.cpp">
+      <Filter>00. Resources\03. Billboard\01. Monster Board</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\ObstacleCube.cpp">
+      <Filter>00. Resources\00. VIBuffer\55. ObsCube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\HeightCol.cpp">
+      <Filter>00. Resources\00. VIBuffer\56. HeightCol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\VICustom.cpp">
+      <Filter>00. Resources\00. VIBuffer\91. VICustom</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Code\Resources.h">
+      <Filter>00. Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\VIBuffer.h">
+      <Filter>00. Resources\00. VIBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\ResourcesMgr.h">
+      <Filter>01. ResourcesMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Header\Export_Resources.h">
+      <Filter>99. Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Texture.h">
+      <Filter>00. Resources\01. Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\CubeDra.h">
+      <Filter>00. Resources\00. VIBuffer\01. CubeDra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\CubeCol.h">
+      <Filter>00. Resources\00. VIBuffer\02. CubeCol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\TerrainTex.h">
+      <Filter>100. JunkBox\01. TerrainTex</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Terrain.h">
+      <Filter>00. Resources\00. VIBuffer\00. Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Particle.h">
+      <Filter>00. Resources\02. Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\BaseLand.h">
+      <Filter>00. Resources\00. VIBuffer\50. Land</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\ForestLand.h">
+      <Filter>00. Resources\00. VIBuffer\50. Land</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\RiftLand.h">
+      <Filter>00. Resources\00. VIBuffer\50. Land</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\VolcanoLand.h">
+      <Filter>00. Resources\00. VIBuffer\50. Land</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\IceAgeLand.h">
+      <Filter>00. Resources\00. VIBuffer\50. Land</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\BoardSector.h">
+      <Filter>00. Resources\04. Sector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\BaseSector.h">
+      <Filter>00. Resources\04. Sector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\RoadSector.h">
+      <Filter>00. Resources\04. Sector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\UnitSector.h">
+      <Filter>00. Resources\04. Sector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\SkyCube.h">
+      <Filter>00. Resources\00. VIBuffer\51. SkyCube</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\GlacierTex.h">
+      <Filter>00. Resources\00. VIBuffer\52. Sculpture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\RockTex.h">
+      <Filter>00. Resources\00. VIBuffer\52. Sculpture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Texture_Cube.h">
+      <Filter>00. Resources\00. VIBuffer\20. Texture_Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\MeteorBoard.h">
+      <Filter>00. Resources\03. Billboard\00. Terrain Board\00. MeteorBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\TreeBoard.h">
+      <Filter>00. Resources\03. Billboard\00. Terrain Board\01. TreeBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Texture_Plane.h">
+      <Filter>00. Resources\00. VIBuffer\03. Texture_Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Texture_Square.h">
+      <Filter>00. Resources\00. VIBuffer\90. Texture_Square</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Part_Atk.h">
+      <Filter>00. Resources\02. Particle\00. Part_Atk</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Part_Wind.h">
+      <Filter>00. Resources\02. Particle\01. Part_Wind</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\CaveCylinder.h">
+      <Filter>00. Resources\00. VIBuffer\53. CaveCylinder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\VentCube.h">
+      <Filter>00. Resources\00. VIBuffer\54. VentCube</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\BaseBoard.h">
+      <Filter>00. Resources\03. Billboard\00. Terrain Board</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\MonsterBoard.h">
+      <Filter>00. Resources\03. Billboard\01. Monster Board</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\ObstacleCube.h">
+      <Filter>00. Resources\00. VIBuffer\55. ObsCube</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\HeightCol.h">
+      <Filter>00. Resources\00. VIBuffer\56. HeightCol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\VICustom.h">
+      <Filter>00. Resources\00. VIBuffer\91. VICustom</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Header\Export_Resources.inl">
+      <Filter>99. Export</Filter>
+    </None>
+  </ItemGroup>
+</Project>
