@@ -49,7 +49,7 @@ bool CCollisionMgr::Player_MonsterCol(CGameObject * _caller, CGameObject * _call
 	_callee->Get_Transform()->Get_Info(Engine::INFO_POS, &vMonsterPos);
 	vDis = vPlayerPos - vMonsterPos;
 
-	return ((powf(vDis.x, 2) + powf(vDis.y, 2) + powf(vDis.z, 2)) < 4);
+	return ((powf(vDis.x, 2) + powf(vDis.y, 2) + powf(vDis.z, 2)) < 50);
 }
 
 

@@ -18,6 +18,11 @@ HRESULT CJump_Monster::Ready_Object(void)
 	Engine::CMonsterMain::Ready_Object();
 	Add_Component();
 	m_fSpeed = 20.f;
+	m_fMonster_HP = 100.f;
+	m_fMonster_MaxHP = 100.f;
+	m_fScale = 5.f;
+	m_fMaxScale = 5.f;
+	m_fDamaged = 5.f;
 	m_eState = MONSTER_REBORN;
 
 	return S_OK;
@@ -30,7 +35,11 @@ int CJump_Monster::Update_Object(const float & fTimeDelta)
 	{
 		m_pTransform->Set_Trans(&m_vFirstPos);
 		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
-		m_pTransform->Set_Scale(1);
+		m_pTransform->Set_Scale(m_fMaxScale);
+
+		m_fMonster_HP = 100.f;
+		m_fScale = 10.f;
+
 		m_iEvent = OBJ_NOEVENT;
 		m_eState = MONSTER_IDLE;
 	}

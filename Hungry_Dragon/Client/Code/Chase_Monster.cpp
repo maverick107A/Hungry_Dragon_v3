@@ -20,8 +20,8 @@ HRESULT CChase_Monster::Ready_Object(void)
 	m_fSpeed = 50.f;
 	m_fMonster_HP    = 100.f;
 	m_fMonster_MaxHP = 100.f;
-	m_fScale		 = 10.f;
-	m_fMaxScale      = 10.f;
+	m_fScale = 5.f;
+	m_fMaxScale = 5.f;
 	m_fDamaged		 = 5.f;
 	m_eState = MONSTER_REBORN;
 	return S_OK;
