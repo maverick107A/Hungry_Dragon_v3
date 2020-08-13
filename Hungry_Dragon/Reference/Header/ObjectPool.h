@@ -23,8 +23,11 @@ public:
 	void		Set_Object_LayerMap(CLayer *  _Layer);
 	HRESULT		Set_Bullet_LayerMap(OBJID _Type, _int iCnt, _vec3 _Pos);
 	HRESULT		Set_Monster_LayerMap(OBJID _Type, _int iCnt, _vec3 _Pos);
+	HRESULT		Set_Monster_CaveMap(OBJID _Type, _int iCnt, _vec3 _Pos);
+
 private:
 	CLayer*		m_Layer;
+	_float		m_fRaidus;
 	list<CGameObject*>  m_listObject[OBJID::OBJ_END];
 public:
 	virtual void	Free(void);

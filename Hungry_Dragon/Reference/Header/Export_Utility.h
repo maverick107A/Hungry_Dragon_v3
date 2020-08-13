@@ -48,6 +48,8 @@ inline HRESULT		Add_Object_Layer(OBJID _Type, _int iCnt);
 inline HRESULT		Add_Object_Pool(CGameObject* pGameObject, OBJID _Type);
 inline HRESULT      Set_Bullet_LayerMap(OBJID _Type, _int iCnt, _vec3 _Pos);
 inline HRESULT		Set_Monster_LayerMap(OBJID _Type, _int iCnt, _vec3 _Pos);
+inline HRESULT		Set_Monster_CaveMap(OBJID _Type, _int iCnt, _vec3 _Pos);
+
 inline  void		Set_Object_LayerMap(CLayer *  _Layer);
 
 //Collision

@@ -23,8 +23,16 @@ HRESULT CBat_Monster::Ready_Object(void)
 	
 	m_tFrame.fStartFrame = 0.f;
 	m_tFrame.fMaxFrame   = 6.f;
-	m_tFrame.fFrameSpeed = 0.5f;
-	m_fHeight = 500.f;
+	m_tFrame.fFrameSpeed = 1.5f;
+	m_fHeight = 0.f;
+
+
+	m_fSpeed = 5.f;
+	m_fMonster_HP = 100.f;
+	m_fMonster_MaxHP = 100.f;
+	m_fScale = 1.f;
+	m_fMaxScale = 1.f;
+	m_fDamaged = 2.f;
 
 	return S_OK;
 }
@@ -35,8 +43,10 @@ int CBat_Monster::Update_Object(const float & fTimeDelta)
 	if (m_eState == MONSTER_REBORN && m_eState != MONSTER_DEACTIVATE)
 	{
 		m_pTransform->Set_Trans(&m_vFirstPos);
-		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain() + m_fHeight;
-		m_pTransform->Set_Scale(1);
+		//m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain() + m_fHeight;
+		m_pTransform->Set_Scale(m_fMaxScale);
+		m_fMonster_HP = 100.f;
+		m_fScale = 1.f;
 		m_iEvent = OBJ_NOEVENT;
 		m_eState = MONSTER_IDLE;
 	}
@@ -50,6 +60,8 @@ int CBat_Monster::Update_Object(const float & fTimeDelta)
 	}
 
 
+	D3DXVECTOR3 vCaveDir = { 0.f , 0.f ,-m_fSpeed };
+	m_pTransform->Add_Trans(&vCaveDir);
 	// Y ºôº¸µå
 
 	// D3DXMATRIX		matView;
@@ -77,17 +89,17 @@ int CBat_Monster::Update_Object(const float & fTimeDelta)
 void CBat_Monster::Render_Object(void)
 {	
 	m_pTransform->Set_Transform(m_pGraphicDev);
-	//
-	//m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
-	//
-	//m_pGraphicDev->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
-	//m_pGraphicDev->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
-	//
+	
+	m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
+	
+	m_pGraphicDev->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+	m_pGraphicDev->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+	
 	m_pTextureCom->Set_Texture((int)m_tFrame.fStartFrame);
 	m_pBufferBoradCom->Render_Buffer();
 	Engine::CMonsterMain::Render_Object();
-	//
-	//m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
+	
+	m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 
 
 }
@@ -111,7 +123,7 @@ HRESULT CBat_Monster::Add_Component(void)
 	//
 	
 	pComponent = m_pTextureCom = dynamic_cast<Engine::CTexture*>
-		(Engine::Clone(RESOURCE_STAGE, L"Texture_BoxHead"));
+		(Engine::Clone(RESOURCE_STAGE, L"Texture_Bat"));
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Texture", pComponent);
 

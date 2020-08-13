@@ -109,6 +109,9 @@ HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 	case BUFFER_ROCKMESH:
 		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/Rock12.dat");
 		break;
+	case BUFFER_CHRYSTAL:
+		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/Chrystal.dat");
+		break;
 	}
 
 	m_pmapResource[wContainerIdx].emplace(pBufferTag, pResources);

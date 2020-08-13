@@ -16,7 +16,8 @@ private:
 public:
 	// 몬스터 뿌려 주는 곳
 	void Game_Update(D3DXVECTOR3 _vPlayerPos);
-
+	void Cave_ObjPool_Update(D3DXVECTOR3 _vPlayerPos);
+	
 private:
 	// 출력할 글디바.
 	LPDIRECT3DDEVICE9				m_pGraphicDev;

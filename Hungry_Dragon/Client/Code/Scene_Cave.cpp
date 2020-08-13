@@ -1,6 +1,6 @@
 ﻿#include "stdafx.h"
 #include "Scene_Cave.h"
-
+#include "GameMgr.h"
 #include "Export_Function.h"
 #include "SkySphere.h"
 #include "Cave.h"
@@ -107,7 +107,10 @@ _int CScene_Cave::Update_Scene(const _float& fTimeDelta)
 	{
 		m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 	}
+	//플레이어 위치 최신화
+	pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);
 
+	CGameMgr::GetInstance()->Cave_ObjPool_Update(m_vPlayerPos);
 	return 0;
 }
 
@@ -182,7 +185,10 @@ HRESULT CScene_Cave::Ready_Layer_Environment(const _tchar * pLayerTag) {
 	FAILED_CHECK_RETURN(Register_GameObject<CCave>(&m_pCave, pLayer, L"Cave"), E_FAIL);
 	FAILED_CHECK_RETURN(Register_GameObject<CVent>(&m_pVent, pLayer, L"Vent"), E_FAIL);
 	
-	
+	for (int i = 0; i < 3000; ++i)
+	{
+		FAILED_CHECK_RETURN(Register_ObjectPool<CBat_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
+	}
 
 	//m_pVent->Set_Trans(_vec3(0.f,0.f, m_pCave->Get_EndPoint()+4000.f));
 	m_mapLayer.emplace(pLayerTag, pLayer);
@@ -202,6 +208,10 @@ HRESULT CScene_Cave::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 	Engine::CGameObject*		pGameObject = nullptr;
 
 	FAILED_CHECK_RETURN(Register_GameObject<CCavePlayer>(pLayer, L"TestPlayer"), E_FAIL);
+
+	CGameObject* tempPlayer = pLayer->Get_Object(L"TestPlayer", Engine::Find_First, nullptr);
+	pPlayerTransformCom = static_cast<CTransform*>(tempPlayer->Get_Component(L"Com_Transform", Engine::ID_DYNAMIC));
+	pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);
 	return S_OK;
 }
 

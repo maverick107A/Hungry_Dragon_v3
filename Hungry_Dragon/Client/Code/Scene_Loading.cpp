@@ -122,6 +122,12 @@ _uint CScene_Loading::Loading_ForStage(void)
 		L"BUFFER_DIAMESH",
 		Engine::BUFFER_DIAMESH),
 		E_FAIL);
+	
+	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"BUFFER_CHRYSTAL",
+		Engine::BUFFER_CHRYSTAL),
+		E_FAIL);
 
 	lstrcpy(m_szFinish, L"Texture Loading............");
 
@@ -143,7 +149,7 @@ _uint CScene_Loading::Loading_ForStage(void)
 		RESOURCE_STAGE,
 		L"Texture_Bat",
 		Engine::TEX_NORMAL,
-		L"../../Asset/Monster/Bat.png"),
+		L"../../Asset/Monster/CaveBat/%d.png" , 8),
 		E_FAIL);
 
 

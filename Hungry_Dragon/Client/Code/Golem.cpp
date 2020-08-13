@@ -24,6 +24,7 @@ HRESULT CGolem::Ready_Object(void)
 	m_fMaxScale = 15.f;
 	m_fDamaged = 2.f;
 	m_eState = MONSTER_REBORN;
+
 	return S_OK;
 }
 
@@ -53,46 +54,52 @@ int CGolem::Update_Object(const float & fTimeDelta)
 
 
 
-	if (m_eState == MONSTER_ACTIVATE && m_eState != MONSTER_DEACTIVATE)
-	{
-		vPlayerPos = { m_vPlayerPos.x  , 0.f  , m_vPlayerPos.z };
-		m_pTransform->Chase_Target(&vPlayerPos, (fTimeDelta * m_fSpeed));
-		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
-	}
+
+	//if (m_eState == MONSTER_ACTIVATE && m_eState != MONSTER_DEACTIVATE)
+	//{
+	//	vPlayerPos = { m_vPlayerPos.x  , 0.f  , m_vPlayerPos.z };
+	//	m_pTransform->Chase_Target(&vPlayerPos, (fTimeDelta * m_fSpeed));
+	//	m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
+	//}
 
 	return m_iEvent;
 }
 
 void CGolem::Render_Object(void)
 {
+	if (m_eState != MONSTER_DEACTIVATE && m_eState != MONSTER_DYING)
+	{
+		m_pTransform->Get_Info(Engine::INFO_POS, &m_vLeftArmPos);
+		m_pTransform->Get_Info(Engine::INFO_POS, &m_vRightArmPos);
+	}
 
-	m_pTransform->Get_Info(Engine::INFO_POS, &m_vLeftArmPos);
-	m_pTransform->Get_Info(Engine::INFO_POS, &m_vRightArmPos);
+
 	m_pTransform->Get_Info(Engine::INFO_POS, &m_vBodyPos);
 
 
-	if (m_eState != MONSTER_DEACTIVATE && m_eState != MONSTER_DYING)
-	{
-		// ¿À¸¥ÆÈ
-		m_pTransform->Set_Scale(3);
-		m_vLeftArmPos.x += 20;
-		m_pTransform->Set_Trans(&m_vLeftArmPos);
-		m_pTransform->Update_Component(0.01f);
-		m_pTransform->Set_Transform(m_pGraphicDev);	
-	}
+	
+	// ¿À¸¥ÆÈ
+	m_pTransform->Set_Scale(5);
+	m_vLeftArmPos.x += 10;
+	m_vLeftArmPos.y -= 5;
 
-	m_pBufferMeshCom->Render_Buffer();
+	m_pTransform->Set_Trans(&m_vLeftArmPos);
+	m_pTransform->Update_Component(0.01f);
+	m_pTransform->Set_Transform(m_pGraphicDev);
+	
 
-	if (m_eState != MONSTER_DEACTIVATE && m_eState != MONSTER_DYING)
-	{	// ¿Þ? ÆÈ
-		m_pTransform->Set_Scale(3);
-		m_vRightArmPos.x -= 20;
-		m_pTransform->Set_Trans(&m_vRightArmPos);
-		m_pTransform->Update_Component(0.01f);
-		m_pTransform->Set_Transform(m_pGraphicDev);
-	}
+	m_pBufferChrystalMeshCom->Render_Buffer();
 
-	m_pBufferMeshCom->Render_Buffer();
+	// ¿Þ? ÆÈ
+	m_pTransform->Set_Scale(5);
+	m_vRightArmPos.x -= 10;
+	m_vRightArmPos.y -= 5;
+	m_pTransform->Set_Trans(&m_vRightArmPos);
+	m_pTransform->Update_Component(0.01f);
+	m_pTransform->Set_Transform(m_pGraphicDev);
+	
+
+	m_pBufferChrystalMeshCom->Render_Buffer();
 
 
 
@@ -119,6 +126,14 @@ HRESULT CGolem::Add_Component(void)
 		(Engine::Clone(RESOURCE_STAGE, L"BUFFER_ROCKMESH"));
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Buffer", pComponent);
+
+
+	// buffer
+	pComponent = m_pBufferChrystalMeshCom = dynamic_cast<Engine::CVICustom*>
+		(Engine::Clone(RESOURCE_STAGE, L"BUFFER_CHRYSTAL"));
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	m_mapComponent[Engine::ID_STATIC].emplace(L"Chrystal_Buffer", pComponent);
+	
 
 
 	return S_OK;

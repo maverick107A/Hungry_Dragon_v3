@@ -67,6 +67,11 @@ inline HRESULT Set_Monster_LayerMap(OBJID _Type, _int iCnt, _vec3 _Pos)
 	return CObjectPool::GetInstance()->Set_Monster_LayerMap(_Type, iCnt, _Pos);
 }
 
+inline HRESULT Set_Monster_CaveMap(OBJID _Type, _int iCnt, _vec3 _Pos)
+{
+	return CObjectPool::GetInstance()->Set_Monster_CaveMap(_Type, iCnt, _Pos);
+}
+
 void		Set_Object_LayerMap(CLayer *  _Layer)
 {
 	return CObjectPool::GetInstance()->Set_Object_LayerMap(_Layer);

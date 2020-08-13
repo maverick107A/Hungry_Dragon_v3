@@ -15,7 +15,7 @@
 //-------------------------------------------------------
 //여기에 기타 헤더 추가
 
-
+#include "Bat_Monster.h"
 //-------------------------------------------------------
 
 using namespace Engine;
@@ -52,7 +52,9 @@ private:
 	ID3DXEffect*	m_pFogEffect = 0;
 	D3DXHANDLE		m_hFogTechHandle = 0;
 
-
+private:
+	// 플레이어 받아오는곳
+	Engine::CTransform*		pPlayerTransformCom;
 private:
 	virtual void Free(void) override;
 };
