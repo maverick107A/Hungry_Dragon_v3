@@ -1,26 +1,26 @@
-#ifndef Terrain_Locater_h__
-#define Terrain_Locater_h__
+#ifndef Tree_Locater_h__
+#define Tree_Locater_h__
 
 #include "Define.h"
 #include "GameObject.h"
 
 BEGIN(Engine)
 
-class CHeightCol;
 class CTransform;
 class CRenderer;
 
 END
 
+class CTree_Object;
 class CTerrain_Parts;
 
 USING(Engine)
 
-class CTerrain_Locater : public Engine::CGameObject
+class CTree_Locater : public Engine::CGameObject
 {
 private:
-	explicit CTerrain_Locater(LPDIRECT3DDEVICE9 pGraphicDev);
-	virtual ~CTerrain_Locater(void);
+	explicit CTree_Locater(LPDIRECT3DDEVICE9 pGraphicDev);
+	virtual ~CTree_Locater(void);
 
 public:
 	virtual HRESULT Ready_Object(void) override;
@@ -29,25 +29,19 @@ public:
 	virtual void Render_Object(void) override;
 
 public:
-	_uint Get_CurrSectorNum() { return m_uCurrSectorNum; }
-	vector<int> Get_PartsHeight(_uint _uNum);
+	void Locate_Tree();
 
 private:
 	HRESULT		Add_Component(void);
 
 private:
-	Engine::CHeightCol*		m_pDummy = nullptr;
 	Engine::CTransform*		m_pTransform = nullptr;
 	Engine::CTransform*		m_pPlayerTrans = nullptr;
 
-	CTerrain_Parts*	m_pParts[50] = { 0 };
-
-	list<_uint> m_lstRenderIdx;
-	_uint m_uOldSectorNum = 0;
-	_uint m_uCurrSectorNum = 0;
+	list<CTree_Object*> m_arrRenderGroupIdx[50];
 
 public:
-	static CTerrain_Locater*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
+	static CTree_Locater*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 private:
 	virtual void Free(void) override;
 

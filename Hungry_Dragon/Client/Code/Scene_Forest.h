@@ -33,6 +33,7 @@
 #include "Ocean.h"
 #include "PlayerUI.h"
 #include "Terrain_Locater.h"
+#include "Tree_Locater.h"
 //-------------------------------------------------------
 
 using namespace Engine;

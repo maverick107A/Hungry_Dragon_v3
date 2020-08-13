@@ -129,6 +129,12 @@ _uint CScene_Loading::Loading_ForStage(void)
 		Engine::BUFFER_CHRYSTAL),
 		E_FAIL);
 
+	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"BUFFER_TREEMESH",
+		Engine::BUFFER_TREEMESH),
+		E_FAIL);
+
 	lstrcpy(m_szFinish, L"Texture Loading............");
 
 	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,

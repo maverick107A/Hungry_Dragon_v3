@@ -41,11 +41,17 @@ void CTerrain_Parts::Render_Object(void)
 void CTerrain_Parts::Set_HeightMap(const _tchar * _pPath)
 {
 	m_pBufferCom->Set_Height(_pPath);
+	
 }
 
 void CTerrain_Parts::Set_Trans(_vec3 & _vPos)
 {
 	m_pTransform->Set_Trans(&_vPos);
+}
+
+vector<int> CTerrain_Parts::Get_HeightVector()
+{
+	return m_pBufferCom->Get_TerrainHeight();
 }
 
 

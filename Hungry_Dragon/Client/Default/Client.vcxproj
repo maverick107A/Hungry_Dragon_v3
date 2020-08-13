@@ -188,6 +188,8 @@
     <ClInclude Include="..\Code\Terrain_Parts.h" />
     <ClInclude Include="..\Code\TestPlayer.h" />
     <ClInclude Include="..\Code\PlayerUI.h" />
+    <ClInclude Include="..\Code\Tree_Locater.h" />
+    <ClInclude Include="..\Code\Tree_Object.h" />
     <ClInclude Include="..\Code\Vent.h" />
     <ClInclude Include="..\Header\Define.h" />
     <ClInclude Include="Client.h" />
@@ -227,6 +229,8 @@
     <ClCompile Include="..\Code\Terrain_Parts.cpp" />
     <ClCompile Include="..\Code\TestPlayer.cpp" />
     <ClCompile Include="..\Code\PlayerUI.cpp" />
+    <ClCompile Include="..\Code\Tree_Locater.cpp" />
+    <ClCompile Include="..\Code\Tree_Object.cpp" />
     <ClCompile Include="..\Code\Vent.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="stdafx.cpp">

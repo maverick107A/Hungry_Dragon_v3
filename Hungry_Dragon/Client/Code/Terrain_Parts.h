@@ -29,6 +29,7 @@ public:
 	void Set_HeightMap(const _tchar* _pPath);
 	void Set_Trans(_vec3& _vPos);
 	CHeightCol*	Get_BufferCom() { return m_pBufferCom; }
+	vector<int> Get_HeightVector();
 
 public:
 	void Weld_Edge(CTerrain_Parts* _Dst, bool _bHorizontal);

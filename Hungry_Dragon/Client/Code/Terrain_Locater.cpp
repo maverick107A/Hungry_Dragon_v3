@@ -297,6 +297,15 @@ void CTerrain_Locater::Free(void)
 }
 
 
+vector<int> CTerrain_Locater::Get_PartsHeight(_uint _uNum)
+{
+	if (0 > _uNum || 49 < _uNum)
+	{
+		abort();
+	}
+	return m_pParts[_uNum]->Get_HeightVector();
+}
+
 HRESULT CTerrain_Locater::Add_Component(void)
 {
 	Engine::CComponent*		pComponent = nullptr;
@@ -312,7 +321,8 @@ HRESULT CTerrain_Locater::Add_Component(void)
 		m_pParts[i] = CTerrain_Parts::Create(m_pGraphicDev);
 		wsprintf(szBuf, L"../../Asset/Terrain/Korea/KoreaHeight_%.2d.bmp", i + 1);
 		//wsprintf(szBuf, L"../../Asset/Terrain/Australia/Australia_%.2d.bmp", i + 1);
-		m_pParts[i]->Set_HeightMap(L"../../Asset/Terrain/Korea/KoreaHeight_51.bmp");
+		m_pParts[i]->Set_HeightMap(szBuf);
+		//m_pParts[i]->Set_HeightMap(L"../../Asset/Terrain/Korea/KoreaHeight_51.bmp");
 		m_pParts[i]->Set_Trans(_vec3(12800.f*((i%5)-2),0.f, -12800.f*((i/5)-5)));
 	}
 
