@@ -35,6 +35,7 @@ void CPLandIdle::Update_State(const float& fTimeDelta)
 		m_pPlayer->Set_Sate(CPlayerMain::STATE_FLY);
 	}
 	m_pPlayer->Add_Stamina(1);
+	m_pPlayer->Get_Transform()->m_vInCamPos.z = -10.f;
 }
 
 void CPLandIdle::Out_State()

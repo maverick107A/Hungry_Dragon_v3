@@ -24,8 +24,6 @@ CTestPlayer::~CTestPlayer(void)
 
 HRESULT CTestPlayer::Ready_Object(void)
 {
-	
-
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
 	m_pTransform->m_vInfo[Engine::INFO_POS].x = 0.f;
@@ -45,7 +43,8 @@ void CTestPlayer::Initialize_Object(void)
 
 int CTestPlayer::Update_Object(const float& fTimeDelta)
 {
-	m_pTerrain = m_pTerrrrrrrain->Get_Terrain();
+	if(m_pTerrrrrrrain)
+		m_pTerrain = m_pTerrrrrrrain->Get_Terrain();
 	//Key_Input(fTimeDelta);
 
 	//Ride_Terrain();
