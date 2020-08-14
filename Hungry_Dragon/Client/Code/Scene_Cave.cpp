@@ -91,7 +91,7 @@ HRESULT CScene_Cave::Ready_Scene(void)
 
 	m_hFogTechHandle = m_pFogEffect->GetTechniqueByName("Fog");
 
-
+	m_pGraphicDev->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_GOURAUD);
 
 	return S_OK;
 }

@@ -80,19 +80,21 @@ HRESULT CScene_Forest::Ready_Scene(void) {
 _int CScene_Forest::Update_Scene(const _float& fTimeDelta) {
 	if (GetAsyncKeyState('F') & 0x0001)
 	{
-		if(m_bWireFrame)
+		if(m_bWireFrameMode)
 			m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 		else
 			m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
-		m_bWireFrame = !m_bWireFrame;
+		m_bWireFrameMode = !m_bWireFrameMode;
 	}
 	if (GetAsyncKeyState(VK_F5) & 0x0001)
 	{
 		m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+		m_bWireFrameMode = true;
 	}
 	if (GetAsyncKeyState(VK_F6) & 0x0001)
 	{
 		m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+		m_bWireFrameMode = false;
 	}
 	if (GetAsyncKeyState(VK_F7) & 0x0001)
 	{
@@ -143,8 +145,10 @@ void CScene_Forest::Render_Scene(void) {
 	D3DXMatrixIdentity(&matWorld);
 	m_pGraphicDev->SetTransform(D3DTS_WORLD, &matWorld);
 	Engine::Particle_Render();
-
-	m_mapLayer[L"Environment"]->Render_Layer();
+	if (!m_bWireFrameMode)
+	{
+		m_mapLayer[L"Environment"]->Render_Layer();
+	}
 	m_mapLayer[L"GameLogic"]->Render_Layer();
 	
 	m_pFogEffect->End();
@@ -225,7 +229,7 @@ HRESULT CScene_Forest::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 	FAILED_CHECK_RETURN(Register_GameObject<CTree_Locater>(pLayer, L"TreeObject"), E_FAIL);		// 무조건 터레인 로케이터 뒤에
 	FAILED_CHECK_RETURN(Register_GameObject<CTestPlayer>(pLayer, L"TestPlayer"), E_FAIL);
 
-	for (int i = 0; i < 250; ++i)
+	for (int i = 0; i < 50; ++i)
 	{
 		FAILED_CHECK_RETURN(Register_ObjectPool<CGolem>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
 		FAILED_CHECK_RETURN(Register_ObjectPool<CChase_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);

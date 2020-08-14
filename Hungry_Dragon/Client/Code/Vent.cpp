@@ -119,7 +119,7 @@ _int CVent::Update_Object(const _float& fTimeDelta)
 	if (bCheck)
 	{
 		m_pPlayer->Get_Camera()->Set_Shock();
-		m_pPlayer->Add_Hp(-50);
+		m_pPlayer->Add_Hp(-10);
 	}
 	for (_uint i = 0; i < m_uDelayDeactNum; ++i)
 	{
