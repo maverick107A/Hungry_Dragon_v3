@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Scene_Cloud.h"
 #include "Export_Function.h"
-#include "GameMgr.h"
 #include "Ingame_Flow.h"
 
 CScene_Cloud::CScene_Cloud(LPDIRECT3DDEVICE9 pGraphicDev)
@@ -107,7 +106,7 @@ _int CScene_Cloud::Update_Scene(const _float& fTimeDelta) {
 
 	//플레이어 위치 최신화
 	pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);
-	CGameMgr::GetInstance()->Game_Update(m_vPlayerPos);
+	Engine::Set_Monster_LayerMap(OBJID::STAND_MONSTER, 9999, m_vPlayerPos);
 	
 	
 	Engine::CScene::Update_Scene(fTimeDelta);
@@ -155,7 +154,6 @@ void CScene_Cloud::Render_Scene(void) {
 void CScene_Cloud::Free(void) {
 	Engine::Clear_RenderGroup();
 	Engine::CScene::Free();
-	CGameMgr::DestroyInstance();
 	Safe_Release(m_pFogEffect);
 }
 

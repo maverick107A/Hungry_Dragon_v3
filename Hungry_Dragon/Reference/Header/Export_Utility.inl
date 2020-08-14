@@ -78,6 +78,10 @@ void		Set_Object_LayerMap(CLayer *  _Layer)
 
 }
 
+HRESULT		Clear_ObjectPool()
+{
+	return CObjectPool::GetInstance()->Clear_ObjectPool();
+}
 
 
 

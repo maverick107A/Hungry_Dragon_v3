@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Scene_Forest.h"
 #include "Export_Function.h"
-#include "GameMgr.h"
 #include "Ingame_Flow.h"
 
 CScene_Forest::CScene_Forest(LPDIRECT3DDEVICE9 pGraphicDev)
@@ -109,7 +108,7 @@ _int CScene_Forest::Update_Scene(const _float& fTimeDelta) {
 
 	//플레이어 위치 최신화
 	pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);
-	CGameMgr::GetInstance()->Game_Update(m_vPlayerPos);
+	Engine::Set_Monster_LayerMap(OBJID::STAND_MONSTER, 9999, m_vPlayerPos);
 	
 	
 	Engine::CScene::Update_Scene(fTimeDelta);
@@ -159,7 +158,7 @@ void CScene_Forest::Render_Scene(void) {
 void CScene_Forest::Free(void) {
 	Engine::Clear_RenderGroup();
 	Engine::CScene::Free();
-	CGameMgr::DestroyInstance();
+	Engine::Clear_ObjectPool();
 	Safe_Release(m_pFogEffect);
 }
 
@@ -229,7 +228,7 @@ HRESULT CScene_Forest::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 	FAILED_CHECK_RETURN(Register_GameObject<CTree_Locater>(pLayer, L"TreeObject"), E_FAIL);		// 무조건 터레인 로케이터 뒤에
 	FAILED_CHECK_RETURN(Register_GameObject<CTestPlayer>(pLayer, L"TestPlayer"), E_FAIL);
 
-	for (int i = 0; i < 50; ++i)
+	for (int i = 0; i < 250; ++i)
 	{
 		FAILED_CHECK_RETURN(Register_ObjectPool<CGolem>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
 		FAILED_CHECK_RETURN(Register_ObjectPool<CChase_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);

@@ -1,10 +1,7 @@
-#ifndef Bullet_h__
-#define Bullet_h__
+#ifndef BulletMain_h__
+#define BulletMain_h__
 
-#include "Define.h"
 #include "GameObject.h"
-#include "Export_Utility.h"
-
 
 BEGIN(Engine)
 
@@ -12,13 +9,13 @@ class CTexture_Cube;
 class CTexture;
 class CTransform;
 
-END
-class CBullet : public Engine::CGameObject
+
+class ENGINE_DLL CBulletMain : public Engine::CGameObject
 {
 
 protected:
-	explicit CBullet(LPDIRECT3DDEVICE9 pGraphicDev);
-	virtual ~CBullet(void);
+	explicit CBulletMain(LPDIRECT3DDEVICE9 pGraphicDev);
+	virtual ~CBulletMain(void);
 
 public:
 	virtual HRESULT Ready_Object(void) override;
@@ -31,7 +28,7 @@ public:
 
 public:
 private:
-	virtual		HRESULT		Add_Component(void);
+	HRESULT		Add_Component(void);
 	void		Key_Input(const float& fTimeDelta);
 
 protected:
@@ -44,10 +41,12 @@ protected:
 	float						 m_fDistance;
 
 public:
-	static CBullet*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
+	static CBulletMain*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 public:
 	virtual void Free(void) override;
 
 };
 
-#endif // Bullet_h__
+END
+
+#endif // BulletMain_h__

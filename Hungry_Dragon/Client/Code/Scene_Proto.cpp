@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Scene_Proto.h"
 #include "Export_Function.h"
-#include "GameMgr.h"
 
 CScene_Proto::CScene_Proto(LPDIRECT3DDEVICE9 pGraphicDev)
 	: Engine::CScene(pGraphicDev) {
@@ -92,7 +91,6 @@ _int CScene_Proto::Update_Scene(const _float& fTimeDelta) {
 
 	//플레이어 위치 최신화
 	pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);
-	CGameMgr::GetInstance()->Game_Update(m_vPlayerPos);
 
 	Engine::CScene::Update_Scene(fTimeDelta);
 
@@ -126,7 +124,6 @@ void CScene_Proto::Render_Scene(void) {
 void CScene_Proto::Free(void) {
 	Engine::Clear_RenderGroup();
 	Engine::CScene::Free();
-	CGameMgr::DestroyInstance();
 	Safe_Release(m_pFogEffect);
 }
 

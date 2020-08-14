@@ -82,6 +82,9 @@
     <Filter Include="02. UtilBase\02. Component\01. Camera\02. CaveCamera">
       <UniqueIdentifier>{d7eb16a6-4dbc-4998-9111-af3eac7ebaef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. UtilBase\01. GameObject\36.Bullet">
+      <UniqueIdentifier>{cb978f01-7c9e-4279-a5b1-7a1fd65c8196}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\Component.cpp">
@@ -161,6 +164,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Camera.cpp">
       <Filter>02. UtilBase\02. Component\01. Camera\01. Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BulletMain.cpp">
+      <Filter>02. UtilBase\01. GameObject\36.Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -244,6 +250,9 @@
     </ClInclude>
     <ClInclude Include="..\Code\Camera.h">
       <Filter>02. UtilBase\02. Component\01. Camera\01. Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\BulletMain.h">
+      <Filter>02. UtilBase\01. GameObject\36.Bullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

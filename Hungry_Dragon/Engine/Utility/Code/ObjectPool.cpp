@@ -92,7 +92,7 @@ HRESULT CObjectPool::Set_Monster_LayerMap(OBJID _Type, _int iCnt, _vec3 _Pos)
 	}
 	for (int i = 0; i < iCnt; ++i)
 	{
-		_vec3 _pPos = { _Pos.x + (D3DX_PI * ((rand() % 100) * 0.02f) * m_fForestRaidus) , 0 , _Pos.x + (D3DX_PI * ((rand() % 100) * 0.02f) * m_fForestRaidus) };
+		_vec3 _pPos = { _Pos.x + (D3DX_PI * ((rand() % 100) * 0.02f) * m_fForestRaidus) , 0 , _Pos.z + (D3DX_PI * ((rand() % 100) * 0.02f) * m_fForestRaidus) };
 		CGameObject* insertedMonster = m_listObject[_Type].front();
 		insertedMonster->Set_Pos(_pPos);
 		m_Layer->Add_Object(L"Monster", insertedMonster);
@@ -122,6 +122,20 @@ HRESULT CObjectPool::Set_Monster_CaveMap(OBJID _Type, _int iCnt, _vec3 _Pos)
 		insertedMonster->Set_Pos(_pPos);
 		m_Layer->Add_Object(L"Monster", insertedMonster);
 		m_listObject[_Type].pop_front();
+	}
+
+	return S_OK;
+}
+
+HRESULT CObjectPool::Clear_ObjectPool()
+{
+
+	for (int i = 0; i < OBJID::OBJ_END; ++i)
+	{
+		for (auto& iter : m_listObject[i])
+			Safe_Release(iter);
+
+		m_listObject[i].clear();
 	}
 
 	return S_OK;

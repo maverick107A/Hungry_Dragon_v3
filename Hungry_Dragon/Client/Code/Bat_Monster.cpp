@@ -17,6 +17,7 @@ HRESULT CBat_Monster::Ready_Object(void)
 {
 	Engine::CMonsterMain::Ready_Object();
 	Add_Component();
+
 	m_fSpeed = 50.f;
 	m_eState = MONSTER_REBORN;
 	
@@ -28,11 +29,11 @@ HRESULT CBat_Monster::Ready_Object(void)
 
 
 	m_fSpeed = 5.f;
-	m_fMonster_HP = 100.f;
 	m_fMonster_MaxHP = 100.f;
+	m_fMonster_HP = 100.f;
 	m_fScale = 1.f;
 	m_fMaxScale = 1.f;
-	m_fDamaged = 2.f;
+	m_fDamaged = 10.f;
 
 	return S_OK;
 }
@@ -43,10 +44,9 @@ int CBat_Monster::Update_Object(const float & fTimeDelta)
 	if (m_eState == MONSTER_REBORN && m_eState != MONSTER_DEACTIVATE)
 	{
 		m_pTransform->Set_Trans(&m_vFirstPos);
-		//m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain() + m_fHeight;
 		m_pTransform->Set_Scale(m_fMaxScale);
-		m_fMonster_HP = 100.f;
-		m_fScale = 1.f;
+		m_fMonster_HP = m_fMonster_MaxHP;
+		m_fScale = m_fMaxScale;
 		m_iEvent = OBJ_NOEVENT;
 		m_eState = MONSTER_IDLE;
 	}
@@ -59,9 +59,12 @@ int CBat_Monster::Update_Object(const float & fTimeDelta)
 		return m_iEvent;
 	}
 
+	if (m_eState != MONSTER_DEACTIVATE)
+	{		
+		D3DXVECTOR3 vCaveDir = { 0.f , 0.f ,-m_fSpeed };
+		m_pTransform->Add_Trans(&vCaveDir);
+	}
 
-	D3DXVECTOR3 vCaveDir = { 0.f , 0.f ,-m_fSpeed };
-	m_pTransform->Add_Trans(&vCaveDir);
 	// Y ºôº¸µå
 
 	// D3DXMATRIX		matView;
@@ -115,12 +118,6 @@ HRESULT CBat_Monster::Add_Component(void)
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_Buffer", pComponent);
 
-	// Texture
-	//pComponent = m_pTextureCom = dynamic_cast<Engine::CTexture*>
-	//	(Engine::Clone(RESOURCE_STAGE, L"Texture_Portal"));
-	//NULL_CHECK_RETURN(pComponent, E_FAIL);
-	//m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Texture", pComponent);
-	//
 	
 	pComponent = m_pTextureCom = dynamic_cast<Engine::CTexture*>
 		(Engine::Clone(RESOURCE_STAGE, L"Texture_Bat"));

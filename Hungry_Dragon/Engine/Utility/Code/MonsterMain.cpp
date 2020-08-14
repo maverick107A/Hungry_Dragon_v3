@@ -21,11 +21,6 @@ HRESULT Engine::CMonsterMain::Ready_Object(void)
 int Engine::CMonsterMain::Update_Object(const float & fTimeDelta)
 {
 
-
-	
-
-
-
 	m_vPlayerPos = ((Engine::CLayer*)(this->Get_Parent()))->Get_PlayerPos();
 
 	Engine::CGameObject::Update_Object(fTimeDelta);
@@ -59,16 +54,6 @@ int Engine::CMonsterMain::Update_Object(const float & fTimeDelta)
 		m_iEvent = MONSTER_DEAD;
 	}
 
-
-	//if (m_fPlayerDistance < 3)
-	//{
-	//	Engine::Particle_Update(fTimeDelta);
-	//	m_eState = MONSTER_DEACTIVATE;
-	//	Dead_Monster(fTimeDelta);
-	//
-	//}
-	//
-	//
 	
 	State_Change();
 
@@ -77,10 +62,6 @@ int Engine::CMonsterMain::Update_Object(const float & fTimeDelta)
 
 void Engine::CMonsterMain::Render_Object(void)
 {
-	if (m_preState == MONSTER_DEACTIVATE)
-	{
-	
-	}
 
 	if (m_pParticle != nullptr)
 	{
