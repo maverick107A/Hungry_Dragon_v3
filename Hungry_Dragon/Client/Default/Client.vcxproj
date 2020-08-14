@@ -163,6 +163,7 @@
     <ClInclude Include="..\Code\Cave.h" />
     <ClInclude Include="..\Code\CavePlayer.h" />
     <ClInclude Include="..\Code\Chase_Monster.h" />
+    <ClInclude Include="..\Code\Color_Mask.h" />
     <ClInclude Include="..\Code\Fly_Monster.h" />
     <ClInclude Include="..\Code\Golem.h" />
     <ClInclude Include="..\Code\Ingame_Flow.h" />
@@ -203,6 +204,7 @@
     <ClCompile Include="..\Code\Cave.cpp" />
     <ClCompile Include="..\Code\CavePlayer.cpp" />
     <ClCompile Include="..\Code\Chase_Monster.cpp" />
+    <ClCompile Include="..\Code\Color_Mask.cpp" />
     <ClCompile Include="..\Code\Fly_Monster.cpp" />
     <ClCompile Include="..\Code\Golem.cpp" />
     <ClCompile Include="..\Code\Ingame_Flow.cpp" />

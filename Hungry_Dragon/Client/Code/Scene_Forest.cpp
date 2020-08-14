@@ -103,6 +103,10 @@ _int CScene_Forest::Update_Scene(const _float& fTimeDelta) {
 	{
 		m_bFogEnable = !m_bFogEnable;
 	}
+	if (GetAsyncKeyState(VK_TAB) & 0x0001)
+	{
+		m_iMaskNum = (m_iMaskNum + 1) % 8;
+	}
 
 	Engine::Particle_Update(fTimeDelta);
 
@@ -148,6 +152,8 @@ void CScene_Forest::Render_Scene(void) {
 	{
 		m_mapLayer[L"Environment"]->Render_Layer();
 	}
+	//CIngame_Flow::GetInstance()->Set_MaskColor(m_iMaskNum);
+	CIngame_Flow::GetInstance()->Set_DefaultTex();
 	m_mapLayer[L"GameLogic"]->Render_Layer();
 	
 	m_pFogEffect->End();
@@ -227,6 +233,7 @@ HRESULT CScene_Forest::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 	FAILED_CHECK_RETURN(Register_GameObject<CTerrain_Locater>(pLayer, L"BackGround"), E_FAIL);
 	FAILED_CHECK_RETURN(Register_GameObject<CTree_Locater>(pLayer, L"TreeObject"), E_FAIL);		// 무조건 터레인 로케이터 뒤에
 	FAILED_CHECK_RETURN(Register_GameObject<CTestPlayer>(pLayer, L"TestPlayer"), E_FAIL);
+
 
 	for (int i = 0; i < 250; ++i)
 	{

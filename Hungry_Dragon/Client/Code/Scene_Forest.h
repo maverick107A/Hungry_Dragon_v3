@@ -62,6 +62,7 @@ private:
 	bool						m_bWireFrame = false;
 	bool						m_bFogEnable = true;
 	bool						m_bWireFrameMode = false;
+	int							m_iMaskNum=0;
 	ID3DXEffect* m_pFogEffect = 0;
 	D3DXHANDLE m_hFogTechHandle = 0;
 private:

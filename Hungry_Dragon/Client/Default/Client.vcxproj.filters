@@ -163,6 +163,12 @@
     <Filter Include="97. WorkFlow">
       <UniqueIdentifier>{f74e9fa3-e799-4f54-9417-49d36c6ca335}</UniqueIdentifier>
     </Filter>
+    <Filter Include="03. GameMgr">
+      <UniqueIdentifier>{b3e38d98-0162-4576-b32b-7bbadbdfe1a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\59. Color_Mask">
+      <UniqueIdentifier>{c1e13116-ccb5-4204-a1cf-6faf95a8ea36}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -279,6 +285,9 @@
     <ClInclude Include="..\Code\Scene_Cloud.h">
       <Filter>01. Scene\04. Scene_Cloud</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\Color_Mask.h">
+      <Filter>02. GameObject\01. Stage\59. Color_Mask</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -385,6 +394,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Scene_Cloud.cpp">
       <Filter>01. Scene\04. Scene_Cloud</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Color_Mask.cpp">
+      <Filter>02. GameObject\01. Stage\59. Color_Mask</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
