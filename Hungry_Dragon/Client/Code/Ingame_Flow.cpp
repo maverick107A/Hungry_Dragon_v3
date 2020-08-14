@@ -117,10 +117,6 @@ void CIngame_Flow::Occur_Event(int _iEvent)
 
 void CIngame_Flow::Load_ForestTerrain()
 {
-	if (DEBUG_WITHOUT_FOREST)
-	{
-		return;
-	}
 	TCHAR szBuf[256] = L"";
 	for (int i = 0; i < 50; ++i)
 	{
@@ -151,10 +147,6 @@ void CIngame_Flow::Load_ForestTerrain()
 
 void CIngame_Flow::Release_ForestTerrain()
 {
-	if (DEBUG_WITHOUT_FOREST)
-	{
-		return;
-	}
 	for (int i = 0; i < 50; ++i)
 	{
 		Safe_Release(m_pParts[i]);
@@ -163,7 +155,7 @@ void CIngame_Flow::Release_ForestTerrain()
 
 void CIngame_Flow::Load_TreeList()
 {
-	if (DEBUG_WITHOUT_FOREST)
+	if (DEBUG_WITHOUT_TREE)
 	{
 		return;
 	}
@@ -191,7 +183,7 @@ void CIngame_Flow::Load_TreeList()
 
 void CIngame_Flow::Release_TreeList()
 {
-	if (DEBUG_WITHOUT_FOREST)
+	if (DEBUG_WITHOUT_TREE)
 	{
 		return;
 	}
