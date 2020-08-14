@@ -13,12 +13,17 @@ Engine::CMonsterMain::~CMonsterMain(void)
 
 HRESULT Engine::CMonsterMain::Ready_Object(void)
 {
+
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 	return S_OK;
 }
 
 int Engine::CMonsterMain::Update_Object(const float & fTimeDelta)
 {
+
+
+	
+
 
 
 	m_vPlayerPos = ((Engine::CLayer*)(this->Get_Parent()))->Get_PlayerPos();
@@ -143,36 +148,76 @@ void Engine::CMonsterMain::Dead_Monster(const float & fTimeDelta)
 
 float Engine::CMonsterMain::Ride_Terrain()
 {
-	CGameObject* pGroundObj = ((Engine::CLayer*)(Get_Parent()))->Get_Object(L"BackGround", Engine::Find_First, nullptr);
-	m_pTerrain = static_cast<Engine::CBaseLand*>(pGroundObj->Get_Component(L"Com_Buffer", Engine::ID_STATIC));
+	CBaseLand* pTerrain =  Get_Terrain();
 
-	if (m_pTerrain == nullptr)
-		return 0;
-
-	D3DXVECTOR3* vPos = &m_pTransform->m_vInfo[Engine::INFO_POS];
-
-
-	int Vernum = (int(vPos->x*INVERSETILESIZE) + VERTEXSIZE*int(vPos->z*INVERSETILESIZE));
-
-	if (Vernum < 0)
-		Vernum = 0;
-
-	if (Vernum > 16384)
-		Vernum = 16384;
-
-	D3DXVECTOR3 Vertex1 = { float(int(vPos->x*INVERSETILESIZE)*TILECX), 0.f, float(int(vPos->z*INVERSETILESIZE)*TILECZ) };
-	D3DXVECTOR3 Vertex2 = { float(int(vPos->x*INVERSETILESIZE)*TILECX + TILECX), 0.f, float(int(vPos->z*INVERSETILESIZE)*TILECZ) };
-	D3DXVECTOR3 Vertex3 = { float(int(vPos->x*INVERSETILESIZE)*TILECX), 0.f, float(int(vPos->z*INVERSETILESIZE)*TILECZ + TILECZ) };
-	D3DXVECTOR3 Vertex4 = { float(int(vPos->x*INVERSETILESIZE)*TILECX + TILECX), 0.f, float(int(vPos->z*INVERSETILESIZE)*TILECZ + TILECZ) };
+	if (pTerrain == nullptr)
+	{
+		if (m_fHeight)
+			m_fHeight = 0.f;
+	
+		return false;
+	}
 
 
-	D3DXVECTOR3 vTemp1 = *vPos - Vertex3;
+
+	float PosX = m_pTransform->m_vInfo[Engine::INFO_POS].x;
+	float PosZ = m_pTransform->m_vInfo[Engine::INFO_POS].z;
+
+	if (PosX > 0)
+	{
+		while (true)
+		{
+			if (PosX < 12800.f)
+				break;
+			PosX -= 12800.f;
+		}
+	}
+	else
+	{
+		while (true)
+		{
+			if (PosX > 0.f)
+				break;
+			PosX += 12800.f;
+		}
+	}
+
+	if (PosZ > 0)
+	{
+		while (true)
+		{
+			if (PosZ < 12800.f)
+				break;
+			PosZ -= 12800.f;
+		}
+	}
+	else
+	{
+		while (true)
+		{
+			if (PosZ > 0.f)
+				break;
+			PosZ += 12800.f;
+		}
+	}
+
+	int Vernum = int(PosX*INVERSETILESIZE) + VERTEXSIZE*int(PosZ *INVERSETILESIZE);
+
+
+
+	D3DXVECTOR3 Vertex1 = { float(int(PosX*INVERSETILESIZE)*TILECX), 0.f, float(int(PosZ*INVERSETILESIZE)*TILECZ) };
+	D3DXVECTOR3 Vertex2 = { float(int(PosX*INVERSETILESIZE)*TILECX + TILECX), 0.f, float(int(PosZ*INVERSETILESIZE)*TILECZ) };
+	D3DXVECTOR3 Vertex3 = { float(int(PosX*INVERSETILESIZE)*TILECX), 0.f, float(int(PosZ*INVERSETILESIZE)*TILECZ + TILECZ) };
+	D3DXVECTOR3 Vertex4 = { float(int(PosX*INVERSETILESIZE)*TILECX + TILECX), 0.f, float(int(PosZ*INVERSETILESIZE)*TILECZ + TILECZ) };
+
+
+	D3DXVECTOR3 vTemp1 = m_pTransform->m_vInfo[Engine::INFO_POS] - Vertex3;
 	D3DXVECTOR3	vTemp2 = { -1.f,0.f,-1.f };
 	if (D3DXVec3Dot(&vTemp1, &vTemp2) > 0)
 	{
-		Vertex1.y = (float)m_pTerrain->Get_TerrainHeight()[Vernum] + 1;
-		Vertex2.y = (float)m_pTerrain->Get_TerrainHeight()[Vernum + 1] + 1;
-		Vertex3.y = (float)m_pTerrain->Get_TerrainHeight()[Vernum + VERTEXSIZE] + 1;
+		Vertex1.y = (float)pTerrain->Get_TerrainHeight()[Vernum] * 10.f + 20.f;
+		Vertex2.y = (float)pTerrain->Get_TerrainHeight()[Vernum + 1] * 10.f + 20.f;
+		Vertex3.y = (float)pTerrain->Get_TerrainHeight()[Vernum + VERTEXSIZE] * 10.f + 20.f;
 
 		vTemp1 = Vertex2 - Vertex1;
 		vTemp2 = Vertex3 - Vertex1;
@@ -180,15 +225,16 @@ float Engine::CMonsterMain::Ride_Terrain()
 		D3DXVec3Cross(&vNorm, &vTemp1, &vTemp2);
 
 		float fConst = D3DXVec3Dot(&vNorm, &Vertex1);
-		return ((fConst - vNorm.x*vPos->x - vNorm.z*vPos->z) / vNorm.y) + 1;
+		float fTerrainHieght = (fConst - vNorm.x*PosX - vNorm.z*PosZ) / vNorm.y;
 
-
+		return fTerrainHieght;
+	
 	}
 	else
 	{
-		Vertex2.y = (float)m_pTerrain->Get_TerrainHeight()[Vernum + 1] + 1;
-		Vertex3.y = (float)m_pTerrain->Get_TerrainHeight()[Vernum + VERTEXSIZE] + 1;
-		Vertex4.y = (float)m_pTerrain->Get_TerrainHeight()[Vernum + VERTEXSIZE + 1] + 1;
+		Vertex2.y = (float)pTerrain->Get_TerrainHeight()[Vernum + 1] * 10.f + 20.f;
+		Vertex3.y = (float)pTerrain->Get_TerrainHeight()[Vernum + VERTEXSIZE] * 10.f + 20.f;
+		Vertex4.y = (float)pTerrain->Get_TerrainHeight()[Vernum + VERTEXSIZE + 1] * 10.f + 20.f;
 
 		vTemp1 = Vertex3 - Vertex4;
 		vTemp2 = Vertex2 - Vertex4;
@@ -196,8 +242,12 @@ float Engine::CMonsterMain::Ride_Terrain()
 		D3DXVec3Cross(&vNorm, &vTemp1, &vTemp2);
 
 		float fConst = D3DXVec3Dot(&vNorm, &Vertex3);
-		return ((fConst - vNorm.x*vPos->x - vNorm.z*vPos->z) / vNorm.y) + 1;
+		float fTerrainHieght = (fConst - vNorm.x*PosX - vNorm.z*PosZ) / vNorm.y;
+
+		return fTerrainHieght;
+
 	}
+	return false;
 }
 
 void Engine::CMonsterMain::Kill_Monster(const float & fTimeDelta)

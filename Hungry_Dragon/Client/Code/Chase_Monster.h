@@ -5,12 +5,14 @@
 #include "Define.h"
 #include "MonsterMain.h"
 
+
 BEGIN(Engine)
 
 class CTexture_Cube;
 class CTexture;
 class CTransform;
 class CTerrainTex;
+
 
 END
 
@@ -24,12 +26,16 @@ public:
 	virtual int Update_Object(const float& fTimeDelta) override;
 	virtual void Render_Object(void) override;
 	virtual void LateUpdate_Object(const float& fTimeDelta) override;
+
 private:
 	HRESULT		Add_Component(void);
 
 public:
 	static CChase_Monster*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
+
+
 private:
+
 	virtual void Free(void) override;
 
 };

@@ -28,6 +28,8 @@ public:
 private:
 	CLayer*		m_Layer;
 	_float		m_fRaidus;
+	_float		m_fForestRaidus;
+
 	list<CGameObject*>  m_listObject[OBJID::OBJ_END];
 public:
 	virtual void	Free(void);

@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "Export_Function.h"
-
+#include "Terrain_Locater.h"
 #include "Chase_Monster.h"
-
+#include "Terrain_Locater.h"
 
 CChase_Monster::CChase_Monster(LPDIRECT3DDEVICE9 pGraphicDev)
 	:Engine::CMonsterMain(pGraphicDev)
@@ -16,6 +16,7 @@ CChase_Monster::~CChase_Monster(void)
 HRESULT CChase_Monster::Ready_Object(void)
 {
 	Engine::CMonsterMain::Ready_Object();
+
 	Add_Component();
 	m_fSpeed = 50.f;
 	m_fMonster_HP    = 100.f;
@@ -29,6 +30,11 @@ HRESULT CChase_Monster::Ready_Object(void)
 
 int CChase_Monster::Update_Object(const float & fTimeDelta)
 {
+
+	m_ptempTerain = static_cast<CTerrain_Locater*>(((Engine::CLayer*)(Get_Parent()))->Get_Object(L"BackGround", Engine::Find_First, nullptr));
+	m_pTerrain = m_ptempTerain->Get_Terrain();
+
+
 	if (m_eState == MONSTER_REBORN && m_eState != MONSTER_DEACTIVATE)
 	{
 		m_pTransform->Set_Trans(&m_vFirstPos);
@@ -97,6 +103,7 @@ void CChase_Monster::LateUpdate_Object(const float & fTimeDelta)
 {
 	Engine::CMonsterMain::LateUpdate_Object(fTimeDelta);
 }
+
 
 CChase_Monster * CChase_Monster::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 {

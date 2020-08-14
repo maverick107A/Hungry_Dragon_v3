@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Export_Function.h"
-
+#include "Terrain_Locater.h"
 #include "Golem.h"
 
 
@@ -30,6 +30,10 @@ HRESULT CGolem::Ready_Object(void)
 
 int CGolem::Update_Object(const float & fTimeDelta)
 {
+
+	m_ptempTerain = static_cast<CTerrain_Locater*>(((Engine::CLayer*)(Get_Parent()))->Get_Object(L"BackGround", Engine::Find_First, nullptr));
+	m_pTerrain = m_ptempTerain->Get_Terrain();
+
 	if (m_eState == MONSTER_REBORN && m_eState != MONSTER_DEACTIVATE)
 	{
 		m_pTransform->Set_Trans(&m_vFirstPos);

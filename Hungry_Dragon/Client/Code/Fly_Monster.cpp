@@ -1,7 +1,7 @@
  #include "stdafx.h"
 #include "Fly_Monster.h"
 #include "Export_Function.h"
-
+#include "Terrain_Locater.h"
 CFly_Monster::CFly_Monster(LPDIRECT3DDEVICE9 pGraphicDev)
 	:Engine::CMonsterMain(pGraphicDev)
 {
@@ -29,6 +29,9 @@ HRESULT CFly_Monster::Ready_Object(void)
 
 int CFly_Monster::Update_Object(const float & fTimeDelta)
 {
+
+	m_ptempTerain = static_cast<CTerrain_Locater*>(((Engine::CLayer*)(Get_Parent()))->Get_Object(L"BackGround", Engine::Find_First, nullptr));
+	m_pTerrain = m_ptempTerain->Get_Terrain();
 
 	if (m_eState == MONSTER_REBORN && m_eState != MONSTER_DEACTIVATE)
 	{

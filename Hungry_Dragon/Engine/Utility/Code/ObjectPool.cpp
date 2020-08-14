@@ -7,7 +7,8 @@ USING(Engine)
 IMPLEMENT_SINGLETON(CObjectPool)
 
 CObjectPool::CObjectPool(void)
-	:m_fRaidus(13)
+	:m_fRaidus(13),
+	m_fForestRaidus(3000)
 {
 	srand(unsigned(time(NULL)));
 	
@@ -91,7 +92,7 @@ HRESULT CObjectPool::Set_Monster_LayerMap(OBJID _Type, _int iCnt, _vec3 _Pos)
 	}
 	for (int i = 0; i < iCnt; ++i)
 	{
-		_vec3 _pPos = { _Pos.x + (rand() % 3000) , 0 , _Pos.z + (rand() % 3000) };
+		_vec3 _pPos = { _Pos.x + (D3DX_PI * ((rand() % 100) * 0.02f) * m_fForestRaidus) , 0 , _Pos.x + (D3DX_PI * ((rand() % 100) * 0.02f) * m_fForestRaidus) };
 		CGameObject* insertedMonster = m_listObject[_Type].front();
 		insertedMonster->Set_Pos(_pPos);
 		m_Layer->Add_Object(L"Monster", insertedMonster);

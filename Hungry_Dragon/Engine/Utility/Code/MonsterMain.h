@@ -3,6 +3,7 @@
 
 #include "GameObject.h"
 
+class CTerrain_Locater;
 
 BEGIN(Engine)
 
@@ -34,7 +35,7 @@ public:
 
 public:
 	void	    Dead_Monster(const float& fTimeDelta);
-	float		Ride_Terrain();
+	virtual float		Ride_Terrain();
 
 	//가의묵이 추가한 충돌확인용 임시 함수
 	void		Kill_Monster(const float& fTimeDelta);
@@ -42,7 +43,7 @@ public:
 public:
 	void Set_State(MONSTERSTATE _State) { m_eState = _State ; }
 	MONSTERSTATE Get_State() { return m_eState; }
-
+	CBaseLand*	Get_Terrain() { return m_pTerrain; }
 
 private:
 	HRESULT		Add_Component(void);
@@ -56,6 +57,7 @@ protected:
 
 	Engine::CTexture*			m_pTextureCom = nullptr;
 	Engine::CBaseLand*			m_pTerrain = nullptr;
+	CTerrain_Locater*			m_ptempTerain = nullptr;
 	Engine::CResources*			m_pParticle = nullptr;
 
 	D3DXVECTOR3					m_vLook;
@@ -71,6 +73,8 @@ protected:
 	float						m_fPlayerDistance;
 	float						m_fDistance;
 	float						m_fSpeed;
+	float						m_fHeight;
+
 
 	float						m_fMonster_HP;
 	float						m_fMonster_MaxHP;
