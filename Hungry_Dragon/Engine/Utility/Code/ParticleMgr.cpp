@@ -55,14 +55,14 @@ void CParticleMgr::Particle_LateUpdate(const float & fTimeDelta)
 
 void CParticleMgr::Particle_Render()
 {
-	int index = 0;
+	/*int index = 0;
 	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end(); ++iter,++index)
 	{
 		m_pParticleTrans->Set_Trans(&m_vecTrans[index]);
 		m_pParticleTrans->Update_Component(0.1f);
 		m_pParticleTrans->Set_Transform(m_pGraphicDev);
 		(*iter)->Render_Buffer();
-	}
+	}*/
 }
 
 CResources* CParticleMgr::Particle_Create(const _vec3 _pos)

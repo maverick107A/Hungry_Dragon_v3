@@ -65,7 +65,7 @@ void CPart_Atk::Reset_Particle(ATTRIBUTE* _attribute) {
 	_attribute->vVelocity.y = ((ftempRand_r*sinf(ftempRand_t))*m_fHeight+m_fSpeed);
 	_attribute->vVelocity.z = (ftempRand_z*cosf(ftempRand_t))*m_fWidth;
 
-	_attribute->tColor = D3DXCOLOR(255.f, 0.f, 0.f, 255.f-(rand()*50/RAND_MAX));
+	_attribute->tColor = D3DXCOLOR(255.f, 0.f, 0.f, 255.f);
 
 	_attribute->fLifeTime = Engine::CTimerMgr::GetInstance()->Get_TimeDelta(L"Particle_Timer");
 }

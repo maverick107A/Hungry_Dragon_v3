@@ -37,6 +37,7 @@ CParticle::~CParticle(void) {
 }
 
 HRESULT CParticle::Ready_Buffer(void) {
+
 	m_pGraphicDev->CreateVertexBuffer(m_VbSize * sizeof(PARTICLE), D3DUSAGE_DYNAMIC | D3DUSAGE_POINTS | D3DUSAGE_WRITEONLY, FVF_PART, D3DPOOL_DEFAULT, &m_Vb, 0);
 
 	return S_OK;
@@ -44,6 +45,7 @@ HRESULT CParticle::Ready_Buffer(void) {
 
 void CParticle::Render_Buffer(void) {
 	Render_Begin();
+
 	m_pGraphicDev->SetTexture(0, m_Tex);
 	m_pGraphicDev->SetFVF(FVF_PART);
 	m_pGraphicDev->SetStreamSource(0, m_Vb, 0, sizeof(PARTICLE));
@@ -96,12 +98,13 @@ void CParticle::Render_Buffer(void) {
 	}
 
 	m_vOffset += m_BatchSize;
+
 	Render_End();
 }
 
 void CParticle::Render_Begin(void) {
-	float fZero = 0.f;
-	float fOne = 1.f;
+	float fZero = 30.f;
+	float fOne = 40.f;
 
 	m_pGraphicDev->SetRenderState(D3DRS_LIGHTING, false);
 	m_pGraphicDev->SetRenderState(D3DRS_POINTSPRITEENABLE, true);
@@ -113,9 +116,14 @@ void CParticle::Render_Begin(void) {
 	m_pGraphicDev->SetRenderState(D3DRS_POINTSCALE_B, FloatToDword(fZero));
 	m_pGraphicDev->SetRenderState(D3DRS_POINTSCALE_C, FloatToDword(fOne));
 
+	m_pGraphicDev->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
+	m_pGraphicDev->SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_SELECTARG1);
+
 	m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
 	m_pGraphicDev->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	m_pGraphicDev->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+
+
 }
 
 void CParticle::Render_End(void) {

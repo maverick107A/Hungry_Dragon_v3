@@ -81,6 +81,11 @@ void Engine::CMonsterMain::Render_Object(void)
 	{
 	
 	}
+
+	if (m_pParticle != nullptr)
+	{
+		m_pParticle->Render_Buffer();
+	}
 	
 }
 
