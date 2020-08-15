@@ -195,66 +195,8 @@ _uint CScene_Loading::Loading_ForStage(void)
 		L"../../Asset/Environment/Passage_Through.png"),
 		E_FAIL);
 
-	// せせせせせせせせせせせせせせせせせせせせせせせせせせせせせせせせせせせ
-
-	
-	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
-		RESOURCE_STAGE,
-		L"TEX_BLACK",
-		Engine::TEX_NORMAL,
-		L"../../Asset/Mask/Mask_Black.png"),
-		E_FAIL);
-	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
-		RESOURCE_STAGE,
-		L"TEX_WHITE",
-		Engine::TEX_NORMAL,
-		L"../../Asset/Mask/Mask_White.png"),
-		E_FAIL);
-	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
-		RESOURCE_STAGE,
-		L"TEX_EMERALD",
-		Engine::TEX_NORMAL,
-		L"../../Asset/Mask/Mask_Emerald.png"),
-		E_FAIL);
-	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
-		RESOURCE_STAGE,
-		L"TEX_ORANGE",
-		Engine::TEX_NORMAL,
-		L"../../Asset/Mask/Mask_Orange.png"),
-		E_FAIL);
-
-	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
-		RESOURCE_STAGE,
-		L"TEX_PURPLE",
-		Engine::TEX_NORMAL,
-		L"../../Asset/Mask/Mask_Purple.png"),
-		E_FAIL);
-	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
-		RESOURCE_STAGE,
-		L"TEX_DARKBLUE",
-		Engine::TEX_NORMAL,
-		L"../../Asset/Mask/Mask_Darkblue.png"),
-		E_FAIL);
-	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
-		RESOURCE_STAGE,
-		L"TEX_SKYBLUE",
-		Engine::TEX_NORMAL,
-		L"../../Asset/Mask/Mask_Skyblue.png"),
-		E_FAIL);
-	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
-		RESOURCE_STAGE,
-		L"TEX_RED",
-		Engine::TEX_NORMAL,
-		L"../../Asset/Mask/Mask_Red.png"),
-		E_FAIL);
-
-	// せせせせせせせせせせせせせせせせせせせせせせせせせせせせせせせせせせせ
-
-
-
 	CIngame_Flow::GetInstance()->Load_ForestTerrain();
 	CIngame_Flow::GetInstance()->Load_TreeList();
-	CIngame_Flow::GetInstance()->Init_Mask();
 
 	lstrcpy(m_szFinish, L"Loading Complete");
 

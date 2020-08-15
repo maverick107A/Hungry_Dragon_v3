@@ -1,12 +1,9 @@
 #include "stdafx.h"
 #include "NormalBullet.h"
 #include "Export_Function.h"
-#include "Export_Function.h"
-#include "BulletMain.h"
-
 
 CNormal_Bullet::CNormal_Bullet(LPDIRECT3DDEVICE9 pGraphicDev)
-	:Engine::CBulletMain(pGraphicDev)
+	:CBullet(pGraphicDev)
 {
 }
 
@@ -17,8 +14,7 @@ CNormal_Bullet::~CNormal_Bullet(void)
 HRESULT CNormal_Bullet::Ready_Object(void)
 {
 
-	Engine::CBulletMain::Ready_Object();
-	Add_Component();
+	CBullet::Ready_Object();
 
 	m_pTransform->m_vInfo[Engine::INFO_POS].x = m_vFirstPos.x;
 	m_pTransform->m_vInfo[Engine::INFO_POS].y = m_vFirstPos.y;
@@ -36,7 +32,7 @@ HRESULT CNormal_Bullet::Ready_Object(void)
 
 int CNormal_Bullet::Update_Object(const float & fTimeDelta)
 {
-	Engine::CBulletMain::Update_Object(fTimeDelta);
+	CBullet::Update_Object(fTimeDelta);
 
 
 	if (m_bFirst)
@@ -134,7 +130,12 @@ HRESULT CNormal_Bullet::Add_Component(void)
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Texture", pComponent);
 
+	//Transform
+	pComponent = m_pTransform = Engine::CTransform::Create();
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_Transform", pComponent);
 
+	//m_pBufferCom
 
 	return S_OK;
 }
@@ -160,5 +161,5 @@ CNormal_Bullet * CNormal_Bullet::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 
 void CNormal_Bullet::Free(void)
 {
-	Engine::CBulletMain::Free();
+	CBullet::Free();
 }

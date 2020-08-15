@@ -2,6 +2,7 @@
 #include "Export_Function.h"
 #include "Terrain_Locater.h"
 #include "Chase_Monster.h"
+#include "Terrain_Locater.h"
 
 CChase_Monster::CChase_Monster(LPDIRECT3DDEVICE9 pGraphicDev)
 	:Engine::CMonsterMain(pGraphicDev)
@@ -24,7 +25,6 @@ HRESULT CChase_Monster::Ready_Object(void)
 	m_fMaxScale = 5.f;
 	m_fDamaged		 = 5.f;
 	m_eState = MONSTER_REBORN;
-
 	return S_OK;
 }
 

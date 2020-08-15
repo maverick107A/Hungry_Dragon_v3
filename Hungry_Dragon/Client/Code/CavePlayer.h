@@ -32,6 +32,9 @@ private:
 	virtual HRESULT	Add_Component(void) override;
 
 public:
+	void	Switch_Phase(int _iPhase);
+
+public:
 	static CCavePlayer*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 
 private:

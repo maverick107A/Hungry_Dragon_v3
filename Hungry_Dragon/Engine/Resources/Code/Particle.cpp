@@ -131,8 +131,6 @@ void CParticle::Render_End(void) {
 	m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
 	m_pGraphicDev->SetRenderState(D3DRS_POINTSCALEENABLE, false);
 	m_pGraphicDev->SetRenderState(D3DRS_POINTSPRITEENABLE, false);
-
-	
 }
 
 //파티클을 재활용하기 위해 개개의 파티클이 가진 속성을 원래대로 리셋해주는 함수

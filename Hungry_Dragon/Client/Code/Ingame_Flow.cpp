@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Ingame_Flow.h"
+#include "Export_Utility.h"
 #include "Export_Function.h"
 
 // 씬들
@@ -14,7 +15,6 @@
 // 리소스들
 #include "Terrain_Parts.h"
 #include "Tree_Object.h"
-#include "Color_Mask.h"
 
 USING(Engine)
 
@@ -40,9 +40,6 @@ CIngame_Flow::~CIngame_Flow(void)
 void CIngame_Flow::Init_Flow(LPDIRECT3DDEVICE9 pGraphicDev)
 {
 	m_pGraphicDev = pGraphicDev;
-
-	
-
 }
 
 void CIngame_Flow::Update_BeforeScene(const Engine::_float & _fTimeDelta)
@@ -77,15 +74,6 @@ void CIngame_Flow::Update_Event()
 		Occur_Event(iIdx);
 	}
 	m_listEvent.clear();
-}
-
-void CIngame_Flow::Init_Mask()
-{
-	for (int i = 0; i < 8; ++i)
-	{
-		m_pMaskTexObj[i] = CColor_Mask::Create(m_pGraphicDev);
-		m_pMaskTexObj[i]->Init_MaskTex(i);
-	}
 }
 
 void CIngame_Flow::Occur_Event(int _iEvent)
@@ -127,16 +115,6 @@ void CIngame_Flow::Occur_Event(int _iEvent)
 	}
 }
 
-void CIngame_Flow::Set_MaskColor(int _iIdx)
-{
-	m_pMaskTexObj[_iIdx]->Set_ColorMask();
-}
-
-void CIngame_Flow::Set_DefaultTex()
-{
-	m_pGraphicDev->SetTexture(0, 0);
-}
-
 void CIngame_Flow::Load_ForestTerrain()
 {
 	TCHAR szBuf[256] = L"";
@@ -172,10 +150,6 @@ void CIngame_Flow::Release_ForestTerrain()
 	for (int i = 0; i < 50; ++i)
 	{
 		Safe_Release(m_pParts[i]);
-	}
-	for (int i = 0; i < 8; ++i)
-	{
-		Safe_Release(m_pMaskTexObj[i]);
 	}
 }
 

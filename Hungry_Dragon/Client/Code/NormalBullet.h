@@ -3,7 +3,7 @@
 
 
 #include "Define.h"
-#include "BulletMain.h"
+#include "Bullet.h"
 
 BEGIN(Engine)
 
@@ -14,7 +14,7 @@ class CTerrainTex;
 
 END
 
-class  CNormal_Bullet : public Engine::CBulletMain
+class  CNormal_Bullet : public CBullet
 {
 
 	enum BULLETSTATE { IDLE_BULLET, DEAD_BULLET, REFLECT_BULLET, STATE_END };

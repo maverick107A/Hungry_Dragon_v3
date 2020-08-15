@@ -8,6 +8,7 @@ class CBaseLand;
 
 class ENGINE_DLL CCaveCamera : public CCameraMain
 {
+	enum PHASE {PHASE_ZERO, PHASE_ONE, PHASE_TWO, PHASE_END};
 private:
 	explicit CCaveCamera(void);
 	virtual ~CCaveCamera(void);
@@ -18,6 +19,14 @@ public:
 
 private:
 	void			Move_Camera(LPDIRECT3DDEVICE9& pGraphicDev, _vec3 _vPos, float* _fAngleX, float* _fAngleY);
+	void			Move_Phase01(LPDIRECT3DDEVICE9& pGraphicDev, _vec3 _vPos, float* _fAngleX, float* _fAngleY);
+	void			Move_Phase2(LPDIRECT3DDEVICE9& pGraphicDev, _vec3 _vPos, float* _fAngleX, float* _fAngleY);
+
+public:
+	void			Switch_Phase(int _iPhase);
+
+private:
+	PHASE			m_ePhase = PHASE_ZERO;
 
 public:
 	static CCaveCamera*		Create(void);

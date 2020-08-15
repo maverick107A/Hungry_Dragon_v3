@@ -24,8 +24,6 @@ public:
 	HRESULT		Set_Bullet_LayerMap(OBJID _Type, _int iCnt, _vec3 _Pos);
 	HRESULT		Set_Monster_LayerMap(OBJID _Type, _int iCnt, _vec3 _Pos);
 	HRESULT		Set_Monster_CaveMap(OBJID _Type, _int iCnt, _vec3 _Pos);
-	HRESULT		Clear_ObjectPool();
-
 
 private:
 	CLayer*		m_Layer;

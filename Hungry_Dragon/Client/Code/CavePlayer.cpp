@@ -6,6 +6,7 @@
 #include "CaveCamera.h"
 #include "PlayerState.h"
 #include "PCaveRush.h"
+//#include "CaveCamera.h"
 
 CCavePlayer::CCavePlayer(LPDIRECT3DDEVICE9 pGraphicDev)
 	: CPlayerMain(pGraphicDev)
@@ -39,6 +40,13 @@ void CCavePlayer::Initialize_Object(void)
 
 int CCavePlayer::Update_Object(const float& fTimeDelta)
 {
+	if (GetAsyncKeyState(VK_NUMPAD0))
+		Switch_Phase(0);
+	if (GetAsyncKeyState(VK_NUMPAD1))
+		Switch_Phase(1);
+	if (GetAsyncKeyState(VK_NUMPAD2))
+		Switch_Phase(2);
+
 	m_pCamera->Update_Camera(fTimeDelta, m_pGraphicDev, m_pTransform->m_vInfo[Engine::INFO_POS], &m_fAngleX, &m_fAngleY, m_pTerrain);
 	m_pState->Update_State(fTimeDelta);
 	//
@@ -108,6 +116,28 @@ HRESULT CCavePlayer::Add_Component(void)
 	//m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_State", m_pState);
 
 	return S_OK;
+}
+
+void CCavePlayer::Switch_Phase(int _iPhase)
+{
+	switch (_iPhase)
+	{
+	case 0:
+		static_cast<Engine::CPCaveRush*>(m_pState)->Switch_Phase(0);
+		static_cast<Engine::CCaveCamera*>(m_pCamera)->Switch_Phase(0);
+		m_pTransform->Set_Scale(2.f);
+		break;
+	case 1:
+		static_cast<Engine::CPCaveRush*>(m_pState)->Switch_Phase(1);
+		static_cast<Engine::CCaveCamera*>(m_pCamera)->Switch_Phase(1);
+		m_pTransform->Set_Scale(1.f);
+		break;
+	case 2:
+		static_cast<Engine::CPCaveRush*>(m_pState)->Switch_Phase(2);
+		static_cast<Engine::CCaveCamera*>(m_pCamera)->Switch_Phase(2);
+		m_pTransform->Set_Scale(2.f);
+		break;
+	}
 }
 
 CCavePlayer* CCavePlayer::Create(LPDIRECT3DDEVICE9 pGraphicDev)

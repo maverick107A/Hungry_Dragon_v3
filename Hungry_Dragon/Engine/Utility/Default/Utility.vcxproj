@@ -166,7 +166,6 @@ call CopyUtility.bat</Command>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Code\BulletMain.cpp" />
     <ClCompile Include="..\Code\Camera.cpp" />
     <ClCompile Include="..\Code\CameraMain.cpp" />
     <ClCompile Include="..\Code\CaveCamera.cpp" />
@@ -196,7 +195,6 @@ call CopyUtility.bat</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Header\Export_Utility.h" />
-    <ClInclude Include="..\Code\BulletMain.h" />
     <ClInclude Include="..\Code\Camera.h" />
     <ClInclude Include="..\Code\CameraMain.h" />
     <ClInclude Include="..\Code\CaveCamera.h" />

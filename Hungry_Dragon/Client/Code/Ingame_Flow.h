@@ -7,8 +7,6 @@
 class CTerrain_Parts;
 class CTree_Object;
 
-class CColor_Mask;
-
 class CIngame_Flow
 {
 	DECLARE_SINGLETON(CIngame_Flow)
@@ -30,12 +28,9 @@ public:			// 씬 공용 메소드 (씬 상위에서 혼자서 갱신함)
 	void Update_Event();
 
 public:			// 셋터/겟터
-	void Init_Mask();
 	void Change_SceneTo(SCENENUM::ID _eID) { m_eReservedScene = _eID; Set_Event(EVENT_SCENECHANGE); }
 	void Set_Event(int _iEvent) { m_listEvent.emplace_back(_iEvent); }
 	void Occur_Event(int _iEvent);
-	void Set_MaskColor(int _iIdx);
-	void Set_DefaultTex();
 
 public:			// 씬 흐름 관리 메소드 + 매니지먼트에 씬전환 요청
 	void Load_ForestTerrain();		// 포레스트 터레인 50여개를 로드시켜놓기 (디버그엔 와리가리 하니 나두는데 나중엔 그때그때 소멸)
@@ -46,7 +41,6 @@ public:			// 씬 흐름 관리 메소드 + 매니지먼트에 씬전환 요청
 	void Release_TreeList();
 	list<CTree_Object*>* GetEntry_TreeList(int _iIdx) { return &m_arrRenderGroupIdx[_iIdx]; }
 
-	
 
 	void Release_AllResources();
 
@@ -55,10 +49,6 @@ private:		// 씬 공용 혹은 임시 인게임용 데이터
 	SCENENUM::ID m_eReservedScene;
 	CTerrain_Parts*	m_pParts[50] = { 0 };
 	list<CTree_Object*> m_arrRenderGroupIdx[50];
-
-private:
-	CColor_Mask*	m_pMaskTexObj[8];
-
 private:
 	// 출력할 글디바.
 	LPDIRECT3DDEVICE9				m_pGraphicDev;

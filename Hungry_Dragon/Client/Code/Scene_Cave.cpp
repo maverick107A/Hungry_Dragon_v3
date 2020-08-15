@@ -1,5 +1,6 @@
 ﻿#include "stdafx.h"
 #include "Scene_Cave.h"
+#include "GameMgr.h"
 #include "Export_Function.h"
 #include "SkySphere.h"
 #include "Cave.h"
@@ -90,7 +91,7 @@ HRESULT CScene_Cave::Ready_Scene(void)
 
 	m_hFogTechHandle = m_pFogEffect->GetTechniqueByName("Fog");
 
-	m_pGraphicDev->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_GOURAUD);
+
 
 	return S_OK;
 }
@@ -139,10 +140,10 @@ _int CScene_Cave::Update_Scene(const _float& fTimeDelta)
 	switch (m_ePhaseNum)
 	{
 	case CScene_Cave::PHASE_1:			// 카메라 Z회전 안함
-		Engine::Set_Monster_CaveMap(OBJID::STAND_MONSTER, 9999, m_vPlayerPos);
+		CGameMgr::GetInstance()->Cave_ObjPool_Update(m_vPlayerPos);
 		break;
 	case CScene_Cave::PHASE_2:			// 카메라 횡스크롤
-		Engine::Set_Monster_CaveMap(OBJID::STAND_MONSTER, 9999, m_vPlayerPos);	// 횡스크롤로 변경
+		CGameMgr::GetInstance()->Cave_ObjPool_Update(m_vPlayerPos);	// 횡스크롤로 변경
 
 		break;
 	case CScene_Cave::PHASE_3:			// 카메라 Z회전 함
@@ -192,6 +193,7 @@ void CScene_Cave::Free(void)
 	Engine::CScene::Free();
 
 	Safe_Release(m_pFogEffect);
+	CGameMgr::DestroyInstance();
 }
 
 CScene_Cave* CScene_Cave::Create(LPDIRECT3DDEVICE9 pGraphicDev)
@@ -220,6 +222,23 @@ HRESULT CScene_Cave::Ready_Layer_UI(const _tchar* pLayerTag)
 	m_mapLayer.emplace(pLayerTag, pLayer);
 
 	return S_OK;
+}
+
+void CScene_Cave::Phase_shift(int _iNum)
+{
+	Get_Object(L"GameLogic", L"TestPlayer");
+	switch (_iNum)
+	{
+	case 0:
+		//static_cast<CCavePlayer*>(Get_Object(L"GameLogic", L"TestPlayer"))->
+		break;
+	case 1:
+		break;
+	case 2:
+		break;
+	default:
+		break;
+	}
 }
 
 HRESULT CScene_Cave::Ready_Layer_Environment(const _tchar * pLayerTag) {

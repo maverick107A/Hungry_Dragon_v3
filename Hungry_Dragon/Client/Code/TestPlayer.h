@@ -35,7 +35,6 @@ private:
 	void		Key_Input(const float& fTimeDelta);
 	void		Ride_Terrain();
 
-
 public:
 	static CTestPlayer*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 
