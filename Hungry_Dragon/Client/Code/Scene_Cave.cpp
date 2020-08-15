@@ -98,6 +98,14 @@ HRESULT CScene_Cave::Ready_Scene(void)
 
 _int CScene_Cave::Update_Scene(const _float& fTimeDelta)
 {
+	if (GetAsyncKeyState(VK_NUMPAD0))
+		Switch_Phase(0);
+	if (GetAsyncKeyState(VK_NUMPAD1))
+		Switch_Phase(1);
+	if (GetAsyncKeyState(VK_NUMPAD2))
+		Switch_Phase(2);
+
+
 	Engine::CScene::Update_Scene(fTimeDelta);
 
 	if (GetAsyncKeyState(VK_F5) & 0x0001)
@@ -120,16 +128,25 @@ _int CScene_Cave::Update_Scene(const _float& fTimeDelta)
 		case CScene_Cave::PHASE_1:
 			m_pVent->Set_Active(false);
 			m_pVent->Set_ObsLoop(false);
+			static_cast<CCavePlayer*>(Get_Object(L"GameLogic", L"TestPlayer"))->Switch_Phase(0);
+			m_pCave->Set_Speed(400.f);
+			m_pVent->Set_Speed(400.f);
 			break;
 		case CScene_Cave::PHASE_2:
 			m_pVent->Set_Trans(_vec3(0.f, 0.f, 4000.f));
 			m_pVent->Set_Active(true);
 			m_pVent->Set_ObsLoop(false);
+			static_cast<CCavePlayer*>(Get_Object(L"GameLogic", L"TestPlayer"))->Switch_Phase(1);
+			m_pCave->Set_Speed(100.f);
+			m_pVent->Set_Speed(100.f);
 			break;
 		case CScene_Cave::PHASE_3:
 			m_pVent->Set_Trans(_vec3(0.f, 0.f, 0.f));
 			m_pVent->Set_Active(true);
 			m_pVent->Set_ObsLoop(true);
+			static_cast<CCavePlayer*>(Get_Object(L"GameLogic", L"TestPlayer"))->Switch_Phase(2);
+			m_pCave->Set_Speed(400.f);
+			m_pVent->Set_Speed(400.f);
 			break;
 		default:
 			break;
@@ -144,7 +161,6 @@ _int CScene_Cave::Update_Scene(const _float& fTimeDelta)
 		break;
 	case CScene_Cave::PHASE_2:			// 카메라 횡스크롤
 		CGameMgr::GetInstance()->Cave_ObjPool_Update(m_vPlayerPos);	// 횡스크롤로 변경
-
 		break;
 	case CScene_Cave::PHASE_3:			// 카메라 Z회전 함
 										// 여기 몬스터 안나오게 해줘
@@ -224,19 +240,24 @@ HRESULT CScene_Cave::Ready_Layer_UI(const _tchar* pLayerTag)
 	return S_OK;
 }
 
-void CScene_Cave::Phase_shift(int _iNum)
+void CScene_Cave::Switch_Phase(int _iNum)
 {
-	Get_Object(L"GameLogic", L"TestPlayer");
 	switch (_iNum)
 	{
 	case 0:
-		//static_cast<CCavePlayer*>(Get_Object(L"GameLogic", L"TestPlayer"))->
+		static_cast<CCavePlayer*>(Get_Object(L"GameLogic", L"TestPlayer"))->Switch_Phase(0);
+		m_pCave->Set_Speed(400.f);
+		m_pVent->Set_Speed(400.f);
 		break;
 	case 1:
+		static_cast<CCavePlayer*>(Get_Object(L"GameLogic", L"TestPlayer"))->Switch_Phase(1);
+		m_pCave->Set_Speed(100.f);
+		m_pVent->Set_Speed(100.f);
 		break;
 	case 2:
-		break;
-	default:
+		static_cast<CCavePlayer*>(Get_Object(L"GameLogic", L"TestPlayer"))->Switch_Phase(2);
+		m_pCave->Set_Speed(400.f);
+		m_pVent->Set_Speed(400.f);
 		break;
 	}
 }

@@ -44,7 +44,7 @@ private:
 	HRESULT	Ready_Layer_UI(const _tchar* pLayerTag);
 	
 private:
-	void Phase_shift(int _iNum);
+	void Switch_Phase(int _iNum);
 
 public:
 	static CScene_Cave*		Create(LPDIRECT3DDEVICE9 pGraphicDev);

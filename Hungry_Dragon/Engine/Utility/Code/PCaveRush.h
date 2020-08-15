@@ -36,7 +36,7 @@ private:
 	float					m_fMaxSpeed = 10.f;
 	float					m_fAccle = 10.f;
 	float					m_fPosZ = 0.f;
-	float					m_fPosY = 0.f;
+	float					m_fPosY = -9.f;
 	PHASE					m_ePhase = PHASE::PHASE_ZERO;
 
 public:

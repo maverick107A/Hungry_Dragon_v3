@@ -95,10 +95,11 @@ void CCaveCamera::Move_Phase01(LPDIRECT3DDEVICE9 & pGraphicDev, _vec3 _vPos, flo
 
 	float DeltaAngleX = m_vAfterAngle.x - m_vAngle.x;
 	float DeltaAngleY = m_vAfterAngle.y - m_vAngle.y;
-	float DeltaAngleZ = m_vAfterAngle.z - m_vAngle.z + m_fShockAngle;
+	float DeltaAngleZ = m_fShockAngle;
 
 	m_vAngle.x += DeltaAngleX*0.05f;
 	m_vAngle.y += DeltaAngleY*0.05f;
+	m_vAngle.z += DeltaAngleZ*0.03f;
 
 	D3DXMATRIX vRotZ;
 	D3DXMatrixRotationZ(&vRotZ, m_vAngle.z);

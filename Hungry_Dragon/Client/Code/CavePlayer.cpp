@@ -40,13 +40,6 @@ void CCavePlayer::Initialize_Object(void)
 
 int CCavePlayer::Update_Object(const float& fTimeDelta)
 {
-	if (GetAsyncKeyState(VK_NUMPAD0))
-		Switch_Phase(0);
-	if (GetAsyncKeyState(VK_NUMPAD1))
-		Switch_Phase(1);
-	if (GetAsyncKeyState(VK_NUMPAD2))
-		Switch_Phase(2);
-
 	m_pCamera->Update_Camera(fTimeDelta, m_pGraphicDev, m_pTransform->m_vInfo[Engine::INFO_POS], &m_fAngleX, &m_fAngleY, m_pTerrain);
 	m_pState->Update_State(fTimeDelta);
 	//
