@@ -125,8 +125,6 @@ void CScene_Forest::LateUpdate_Scene(const _float & fTimeDelta)
 
 void CScene_Forest::Render_Scene(void) {
 
-	
-
 	// set the technique to use
 	m_pFogEffect->SetTechnique(m_hFogTechHandle);
 
@@ -142,12 +140,14 @@ void CScene_Forest::Render_Scene(void) {
 	_matrix matWorld;
 	D3DXMatrixIdentity(&matWorld);
 	m_pGraphicDev->SetTransform(D3DTS_WORLD, &matWorld);
-	Engine::Particle_Render();
+
 
 	m_mapLayer[L"Environment"]->Render_Layer();
 	m_mapLayer[L"GameLogic"]->Render_Layer();
 	
 	m_pFogEffect->End();
+
+	Engine::Particle_Render();
 
 	m_mapLayer[L"UI"]->Render_Layer();
 }
