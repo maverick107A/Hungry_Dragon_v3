@@ -1,5 +1,6 @@
 #include "MonsterMain.h"
 #include "Export_Function.h"
+#include "Particle.h"
 
 Engine::CMonsterMain::CMonsterMain(LPDIRECT3DDEVICE9 pGraphicDev)
 	: Engine::CGameObject(pGraphicDev)
@@ -101,7 +102,8 @@ void Engine::CMonsterMain::State_Change()
 		
 		if (m_eState == MONSTER_DEACTIVATE)
 		{
-			m_pParticle = Engine::Particle_Create(_vec3(0.f, 0.f, 0.f));
+			m_pParticle = Engine::Particle_Create(Engine::PART_FRAGILE,_vec3(0.f, 0.f, 0.f));
+			Engine::Set_ParticleColor(static_cast<CParticle*>(m_pParticle), D3DXCOLOR(255.f, 0.f, 255.f, 255.f));
 		}
 
 		if (m_eState == MONSTER_DYING&&nullptr!=m_pParticle)

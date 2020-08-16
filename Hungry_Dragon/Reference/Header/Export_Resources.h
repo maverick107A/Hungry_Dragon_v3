@@ -29,13 +29,17 @@ inline HRESULT	Ready_Texture(LPDIRECT3DDEVICE9 pGraphicDev,
 
 inline void	Load_Particle(LPDIRECT3DDEVICE9 pGraphicDev);
 
-inline void	Render_Buffer(const _ushort& wContainerIdx, const _tchar* pBufferTag);
-inline CResources*		Clone(const _ushort& wContainerIdx, const _tchar* pResourceTag);
-
 inline CResources*	Get_Particle(LPDIRECT3DDEVICE9 pGraphicDev,
 	PARTICLEID _ePartID,
 	BoundingBox _boundingBox,
 	_vec3 _vOrigin);
+
+inline void	Set_ParticleColor(Engine::CParticle* _pParticle,D3DXCOLOR _color);
+
+inline void	Render_Buffer(const _ushort& wContainerIdx, const _tchar* pBufferTag);
+inline CResources*		Clone(const _ushort& wContainerIdx, const _tchar* pResourceTag);
+
+
 
 inline CResources* Create_Preview(LPDIRECT3DDEVICE9 pGraphicDev, LPCTSTR _address);
 inline CResources* Create_Preview(LPDIRECT3DDEVICE9 pGraphicDev, list<VTXCOL> _listVertex, list<INDEX16> _listIndex);

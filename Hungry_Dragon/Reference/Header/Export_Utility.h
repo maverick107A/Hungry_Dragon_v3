@@ -61,7 +61,7 @@ inline void Particle_Update(const float& fTimeDelta);
 inline void Particle_LateUpdate(const float& fTimeDelta);
 inline void Particle_Render();
 inline bool Set_ParticleTrans(CResources* _particle, _vec3 _pos);
-inline CResources* Particle_Create(const _vec3 _pos);
+inline CResources* Particle_Create(Engine::PARTICLEID _eID, const _vec3 _pos);
 
 // Release
 inline void		Release_Utility(void);

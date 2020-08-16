@@ -47,6 +47,11 @@ inline CResources * Get_Particle(LPDIRECT3DDEVICE9 pGraphicDev, PARTICLEID _ePar
 	return CResourcesMgr::GetInstance()->Get_Particle(pGraphicDev, _ePartID, _boundingBox, _vOrigin);
 }
 
+inline void Set_ParticleColor(Engine::CParticle * _pParticle, D3DXCOLOR _color)
+{
+	_pParticle->Set_Color(_color);
+}
+
 inline CResources * Create_Preview(LPDIRECT3DDEVICE9 pGraphicDev, LPCTSTR _address)
 {
 	return CVICustom::Create(pGraphicDev, _address);

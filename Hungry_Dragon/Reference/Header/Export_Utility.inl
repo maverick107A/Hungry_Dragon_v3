@@ -88,41 +88,33 @@ HRESULT		Clear_ObjectPool()
 //Particle
 void Ready_ParticleMgr(LPDIRECT3DDEVICE9 _pGraphicDev)
 {
-	CParticleMgr::GetInstance()->Ready_ParticleMgr(_pGraphicDev);
+	Engine::CParticleMgr::GetInstance()->Ready_ParticleMgr(_pGraphicDev);
 }
 
 void Particle_Update(const float& fTimeDelta)
 {
-	CParticleMgr::GetInstance()->Particle_Update(fTimeDelta);
+	Engine::CParticleMgr::GetInstance()->Particle_Update(fTimeDelta);
 }
 
 inline void Particle_LateUpdate(const float & fTimeDelta)
 {
-	CParticleMgr::GetInstance()->Particle_LateUpdate(fTimeDelta);
+	Engine::CParticleMgr::GetInstance()->Particle_LateUpdate(fTimeDelta);
 }
 
 void Particle_Render()
 {
-	CParticleMgr::GetInstance()->Particle_Render();
+	Engine::CParticleMgr::GetInstance()->Particle_Render();
 }
 
-inline bool Set_ParticleTrans(CResources * _particle, _vec3 _pos)
+inline bool Set_ParticleTrans(Engine::CResources* _particle, Engine::_vec3 _pos)
 {
-	return CParticleMgr::GetInstance()->Set_ParticleTrans(_particle, _pos);
+	return Engine::CParticleMgr::GetInstance()->Set_ParticleTrans(_particle, _pos);
 }
 
-CResources* Particle_Create(const _vec3 _pos)
+inline Engine::CResources* Particle_Create(Engine::PARTICLEID _eID, const Engine::_vec3 _pos)
 {
-	return CParticleMgr::GetInstance()->Particle_Create(_pos);
+	return CParticleMgr::GetInstance()->Particle_Create(_eID,_pos);
 }
-
-
-
-
-
-
-
-
 
 inline bool Find_First(CGameObject * _caller, CGameObject * _callee)
 {

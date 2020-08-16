@@ -24,7 +24,7 @@ public:
 	void Particle_Update(const float& fTimeDelta);
 	void Particle_LateUpdate(const float& fTimeDelta);
 	void Particle_Render();
-	CResources* Particle_Create(const _vec3 _pos);
+	CResources* Particle_Create(Engine::PARTICLEID _eID, const _vec3 _pos);
 
 public:
 	bool Set_ParticleTrans(CResources* _particle,_vec3 _pos);

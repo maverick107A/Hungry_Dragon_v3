@@ -91,6 +91,9 @@
     <Filter Include="00. Resources\00. VIBuffer\91. VICustom">
       <UniqueIdentifier>{33281f5c-858e-4847-b8f6-46a5d89dfcf8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00. Resources\02. Particle\02. Part_Fragile">
+      <UniqueIdentifier>{de74eaaf-6538-4d85-80de-745c7ec8fd24}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\Resources.cpp">
@@ -197,6 +200,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\VICustom.cpp">
       <Filter>00. Resources\00. VIBuffer\91. VICustom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Part_Fragile.cpp">
+      <Filter>00. Resources\02. Particle\02. Part_Fragile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -307,6 +313,9 @@
     </ClInclude>
     <ClInclude Include="..\Code\VICustom.h">
       <Filter>00. Resources\00. VIBuffer\91. VICustom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Part_Fragile.h">
+      <Filter>00. Resources\02. Particle\02. Part_Fragile</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

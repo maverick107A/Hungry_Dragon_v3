@@ -16,6 +16,7 @@ public:
 	void			Get_RandomVector(_vec3* _out, _vec3* _min, _vec3* _max);
 
 	void			Set_Texture(_tchar* texFileName);
+	void			Set_Color(D3DXCOLOR _color);
 	void			Set_Size(_float _fSize);
 	void			Set_Empty();
 

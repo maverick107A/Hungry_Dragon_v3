@@ -175,6 +175,15 @@ void CParticle::Set_Texture(_tchar * texFileName) {
 		
 }
 
+void CParticle::Set_Color(D3DXCOLOR _color)
+{
+	list<ATTRIBUTE>::iterator iter=	m_arrParticle.begin();
+	for (; iter != m_arrParticle.end(); ++iter)
+	{
+		iter->tColor = _color;
+	}
+}
+
 void CParticle::Set_Size(_float _fSize) {
 	if (_fSize>0) {
 		m_fSize = _fSize;
