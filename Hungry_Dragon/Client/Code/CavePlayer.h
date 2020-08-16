@@ -26,7 +26,7 @@ public:
 	virtual void Initialize_Object(void);
 	virtual int Update_Object(const float& fTimeDelta) override;
 	virtual void Render_Object(void) override;
-	
+
 private:
 	virtual void	State_Change() override;
 	virtual HRESULT	Add_Component(void) override;

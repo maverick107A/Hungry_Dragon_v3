@@ -64,7 +64,7 @@ void CCave::Render_Object(void)
 	//여기까지 레이트업데이트에 넣어줘야함
 	
 
-	m_pGraphicDev->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+	
 	m_pTransform->Set_Transform(m_pGraphicDev);
 	m_pBufferCom->Render_Buffer();
 	m_pTransformBeyond->Set_Transform(m_pGraphicDev);

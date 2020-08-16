@@ -8,7 +8,7 @@ class CBaseLand;
 
 class ENGINE_DLL CCaveCamera : public CCameraMain
 {
-	enum PHASE {PHASE_ZERO, PHASE_ONE, PHASE_TWO, PHASE_END};
+	enum PHASE { PHASE_ZERO, PHASE_ONE, PHASE_TWO, PHASE_END };
 private:
 	explicit CCaveCamera(void);
 	virtual ~CCaveCamera(void);

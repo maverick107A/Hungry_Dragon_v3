@@ -34,8 +34,8 @@ _int CLogo::Update_Scene(const _float& fTimeDelta) {
 			Engine::CScene*		pScene = nullptr;
 
 			//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_PROTO);
-			//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_FOREST);
-			CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_CAVE);
+			CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_FOREST);
+			//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_CAVE);
 			//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_CLOUD);
 
 			

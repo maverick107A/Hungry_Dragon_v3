@@ -26,7 +26,6 @@ public:
 	void			Set_Angle(int _iIndex, float _fAngle) { m_vAngle[_iIndex] = _fAngle; }
 	void			Set_AfterAngle(int _iIndex, float _fAngle) { m_vAfterAngle[_iIndex] = _fAngle; }
 	void			Set_Shock() { m_bShock = true; m_fShockAngle = 5.f; }
-	void			Set_CameraDis(float _fDis) { m_fCameraDis = _fDis; }
 
 protected:
 	virtual void	Move_Camera(LPDIRECT3DDEVICE9& pGraphicDev, _vec3 _vPos, float* _fAngleX, float* _fAngleY) {}

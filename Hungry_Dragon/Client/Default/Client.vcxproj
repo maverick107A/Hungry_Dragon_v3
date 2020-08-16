@@ -80,7 +80,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>../Bin\</OutDir>
+    <OutDir>../Bin/Release\</OutDir>
     <IncludePath>$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
     <LibraryPath>$(DXSDK_DIR)lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
@@ -160,18 +160,16 @@
     <ClInclude Include="..\Code\BackGround.h" />
     <ClInclude Include="..\Code\BackGround_Logo.h" />
     <ClInclude Include="..\Code\Bat_Monster.h" />
-    <ClInclude Include="..\Code\Bullet.h" />
     <ClInclude Include="..\Code\Cave.h" />
     <ClInclude Include="..\Code\CavePlayer.h" />
     <ClInclude Include="..\Code\Chase_Monster.h" />
+    <ClInclude Include="..\Code\Color_Mask.h" />
     <ClInclude Include="..\Code\Fly_Monster.h" />
-    <ClInclude Include="..\Code\GameMgr.h" />
     <ClInclude Include="..\Code\Golem.h" />
     <ClInclude Include="..\Code\Ingame_Flow.h" />
     <ClInclude Include="..\Code\Jump_Monster.h" />
     <ClInclude Include="..\Code\Logo.h" />
     <ClInclude Include="..\Code\MainApp.h" />
-    <ClInclude Include="..\Code\Monster.h" />
     <ClInclude Include="..\Code\NormalBullet.h" />
     <ClInclude Include="..\Code\Obstacle.h" />
     <ClInclude Include="..\Code\Ocean.h" />
@@ -203,18 +201,16 @@
     <ClCompile Include="..\Code\BackGround.cpp" />
     <ClCompile Include="..\Code\BackGround_Logo.cpp" />
     <ClCompile Include="..\Code\Bat_Monster.cpp" />
-    <ClCompile Include="..\Code\Bullet.cpp" />
     <ClCompile Include="..\Code\Cave.cpp" />
     <ClCompile Include="..\Code\CavePlayer.cpp" />
     <ClCompile Include="..\Code\Chase_Monster.cpp" />
+    <ClCompile Include="..\Code\Color_Mask.cpp" />
     <ClCompile Include="..\Code\Fly_Monster.cpp" />
-    <ClCompile Include="..\Code\GameMgr.cpp" />
     <ClCompile Include="..\Code\Golem.cpp" />
     <ClCompile Include="..\Code\Ingame_Flow.cpp" />
     <ClCompile Include="..\Code\Jump_Monster.cpp" />
     <ClCompile Include="..\Code\Logo.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />
-    <ClCompile Include="..\Code\Monster.cpp" />
     <ClCompile Include="..\Code\NormalBullet.cpp" />
     <ClCompile Include="..\Code\Obstacle.cpp" />
     <ClCompile Include="..\Code\Ocean.cpp" />

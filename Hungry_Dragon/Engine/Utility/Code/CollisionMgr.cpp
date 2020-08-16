@@ -45,7 +45,7 @@ void CCollisionMgr::Player_Monster(list<CGameObject*> * _pPlayer, list<CGameObje
 bool CCollisionMgr::Player_MonsterCol(CGameObject * _caller, CGameObject * _callee)
 {
 	_vec3 vPlayerPos, vMonsterPos, vDis;
-	memcpy(&vPlayerPos, &_caller->Get_Transform()->Get_World().m[Engine::INFO_POS][0], sizeof(_vec3));
+	_caller->Get_Transform()->Get_Info(Engine::INFO_POS, &vPlayerPos);
 	_callee->Get_Transform()->Get_Info(Engine::INFO_POS, &vMonsterPos);
 	vDis = vPlayerPos - vMonsterPos;
 

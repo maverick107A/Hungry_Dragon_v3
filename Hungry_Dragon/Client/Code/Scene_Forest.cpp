@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Scene_Forest.h"
 #include "Export_Function.h"
-#include "GameMgr.h"
 #include "Ingame_Flow.h"
 
 CScene_Forest::CScene_Forest(LPDIRECT3DDEVICE9 pGraphicDev)
@@ -80,19 +79,21 @@ HRESULT CScene_Forest::Ready_Scene(void) {
 _int CScene_Forest::Update_Scene(const _float& fTimeDelta) {
 	if (GetAsyncKeyState('F') & 0x0001)
 	{
-		if(m_bWireFrame)
+		if(m_bWireFrameMode)
 			m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 		else
 			m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
-		m_bWireFrame = !m_bWireFrame;
+		m_bWireFrameMode = !m_bWireFrameMode;
 	}
 	if (GetAsyncKeyState(VK_F5) & 0x0001)
 	{
 		m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+		m_bWireFrameMode = true;
 	}
 	if (GetAsyncKeyState(VK_F6) & 0x0001)
 	{
 		m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+		m_bWireFrameMode = false;
 	}
 	if (GetAsyncKeyState(VK_F7) & 0x0001)
 	{
@@ -102,12 +103,16 @@ _int CScene_Forest::Update_Scene(const _float& fTimeDelta) {
 	{
 		m_bFogEnable = !m_bFogEnable;
 	}
+	if (GetAsyncKeyState(VK_TAB) & 0x0001)
+	{
+		m_iMaskNum = (m_iMaskNum + 1) % 8;
+	}
 
 	Engine::Particle_Update(fTimeDelta);
 
 	//플레이어 위치 최신화
 	pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);
-	CGameMgr::GetInstance()->Game_Update(m_vPlayerPos);
+	Engine::Set_Monster_LayerMap(OBJID::STAND_MONSTER, 9999, m_vPlayerPos);
 	
 	
 	Engine::CScene::Update_Scene(fTimeDelta);
@@ -143,8 +148,12 @@ void CScene_Forest::Render_Scene(void) {
 	D3DXMatrixIdentity(&matWorld);
 	m_pGraphicDev->SetTransform(D3DTS_WORLD, &matWorld);
 	Engine::Particle_Render();
-
-	m_mapLayer[L"Environment"]->Render_Layer();
+	if (!m_bWireFrameMode)
+	{
+		m_mapLayer[L"Environment"]->Render_Layer();
+	}
+	//CIngame_Flow::GetInstance()->Set_MaskColor(m_iMaskNum);
+	CIngame_Flow::GetInstance()->Set_DefaultTex();
 	m_mapLayer[L"GameLogic"]->Render_Layer();
 	
 	m_pFogEffect->End();
@@ -155,7 +164,7 @@ void CScene_Forest::Render_Scene(void) {
 void CScene_Forest::Free(void) {
 	Engine::Clear_RenderGroup();
 	Engine::CScene::Free();
-	CGameMgr::DestroyInstance();
+	Engine::Clear_ObjectPool();
 	Safe_Release(m_pFogEffect);
 }
 
@@ -224,6 +233,7 @@ HRESULT CScene_Forest::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 	FAILED_CHECK_RETURN(Register_GameObject<CTerrain_Locater>(pLayer, L"BackGround"), E_FAIL);
 	FAILED_CHECK_RETURN(Register_GameObject<CTree_Locater>(pLayer, L"TreeObject"), E_FAIL);		// 무조건 터레인 로케이터 뒤에
 	FAILED_CHECK_RETURN(Register_GameObject<CTestPlayer>(pLayer, L"TestPlayer"), E_FAIL);
+
 
 	for (int i = 0; i < 250; ++i)
 	{

@@ -9,7 +9,7 @@ class CTransform;
 
 class ENGINE_DLL CPCaveRush : public CPlayerState
 {
-	enum PHASE {PHASE_ZERO, PHASE_ONE, PHASE_TWO};
+	enum PHASE { PHASE_ZERO, PHASE_ONE, PHASE_TWO };
 
 private:
 	explicit CPCaveRush(void);
@@ -27,7 +27,7 @@ private:
 
 public:
 	void Switch_Phase(int _iPhase);
-	
+
 private:
 	float					m_fAngle = 0.f;
 	float					m_fAngularSpeed = 0.f;

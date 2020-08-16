@@ -1,6 +1,5 @@
 ﻿#include "stdafx.h"
 #include "Scene_Cave.h"
-#include "GameMgr.h"
 #include "Export_Function.h"
 #include "SkySphere.h"
 #include "Cave.h"
@@ -91,21 +90,13 @@ HRESULT CScene_Cave::Ready_Scene(void)
 
 	m_hFogTechHandle = m_pFogEffect->GetTechniqueByName("Fog");
 
-
+	m_pGraphicDev->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_GOURAUD);
 
 	return S_OK;
 }
 
 _int CScene_Cave::Update_Scene(const _float& fTimeDelta)
 {
-	if (GetAsyncKeyState(VK_NUMPAD0))
-		Switch_Phase(0);
-	if (GetAsyncKeyState(VK_NUMPAD1))
-		Switch_Phase(1);
-	if (GetAsyncKeyState(VK_NUMPAD2))
-		Switch_Phase(2);
-
-
 	Engine::CScene::Update_Scene(fTimeDelta);
 
 	if (GetAsyncKeyState(VK_F5) & 0x0001)
@@ -157,10 +148,11 @@ _int CScene_Cave::Update_Scene(const _float& fTimeDelta)
 	switch (m_ePhaseNum)
 	{
 	case CScene_Cave::PHASE_1:			// 카메라 Z회전 안함
-		CGameMgr::GetInstance()->Cave_ObjPool_Update(m_vPlayerPos);
+		Engine::Set_Monster_CaveMap(OBJID::STAND_MONSTER, 9999, m_vPlayerPos);
 		break;
 	case CScene_Cave::PHASE_2:			// 카메라 횡스크롤
-		CGameMgr::GetInstance()->Cave_ObjPool_Update(m_vPlayerPos);	// 횡스크롤로 변경
+		Engine::Set_Monster_CaveMap(OBJID::STAND_MONSTER, 9999, m_vPlayerPos);	// 횡스크롤로 변경
+
 		break;
 	case CScene_Cave::PHASE_3:			// 카메라 Z회전 함
 										// 여기 몬스터 안나오게 해줘
@@ -209,7 +201,6 @@ void CScene_Cave::Free(void)
 	Engine::CScene::Free();
 
 	Safe_Release(m_pFogEffect);
-	CGameMgr::DestroyInstance();
 }
 
 CScene_Cave* CScene_Cave::Create(LPDIRECT3DDEVICE9 pGraphicDev)

@@ -166,6 +166,9 @@
     <Filter Include="03. GameMgr">
       <UniqueIdentifier>{b3e38d98-0162-4576-b32b-7bbadbdfe1a1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. GameObject\01. Stage\59. Color_Mask">
+      <UniqueIdentifier>{c1e13116-ccb5-4204-a1cf-6faf95a8ea36}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -219,9 +222,6 @@
     <ClInclude Include="..\Code\NormalBullet.h">
       <Filter>02. GameObject\01. Stage\02.Bullet\00.Normal</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\Bullet.h">
-      <Filter>02. GameObject\01. Stage\02.Bullet</Filter>
-    </ClInclude>
     <ClInclude Include="..\Code\Scene_Proto.h">
       <Filter>01. Scene\01.Scene_Proto</Filter>
     </ClInclude>
@@ -240,14 +240,8 @@
     <ClInclude Include="..\Code\Scene_PT.h">
       <Filter>01. Scene\Scene_PT</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\Monster.h">
-      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster</Filter>
-    </ClInclude>
     <ClInclude Include="..\Code\Scene_Cave.h">
       <Filter>01. Scene\03. Scene_Cave</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\GameMgr.h">
-      <Filter>03. GameMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Cave.h">
       <Filter>02. GameObject\01. Stage\52.Cave</Filter>
@@ -290,6 +284,9 @@
     </ClInclude>
     <ClInclude Include="..\Code\Scene_Cloud.h">
       <Filter>01. Scene\04. Scene_Cloud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Color_Mask.h">
+      <Filter>02. GameObject\01. Stage\59. Color_Mask</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -335,9 +332,6 @@
     <ClCompile Include="..\Code\NormalBullet.cpp">
       <Filter>02. GameObject\01. Stage\02.Bullet\00.Normal</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Bullet.cpp">
-      <Filter>02. GameObject\01. Stage\02.Bullet</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\Scene_Proto.cpp">
       <Filter>01. Scene\01.Scene_Proto</Filter>
     </ClCompile>
@@ -347,9 +341,6 @@
     <ClCompile Include="..\Code\Ocean.cpp">
       <Filter>02. GameObject\01. Stage\50.Ocean</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\GameMgr.cpp">
-      <Filter>03. GameMgr</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\Scene_Loading.cpp">
       <Filter>01. Scene\90. Scene_Loading</Filter>
     </ClCompile>
@@ -358,9 +349,6 @@
     </ClCompile>
     <ClCompile Include="..\Code\Scene_PT.cpp">
       <Filter>01. Scene\Scene_PT</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Monster.cpp">
-      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Scene_Cave.cpp">
       <Filter>01. Scene\03. Scene_Cave</Filter>
@@ -406,6 +394,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Scene_Cloud.cpp">
       <Filter>01. Scene\04. Scene_Cloud</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Color_Mask.cpp">
+      <Filter>02. GameObject\01. Stage\59. Color_Mask</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

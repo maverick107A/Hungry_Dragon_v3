@@ -8,7 +8,7 @@ USING(Engine)
 
 Engine::CPCaveRush::CPCaveRush(void)
 {
-	
+
 }
 
 Engine::CPCaveRush::CPCaveRush(const CPCaveRush& rhs)

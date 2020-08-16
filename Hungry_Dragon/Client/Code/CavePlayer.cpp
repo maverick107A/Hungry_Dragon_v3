@@ -21,7 +21,7 @@ CCavePlayer::~CCavePlayer(void)
 
 HRESULT CCavePlayer::Ready_Object(void)
 {
-	
+
 
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
@@ -54,7 +54,7 @@ void CCavePlayer::Render_Object(void)
 	m_pTransform->Set_Transform(m_pGraphicDev);
 	m_pBufferCom->Render_Buffer();
 
-	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end();++iter) {
+	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end(); ++iter) {
 		(*iter)->Render_Buffer();
 	}
 }
@@ -67,7 +67,7 @@ void CCavePlayer::Free(void)
 
 	}
 	m_arrParticle.clear();
-	
+
 	m_pState->Release();
 	Engine::CGameObject::Free();
 }
