@@ -20,6 +20,7 @@ public:
 
 public:
 	_vec3			Get_Pos() { return m_vPos; }
+	_vec3			Get_Dir() { return m_vDir; }
 
 public:
 	void			Set_AngleZPlus(float _fAngle) { m_vAngle.z += _fAngle; }

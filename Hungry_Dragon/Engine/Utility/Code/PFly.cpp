@@ -32,18 +32,13 @@ void CPFly::Update_State(const float& fTimeDelta)
 	D3DXVECTOR3 vLook = { 0.f,0.f,0.f };
 	D3DXVECTOR3 vRight = { 0.f,0.f,0.f };
 
-	vLook.y = -sinf(m_pPlayer->Get_AngleX());
+	float fCos = cosf(m_pPlayer->Get_AngleX());
 
-	if (cosf(m_pPlayer->Get_AngleX()) > 0)
-	{
-		vLook.x = sinf(m_pPlayer->Get_AngleY());
-		vLook.z = cosf(m_pPlayer->Get_AngleY());
-	}
-	else
-	{
-		vLook.x = -sinf(m_pPlayer->Get_AngleY());
-		vLook.z = -cosf(m_pPlayer->Get_AngleY());
-	}
+	vLook.y = -sinf(m_pPlayer->Get_AngleX());
+	vLook.x = sinf(m_pPlayer->Get_AngleY())*fCos;
+	vLook.z = cosf(m_pPlayer->Get_AngleY())*fCos;
+
+
 	D3DXVec3Cross(&vRight, &_vec3(0.f,1.f,0.f), &vLook);
 	D3DXVec3Normalize(&vRight, &vRight);
 	D3DXVec3Normalize(&vLook, &vLook);
@@ -182,7 +177,7 @@ void CPFly::Update_State(const float& fTimeDelta)
 	}
 	if (Land_Check())
 		m_pPlayer->Set_Sate(CPlayerMain::STATE_LANDRUSH);
-	m_pPlayer->Get_Transform()->m_vInCamPos.z = -10.f;
+	//m_pPlayer->Get_Transform()->m_vInCamPos.z = -10.f;
 }
 
 void CPFly::Out_State()

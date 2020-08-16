@@ -9,6 +9,7 @@
 #include "PFly.h"
 #include "PLandIdle.h"
 #include "PLandRush.h"
+#include "BreathBase.h"
 #include "Terrain_Locater.h"
 
 CTestPlayer::CTestPlayer(LPDIRECT3DDEVICE9 pGraphicDev)
@@ -94,6 +95,7 @@ void CTestPlayer::Render_Object(void)
 {
 	m_pTransform->Set_Transform(m_pGraphicDev);
 	m_pBufferCom->Render_Buffer();
+	m_pBreath->Render_Breath(this);
 
 	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end();++iter) {
 		(*iter)->Render_Buffer();
@@ -165,7 +167,11 @@ HRESULT CTestPlayer::Add_Component(void)
 	//State
 	m_pState = Engine::CPFlyIdle::Create();
 	m_pState->Enter_State(this);
-	//m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_State", m_pState);
+
+	//Breath
+	pComponent = m_pBreath = Engine::CBreathBase::Create(m_pGraphicDev);
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_Breath", pComponent);
 
 	return S_OK;
 }

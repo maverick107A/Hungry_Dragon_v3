@@ -30,7 +30,7 @@ _int Engine::CCamera::Update_Camera(const _float& _fTimeDelta, LPDIRECT3DDEVICE9
 	//Ride_Terrain(_pTerrain);
 
 	D3DXMATRIX V;
-	D3DXMatrixLookAtLH(&V, &m_vPos, &m_vDir, &m_vUp);
+	D3DXMatrixLookAtLH(&V, &m_vPos, &_vPos, &m_vUp);
 	_pGraphicDev->SetTransform(D3DTS_VIEW, &V);
 
 	return 0;
@@ -46,7 +46,7 @@ _int CCamera::Update_Camera(const _float & _fTimeDelta, LPDIRECT3DDEVICE9 & _pGr
 	Ride_Terrain(_pTerrain);
 
 	D3DXMATRIX V;
-	D3DXMatrixLookAtLH(&V, &m_vPos, &m_vDir, &m_vUp);
+	D3DXMatrixLookAtLH(&V, &m_vPos, &_vPos, &m_vUp);
 	_pGraphicDev->SetTransform(D3DTS_VIEW, &V);
 
 	return 0;
@@ -94,7 +94,7 @@ void CCamera::Move_Camera(LPDIRECT3DDEVICE9 & pGraphicDev, _vec3 _vPos, float* _
 
 	SetCursorPos(m_tCenter.x, m_tCenter.y);
 	m_vPos = _vPos - m_vDir*m_fCameraDis;
-	m_vDir = m_vPos + m_vDir;
+	//m_vDir = m_vPos + m_vDir;
 }
 
 void CCamera::Move_Camera(LPDIRECT3DDEVICE9 & pGraphicDev, _vec3 _vPos, _vec3 * _vLook, _vec3 * _vUp)
@@ -122,6 +122,7 @@ void CCamera::Move_Camera(LPDIRECT3DDEVICE9 & pGraphicDev, _vec3 _vPos, _vec3 * 
 
 	vRotTotal = vRotX*vRotY;
 	D3DXVec3TransformNormal(&m_vDir, &m_vLook, &vRotTotal);
+
 	//¾÷¹éÅÍ
 	D3DXVec3TransformNormal(&m_vUp, &m_vUp, &vRotTotal);
 

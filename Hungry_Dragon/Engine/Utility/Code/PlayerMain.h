@@ -13,6 +13,7 @@ class CTransform;
 class CCameraMain;
 class CBaseLand;
 class CPlayerState;
+class CBreathBase;
 
 class ENGINE_DLL CPlayerMain : public Engine::CGameObject
 {
@@ -59,6 +60,7 @@ protected:
 	CTerrain_Locater*		m_pTerrrrrrrain = nullptr;
 	CBaseLand*				m_pTerrain = nullptr;
 	CPlayerState*			m_pState = nullptr;
+	CBreathBase*			m_pBreath = nullptr;
 	D3DXVECTOR3				m_vLook;
 	D3DXVECTOR3				m_vUp;
 	float					m_fAngleX = 0.f;

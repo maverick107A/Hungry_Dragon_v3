@@ -166,6 +166,8 @@ call CopyUtility.bat</Command>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Code\BeamBase.cpp" />
+    <ClCompile Include="..\Code\BreathBase.cpp" />
     <ClCompile Include="..\Code\BulletMain.cpp" />
     <ClCompile Include="..\Code\Camera.cpp" />
     <ClCompile Include="..\Code\CameraMain.cpp" />
@@ -196,6 +198,8 @@ call CopyUtility.bat</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Header\Export_Utility.h" />
+    <ClInclude Include="..\Code\BeamBase.h" />
+    <ClInclude Include="..\Code\BreathBase.h" />
     <ClInclude Include="..\Code\BulletMain.h" />
     <ClInclude Include="..\Code\Camera.h" />
     <ClInclude Include="..\Code\CameraMain.h" />
