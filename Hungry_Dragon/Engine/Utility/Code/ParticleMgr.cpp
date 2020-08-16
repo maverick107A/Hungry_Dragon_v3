@@ -67,9 +67,6 @@ void CParticleMgr::Particle_Render()
 
 CResources* CParticleMgr::Particle_Create(const _vec3 _pos)
 {
-	//Engine::Particle_Render();
-
-
 	Engine::_vec3 vOrigin = _pos;
 	Engine::BoundingBox tempBoundingBox;
 	tempBoundingBox.vMax = vOrigin+ Engine::_vec3(500.f, 500.f, 500.f);
