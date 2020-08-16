@@ -27,6 +27,7 @@
 #include "VICustom.h"
 #include "Texture.h"
 #include "HeightCol.h"
+#include "CliffCylinder.h"
 
 #include "Part_Atk.h"
 #include "Part_Wind.h"

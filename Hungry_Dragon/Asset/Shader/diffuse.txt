@@ -1,0 +1,67 @@
+
+// 클라이언트로부터 초기화되는 매터리얼, 행렬/벡터 등의 전역 변수 설정
+
+matrix matView;
+matrix matViewProj;
+
+vector vLightDirection;
+vector vAmbientMtrl;
+vector vDiffuseMtrl;
+
+
+
+// 셰이더에서 초기화되는 빛의 강도 벡터 설정
+
+vector vDiffuseLightIntensity = {0.0f, 1.0f, 0.0f, 1.0f};
+vector vAmbientLightIntensity = {0.0f, 0.2f, 0.0f, 1.0f};
+
+
+// 인풋/아웃풋 스트럭트
+
+struct VS_INPUT
+{
+    vector position : POSITION;
+    vector normal   : NORMAL;
+};
+
+struct VS_OUTPUT
+{
+    vector position : POSITION;
+    vector diffuse  : COLOR;
+};
+
+// 메인 컴퓨팅
+
+VS_OUTPUT Main(VS_INPUT _input)
+{
+    VS_OUTPUT output = (VS_OUTPUT)0;
+    
+    // 버텍스 저장공간(동종클립스페이스)에 전달하고 아웃풋에 저장
+    output.position = mul(_input.position, matViewProj);
+    
+    // 뷰 스페이스에 조명과 노말 전달
+    // w값을 0으로 설정해서 점이 아닌 벡터를 전달
+    vector temp = vLightDirection; // 왠진 모르겠는데 전역변수 쓰기가 안됨
+    temp.w = 0.0f;
+    _input.normal.w = 0.0f;
+    temp = mul(temp, matView);
+    _input.normal = mul(_input.normal, matView);
+
+    // 빛과 노말 사이각 코사인값 계산
+    float s = dot(temp, _input.normal);
+
+
+    // 환경광과 난반사의 반사값을 매터리얼과 빛의 강도의 성분 단위 곱을 통해 얻는다.
+    // 위에서 계산한 코사인 값으로 난반사 값을 조절 
+    // 두 반사값을 더하여 최종 칼라 지정
+
+    output.diffuse = (vAmbientMtrl * vAmbientLightIntensity) + 
+                     (s * (vDiffuseLightIntensity * vDiffuseMtrl));
+    
+    return output;
+}
+
+
+
+
+

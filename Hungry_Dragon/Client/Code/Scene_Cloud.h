@@ -32,8 +32,9 @@
 #include "SkySphere.h"
 #include "Ocean.h"
 #include "PlayerUI.h"
-#include "Terrain_Locater.h"
-#include "Tree_Locater.h"
+#include "Cloud_Locater.h"
+#include "Cliff_Locater.h"
+
 //-------------------------------------------------------
 
 using namespace Engine;

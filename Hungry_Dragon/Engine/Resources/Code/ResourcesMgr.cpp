@@ -72,7 +72,7 @@ HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 		pResources = CHeightCol::Create(pGraphicDev, dwCntX, dwCntZ, dwVtxItv);
 		break;
 	case BUFFER_RIFT:
-		//pResources = CTriCol::Create(pGraphicDev);
+		pResources = CCliffCylinder::Create(pGraphicDev);
 		break;
 
 	case BUFFER_VOLCANO:

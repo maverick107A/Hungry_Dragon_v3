@@ -1,0 +1,68 @@
+
+// extern으로..
+
+extern matrix matWorldView;
+extern matrix matWorldViewProj;
+
+extern vector vLightDirection;
+extern vector vColor;
+
+
+
+// 인풋/아웃풋 스트럭트
+
+struct VS_INPUT
+{
+    vector position : POSITION;
+    vector normal   : NORMAL;
+};
+
+struct VS_OUTPUT
+{
+    vector position : POSITION;
+    float2 uvCoords : TEXCOORD;
+    vector diffuse  : COLOR;
+};
+
+// 메인 컴퓨팅
+
+VS_OUTPUT Main(VS_INPUT _input)
+{
+    VS_OUTPUT output = (VS_OUTPUT)0;
+    
+    // 버텍스 저장공간(동종클립스페이스)에 전달하고 아웃풋에 저장
+    output.position = mul(_input.position, matWorldViewProj);
+    
+    // 뷰 스페이스에 조명과 노말 전달
+    // w값을 0으로 설정해서 점이 아닌 벡터를 전달
+    // 월드 행렬에 스케일 적용이 없다고 가정함
+    
+    vector temp = vLightDirection;
+    temp.w = 0.0f;
+    _input.normal.w = 0.0f;
+    temp = mul(temp, matWorldView);
+    _input.normal = mul(_input.normal, matWorldView);
+
+    // 카툰 렌더링을 위해 1D로 텍스처 좌표 컴퓨팅
+    float u = dot(temp, _input.normal);
+
+
+    // u가 음수면 둔각, 즉 빛 안받는거니 0으로 설정
+    if(u<0.0f)
+       u = 0.0f;
+
+    // 텍스처 y 좌표를 중간으로 설정
+    float v = 0.5f;
+    
+    output.uvCoords.x = u;
+    output.uvCoords.y = v;  
+    // 색깔 지정
+    output.diffuse = vColor;
+    
+    return output;
+}
+
+
+
+
+

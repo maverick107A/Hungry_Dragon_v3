@@ -169,6 +169,18 @@
     <Filter Include="02. GameObject\01. Stage\59. Color_Mask">
       <UniqueIdentifier>{c1e13116-ccb5-4204-a1cf-6faf95a8ea36}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. GameObject\01. Stage\60. Cloud_Locater">
+      <UniqueIdentifier>{60610011-60bb-49bb-ba93-c11b9c297da6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\61. Cloud_Parts">
+      <UniqueIdentifier>{928382d3-4b54-46c1-bbe3-b0623952625f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\63. Cliff_Object">
+      <UniqueIdentifier>{256e1db8-8309-4991-8515-e39d545a528c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\62. Cliff_Locater">
+      <UniqueIdentifier>{515b359b-6db9-4590-af29-902ebb72d40e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -288,6 +300,18 @@
     <ClInclude Include="..\Code\Color_Mask.h">
       <Filter>02. GameObject\01. Stage\59. Color_Mask</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\Cloud_Locater.h">
+      <Filter>02. GameObject\01. Stage\60. Cloud_Locater</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Cloud_Parts.h">
+      <Filter>02. GameObject\01. Stage\61. Cloud_Parts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Cliff_Object.h">
+      <Filter>02. GameObject\01. Stage\63. Cliff_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Cliff_Locater.h">
+      <Filter>02. GameObject\01. Stage\62. Cliff_Locater</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -397,6 +421,18 @@
     </ClCompile>
     <ClCompile Include="..\Code\Color_Mask.cpp">
       <Filter>02. GameObject\01. Stage\59. Color_Mask</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Cloud_Locater.cpp">
+      <Filter>02. GameObject\01. Stage\60. Cloud_Locater</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Cloud_Parts.cpp">
+      <Filter>02. GameObject\01. Stage\61. Cloud_Parts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Cliff_Object.cpp">
+      <Filter>02. GameObject\01. Stage\63. Cliff_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Cliff_Locater.cpp">
+      <Filter>02. GameObject\01. Stage\62. Cliff_Locater</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

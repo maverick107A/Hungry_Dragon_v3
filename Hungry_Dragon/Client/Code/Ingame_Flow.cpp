@@ -177,6 +177,7 @@ void CIngame_Flow::Release_ForestTerrain()
 	{
 		Safe_Release(m_pMaskTexObj[i]);
 	}
+	m_listEvent.clear();
 }
 
 void CIngame_Flow::Load_TreeList()

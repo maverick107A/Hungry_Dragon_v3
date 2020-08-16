@@ -17,6 +17,7 @@ public:
 	virtual void Render_Buffer(void) override;
 
 	void Set_Height(const _tchar* _pPath);
+	void Set_RandomHeight(_float _fMag, _uint uContrast);
 	VTXCOL* Get_EntryVB();
 
 private:

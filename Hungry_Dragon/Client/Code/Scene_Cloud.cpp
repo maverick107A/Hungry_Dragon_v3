@@ -3,6 +3,7 @@
 #include "Export_Function.h"
 #include "Ingame_Flow.h"
 
+
 CScene_Cloud::CScene_Cloud(LPDIRECT3DDEVICE9 pGraphicDev)
 	: Engine::CScene(pGraphicDev) {
 
@@ -154,6 +155,7 @@ void CScene_Cloud::Render_Scene(void) {
 void CScene_Cloud::Free(void) {
 	Engine::Clear_RenderGroup();
 	Engine::CScene::Free();
+	Engine::Clear_ObjectPool();
 	Safe_Release(m_pFogEffect);
 }
 
@@ -194,7 +196,6 @@ HRESULT CScene_Cloud::Ready_Layer_Environment(const _tchar * pLayerTag) {
 
 	// 템플릿으로 1줄 처리함 알아서들 쓰세염, 컴포넌트 버전도 만들어놓음
 	FAILED_CHECK_RETURN(Register_GameObject<CSkySphere>(pLayer, L"Skybox"), E_FAIL);
-	FAILED_CHECK_RETURN(Register_GameObject<COcean>(pLayer, L"BaseLayer"), E_FAIL);
 
 	// 이렇게 게임오브젝트 뽑아올 수도 있음
 	//CSkySphere*		pGameObject = nullptr;
@@ -222,6 +223,8 @@ HRESULT CScene_Cloud::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 	// 지형없이 안터지는 플레이어 설정해주세요
 
 	CTestPlayer* tempPlayer = nullptr;
+	FAILED_CHECK_RETURN(Register_GameObject<CCloud_Locater>(pLayer, L"Cloud"), E_FAIL);
+	FAILED_CHECK_RETURN(Register_GameObject<CCliff_Locater>(pLayer, L"Cliff"), E_FAIL);
 	FAILED_CHECK_RETURN(Register_GameObject<CTestPlayer>(&tempPlayer, pLayer, L"TestPlayer"), E_FAIL);
 	pPlayerTransformCom = static_cast<CTransform*>(tempPlayer->Get_Component(L"Com_Transform", Engine::ID_DYNAMIC));
 	pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);

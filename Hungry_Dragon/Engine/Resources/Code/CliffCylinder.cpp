@@ -1,14 +1,14 @@
-#include "CaveCylinder.h"
+#include "CliffCylinder.h"
 
 USING(Engine)
 
-Engine::CCaveCylinder::CCaveCylinder(LPDIRECT3DDEVICE9 pGraphicDev)
+Engine::CCliffCylinder::CCliffCylinder(LPDIRECT3DDEVICE9 pGraphicDev)
 	: CVIBuffer(pGraphicDev)
 {
 
 }
 
-Engine::CCaveCylinder::CCaveCylinder(const CCaveCylinder& rhs)
+Engine::CCliffCylinder::CCliffCylinder(const CCliffCylinder& rhs)
 	: CVIBuffer(rhs)
 {
 	m_fHeight = rhs.m_fHeight;		// 원기둥 시야
@@ -20,22 +20,22 @@ Engine::CCaveCylinder::CCaveCylinder(const CCaveCylinder& rhs)
 	m_uVtxNum = rhs.m_uVtxNum;
 }
 
-Engine::CCaveCylinder::~CCaveCylinder(void)
+Engine::CCliffCylinder::~CCliffCylinder(void)
 {
 
 }
 
 
 // 코드 알고싶으면 dx11 방울책 예제소스의 GeometryGenerator 코드를 보면 다양한 모양의 코드가 있으니까 가져다 쓰심됨
-HRESULT Engine::CCaveCylinder::Ready_Buffer(void)			// 어쨋든 원기둥 내면 그리는거임 영어로 주석 달아놓음
+HRESULT Engine::CCliffCylinder::Ready_Buffer(void)			// 어쨋든 원기둥 내면 그리는거임 영어로 주석 달아놓음
 {
 	// 실린더 세팅
-	m_fHeight = 2000.f;		// 원기둥 시야
-	m_uStackCount = 200;		// 절단면
+	m_fHeight = 10000.f;		// 원기둥 시야
+	m_uStackCount = 5;		// 절단면
 	m_fStackHeight = m_fHeight / m_uStackCount;	
-	m_fRadius = 25.f;			// 원기둥 반지름
+	m_fRadius = 10000.f;			// 원기둥 반지름
 	m_uRingCount = m_uStackCount + 1;
-	m_uSliceCount = 48;			// 세로 절단면
+	m_uSliceCount = 24;			// 세로 절단면
 	m_uVtxNum = 0;
 
 	// Compute vertices for each stack ring starting at the bottom and moving up.
@@ -61,7 +61,7 @@ HRESULT Engine::CCaveCylinder::Ready_Buffer(void)			// 어쨋든 원기둥 내면 그리는
 	// 접합부
 	for (UINT i = 0; i < 1; ++i)
 	{
-		float fHeightZ = -0.5f*m_fHeight;
+		float fHeightY = -0.5f*m_fHeight;
 		float fOld_r = m_fRadius;
 
 		// vertices of ring
@@ -76,10 +76,10 @@ HRESULT Engine::CCaveCylinder::Ready_Buffer(void)			// 어쨋든 원기둥 내면 그리는
 			float fSin = sinf(j*dTheta);
 			
 			float fRandomR = fOld_r*(1.f);
-			vertex.vPosition = D3DXVECTOR3(fRandomR*fCos, fRandomR*fSin, fHeightZ);
+			vertex.vPosition = D3DXVECTOR3(fRandomR*fCos, fHeightY, fRandomR*fSin);
 
-			UINT uColor = 96 * (1);
-			vertex.dwColor = D3DCOLOR_XRGB(uColor, uColor, uColor);
+			UINT uColor = 80;
+			vertex.dwColor = D3DCOLOR_XRGB(uColor, uColor>>1, uColor>>2);
 
 			pVertex[m_uVtxNum] = vertex;
 			++m_uVtxNum;
@@ -90,12 +90,14 @@ HRESULT Engine::CCaveCylinder::Ready_Buffer(void)			// 어쨋든 원기둥 내면 그리는
 	// 몸통부
 	for (UINT i = 1; i < m_uRingCount-1; ++i)
 	{
-		float fHeightZ = -0.5f*m_fHeight + i*m_fStackHeight;
+		float fHeightY = -0.5f*m_fHeight + i*m_fStackHeight;
 		float fOld_r = m_fRadius;
 
 		// vertices of ring
 		float dTheta = 2.0f*D3DX_PI / m_uSliceCount;
-
+		float fRand = (float)(rand() % 20 - 10) *0.01f;
+		
+		
 
 		for (UINT j = 0; j < m_uSliceCount; ++j)
 		{
@@ -103,12 +105,12 @@ HRESULT Engine::CCaveCylinder::Ready_Buffer(void)			// 어쨋든 원기둥 내면 그리는
 
 			float fCos = cosf(j*dTheta);
 			float fSin = sinf(j*dTheta);
-			float fRand = (float)(rand() % 20 - 10) *0.02f;
-			float fRandomR = fOld_r*(1.f+ fRand);
-			vertex.vPosition = D3DXVECTOR3(fRandomR*fCos, fRandomR*fSin, fHeightZ);
+			float fRandDetail = (float)(rand() % 20 - 10) *0.01f;
+			float fRandomR = fOld_r*(1.f + fRand*0.2f + fRandDetail*0.1f);
+			vertex.vPosition = D3DXVECTOR3(fRandomR*fCos, fHeightY, fRandomR*fSin);
 
-			UINT uColor = 96 * (1- fRand*5.f);
-			vertex.dwColor = D3DCOLOR_XRGB(uColor, uColor, uColor);
+			UINT uColor = 30 * (1- fRand*2.f - fRandDetail);
+			vertex.dwColor = D3DCOLOR_XRGB(uColor*3, uColor*2, uColor);
 
 			pVertex[m_uVtxNum] = vertex;
 			++m_uVtxNum;
@@ -120,7 +122,7 @@ HRESULT Engine::CCaveCylinder::Ready_Buffer(void)			// 어쨋든 원기둥 내면 그리는
 	// 접합부
 	for (UINT i = m_uRingCount-1; i < m_uRingCount; ++i)
 	{
-		float fHeightZ = 0.5f*m_fHeight;
+		float fHeightY = 0.5f*m_fHeight;
 		float fOld_r = m_fRadius;
 
 		// vertices of ring
@@ -135,9 +137,9 @@ HRESULT Engine::CCaveCylinder::Ready_Buffer(void)			// 어쨋든 원기둥 내면 그리는
 			float fSin = sinf(j*dTheta);
 
 			float fRandomR = fOld_r*(1.f);
-			vertex.vPosition = D3DXVECTOR3(fRandomR*fCos, fRandomR*fSin, fHeightZ);
+			vertex.vPosition = D3DXVECTOR3(fRandomR*fCos, fHeightY, fRandomR*fSin);
 
-			UINT uColor = 96 * (1);
+			UINT uColor = 60;
 			vertex.dwColor = D3DCOLOR_XRGB(uColor, uColor, uColor);
 
 			pVertex[m_uVtxNum] = vertex;
@@ -164,7 +166,7 @@ HRESULT Engine::CCaveCylinder::Ready_Buffer(void)			// 어쨋든 원기둥 내면 그리는
 	{
 		for (UINT j = 0; j < m_uSliceCount; ++j)
 		{
-			pIndex[uIdxNum] = { i*ringVertexCount + j ,(i + 1)*ringVertexCount + j,(i + 1)*ringVertexCount + j + 1 };
+			pIndex[uIdxNum] = { i*ringVertexCount + j  ,(i + 1)*ringVertexCount + j ,(i + 1)*ringVertexCount + j + 1 };
 			++uIdxNum;
 
 			pIndex[uIdxNum] = { i*ringVertexCount + j ,(i + 1)*ringVertexCount + j + 1,i*ringVertexCount + j + 1 };
@@ -176,19 +178,19 @@ HRESULT Engine::CCaveCylinder::Ready_Buffer(void)			// 어쨋든 원기둥 내면 그리는
 	return S_OK;
 }
 
-void Engine::CCaveCylinder::Render_Buffer(void)
+void Engine::CCliffCylinder::Render_Buffer(void)
 {
 	CVIBuffer::Render_Buffer();
 }
 
-void Engine::CCaveCylinder::Free(void)
+void Engine::CCliffCylinder::Free(void)
 {
 	CVIBuffer::Free();
 }
 
-CCaveCylinder* Engine::CCaveCylinder::Create(LPDIRECT3DDEVICE9 pGraphicDev)
+CCliffCylinder* Engine::CCliffCylinder::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 {
-	CCaveCylinder*	pInstance = new CCaveCylinder(pGraphicDev);
+	CCliffCylinder*	pInstance = new CCliffCylinder(pGraphicDev);
 
 	if (FAILED(pInstance->Ready_Buffer()))
 		Safe_Release(pInstance);
@@ -196,8 +198,8 @@ CCaveCylinder* Engine::CCaveCylinder::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 	return pInstance;
 }
 
-CComponent* Engine::CCaveCylinder::Clone(void)
+CComponent* Engine::CCliffCylinder::Clone(void)
 {
-	return new CCaveCylinder(*this);
+	return new CCliffCylinder(*this);
 }
 

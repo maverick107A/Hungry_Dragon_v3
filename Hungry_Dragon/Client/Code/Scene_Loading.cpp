@@ -94,6 +94,12 @@ _uint CScene_Loading::Loading_ForStage(void)
 
 	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
 		RESOURCE_STAGE,
+		L"BUFFER_CLIFFCYLINDER",
+		Engine::BUFFER_RIFT),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
+		RESOURCE_STAGE,
 		L"BUFFER_VENTCUBE",
 		Engine::BUFFER_VENTCUBE),
 		E_FAIL);
