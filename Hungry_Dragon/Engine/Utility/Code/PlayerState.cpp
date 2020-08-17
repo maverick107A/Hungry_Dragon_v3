@@ -37,7 +37,7 @@ bool CPlayerState::Land_Check(float* _fHeight, _vec3* _vNorm)
 
 	float PosX = m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS].x;
 	float PosZ = m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS].z;
-	if (PosX > 0)
+	if (PosX > 0.f)
 	{
 		while (true)
 		{
