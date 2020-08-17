@@ -24,10 +24,15 @@ Engine::CPBreathFly::~CPBreathFly(void)
 void CPBreathFly::Enter_State(CPlayerMain* _pPlayer)
 {
 	m_pPlayer = _pPlayer;
+	m_pPlayer->Set_Breath(true);
 }
 
 void CPBreathFly::Update_State(const float& fTimeDelta)
 {
+	if (0 == m_pPlayer->Get_Mana())
+		m_pPlayer->Set_Sate(CPlayerMain::STATE_FLY);
+	m_pPlayer->Add_Mana(-1);
+
 	D3DXVECTOR3 vDir = { 0.f,0.f,0.f };
 	D3DXVECTOR3 vLook = { 0.f,0.f,0.f };
 	D3DXVECTOR3 vRight = { 0.f,0.f,0.f };
@@ -173,7 +178,7 @@ void CPBreathFly::Update_State(const float& fTimeDelta)
 	}
 	else
 	{
-		m_pPlayer->Set_Sate(CPlayerMain::STATE_FLYIDLE);
+		m_pPlayer->Set_Sate(CPlayerMain::STATE_BREATHIDLE);
 	}
 	if (Land_Check())
 		m_pPlayer->Set_Sate(CPlayerMain::STATE_LANDRUSH);
@@ -182,7 +187,7 @@ void CPBreathFly::Update_State(const float& fTimeDelta)
 
 void CPBreathFly::Out_State()
 {
-	//m_pTransform->Add_Trans()
+	m_pPlayer->Set_Breath(false);
 }
 
 CPBreathFly* Engine::CPBreathFly::Create(void)

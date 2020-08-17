@@ -26,6 +26,8 @@ void CPFlyIdle::Enter_State(CPlayerMain* _pPlayer)
 
 void CPFlyIdle::Update_State(const float& fTimeDelta)
 {
+	if(GetAsyncKeyState('G'))
+		m_pPlayer->Set_Sate(CPlayerMain::STATE_BREATHIDLE);
 	if (GetAsyncKeyState('W') || GetAsyncKeyState('S') || GetAsyncKeyState('A') || GetAsyncKeyState('D') || GetAsyncKeyState(VK_SPACE))
 	{
 		m_pPlayer->Set_Sate(CPlayerMain::STATE_FLY);

@@ -9,6 +9,8 @@
 #include "PFly.h"
 #include "PLandIdle.h"
 #include "PLandRush.h"
+#include "PBreathIdle.h"
+#include "PBreathFly.h"
 #include "BreathBase.h"
 #include "Terrain_Locater.h"
 
@@ -125,23 +127,39 @@ void CTestPlayer::State_Change()
 	switch (m_eState)
 	{
 	case STATE_FLYIDLE:
+		m_pState->Out_State();
 		m_pState->Release();
 		m_pState = Engine::CPFlyIdle::Create();
 		m_pState->Enter_State(this);
 		break;
 	case STATE_FLY:
+		m_pState->Out_State();
 		m_pState->Release();
 		m_pState = Engine::CPFly::Create();
 		m_pState->Enter_State(this);
 		break;
 	case STATE_LANDIDLE:
+		m_pState->Out_State();
 		m_pState->Release();
 		m_pState = Engine::CPLandIdle::Create();
 		m_pState->Enter_State(this);
 		break;
 	case STATE_LANDRUSH:
+		m_pState->Out_State();
 		m_pState->Release();
 		m_pState = Engine::CPLandRush::Create();
+		m_pState->Enter_State(this);
+		break;
+	case STATE_BREATHIDLE:
+		m_pState->Out_State();
+		m_pState->Release();
+		m_pState = Engine::CPBreathIdle::Create();
+		m_pState->Enter_State(this);
+		break;
+	case STATE_BREATHFLY:
+		m_pState->Out_State();
+		m_pState->Release();
+		m_pState = Engine::CPBreathFly::Create();
 		m_pState->Enter_State(this);
 		break;
 	}

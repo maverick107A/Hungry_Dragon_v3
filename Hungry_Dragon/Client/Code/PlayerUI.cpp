@@ -74,15 +74,17 @@ void CPlayerUI::Render_Object(void)
 
 	D3DXMATRIX matTrans = {};
 
-	RECT tRect = { 0,0,int(m_pPlayer->Get_Hp()*3.f),30 };
+	RECT tRect = { 0,0,int(m_pPlayer->Get_Hp()),30 };
 
 	D3DXMatrixTranslation(&matTrans, 100.f, 50.f, 0.f);
 	m_pSprite->SetTransform(&matTrans);
 	m_pSprite->Draw(m_pRedTex, &tRect, nullptr, nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
 
+	tRect = { 0,0,int(m_pPlayer->Get_Mana()),30 };
+
 	D3DXMatrixTranslation(&matTrans, 100.f, 80.f, 0.f);
 	m_pSprite->SetTransform(&matTrans);
-	m_pSprite->Draw(m_pGreenTex, nullptr, nullptr, nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
+	m_pSprite->Draw(m_pGreenTex, &tRect, nullptr, nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
 
 	tRect = { 0,0,int(m_pPlayer->Get_Stamina()),20 };
 

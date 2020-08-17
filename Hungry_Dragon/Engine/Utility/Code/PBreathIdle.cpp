@@ -22,6 +22,7 @@ Engine::CPBreathIdle::~CPBreathIdle(void)
 void CPBreathIdle::Enter_State(CPlayerMain* _pPlayer)
 {
 	m_pPlayer = _pPlayer;
+	m_pPlayer->Set_Breath(true);
 }
 
 void CPBreathIdle::Update_State(const float& fTimeDelta)
@@ -47,6 +48,7 @@ void CPBreathIdle::Update_State(const float& fTimeDelta)
 
 void CPBreathIdle::Out_State()
 {
+	m_pPlayer->Set_Breath(false);
 }
 
 CPBreathIdle* Engine::CPBreathIdle::Create(void)

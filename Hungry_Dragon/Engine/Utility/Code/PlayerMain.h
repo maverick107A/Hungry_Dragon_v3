@@ -37,6 +37,7 @@ public:
 
 public:
 	void Set_Sate(STATE _eState) { m_eState = _eState; }
+	void Set_Breath(bool _bCheck) { m_bBreath = _bCheck; }
 
 public:
 	void Add_Hp(int _iHp) { m_iHp += _iHp; }
@@ -73,9 +74,9 @@ protected:
 	float					m_fSpeed = 10.f;
 	STATE					m_eState = STATE_END;
 
-	int						m_iHp = 100;
+	int						m_iHp = 300;
 	int						m_iStamina = 1000;
-	int						m_iMana = 0;
+	int						m_iMana = 300;
 
 public:
 	static CPlayerMain*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
