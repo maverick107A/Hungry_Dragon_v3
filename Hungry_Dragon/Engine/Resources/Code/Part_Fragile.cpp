@@ -70,6 +70,19 @@ void CPart_Fragile::Set_TexArray() {
 	D3DXCreateTextureFromFile(m_pGraphicDev, L"../../Asset/Texture9.dds", &m_arrTex[9]);
 }
 
+void CPart_Fragile::Set_TexArrayMFC() {
+	D3DXCreateTextureFromFile(m_pGraphicDev, L"../Asset/Texture0.dds", &m_arrTex[0]);
+	D3DXCreateTextureFromFile(m_pGraphicDev, L"../Asset/Texture1.dds", &m_arrTex[1]);
+	D3DXCreateTextureFromFile(m_pGraphicDev, L"../Asset/Texture2.dds", &m_arrTex[2]);
+	D3DXCreateTextureFromFile(m_pGraphicDev, L"../Asset/Texture3.dds", &m_arrTex[3]);
+	D3DXCreateTextureFromFile(m_pGraphicDev, L"../Asset/Texture4.dds", &m_arrTex[4]);
+	D3DXCreateTextureFromFile(m_pGraphicDev, L"../Asset/Texture5.dds", &m_arrTex[5]);
+	D3DXCreateTextureFromFile(m_pGraphicDev, L"../Asset/Texture6.dds", &m_arrTex[6]);
+	D3DXCreateTextureFromFile(m_pGraphicDev, L"../Asset/Texture7.dds", &m_arrTex[7]);
+	D3DXCreateTextureFromFile(m_pGraphicDev, L"../Asset/Texture8.dds", &m_arrTex[8]);
+	D3DXCreateTextureFromFile(m_pGraphicDev, L"../Asset/Texture9.dds", &m_arrTex[9]);
+}
+
 void CPart_Fragile::Reset_Particle(ATTRIBUTE * _attribute)
 {
 	_attribute->bAlive = true;
@@ -143,7 +156,6 @@ void CPart_Fragile::Free(void)
 {
 	for(int i=0;i<10;++i)
 		Safe_Release(m_arrTex[i]);
-	//CParticle::Free();
 	Safe_Release(m_Vb);
 	CResources::Free();
 }

@@ -16,6 +16,15 @@
     <Filter Include="02. View\00. PreForm">
       <UniqueIdentifier>{0856d096-be96-4a1e-a0ed-c9be200c83e5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. View\00. PreForm\00. ObjectTab">
+      <UniqueIdentifier>{4f6d79bd-e6ab-4ffd-8af6-c8c716cbc977}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. View\00. PreForm\01. HierarchyTab">
+      <UniqueIdentifier>{d73a4721-ae25-4768-b84b-93ecf63b15a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. View\00. PreForm\02. AnimationTab">
+      <UniqueIdentifier>{bfcdb9a7-93ed-4b81-b3d4-90f46ad2a6cb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainFrm.h">
@@ -42,6 +51,9 @@
     <ClInclude Include="PreForm.h">
       <Filter>02. View\00. PreForm</Filter>
     </ClInclude>
+    <ClInclude Include="ObjectTab.h">
+      <Filter>02. View\00. PreForm\00. ObjectTab</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainFrm.cpp">
@@ -61,6 +73,9 @@
     </ClCompile>
     <ClCompile Include="PreForm.cpp">
       <Filter>02. View\00. PreForm</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectTab.cpp">
+      <Filter>02. View\00. PreForm\00. ObjectTab</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

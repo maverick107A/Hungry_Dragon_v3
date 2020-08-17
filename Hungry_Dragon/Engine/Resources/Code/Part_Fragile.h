@@ -18,6 +18,7 @@ public:
 	void Set_BoundingBox(BoundingBox _boundingBox);
 	void Set_Origin(_vec3 _origin);
 	void Set_TexArray();
+	void Set_TexArrayMFC();
 
 public:
 	virtual void	Reset_Particle(ATTRIBUTE* _attribute);
