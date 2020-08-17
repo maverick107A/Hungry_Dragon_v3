@@ -49,11 +49,6 @@ _int CLogo::Update_Scene(const _float& fTimeDelta) {
 	//
 	//	return -1;
 	//}
-<<<<<<< Updated upstream
-	
-=======
->>>>>>> Stashed changes
-
 	return iExit;
 }
 
