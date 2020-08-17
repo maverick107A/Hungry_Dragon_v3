@@ -20,7 +20,9 @@ private:
 
 public:
 	virtual HRESULT Ready_Object(void) override;
+	virtual void	Initialize_Object(void);
 	virtual Engine::_int Update_Object(const Engine::_float& fTimeDelta) override;
+	virtual void LateUpdate_Object(const float& fTimeDelta) override;
 	virtual void Render_Object(void) override;
 	
 
@@ -31,6 +33,7 @@ private:
 	Engine::CSkyCube*		m_pBufferCom = nullptr;
 	Engine::CTexture*		m_pTextureCom = nullptr;
 	Engine::CTransform*		m_pTransform = nullptr;
+	Engine::CTransform*		m_pPlayerTrans = nullptr;
 
 public:
 	static CSkySphere*	Create(LPDIRECT3DDEVICE9 pGraphicDev);

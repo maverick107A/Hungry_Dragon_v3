@@ -2,6 +2,7 @@
 #include "SkySphere.h"
 
 #include "Export_Function.h"
+#include "PlayerMain.h"
 
 USING(Engine)
 
@@ -23,6 +24,12 @@ HRESULT CSkySphere::Ready_Object(void)
 	return S_OK;
 }
 
+void CSkySphere::Initialize_Object(void)
+{
+	m_pPlayerTrans = static_cast<Engine::CTransform*>(Engine::Get_Component(L"GameLogic", L"TestPlayer", L"Com_Transform", Engine::ID_DYNAMIC));
+	m_pTransform->Set_Scale(100.f);
+}
+
 _int CSkySphere::Update_Object(const _float& fTimeDelta)
 {
 	//_matrix		matCamWorld;
@@ -38,17 +45,17 @@ _int CSkySphere::Update_Object(const _float& fTimeDelta)
 	return 0;
 }
 
-void CSkySphere::Render_Object(void)
+void CSkySphere::LateUpdate_Object(const float & fTimeDelta)
 {
-	//여기부터
-	_matrix		matCamWorld;
-	m_pGraphicDev->GetTransform(D3DTS_VIEW, &matCamWorld);
-	D3DXMatrixInverse(&matCamWorld, NULL, &matCamWorld);
+	_vec3 vPos = m_pPlayerTrans->m_vInfo[INFO_POS];
 
-	m_pTransform->m_vInfo[INFO_POS] = { matCamWorld._41, matCamWorld._42, matCamWorld._43 };
+	m_pTransform->m_vInfo[INFO_POS] = { vPos.x, vPos.y, vPos.z };
 
 	Engine::CGameObject::Update_Object(float(0));
-	//여기까지 레이트업데이트에 넣어줘야함
+}
+
+void CSkySphere::Render_Object(void)
+{
 	m_pTransform->Set_Transform(m_pGraphicDev);
 	m_pGraphicDev->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	m_pGraphicDev->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
