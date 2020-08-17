@@ -154,10 +154,33 @@ void CPFly::Update_State(const float& fTimeDelta)
 				fAngleY *= -1;
 				fAngleY += D3DX_PI*2;
 			}
-			m_pPlayer->Get_Transform()->m_vAngle.y = fAngleY;
 			//부드러운이동 시작
-			//float fDeltaY = (fAngleY - m_pPlayer->Get_Transform()->m_vAngle.y);
-			//	m_pPlayer->Get_Transform()->m_vAngle.y += fDeltaY;
+			float fDeltaY = (fAngleY - m_pPlayer->Get_Transform()->m_vAngle.y);
+
+			//if (abs(fDeltaY) < m_fAngleSpeed)
+			//	m_pPlayer->Get_Transform()->m_vAngle.y = fAngleY;
+			//else if (abs(fDeltaY) > (D3DX_PI*2- m_fAngleSpeed))
+			//	m_pPlayer->Get_Transform()->m_vAngle.y = fAngleY;
+
+			if (fDeltaY > 0.f)
+			{
+				if (fDeltaY < D3DX_PI)
+					m_pPlayer->Get_Transform()->m_vAngle.y += fDeltaY*m_fAngleDamping;
+				else
+					m_pPlayer->Get_Transform()->m_vAngle.y += (fDeltaY - D3DX_PI*2)*m_fAngleDamping;
+			}
+			else
+			{
+				if (fDeltaY > -D3DX_PI)
+					m_pPlayer->Get_Transform()->m_vAngle.y += fDeltaY*m_fAngleDamping;
+				else
+					m_pPlayer->Get_Transform()->m_vAngle.y += (D3DX_PI*2 + fDeltaY)*m_fAngleDamping;
+			}
+			if (m_pPlayer->Get_Transform()->m_vAngle.y < 0)
+				m_pPlayer->Get_Transform()->m_vAngle.y += D3DX_PI *2;
+			if (m_pPlayer->Get_Transform()->m_vAngle.y > D3DX_PI *2)
+				m_pPlayer->Get_Transform()->m_vAngle.y -= D3DX_PI *2;
+	
 			//if (abs(m_pPlayer->Get_Transform()->m_vAngle.y - fAngleY) < m_fAngleSpeed)
 			//	m_pPlayer->Get_Transform()->m_vAngle.y = fAngleY;
 			//else if (abs(m_pPlayer->Get_Transform()->m_vAngle.y - fAngleY) > (D3DX_PI*2- m_fAngleSpeed))
