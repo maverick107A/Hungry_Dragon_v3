@@ -184,8 +184,8 @@
     <Filter Include="02. GameObject\01. Stage\02.Bullet\01. Beam\23.MonsterBeam">
       <UniqueIdentifier>{bf8dc0e1-0b4f-4085-8945-d61ad2d1e6b2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Scene\07. Scene_Intro\06. Scene_Iceland">
-      <UniqueIdentifier>{8173bc68-0d3e-4f0d-ba76-965475504e7a}</UniqueIdentifier>
+    <Filter Include="01. Scene\06. Scene_Iceland">
+      <UniqueIdentifier>{37bc2afd-8600-40dc-a2f4-c87df6540a0e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

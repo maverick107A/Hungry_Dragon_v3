@@ -64,6 +64,10 @@ private:
 	bool						m_bFogEnable = true;
 	ID3DXEffect* m_pFogEffect = 0;
 	D3DXHANDLE m_hFogTechHandle = 0;
+	D3DXHANDLE m_hvFog = 0;
+	FLOAT						m_near = -1.0f;		// 포그시작
+	FLOAT						m_far = -0.2f;		// 포그종료
+
 private:
 	virtual void Free(void) override;
 private:

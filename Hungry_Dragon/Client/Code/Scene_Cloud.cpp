@@ -43,13 +43,15 @@ HRESULT CScene_Cloud::Ready_Scene(void) {
 	ID3DXBuffer* errorBuffer = 0;
 	hr = D3DXCreateEffectFromFile(
 		m_pGraphicDev,
-		L"../../Asset/Shader/fog_base.txt",
+		L"../../Asset/Shader/fog_height.fx",
 		0,                // no preprocessor definitions
 		0,                // no ID3DXInclude interface
 		D3DXSHADER_DEBUG, // compile flags
 		0,                // don't share parameters
 		&m_pFogEffect,
 		&errorBuffer);
+
+	
 
 	// output any error messages
 	if (errorBuffer)
@@ -71,8 +73,8 @@ HRESULT CScene_Cloud::Ready_Scene(void) {
 	// Save Frequently Accessed Parameter Handles
 	//
 
-	m_hFogTechHandle = m_pFogEffect->GetTechniqueByName("Fog");
-
+	m_hFogTechHandle = m_pFogEffect->GetTechniqueByName("TShader");
+	m_hvFog = m_pFogEffect->GetParameterByName(NULL, "vFog");
 	
 	return S_OK;
 }
@@ -101,6 +103,23 @@ _int CScene_Cloud::Update_Scene(const _float& fTimeDelta) {
 	if (GetAsyncKeyState(VK_F8) & 0x0001)
 	{
 		m_bFogEnable = !m_bFogEnable;
+	}
+
+	if (GetAsyncKeyState('H') & 0x8000)
+	{
+		m_near += 0.001f;
+	}
+	if (GetAsyncKeyState('J') & 0x8000)
+	{
+		m_near -= 0.001f;
+	}
+	if (GetAsyncKeyState('K') & 0x8000)
+	{
+		m_far += 0.001f;
+	}
+	if (GetAsyncKeyState('L') & 0x8000)
+	{
+		m_far -= 0.001f;
 	}
 
 	Engine::Particle_Update(fTimeDelta);
@@ -132,19 +151,29 @@ void CScene_Cloud::Render_Scene(void) {
 
 	UINT numPasses = 0;
 	m_pFogEffect->Begin(&numPasses, 0);
+	
 
 	D3DXMATRIX I;
 	D3DXMatrixIdentity(&I);
 	
-	if(m_bFogEnable)
-		m_pFogEffect->BeginPass(0);
-
+	// 행렬 및 파티클/스카이박스 렌더
 	_matrix matWorld;
 	D3DXMatrixIdentity(&matWorld);
 	m_pGraphicDev->SetTransform(D3DTS_WORLD, &matWorld);
 	Engine::Particle_Render();
 
 	m_mapLayer[L"Environment"]->Render_Layer();
+
+	// 안개셰이더
+	if(m_bFogEnable)
+		m_pFogEffect->BeginPass(0);
+
+	D3DXVECTOR4 vFog;
+	vFog.x = m_far / (m_far - m_near);
+	vFog.y = -1.0f / (m_far - m_near);
+	//if (m_hvFog != NULL) m_pFogEffect->SetVector(m_hvFog, &vFog);
+
+	// 게임에 적용
 	m_mapLayer[L"GameLogic"]->Render_Layer();
 	
 	m_pFogEffect->End();
