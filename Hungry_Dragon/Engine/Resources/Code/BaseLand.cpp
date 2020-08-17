@@ -103,7 +103,7 @@ void Engine::CBaseLand::Render_Buffer(void)
 	CVIBuffer::Render_Buffer();
 }
 
-const vector<int>& CBaseLand::Get_TerrainHeight()
+vector<int>& CBaseLand::Get_TerrainHeight()
 {
 	return m_vecHeight;
 }

@@ -49,7 +49,7 @@ _int CLogo::Update_Scene(const _float& fTimeDelta) {
 	//
 	//	return -1;
 	//}
-	}
+	
 
 	return iExit;
 }

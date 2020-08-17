@@ -17,7 +17,7 @@ public:
 	virtual void		Render_Buffer(void);
 
 public:
-	const vector<int>& Get_TerrainHeight();
+	vector<int>& Get_TerrainHeight();
 
 protected:
 	vector<int>			m_vecHeight;
