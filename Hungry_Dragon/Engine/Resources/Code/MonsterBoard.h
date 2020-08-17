@@ -14,7 +14,6 @@ protected:
 
 public:
 	virtual HRESULT		Ready_Buffer(void);
-	virtual HRESULT		Update_Animation(const _float& fTimeDelta);
 	virtual void		Render_Buffer(void);
 
 	// 스태틱의 경우 거의 카메라만 바라볼거고 카메라 각도에 따라 탑뷰 + 쿼터뷰블렌딩 적용

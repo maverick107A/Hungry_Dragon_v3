@@ -75,6 +75,16 @@ int CBat_Monster::Update_Object(const float & fTimeDelta)
 	// m_pTransform->m_matWorld._31 = matView._31;
 	// m_pTransform->m_matWorld._33 = matView._33;
 
+	// X ºôº¸µå
+
+	// D3DXMATRIX		matView;
+	// m_pGraphicDev->GetTransform(D3DTS_VIEW, &matView);
+	// D3DXMatrixInverse(&matView, NULL, &matView);
+	// m_pTransform->m_matWorld._22 = matView._22;
+	// m_pTransform->m_matWorld._23 = matView._23;
+	// m_pTransform->m_matWorld._32 = matView._32;
+	// m_pTransform->m_matWorld._33 = matView._33;
+
 	// ¿ùµå ºôº¸µå
 
 	D3DXMatrixIdentity(&matBilboard);

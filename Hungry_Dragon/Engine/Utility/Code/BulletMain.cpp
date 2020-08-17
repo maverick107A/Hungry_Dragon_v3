@@ -63,6 +63,10 @@ HRESULT Engine::CBulletMain::Add_Component(void)
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_Transform", pComponent);
 
+	pComponent = m_pTransformX = Engine::CTransform::Create();
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_TransformX", pComponent);
+	
 	return S_OK;
 }
 

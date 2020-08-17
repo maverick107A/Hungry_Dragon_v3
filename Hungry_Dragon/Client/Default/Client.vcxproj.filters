@@ -94,9 +94,6 @@
     <Filter Include="01. Scene\05. Scene_Volcano">
       <UniqueIdentifier>{a1fd4ff7-25f1-4246-98e2-ce08026c75fd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Scene\06. Scene_Iceland">
-      <UniqueIdentifier>{8173bc68-0d3e-4f0d-ba76-965475504e7a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01. Scene\50. Scene_Terrain">
       <UniqueIdentifier>{bac2b7ef-17a0-4138-8ecd-1128cd6ed6a1}</UniqueIdentifier>
     </Filter>
@@ -183,6 +180,12 @@
     </Filter>
     <Filter Include="01. Scene\09. Scene_Menu">
       <UniqueIdentifier>{496abfac-4fcf-4338-bb7a-8efe2b23e3b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\02.Bullet\01. Beam\23.MonsterBeam">
+      <UniqueIdentifier>{bf8dc0e1-0b4f-4085-8945-d61ad2d1e6b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Scene\07. Scene_Intro\06. Scene_Iceland">
+      <UniqueIdentifier>{8173bc68-0d3e-4f0d-ba76-965475504e7a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -321,6 +324,9 @@
     <ClInclude Include="..\Code\Scene_Menu.h">
       <Filter>01. Scene\09. Scene_Menu</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\MonsterBeam.h">
+      <Filter>02. GameObject\01. Stage\02.Bullet\01. Beam\23.MonsterBeam</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -448,6 +454,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Scene_Menu.cpp">
       <Filter>01. Scene\09. Scene_Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MonsterBeam.cpp">
+      <Filter>02. GameObject\01. Stage\02.Bullet\01. Beam\23.MonsterBeam</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

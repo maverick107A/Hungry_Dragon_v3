@@ -74,43 +74,6 @@ HRESULT Engine::CMonsterBoard::Ready_Buffer(void)
 	return S_OK;
 }
 
-HRESULT CMonsterBoard::Update_Animation(const _float & fTimeDelta)
-{
-	m_fFrameUCnt += fTimeDelta;
-
-	if ((int)m_fFrameUCnt > m_iAnimUCnt)
-	{
-		m_fFrameUCnt = 1;
-		++m_fFrameVCnt;		
-		
-		if ((int)m_fFrameVCnt > m_iAnimVCnt)
-		{
-			m_fFrameVCnt = 1;
-		}
-	}
-
-	VTXTEX*		pVertex = nullptr;
-
-	m_pVB->Lock(0, 0, (void**)&pVertex, 0);
-
-
-	pVertex[0] = VTXTEX(-1.0f, -1.0f, -1.0f     , 0.0f, 0.0f, -1.0f,          m_fTexU * ((int)m_fFrameUCnt - 1)   , m_fTexV * (m_fFrameVCnt - 1));
-	pVertex[1] = VTXTEX(-1.0f, 1.0f, -1.0f      , 0.0f, 0.0f, -1.0f,          m_fTexU * ((int)m_fFrameUCnt - 1)   , m_fTexV *  m_fFrameVCnt);
-	pVertex[2] = VTXTEX(1.0f, 1.0f, -1.0f       , 0.0f, 0.0f, -1.0f,          m_fTexU *  (int)m_fFrameUCnt        , m_fTexV *  m_fFrameVCnt);
-	pVertex[3] = VTXTEX(1.0f, -1.0f, -1.0f      , 0.0f, 0.0f, -1.0f,          m_fTexU *  (int)m_fFrameUCnt        , m_fTexV * (m_fFrameVCnt - 1));
-
-
-
-
-
-	m_pVB->Unlock();
-
-
-
-
-
-	return S_OK;
-}
 
 void Engine::CMonsterBoard::Render_Buffer(void)
 {

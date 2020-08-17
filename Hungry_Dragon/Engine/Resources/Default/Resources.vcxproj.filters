@@ -91,12 +91,14 @@
     <Filter Include="00. Resources\00. VIBuffer\91. VICustom">
       <UniqueIdentifier>{33281f5c-858e-4847-b8f6-46a5d89dfcf8}</UniqueIdentifier>
     </Filter>
-
     <Filter Include="00. Resources\02. Particle\02. Part_Fragile">
       <UniqueIdentifier>{de74eaaf-6538-4d85-80de-745c7ec8fd24}</UniqueIdentifier>
     </Filter>
     <Filter Include="00. Resources\00. VIBuffer\57. CliffCylinder">
       <UniqueIdentifier>{ed482420-af02-42b1-ab7f-673d6a0b469f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\00. VIBuffer\95. BeamTex">
+      <UniqueIdentifier>{ea40d500-0ef1-40a9-ab43-8abdac9bb164}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -321,7 +323,6 @@
     <ClInclude Include="..\Code\VICustom.h">
       <Filter>00. Resources\00. VIBuffer\91. VICustom</Filter>
     </ClInclude>
-
     <ClInclude Include="..\Code\Part_Fragile.h">
       <Filter>00. Resources\02. Particle\02. Part_Fragile</Filter>
     </ClInclude>

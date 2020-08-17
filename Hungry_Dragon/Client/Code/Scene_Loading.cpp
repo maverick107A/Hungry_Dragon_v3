@@ -158,11 +158,19 @@ _uint CScene_Loading::Loading_ForStage(void)
 		L"../../Asset/Skybox/TestSkybox.dds"),
 		E_FAIL);
 
+	
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"Texture_MonsterBeam",
+		Engine::TEX_NORMAL,
+		L"../../Asset/MonsterBeam/%d.png" , 3),
+		E_FAIL);
+
 	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
 		RESOURCE_STAGE,
 		L"Texture_Bat",
 		Engine::TEX_NORMAL,
-		L"../../Asset/Monster/CaveBat/%d.png" , 8),
+		L"../../Asset/Monster/CaveBat/%d.png", 8),
 		E_FAIL);
 
 

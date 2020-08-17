@@ -33,6 +33,8 @@ public:
 	const _matrix*	Compute_LookAtTarget(const _vec3* pTargetPos);
 	void			Chase_Target(const _vec3* pTargetPos, const _float& fSpeed);
 
+	void			Chase_RotaionTarget(const _vec3 * pTargetPos);
+
 	void			Dir_Fly(const _vec3 * pTargetPos, const _float & fSpeed);
 
 

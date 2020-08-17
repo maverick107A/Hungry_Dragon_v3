@@ -8,7 +8,7 @@ BEGIN(Engine)
 class CTexture_Cube;
 class CTexture;
 class CTransform;
-
+class CMonsterBoard;
 
 class ENGINE_DLL CBulletMain : public Engine::CGameObject
 {
@@ -33,6 +33,8 @@ private:
 
 protected:
 	Engine::CTransform*			m_pTransform = nullptr;
+	Engine::CTransform*			m_pTransformX = nullptr;
+	Engine::CMonsterBoard*		m_pBufferBoradCom = nullptr;
 	Engine::CTexture_Cube*		m_pBufferCom = nullptr;
 	Engine::CTexture*			m_pTextureCom = nullptr;
 	D3DXVECTOR3					m_vLook;
