@@ -17,6 +17,7 @@ public:
 public:
 	void Set_BoundingBox(BoundingBox _boundingBox);
 	void Set_Origin(_vec3 _origin);
+	void Set_TexArray();
 
 public:
 	virtual void	Reset_Particle(ATTRIBUTE* _attribute);
@@ -29,6 +30,9 @@ public:
 
 private:
 	_vec3 m_MoveDirection;
+	IDirect3DTexture9* m_arrTex[10];
+	int		m_iTexIndex=0;
+	bool	m_bTexRight=true;
 };
 
 END

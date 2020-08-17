@@ -35,8 +35,8 @@ _int CLogo::Update_Scene(const _float& fTimeDelta) {
 		//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_FOREST);
 		//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_CAVE);
 		//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_CLOUD);
-			return -1;
-		}
+		return -1;
+	}
 
 	//if (Engine::Get_DIKeyState(DIK_RETURN) & 0x80)
 	//{

@@ -5,11 +5,20 @@ USING(Engine)
 CPart_Fragile::CPart_Fragile(LPDIRECT3DDEVICE9 pGraphicDev)
 	:CParticle(pGraphicDev)
 {
+	for (int i = 0; i < 10; ++i) {
+		m_arrTex[i] = nullptr;
+	}
 }
 
 CPart_Fragile::CPart_Fragile(const CPart_Fragile & rhs)
 	:CParticle(rhs)
 {
+	m_iTexIndex = 0;
+	m_bTexRight = true;
+	for (int i = 0; i < 10; ++i) {
+		m_arrTex[i] = rhs.m_arrTex[i];
+		m_arrTex[i]->AddRef();
+	}
 }
 
 CPart_Fragile::CPart_Fragile(LPDIRECT3DDEVICE9 pGraphicDev, _vec3 _vOrigin, BoundingBox * boundingBox, int numParticle, float _fSize)
@@ -48,12 +57,25 @@ void CPart_Fragile::Set_Origin(_vec3 _origin)
 	}
 }
 
+void CPart_Fragile::Set_TexArray() {
+	D3DXCreateTextureFromFile(m_pGraphicDev, L"../../Asset/Texture0.dds", &m_arrTex[0]);
+	D3DXCreateTextureFromFile(m_pGraphicDev, L"../../Asset/Texture1.dds", &m_arrTex[1]);
+	D3DXCreateTextureFromFile(m_pGraphicDev, L"../../Asset/Texture2.dds", &m_arrTex[2]);
+	D3DXCreateTextureFromFile(m_pGraphicDev, L"../../Asset/Texture3.dds", &m_arrTex[3]);
+	D3DXCreateTextureFromFile(m_pGraphicDev, L"../../Asset/Texture4.dds", &m_arrTex[4]);
+	D3DXCreateTextureFromFile(m_pGraphicDev, L"../../Asset/Texture5.dds", &m_arrTex[5]);
+	D3DXCreateTextureFromFile(m_pGraphicDev, L"../../Asset/Texture6.dds", &m_arrTex[6]);
+	D3DXCreateTextureFromFile(m_pGraphicDev, L"../../Asset/Texture7.dds", &m_arrTex[7]);
+	D3DXCreateTextureFromFile(m_pGraphicDev, L"../../Asset/Texture8.dds", &m_arrTex[8]);
+	D3DXCreateTextureFromFile(m_pGraphicDev, L"../../Asset/Texture9.dds", &m_arrTex[9]);
+}
+
 void CPart_Fragile::Reset_Particle(ATTRIBUTE * _attribute)
 {
 	_attribute->bAlive = true;
 	_attribute->vPosition = m_vOrigin;
 
-	_vec3 randPos = _vec3(rand()%10-5,rand()%10-5,0);
+	_vec3 randPos = _vec3(rand()%10-5,rand()%10-5,rand()%10-5);
 	_attribute->vPosition += randPos;
 	D3DXVec3Normalize(&_attribute->vVelocity, &(_attribute->vPosition-m_vOrigin));
 
@@ -67,6 +89,20 @@ _int CPart_Fragile::Update_Component(const _float & _fTimeDelta)
 		return -1;
 	}
 
+	if(m_bTexRight)
+		m_Tex=m_arrTex[m_iTexIndex++];
+	else
+		m_Tex = m_arrTex[m_iTexIndex--];
+
+	if (m_iTexIndex == 10) {
+		m_iTexIndex = 8;
+		m_bTexRight = false;
+	}
+	else if(m_iTexIndex==-1){
+		m_iTexIndex = 1;
+		m_bTexRight = true;
+	}
+
 	list<ATTRIBUTE>::iterator iter = m_arrParticle.begin();
 	for (; iter != m_arrParticle.end();)
 	{
@@ -77,7 +113,7 @@ _int CPart_Fragile::Update_Component(const _float & _fTimeDelta)
 		}
 		else
 		{
-			iter->vPosition += iter->vVelocity*_fTimeDelta*10.f;
+			iter->vPosition += iter->vVelocity*_fTimeDelta*100.f;
 			++iter;
 		}
 	}
@@ -105,5 +141,9 @@ CResources * CPart_Fragile::Clone(_vec3 _origin, BoundingBox _boundingBox)
 
 void CPart_Fragile::Free(void)
 {
-	CParticle::Free();
+	for(int i=0;i<10;++i)
+		Safe_Release(m_arrTex[i]);
+	//CParticle::Free();
+	Safe_Release(m_Vb);
+	CResources::Free();
 }

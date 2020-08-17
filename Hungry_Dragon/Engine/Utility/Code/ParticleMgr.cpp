@@ -58,6 +58,7 @@ void CParticleMgr::Particle_Render()
 	int index = 0;
 	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end(); ++iter,++index)
 	{
+		
 		m_pParticleTrans->Set_Trans(&m_vecTrans[index]);
 		m_pParticleTrans->Update_Component(0.1f);
 		m_pParticleTrans->Set_Transform(m_pGraphicDev);
@@ -70,7 +71,7 @@ CResources* CParticleMgr::Particle_Create(Engine::PARTICLEID _eID, const _vec3 _
 	Engine::_vec3 vOrigin = _pos;
 	Engine::BoundingBox tempBoundingBox;
 	tempBoundingBox.vMax = vOrigin+ Engine::_vec3(500.f, 500.f, 500.f);
-	tempBoundingBox.vMin = vOrigin+Engine::_vec3(-500.f, -5.f, -500.f);
+	tempBoundingBox.vMin = vOrigin+Engine::_vec3(-500.f, -50.f, -500.f);
 	Engine::CResources* tempParticle = Engine::Get_Particle(m_pGraphicDev, _eID, tempBoundingBox, vOrigin);
 
 	m_arrParticle.emplace_back(tempParticle);
