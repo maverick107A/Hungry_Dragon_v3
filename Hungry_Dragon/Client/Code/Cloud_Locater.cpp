@@ -84,7 +84,7 @@ void CCloud_Locater::Render_Object(void)
 		for (int j = 0; j < 3; ++j)
 		{
 			m_pCloud[_iIdx]->Set_Trans(_vec3((int)(m_uLength*(m_uVerCntX-1))*(iPlayerX-1+j), 
-										0, (int)(m_uLength*(m_uVerCntZ - 1))*(iPlayerZ-1+i)));
+										-5000, (int)(m_uLength*(m_uVerCntZ - 1))*(iPlayerZ-1+i)));
 			m_pCloud[_iIdx]->Render_Object();
 			_iIdx = (_iIdx+1)%9;
 		}
@@ -96,7 +96,7 @@ void CCloud_Locater::Render_Object(void)
 		for (int j = 0; j < 3; ++j)
 		{
 			m_pCloud[_iIdx]->Set_Trans(_vec3((int)(m_uLength*(m_uVerCntX - 1))*(iPlayerX - 1 + j),
-				10000, (int)(m_uLength*(m_uVerCntZ - 1))*(iPlayerZ - 1 + i)));
+				5000, (int)(m_uLength*(m_uVerCntZ - 1))*(iPlayerZ - 1 + i)));
 			m_pCloud[_iIdx]->Render_Object();
 			_iIdx = (_iIdx + 1) % 9;
 		}

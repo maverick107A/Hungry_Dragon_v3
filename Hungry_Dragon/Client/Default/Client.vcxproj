@@ -181,11 +181,13 @@
     <ClInclude Include="..\Code\Scene_Cave.h" />
     <ClInclude Include="..\Code\Scene_Cloud.h" />
     <ClInclude Include="..\Code\Scene_Forest.h" />
+    <ClInclude Include="..\Code\Scene_Menu.h" />
     <ClInclude Include="..\Code\Scene_PT.h" />
     <ClInclude Include="..\Code\Run_Monster.h" />
     <ClInclude Include="..\Code\Scene_Loading.h" />
     <ClInclude Include="..\Code\Scene_Monster.h" />
     <ClInclude Include="..\Code\Scene_Proto.h" />
+    <ClInclude Include="..\Code\Scene_Select.h" />
     <ClInclude Include="..\Code\SkySphere.h" />
     <ClInclude Include="..\Code\Terrain.h" />
     <ClInclude Include="..\Code\Terrain_Locater.h" />
@@ -226,11 +228,13 @@
     <ClCompile Include="..\Code\Scene_Cave.cpp" />
     <ClCompile Include="..\Code\Scene_Cloud.cpp" />
     <ClCompile Include="..\Code\Scene_Forest.cpp" />
+    <ClCompile Include="..\Code\Scene_Menu.cpp" />
     <ClCompile Include="..\Code\Scene_PT.cpp" />
     <ClCompile Include="..\Code\Run_Monster.cpp" />
     <ClCompile Include="..\Code\Scene_Loading.cpp" />
     <ClCompile Include="..\Code\Scene_Monster.cpp" />
     <ClCompile Include="..\Code\Scene_Proto.cpp" />
+    <ClCompile Include="..\Code\Scene_Select.cpp" />
     <ClCompile Include="..\Code\SkySphere.cpp" />
     <ClCompile Include="..\Code\Terrain.cpp" />
     <ClCompile Include="..\Code\Terrain_Locater.cpp" />

@@ -30,15 +30,11 @@ _int CLogo::Update_Scene(const _float& fTimeDelta) {
 	_int iExit = Engine::CScene::Update_Scene(fTimeDelta);
 
 	if (true == m_pLoading->Get_Finish()) {
-		if (GetAsyncKeyState(VK_RETURN) & 0x8000) {
-			Engine::CScene*		pScene = nullptr;
-
-			//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_PROTO);
-			//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_FOREST);
-			//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_CAVE);
-			CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_CLOUD);
-
-			
+		CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_MENU);
+		//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_PROTO);
+		//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_FOREST);
+		//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_CAVE);
+		//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_CLOUD);
 			return -1;
 		}
 
