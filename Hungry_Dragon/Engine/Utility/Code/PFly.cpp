@@ -132,15 +132,17 @@ void CPFly::Update_State(const float& fTimeDelta)
 		if (0 < m_vSpeed.y)
 			fAngleX *= -1;
 		//부드러운 이동 시작
-		if (abs(m_pPlayer->Get_Transform()->m_vAngle.x - fAngleX) < m_fAngleSpeed)
-			m_pPlayer->Get_Transform()->m_vAngle.x = fAngleX;
-		else
-		{
-			if ((m_pPlayer->Get_Transform()->m_vAngle.x - fAngleX) > 0)
-				m_pPlayer->Get_Transform()->m_vAngle.x -= m_fAngleSpeed;
-			else
-				m_pPlayer->Get_Transform()->m_vAngle.x += m_fAngleSpeed;
-		}
+		float fDeltaX = (fAngleX - m_pPlayer->Get_Transform()->m_vAngle.x)*0.1f;
+		m_pPlayer->Get_Transform()->m_vAngle.x += fDeltaX;
+		//if (abs(m_pPlayer->Get_Transform()->m_vAngle.x - fAngleX) < m_fAngleSpeed)
+		//	m_pPlayer->Get_Transform()->m_vAngle.x = fAngleX;
+		//else
+		//{
+		//	if ((m_pPlayer->Get_Transform()->m_vAngle.x - fAngleX) > 0)
+		//		m_pPlayer->Get_Transform()->m_vAngle.x -= m_fAngleSpeed;
+		//	else
+		//		m_pPlayer->Get_Transform()->m_vAngle.x += m_fAngleSpeed;
+		//}
 		//끝
 
 		//구버전
@@ -152,24 +154,29 @@ void CPFly::Update_State(const float& fTimeDelta)
 				fAngleY *= -1;
 				fAngleY += D3DX_PI*2;
 			}
+			m_pPlayer->Get_Transform()->m_vAngle.y = fAngleY;
 			//부드러운이동 시작
-			if (abs(m_pPlayer->Get_Transform()->m_vAngle.y - fAngleY) < m_fAngleSpeed)
-				m_pPlayer->Get_Transform()->m_vAngle.y = fAngleY;
-			else
-			{
-				if ((m_pPlayer->Get_Transform()->m_vAngle.y - fAngleY) > D3DX_PI)
-					m_pPlayer->Get_Transform()->m_vAngle.y += m_fAngleSpeed;
-				else if ((m_pPlayer->Get_Transform()->m_vAngle.y - fAngleY) < -D3DX_PI)
-					m_pPlayer->Get_Transform()->m_vAngle.y -= m_fAngleSpeed;
-				else if ((m_pPlayer->Get_Transform()->m_vAngle.y - fAngleY) > 0)
-					m_pPlayer->Get_Transform()->m_vAngle.y -= m_fAngleSpeed;
-				else
-					m_pPlayer->Get_Transform()->m_vAngle.y += m_fAngleSpeed;
-				if (m_pPlayer->Get_Transform()->m_vAngle.y < 0)
-					m_pPlayer->Get_Transform()->m_vAngle.y += D3DX_PI *2;
-				if (m_pPlayer->Get_Transform()->m_vAngle.y > D3DX_PI *2)
-					m_pPlayer->Get_Transform()->m_vAngle.y -= D3DX_PI *2;
-			}
+			//float fDeltaY = (fAngleY - m_pPlayer->Get_Transform()->m_vAngle.y);
+			//	m_pPlayer->Get_Transform()->m_vAngle.y += fDeltaY;
+			//if (abs(m_pPlayer->Get_Transform()->m_vAngle.y - fAngleY) < m_fAngleSpeed)
+			//	m_pPlayer->Get_Transform()->m_vAngle.y = fAngleY;
+			//else if (abs(m_pPlayer->Get_Transform()->m_vAngle.y - fAngleY) > (D3DX_PI*2- m_fAngleSpeed))
+			//	m_pPlayer->Get_Transform()->m_vAngle.y = fAngleY;
+			//else
+			//{
+			//	if ((m_pPlayer->Get_Transform()->m_vAngle.y - fAngleY) > D3DX_PI)
+			//		m_pPlayer->Get_Transform()->m_vAngle.y += m_fAngleSpeed;
+			//	else if ((m_pPlayer->Get_Transform()->m_vAngle.y - fAngleY) < -D3DX_PI)
+			//		m_pPlayer->Get_Transform()->m_vAngle.y -= m_fAngleSpeed;
+			//	else if ((m_pPlayer->Get_Transform()->m_vAngle.y - fAngleY) > 0)
+			//		m_pPlayer->Get_Transform()->m_vAngle.y -= m_fAngleSpeed;
+			//	else
+			//		m_pPlayer->Get_Transform()->m_vAngle.y += m_fAngleSpeed;
+			//	if (m_pPlayer->Get_Transform()->m_vAngle.y < 0)
+			//		m_pPlayer->Get_Transform()->m_vAngle.y += D3DX_PI *2;
+			//	if (m_pPlayer->Get_Transform()->m_vAngle.y > D3DX_PI *2)
+			//		m_pPlayer->Get_Transform()->m_vAngle.y -= D3DX_PI *2;
+			//}
 			//끝
 		}
 	}
@@ -179,7 +186,6 @@ void CPFly::Update_State(const float& fTimeDelta)
 	}
 	if (Land_Check())
 		m_pPlayer->Set_Sate(CPlayerMain::STATE_LANDRUSH);
-	//m_pPlayer->Get_Transform()->m_vInCamPos.z = -10.f;
 }
 
 void CPFly::Out_State()

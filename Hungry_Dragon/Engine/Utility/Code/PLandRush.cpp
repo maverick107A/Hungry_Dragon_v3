@@ -111,7 +111,6 @@ void CPLandRush::Update_State(const float& fTimeDelta)
 		m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS] += _vec3(0.f, 1.f, 0.f);
 		m_pPlayer->Set_Sate(CPlayerMain::STATE_FLY);
 	}
-	m_pPlayer->Get_Transform()->m_vInCamPos.z = -10.f;
 }
 
 void CPLandRush::Out_State()

@@ -27,7 +27,6 @@ HRESULT CTerrain_Locater::Ready_Object(void)
 void CTerrain_Locater::Initialize_Object()
 {
 	m_pPlayerTrans = static_cast<Engine::CTransform*>(Engine::Get_Component(L"GameLogic", L"TestPlayer", L"Com_Transform", Engine::ID_DYNAMIC));
-
 }
 
 _int CTerrain_Locater::Update_Object(const _float& fTimeDelta)

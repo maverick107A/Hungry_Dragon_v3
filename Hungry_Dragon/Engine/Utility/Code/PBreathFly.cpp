@@ -182,7 +182,6 @@ void CPBreathFly::Update_State(const float& fTimeDelta)
 	}
 	if (Land_Check())
 		m_pPlayer->Set_Sate(CPlayerMain::STATE_LANDRUSH);
-	//m_pPlayer->Get_Transform()->m_vInCamPos.z = -10.f;
 }
 
 void CPBreathFly::Out_State()

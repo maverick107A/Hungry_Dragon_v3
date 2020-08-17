@@ -22,7 +22,7 @@ public:
 private:
 	float			m_fSpeed = 40.f;
 	float			m_fBoostMulti = 100.f;
-	float			m_fAngleSpeed = 0.1f;
+	float			m_fAngleSpeed = 0.15f;
 	float			m_fDamping = 0.85f;
 	_vec3			m_vSpeed = {0.f,0.f,0.f};
 

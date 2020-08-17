@@ -28,15 +28,34 @@ void CCollisionMgr::Player_Monster(list<CGameObject*> * _pPlayer, list<CGameObje
 {
 	for (auto& pPlayer : *_pPlayer)
 	{
-		for (auto& pMonster : *_pMonster)
+		//플레이어는 한명이니 한번만
+		CPlayerMain* Player = static_cast<CPlayerMain*>(pPlayer);
+		_vec3 vPlayerPos;
+		pPlayer->Get_Transform()->Get_Info(Engine::INFO_POS, &vPlayerPos);
+		if (Player->Get_Breath())
 		{
-			_vec3 vPlayerPos, vMonsterPos, vDis;
-			pPlayer->Get_Transform()->Get_Info(Engine::INFO_POS, &vPlayerPos);
-			pMonster->Get_Transform()->Get_Info(Engine::INFO_POS, &vMonsterPos);
-			vDis = vPlayerPos - vMonsterPos;
-			if (powf(vDis.x, 2) + powf(vDis.y, 2) + powf(vDis.z, 2) < 4)
+			for (auto& pMonster : *_pMonster)
 			{
-				static_cast<CMonsterMain*>(pMonster)->Kill_Monster(fTimeDelta);
+				_vec3 vMonsterPos, vDis;
+				pMonster->Get_Transform()->Get_Info(Engine::INFO_POS, &vMonsterPos);
+				vDis = vPlayerPos - vMonsterPos;
+				if (powf(vDis.x, 2) + powf(vDis.y, 2) + powf(vDis.z, 2) < 400)
+				{
+					static_cast<CMonsterMain*>(pMonster)->Kill_Monster(fTimeDelta);
+				}
+			}
+		}
+		else
+		{
+			for (auto& pMonster : *_pMonster)
+			{
+				_vec3 vMonsterPos, vDis;
+				pMonster->Get_Transform()->Get_Info(Engine::INFO_POS, &vMonsterPos);
+				vDis = vPlayerPos - vMonsterPos;
+				if (powf(vDis.x, 2) + powf(vDis.y, 2) + powf(vDis.z, 2) < 400)
+				{
+					static_cast<CMonsterMain*>(pMonster)->Kill_Monster(fTimeDelta);
+				}
 			}
 		}
 	}

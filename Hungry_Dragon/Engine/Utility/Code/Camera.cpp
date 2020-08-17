@@ -68,7 +68,14 @@ void CCamera::Move_Camera(LPDIRECT3DDEVICE9 & pGraphicDev, _vec3 _vPos, float* _
 		return;
 	POINT tPos = {};
 	GetCursorPos(&tPos);
-	m_vAfterAngle.y += ((tPos.x - m_tCenter.x)*cosf(m_vAngle.z) + (tPos.y - m_tCenter.y)*sinf(m_vAngle.z))*cosf(m_vAfterAngle.x)*0.001f;
+	//짜증나는코드
+	float fYPlus;
+	if(cosf(m_vAfterAngle.x) > 0)
+		fYPlus = ((tPos.x - m_tCenter.x)*cosf(m_vAngle.z) + (tPos.y - m_tCenter.y)*sinf(m_vAngle.z))*0.001f;
+	else
+		fYPlus = -((tPos.x - m_tCenter.x)*cosf(m_vAngle.z) + (tPos.y - m_tCenter.y)*sinf(m_vAngle.z))*0.001f;
+	//끝
+	m_vAfterAngle.y += fYPlus;
 	m_vAfterAngle.x += ((tPos.y - m_tCenter.y)*cosf(m_vAngle.z) - (tPos.x - m_tCenter.x)*sinf(m_vAngle.z))*0.001f;
 	*_fAngleX = m_vAfterAngle.x;
 	*_fAngleY = m_vAfterAngle.y;

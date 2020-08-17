@@ -34,6 +34,7 @@ public:
 	int Get_Hp() { return m_iHp; }
 	int	Get_Stamina() { return m_iStamina; }
 	int Get_Mana() { return m_iMana; }
+	bool	Get_Breath() { return m_bBreath; }
 
 public:
 	void Set_Sate(STATE _eState) { m_eState = _eState; }

@@ -43,7 +43,6 @@ void CPBreathIdle::Update_State(const float& fTimeDelta)
 	m_pPlayer->Get_Transform()->m_vInCamPos.y += 0.1f*sinf(m_fAngle);
 	m_fAngle += 0.1f;
 	m_pPlayer->Add_Stamina(1);
-	m_pPlayer->Get_Transform()->m_vInCamPos.z = -10.f;
 }
 
 void CPBreathIdle::Out_State()
