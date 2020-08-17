@@ -125,6 +125,7 @@ void CHeightCol::Set_Height(const _tchar* _pPath)
 	const int iSize = m_dwVtxCnt;
 
 	m_vecHeight.resize(iSize);
+	m_vecAdvanceHeight.resize(iSize);
 
 	// 24∫Ò∆Æ∂Û;;
 	//ReadFile(m_hFile, pPixel, sizeof(IDX24) * m_ih.biWidth * m_ih.biHeight, &dwByte, NULL);
@@ -145,6 +146,7 @@ void CHeightCol::Set_Height(const _tchar* _pPath)
 			int iIndex = i * 129 + j;			
 			//m_vecHeight[iIndex] = (_uint)((pPixel[iIndex]._b));
 			m_vecHeight[iIndex] = (_uint)((pPixel[iIndex] & 0x000000ff));
+			m_vecAdvanceHeight[iIndex] = ((float)(m_vecHeight[iIndex])) / 255.f * 2560.f;
 		}
 	}
 

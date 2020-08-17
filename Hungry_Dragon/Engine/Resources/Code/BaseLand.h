@@ -18,9 +18,11 @@ public:
 
 public:
 	vector<int>& Get_TerrainHeight();
+	vector<float>& Get_AdvanceHeight();
 
 protected:
 	vector<int>			m_vecHeight;
+	vector<float>		m_vecAdvanceHeight;
 	bool				m_bCheck = true;
 
 protected:

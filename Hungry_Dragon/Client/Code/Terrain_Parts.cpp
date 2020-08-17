@@ -61,8 +61,8 @@ void CTerrain_Parts::Weld_Edge(CTerrain_Parts * _Dst, bool _bHorizontal)
 	_float fJoinPoint[129] = { 0 };
 	int iPivot = 127 * 128;
 
-	vector<int>& rSrcHeightMap = m_pBufferCom->Get_TerrainHeight();
-	vector<int>& rDstHeightMap = _Dst->Get_BufferCom()->Get_TerrainHeight();
+	vector<float>& rSrcHeightMap = m_pBufferCom->Get_AdvanceHeight();
+	vector<float>& rDstHeightMap = _Dst->Get_BufferCom()->Get_AdvanceHeight();
 
 	if (_bHorizontal)	// 오른쪽이랑 접합
 	{
@@ -89,10 +89,10 @@ void CTerrain_Parts::Weld_Edge(CTerrain_Parts * _Dst, bool _bHorizontal)
 			pRight[i * 128 * 6 + 5].vPosition.y = fJoinPoint[i];
 
 			// 높이맵 갱신
-			rSrcHeightMap[(127 - i) * 129 + 128] = fJoinPoint[i + 1] * 255.f / 2560.f;
-			rDstHeightMap[(127 - i) * 129] = fJoinPoint[i + 1] * 255.f / 2560.f;
-			rSrcHeightMap[(128 - i) * 129 + 128] = fJoinPoint[i ] * 255.f / 2560.f;
-			rDstHeightMap[(128 - i) * 129] = fJoinPoint[i ] * 255.f / 2560.f;
+			rSrcHeightMap[(127 - i) * 129 + 128] = fJoinPoint[i + 1];
+			rDstHeightMap[(127 - i) * 129] = fJoinPoint[i + 1] ;
+			rSrcHeightMap[(128 - i) * 129 + 128] = fJoinPoint[i ];
+			rDstHeightMap[(128 - i) * 129] = fJoinPoint[i ];
 
 		}
 
@@ -128,10 +128,10 @@ void CTerrain_Parts::Weld_Edge(CTerrain_Parts * _Dst, bool _bHorizontal)
 			pDown[(i + iPivot) * 6 + 1].vPosition.y = fJoinPoint[i + 1];
 
 			// 높이맵 갱신
-			rSrcHeightMap[uPivot + i+1] = fJoinPoint[i + 1] * 255.f / 2560.f;
-			rDstHeightMap[i+1] = fJoinPoint[i + 1] * 255.f / 2560.f;
-			rSrcHeightMap[uPivot + i] = fJoinPoint[i] * 255.f / 2560.f;
-			rDstHeightMap[i] = fJoinPoint[i] * 255.f / 2560.f;
+			rSrcHeightMap[uPivot + i+1] = fJoinPoint[i + 1] ;
+			rDstHeightMap[i+1] = fJoinPoint[i + 1] ;
+			rSrcHeightMap[uPivot + i] = fJoinPoint[i];
+			rDstHeightMap[i] = fJoinPoint[i];
 		}
 	}
 	

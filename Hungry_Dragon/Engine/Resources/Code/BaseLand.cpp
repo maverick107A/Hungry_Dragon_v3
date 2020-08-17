@@ -108,6 +108,12 @@ vector<int>& CBaseLand::Get_TerrainHeight()
 	return m_vecHeight;
 }
 
+vector<float>& CBaseLand::Get_AdvanceHeight()
+{
+	return m_vecAdvanceHeight;
+
+}
+
 void Engine::CBaseLand::Free(void)
 {
 	CResources::Free();
