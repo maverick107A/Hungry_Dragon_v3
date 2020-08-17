@@ -71,6 +71,12 @@ int CGolem::Update_Object(const float & fTimeDelta)
 
 void CGolem::Render_Object(void)
 {
+	m_fAngle += 0.01f;
+	if (m_fAngle > 6.28319)
+	{
+		m_fAngle = 0;
+	}
+
 	if (m_eState != MONSTER_DEACTIVATE && m_eState != MONSTER_DYING)
 	{
 		m_pTransform->Get_Info(Engine::INFO_POS, &m_vLeftArmPos);
@@ -84,8 +90,8 @@ void CGolem::Render_Object(void)
 	
 	// ¿À¸¥ÆÈ
 	m_pTransform->Set_Scale(5);
-	m_vLeftArmPos.x += 10;
-	m_vLeftArmPos.y -= 5;
+
+	m_vLeftArmPos = { m_vLeftArmPos.x + (sinf( m_fAngle) * 10)  ,m_vLeftArmPos.y - 5.f , m_vLeftArmPos.z + (cosf(m_fAngle) * 10) };
 
 	m_pTransform->Set_Trans(&m_vLeftArmPos);
 	m_pTransform->Update_Component(0.01f);
@@ -96,8 +102,7 @@ void CGolem::Render_Object(void)
 
 	// ¿Þ? ÆÈ
 	m_pTransform->Set_Scale(5);
-	m_vRightArmPos.x -= 10;
-	m_vRightArmPos.y -= 5;
+	m_vRightArmPos = { m_vRightArmPos.x - (sinf(m_fAngle) * 10)  ,m_vRightArmPos.y - 5.f , m_vRightArmPos.z -( cosf(m_fAngle) * 10) };
 	m_pTransform->Set_Trans(&m_vRightArmPos);
 	m_pTransform->Update_Component(0.01f);
 	m_pTransform->Set_Transform(m_pGraphicDev);
