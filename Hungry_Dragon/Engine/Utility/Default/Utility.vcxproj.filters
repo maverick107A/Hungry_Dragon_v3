@@ -186,6 +186,12 @@
     <ClCompile Include="..\Code\BreathBase.cpp">
       <Filter>02. UtilBase\02. Component\05. Breath</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\PBreathFly.cpp">
+      <Filter>02. UtilBase\02. Component\02. State\00.PlayerState\05.BreathFly</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\PBreathIdle.cpp">
+      <Filter>02. UtilBase\02. Component\02. State\00.PlayerState\04.BreathIdle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Code\Component.h">
@@ -277,6 +283,12 @@
     </ClInclude>
     <ClInclude Include="..\Code\BreathBase.h">
       <Filter>02. UtilBase\02. Component\05. Breath</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\PBreathFly.h">
+      <Filter>02. UtilBase\02. Component\02. State\00.PlayerState\05.BreathFly</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\PBreathIdle.h">
+      <Filter>02. UtilBase\02. Component\02. State\00.PlayerState\04.BreathIdle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

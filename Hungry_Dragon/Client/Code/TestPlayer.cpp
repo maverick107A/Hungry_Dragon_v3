@@ -44,6 +44,9 @@ void CTestPlayer::Initialize_Object(void)
 
 int CTestPlayer::Update_Object(const float& fTimeDelta)
 {
+	if (Engine::Get_DIKeyState(DIK_K) & 0x80)
+		m_bBreath = !m_bBreath;
+
 	if(m_pTerrrrrrrain)
 		m_pTerrain = m_pTerrrrrrrain->Get_Terrain();
 	//Key_Input(fTimeDelta);
@@ -95,7 +98,8 @@ void CTestPlayer::Render_Object(void)
 {
 	m_pTransform->Set_Transform(m_pGraphicDev);
 	m_pBufferCom->Render_Buffer();
-	m_pBreath->Render_Breath(this);
+	if(m_bBreath)
+		m_pBreath->Render_Breath(this);
 
 	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end();++iter) {
 		(*iter)->Render_Buffer();

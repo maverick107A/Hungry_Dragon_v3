@@ -18,7 +18,7 @@ class CBreathBase;
 class ENGINE_DLL CPlayerMain : public Engine::CGameObject
 {
 public:
-	enum STATE { STATE_FLYIDLE, STATE_FLY, STATE_LANDIDLE, STATE_LANDRUSH, STATE_END };
+	enum STATE { STATE_FLYIDLE, STATE_FLY, STATE_LANDIDLE, STATE_LANDRUSH, STATE_BREATHIDLE, STATE_BREATHFLY, STATE_END };
 
 protected:
 	explicit CPlayerMain(LPDIRECT3DDEVICE9 pGraphicDev);
@@ -33,6 +33,7 @@ public:
 public:
 	int Get_Hp() { return m_iHp; }
 	int	Get_Stamina() { return m_iStamina; }
+	int Get_Mana() { return m_iMana; }
 
 public:
 	void Set_Sate(STATE _eState) { m_eState = _eState; }
@@ -40,6 +41,7 @@ public:
 public:
 	void Add_Hp(int _iHp) { m_iHp += _iHp; }
 	void Add_Stamina(int _iStamina) { m_iStamina += _iStamina; }
+	void Add_Mana(int _iMana) { m_iMana += _iMana; }
 
 public:
 	CTransform* Get_Transform() { return m_pTransform; }
@@ -67,11 +69,13 @@ protected:
 	float					m_fAngleY = 0.f;
 	bool					m_bLand = false;
 	bool					m_bShift = false;
+	bool					m_bBreath = false;
 	float					m_fSpeed = 10.f;
 	STATE					m_eState = STATE_END;
 
 	int						m_iHp = 100;
 	int						m_iStamina = 1000;
+	int						m_iMana = 0;
 
 public:
 	static CPlayerMain*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
