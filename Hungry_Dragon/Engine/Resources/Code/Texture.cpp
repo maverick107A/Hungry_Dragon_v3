@@ -45,6 +45,8 @@ HRESULT Engine::CTexture::Ready_Texture(const _tchar* pPath,
 		case TEX_NORMAL:
 			if (FAILED(D3DXCreateTextureFromFile(m_pGraphicDev, szFileName, (LPDIRECT3DTEXTURE9*)&pTexture)))
 				return E_FAIL;
+			m_pTexture = (PDIRECT3DTEXTURE9)pTexture;
+
 			break;
 
 		case TEX_CUBE:

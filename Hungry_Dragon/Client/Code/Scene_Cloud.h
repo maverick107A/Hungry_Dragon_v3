@@ -34,6 +34,7 @@
 #include "PlayerUI.h"
 #include "Cloud_Locater.h"
 #include "Cliff_Locater.h"
+#include "View_Mask.h"
 
 //-------------------------------------------------------
 
@@ -67,6 +68,8 @@ private:
 	D3DXHANDLE m_hvFog = 0;
 	FLOAT						m_near = -1.0f;		// 포그시작
 	FLOAT						m_far = -0.2f;		// 포그종료
+	
+	
 
 private:
 	virtual void Free(void) override;

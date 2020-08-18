@@ -63,6 +63,11 @@ HRESULT Engine::CGraphicDev::Ready_GraphicDev(HWND hWnd,
 	if (FAILED(m_pSDK->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd, uFlag, &Present_Parameter, &m_pGraphicDev)))
 		return E_FAIL;
 
+	if (FAILED(D3DXCreateSprite(m_pGraphicDev, &m_pSprite)))
+	{
+		return E_FAIL;
+	}
+
 	*ppGraphicDev = this;
 
 	return S_OK;
@@ -76,12 +81,14 @@ void Engine::CGraphicDev::Render_Begin(D3DXCOLOR Color)
 		Color,
 		1.f,
 		0);
-
 	m_pGraphicDev->BeginScene();
+	
+
 }
 
 void Engine::CGraphicDev::Render_End(void)
 {
+	
 	m_pGraphicDev->EndScene();
 	m_pGraphicDev->Present(NULL, NULL, NULL, NULL);
 }
@@ -89,6 +96,8 @@ void Engine::CGraphicDev::Render_End(void)
 void Engine::CGraphicDev::Free(void)
 {
 	_ulong dwRefCnt = 0;
+
+	Safe_Release(m_pSprite);
 
 	if (dwRefCnt = Engine::Safe_Release(m_pGraphicDev))
 		MSG_BOX("m_pGraphicDev Release Failed");

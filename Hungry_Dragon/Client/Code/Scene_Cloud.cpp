@@ -178,7 +178,17 @@ void CScene_Cloud::Render_Scene(void) {
 	
 	m_pFogEffect->End();
 
+
+	_matrix matPers;
+	_matrix matOrtho;
+	m_pGraphicDev->GetTransform(D3DTS_PROJECTION, &matPers);
+	D3DXMatrixOrthoOffCenterRH(&matOrtho, 0, 0, 1600, 900, 0, 1000);
+
+	m_pGraphicDev->GetTransform(D3DTS_PROJECTION, &matOrtho);
 	m_mapLayer[L"UI"]->Render_Layer();
+	m_pGraphicDev->GetTransform(D3DTS_PROJECTION, &matPers);
+
+	
 }
 
 void CScene_Cloud::Free(void) {
@@ -213,6 +223,7 @@ HRESULT CScene_Cloud::Ready_Layer_UI(const _tchar* pLayerTag) {
 	m_mapLayer.emplace(pLayerTag, pLayer);
 
 	FAILED_CHECK_RETURN(Register_GameObject<CPlayerUI>(pLayer, L"PlayerUI"), E_FAIL);
+	FAILED_CHECK_RETURN(Register_GameObject<CView_Mask>(pLayer, L"Sprite"), E_FAIL);
 
 	return S_OK;
 }

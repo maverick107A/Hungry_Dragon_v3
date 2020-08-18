@@ -16,6 +16,7 @@ private:
 
 public:
 	LPDIRECT3DDEVICE9		GetDevice(void) { return m_pGraphicDev; }
+	LPD3DXSPRITE			GetSprite(void) { return m_pSprite; }
 
 public:
 	HRESULT		Ready_GraphicDev(HWND hWnd,
@@ -30,6 +31,7 @@ public:
 private:
 	LPDIRECT3D9				m_pSDK = nullptr;
 	LPDIRECT3DDEVICE9		m_pGraphicDev = nullptr;
+	LPD3DXSPRITE			m_pSprite = nullptr;
 
 public:
 	virtual void Free(void);

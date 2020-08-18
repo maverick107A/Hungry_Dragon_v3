@@ -47,7 +47,7 @@ HRESULT CMainApp::Ready_MainApp(void)
 	Set_DefaultSetting(&m_pGraphicDev);
 	FAILED_CHECK_RETURN(Ready_Scene(m_pGraphicDev, &m_pManagementClass), E_FAIL);
 	Engine::Load_Particle(m_pGraphicDev);
-	CIngame_Flow::GetInstance()->Init_Flow(m_pGraphicDev);
+	CIngame_Flow::GetInstance()->Init_Flow(m_pGraphicDev, m_pDeviceClass->GetSprite());
 	return S_OK;
 }
 

@@ -20,7 +20,7 @@ private:
 	virtual ~CIngame_Flow(void);
 
 public:			// 씬 공용 메소드 (씬 상위에서 혼자서 갱신함)
-	void Init_Flow(LPDIRECT3DDEVICE9 pGraphicDev);
+	void Init_Flow(LPDIRECT3DDEVICE9 pGraphicDev, LPD3DXSPRITE pSprite);
 	void Update_BeforeScene(const Engine::_float& _fTimeDelta);
 	void Update_AfterScene(const Engine::_float& _fTimeDelta);
 	void LateUpdate_BeforeScene(const Engine::_float& _fTimeDelta);
@@ -36,6 +36,7 @@ public:			// 셋터/겟터
 	void Occur_Event(int _iEvent);
 	void Set_MaskColor(int _iIdx);
 	void Set_DefaultTex();
+	LPD3DXSPRITE Get_Sprite() { return m_pSprite; }
 
 public:			// 씬 흐름 관리 메소드 + 매니지먼트에 씬전환 요청
 	void Load_ForestTerrain();		// 포레스트 터레인 50여개를 로드시켜놓기 (디버그엔 와리가리 하니 나두는데 나중엔 그때그때 소멸)
@@ -62,6 +63,7 @@ private:
 private:
 	// 출력할 글디바.
 	LPDIRECT3DDEVICE9				m_pGraphicDev;
+	LPD3DXSPRITE					m_pSprite;
 };
 
 

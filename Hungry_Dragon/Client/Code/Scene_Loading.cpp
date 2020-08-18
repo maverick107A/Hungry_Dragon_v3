@@ -203,6 +203,35 @@ _uint CScene_Loading::Loading_ForStage(void)
 
 	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
 		RESOURCE_STAGE,
+		L"Texture_Blur",
+		Engine::TEX_NORMAL,
+		L"../../Asset/Billboard/Blur/TestBlur00%.2d.png", 30),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"Texture_Boom",
+		Engine::TEX_NORMAL,
+		L"../../Asset/Billboard/Boom/Boom00%.2d.png", 6),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"Texture_Meteor",
+		Engine::TEX_NORMAL,
+		L"../../Asset/Billboard/Meteor/Meteor00%.2d.png", 16),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"Texture_BillCloud",
+		Engine::TEX_NORMAL,
+		L"../../Asset/Billboard/bill_cloud.png"),
+		E_FAIL);
+
+
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+		RESOURCE_STAGE,
 		L"TEX_OCEAN",
 		Engine::TEX_NORMAL,
 		L"../../Asset/Terrain/water.bmp"),

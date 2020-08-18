@@ -39,12 +39,10 @@ CIngame_Flow::~CIngame_Flow(void)
 {
 }
 
-void CIngame_Flow::Init_Flow(LPDIRECT3DDEVICE9 pGraphicDev)
+void CIngame_Flow::Init_Flow(LPDIRECT3DDEVICE9 pGraphicDev, LPD3DXSPRITE pSprite)
 {
 	m_pGraphicDev = pGraphicDev;
-
-	
-
+	m_pSprite = pSprite;
 }
 
 void CIngame_Flow::Update_BeforeScene(const Engine::_float & _fTimeDelta)

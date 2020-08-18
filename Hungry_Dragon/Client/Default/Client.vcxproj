@@ -214,6 +214,7 @@ call CopyUtility.bat</Command>
     <ClInclude Include="..\Code\Tree_Locater.h" />
     <ClInclude Include="..\Code\Tree_Object.h" />
     <ClInclude Include="..\Code\Vent.h" />
+    <ClInclude Include="..\Code\View_Mask.h" />
     <ClInclude Include="..\Code\Volcano_Parts.h" />
     <ClInclude Include="..\Header\Define.h" />
     <ClInclude Include="Client.h" />
@@ -271,6 +272,7 @@ call CopyUtility.bat</Command>
     <ClCompile Include="..\Code\Tree_Locater.cpp" />
     <ClCompile Include="..\Code\Tree_Object.cpp" />
     <ClCompile Include="..\Code\Vent.cpp" />
+    <ClCompile Include="..\Code\View_Mask.cpp" />
     <ClCompile Include="..\Code\Volcano_Parts.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="stdafx.cpp">

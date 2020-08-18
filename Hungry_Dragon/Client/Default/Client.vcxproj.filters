@@ -205,6 +205,9 @@
     <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\39. CrystalMonster">
       <UniqueIdentifier>{565aa000-57d8-449a-b276-0723562ccadf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. GameObject\01. Stage\67. View_Mask">
+      <UniqueIdentifier>{9c30bee2-5c1b-4c29-a463-5df680b73065}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -372,6 +375,9 @@
     <ClInclude Include="..\Code\RedSky.h">
       <Filter>02. GameObject\01. Stage\51.SkySphere\00. RedSky</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\View_Mask.h">
+      <Filter>02. GameObject\01. Stage\67. View_Mask</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -529,6 +535,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\RedSky.cpp">
       <Filter>02. GameObject\01. Stage\51.SkySphere\00. RedSky</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\View_Mask.cpp">
+      <Filter>02. GameObject\01. Stage\67. View_Mask</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

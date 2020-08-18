@@ -18,9 +18,11 @@ public:
 								const _uint& iCnt);
 
 	void		Set_Texture(const _uint& iIndex = 0);
+	PDIRECT3DTEXTURE9 Get_Texture() {return m_pTexture;}
 
 private:
 	vector<IDirect3DBaseTexture9*>			m_vecTexture;
+	PDIRECT3DTEXTURE9						m_pTexture;
 
 public:
 	static CTexture*		Create(LPDIRECT3DDEVICE9 pGraphicDev, 
