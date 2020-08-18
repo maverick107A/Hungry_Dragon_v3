@@ -15,13 +15,13 @@ float4   vFog;		// (Far/(Far-Near), -1/(Far-Near))
 struct VS_INPUT
 {
 	 vector position : POSITION;
-  	 vector diffuse  : COLOR;
+  	 float diffuse  : COLOR;
 };
 
 struct VS_OUTPUT
 {
 	 vector position : POSITION;
-  	 vector diffuse  : COLOR;
+  	 float diffuse  : COLOR;
 	 //float  Fog      : FOG;
 };
 
@@ -53,6 +53,8 @@ technique TShader
         //VertexShader = compile vs_1_1 VS();
         
         FogEnable = true;			// 포그사용
+	FogStart      = 10000.0f;  
+        FogEnd        = 100000.0f;
         FogVertexMode = Linear;		// 선형포그
         FogColor = 0xd8e3fe;		// 포그색
     }

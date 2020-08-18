@@ -11,7 +11,7 @@ technique Fog
 
         pixelshader      = null;
         vertexshader     = null;
-        fvf              = XYZ | Normal;
+        fvf              = XYZ | Diffuse;
         Lighting         = false;
         NormalizeNormals = true;
         SpecularEnable   = false;
