@@ -1,19 +1,19 @@
 #include "stdafx.h"
 #include "Export_Function.h"
 #include "Terrain_Locater.h"
-#include "Golem.h"
+#include "FlyGolem.h"
 
 
-CGolem::CGolem(LPDIRECT3DDEVICE9 pGraphicDev)
+CFlyGolem::CFlyGolem(LPDIRECT3DDEVICE9 pGraphicDev)
 	:Engine::CMonsterMain(pGraphicDev)
 {
 }
 
-CGolem::~CGolem(void)
+CFlyGolem::~CFlyGolem(void)
 {
 }
 
-HRESULT CGolem::Ready_Object(void)
+HRESULT CFlyGolem::Ready_Object(void)
 {
 	Engine::CMonsterMain::Ready_Object();
 	Add_Component();
@@ -28,7 +28,7 @@ HRESULT CGolem::Ready_Object(void)
 	return S_OK;
 }
 
-int CGolem::Update_Object(const float & fTimeDelta)
+int CFlyGolem::Update_Object(const float & fTimeDelta)
 {
 
 	m_ptempTerain = static_cast<CTerrain_Locater*>(((Engine::CLayer*)(Get_Parent()))->Get_Object(L"BackGround", Engine::Find_First, nullptr));
@@ -37,7 +37,7 @@ int CGolem::Update_Object(const float & fTimeDelta)
 	if (m_eState == MONSTER_REBORN && m_eState != MONSTER_DEACTIVATE)
 	{
 		m_pTransform->Set_Trans(&m_vFirstPos);
-		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
+		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain() + 1000.f;
 		m_pTransform->Set_Scale(m_fMaxScale);
 
 		m_fMonster_HP = 100.f;
@@ -69,9 +69,9 @@ int CGolem::Update_Object(const float & fTimeDelta)
 	return m_iEvent;
 }
 
-void CGolem::Render_Object(void)
+void CFlyGolem::Render_Object(void)
 {
-	m_fAngle += 0.01f;
+	m_fAngle += 0.5f;
 
 	if (m_fAngle > 6.28319)
 	{
@@ -88,14 +88,14 @@ void CGolem::Render_Object(void)
 	m_pTransform->Get_Info(Engine::INFO_POS, &m_vBodyPos);
 
 
-	
+
 	// ¿À¸¥ÆÈ
 	m_pTransform->Set_Scale(5);
 	m_vLeftArmPos = { m_vLeftArmPos.x + (sinf(m_fAngle) * 10)  ,m_vLeftArmPos.y - 5.f , m_vLeftArmPos.z + (cosf(m_fAngle) * 10) };
 	m_pTransform->Set_Trans(&m_vLeftArmPos);
 	m_pTransform->Update_Component(0.01f);
 	m_pTransform->Set_Transform(m_pGraphicDev);
-	
+
 
 	m_pBufferChrystalMeshCom->Render_Buffer();
 
@@ -105,7 +105,7 @@ void CGolem::Render_Object(void)
 	m_pTransform->Set_Trans(&m_vRightArmPos);
 	m_pTransform->Update_Component(0.01f);
 	m_pTransform->Set_Transform(m_pGraphicDev);
-	
+
 
 	m_pBufferChrystalMeshCom->Render_Buffer();
 
@@ -118,14 +118,24 @@ void CGolem::Render_Object(void)
 	m_pTransform->Set_Transform(m_pGraphicDev);
 
 
-	m_pBufferMeshCom->Render_Buffer();
+	m_pBufferChrystalMeshCom->Render_Buffer();
 
+	// ¸öÃ¼
+	m_vBombPos = { m_vBodyPos.x ,m_vBodyPos.y - 20.f ,m_vBodyPos.z };
+	m_pTransform->Set_Trans(&m_vBombPos);
+	m_pTransform->Set_Scale(8);
+	m_pTransform->Update_Component(0.01f);
+	m_pTransform->Set_Transform(m_pGraphicDev);
+
+	m_pTransform->Set_Trans(&m_vBodyPos);
+
+	m_pBufferMeshCom->Render_Buffer();
 
 
 	Engine::CMonsterMain::Render_Object();
 }
 
-HRESULT CGolem::Add_Component(void)
+HRESULT CFlyGolem::Add_Component(void)
 {
 	Engine::CComponent*		pComponent = nullptr;
 
@@ -147,14 +157,14 @@ HRESULT CGolem::Add_Component(void)
 	return S_OK;
 }
 
-void CGolem::LateUpdate_Object(const float & fTimeDelta)
+void CFlyGolem::LateUpdate_Object(const float & fTimeDelta)
 {
 	Engine::CMonsterMain::LateUpdate_Object(fTimeDelta);
 }
 
-CGolem * CGolem::Create(LPDIRECT3DDEVICE9 pGraphicDev)
+CFlyGolem * CFlyGolem::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 {
-	CGolem*		pInstance = new CGolem(pGraphicDev);
+	CFlyGolem*		pInstance = new CFlyGolem(pGraphicDev);
 
 
 	if (FAILED(pInstance->Ready_Object()))
@@ -166,7 +176,7 @@ CGolem * CGolem::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 	return pInstance;
 }
 
-void CGolem::Free(void)
+void CFlyGolem::Free(void)
 {
 
 	Engine::CMonsterMain::Free();

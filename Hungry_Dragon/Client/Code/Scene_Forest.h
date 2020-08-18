@@ -22,6 +22,9 @@
 #include "Jump_Monster.h"
 #include "Fly_Monster.h"
 #include "Golem.h"
+#include "FlyGolem.h"
+
+
 
 #include "MonsterBeam.h"
 #include "NormalBullet.h"

@@ -1,5 +1,5 @@
-#ifndef Golem_h__
-#define Golem_h__
+#ifndef FlyGolem_h__
+#define FlyGolem_h__
 
 
 #include "Define.h"
@@ -14,11 +14,11 @@ class CTerrainTex;
 
 END
 
-class  CGolem : public Engine::CMonsterMain
+class  CFlyGolem : public Engine::CMonsterMain
 {
 private:
-	explicit CGolem(LPDIRECT3DDEVICE9 pGraphicDev);
-	virtual ~CGolem(void);
+	explicit CFlyGolem(LPDIRECT3DDEVICE9 pGraphicDev);
+	virtual ~CFlyGolem(void);
 public:
 	virtual HRESULT Ready_Object(void) override;
 	virtual int Update_Object(const float& fTimeDelta) override;
@@ -28,10 +28,12 @@ private:
 	HRESULT		Add_Component(void);
 
 public:
-	static CGolem*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
+	static CFlyGolem*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 
 private:
 	D3DXVECTOR3 m_vBodyPos;
+	D3DXVECTOR3 m_vBombPos;
+
 	float		m_fAngle = 0;
 	D3DXVECTOR3 m_vLeftArmPos;
 	D3DXVECTOR3 m_vRightArmPos;
@@ -41,4 +43,4 @@ private:
 };
 
 
-#endif // Golem_h__
+#endif // FlyGolem_h__

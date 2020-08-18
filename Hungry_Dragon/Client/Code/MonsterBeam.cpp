@@ -21,7 +21,7 @@ HRESULT CMonsterBeam::Ready_Object(void)
 	Add_Component();
 	m_eState = IDLE_BULLET;
 	m_preState = IDLE_BULLET;
-
+	m_iLifeTime = 3;
 
 
 	return S_OK;
@@ -37,7 +37,7 @@ int CMonsterBeam::Update_Object(const float & fTimeDelta)
 		m_pTransform->Set_Trans(&m_vFirstPos);
 		m_pTransformX->Set_Trans(&m_vFirstPos);
 
-	//	m_pTransform->Add_Trans(&D3DXVECTOR3(1.f, 0.f, 0.f));
+		//m_pTransform->Add_Trans(&D3DXVECTOR3(100.f, 0.f, 0.f));
 		m_pTransform->m_vScale.y = 100.f;
 
 		CGameObject* pPlayer = ((Engine::CLayer*)(Get_Parent()))->Get_Object(L"TestPlayer", Engine::Find_First, nullptr);
@@ -56,26 +56,23 @@ int CMonsterBeam::Update_Object(const float & fTimeDelta)
 
 
 
-	//if (m_eState == IDLE_BULLET)
-	//{
-	//	// ºöÀÇ ¶óÀÌÇÁ Å¸ÀÓÀ» ¶³±¸°í
-	//	// ¶³±º ¶óÀÌÇÁ Å¸ÀÓ ¸¸Å­ ºöÀÇ Y ·ê ÁÙ¿©Áà¶ó
-	//	// m_pTransform->Dir_Fly(&m_FirstPos, (fTimeDelta * 100.f));
-	//}
-	//else if (m_eState == DEAD_BULLET)
-	//{
-	//	//m_bFirst = true;
-	//	Dead_Bullet();
-	//}
+	if (m_eState == IDLE_BULLET)
+	{
+		m_iLifeTime -= fTimeDelta;
+	}
+	if (m_iLifeTime == 0)
+	{		
+		m_eState = DEAD_BULLET;
+	}
 
-	D3DXMATRIX		matView;
-	m_pGraphicDev->GetTransform(D3DTS_VIEW, &matView);
-	D3DXMatrixInverse(&matView, NULL, &matView);
-	m_pTransform->m_matWorld._11 = matView._11;
-	m_pTransform->m_matWorld._13 = matView._13;
-	m_pTransform->m_matWorld._31 = matView._31;
-	m_pTransform->m_matWorld._33 = matView._33;
-	//State_Change();
+	if (m_eState == DEAD_BULLET)
+	{
+		m_bFirst = true;
+		Dead_Bullet();
+	}
+
+	
+	State_Change();
 
 	return m_iEvent;
 }

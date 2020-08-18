@@ -51,13 +51,13 @@ int CBat_Monster::Update_Object(const float & fTimeDelta)
 		m_eState = MONSTER_IDLE;
 	}
 
+	// 파티클만 취급 안하는 업데이트 만들어
+	//if (MONSTER_DEAD == Engine::CMonsterMain::Update_Object(fTimeDelta))
+	//{
+	//	m_eState = MONSTER_REBORN;
 
-	if (MONSTER_DEAD == Engine::CMonsterMain::Update_Object(fTimeDelta))
-	{
-		m_eState = MONSTER_REBORN;
-
-		return m_iEvent;
-	}
+	//	return m_iEvent;
+	//}
 
 	if (m_eState != MONSTER_DEACTIVATE)
 	{		

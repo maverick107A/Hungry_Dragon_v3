@@ -42,6 +42,7 @@ private:
 	BULLETSTATE		m_eState;
 	D3DXVECTOR3		m_vReflDir;
 	D3DXVECTOR3		m_FirstPos;
+	int				m_iLifeTime;
 };
 
 
