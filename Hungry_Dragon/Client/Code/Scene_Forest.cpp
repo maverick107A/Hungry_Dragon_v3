@@ -72,7 +72,9 @@ HRESULT CScene_Forest::Ready_Scene(void) {
 
 	m_hFogTechHandle = m_pFogEffect->GetTechniqueByName("Fog");
 
-	
+	//m_pTempMovingObj = Engine::CMovingObject::Create(m_pGraphicDev);
+	//m_pTempMovingObj->Ready_Object();
+
 	return S_OK;
 }
 
@@ -166,6 +168,7 @@ void CScene_Forest::Render_Scene(void) {
 }
 
 void CScene_Forest::Free(void) {
+	//Safe_Release(m_pTempMovingObj);
 	Engine::Clear_RenderGroup();
 	Engine::CScene::Free();
 	Engine::Clear_ObjectPool();
@@ -262,7 +265,7 @@ HRESULT CScene_Forest::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 	pPlayerTransformCom = static_cast<CTransform*>(tempPlayer->Get_Component(L"Com_Transform", Engine::ID_DYNAMIC));
 	pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);
 
-
+	//pLayer->Add_Object(L"Moving", m_pTempMovingObj);
 	return S_OK;
 }
 

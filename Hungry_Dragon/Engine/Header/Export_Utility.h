@@ -10,7 +10,9 @@
 #include "GameObject.h"
 #include "Camera.h"
 #include "Component.h"
+#include "Animator.h"
 #include "CollisionMgr.h"
+#include "MovingObject.h"
 #include "ParticleMgr.h"
 BEGIN(Engine)
 

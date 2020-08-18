@@ -147,6 +147,22 @@ void CAnimator::Insert_Idle(_int exceptTarget)
 	}
 }
 
+CAnimator * CAnimator::Create(void)
+{
+	CAnimator* pInstance = new CAnimator;
+
+	return pInstance;
+}
+
+CComponent * CAnimator::Clone(void)
+{
+	return new CAnimator(*this);
+}
+
+void CAnimator::Free(void)
+{
+}
+
 _int CAnimator::Get_FrameArraySize(_int _frame)
 {
 	return (int)m_moventList[_frame].size();

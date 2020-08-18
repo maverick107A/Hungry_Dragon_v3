@@ -32,10 +32,10 @@ _int CLogo::Update_Scene(const _float& fTimeDelta) {
 	if (true == m_pLoading->Get_Finish()) {
 		//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_MENU);
 		//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_PROTO);
-		//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_FOREST);
+		CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_FOREST);
 		//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_CAVE);
 		//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_CLOUD);
-		CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_VOLCANO);
+		//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_VOLCANO);
 
 		return -1;
 	}

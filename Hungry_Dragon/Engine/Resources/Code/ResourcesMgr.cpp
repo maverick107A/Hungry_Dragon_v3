@@ -117,6 +117,12 @@ HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 	case BUFFER_CHRYSTAL:
 		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/Chrystal.dat");
 		break;
+	case BUFFER_DIAMOB_UPPER:
+		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/Mob_Dia_Upper.dat");
+		break;
+	case BUFFER_DIAMOB_UNDER:
+		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/Mob_Dia_Under.dat");
+		break;
 	}
 
 	m_pmapResource[wContainerIdx].emplace(pBufferTag, pResources);

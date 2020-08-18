@@ -25,7 +25,7 @@
 #include "FlyGolem.h"
 #include "FlyChaseGolem.h"
 #include "RedCrystal_Monster.h"
-
+#include "MovingObject.h"
 
 
 
@@ -78,6 +78,8 @@ private:
 private:
 	// 플레이어 받아오는곳
 	Engine::CTransform*		pPlayerTransformCom;
+
+	//Engine::CMovingObject*			m_pTempMovingObj;
 };
 
 #endif //
