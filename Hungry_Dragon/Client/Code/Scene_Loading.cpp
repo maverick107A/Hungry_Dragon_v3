@@ -158,6 +158,13 @@ _uint CScene_Loading::Loading_ForStage(void)
 		L"../../Asset/Skybox/TestSkybox.dds"),
 		E_FAIL);
 
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"Texture_RedSkySphere",
+		Engine::TEX_CUBE,
+		L"../../Asset/Skybox/RedSkybox.dds"),
+		E_FAIL);
+
 	
 	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
 		RESOURCE_STAGE,
@@ -193,6 +200,13 @@ _uint CScene_Loading::Loading_ForStage(void)
 		L"TEX_OCEAN",
 		Engine::TEX_NORMAL,
 		L"../../Asset/Terrain/water.bmp"),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"TEX_LAVA",
+		Engine::TEX_NORMAL,
+		L"../../Asset/Terrain/lava.png"),
 		E_FAIL);
 
 	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,

@@ -187,6 +187,18 @@
     <Filter Include="01. Scene\06. Scene_Iceland">
       <UniqueIdentifier>{37bc2afd-8600-40dc-a2f4-c87df6540a0e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. GameObject\01. Stage\64. AshCloud_Locater">
+      <UniqueIdentifier>{080f7bae-f4b0-4191-82ed-4349477caaa0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\65. Volcano_Parts">
+      <UniqueIdentifier>{cb20bece-5c73-48e4-af59-c095bebe43d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\51.SkySphere\00. RedSky">
+      <UniqueIdentifier>{56e34dff-bfcb-4e68-8342-a72e396c291b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\66. Meteor_Spawner">
+      <UniqueIdentifier>{45499b64-0812-44c0-ab84-4f51e74e905b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -333,6 +345,21 @@
     <ClInclude Include="..\Code\FlyChaseGolem.h">
       <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\Scene_Volcano.h">
+      <Filter>01. Scene\05. Scene_Volcano</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Lava.h">
+      <Filter>02. GameObject\01. Stage\50.Ocean</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\AshCloud_Locater.h">
+      <Filter>02. GameObject\01. Stage\64. AshCloud_Locater</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Volcano_Parts.h">
+      <Filter>02. GameObject\01. Stage\65. Volcano_Parts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\RedSky.h">
+      <Filter>02. GameObject\01. Stage\51.SkySphere\00. RedSky</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -469,6 +496,21 @@
     </ClCompile>
     <ClCompile Include="..\Code\FlyChaseGolem.cpp">
       <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Scene_Volcano.cpp">
+      <Filter>01. Scene\05. Scene_Volcano</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Lava.cpp">
+      <Filter>02. GameObject\01. Stage\50.Ocean</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\AshCloud_Locater.cpp">
+      <Filter>02. GameObject\01. Stage\64. AshCloud_Locater</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Volcano_Parts.cpp">
+      <Filter>02. GameObject\01. Stage\65. Volcano_Parts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\RedSky.cpp">
+      <Filter>02. GameObject\01. Stage\51.SkySphere\00. RedSky</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

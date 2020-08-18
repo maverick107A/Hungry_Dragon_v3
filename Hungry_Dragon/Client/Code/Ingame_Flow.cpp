@@ -8,7 +8,7 @@
 #include "Scene_Forest.h"
 #include "Scene_Cave.h"
 #include "Scene_Cloud.h"
-//#include "Scene_Volcano.h"
+#include "Scene_Volcano.h"
 //#include "Scene_Iceland.h"
 #include "Scene_Select.h"
 #include "Scene_Menu.h"
@@ -121,7 +121,7 @@ void CIngame_Flow::Occur_Event(int _iEvent)
 			CScene_Cloud::Create(m_pGraphicDev);
 			break;
 		case SCENENUM::SCENE_VOLCANO:
-			//CScene_Volcano::Create(m_pGraphicDev);
+			CScene_Volcano::Create(m_pGraphicDev);
 			break;
 		case SCENENUM::SCENE_ICELAND:
 			//CScene_Iceland::Create(m_pGraphicDev);

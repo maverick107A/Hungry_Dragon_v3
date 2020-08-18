@@ -54,7 +54,7 @@ void CCloud_Locater::Render_Object(void)
 	//m_pDummy->Render_Buffer();
 	m_pGraphicDev->SetTexture(0, 0);
 
-	// 피벗 버그 + 용접 버그 고쳐야함 ㅂㄷㅂㄷ
+	
 
 	_int iPlayerX = (_int)(m_pPlayerTrans->Get_World()._41 / (m_uLength*(m_uVerCntX - 1)));
 	if (0.f > m_pPlayerTrans->Get_World()._41)
@@ -77,13 +77,13 @@ void CCloud_Locater::Render_Object(void)
 	{
 		iPivotZ = (3 - ((-iPlayerZ) % 3))%3;
 	}
-	int _iIdx = ((iPivotX)+(iPivotZ)*3)%9;
+	int _iIdx = ((iPivotZ)*3)%9;
 	
 	for (int i = 0; i < 3; ++i)
 	{
 		for (int j = 0; j < 3; ++j)
 		{
-			m_pCloud[_iIdx]->Set_Trans(_vec3((int)(m_uLength*(m_uVerCntX-1))*(iPlayerX-1+j), 
+			m_pCloud[_iIdx]->Set_Trans(_vec3((int)(m_uLength*(m_uVerCntX-1))*(-1+j), 
 										-5000, (int)(m_uLength*(m_uVerCntZ - 1))*(iPlayerZ-1+i)));
 			m_pCloud[_iIdx]->Render_Object();
 			_iIdx = (_iIdx+1)%9;
@@ -95,7 +95,7 @@ void CCloud_Locater::Render_Object(void)
 	{
 		for (int j = 0; j < 3; ++j)
 		{
-			m_pCloud[_iIdx]->Set_Trans(_vec3((int)(m_uLength*(m_uVerCntX - 1))*(iPlayerX - 1 + j),
+			m_pCloud[_iIdx]->Set_Trans(_vec3((int)(m_uLength*(m_uVerCntX - 1))*( - 1 + j),
 				5000, (int)(m_uLength*(m_uVerCntZ - 1))*(iPlayerZ - 1 + i)));
 			m_pCloud[_iIdx]->Render_Object();
 			_iIdx = (_iIdx + 1) % 9;

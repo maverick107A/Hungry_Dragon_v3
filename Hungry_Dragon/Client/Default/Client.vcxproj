@@ -165,6 +165,7 @@ call CopyUtility.bat</Command>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Code\AshCloud_Locater.h" />
     <ClInclude Include="..\Code\BackGround.h" />
     <ClInclude Include="..\Code\BackGround_Logo.h" />
     <ClInclude Include="..\Code\Bat_Monster.h" />
@@ -182,6 +183,7 @@ call CopyUtility.bat</Command>
     <ClInclude Include="..\Code\Golem.h" />
     <ClInclude Include="..\Code\Ingame_Flow.h" />
     <ClInclude Include="..\Code\Jump_Monster.h" />
+    <ClInclude Include="..\Code\Lava.h" />
     <ClInclude Include="..\Code\Logo.h" />
     <ClInclude Include="..\Code\MainApp.h" />
     <ClInclude Include="..\Code\MonsterBeam.h" />
@@ -189,6 +191,7 @@ call CopyUtility.bat</Command>
     <ClInclude Include="..\Code\Obstacle.h" />
     <ClInclude Include="..\Code\Ocean.h" />
     <ClInclude Include="..\Code\Player.h" />
+    <ClInclude Include="..\Code\RedSky.h" />
     <ClInclude Include="..\Code\Scene_Cave.h" />
     <ClInclude Include="..\Code\Scene_Cloud.h" />
     <ClInclude Include="..\Code\Scene_Forest.h" />
@@ -199,6 +202,7 @@ call CopyUtility.bat</Command>
     <ClInclude Include="..\Code\Scene_Monster.h" />
     <ClInclude Include="..\Code\Scene_Proto.h" />
     <ClInclude Include="..\Code\Scene_Select.h" />
+    <ClInclude Include="..\Code\Scene_Volcano.h" />
     <ClInclude Include="..\Code\SkySphere.h" />
     <ClInclude Include="..\Code\Terrain.h" />
     <ClInclude Include="..\Code\Terrain_Locater.h" />
@@ -208,6 +212,7 @@ call CopyUtility.bat</Command>
     <ClInclude Include="..\Code\Tree_Locater.h" />
     <ClInclude Include="..\Code\Tree_Object.h" />
     <ClInclude Include="..\Code\Vent.h" />
+    <ClInclude Include="..\Code\Volcano_Parts.h" />
     <ClInclude Include="..\Header\Define.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="Resource.h" />
@@ -215,6 +220,7 @@ call CopyUtility.bat</Command>
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Code\AshCloud_Locater.cpp" />
     <ClCompile Include="..\Code\BackGround.cpp" />
     <ClCompile Include="..\Code\BackGround_Logo.cpp" />
     <ClCompile Include="..\Code\Bat_Monster.cpp" />
@@ -232,6 +238,7 @@ call CopyUtility.bat</Command>
     <ClCompile Include="..\Code\Golem.cpp" />
     <ClCompile Include="..\Code\Ingame_Flow.cpp" />
     <ClCompile Include="..\Code\Jump_Monster.cpp" />
+    <ClCompile Include="..\Code\Lava.cpp" />
     <ClCompile Include="..\Code\Logo.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />
     <ClCompile Include="..\Code\MonsterBeam.cpp" />
@@ -239,6 +246,7 @@ call CopyUtility.bat</Command>
     <ClCompile Include="..\Code\Obstacle.cpp" />
     <ClCompile Include="..\Code\Ocean.cpp" />
     <ClCompile Include="..\Code\Player.cpp" />
+    <ClCompile Include="..\Code\RedSky.cpp" />
     <ClCompile Include="..\Code\Scene_Cave.cpp" />
     <ClCompile Include="..\Code\Scene_Cloud.cpp" />
     <ClCompile Include="..\Code\Scene_Forest.cpp" />
@@ -249,6 +257,7 @@ call CopyUtility.bat</Command>
     <ClCompile Include="..\Code\Scene_Monster.cpp" />
     <ClCompile Include="..\Code\Scene_Proto.cpp" />
     <ClCompile Include="..\Code\Scene_Select.cpp" />
+    <ClCompile Include="..\Code\Scene_Volcano.cpp" />
     <ClCompile Include="..\Code\SkySphere.cpp" />
     <ClCompile Include="..\Code\Terrain.cpp" />
     <ClCompile Include="..\Code\Terrain_Locater.cpp" />
@@ -258,6 +267,7 @@ call CopyUtility.bat</Command>
     <ClCompile Include="..\Code\Tree_Locater.cpp" />
     <ClCompile Include="..\Code\Tree_Object.cpp" />
     <ClCompile Include="..\Code\Vent.cpp" />
+    <ClCompile Include="..\Code\Volcano_Parts.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
