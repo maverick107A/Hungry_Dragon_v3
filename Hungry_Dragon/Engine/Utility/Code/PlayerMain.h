@@ -34,6 +34,7 @@ public:
 	int Get_Hp() { return m_iHp; }
 	int	Get_Stamina() { return m_iStamina; }
 	int Get_Mana() { return m_iMana; }
+	float	Get_ColSize() { return m_fColSize; }
 	bool	Get_Breath() { return m_bBreath; }
 
 public:
@@ -78,6 +79,8 @@ protected:
 	int						m_iHp = 300;
 	int						m_iStamina = 1000;
 	int						m_iMana = 300;
+
+	float					m_fColSize = 0.f;
 
 public:
 	static CPlayerMain*	Create(LPDIRECT3DDEVICE9 pGraphicDev);

@@ -34,7 +34,7 @@ HRESULT CTestPlayer::Ready_Object(void)
 	m_pTransform->m_vInfo[Engine::INFO_POS].z = 0.f;
 
 	m_pTransform->Set_Scale(10.f);
-
+	m_fColSize = 400.f;
 	return S_OK;
 }
 
