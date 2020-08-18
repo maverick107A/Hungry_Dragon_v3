@@ -166,6 +166,7 @@ call CopyUtility.bat</Command>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Code\Animator.cpp" />
     <ClCompile Include="..\Code\BeamBase.cpp" />
     <ClCompile Include="..\Code\BreathBase.cpp" />
     <ClCompile Include="..\Code\BulletMain.cpp" />
@@ -179,6 +180,7 @@ call CopyUtility.bat</Command>
     <ClCompile Include="..\Code\Layer.cpp" />
     <ClCompile Include="..\Code\Management.cpp" />
     <ClCompile Include="..\Code\MonsterMain.cpp" />
+    <ClCompile Include="..\Code\MovingObject.cpp" />
     <ClCompile Include="..\Code\ObjectPool.cpp" />
     <ClCompile Include="..\Code\ParticleMgr.cpp" />
     <ClCompile Include="..\Code\PBreathFly.cpp" />
@@ -200,6 +202,7 @@ call CopyUtility.bat</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Header\Export_Utility.h" />
+    <ClInclude Include="..\Code\Animator.h" />
     <ClInclude Include="..\Code\BeamBase.h" />
     <ClInclude Include="..\Code\BreathBase.h" />
     <ClInclude Include="..\Code\BulletMain.h" />
@@ -213,6 +216,7 @@ call CopyUtility.bat</Command>
     <ClInclude Include="..\Code\Layer.h" />
     <ClInclude Include="..\Code\Management.h" />
     <ClInclude Include="..\Code\MonsterMain.h" />
+    <ClInclude Include="..\Code\MovingObject.h" />
     <ClInclude Include="..\Code\ObjectPool.h" />
     <ClInclude Include="..\Code\ParticleMgr.h" />
     <ClInclude Include="..\Code\PBreathFly.h" />

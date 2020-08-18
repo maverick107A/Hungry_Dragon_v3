@@ -176,7 +176,14 @@ namespace Engine
 
 	}FRAME;
 
-
+	typedef struct tagMovement
+	{
+		_matrix matScale;
+		_matrix matRot;
+		_matrix matTrans;
+		_matrix matRevolution;
+		_int	tFrame;
+	}MOVEMENT;
 }
 
 

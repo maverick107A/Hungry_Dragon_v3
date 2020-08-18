@@ -97,6 +97,12 @@
     <Filter Include="02. UtilBase\02. Component\02. State\00.PlayerState\05.BreathFly">
       <UniqueIdentifier>{8d5824cb-c6a5-462c-82b1-cb9722498fdc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. UtilBase\02. Component\06. Animatior">
+      <UniqueIdentifier>{e2252d88-223e-4068-b7fc-80672ea2d48b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. UtilBase\01. GameObject\03. MovingObject">
+      <UniqueIdentifier>{5f523a2c-b0ed-4f6c-a34f-a9e70bfb7d2a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\Component.cpp">
@@ -191,6 +197,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\PBreathIdle.cpp">
       <Filter>02. UtilBase\02. Component\02. State\00.PlayerState\04.BreathIdle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Animator.cpp">
+      <Filter>02. UtilBase\02. Component\06. Animatior</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\MovingObject.cpp">
+      <Filter>02. UtilBase\01. GameObject\03. MovingObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -289,6 +301,12 @@
     </ClInclude>
     <ClInclude Include="..\Code\PBreathIdle.h">
       <Filter>02. UtilBase\02. Component\02. State\00.PlayerState\04.BreathIdle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Animator.h">
+      <Filter>02. UtilBase\02. Component\06. Animatior</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\MovingObject.h">
+      <Filter>02. UtilBase\01. GameObject\03. MovingObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
