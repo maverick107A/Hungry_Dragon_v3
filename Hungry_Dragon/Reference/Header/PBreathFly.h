@@ -24,8 +24,8 @@ private:
 	float			m_fBoostMulti = 100.f;
 	float			m_fAngleSpeed = 0.1f;
 	float			m_fDamping = 0.85f;
+	float			m_fAngleDamping = 0.25f;
 	_vec3			m_vSpeed = {0.f,0.f,0.f};
-
 public:
 	static CPBreathFly*		Create(void);
 	virtual CComponent*		Clone(void);

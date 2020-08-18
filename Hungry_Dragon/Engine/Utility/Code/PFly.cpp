@@ -28,7 +28,7 @@ void CPFly::Enter_State(CPlayerMain* _pPlayer)
 
 void CPFly::Update_State(const float& fTimeDelta)
 {
-	if (GetAsyncKeyState('G'))
+	if (GetAsyncKeyState('G') && 0 < m_pPlayer->Get_Mana())
 		m_pPlayer->Set_Sate(CPlayerMain::STATE_BREATHIDLE);
 	D3DXVECTOR3 vDir = { 0.f,0.f,0.f };
 	D3DXVECTOR3 vLook = { 0.f,0.f,0.f };

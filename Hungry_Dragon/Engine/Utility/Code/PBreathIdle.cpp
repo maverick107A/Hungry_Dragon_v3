@@ -27,8 +27,11 @@ void CPBreathIdle::Enter_State(CPlayerMain* _pPlayer)
 
 void CPBreathIdle::Update_State(const float& fTimeDelta)
 {
-	if( 0 == m_pPlayer->Get_Mana())
+	if (0 >= m_pPlayer->Get_Mana())
+	{
 		m_pPlayer->Set_Sate(CPlayerMain::STATE_FLYIDLE);
+		return;
+	}
 	m_pPlayer->Add_Mana(-1);
 	if (GetAsyncKeyState('W') || GetAsyncKeyState('S') || GetAsyncKeyState('A') || GetAsyncKeyState('D') || GetAsyncKeyState(VK_SPACE))
 	{
