@@ -1,5 +1,5 @@
-#ifndef GolemRightArm_h__
-#define GolemRightArm_h__
+#ifndef FlyChaseGolem_h__
+#define FlyChaseGolem_h__
 
 
 #include "Define.h"
@@ -7,18 +7,18 @@
 
 BEGIN(Engine)
 
-class CTexture_Cube;
+class CVICustom;
 class CTexture;
 class CTransform;
 class CTerrainTex;
 
 END
 
-class  CGolemRightArm : public Engine::CMonsterMain
+class  CFlyChaseGolem : public Engine::CMonsterMain
 {
 private:
-	explicit CGolemRightArm(LPDIRECT3DDEVICE9 pGraphicDev);
-	virtual ~CGolemRightArm(void);
+	explicit CFlyChaseGolem(LPDIRECT3DDEVICE9 pGraphicDev);
+	virtual ~CFlyChaseGolem(void);
 public:
 	virtual HRESULT Ready_Object(void) override;
 	virtual int Update_Object(const float& fTimeDelta) override;
@@ -28,11 +28,19 @@ private:
 	HRESULT		Add_Component(void);
 
 public:
-	static CGolemRightArm*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
+	static CFlyChaseGolem*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
+
+private:
+	D3DXVECTOR3 m_vBodyPos;
+	D3DXVECTOR3 m_vBombPos;
+
+	float		m_fAngle = 0;
+	D3DXVECTOR3 m_vLeftArmPos;
+	D3DXVECTOR3 m_vRightArmPos;
 private:
 	virtual void Free(void) override;
 
 };
 
 
-#endif // GolemRightArm_h__
+#endif // FlyChaseGolem_h__

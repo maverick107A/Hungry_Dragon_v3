@@ -48,8 +48,11 @@ void CCollisionMgr::Player_Monster(list<CGameObject*> * _pPlayer, list<CGameObje
 				fTemp = D3DXVec3Dot(&vDir, &vTemp)/D3DXVec3Dot(&vDir, &vDir);
 				vTemp = vPlayerPos + vDir*fTemp - vMonsterPos;
 
-				if(D3DXVec3Dot(&vTemp,&vTemp) < ColSize)
-					static_cast<CMonsterMain*>(pMonster)->Kill_Monster(true);
+				_vec3 vMola = vPlayerPos + vDir*fTemp - vMonsterPos;
+
+				if(D3DXVec3Dot(&vMola,&vMola) < ColSize)
+					static_cast<CMonsterMain*>(pMonster)->Kill_Lay_Monster(fTimeDelta);
+
 			}
 		}
 		else

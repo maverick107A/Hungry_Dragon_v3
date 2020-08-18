@@ -176,6 +176,7 @@ call CopyUtility.bat</Command>
     <ClInclude Include="..\Code\Cloud_Locater.h" />
     <ClInclude Include="..\Code\Cloud_Parts.h" />
     <ClInclude Include="..\Code\Color_Mask.h" />
+    <ClInclude Include="..\Code\FlyChaseGolem.h" />
     <ClInclude Include="..\Code\FlyGolem.h" />
     <ClInclude Include="..\Code\Fly_Monster.h" />
     <ClInclude Include="..\Code\Golem.h" />
@@ -225,6 +226,7 @@ call CopyUtility.bat</Command>
     <ClCompile Include="..\Code\Cloud_Locater.cpp" />
     <ClCompile Include="..\Code\Cloud_Parts.cpp" />
     <ClCompile Include="..\Code\Color_Mask.cpp" />
+    <ClCompile Include="..\Code\FlyChaseGolem.cpp" />
     <ClCompile Include="..\Code\FlyGolem.cpp" />
     <ClCompile Include="..\Code\Fly_Monster.cpp" />
     <ClCompile Include="..\Code\Golem.cpp" />

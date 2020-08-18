@@ -120,8 +120,16 @@ void CFlyGolem::Render_Object(void)
 
 	m_pBufferChrystalMeshCom->Render_Buffer();
 
-	// ¸öÃ¼
-	m_vBombPos = { m_vBodyPos.x ,m_vBodyPos.y - 20.f ,m_vBodyPos.z };
+	// ÆøÅº
+
+	if (m_eState == MONSTER_DEACTIVATE || m_fMonster_HP < 0)
+	{
+		m_vBombPos = { m_vBombPos.x ,m_vBombPos.y - 20.f ,m_vBombPos.z };
+	}
+	else
+	{
+		m_vBombPos = { m_vBodyPos.x ,m_vBodyPos.y - 20.f ,m_vBodyPos.z };
+	}
 	m_pTransform->Set_Trans(&m_vBombPos);
 	m_pTransform->Set_Scale(8);
 	m_pTransform->Update_Component(0.01f);

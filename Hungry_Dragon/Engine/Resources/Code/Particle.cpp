@@ -192,7 +192,10 @@ void CParticle::Set_Size(_float _fSize) {
 
 void CParticle::Set_Empty()
 {
+
+	if(!m_arrParticle.empty())
 	m_arrParticle.clear();
+
 }
 
 void CParticle::Free(void) {

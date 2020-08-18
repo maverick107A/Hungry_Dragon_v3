@@ -23,6 +23,8 @@
 #include "Fly_Monster.h"
 #include "Golem.h"
 #include "FlyGolem.h"
+#include "FlyChaseGolem.h"
+
 
 
 

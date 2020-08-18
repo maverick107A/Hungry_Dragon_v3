@@ -20,7 +20,7 @@ class CVICustom;
 class ENGINE_DLL CMonsterMain : public Engine::CGameObject
 {
 protected:
-	enum MONSTERSTATE { MONSTER_IDLE, MONSTER_REBORN , MONSTER_ACTIVATE , MONSTER_DEACTIVATE, MONSTER_DYING , MONSTER_END };
+	enum MONSTERSTATE { MONSTER_IDLE, MONSTER_REBORN , MONSTER_ACTIVATE, MONSTER_SUICIDE, MONSTER_LAYDEAD , MONSTER_DEACTIVATE, MONSTER_DYING , MONSTER_END };
 
 protected:
 	explicit CMonsterMain(LPDIRECT3DDEVICE9 pGraphicDev);
@@ -38,7 +38,9 @@ public:
 	virtual float		Ride_Terrain();
 
 	//가의묵이 추가한 충돌확인용 임시 함수
-	void		Kill_Monster(bool _bCheck);
+	void		Kill_Monster(const float& fTimeDelta);
+	void		Kill_Lay_Monster(const float & fTimeDelta);
+
 
 public:
 	void Set_State(MONSTERSTATE _State) { m_eState = _State ; }
@@ -69,7 +71,6 @@ protected:
 	MONSTERSTATE				m_eState;
 
 
-	float						m_fParticle_Speed = 0;
 	float						m_fPlayerDistance;
 	float						m_fDistance;
 	float						m_fSpeed;

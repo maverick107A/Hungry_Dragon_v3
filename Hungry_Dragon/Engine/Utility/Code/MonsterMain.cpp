@@ -26,8 +26,6 @@ int Engine::CMonsterMain::Update_Object(const float & fTimeDelta)
 
 	Engine::CGameObject::Update_Object(fTimeDelta);
 
-
-
 	D3DXVECTOR3	vMonsterPos;
 	m_pTransform->Get_Info(Engine::INFO_POS, &vMonsterPos);
 
@@ -36,9 +34,9 @@ int Engine::CMonsterMain::Update_Object(const float & fTimeDelta)
 	Dir.y = 0;
 	m_fDistance = D3DXVec3Length(&Dir);
 
-	if (m_eState != MONSTER_DYING &&  m_eState != MONSTER_DEACTIVATE)
+	if (m_eState != MONSTER_DYING &&  m_eState != MONSTER_DEACTIVATE && m_eState != MONSTER_SUICIDE && m_eState != MONSTER_LAYDEAD)
 	{
-		if (m_fDistance < 200 && m_eState != MONSTER_DYING)
+		if (m_fDistance < 400 && m_eState != MONSTER_DYING)
 		{
 			m_eState = MONSTER_ACTIVATE;
 
@@ -50,31 +48,34 @@ int Engine::CMonsterMain::Update_Object(const float & fTimeDelta)
 	}
 	if (m_fDistance > 7000)
 	{
-		m_fParticle_Speed = 0;
 		m_eState = MONSTER_REBORN;
 		m_iEvent = MONSTER_DEAD;
 	}
 
+	if (m_eState == MONSTER_SUICIDE)
+	{
+		m_fMonster_HP -= m_fDamaged;
+		Dead_Monster(fTimeDelta);
+	}
+
+	if (m_eState == MONSTER_LAYDEAD)
+	{
+		m_fMonster_HP -= m_fDamaged;
+		Dead_Monster(fTimeDelta);
+	}
+	
 	
 	State_Change();
-
 	return m_iEvent;
 }
 
 void Engine::CMonsterMain::Render_Object(void)
 {
 
-	if (m_pParticle != nullptr)
-	{
-		//m_pParticle->Render_Buffer();
-	}
-	
 }
 
 void Engine::CMonsterMain::LateUpdate_Object(const float & fTimeDelta)
 {
-
-
 	m_vPlayerPos = ((Engine::CLayer*)(this->Get_Parent()))->Get_PlayerPos();
 	if (m_eState == MONSTER_DEACTIVATE)
 	{
@@ -96,7 +97,6 @@ void Engine::CMonsterMain::LateUpdate_Object(const float & fTimeDelta)
 void Engine::CMonsterMain::State_Change()
 {
 		
-
 	if (m_preState != m_eState)
 	{
 		
@@ -106,10 +106,20 @@ void Engine::CMonsterMain::State_Change()
 			m_pParticle = Engine::Particle_Create(Engine::PART_FRAGILE,_vec3(0.f, 0.f, 0.f));
 			//Engine::Set_ParticleColor(static_cast<CParticle*>(m_pParticle), D3DXCOLOR(1.f, 0.f, 0.f, 1.f));
 		}
-
-		if (m_eState == MONSTER_DYING&&nullptr!=m_pParticle)
+		if (m_eState == MONSTER_SUICIDE)
 		{
-			static_cast<Engine::CParticle*>(m_pParticle)->Set_Empty();
+			m_pParticle = Engine::Particle_Create(Engine::PART_FRAGILE, _vec3(0.f, 0.f, 0.f));
+		}
+		if (m_eState == MONSTER_LAYDEAD)
+		{
+			m_pParticle = Engine::Particle_Create(Engine::PART_FRAGILE, _vec3(0.f, 0.f, 0.f));
+		}
+		
+		if (m_eState == MONSTER_DYING)
+		{
+			// 이거 살릴수 있으면 좋음
+			//if (nullptr != m_pParticle)
+			//	static_cast<Engine::CParticle*>(m_pParticle)->Set_Empty();
 		}
 
 		m_preState = m_eState;
@@ -120,16 +130,12 @@ void Engine::CMonsterMain::State_Change()
 
 void Engine::CMonsterMain::Dead_Monster(bool _bCheck)
 {
-	if(_bCheck)
-		m_pTransform->Set_Trans(&m_vPlayerPos);
+
+
 	m_pTransform->Set_Scale(m_fScale);
-
-
-
 
 	if (m_fMonster_HP < 0)
 	{
-		m_fParticle_Speed = 0;
 		m_iEvent = MONSTER_DEAD;
 		m_eState = MONSTER_DYING;
 	}
@@ -247,6 +253,11 @@ void Engine::CMonsterMain::Kill_Monster(bool _bCheck)
 	m_fScale = m_fMonster_HP / m_fMonster_MaxHP;
 	m_fScale = m_fMaxScale * m_fScale;
 	Dead_Monster(_bCheck);
+}
+
+void Engine::CMonsterMain::Kill_Lay_Monster(const float & fTimeDelta)
+{
+	m_eState = MONSTER_LAYDEAD;
 }
 
 HRESULT Engine::CMonsterMain::Add_Component(void)

@@ -34,6 +34,7 @@ private:
 	vector<Engine::_vec3>	m_vecTrans;
 	LPDIRECT3DDEVICE9		m_pGraphicDev;
 	CTransform*				m_pParticleTrans;
+	size_t					m_iParticleLimite  = 30;
 
 public:
 	virtual void Free(void) override;

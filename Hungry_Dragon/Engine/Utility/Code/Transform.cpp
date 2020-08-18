@@ -164,10 +164,10 @@ const _matrix * CTransform::Compute_LookAtTarget(const _vec3 * pTargetPos)
 												  D3DXVec3Normalize(&vDir, &vDir))));
 }
 
-void CTransform::Chase_Target(const _vec3 * pTargetPos, const _float & fSpeed)
+void CTransform::Chase_Fly_Target(const _vec3 * pTargetPos, const _float & fSpeed)
 {
 	_vec3		vDir = *pTargetPos - m_vInfo[INFO_POS];
-	vDir.y = 0;
+ 	
 	m_vInfo[INFO_POS] += *D3DXVec3Normalize(&vDir, &vDir) * fSpeed;
 
 	//_matrix		matScale, matRot, matTrans;
@@ -177,6 +177,13 @@ void CTransform::Chase_Target(const _vec3 * pTargetPos, const _float & fSpeed)
 	//D3DXMatrixTranslation(&matTrans, m_vInfo[INFO_POS].x, m_vInfo[INFO_POS].y, m_vInfo[INFO_POS].z);
 	//
 	//m_matWorld = matScale * matRot * matTrans;
+}
+
+void CTransform::Chase_Target(const _vec3 * pTargetPos, const _float & fSpeed)
+{
+	_vec3		vDir = *pTargetPos - m_vInfo[INFO_POS];
+	vDir.y = 0;
+	m_vInfo[INFO_POS] += *D3DXVec3Normalize(&vDir, &vDir) * fSpeed;
 }
 
 void CTransform::Chase_RotaionTarget(const _vec3 * pTargetPos)

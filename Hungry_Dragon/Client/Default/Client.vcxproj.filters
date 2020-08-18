@@ -330,6 +330,9 @@
     <ClInclude Include="..\Code\FlyGolem.h">
       <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\FlyChaseGolem.h">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -462,6 +465,9 @@
       <Filter>02. GameObject\01. Stage\02.Bullet\01. Beam\23.MonsterBeam</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\FlyGolem.cpp">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\FlyChaseGolem.cpp">
       <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster</Filter>
     </ClCompile>
   </ItemGroup>

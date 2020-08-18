@@ -31,6 +31,7 @@ public:
 public:
 	void			Rotation(ROTATION eType, const _float& fAngle);
 	const _matrix*	Compute_LookAtTarget(const _vec3* pTargetPos);
+	void			Chase_Fly_Target(const _vec3 * pTargetPos, const _float & fSpeed);
 	void			Chase_Target(const _vec3* pTargetPos, const _float& fSpeed);
 
 	void			Chase_RotaionTarget(const _vec3 * pTargetPos);
