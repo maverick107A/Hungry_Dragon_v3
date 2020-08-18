@@ -17,12 +17,13 @@ public:
 public:
 	void Set_BoundingBox(BoundingBox _boundingBox);
 	void Set_Origin(_vec3 _origin);
-	void Set_TexArray(PARTICLEDIR _eDir);
+	void Set_TexArray();
 	void Set_TexArrayMFC();
 
 public:
 	virtual void	Reset_Particle(ATTRIBUTE* _attribute);
 	virtual _int	Update_Component(const _float& _fTimeDelta);
+	virtual void Render_Buffer(void);
 
 public:
 	static CPart_Fragile* Create(LPDIRECT3DDEVICE9 pGraphicDev, int numParticle, float _fSize = 0.25f);
@@ -31,9 +32,7 @@ public:
 
 private:
 	_vec3 m_MoveDirection;
-	IDirect3DTexture9* m_arrTex[10];
-	int		m_iTexIndex=0;
-	bool	m_bTexRight=true;
+	IDirect3DTexture9* m_arrTex[DIR_END][10];
 };
 
 END

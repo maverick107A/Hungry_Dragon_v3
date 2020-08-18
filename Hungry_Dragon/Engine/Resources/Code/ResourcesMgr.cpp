@@ -217,7 +217,7 @@ void CResourcesMgr::Load_Particle(LPDIRECT3DDEVICE9 pGraphicDev) {
 			break;
 		case PART_FRAGILE:
 			pParticle = CPart_Fragile::Create(pGraphicDev, 500);
-			static_cast<Engine::CPart_Fragile*>(pParticle)->Set_TexArray((PARTICLEDIR)0);
+			static_cast<Engine::CPart_Fragile*>(pParticle)->Set_TexArray();
 			break;
 		default:
 			pParticle = nullptr;

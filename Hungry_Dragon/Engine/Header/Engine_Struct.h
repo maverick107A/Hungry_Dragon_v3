@@ -130,6 +130,10 @@ namespace Engine
 		float fLifeTime;
 		float fAge;
 
+		int		iShape;
+		int		iFrameIndex;
+		bool	bFrameUp;
+
 		D3DXCOLOR tColor;
 		D3DXCOLOR tColorFade;
 
