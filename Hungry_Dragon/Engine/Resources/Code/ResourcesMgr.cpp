@@ -3,6 +3,8 @@
 USING(Engine)
 IMPLEMENT_SINGLETON(CResourcesMgr)
 
+#include "Engine_Define.h"
+
 Engine::CResourcesMgr::CResourcesMgr(void)
 	: m_pmapResource(nullptr)
 {
@@ -215,8 +217,7 @@ void CResourcesMgr::Load_Particle(LPDIRECT3DDEVICE9 pGraphicDev) {
 			break;
 		case PART_FRAGILE:
 			pParticle = CPart_Fragile::Create(pGraphicDev, 500);
-			//static_cast<Engine::CPart_Fragile*>(pParticle)->Set_Texture(L"../../Asset/Triangle.dds");
-			static_cast<Engine::CPart_Fragile*>(pParticle)->Set_TexArray();
+			static_cast<Engine::CPart_Fragile*>(pParticle)->Set_TexArray((PARTICLEDIR)0);
 			break;
 		default:
 			pParticle = nullptr;

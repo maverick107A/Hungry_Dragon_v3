@@ -28,6 +28,10 @@ namespace Engine
 	//Direct Input
 	enum MOUSEKEYSTATE {DIM_LB,DIM_RB,DIR_MB,DIM_END};
 	enum MOUSEMOVESTATE { DIMS_X, DIMS_Y, DIMS_Z, DIMS_END };
+
+	// 프래자일 파티클 방향 구분용
+	enum PARTICLEDIR{ DIR_N, DIR_S, DIR_E, DIR_W, DIR_NE, DIR_SW, DIR_NW, DIR_SE, DIR_END};
+
 }
 
 

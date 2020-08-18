@@ -57,17 +57,75 @@ void CPart_Fragile::Set_Origin(_vec3 _origin)
 	}
 }
 
-void CPart_Fragile::Set_TexArray() {
-	D3DXCreateTextureFromFile(m_pGraphicDev, L"../../Asset/Texture0.dds", &m_arrTex[0]);
-	D3DXCreateTextureFromFile(m_pGraphicDev, L"../../Asset/Texture1.dds", &m_arrTex[1]);
-	D3DXCreateTextureFromFile(m_pGraphicDev, L"../../Asset/Texture2.dds", &m_arrTex[2]);
-	D3DXCreateTextureFromFile(m_pGraphicDev, L"../../Asset/Texture3.dds", &m_arrTex[3]);
-	D3DXCreateTextureFromFile(m_pGraphicDev, L"../../Asset/Texture4.dds", &m_arrTex[4]);
-	D3DXCreateTextureFromFile(m_pGraphicDev, L"../../Asset/Texture5.dds", &m_arrTex[5]);
-	D3DXCreateTextureFromFile(m_pGraphicDev, L"../../Asset/Texture6.dds", &m_arrTex[6]);
-	D3DXCreateTextureFromFile(m_pGraphicDev, L"../../Asset/Texture7.dds", &m_arrTex[7]);
-	D3DXCreateTextureFromFile(m_pGraphicDev, L"../../Asset/Texture8.dds", &m_arrTex[8]);
-	D3DXCreateTextureFromFile(m_pGraphicDev, L"../../Asset/Texture9.dds", &m_arrTex[9]);
+void CPart_Fragile::Set_TexArray(PARTICLEDIR _eDir) {
+	switch (_eDir)
+	{
+	case Engine::DIR_N:
+		for (int i = 0; i < 10; ++i)
+		{
+			TCHAR str[128] = L"";
+			wsprintf(str, L"../../Asset/Particle/Tri/TriangleNS_%d.dds", i);
+			D3DXCreateTextureFromFile(m_pGraphicDev, str, &m_arrTex[i]);
+		}
+		break;
+	case Engine::DIR_S:
+		for (int i = 0; i < 10; ++i)
+		{
+			TCHAR str[128] = L"";
+			wsprintf(str, L"../../Asset/Particle/Tri/TriangleNS_%d.dds", i);
+			D3DXCreateTextureFromFile(m_pGraphicDev, str, &m_arrTex[9-i]);
+		}
+		break;
+	case Engine::DIR_E:
+		for (int i = 0; i < 10; ++i)
+		{
+			TCHAR str[128] = L"";
+			wsprintf(str, L"../../Asset/Particle/Tri/TriangleEW_%d.dds", i);
+			D3DXCreateTextureFromFile(m_pGraphicDev, str, &m_arrTex[i]);
+		}
+		break;
+	case Engine::DIR_W:
+		for (int i = 0; i < 10; ++i)
+		{
+			TCHAR str[128] = L"";
+			wsprintf(str, L"../../Asset/Particle/Tri/TriangleEW_%d.dds", i);
+			D3DXCreateTextureFromFile(m_pGraphicDev, str, &m_arrTex[9-i]);
+		}
+		break;
+	case Engine::DIR_NE:
+		for (int i = 0; i < 10; ++i)
+		{
+			TCHAR str[128] = L"";
+			wsprintf(str, L"../../Asset/Particle/Tri/TriangleNE_%d.dds", i);
+			D3DXCreateTextureFromFile(m_pGraphicDev, str, &m_arrTex[i]);
+		}
+		break;
+	case Engine::DIR_SW:
+		for (int i = 0; i < 10; ++i)
+		{
+			TCHAR str[128] = L"";
+			wsprintf(str, L"../../Asset/Particle/Tri/Triangle NE_%d.dds", i);
+			D3DXCreateTextureFromFile(m_pGraphicDev, str, &m_arrTex[9 - i]);
+		}
+		break;
+	case Engine::DIR_NW:
+		for (int i = 0; i < 10; ++i)
+		{
+			TCHAR str[128] = L"";
+			wsprintf(str, L"../../Asset/Particle/Tri/TriangleNW_%d.dds", i);
+			D3DXCreateTextureFromFile(m_pGraphicDev, str, &m_arrTex[i]);
+		}
+		break;
+	case Engine::DIR_SE:
+		for (int i = 0; i < 10; ++i)
+		{
+			TCHAR str[128] = L"";
+			wsprintf(str, L"../../Asset/Particle/Tri/TriangleNW_%d.dds", i);
+			D3DXCreateTextureFromFile(m_pGraphicDev, str, &m_arrTex[9 - i]);
+		}
+		break;
+	}
+	
 }
 
 void CPart_Fragile::Set_TexArrayMFC() {

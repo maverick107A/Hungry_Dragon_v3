@@ -17,7 +17,7 @@ public:
 public:
 	void Set_BoundingBox(BoundingBox _boundingBox);
 	void Set_Origin(_vec3 _origin);
-	void Set_TexArray();
+	void Set_TexArray(PARTICLEDIR _eDir);
 	void Set_TexArrayMFC();
 
 public:
