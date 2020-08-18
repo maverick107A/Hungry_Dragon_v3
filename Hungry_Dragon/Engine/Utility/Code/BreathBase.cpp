@@ -25,7 +25,7 @@ HRESULT Engine::CBreathBase::Ready_BreathBase(LPDIRECT3DDEVICE9& _pGraphicDev)
 	D3DXCreateCylinder(
 		m_pGraphicDev,
 		0.7f, // radius at negative z end
-		0.7f, // radius at positive z end
+		10.f, // radius at positive z end
 		100.f, // length of cylinder
 		10,   // slices
 		10,   // stacks
@@ -51,9 +51,9 @@ void CBreathBase::Render_Breath(CPlayerMain* _pPlayer)
 {
 	//_vec3 vDir = _pPlayer->Get_Camera()->Get_Dir()*100.f;
 	_matrix matWorld = _pPlayer->Get_Transform()->Get_World();
-	matWorld.m[3][0] += matWorld.m[2][0]*50.f;
-	matWorld.m[3][1] += matWorld.m[2][1]*50.f;
-	matWorld.m[3][2] += matWorld.m[2][2]*50.f;
+	matWorld.m[3][0] += matWorld.m[2][0]*52.f;
+	matWorld.m[3][1] += matWorld.m[2][1]*52.f;
+	matWorld.m[3][2] += matWorld.m[2][2]*52.f;
 
 	//_matrix matWorld = _pPlayer->Get_Transform()->Get_World();
 	//_vec3 vDir = { matWorld.m[2][0], matWorld.m[2][1], matWorld.m[2][2] };

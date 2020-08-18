@@ -31,6 +31,7 @@ void CCollisionMgr::Player_Monster(list<CGameObject*> * _pPlayer, list<CGameObje
 		//플레이어는 한명이니 한번만
 		CPlayerMain* Player = static_cast<CPlayerMain*>(pPlayer);
 		_vec3 vPlayerPos;
+		_vec3 vTemp;
 		float fTemp;
 		float ColSize = Player->Get_ColSize();
 		pPlayer->Get_Transform()->Get_Info(Engine::INFO_POS, &vPlayerPos);
@@ -43,15 +44,12 @@ void CCollisionMgr::Player_Monster(list<CGameObject*> * _pPlayer, list<CGameObje
 			{
 				_vec3 vMonsterPos, vDis;
 				pMonster->Get_Transform()->Get_Info(Engine::INFO_POS, &vMonsterPos);
-
-				_vec3 vTemp = vMonsterPos - vPlayerPos;
-
+				vTemp = vMonsterPos - vPlayerPos;
 				fTemp = D3DXVec3Dot(&vDir, &vTemp)/D3DXVec3Dot(&vDir, &vDir);
+				vTemp = vPlayerPos + vDir*fTemp - vMonsterPos;
 
-				_vec3 vMola = vPlayerPos + vDir*fTemp - vMonsterPos;
-
-				if(D3DXVec3Dot(&vMola,&vMola) < ColSize)
-					static_cast<CMonsterMain*>(pMonster)->Kill_Monster(fTimeDelta);
+				if(D3DXVec3Dot(&vTemp,&vTemp) < ColSize)
+					static_cast<CMonsterMain*>(pMonster)->Kill_Monster(true);
 			}
 		}
 		else
@@ -63,7 +61,7 @@ void CCollisionMgr::Player_Monster(list<CGameObject*> * _pPlayer, list<CGameObje
 				vDis = vPlayerPos - vMonsterPos;
 				if (powf(vDis.x, 2) + powf(vDis.y, 2) + powf(vDis.z, 2) < ColSize)
 				{
-					static_cast<CMonsterMain*>(pMonster)->Kill_Monster(fTimeDelta);
+					static_cast<CMonsterMain*>(pMonster)->Kill_Monster(false);
 				}
 			}
 		}

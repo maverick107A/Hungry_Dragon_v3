@@ -34,16 +34,28 @@ void CPFly::Update_State(const float& fTimeDelta)
 	D3DXVECTOR3 vLook = { 0.f,0.f,0.f };
 	D3DXVECTOR3 vRight = { 0.f,0.f,0.f };
 
-	float fCos = cosf(m_pPlayer->Get_AngleX());
+	//float fCos = cosf(m_pPlayer->Get_AngleX());
 
-	vLook.y = -sinf(m_pPlayer->Get_AngleX());
-	vLook.x = sinf(m_pPlayer->Get_AngleY())*fCos;
-	vLook.z = cosf(m_pPlayer->Get_AngleY())*fCos;
+	//vLook.y = -sinf(m_pPlayer->Get_AngleX());
+	//vLook.x = sinf(m_pPlayer->Get_AngleY())*fCos;
+	//vLook.z = cosf(m_pPlayer->Get_AngleY())*fCos;
 
 
-	D3DXVec3Cross(&vRight, &_vec3(0.f,1.f,0.f), &vLook);
-	D3DXVec3Normalize(&vRight, &vRight);
-	D3DXVec3Normalize(&vLook, &vLook);
+	//D3DXVec3Cross(&vRight, &_vec3(0.f,1.f,0.f), &vLook);
+	//D3DXVec3Normalize(&vRight, &vRight);
+	//D3DXVec3Normalize(&vLook, &vLook);
+
+	D3DXMATRIX vRotZ;
+
+	D3DXMATRIX vRotX, vRotY, vRotTotal;
+	D3DXMatrixRotationX(&vRotX, m_pPlayer->Get_AngleX());
+	D3DXMatrixRotationY(&vRotY, m_pPlayer->Get_AngleY());
+
+	vRotTotal = vRotX*vRotY;
+	D3DXVec3TransformNormal(&vLook, &_vec3(0.f,0.f,1.f), &vRotTotal);
+
+	D3DXVec3Cross(&vRight, &m_pPlayer->Get_Up(), &vLook);
+
 	bool bCheck = false;
 	bool bShift = false;
 	if (Engine::Get_DIKeyState(DIK_W))

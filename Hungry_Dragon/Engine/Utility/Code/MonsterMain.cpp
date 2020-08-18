@@ -118,9 +118,10 @@ void Engine::CMonsterMain::State_Change()
 	}
 }
 
-void Engine::CMonsterMain::Dead_Monster(const float & fTimeDelta)
+void Engine::CMonsterMain::Dead_Monster(bool _bCheck)
 {
-	m_pTransform->Set_Trans(&m_vPlayerPos);
+	if(_bCheck)
+		m_pTransform->Set_Trans(&m_vPlayerPos);
 	m_pTransform->Set_Scale(m_fScale);
 
 
@@ -239,13 +240,13 @@ float Engine::CMonsterMain::Ride_Terrain()
 	return false;
 }
 
-void Engine::CMonsterMain::Kill_Monster(const float & fTimeDelta)
+void Engine::CMonsterMain::Kill_Monster(bool _bCheck)
 {
 	m_eState = MONSTER_DEACTIVATE;
 	m_fMonster_HP -= m_fDamaged;
 	m_fScale = m_fMonster_HP / m_fMonster_MaxHP;
 	m_fScale = m_fMaxScale * m_fScale;
-	Dead_Monster(fTimeDelta);
+	Dead_Monster(_bCheck);
 }
 
 HRESULT Engine::CMonsterMain::Add_Component(void)

@@ -80,15 +80,16 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 		}
 	}
 
+	m_pCamera->Update_Camera(fTimeDelta, &m_fAngleX, &m_fAngleY, &m_vLook, &m_vUp, m_pTerrain);
 	m_pState->Update_State(fTimeDelta);
-	m_pCamera->Update_Camera(fTimeDelta, m_pGraphicDev, m_pTransform->m_vInfo[Engine::INFO_POS], &m_fAngleX, &m_fAngleY, m_pTerrain);
+	m_pCamera->Camera_Set(m_pGraphicDev, m_pTransform->m_vInfo[Engine::INFO_POS]);
 	//
 	State_Change();
 
 	if (GetAsyncKeyState(VK_LBUTTON))
 	{
 		TCHAR szBuff[256] = L"";
-		wsprintf(szBuff, L"x :%d, z :%d", int(m_pTransform->m_vInfo[Engine::INFO_POS].x) * 100, int(m_pTransform->m_vInfo[Engine::INFO_POS].z) * 100);
+		wsprintf(szBuff, L"x :%d, z :%d", int(m_pTransform->m_vInfo[Engine::INFO_POS].x * 100), int(m_pTransform->m_vInfo[Engine::INFO_POS].z * 100));
 		MessageBox(nullptr, szBuff, L"XY", 0);
 	}
 

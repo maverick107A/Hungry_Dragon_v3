@@ -12,6 +12,15 @@ Engine::CCameraMain::~CCameraMain(void)
 
 }
 
+void CCameraMain::Camera_Set(LPDIRECT3DDEVICE9& _pGraphicDev, _vec3 _vPos)
+{
+	m_vPos = _vPos - m_vDir*m_fCameraDis;
+	D3DXMATRIX V;
+	D3DXMatrixLookAtLH(&V, &m_vPos, &_vPos, &m_vUp);
+	_pGraphicDev->SetTransform(D3DTS_VIEW, &V);
+
+}
+
 void CCameraMain::Ride_Terrain(CBaseLand* _pTerrain)
 {
 	int Vernum = (int(m_vPos.x*INVERSETILESIZE) + VERTEXSIZE*int(m_vPos.z*INVERSETILESIZE));
