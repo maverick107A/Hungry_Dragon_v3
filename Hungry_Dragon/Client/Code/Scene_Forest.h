@@ -24,6 +24,7 @@
 #include "Golem.h"
 #include "FlyGolem.h"
 #include "FlyChaseGolem.h"
+#include "RedCrystal_Monster.h"
 
 
 

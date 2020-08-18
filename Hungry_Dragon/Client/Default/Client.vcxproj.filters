@@ -199,6 +199,12 @@
     <Filter Include="02. GameObject\01. Stage\66. Meteor_Spawner">
       <UniqueIdentifier>{45499b64-0812-44c0-ab84-4f51e74e905b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem">
+      <UniqueIdentifier>{b3abe725-b969-4009-bd7d-939ad29f1584}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\39. CrystalMonster">
+      <UniqueIdentifier>{565aa000-57d8-449a-b276-0723562ccadf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -300,9 +306,6 @@
     <ClInclude Include="..\Code\PlayerUI.h">
       <Filter>02. GameObject\01. Stage\99. PlayerUI</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\Golem.h">
-      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster</Filter>
-    </ClInclude>
     <ClInclude Include="..\Code\Tree_Locater.h">
       <Filter>02. GameObject\01. Stage\57. Tree_Locator</Filter>
     </ClInclude>
@@ -339,11 +342,20 @@
     <ClInclude Include="..\Code\MonsterBeam.h">
       <Filter>02. GameObject\01. Stage\02.Bullet\01. Beam\23.MonsterBeam</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\Golem.h">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem</Filter>
+    </ClInclude>
     <ClInclude Include="..\Code\FlyGolem.h">
-      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster</Filter>
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\FlyChaseGolem.h">
-      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster</Filter>
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Horizon_Bat_Monster.h">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\01.BoardMonster</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\RedCrystal_Monster.h">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\39. CrystalMonster</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Scene_Volcano.h">
       <Filter>01. Scene\05. Scene_Volcano</Filter>
@@ -452,9 +464,6 @@
     <ClCompile Include="..\Code\PlayerUI.cpp">
       <Filter>02. GameObject\01. Stage\99. PlayerUI</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Golem.cpp">
-      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\Tree_Locater.cpp">
       <Filter>02. GameObject\01. Stage\57. Tree_Locator</Filter>
     </ClCompile>
@@ -491,11 +500,20 @@
     <ClCompile Include="..\Code\MonsterBeam.cpp">
       <Filter>02. GameObject\01. Stage\02.Bullet\01. Beam\23.MonsterBeam</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\Golem.cpp">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem</Filter>
+    </ClCompile>
     <ClCompile Include="..\Code\FlyGolem.cpp">
-      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster</Filter>
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\FlyChaseGolem.cpp">
-      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster</Filter>
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Horizon_Bat_Monster.cpp">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\01.BoardMonster</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\RedCrystal_Monster.cpp">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\39. CrystalMonster</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Scene_Volcano.cpp">
       <Filter>01. Scene\05. Scene_Volcano</Filter>

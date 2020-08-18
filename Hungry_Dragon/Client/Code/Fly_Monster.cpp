@@ -41,7 +41,7 @@ int CFly_Monster::Update_Object(const float & fTimeDelta)
 
 		m_fMonster_HP = 100.f;
 		m_fScale = 10.f;
-
+		m_pParticle = nullptr;
 
 		m_iEvent = OBJ_NOEVENT;
 		m_eState = MONSTER_IDLE;

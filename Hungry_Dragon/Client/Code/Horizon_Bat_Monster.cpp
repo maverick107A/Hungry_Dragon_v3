@@ -1,19 +1,19 @@
 #include "stdafx.h"
 #include "Export_Function.h"
 
-#include "Bat_Monster.h"
+#include "Horizon_Bat_Monster.h"
 
 
-CBat_Monster::CBat_Monster(LPDIRECT3DDEVICE9 pGraphicDev)
+CHorizonBat_Monster::CHorizonBat_Monster(LPDIRECT3DDEVICE9 pGraphicDev)
 	:Engine::CMonsterMain(pGraphicDev)
 {
 }
 
-CBat_Monster::~CBat_Monster(void)
+CHorizonBat_Monster::~CHorizonBat_Monster(void)
 {
 }
 
-HRESULT CBat_Monster::Ready_Object(void)
+HRESULT CHorizonBat_Monster::Ready_Object(void)
 {
 	Engine::CMonsterMain::Ready_Object();
 	Add_Component();
@@ -23,7 +23,7 @@ HRESULT CBat_Monster::Ready_Object(void)
 	
 	
 	m_tFrame.fStartFrame = 0.f;
-	m_tFrame.fMaxFrame   = 7.f;
+	m_tFrame.fMaxFrame   = 12.f;
 	m_tFrame.fFrameSpeed = 1.5f;
 	m_fHeight = 0.f;
 
@@ -38,7 +38,7 @@ HRESULT CBat_Monster::Ready_Object(void)
 	return S_OK;
 }
 
-int CBat_Monster::Update_Object(const float & fTimeDelta)
+int CHorizonBat_Monster::Update_Object(const float & fTimeDelta)
 {
 
 	if (m_eState == MONSTER_REBORN && m_eState != MONSTER_DEACTIVATE)
@@ -68,13 +68,13 @@ int CBat_Monster::Update_Object(const float & fTimeDelta)
 
 	// Y ºôº¸µå
 
-	// D3DXMATRIX		matView;
-	// m_pGraphicDev->GetTransform(D3DTS_VIEW, &matView);
-	// D3DXMatrixInverse(&matView, NULL, &matView);
-	// m_pTransform->m_matWorld._11 = matView._11;
-	// m_pTransform->m_matWorld._13 = matView._13;
-	// m_pTransform->m_matWorld._31 = matView._31;
-	// m_pTransform->m_matWorld._33 = matView._33;
+	 D3DXMATRIX		matView;
+	 m_pGraphicDev->GetTransform(D3DTS_VIEW, &matView);
+	 D3DXMatrixInverse(&matView, NULL, &matView);
+	 m_pTransform->m_matWorld._11 = matView._11;
+	 m_pTransform->m_matWorld._13 = matView._13;
+	 m_pTransform->m_matWorld._31 = matView._31;
+	 m_pTransform->m_matWorld._33 = matView._33;
 
 	// X ºôº¸µå
 
@@ -88,19 +88,19 @@ int CBat_Monster::Update_Object(const float & fTimeDelta)
 
 	// ¿ùµå ºôº¸µå
 
-	D3DXMatrixIdentity(&matBilboard);
-	D3DXMATRIX		matView;
-	m_pGraphicDev->GetTransform(D3DTS_VIEW, &matView);
-	ZeroMemory(&matView.m[3][0], sizeof(D3DXVECTOR3));
-	D3DXMatrixInverse(&matView, NULL, &matView);
-	m_pTransform->m_matWorld = matView *  m_pTransform->m_matWorld;
+	//D3DXMatrixIdentity(&matBilboard);
+	//D3DXMATRIX		matView;
+	//m_pGraphicDev->GetTransform(D3DTS_VIEW, &matView);
+	//ZeroMemory(&matView.m[3][0], sizeof(D3DXVECTOR3));
+	//D3DXMatrixInverse(&matView, NULL, &matView);
+	//m_pTransform->m_matWorld = matView *  m_pTransform->m_matWorld;
 
 
 	Update_Animation(fTimeDelta);
 	return m_iEvent;
 }
 
-void CBat_Monster::Render_Object(void)
+void CHorizonBat_Monster::Render_Object(void)
 {	
 	m_pTransform->Set_Transform(m_pGraphicDev);
 	
@@ -118,7 +118,7 @@ void CBat_Monster::Render_Object(void)
 
 }
 
-HRESULT CBat_Monster::Add_Component(void)
+HRESULT CHorizonBat_Monster::Add_Component(void)
 {
 
 	Engine::CComponent*		pComponent = nullptr;
@@ -131,7 +131,7 @@ HRESULT CBat_Monster::Add_Component(void)
 
 	
 	pComponent = m_pTextureCom = dynamic_cast<Engine::CTexture*>
-		(Engine::Clone(RESOURCE_STAGE, L"Texture_Bat"));
+		(Engine::Clone(RESOURCE_STAGE, L"Texture_HrizonBat"));
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Texture", pComponent);
 
@@ -139,12 +139,12 @@ HRESULT CBat_Monster::Add_Component(void)
 	return S_OK;
 }
 
-void CBat_Monster::LateUpdate_Object(const float & fTimeDelta)
+void CHorizonBat_Monster::LateUpdate_Object(const float & fTimeDelta)
 {
 	Engine::CMonsterMain::LateUpdate_Object(fTimeDelta);
 }
 
-void CBat_Monster::Update_Animation(const float & fTimeDelta)
+void CHorizonBat_Monster::Update_Animation(const float & fTimeDelta)
 {
 	m_tFrame.fStartFrame += m_tFrame.fMaxFrame * fTimeDelta * m_tFrame.fFrameSpeed;
 
@@ -154,9 +154,9 @@ void CBat_Monster::Update_Animation(const float & fTimeDelta)
 	}
 }
 
-CBat_Monster * CBat_Monster::Create(LPDIRECT3DDEVICE9 pGraphicDev)
+CHorizonBat_Monster * CHorizonBat_Monster::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 {
-	CBat_Monster*		pInstance = new CBat_Monster(pGraphicDev);
+	CHorizonBat_Monster*		pInstance = new CHorizonBat_Monster(pGraphicDev);
 
 	if (FAILED(pInstance->Ready_Object()))
 		Engine::Safe_Release(pInstance);
@@ -164,7 +164,7 @@ CBat_Monster * CBat_Monster::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 	return pInstance;
 }
 
-void CBat_Monster::Free(void)
+void CHorizonBat_Monster::Free(void)
 {
 	Engine::CMonsterMain::Free();
 }

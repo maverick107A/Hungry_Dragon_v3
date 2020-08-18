@@ -181,6 +181,7 @@ call CopyUtility.bat</Command>
     <ClInclude Include="..\Code\FlyGolem.h" />
     <ClInclude Include="..\Code\Fly_Monster.h" />
     <ClInclude Include="..\Code\Golem.h" />
+    <ClInclude Include="..\Code\Horizon_Bat_Monster.h" />
     <ClInclude Include="..\Code\Ingame_Flow.h" />
     <ClInclude Include="..\Code\Jump_Monster.h" />
     <ClInclude Include="..\Code\Lava.h" />
@@ -192,6 +193,7 @@ call CopyUtility.bat</Command>
     <ClInclude Include="..\Code\Ocean.h" />
     <ClInclude Include="..\Code\Player.h" />
     <ClInclude Include="..\Code\RedSky.h" />
+    <ClInclude Include="..\Code\RedCrystal_Monster.h" />
     <ClInclude Include="..\Code\Scene_Cave.h" />
     <ClInclude Include="..\Code\Scene_Cloud.h" />
     <ClInclude Include="..\Code\Scene_Forest.h" />
@@ -236,6 +238,7 @@ call CopyUtility.bat</Command>
     <ClCompile Include="..\Code\FlyGolem.cpp" />
     <ClCompile Include="..\Code\Fly_Monster.cpp" />
     <ClCompile Include="..\Code\Golem.cpp" />
+    <ClCompile Include="..\Code\Horizon_Bat_Monster.cpp" />
     <ClCompile Include="..\Code\Ingame_Flow.cpp" />
     <ClCompile Include="..\Code\Jump_Monster.cpp" />
     <ClCompile Include="..\Code\Lava.cpp" />
@@ -247,6 +250,7 @@ call CopyUtility.bat</Command>
     <ClCompile Include="..\Code\Ocean.cpp" />
     <ClCompile Include="..\Code\Player.cpp" />
     <ClCompile Include="..\Code\RedSky.cpp" />
+    <ClCompile Include="..\Code\RedCrystal_Monster.cpp" />
     <ClCompile Include="..\Code\Scene_Cave.cpp" />
     <ClCompile Include="..\Code\Scene_Cloud.cpp" />
     <ClCompile Include="..\Code\Scene_Forest.cpp" />

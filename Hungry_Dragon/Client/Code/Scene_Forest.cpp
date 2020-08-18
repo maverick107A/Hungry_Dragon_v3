@@ -238,13 +238,12 @@ HRESULT CScene_Forest::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 	FAILED_CHECK_RETURN(Register_GameObject<CTree_Locater>(pLayer, L"TreeObject"), E_FAIL);		// 무조건 터레인 로케이터 뒤에
 	FAILED_CHECK_RETURN(Register_GameObject<CTestPlayer>(pLayer, L"TestPlayer"), E_FAIL);
 
-	for (int i = 0; i < 250; ++i)
+	for (int i = 0; i < 150; ++i)
 	{
 		FAILED_CHECK_RETURN(Register_ObjectPool<CGolem>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
 		FAILED_CHECK_RETURN(Register_ObjectPool<CFlyGolem>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
 		FAILED_CHECK_RETURN(Register_ObjectPool<CFlyChaseGolem>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
-
-		
+		FAILED_CHECK_RETURN(Register_ObjectPool<CRedCrystal_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);		
 		FAILED_CHECK_RETURN(Register_ObjectPool<CChase_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
 		FAILED_CHECK_RETURN(Register_ObjectPool<CRun_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
 		FAILED_CHECK_RETURN(Register_ObjectPool<CJump_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);

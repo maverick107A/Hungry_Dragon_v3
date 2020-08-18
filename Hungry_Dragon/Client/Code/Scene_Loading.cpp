@@ -180,6 +180,12 @@ _uint CScene_Loading::Loading_ForStage(void)
 		L"../../Asset/Monster/CaveBat/%d.png", 8),
 		E_FAIL);
 
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"Texture_HrizonBat",
+		Engine::TEX_NORMAL,
+		L"../../Asset/Monster/CaveHrizonBat/%d.png", 13),
+		E_FAIL);
 
 	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
 		RESOURCE_STAGE,
