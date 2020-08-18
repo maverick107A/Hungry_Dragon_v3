@@ -34,7 +34,7 @@ public:
 	virtual void State_Change();
 
 public:
-	void	    Dead_Monster(bool _bCheck);
+	void		 Dead_Monster();
 	virtual float		Ride_Terrain();
 
 	//가의묵이 추가한 충돌확인용 임시 함수

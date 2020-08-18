@@ -67,7 +67,8 @@ int CFly_Monster::Update_Object(const float & fTimeDelta)
 			}
 		
 	}
-
+	else
+		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain() + m_fHeight;
 
 	return m_iEvent;
 }

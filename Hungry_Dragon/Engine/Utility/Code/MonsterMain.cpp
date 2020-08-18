@@ -55,13 +55,13 @@ int Engine::CMonsterMain::Update_Object(const float & fTimeDelta)
 	if (m_eState == MONSTER_SUICIDE)
 	{
 		m_fMonster_HP -= m_fDamaged;
-		Dead_Monster(fTimeDelta);
+		Dead_Monster();
 	}
 
 	if (m_eState == MONSTER_LAYDEAD)
 	{
-		m_fMonster_HP -= m_fDamaged;
-		Dead_Monster(fTimeDelta);
+		m_fMonster_HP -= (m_fMonster_MaxHP * 0.2f);
+		Dead_Monster();
 	}
 	
 	
@@ -118,8 +118,8 @@ void Engine::CMonsterMain::State_Change()
 		if (m_eState == MONSTER_DYING)
 		{
 			// 이거 살릴수 있으면 좋음
-			//if (nullptr != m_pParticle)
-			//	static_cast<Engine::CParticle*>(m_pParticle)->Set_Empty();
+			if (nullptr != m_pParticle)
+				static_cast<Engine::CParticle*>(m_pParticle)->Set_Empty();
 		}
 
 		m_preState = m_eState;
@@ -128,10 +128,8 @@ void Engine::CMonsterMain::State_Change()
 	}
 }
 
-void Engine::CMonsterMain::Dead_Monster(bool _bCheck)
+void Engine::CMonsterMain::Dead_Monster()
 {
-
-
 	m_pTransform->Set_Scale(m_fScale);
 
 	if (m_fMonster_HP < 0)
@@ -246,13 +244,13 @@ float Engine::CMonsterMain::Ride_Terrain()
 	return false;
 }
 
-void Engine::CMonsterMain::Kill_Monster(bool _bCheck)
+void Engine::CMonsterMain::Kill_Monster(const float& fTimeDelta)
 {
 	m_eState = MONSTER_DEACTIVATE;
 	m_fMonster_HP -= m_fDamaged;
 	m_fScale = m_fMonster_HP / m_fMonster_MaxHP;
 	m_fScale = m_fMaxScale * m_fScale;
-	Dead_Monster(_bCheck);
+	Dead_Monster();
 }
 
 void Engine::CMonsterMain::Kill_Lay_Monster(const float & fTimeDelta)

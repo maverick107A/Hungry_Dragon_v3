@@ -34,7 +34,6 @@ int CChase_Monster::Update_Object(const float & fTimeDelta)
 	m_ptempTerain = static_cast<CTerrain_Locater*>(((Engine::CLayer*)(Get_Parent()))->Get_Object(L"BackGround", Engine::Find_First, nullptr));
 	m_pTerrain = m_ptempTerain->Get_Terrain();
 
-
 	if (m_eState == MONSTER_REBORN && m_eState != MONSTER_DEACTIVATE)
 	{
 		m_pTransform->Set_Trans(&m_vFirstPos);
@@ -47,6 +46,7 @@ int CChase_Monster::Update_Object(const float & fTimeDelta)
 		m_iEvent = OBJ_NOEVENT;
 		m_eState = MONSTER_IDLE;
 	}
+
 
 
 	if(MONSTER_DEAD == Engine::CMonsterMain::Update_Object(fTimeDelta))
@@ -66,7 +66,8 @@ int CChase_Monster::Update_Object(const float & fTimeDelta)
 		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
 
 	}
-
+	else
+		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
 	return m_iEvent;
 }
 

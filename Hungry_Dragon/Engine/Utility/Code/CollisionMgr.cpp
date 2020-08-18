@@ -64,7 +64,7 @@ void CCollisionMgr::Player_Monster(list<CGameObject*> * _pPlayer, list<CGameObje
 				vDis = vPlayerPos - vMonsterPos;
 				if (powf(vDis.x, 2) + powf(vDis.y, 2) + powf(vDis.z, 2) < ColSize)
 				{
-					static_cast<CMonsterMain*>(pMonster)->Kill_Monster(false);
+					static_cast<CMonsterMain*>(pMonster)->Kill_Monster(fTimeDelta);
 				}
 			}
 		}

@@ -54,7 +54,8 @@ int CGolem::Update_Object(const float & fTimeDelta)
 
 		return m_iEvent;
 	}
-
+	else
+		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
 
 
 
