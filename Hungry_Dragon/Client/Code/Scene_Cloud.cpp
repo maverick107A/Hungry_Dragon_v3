@@ -99,7 +99,7 @@ _int CScene_Cloud::Update_Scene(const _float& fTimeDelta) {
 	}
 	if (GetAsyncKeyState(VK_F7) & 0x0001)
 	{
-		CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_FOREST);
+		CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_VOLCANO);
 	}
 	if (GetAsyncKeyState(VK_F8) & 0x0001)
 	{
@@ -133,6 +133,8 @@ _int CScene_Cloud::Update_Scene(const _float& fTimeDelta) {
 	
 	Engine::CScene::Update_Scene(fTimeDelta);
 
+
+	Engine::Get_FMOD()->PlayBgm(L"CloudBgm");
 	
 	return 0;
 }

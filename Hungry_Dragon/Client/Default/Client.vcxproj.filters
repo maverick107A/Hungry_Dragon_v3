@@ -214,6 +214,9 @@
     <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\02. AnimateMob">
       <UniqueIdentifier>{4f0fabeb-9bdd-4201-9be9-4b04a23aad48}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. GameObject\00. Logo\01. Logo_Loop">
+      <UniqueIdentifier>{4ba85861-df41-4f3c-abc9-d98f9c661de1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -399,6 +402,9 @@
     <ClInclude Include="..\Code\GiantGolem.h">
       <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\Logo_Loop.h">
+      <Filter>02. GameObject\00. Logo\01. Logo_Loop</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -574,6 +580,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\GiantGolem.cpp">
       <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Logo_Loop.cpp">
+      <Filter>02. GameObject\00. Logo\01. Logo_Loop</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

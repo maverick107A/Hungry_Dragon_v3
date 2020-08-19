@@ -274,6 +274,57 @@ _uint CScene_Loading::Loading_ForStage(void)
 
 	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
 		RESOURCE_STAGE,
+		L"Texture_Breath",
+		Engine::TEX_NORMAL,
+		L"../../Asset/Billboard/Breath/Breath00%.2d.png", 24),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"Texture_DragonHead",
+		Engine::TEX_NORMAL,
+		L"../../Asset/Billboard/DragonHead/dragonhead00%.2d.png", 22),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"Texture_Erupt",
+		Engine::TEX_NORMAL,
+		L"../../Asset/Billboard/Erupt/erupt00%.2d.png", 44),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"Texture_FireEmblem",
+		Engine::TEX_NORMAL,
+		L"../../Asset/Billboard/FireEmblem/Fireemblem00%.2d.png", 72),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"Texture_FireRing",
+		Engine::TEX_NORMAL,
+		L"../../Asset/Billboard/Firering/firering00%.2d.png", 38),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"Texture_FireWall",
+		Engine::TEX_NORMAL,
+		L"../../Asset/Billboard/Firewall/Firewall00%.2d.png", 38),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"Texture_SceneChange",
+		Engine::TEX_NORMAL,
+		L"../../Asset/Billboard/SceneChange/SceneChange00%.2d.png", 76),
+		E_FAIL);
+
+	
+
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+		RESOURCE_STAGE,
 		L"Texture_BillCloud",
 		Engine::TEX_NORMAL,
 		L"../../Asset/Billboard/bill_cloud.png"),
@@ -306,6 +357,27 @@ _uint CScene_Loading::Loading_ForStage(void)
 		L"TEX_OBS",
 		Engine::TEX_NORMAL,
 		L"../../Asset/Environment/Passage_Through.png"),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+		RESOURCE_LOGO,
+		L"Texture_LogoSelect",
+		Engine::TEX_NORMAL,
+		L"../../Asset/Billboard/logo/logo.jpg"),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+		RESOURCE_LOGO,
+		L"Texture_LogoOption",
+		Engine::TEX_NORMAL,
+		L"../../Asset/Billboard/logo/logo2.png"),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+		RESOURCE_LOGO,
+		L"Texture_LogoMenu",
+		Engine::TEX_NORMAL,
+		L"../../Asset/Billboard/logo/logo3.png"),
 		E_FAIL);
 
 	// 마스크
@@ -362,6 +434,22 @@ _uint CScene_Loading::Loading_ForStage(void)
 			E_FAIL);
 	}
 	// 마스크
+
+	// 사운드
+	// 배경음악
+	Engine::Get_FMOD()->Initialize();
+	Engine::Get_FMOD()->Insert_Bgm("../../Asset/Sound/Bgm/Red_Dragon.mp3", L"MenuBgm");
+	Engine::Get_FMOD()->Insert_Bgm("../../Asset/Sound/Bgm/Dragon_Rises.mp3", L"SelectBgm");
+	Engine::Get_FMOD()->Insert_Bgm("../../Asset/Sound/Bgm/Sunshine_Coastline.mp3", L"ForestBgm");
+	Engine::Get_FMOD()->Insert_Bgm("../../Asset/Sound/Bgm/Night_Survivor.mp3", L"CaveBgm");
+	Engine::Get_FMOD()->Insert_Bgm("../../Asset/Sound/Bgm/Flower_Valley.mp3", L"CloudBgm");
+	Engine::Get_FMOD()->Insert_Bgm("../../Asset/Sound/Bgm/Scrap_Valley_Entry.mp3", L"VolcanoBgm");
+	// 효과음
+
+
+
+
+
 
 
 

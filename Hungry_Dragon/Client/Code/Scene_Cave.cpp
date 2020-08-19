@@ -92,6 +92,9 @@ HRESULT CScene_Cave::Ready_Scene(void)
 
 	m_pGraphicDev->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_GOURAUD);
 
+
+	Engine::Get_FMOD()->PlayBgm(L"CaveBgm");
+
 	return S_OK;
 }
 

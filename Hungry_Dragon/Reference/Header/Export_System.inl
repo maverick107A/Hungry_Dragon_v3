@@ -89,6 +89,7 @@ void	Set_InputDev(void)
 // Release System
 void		Release_System(void)
 {
+	CFmodMgr::GetInstance()->DestroyInstance();
 	CInputDev::GetInstance()->DestroyInstance();
 	CFontMgr::GetInstance()->DestroyInstance();
 	CFrameMgr::GetInstance()->DestroyInstance();

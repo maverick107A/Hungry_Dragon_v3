@@ -72,6 +72,9 @@ HRESULT CScene_Forest::Ready_Scene(void) {
 
 	m_hFogTechHandle = m_pFogEffect->GetTechniqueByName("Fog");
 
+	Engine::Get_FMOD()->PlayBgm(L"ForestBgm");
+
+
 	return S_OK;
 }
 

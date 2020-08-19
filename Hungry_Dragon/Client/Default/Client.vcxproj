@@ -190,6 +190,7 @@ call CopyUtility.bat</Command>
     <ClInclude Include="..\Code\Jump_Monster.h" />
     <ClInclude Include="..\Code\Lava.h" />
     <ClInclude Include="..\Code\Logo.h" />
+    <ClInclude Include="..\Code\Logo_Loop.h" />
     <ClInclude Include="..\Code\MainApp.h" />
     <ClInclude Include="..\Code\Meteor_Object.h" />
     <ClInclude Include="..\Code\Meteor_Spawner.h" />
@@ -253,6 +254,7 @@ call CopyUtility.bat</Command>
     <ClCompile Include="..\Code\Jump_Monster.cpp" />
     <ClCompile Include="..\Code\Lava.cpp" />
     <ClCompile Include="..\Code\Logo.cpp" />
+    <ClCompile Include="..\Code\Logo_Loop.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />
     <ClCompile Include="..\Code\Meteor_Object.cpp" />
     <ClCompile Include="..\Code\Meteor_Spawner.cpp" />

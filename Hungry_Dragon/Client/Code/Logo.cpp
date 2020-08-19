@@ -30,11 +30,11 @@ _int CLogo::Update_Scene(const _float& fTimeDelta) {
 	_int iExit = Engine::CScene::Update_Scene(fTimeDelta);
 
 	if (true == m_pLoading->Get_Finish()) {
-		//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_MENU);
+		CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_MENU);
 		//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_PROTO);
 		//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_FOREST);
 		//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_CAVE);
-		CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_CLOUD);
+		//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_CLOUD);
 		//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_VOLCANO);
 
 		return -1;
@@ -85,9 +85,9 @@ HRESULT CLogo::Ready_Layer_UI(const _tchar* pLayerTag) {
 	Engine::CGameObject*		pGameObject = nullptr;
 
 	// BackGround
-	pGameObject = CBackGround_Logo::Create(m_pGraphicDev);
-	NULL_CHECK_RETURN(pGameObject, E_FAIL);
-	FAILED_CHECK_RETURN(pLayer->Add_Object(L"BackGround", pGameObject), E_FAIL);
+	FAILED_CHECK(Register_GameObject<CBackGround_Logo>(pLayer, L"Background"));
+	FAILED_CHECK(Register_GameObject<CLogo_Loop>(pLayer, L"Buffering"));
+	
 
 	m_mapLayer.emplace(pLayerTag, pLayer);
 
@@ -109,6 +109,15 @@ HRESULT CLogo::Ready_Resource(LPDIRECT3DDEVICE9 pGraphicDev, RESOURCEID eMax) {
 		Engine::TEX_NORMAL,
 		L"../../Asset/Loading/Loading.png"),
 		E_FAIL);
+
+
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(pGraphicDev,
+		RESOURCE_LOGO,
+		L"Texture_LoadingLoop",
+		Engine::TEX_NORMAL,
+		L"../../Asset/Billboard/Loading/loading00%.2d.png", 60),
+		E_FAIL);
+	
 
 	return S_OK;
 }

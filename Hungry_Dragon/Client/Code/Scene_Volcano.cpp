@@ -73,6 +73,7 @@ HRESULT CScene_Volcano::Ready_Scene(void) {
 
 	m_hFogTechHandle = m_pFogEffect->GetTechniqueByName("Fog");
 
+	Engine::Get_FMOD()->PlayBgm(L"VolcanoBgm");
 	
 	return S_OK;
 }
@@ -98,7 +99,7 @@ _int CScene_Volcano::Update_Scene(const _float& fTimeDelta) {
 	}
 	if (GetAsyncKeyState(VK_F7) & 0x0001)
 	{
-		CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_CAVE);
+		CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_FOREST);
 	}
 	if (GetAsyncKeyState(VK_F8) & 0x0001)
 	{

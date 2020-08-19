@@ -18,6 +18,8 @@ HRESULT CScene_Menu::Ready_Scene(void) {
 	FAILED_CHECK_RETURN(Ready_Resource(m_pGraphicDev, RESOURCE_END), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_Layer_UI(L"UI"), E_FAIL);
 
+	
+	Engine::Get_FMOD()->PlayBgm(L"MenuBgm");
 
 	return S_OK;
 }
