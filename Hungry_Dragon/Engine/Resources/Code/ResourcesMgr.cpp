@@ -127,6 +127,18 @@ HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 	case BUFFER_DIAMOB_UNDER:
 		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/Mob_Dia_Under.dat");
 		break;
+	
+	case BUFFER_GOLEMBODY:
+		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/GiantBody4.dat");
+		break;
+	case BUFFER_LEFTHAND:
+		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/LeftHand2.dat");
+		break;
+	case BUFFER_RIGHTHAND:
+		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/RightHand2.dat");
+		break;
+
+
 	}
 
 	m_pmapResource[wContainerIdx].emplace(pBufferTag, pResources);

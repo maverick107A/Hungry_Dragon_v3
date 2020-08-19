@@ -31,13 +31,13 @@ HRESULT CFlyGolem::Ready_Object(void)
 int CFlyGolem::Update_Object(const float & fTimeDelta)
 {
 
-	m_ptempTerain = static_cast<CTerrain_Locater*>(((Engine::CLayer*)(Get_Parent()))->Get_Object(L"BackGround", Engine::Find_First, nullptr));
-	m_pTerrain = m_ptempTerain->Get_Terrain();
+	//m_ptempTerain = static_cast<CTerrain_Locater*>(((Engine::CLayer*)(Get_Parent()))->Get_Object(L"BackGround", Engine::Find_First, nullptr));
+	//m_pTerrain = m_ptempTerain->Get_Terrain();
 
 	if (m_eState == MONSTER_REBORN && m_eState != MONSTER_DEACTIVATE)
 	{
 		m_pTransform->Set_Trans(&m_vFirstPos);
-		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain() + 1000.f;
+	//	m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain() + 1000.f;
 		m_pTransform->Set_Scale(m_fMaxScale);
 
 		m_fMonster_HP = 100.f;

@@ -24,6 +24,7 @@ public:
 	HRESULT		Set_Bullet_LayerMap(OBJID _Type, _int iCnt, _vec3 _Pos);
 	HRESULT		Set_Monster_LayerMap(OBJID _Type, _int iCnt, _vec3 _Pos);
 	HRESULT		Set_Monster_CaveMap(OBJID _Type, _int iCnt, _vec3 _Pos);
+	HRESULT		Set_Monster_CloudMap(OBJID _Type, _int iCnt, _vec3 _Pos);
 	HRESULT		Clear_ObjectPool();
 
 
@@ -31,7 +32,7 @@ private:
 	CLayer*		m_Layer;
 	_float		m_fRaidus;
 	_float		m_fForestRaidus;
-
+	_int		m_iRange;
 	list<CGameObject*>  m_listObject[OBJID::OBJ_END];
 public:
 	virtual void	Free(void);

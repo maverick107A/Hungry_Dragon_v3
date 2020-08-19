@@ -160,6 +160,26 @@ _uint CScene_Loading::Loading_ForStage(void)
 		Engine::BUFFER_DIAMOB_UNDER),
 		E_FAIL);
 
+	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
+		RESOURCE_STATIC,
+		L"BUFFER_GOLEMBODY",
+		Engine::BUFFER_GOLEMBODY),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
+		RESOURCE_STATIC,
+		L"BUFFER_LEFTHAND",
+		Engine::BUFFER_LEFTHAND),
+		E_FAIL);
+
+
+	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
+		RESOURCE_STATIC,
+		L"BUFFER_RIGHTHAND",
+		Engine::BUFFER_RIGHTHAND),
+		E_FAIL);
+		
+
 	lstrcpy(m_szFinish, L"Texture Loading............");
 
 	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,

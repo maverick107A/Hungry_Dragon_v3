@@ -60,7 +60,7 @@ int CMonsterBeam::Update_Object(const float & fTimeDelta)
 	{
 		m_iLifeTime -= (int)fTimeDelta;
 	}
-	if (m_iLifeTime == 0)
+	if (m_iLifeTime < 0)
 	{		
 		m_eState = DEAD_BULLET;
 	}

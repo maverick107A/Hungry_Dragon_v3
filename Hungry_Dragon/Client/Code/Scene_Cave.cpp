@@ -265,10 +265,11 @@ HRESULT CScene_Cave::Ready_Layer_Environment(const _tchar * pLayerTag) {
 	FAILED_CHECK_RETURN(Register_GameObject<CCave>(&m_pCave, pLayer, L"Cave"), E_FAIL);
 	FAILED_CHECK_RETURN(Register_GameObject<CVent>(&m_pVent, pLayer, L"Vent"), E_FAIL);
 	
-	for (int i = 0; i < 1000; ++i)
-	{
-		FAILED_CHECK_RETURN(Register_ObjectPool<CBat_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
-	}
+	//for (int i = 0; i < 1000; ++i)
+	//{
+	//	FAILED_CHECK_RETURN(Register_ObjectPool<CBat_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
+	//	FAILED_CHECK_RETURN(Register_ObjectPool<CHorizon_Bat_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);	
+	//}
 
 	//m_pVent->Set_Trans(_vec3(0.f,0.f, m_pCave->Get_EndPoint()+4000.f));
 	m_pVent->Set_Active(false);

@@ -210,7 +210,7 @@
     </Filter>
     <Filter Include="02. GameObject\01. Stage\70. BillCloud_Object">
       <UniqueIdentifier>{6812ae6c-c335-42c7-b0fd-80a3d5ea8945}</UniqueIdentifier>
- </Filter>
+    </Filter>
     <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\02. AnimateMob">
       <UniqueIdentifier>{4f0fabeb-9bdd-4201-9be9-4b04a23aad48}</UniqueIdentifier>
     </Filter>
@@ -396,6 +396,9 @@
     <ClInclude Include="..\Code\Animate_Monster.h">
       <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\02. AnimateMob</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\GiantGolem.h">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -568,6 +571,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Animate_Monster.cpp">
       <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\02. AnimateMob</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\GiantGolem.cpp">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

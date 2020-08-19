@@ -21,10 +21,10 @@
 #include "Run_Monster.h"
 #include "Jump_Monster.h"
 #include "Fly_Monster.h"
+
 #include "Golem.h"
-#include "FlyGolem.h"
-#include "FlyChaseGolem.h"
-#include "RedCrystal_Monster.h"
+
+#include "GiantGolem.h"
 
 
 

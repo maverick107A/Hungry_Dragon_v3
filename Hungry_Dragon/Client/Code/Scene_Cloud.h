@@ -15,14 +15,13 @@
 //-------------------------------------------------------
 //여기에 기타 헤더 추가
 // 몬스터
-#include "Monster.h"
-#include "Chase_Monster.h"
-#include "Bat_Monster.h"
-#include "Run_Monster.h"
-#include "Jump_Monster.h"
 #include "Fly_Monster.h"
-#include "Golem.h"
+#include "FlyGolem.h"
+#include "FlyChaseGolem.h"
+#include "RedCrystal_Monster.h"
+
 #include "NormalBullet.h"
+
 
 #include "BackGround.h"
 

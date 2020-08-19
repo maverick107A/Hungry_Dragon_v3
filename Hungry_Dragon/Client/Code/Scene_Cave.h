@@ -16,6 +16,7 @@
 //여기에 기타 헤더 추가
 
 #include "Bat_Monster.h"
+#include "Horizon_Bat_Monster.h"
 //-------------------------------------------------------
 
 using namespace Engine;

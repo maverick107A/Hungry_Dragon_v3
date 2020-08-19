@@ -99,7 +99,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3d9.lib;d3dx9.lib;dxguid.lib;System.lib;Resources.lib;Utility.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d9.lib;d3dx9.lib;dxguid.lib;System.lib;Resources.lib;Utility.lib;fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>../../Reference/Library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
@@ -136,7 +136,7 @@ call CopyUtility.bat</Command>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3d9.lib;d3dx9.lib;dxguid.lib;System.lib;Resources.lib;Utility.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d9.lib;d3dx9.lib;dxguid.lib;System.lib;Resources.lib;Utility.lib;fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>../../Reference/Library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
@@ -183,6 +183,7 @@ call CopyUtility.bat</Command>
     <ClInclude Include="..\Code\FlyChaseGolem.h" />
     <ClInclude Include="..\Code\FlyGolem.h" />
     <ClInclude Include="..\Code\Fly_Monster.h" />
+    <ClInclude Include="..\Code\GiantGolem.h" />
     <ClInclude Include="..\Code\Golem.h" />
     <ClInclude Include="..\Code\Horizon_Bat_Monster.h" />
     <ClInclude Include="..\Code\Ingame_Flow.h" />
@@ -245,6 +246,7 @@ call CopyUtility.bat</Command>
     <ClCompile Include="..\Code\FlyChaseGolem.cpp" />
     <ClCompile Include="..\Code\FlyGolem.cpp" />
     <ClCompile Include="..\Code\Fly_Monster.cpp" />
+    <ClCompile Include="..\Code\GiantGolem.cpp" />
     <ClCompile Include="..\Code\Golem.cpp" />
     <ClCompile Include="..\Code\Horizon_Bat_Monster.cpp" />
     <ClCompile Include="..\Code\Ingame_Flow.cpp" />

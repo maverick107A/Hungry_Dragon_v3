@@ -127,7 +127,8 @@ _int CScene_Cloud::Update_Scene(const _float& fTimeDelta) {
 
 	//플레이어 위치 최신화
 	pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);
-	Engine::Set_Monster_LayerMap(OBJID::STAND_MONSTER, 9999, m_vPlayerPos);
+	// 클라우드 맵 생성 업데이트
+	Engine::Set_Monster_CloudMap(OBJID::STAND_MONSTER, 9999, m_vPlayerPos);
 	
 	
 	Engine::CScene::Update_Scene(fTimeDelta);
@@ -284,6 +285,24 @@ HRESULT CScene_Cloud::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 	FAILED_CHECK_RETURN(Register_GameObject<CTestPlayer>(&tempPlayer, pLayer, L"TestPlayer"), E_FAIL);
 	pPlayerTransformCom = static_cast<CTransform*>(tempPlayer->Get_Component(L"Com_Transform", Engine::ID_DYNAMIC));
 	pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);
+
+
+	for (int i = 0; i < 400; ++i)
+	{
+		FAILED_CHECK_RETURN(Register_ObjectPool<CFlyGolem>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
+
+		FAILED_CHECK_RETURN(Register_ObjectPool<CFlyChaseGolem>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
+
+		FAILED_CHECK_RETURN(Register_ObjectPool<CRedCrystal_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
+
+		//FAILED_CHECK_RETURN(Register_ObjectPool<CFly_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
+	}
+
+	for (int i = 0; i < 10000; ++i)
+	{
+		FAILED_CHECK_RETURN(Register_ObjectPool<CNormal_Bullet>(pLayer, OBJID::NORMAL_BULLET), E_FAIL);
+		//	FAILED_CHECK_RETURN(Register_ObjectPool<CMonsterBeam>(pLayer, OBJID::NORMAL_BULLET), E_FAIL);
+	}
 
 
 	return S_OK;

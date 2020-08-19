@@ -55,6 +55,9 @@ protected:
 	Engine::CTexture_Cube*		m_pBufferCubeCom = nullptr;
 	Engine::CMonsterBoard*		m_pBufferBoradCom = nullptr;
 	Engine::CVICustom*			m_pBufferMeshCom = nullptr;
+	Engine::CVICustom*			m_pBufferBodyMeshCom = nullptr;
+	Engine::CVICustom*			m_pBufferHeadMeshCom = nullptr;
+
 	Engine::CVICustom*			m_pBufferChrystalMeshCom = nullptr;
 
 	Engine::CTexture*			m_pTextureCom = nullptr;
