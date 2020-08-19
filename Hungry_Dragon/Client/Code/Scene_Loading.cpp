@@ -122,6 +122,12 @@ _uint CScene_Loading::Loading_ForStage(void)
 		L"BUFFER_JAW",
 		Engine::BUFFER_JAW),
 		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
+		RESOURCE_STATIC,
+		L"BUFFER_BODY",
+		Engine::BUFFER_BODY),
+		E_FAIL);
 	//
 
 	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,

@@ -15,6 +15,7 @@
 //플레이어
 #include "DragonFace.h"
 #include "DragonJaw.h"
+#include "DragonBody.h"
 
 #include "CubeCol.h"
 #include "ForestLand.h"

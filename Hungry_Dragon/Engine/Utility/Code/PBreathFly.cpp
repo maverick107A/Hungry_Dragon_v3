@@ -29,6 +29,11 @@ void CPBreathFly::Enter_State(CPlayerMain* _pPlayer)
 
 void CPBreathFly::Update_State(const float& fTimeDelta)
 {
+	if(GetAsyncKeyState('G') & 0x0001)
+	{
+		m_pPlayer->Set_Sate(CPlayerMain::STATE_FLY);
+		return;
+	}
 	if (0 >= m_pPlayer->Get_Mana())
 	{
 		m_pPlayer->Set_Sate(CPlayerMain::STATE_FLY);

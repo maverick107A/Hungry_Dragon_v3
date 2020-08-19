@@ -112,7 +112,10 @@ HRESULT Engine::CDragonBody::Ready_Buffer(void)
 
 	for (int i = 0; i < 76; ++i)
 	{
-		pVertex[i].dwColor = D3DXCOLOR(0.f, 0.f, 0.f, 1.f);
+		if(i & 0x0001)
+			pVertex[i].dwColor = D3DXCOLOR(0.f, 0.f, 0.f, 1.f);
+		else
+			pVertex[i].dwColor = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
 		pVertex[i].vPosition.z *= -1;
 	}
 

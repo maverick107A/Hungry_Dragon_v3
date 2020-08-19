@@ -37,6 +37,10 @@ private:
 	float m_vAngle = 0.f;
 	float m_fSpeed = 0.05f;
 
+	D3DXMATRIX m_matOld1;
+	D3DXMATRIX m_matOld2;
+	D3DXMATRIX m_matOld3;
+
 public:
 	static CTestPlayer*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 

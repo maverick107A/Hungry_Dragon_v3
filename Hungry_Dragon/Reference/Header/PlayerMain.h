@@ -19,7 +19,7 @@ class ENGINE_DLL CPlayerMain : public Engine::CGameObject
 {
 public:
 	enum STATE { STATE_FLYIDLE, STATE_FLY, STATE_LANDIDLE, STATE_LANDRUSH, STATE_BREATHIDLE, STATE_BREATHFLY, STATE_END };
-	enum PARTS { PART_FACE, PART_JAW, PARTS_END};
+	enum PARTS { PART_FACE, PART_JAW, PART_BODY, PART_2BODY, PART_3BODY, PARTS_END};
 protected:
 	explicit CPlayerMain(LPDIRECT3DDEVICE9 pGraphicDev);
 	virtual ~CPlayerMain(void);
@@ -59,8 +59,8 @@ protected:
 	virtual HRESULT	Add_Component(void) { return 0; }
 
 protected:
-	CVIBuffer*				m_pPartsBuffer[PART_END];
-	CTransform*				m_pPartsTrans[PART_END];
+	CVIBuffer*				m_pPartsBuffer[PARTS_END];
+	CTransform*				m_pPartsTrans[PARTS_END];
 	CCameraMain*			m_pCamera = nullptr;
 	CTerrain_Locater*		m_pTerrrrrrrain = nullptr;
 	CBaseLand*				m_pTerrain = nullptr;
