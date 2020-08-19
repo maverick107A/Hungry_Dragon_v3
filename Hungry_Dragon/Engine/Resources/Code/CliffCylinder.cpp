@@ -109,7 +109,7 @@ HRESULT Engine::CCliffCylinder::Ready_Buffer(void)			// ¾îÂ¶µç ¿ø±âµÕ ³»¸é ±×¸®´
 			float fRandomR = fOld_r*(1.f + fRand*0.2f + fRandDetail*0.1f);
 			vertex.vPosition = D3DXVECTOR3(fRandomR*fCos, fHeightY, fRandomR*fSin);
 
-			UINT uColor = 30 * (1- fRand*2.f - fRandDetail);
+			UINT uColor = (_uint)(30.f * (1.f- fRand*2.f - fRandDetail));
 			vertex.dwColor = D3DCOLOR_XRGB(uColor*3, uColor*2, uColor);
 
 			pVertex[m_uVtxNum] = vertex;

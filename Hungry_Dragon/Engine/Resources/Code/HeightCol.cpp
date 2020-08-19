@@ -139,9 +139,9 @@ void CHeightCol::Set_Height(const _tchar* _pPath, _float _fHeight)
 	m_pVB->Lock(0, 0, (void**)&pVertex, 0);
 
 
-	for (int i = 0; i < m_dwCntZ; ++i)
+	for (_uint i = 0; i < m_dwCntZ; ++i)
 	{
-		for (int j = 0; j < m_dwCntX; ++j)
+		for (_uint j = 0; j < m_dwCntX; ++j)
 		{
 			int iIndex = i * m_dwCntX + j;
 			//m_vecHeight[iIndex] = (_uint)((pPixel[iIndex]._b));
@@ -151,9 +151,9 @@ void CHeightCol::Set_Height(const _tchar* _pPath, _float _fHeight)
 	}
 
 
-	for (int i = 0; i < m_dwCntZ - 1; ++i)
+	for (_uint i = 0; i < m_dwCntZ - 1; ++i)
 	{
-		for (int j = 0; j < m_dwCntX - 1; ++j)
+		for (_uint j = 0; j < m_dwCntX - 1; ++j)
 		{
 
 			_ulong dwIdx = (i * (m_dwCntX - 1) + j) * 6;
@@ -224,9 +224,9 @@ void CHeightCol::Set_Height(const _tchar* _pPath, _float _fHeight)
 			float fCosL = -D3DXVec3Dot(&vVertexN, &vLightDirection);
 
 			// 색 평균 적용 + 음영 적용
-			_uint uIdxColorR = (((pVertex[dwIdx].dwColor & 0x00ff0000) >> 16) + ((pVertex[dwIdx + 1].dwColor & 0x00ff0000) >> 16) + ((pVertex[dwIdx + 2].dwColor & 0x00ff0000) >> 16)) / 3.f;
-			_uint uIdxColorG = (((pVertex[dwIdx].dwColor & 0x0000ff00) >> 8) + ((pVertex[dwIdx + 1].dwColor & 0x0000ff00) >> 8) + ((pVertex[dwIdx + 2].dwColor & 0x0000ff00) >> 8)) / 3.f;
-			_uint uIdxColorB = ((pVertex[dwIdx].dwColor & 0x000000ff) + (pVertex[dwIdx + 1].dwColor & 0x000000ff) + (pVertex[dwIdx + 2].dwColor & 0x000000ff)) / 3.f;
+			_uint uIdxColorR = (((pVertex[dwIdx].dwColor & 0x00ff0000) >> 16) + ((pVertex[dwIdx + 1].dwColor & 0x00ff0000) >> 16) + ((pVertex[dwIdx + 2].dwColor & 0x00ff0000) >> 16)) / 3;
+			_uint uIdxColorG = (((pVertex[dwIdx].dwColor & 0x0000ff00) >> 8) + ((pVertex[dwIdx + 1].dwColor & 0x0000ff00) >> 8) + ((pVertex[dwIdx + 2].dwColor & 0x0000ff00) >> 8)) / 3;
+			_uint uIdxColorB = ((pVertex[dwIdx].dwColor & 0x000000ff) + (pVertex[dwIdx + 1].dwColor & 0x000000ff) + (pVertex[dwIdx + 2].dwColor & 0x000000ff)) / 3;
 
 			// 현재 칼라 받아서 빛에 따라 색 계산해서 곱해주기 (음영 적용)
 			D3DXCOLOR tColorR(pVertex[dwIdx].dwColor);
@@ -238,9 +238,9 @@ void CHeightCol::Set_Height(const _tchar* _pPath, _float _fHeight)
 
 
 
-			uIdxColorR = (((pVertex[dwIdx + 3].dwColor & 0x00ff0000) >> 16) + ((pVertex[dwIdx + 4].dwColor & 0x00ff0000) >> 16) + ((pVertex[dwIdx + 5].dwColor & 0x00ff0000) >> 16)) / 3.f;
-			uIdxColorG = (((pVertex[dwIdx + 3].dwColor & 0x0000ff00) >> 8) + ((pVertex[dwIdx + 4].dwColor & 0x0000ff00) >> 8) + ((pVertex[dwIdx + 5].dwColor & 0x0000ff00) >> 8)) / 3.f;
-			uIdxColorB = ((pVertex[dwIdx + 3].dwColor & 0x000000ff) + (pVertex[dwIdx + 4].dwColor & 0x000000ff) + (pVertex[dwIdx + 5].dwColor & 0x000000ff)) / 3.f;
+			uIdxColorR = (((pVertex[dwIdx + 3].dwColor & 0x00ff0000) >> 16) + ((pVertex[dwIdx + 4].dwColor & 0x00ff0000) >> 16) + ((pVertex[dwIdx + 5].dwColor & 0x00ff0000) >> 16)) / 3;
+			uIdxColorG = (((pVertex[dwIdx + 3].dwColor & 0x0000ff00) >> 8) + ((pVertex[dwIdx + 4].dwColor & 0x0000ff00) >> 8) + ((pVertex[dwIdx + 5].dwColor & 0x0000ff00) >> 8)) / 3;
+			uIdxColorB = ((pVertex[dwIdx + 3].dwColor & 0x000000ff) + (pVertex[dwIdx + 4].dwColor & 0x000000ff) + (pVertex[dwIdx + 5].dwColor & 0x000000ff)) / 3;
 
 			// 현재 칼라 받아서 빛에 따라 색 계산해서 곱해주기 (음영 적용)
 			D3DXCOLOR tColorL(pVertex[dwIdx + 3].dwColor);
@@ -301,9 +301,9 @@ void CHeightCol::Set_HeightRedBase(const _tchar* _pPath, _float _fHeight)
 	m_pVB->Lock(0, 0, (void**)&pVertex, 0);
 
 
-	for (int i = 0; i < m_dwCntZ; ++i)
+	for (_uint i = 0; i < m_dwCntZ; ++i)
 	{
-		for (int j = 0; j < m_dwCntX; ++j)
+		for (_uint j = 0; j < m_dwCntX; ++j)
 		{
 			int iIndex = i * m_dwCntX + j;
 			//m_vecHeight[iIndex] = (_uint)((pPixel[iIndex]._b));
@@ -313,9 +313,9 @@ void CHeightCol::Set_HeightRedBase(const _tchar* _pPath, _float _fHeight)
 	}
 
 
-	for (int i = 0; i < m_dwCntZ - 1; ++i)
+	for (_uint i = 0; i < m_dwCntZ - 1; ++i)
 	{
-		for (int j = 0; j < m_dwCntX - 1; ++j)
+		for (_uint j = 0; j < m_dwCntX - 1; ++j)
 		{
 
 			_ulong dwIdx = (i * (m_dwCntX - 1) + j) * 6;
@@ -386,9 +386,9 @@ void CHeightCol::Set_HeightRedBase(const _tchar* _pPath, _float _fHeight)
 			float fCosL = -D3DXVec3Dot(&vVertexN, &vLightDirection);
 
 			// 색 평균 적용 + 음영 적용
-			_uint uIdxColorR = (((pVertex[dwIdx].dwColor & 0x00ff0000) >> 16) + ((pVertex[dwIdx + 1].dwColor & 0x00ff0000) >> 16) + ((pVertex[dwIdx + 2].dwColor & 0x00ff0000) >> 16)) / 3.f;
-			_uint uIdxColorG = (((pVertex[dwIdx].dwColor & 0x0000ff00) >> 8) + ((pVertex[dwIdx + 1].dwColor & 0x0000ff00) >> 8) + ((pVertex[dwIdx + 2].dwColor & 0x0000ff00) >> 8)) / 3.f;
-			_uint uIdxColorB = ((pVertex[dwIdx].dwColor & 0x000000ff) + (pVertex[dwIdx + 1].dwColor & 0x000000ff) + (pVertex[dwIdx + 2].dwColor & 0x000000ff)) / 3.f;
+			_uint uIdxColorR = (((pVertex[dwIdx].dwColor & 0x00ff0000) >> 16) + ((pVertex[dwIdx + 1].dwColor & 0x00ff0000) >> 16) + ((pVertex[dwIdx + 2].dwColor & 0x00ff0000) >> 16)) / 3;
+			_uint uIdxColorG = (((pVertex[dwIdx].dwColor & 0x0000ff00) >> 8) + ((pVertex[dwIdx + 1].dwColor & 0x0000ff00) >> 8) + ((pVertex[dwIdx + 2].dwColor & 0x0000ff00) >> 8)) / 3;
+			_uint uIdxColorB = ((pVertex[dwIdx].dwColor & 0x000000ff) + (pVertex[dwIdx + 1].dwColor & 0x000000ff) + (pVertex[dwIdx + 2].dwColor & 0x000000ff)) / 3;
 
 			// 현재 칼라 받아서 빛에 따라 색 계산해서 곱해주기 (음영 적용)
 			D3DXCOLOR tColorR(pVertex[dwIdx].dwColor);
@@ -400,9 +400,9 @@ void CHeightCol::Set_HeightRedBase(const _tchar* _pPath, _float _fHeight)
 
 
 
-			uIdxColorR = (((pVertex[dwIdx + 3].dwColor & 0x00ff0000) >> 16) + ((pVertex[dwIdx + 4].dwColor & 0x00ff0000) >> 16) + ((pVertex[dwIdx + 5].dwColor & 0x00ff0000) >> 16)) / 3.f;
-			uIdxColorG = (((pVertex[dwIdx + 3].dwColor & 0x0000ff00) >> 8) + ((pVertex[dwIdx + 4].dwColor & 0x0000ff00) >> 8) + ((pVertex[dwIdx + 5].dwColor & 0x0000ff00) >> 8)) / 3.f;
-			uIdxColorB = ((pVertex[dwIdx + 3].dwColor & 0x000000ff) + (pVertex[dwIdx + 4].dwColor & 0x000000ff) + (pVertex[dwIdx + 5].dwColor & 0x000000ff)) / 3.f;
+			uIdxColorR = (((pVertex[dwIdx + 3].dwColor & 0x00ff0000) >> 16) + ((pVertex[dwIdx + 4].dwColor & 0x00ff0000) >> 16) + ((pVertex[dwIdx + 5].dwColor & 0x00ff0000) >> 16)) / 3;
+			uIdxColorG = (((pVertex[dwIdx + 3].dwColor & 0x0000ff00) >> 8) + ((pVertex[dwIdx + 4].dwColor & 0x0000ff00) >> 8) + ((pVertex[dwIdx + 5].dwColor & 0x0000ff00) >> 8)) / 3;
+			uIdxColorB = ((pVertex[dwIdx + 3].dwColor & 0x000000ff) + (pVertex[dwIdx + 4].dwColor & 0x000000ff) + (pVertex[dwIdx + 5].dwColor & 0x000000ff)) / 3;
 
 			// 현재 칼라 받아서 빛에 따라 색 계산해서 곱해주기 (음영 적용)
 			D3DXCOLOR tColorL(pVertex[dwIdx + 3].dwColor);
@@ -441,9 +441,9 @@ void CHeightCol::Set_RandomHeight(_float _fMag, _uint uContrast)
 	m_pVB->Lock(0, 0, (void**)&pVertex, 0);
 
 
-	for (int i = 0; i < m_dwCntZ; ++i)
+	for (_uint i = 0; i < m_dwCntZ; ++i)
 	{
-		for (int j = 0; j < m_dwCntX; ++j)
+		for (_uint j = 0; j < m_dwCntX; ++j)
 		{
 			int iIndex = i * m_dwCntX + j;
 			//m_vecHeight[iIndex] = (_uint)((pPixel[iIndex]._b));
@@ -452,9 +452,9 @@ void CHeightCol::Set_RandomHeight(_float _fMag, _uint uContrast)
 	}
 
 
-	for (int i = 0; i < m_dwCntZ - 1; ++i)
+	for (_uint i = 0; i < m_dwCntZ - 1; ++i)
 	{
-		for (int j = 0; j < m_dwCntX - 1; ++j)
+		for (_uint j = 0; j < m_dwCntX - 1; ++j)
 		{
 
 			_ulong dwIdx = (i * (m_dwCntX - 1) + j) * 6;
@@ -555,9 +555,9 @@ void CHeightCol::Set_RandomHeight(_float _fMag, _uint uContrast)
 			float fCosL = -D3DXVec3Dot(&vVertexN, &vLightDirection);
 
 			// 색 평균 적용 + 음영 적용
-			_uint uIdxColorR = (((pVertex[dwIdx].dwColor & 0x00ff0000) >> 16) + ((pVertex[dwIdx + 1].dwColor & 0x00ff0000) >> 16) + ((pVertex[dwIdx + 2].dwColor & 0x00ff0000) >> 16)) / 3.f;
-			_uint uIdxColorG = (((pVertex[dwIdx].dwColor & 0x0000ff00) >> 8) + ((pVertex[dwIdx + 1].dwColor & 0x0000ff00) >> 8) + ((pVertex[dwIdx + 2].dwColor & 0x0000ff00) >> 8)) / 3.f;
-			_uint uIdxColorB = ((pVertex[dwIdx].dwColor & 0x000000ff) + (pVertex[dwIdx + 1].dwColor & 0x000000ff) + (pVertex[dwIdx + 2].dwColor & 0x000000ff)) / 3.f;
+			_uint uIdxColorR = (((pVertex[dwIdx].dwColor & 0x00ff0000) >> 16) + ((pVertex[dwIdx + 1].dwColor & 0x00ff0000) >> 16) + ((pVertex[dwIdx + 2].dwColor & 0x00ff0000) >> 16)) / 3;
+			_uint uIdxColorG = (((pVertex[dwIdx].dwColor & 0x0000ff00) >> 8) + ((pVertex[dwIdx + 1].dwColor & 0x0000ff00) >> 8) + ((pVertex[dwIdx + 2].dwColor & 0x0000ff00) >> 8)) / 3;
+			_uint uIdxColorB = ((pVertex[dwIdx].dwColor & 0x000000ff) + (pVertex[dwIdx + 1].dwColor & 0x000000ff) + (pVertex[dwIdx + 2].dwColor & 0x000000ff)) / 3;
 
 			// 현재 칼라 받아서 빛에 따라 색 계산해서 곱해주기 (음영 적용)
 			D3DXCOLOR tColorR(pVertex[dwIdx].dwColor);
@@ -569,9 +569,9 @@ void CHeightCol::Set_RandomHeight(_float _fMag, _uint uContrast)
 
 
 
-			uIdxColorR = (((pVertex[dwIdx + 3].dwColor & 0x00ff0000) >> 16) + ((pVertex[dwIdx + 4].dwColor & 0x00ff0000) >> 16) + ((pVertex[dwIdx + 5].dwColor & 0x00ff0000) >> 16)) / 3.f;
-			uIdxColorG = (((pVertex[dwIdx + 3].dwColor & 0x0000ff00) >> 8) + ((pVertex[dwIdx + 4].dwColor & 0x0000ff00) >> 8) + ((pVertex[dwIdx + 5].dwColor & 0x0000ff00) >> 8)) / 3.f;
-			uIdxColorB = ((pVertex[dwIdx + 3].dwColor & 0x000000ff) + (pVertex[dwIdx + 4].dwColor & 0x000000ff) + (pVertex[dwIdx + 5].dwColor & 0x000000ff)) / 3.f;
+			uIdxColorR = (((pVertex[dwIdx + 3].dwColor & 0x00ff0000) >> 16) + ((pVertex[dwIdx + 4].dwColor & 0x00ff0000) >> 16) + ((pVertex[dwIdx + 5].dwColor & 0x00ff0000) >> 16)) / 3;
+			uIdxColorG = (((pVertex[dwIdx + 3].dwColor & 0x0000ff00) >> 8) + ((pVertex[dwIdx + 4].dwColor & 0x0000ff00) >> 8) + ((pVertex[dwIdx + 5].dwColor & 0x0000ff00) >> 8)) / 3;
+			uIdxColorB = ((pVertex[dwIdx + 3].dwColor & 0x000000ff) + (pVertex[dwIdx + 4].dwColor & 0x000000ff) + (pVertex[dwIdx + 5].dwColor & 0x000000ff)) / 3;
 
 			// 현재 칼라 받아서 빛에 따라 색 계산해서 곱해주기 (음영 적용)
 			D3DXCOLOR tColorL(pVertex[dwIdx + 3].dwColor);

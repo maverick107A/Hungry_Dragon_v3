@@ -96,7 +96,7 @@ HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 		break;
 
 	case SPRITE_ANIM :
-		pResources = CMonsterBoard::Create(pGraphicDev, dwCntX, dwCntZ);
+		pResources = CMonsterBoard::Create(pGraphicDev, (_float)dwCntX, (_float)dwCntZ);
 		break;
 
 	case BUFFER_CAVECYLINDER:
