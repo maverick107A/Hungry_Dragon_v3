@@ -13,6 +13,7 @@ CAnimator::CAnimator(const CAnimator & rhs)
 	m_moventList.clear();
 	m_nowFrame = 0;
 	m_maxFrame = 0;
+	m_fFrmaeSpeed = rhs.m_fFrmaeSpeed;
 }
 
 CAnimator::~CAnimator(void)

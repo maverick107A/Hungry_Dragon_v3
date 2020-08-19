@@ -25,8 +25,6 @@
 #include "FlyGolem.h"
 #include "FlyChaseGolem.h"
 #include "RedCrystal_Monster.h"
-#include "MovingObject.h"
-
 
 
 #include "MonsterBeam.h"
@@ -73,13 +71,14 @@ private:
 	int							m_iMaskNum=0;
 	ID3DXEffect* m_pFogEffect = 0;
 	D3DXHANDLE m_hFogTechHandle = 0;
+
 private:
 	virtual void Free(void) override;
 private:
 	// 플레이어 받아오는곳
 	Engine::CTransform*		pPlayerTransformCom;
 
-	//Engine::CMovingObject*			m_pTempMovingObj;
+	Engine::CMovingObject*			m_pTempMovingObj;
 };
 
 #endif //

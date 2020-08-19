@@ -26,6 +26,7 @@ public:
 
 public:
 	static CMovingObject* Create(LPDIRECT3DDEVICE9 pGraphicDev);
+	virtual void Free(void) override;
 
 protected:
 	vector<CVICustom*>	m_pMeshArray;

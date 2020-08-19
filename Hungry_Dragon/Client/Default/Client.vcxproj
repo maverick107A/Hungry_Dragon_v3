@@ -165,6 +165,7 @@ call CopyUtility.bat</Command>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Code\Animate_Monster.h" />
     <ClInclude Include="..\Code\AshCloud_Locater.h" />
     <ClInclude Include="..\Code\BackGround.h" />
     <ClInclude Include="..\Code\BackGround_Logo.h" />
@@ -227,6 +228,7 @@ call CopyUtility.bat</Command>
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Code\Animate_Monster.cpp" />
     <ClCompile Include="..\Code\AshCloud_Locater.cpp" />
     <ClCompile Include="..\Code\BackGround.cpp" />
     <ClCompile Include="..\Code\BackGround_Logo.cpp" />

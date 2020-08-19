@@ -142,6 +142,18 @@ _uint CScene_Loading::Loading_ForStage(void)
 		Engine::BUFFER_TREEMESH),
 		E_FAIL);
 
+	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
+		RESOURCE_STATIC,
+		L"BUFFER_DIAMOB_Upper",
+		Engine::BUFFER_DIAMOB_UPPER),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
+		RESOURCE_STATIC,
+		L"BUFFER_DIAMOB_Under",
+		Engine::BUFFER_DIAMOB_UNDER),
+		E_FAIL);
+
 	lstrcpy(m_szFinish, L"Texture Loading............");
 
 	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
@@ -258,60 +270,60 @@ _uint CScene_Loading::Loading_ForStage(void)
 		L"../../Asset/Environment/Passage_Through.png"),
 		E_FAIL);
 
-	// せせせせせせせせせせせせせせせせせせせせせせせせせせせせせせせせせせせ
+	// 原什滴
+	{
 
-	
-	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
-		RESOURCE_STAGE,
-		L"TEX_BLACK",
-		Engine::TEX_NORMAL,
-		L"../../Asset/Mask/Mask_Black.png"),
-		E_FAIL);
-	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
-		RESOURCE_STAGE,
-		L"TEX_WHITE",
-		Engine::TEX_NORMAL,
-		L"../../Asset/Mask/Mask_White.png"),
-		E_FAIL);
-	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
-		RESOURCE_STAGE,
-		L"TEX_EMERALD",
-		Engine::TEX_NORMAL,
-		L"../../Asset/Mask/Mask_Emerald.png"),
-		E_FAIL);
-	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
-		RESOURCE_STAGE,
-		L"TEX_ORANGE",
-		Engine::TEX_NORMAL,
-		L"../../Asset/Mask/Mask_Orange.png"),
-		E_FAIL);
+		FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+			RESOURCE_STAGE,
+			L"TEX_BLACK",
+			Engine::TEX_NORMAL,
+			L"../../Asset/Mask/Mask_Black.png"),
+			E_FAIL);
+		FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+			RESOURCE_STAGE,
+			L"TEX_WHITE",
+			Engine::TEX_NORMAL,
+			L"../../Asset/Mask/Mask_White.png"),
+			E_FAIL);
+		FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+			RESOURCE_STAGE,
+			L"TEX_EMERALD",
+			Engine::TEX_NORMAL,
+			L"../../Asset/Mask/Mask_Emerald.png"),
+			E_FAIL);
+		FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+			RESOURCE_STAGE,
+			L"TEX_ORANGE",
+			Engine::TEX_NORMAL,
+			L"../../Asset/Mask/Mask_Orange.png"),
+			E_FAIL);
 
-	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
-		RESOURCE_STAGE,
-		L"TEX_PURPLE",
-		Engine::TEX_NORMAL,
-		L"../../Asset/Mask/Mask_Purple.png"),
-		E_FAIL);
-	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
-		RESOURCE_STAGE,
-		L"TEX_DARKBLUE",
-		Engine::TEX_NORMAL,
-		L"../../Asset/Mask/Mask_Darkblue.png"),
-		E_FAIL);
-	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
-		RESOURCE_STAGE,
-		L"TEX_SKYBLUE",
-		Engine::TEX_NORMAL,
-		L"../../Asset/Mask/Mask_Skyblue.png"),
-		E_FAIL);
-	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
-		RESOURCE_STAGE,
-		L"TEX_RED",
-		Engine::TEX_NORMAL,
-		L"../../Asset/Mask/Mask_Red.png"),
-		E_FAIL);
-
-	// せせせせせせせせせせせせせせせせせせせせせせせせせせせせせせせせせせせ
+		FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+			RESOURCE_STAGE,
+			L"TEX_PURPLE",
+			Engine::TEX_NORMAL,
+			L"../../Asset/Mask/Mask_Purple.png"),
+			E_FAIL);
+		FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+			RESOURCE_STAGE,
+			L"TEX_DARKBLUE",
+			Engine::TEX_NORMAL,
+			L"../../Asset/Mask/Mask_Darkblue.png"),
+			E_FAIL);
+		FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+			RESOURCE_STAGE,
+			L"TEX_SKYBLUE",
+			Engine::TEX_NORMAL,
+			L"../../Asset/Mask/Mask_Skyblue.png"),
+			E_FAIL);
+		FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+			RESOURCE_STAGE,
+			L"TEX_RED",
+			Engine::TEX_NORMAL,
+			L"../../Asset/Mask/Mask_Red.png"),
+			E_FAIL);
+	}
+	// 原什滴
 
 
 
