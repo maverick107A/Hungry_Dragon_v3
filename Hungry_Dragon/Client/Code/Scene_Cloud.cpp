@@ -162,7 +162,7 @@ void CScene_Cloud::Render_Scene(void) {
 	_matrix matWorld;
 	D3DXMatrixIdentity(&matWorld);
 	m_pGraphicDev->SetTransform(D3DTS_WORLD, &matWorld);
-	Engine::Particle_Render();
+
 
 	m_mapLayer[L"Environment"]->Render_Layer();
 
@@ -191,7 +191,7 @@ void CScene_Cloud::Render_Scene(void) {
 	m_mapLayer[L"UI"]->Render_Layer();
 	m_pGraphicDev->GetTransform(D3DTS_PROJECTION, &matPers);
 
-	
+	Engine::Particle_Render();
 }
 
 void CScene_Cloud::Free(void) {

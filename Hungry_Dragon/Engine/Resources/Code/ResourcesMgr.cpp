@@ -140,7 +140,9 @@ HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 	case BUFFER_RIGHTHAND:
 		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/RightHand2.dat");
 		break;
-
+	case BUFFER_TWINFACE:
+		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/TwinDragon_Head.dat");
+		break;
 
 	}
 
