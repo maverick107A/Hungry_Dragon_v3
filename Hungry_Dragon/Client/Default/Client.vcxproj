@@ -169,6 +169,8 @@ call CopyUtility.bat</Command>
     <ClInclude Include="..\Code\BackGround.h" />
     <ClInclude Include="..\Code\BackGround_Logo.h" />
     <ClInclude Include="..\Code\Bat_Monster.h" />
+    <ClInclude Include="..\Code\BillCloud_Locater.h" />
+    <ClInclude Include="..\Code\BillCloud_Object.h" />
     <ClInclude Include="..\Code\Cave.h" />
     <ClInclude Include="..\Code\CavePlayer.h" />
     <ClInclude Include="..\Code\Chase_Monster.h" />
@@ -187,6 +189,8 @@ call CopyUtility.bat</Command>
     <ClInclude Include="..\Code\Lava.h" />
     <ClInclude Include="..\Code\Logo.h" />
     <ClInclude Include="..\Code\MainApp.h" />
+    <ClInclude Include="..\Code\Meteor_Object.h" />
+    <ClInclude Include="..\Code\Meteor_Spawner.h" />
     <ClInclude Include="..\Code\MonsterBeam.h" />
     <ClInclude Include="..\Code\NormalBullet.h" />
     <ClInclude Include="..\Code\Obstacle.h" />
@@ -227,6 +231,8 @@ call CopyUtility.bat</Command>
     <ClCompile Include="..\Code\BackGround.cpp" />
     <ClCompile Include="..\Code\BackGround_Logo.cpp" />
     <ClCompile Include="..\Code\Bat_Monster.cpp" />
+    <ClCompile Include="..\Code\BillCloud_Locater.cpp" />
+    <ClCompile Include="..\Code\BillCloud_Object.cpp" />
     <ClCompile Include="..\Code\Cave.cpp" />
     <ClCompile Include="..\Code\CavePlayer.cpp" />
     <ClCompile Include="..\Code\Chase_Monster.cpp" />
@@ -245,6 +251,8 @@ call CopyUtility.bat</Command>
     <ClCompile Include="..\Code\Lava.cpp" />
     <ClCompile Include="..\Code\Logo.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />
+    <ClCompile Include="..\Code\Meteor_Object.cpp" />
+    <ClCompile Include="..\Code\Meteor_Spawner.cpp" />
     <ClCompile Include="..\Code\MonsterBeam.cpp" />
     <ClCompile Include="..\Code\NormalBullet.cpp" />
     <ClCompile Include="..\Code\Obstacle.cpp" />

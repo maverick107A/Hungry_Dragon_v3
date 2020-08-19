@@ -196,17 +196,26 @@
     <Filter Include="02. GameObject\01. Stage\51.SkySphere\00. RedSky">
       <UniqueIdentifier>{56e34dff-bfcb-4e68-8342-a72e396c291b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. GameObject\01. Stage\66. Meteor_Spawner">
-      <UniqueIdentifier>{45499b64-0812-44c0-ab84-4f51e74e905b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem">
       <UniqueIdentifier>{b3abe725-b969-4009-bd7d-939ad29f1584}</UniqueIdentifier>
     </Filter>
     <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\39. CrystalMonster">
       <UniqueIdentifier>{565aa000-57d8-449a-b276-0723562ccadf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. GameObject\01. Stage\67. View_Mask">
+    <Filter Include="02. GameObject\01. Stage\66. View_Mask">
       <UniqueIdentifier>{9c30bee2-5c1b-4c29-a463-5df680b73065}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\67. Meteor_Spawner">
+      <UniqueIdentifier>{45499b64-0812-44c0-ab84-4f51e74e905b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\68. Meteor_Object">
+      <UniqueIdentifier>{c3fde865-bf90-4f00-b8a9-415a3b2311a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\69. BillCloud_Locater">
+      <UniqueIdentifier>{5b9c6cd4-5757-49d2-9b31-5c1f6a99b904}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\70. BillCloud_Object">
+      <UniqueIdentifier>{6812ae6c-c335-42c7-b0fd-80a3d5ea8945}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -376,7 +385,19 @@
       <Filter>02. GameObject\01. Stage\51.SkySphere\00. RedSky</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\View_Mask.h">
-      <Filter>02. GameObject\01. Stage\67. View_Mask</Filter>
+      <Filter>02. GameObject\01. Stage\66. View_Mask</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\BillCloud_Locater.h">
+      <Filter>02. GameObject\01. Stage\69. BillCloud_Locater</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Meteor_Spawner.h">
+      <Filter>02. GameObject\01. Stage\67. Meteor_Spawner</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Meteor_Object.h">
+      <Filter>02. GameObject\01. Stage\68. Meteor_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\BillCloud_Object.h">
+      <Filter>02. GameObject\01. Stage\70. BillCloud_Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -537,7 +558,19 @@
       <Filter>02. GameObject\01. Stage\51.SkySphere\00. RedSky</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\View_Mask.cpp">
-      <Filter>02. GameObject\01. Stage\67. View_Mask</Filter>
+      <Filter>02. GameObject\01. Stage\66. View_Mask</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BillCloud_Locater.cpp">
+      <Filter>02. GameObject\01. Stage\69. BillCloud_Locater</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Meteor_Spawner.cpp">
+      <Filter>02. GameObject\01. Stage\67. Meteor_Spawner</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Meteor_Object.cpp">
+      <Filter>02. GameObject\01. Stage\68. Meteor_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BillCloud_Object.cpp">
+      <Filter>02. GameObject\01. Stage\70. BillCloud_Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

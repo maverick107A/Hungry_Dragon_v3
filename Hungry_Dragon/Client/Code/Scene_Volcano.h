@@ -26,6 +26,7 @@
 #include "PlayerUI.h"
 #include "AshCloud_Locater.h"
 #include "Volcano_Parts.h"
+#include "Meteor_Spawner.h"
 
 //-------------------------------------------------------
 
@@ -59,6 +60,9 @@ private:
 	int							m_iMaskNum=0;
 	ID3DXEffect* m_pFogEffect = 0;
 	D3DXHANDLE m_hFogTechHandle = 0;
+
+	CMeteor_Spawner*			m_pSpawner = nullptr;
+
 private:
 	virtual void Free(void) override;
 private:

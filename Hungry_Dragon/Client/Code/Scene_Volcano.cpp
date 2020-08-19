@@ -234,6 +234,7 @@ HRESULT CScene_Volcano::Ready_Layer_IgnoreEffect(const _tchar * pLayerTag)
 
 
 	FAILED_CHECK_RETURN(Register_GameObject<CAshCloud_Locater>(pLayer, L"AshCloud"), E_FAIL);
+	FAILED_CHECK_RETURN(Register_GameObject<CMeteor_Spawner>(&m_pSpawner, pLayer, L"Spawner"), E_FAIL);
 
 	return S_OK;
 }

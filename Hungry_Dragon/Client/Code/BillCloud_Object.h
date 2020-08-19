@@ -1,5 +1,5 @@
-#ifndef View_Mask_h__
-#define View_Mask_h__
+#ifndef BillCloud_Object_h__
+#define BillCloud_Object_h__
 
 #include "Define.h"
 #include "GameObject.h"
@@ -10,17 +10,15 @@ class CTexture_Square;
 class CTexture;
 class CTransform;
 class CRenderer;
-class CCameraMain;
 
 END
 
 
 
-
-class CView_Mask : public Engine::CGameObject {
+class CBillCloud_Object : public Engine::CGameObject {
 private:
-	explicit CView_Mask(LPDIRECT3DDEVICE9 pGraphicDev);
-	virtual ~CView_Mask(void);
+	explicit CBillCloud_Object(LPDIRECT3DDEVICE9 pGraphicDev);
+	virtual ~CBillCloud_Object(void);
 
 public:
 	virtual HRESULT Ready_Object(void) override;
@@ -38,12 +36,9 @@ private:
 	Engine::CRenderer*		m_pRendererCom = nullptr;
 
 	Engine::_uint m_uTexFrame = 0;
-	bool					m_bAccel = true;
-
-	Engine::CCameraMain*			m_pCam = nullptr;
 
 public:
-	static CView_Mask*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
+	static CBillCloud_Object*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 private:
 	virtual void Free(void) override;
 
