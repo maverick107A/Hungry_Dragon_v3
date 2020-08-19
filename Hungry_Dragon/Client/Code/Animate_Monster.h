@@ -4,13 +4,6 @@
 #include "Define.h"
 #include "Export_Function.h"
 
-BEGIN(Engine)
-
-class CVICustom;
-class CTransform;
-
-END
-
 class CAnimate_Monster :public Engine::CMovingObject
 {
 private:

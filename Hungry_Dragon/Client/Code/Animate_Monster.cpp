@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "Animate_Monster.h"
 
 USING(Engine)
@@ -9,6 +10,7 @@ CAnimate_Monster::CAnimate_Monster(LPDIRECT3DDEVICE9 pGraphicDev)
 
 CAnimate_Monster::~CAnimate_Monster(void)
 {
+	Free();
 }
 
 HRESULT CAnimate_Monster::Ready_Object(void)
@@ -26,9 +28,6 @@ HRESULT CAnimate_Monster::Ready_Object(void)
 		m_pMeshTransform[i]->Set_Trans(&_vec3(0.f, 100.f, 0.f));
 		m_pMeshTransform[i]->Update_Component(0.f);
 	}
-
-	m_pAnimator->Insert_Scale(0, 1, _vec3(2.f, 2.f, 2.f));
-	m_pAnimator->Insert_Scale(1, 1, _vec3(0.5f, 0.5f, 0.5f));
 
 	return S_OK;
 }
@@ -50,11 +49,13 @@ void CAnimate_Monster::Render_Object(void)
 	
 	for (size_t i = 0; i < m_pMeshArray.size(); ++i)
 	{
+		m_pMeshTransform[i]->Set_Transform(m_pGraphicDev);
 		matWorld = matOriginWorld = m_pMeshTransform[i]->m_matWorld;
 		matWorld=m_pAnimator->Get_MoveResult(m_pGraphicDev, matWorld, 0);
 		m_pMeshTransform[i]->m_matWorld = matWorld;
 		m_pMeshTransform[i]->Set_Transform(m_pGraphicDev);
 		m_pMeshArray[i]->Render_Buffer();
+		m_pMeshTransform[i]->m_matWorld = matOriginWorld;
 	}
 }
 
@@ -80,16 +81,16 @@ HRESULT CAnimate_Monster::Add_Componenet(void)
 
 	pComponenet = Engine::CTransform::Create();
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Upper_Transform", pComponenet);
-	m_pMeshTransform.emplace_back(pComponenet);
+	m_pMeshTransform.emplace_back(static_cast<Engine::CTransform*>(pComponenet));
 
 	pComponenet = Engine::CTransform::Create();
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Upper_Transform", pComponenet);
-	m_pMeshTransform.emplace_back(pComponenet);
+	m_pMeshTransform.emplace_back(static_cast<Engine::CTransform*>(pComponenet));
 
 	m_pTransform = Engine::CTransform::Create();
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Total_Transform", m_pTransform);
 
-
+	m_pAnimator->Insert_Scale(0, 0, _vec3(2.f, 2.f, 2.f));
 
 	return S_OK;
 }

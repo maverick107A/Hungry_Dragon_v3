@@ -97,6 +97,7 @@ HRESULT CColor_Mask::Init_MaskTex(int _iNum)
 
 	}
 	
+	return S_OK;
 }
 
 void CColor_Mask::Set_ColorMask()

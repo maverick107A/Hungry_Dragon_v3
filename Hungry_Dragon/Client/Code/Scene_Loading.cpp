@@ -144,13 +144,13 @@ _uint CScene_Loading::Loading_ForStage(void)
 
 	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
 		RESOURCE_STATIC,
-		L"BUFFER_DIAMOB_Upper",
+		L"BUFFER_DIAMOB_UPPER",
 		Engine::BUFFER_DIAMOB_UPPER),
 		E_FAIL);
 
 	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
 		RESOURCE_STATIC,
-		L"BUFFER_DIAMOB_Under",
+		L"BUFFER_DIAMOB_UNDER",
 		Engine::BUFFER_DIAMOB_UNDER),
 		E_FAIL);
 

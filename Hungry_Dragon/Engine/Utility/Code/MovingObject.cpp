@@ -43,4 +43,5 @@ CMovingObject * CMovingObject::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 
 void CMovingObject::Free(void)
 {
+	CGameObject::Free();
 }

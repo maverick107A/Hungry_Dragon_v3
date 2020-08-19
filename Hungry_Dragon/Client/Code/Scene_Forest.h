@@ -27,6 +27,7 @@
 #include "RedCrystal_Monster.h"
 
 
+
 #include "MonsterBeam.h"
 #include "NormalBullet.h"
 
@@ -40,6 +41,7 @@
 #include "PlayerUI.h"
 #include "Terrain_Locater.h"
 #include "Tree_Locater.h"
+#include "Animate_Monster.h"
 //-------------------------------------------------------
 
 using namespace Engine;

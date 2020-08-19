@@ -168,7 +168,6 @@ void CScene_Forest::Render_Scene(void) {
 }
 
 void CScene_Forest::Free(void) {
-	Safe_Release(m_pTempMovingObj);
 	Engine::Clear_RenderGroup();
 	Engine::CScene::Free();
 	Engine::Clear_ObjectPool();
@@ -241,6 +240,8 @@ HRESULT CScene_Forest::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 	FAILED_CHECK_RETURN(Register_GameObject<CTree_Locater>(pLayer, L"TreeObject"), E_FAIL);		// 무조건 터레인 로케이터 뒤에
 	FAILED_CHECK_RETURN(Register_GameObject<CTestPlayer>(pLayer, L"TestPlayer"), E_FAIL);
 
+	FAILED_CHECK_RETURN(Register_GameObject<CAnimate_Monster>((CAnimate_Monster**)&(m_pTempMovingObj), pLayer, L"testAnim"), E_FAIL);
+
 	for (int i = 0; i < 150; ++i)
 	{
 		FAILED_CHECK_RETURN(Register_ObjectPool<CGolem>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
@@ -265,7 +266,6 @@ HRESULT CScene_Forest::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 	pPlayerTransformCom = static_cast<CTransform*>(tempPlayer->Get_Component(L"Com_Transform", Engine::ID_DYNAMIC));
 	pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);
 
-	//pLayer->Add_Object(L"Moving", m_pTempMovingObj);
 	return S_OK;
 }
 
