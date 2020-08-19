@@ -64,6 +64,35 @@ void Engine::CVIBuffer::Render_Buffer(void)
 	m_pGraphicDev->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, m_dwVtxCnt, 0, m_dwTriCnt);
 }
 
+void CVIBuffer::Save_To_Dat(const char* _path, list<VTXCOL> _vertexList, list<INDEX16> _indexList)
+{
+	FILE* fp = nullptr;
+	errno_t err = fopen_s(&fp, _path, "wb");
+
+	if (0 == err)
+	{
+		int vertexSize = (int)_vertexList.size();
+		fwrite(&vertexSize, sizeof(int), 1, fp);
+
+		for (list<VTXCOL>::iterator iter = _vertexList.begin(); iter != _vertexList.end(); ++iter)
+		{
+			VTXCOL tempVtx = (*iter);
+			fwrite(&tempVtx, sizeof(VTXCOL), 1, fp);
+		}
+
+		int indexSize = (int)_indexList.size();
+		fwrite(&indexSize, sizeof(int), 1, fp);
+
+		for (list<INDEX16>::iterator iter = _indexList.begin(); iter != _indexList.end(); ++iter)
+		{
+			INDEX16 tempIdx = (*iter);
+			fwrite(&tempIdx, sizeof(INDEX16), 1, fp);
+		}
+
+		fclose(fp);
+	}
+}
+
 void Engine::CVIBuffer::Free(void)
 {
 	Safe_Release(m_pVB);

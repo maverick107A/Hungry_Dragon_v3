@@ -16,6 +16,9 @@ public:
 	virtual HRESULT		Ready_Buffer(void);
 	virtual void		Render_Buffer(void);
 
+public:
+	void	Save_To_Dat(const char* _path,list<VTXCOL> _vertexList,list<INDEX16> _indexList);
+
 protected:
 	LPDIRECT3DVERTEXBUFFER9			m_pVB;
 	LPDIRECT3DINDEXBUFFER9			m_pIB;
