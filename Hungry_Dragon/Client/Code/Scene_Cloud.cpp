@@ -20,6 +20,7 @@ HRESULT CScene_Cloud::Ready_Scene(void) {
 	FAILED_CHECK_RETURN(Engine::CScene::Ready_Scene(), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_Resource(m_pGraphicDev, RESOURCE_END), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_Layer_Environment(L"Environment"), E_FAIL);
+	FAILED_CHECK_RETURN(Ready_Layer_IgnoreEffect(L"IgnoreEffect"), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_Layer_GameLogic(L"GameLogic"), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_Layer_UI(L"UI"), E_FAIL);
 	// 임시 적용
@@ -178,6 +179,7 @@ void CScene_Cloud::Render_Scene(void) {
 	
 	m_pFogEffect->End();
 
+	m_mapLayer[L"IgnoreEffect"]->Render_Layer();
 
 	_matrix matPers;
 	_matrix matOrtho;
@@ -225,6 +227,7 @@ HRESULT CScene_Cloud::Ready_Layer_UI(const _tchar* pLayerTag) {
 	FAILED_CHECK_RETURN(Register_GameObject<CPlayerUI>(pLayer, L"PlayerUI"), E_FAIL);
 	FAILED_CHECK_RETURN(Register_GameObject<CView_Mask>(pLayer, L"Sprite"), E_FAIL);
 
+
 	return S_OK;
 }
 
@@ -246,6 +249,19 @@ HRESULT CScene_Cloud::Ready_Layer_Environment(const _tchar * pLayerTag) {
 	//FAILED_CHECK_RETURN(pLayer->Add_Object(L"Skybox", pGameObject), E_FAIL);
 
 	
+
+	return S_OK;
+}
+
+HRESULT CScene_Cloud::Ready_Layer_IgnoreEffect(const _tchar * pLayerTag)
+{
+	Engine::CLayer*		pLayer = Engine::CLayer::Create();
+	NULL_CHECK_RETURN(pLayer, E_FAIL);
+	m_mapLayer.emplace(pLayerTag, pLayer);
+	pLayer->Set_Address();
+
+
+	FAILED_CHECK_RETURN(Register_GameObject<CBillCloud_Locater>(pLayer, L"Spawner"), E_FAIL);
 
 	return S_OK;
 }

@@ -34,9 +34,6 @@
     <Filter Include="00. Resources\03. Billboard">
       <UniqueIdentifier>{15913e37-01e8-4031-a380-ea3c0f83e119}</UniqueIdentifier>
     </Filter>
-    <Filter Include="00. Resources\04. Sector">
-      <UniqueIdentifier>{ef499313-1de3-48fc-b4b5-b99b3d9eb3d6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="00. Resources\00. VIBuffer\51. SkyCube">
       <UniqueIdentifier>{b7db04ef-75f4-4789-a8fb-cde7bc0a61ae}</UniqueIdentifier>
     </Filter>
@@ -100,6 +97,12 @@
     <Filter Include="00. Resources\00. VIBuffer\95. BeamTex">
       <UniqueIdentifier>{ea40d500-0ef1-40a9-ab43-8abdac9bb164}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00. Resources\99. Sector">
+      <UniqueIdentifier>{ef499313-1de3-48fc-b4b5-b99b3d9eb3d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\04. Sound">
+      <UniqueIdentifier>{6af500a2-c85d-4a81-acdf-7a7c966d2bbf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\Resources.cpp">
@@ -145,16 +148,16 @@
       <Filter>00. Resources\00. VIBuffer\50. Land</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\BoardSector.cpp">
-      <Filter>00. Resources\04. Sector</Filter>
+      <Filter>00. Resources\99. Sector</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\BaseSector.cpp">
-      <Filter>00. Resources\04. Sector</Filter>
+      <Filter>00. Resources\99. Sector</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\RoadSector.cpp">
-      <Filter>00. Resources\04. Sector</Filter>
+      <Filter>00. Resources\99. Sector</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\UnitSector.cpp">
-      <Filter>00. Resources\04. Sector</Filter>
+      <Filter>00. Resources\99. Sector</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\SkyCube.cpp">
       <Filter>00. Resources\00. VIBuffer\51. SkyCube</Filter>
@@ -261,16 +264,16 @@
       <Filter>00. Resources\00. VIBuffer\50. Land</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\BoardSector.h">
-      <Filter>00. Resources\04. Sector</Filter>
+      <Filter>00. Resources\99. Sector</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\BaseSector.h">
-      <Filter>00. Resources\04. Sector</Filter>
+      <Filter>00. Resources\99. Sector</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\RoadSector.h">
-      <Filter>00. Resources\04. Sector</Filter>
+      <Filter>00. Resources\99. Sector</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\UnitSector.h">
-      <Filter>00. Resources\04. Sector</Filter>
+      <Filter>00. Resources\99. Sector</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\SkyCube.h">
       <Filter>00. Resources\00. VIBuffer\51. SkyCube</Filter>

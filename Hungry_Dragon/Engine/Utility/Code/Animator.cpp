@@ -133,7 +133,7 @@ void CAnimator::Insert_Idle(_int exceptTarget)
 	{
 		if (i != exceptTarget)
 		{
-			for (size_t j = m_moventList[i].size(); j <= m_maxFrame; ++j)
+			for (size_t j = m_moventList[i].size(); j <= (size_t)m_maxFrame; ++j)
 			{
 				MOVEMENT idleMove;
 				idleMove.tFrame = j;

@@ -35,6 +35,7 @@
 #include "Cloud_Locater.h"
 #include "Cliff_Locater.h"
 #include "View_Mask.h"
+#include "BillCloud_Locater.h"
 
 //-------------------------------------------------------
 
@@ -54,6 +55,7 @@ public:
 private:
 	HRESULT	Ready_Resource(LPDIRECT3DDEVICE9 pGraphicDev, RESOURCEID eMax);
 	HRESULT	Ready_Layer_Environment(const _tchar* pLayerTag);
+	HRESULT	Ready_Layer_IgnoreEffect(const _tchar* pLayerTag);
 	HRESULT	Ready_Layer_GameLogic(const _tchar* pLayerTag);
 	HRESULT	Ready_Layer_UI(const _tchar* pLayerTag);
 
@@ -69,7 +71,7 @@ private:
 	FLOAT						m_near = -1.0f;		// 포그시작
 	FLOAT						m_far = -0.2f;		// 포그종료
 	
-	
+	CBillCloud_Locater*			m_pBillCloudLocater = nullptr;
 
 private:
 	virtual void Free(void) override;

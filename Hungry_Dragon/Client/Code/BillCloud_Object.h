@@ -36,6 +36,7 @@ private:
 	Engine::CRenderer*		m_pRendererCom = nullptr;
 
 	Engine::_uint m_uTexFrame = 0;
+	Engine::_vec3 m_vPosOrigin;
 
 public:
 	static CBillCloud_Object*	Create(LPDIRECT3DDEVICE9 pGraphicDev);

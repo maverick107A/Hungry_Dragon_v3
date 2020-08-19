@@ -28,6 +28,8 @@ public:
 	virtual _int Update_Object(const _float& fTimeDelta) override;
 	virtual void Render_Object(void) override;
 
+public:
+	void Instantiate_Cloud(_vec3& vPos);
 
 private:
 	HRESULT		Add_Component(void);
@@ -38,9 +40,8 @@ private:
 	Engine::CTransform*		m_pPlayerTrans = nullptr;
 	vector<CBillCloud_Object*>	m_vecObjectPool;
 	list<CBillCloud_Object*>	m_listRenderGroup;
-	_uint					m_uLength;
-	_uint					m_uVerCntX;
-	_uint					m_uVerCntZ;
+
+	CBillCloud_Object*		m_pCloud = nullptr;
 
 public:
 	static CBillCloud_Locater*	Create(LPDIRECT3DDEVICE9 pGraphicDev);

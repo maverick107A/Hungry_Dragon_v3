@@ -1,20 +1,21 @@
-#include "stdafx.h"
-#include "SndMgr.h"
-#include "Timer_Manager.h"
-#include "Ingame_Manager.h"
+#include "FmodMgr.h"
+#include "fmod.hpp"
 
-CSndMgr* CSndMgr::m_pInstance = nullptr;
-CSndMgr::CSndMgr() 
+USING(Engine)
+IMPLEMENT_SINGLETON(CFmodMgr)
+
+using namespace FMOD;
+CFmodMgr::CFmodMgr() 
 {
 }
 
 
-CSndMgr::~CSndMgr()
+CFmodMgr::~CFmodMgr()
 {
-	Release();
+	
 }
 
-void CSndMgr::Initialize()
+void CFmodMgr::Initialize()
 {
 	System_Create(&m_pBgmSystem);
 	System_Create(&m_pEffectSystem);
@@ -27,21 +28,18 @@ void CSndMgr::Initialize()
 
 }
 
-void CSndMgr::Update()
+void CFmodMgr::Update()
 {
 	m_pBgmSystem->update();
 	m_pEffectSystem->update();
 	m_pLoopSystem->update();
 
-
-	m_fBgmVolume = CIngame_Manager::Get_Instance()->Get_SoundVolume();
 	m_pBgmChannel->setVolume(m_fBgmVolume);
-	m_fSfxVolume = CIngame_Manager::Get_Instance()->Get_EffectVolume();
 	m_pLoopChannel->setVolume(m_fSfxVolume);
 	//m_pEffectChannel->setVolume(m_fSfxVolume);
 }
 
-void CSndMgr::Release()
+void CFmodMgr::Release()
 {
 	for (auto& iter : m_mapSnd)
 	{
@@ -60,9 +58,9 @@ void CSndMgr::Release()
 	m_pLoopSystem->close();
 }
 
-void CSndMgr::Insert_Bgm(const char * _pFilePath, const TCHAR * _pSoundKey)
+void CFmodMgr::Insert_Bgm(const char * _pFilePath, const TCHAR * _pSoundKey)
 {
-	auto iter = find_if(m_mapSnd.begin(), m_mapSnd.end(), CStringCMP(_pSoundKey));
+	auto iter = find_if(m_mapSnd.begin(), m_mapSnd.end(), CTag_Finder(_pSoundKey));
 
 	if (m_mapSnd.end() == iter)
 	{
@@ -74,9 +72,9 @@ void CSndMgr::Insert_Bgm(const char * _pFilePath, const TCHAR * _pSoundKey)
 	}
 }
 
-void CSndMgr::Insert_Sfx(const char * _pFilePath, const TCHAR * _pSoundKey)
+void CFmodMgr::Insert_Sfx(const char * _pFilePath, const TCHAR * _pSoundKey)
 {
-	auto iter = find_if(m_mapSnd.begin(), m_mapSnd.end(), CStringCMP(_pSoundKey));
+	auto iter = find_if(m_mapSnd.begin(), m_mapSnd.end(), CTag_Finder(_pSoundKey));
 
 	if (m_mapSnd.end() == iter)
 	{
@@ -88,7 +86,7 @@ void CSndMgr::Insert_Sfx(const char * _pFilePath, const TCHAR * _pSoundKey)
 	}
 }
 
-void CSndMgr::Insert_Sfx_NoCheck(const char * _pFilePath, const TCHAR * _pSoundKey)
+void CFmodMgr::Insert_Sfx_NoCheck(const char * _pFilePath, const TCHAR * _pSoundKey)
 {
 
 	Sound* pSnd = nullptr;
@@ -99,9 +97,9 @@ void CSndMgr::Insert_Sfx_NoCheck(const char * _pFilePath, const TCHAR * _pSoundK
 
 }
 
-Sound* CSndMgr::Find_Sound(const TCHAR * _pSoundKey)
+Sound* CFmodMgr::Find_Sound(const TCHAR * _pSoundKey)
 {
-	auto iter = find_if(m_mapSnd.begin(), m_mapSnd.end(), CStringCMP(_pSoundKey));
+	auto iter = find_if(m_mapSnd.begin(), m_mapSnd.end(), CTag_Finder(_pSoundKey));
 
 	if (m_mapSnd.end() == iter)
 		return nullptr;
@@ -109,7 +107,7 @@ Sound* CSndMgr::Find_Sound(const TCHAR * _pSoundKey)
 	return iter->second;
 }
 
-void CSndMgr::PlayBgm(const TCHAR* _pSoundKey)
+void CFmodMgr::PlayBgm(const TCHAR* _pSoundKey)
 {
 	
 	Sound* pSnd = Find_Sound(_pSoundKey);
@@ -121,7 +119,7 @@ void CSndMgr::PlayBgm(const TCHAR* _pSoundKey)
 	m_pBgmChannel->setVolume(0.5f);
 }
 
-void CSndMgr::PlayEffect(const TCHAR* _pSoundKey)
+void CFmodMgr::PlayEffect(const TCHAR* _pSoundKey)
 {
 	
 	Sound* pSnd = Find_Sound(_pSoundKey);
@@ -132,7 +130,7 @@ void CSndMgr::PlayEffect(const TCHAR* _pSoundKey)
 	}
 	m_pEffectChannel[m_iEffectRotate]->setVolume(m_fSfxVolume);
 }
-void CSndMgr::PlayEffect(Sound * _pSound)
+void CFmodMgr::PlayEffect(Sound * _pSound)
 {
 	Sound* pSnd = _pSound;
 	
@@ -143,7 +141,7 @@ void CSndMgr::PlayEffect(Sound * _pSound)
 	}
 	m_pEffectChannel[m_iEffectRotate]->setVolume(m_fSfxVolume);
 }
-void CSndMgr::PlayEffectChartered(const TCHAR * _pSoundKey)
+void CFmodMgr::PlayEffectChartered(const TCHAR * _pSoundKey)
 {
 	Sound* pSnd = Find_Sound(_pSoundKey);
 	if (pSnd)
@@ -153,7 +151,7 @@ void CSndMgr::PlayEffectChartered(const TCHAR * _pSoundKey)
 	}
 	m_pCharterChannel->setVolume(m_fSfxVolume);
 }
-void CSndMgr::PlayEffectChartered(Sound * _pSound)
+void CFmodMgr::PlayEffectChartered(Sound * _pSound)
 {
 	Sound* pSnd = _pSound;
 
@@ -164,7 +162,7 @@ void CSndMgr::PlayEffectChartered(Sound * _pSound)
 	}
 	m_pCharterChannel->setVolume(m_fSfxVolume);
 }
-void CSndMgr::PlayLoop(const TCHAR * _pSoundKey)
+void CFmodMgr::PlayLoop(const TCHAR * _pSoundKey)
 {
 	Sound* pSnd = Find_Sound(_pSoundKey);
 	bool bPlaying;
@@ -181,7 +179,7 @@ void CSndMgr::PlayLoop(const TCHAR * _pSoundKey)
 	m_pLoopSystem->playSound(pSnd, 0, false, &m_pLoopChannel);
 	m_pCurrPlayingLoop = pSnd;
 }
-void CSndMgr::PlayVoice(const TCHAR* _pSoundKey)
+void CFmodMgr::PlayVoice(const TCHAR* _pSoundKey)
 {
 	
 	Sound* pSnd = Find_Sound(_pSoundKey);
@@ -194,23 +192,23 @@ void CSndMgr::PlayVoice(const TCHAR* _pSoundKey)
 }
 
 
-void CSndMgr::StopBgm()
+void CFmodMgr::StopBgm()
 {
 	m_pBgmChannel->stop();
 	m_pCurrPlayingBgm = nullptr;
 }
 
-void CSndMgr::PauseBgm()
+void CFmodMgr::PauseBgm()
 {
 	m_pBgmChannel->setPaused(true);
 }
 
-void CSndMgr::ResumeBgm()
+void CFmodMgr::ResumeBgm()
 {
 	m_pBgmChannel->setPaused(false);
 }
 
-void CSndMgr::StopLoop(const TCHAR* _pSoundKey)
+void CFmodMgr::StopLoop(const TCHAR* _pSoundKey)
 {
 	bool bPlaying = false;
 	m_pLoopChannel->isPlaying(&bPlaying);
@@ -234,10 +232,9 @@ void CSndMgr::StopLoop(const TCHAR* _pSoundKey)
 }
 
 
-void CSndMgr::Bring_Sound()
+void CFmodMgr::Bring_Sound()
 {
 	// bgm
-	
 
 
 	// loop
@@ -247,7 +244,12 @@ void CSndMgr::Bring_Sound()
 	
 }
 
-bool CSndMgr::Is_Playing(const TCHAR * _pSoundKey)
+bool CFmodMgr::Is_Playing(const TCHAR * _pSoundKey)
 {
 	return (m_pCurrPlayingBgm == Find_Sound(_pSoundKey));
+}
+
+void CFmodMgr::Free(void)
+{
+	Release();
 }

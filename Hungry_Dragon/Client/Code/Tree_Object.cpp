@@ -46,7 +46,7 @@ void CTree_Object::Set_Trans(_vec3 & _vPos)
 
 void CTree_Object::Set_Scale(_uint _uTimes)
 {
-	m_pTransform->Set_Scale(_uTimes);
+	m_pTransform->Set_Scale((_float)_uTimes);
 }
 
 

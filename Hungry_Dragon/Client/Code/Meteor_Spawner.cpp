@@ -61,7 +61,7 @@ _int CMeteor_Spawner::Update_Object(const _float& fTimeDelta)
 	{
 		m_fSummonTick -= m_fSummonTime;
 
- 		Instantiate_Meteor(_vec3(rand()%384000, 10000.f, rand()%384000));
+ 		Instantiate_Meteor(_vec3((float)(rand()%384000), 10000.f, (float)(rand()%384000)));
 
 	}
 

@@ -74,7 +74,6 @@ void CCliff_Object::Free(void)
 	Engine::CGameObject::Free();
 
 	
-	Safe_Release(m_pBufferCom);
 
 }
 

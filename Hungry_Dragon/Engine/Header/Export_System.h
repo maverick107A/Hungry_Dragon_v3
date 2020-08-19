@@ -7,6 +7,7 @@
 #include "FrameMgr.h"
 #include "FontMgr.h"
 #include "InputDev.h"
+#include "FmodMgr.h"
 
 BEGIN(Engine)
 
@@ -58,6 +59,15 @@ inline 	void	Set_InputDev(void);
 
 // Release System
 inline void		Release_System(void);
+
+
+//FmodMgr
+//Get
+inline CFmodMgr* Get_FMOD() { return CFmodMgr::GetInstance(); }
+
+
+
+
 
 #include "Export_System.inl"
 

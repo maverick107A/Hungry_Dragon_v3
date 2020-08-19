@@ -13,12 +13,6 @@
     <Filter Include="01. Timer\Manager">
       <UniqueIdentifier>{c1784120-709e-4c88-aab7-e2047db7ab04}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Frame">
-      <UniqueIdentifier>{17bc80ff-3e01-4ce2-b79a-0698e260dbc9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Frame\Manager">
-      <UniqueIdentifier>{86914b1c-25aa-4c35-a251-2fd1eada5d2b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03. Font">
       <UniqueIdentifier>{78fc0aa6-1050-453d-acc0-a6ad60df037d}</UniqueIdentifier>
     </Filter>
@@ -27,6 +21,15 @@
     </Filter>
     <Filter Include="04. InputDev">
       <UniqueIdentifier>{06718b7a-38d9-4e1c-9c54-a72092639fd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Frame">
+      <UniqueIdentifier>{17bc80ff-3e01-4ce2-b79a-0698e260dbc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. Frame\Manager">
+      <UniqueIdentifier>{86914b1c-25aa-4c35-a251-2fd1eada5d2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. FmodMgr">
+      <UniqueIdentifier>{8f05efe7-d0c4-4a0e-b111-46be29d02e9f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -40,10 +43,10 @@
       <Filter>01. Timer\Manager</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Frame.cpp">
-      <Filter>02.Frame</Filter>
+      <Filter>02. Frame</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\FrameMgr.cpp">
-      <Filter>02.Frame\Manager</Filter>
+      <Filter>02. Frame\Manager</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Font.cpp">
       <Filter>03. Font</Filter>
@@ -53,6 +56,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\InputDev.cpp">
       <Filter>04. InputDev</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\FmodMgr.cpp">
+      <Filter>05. FmodMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -69,10 +75,10 @@
       <Filter>01. Timer\Manager</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Frame.h">
-      <Filter>02.Frame</Filter>
+      <Filter>02. Frame</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\FrameMgr.h">
-      <Filter>02.Frame\Manager</Filter>
+      <Filter>02. Frame\Manager</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Font.h">
       <Filter>03. Font</Filter>
@@ -82,6 +88,9 @@
     </ClInclude>
     <ClInclude Include="..\Code\InputDev.h">
       <Filter>04. InputDev</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\FmodMgr.h">
+      <Filter>05. FmodMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

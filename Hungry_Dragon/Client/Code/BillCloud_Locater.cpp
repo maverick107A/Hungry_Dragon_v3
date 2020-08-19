@@ -20,9 +20,7 @@ CBillCloud_Locater::~CBillCloud_Locater(void)
 
 HRESULT CBillCloud_Locater::Ready_Object(void)
 {
-	m_uVerCntX = 129;
-	m_uVerCntZ = 129;
-	m_uLength = 1000;		// 생성자 통해서 파츠에 넘겨주는부분이 없음, 그냥 상수 때려박은것
+
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
 
@@ -42,7 +40,7 @@ _int CBillCloud_Locater::Update_Object(const _float& fTimeDelta)
 
 	
 	_bool bOutline = true;
-
+	//m_pCloud->Update_Object(fTimeDelta);
 
 	return 0;
 }
@@ -59,8 +57,13 @@ void CBillCloud_Locater::Render_Object(void)
 	{
 		pObj->Render_Object();
 	}
+	//m_pCloud->Render_Object();
 	//m_pGraphicDev->SetRenderState(D3DRS_ZENABLE, TRUE);
 
+}
+
+void CBillCloud_Locater::Instantiate_Cloud(_vec3 & vPos)
+{
 }
 
 void CBillCloud_Locater::Free(void)
@@ -71,7 +74,7 @@ void CBillCloud_Locater::Free(void)
 		Safe_Release(m_pParts[i]);
 	}*/
 
-
+	Safe_Release(m_pCloud);
 	Engine::CGameObject::Free();
 
 	for (auto& pObj : m_vecObjectPool)
@@ -90,7 +93,7 @@ HRESULT CBillCloud_Locater::Add_Component(void)
 	FAILED_CHECK(Register_Component<CTransform>(&m_pTransform, ID_DYNAMIC, L"Com_Transform"));
 	
 	// 구름 세팅
-	
+	m_pCloud = CBillCloud_Object::Create(m_pGraphicDev);
 	
 	return S_OK;
 }
