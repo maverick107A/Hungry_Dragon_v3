@@ -80,7 +80,8 @@ private:
 	// 플레이어 받아오는곳
 	Engine::CTransform*		pPlayerTransformCom;
 
-	Engine::CMovingObject*	m_pTempMovingObj;
+	//테스트용 애니메이션 적용 오브젝트
+	//Engine::CMovingObject*	m_pTempMovingObj;
 };
 
 #endif //

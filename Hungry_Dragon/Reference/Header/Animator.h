@@ -18,6 +18,7 @@ private:
 
 public:
 	_int		Get_FrameArraySize(_int _frame);
+	_float		Get_NowFrame();
 	_int		Get_TotalMaxFrame();
 	_matrix		Get_MoveResult(LPDIRECT3DDEVICE9 pGraphicDev, _matrix _matTarget,_int _index);
 	MOVEMENT	Get_Movement(_int _targetIndex, _int _targetFrame);

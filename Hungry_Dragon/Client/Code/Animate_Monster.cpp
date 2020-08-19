@@ -71,11 +71,11 @@ HRESULT CAnimate_Monster::Add_Componenet(void)
 
 	pComponenet = Engine::CTransform::Create();
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Upper_Transform", pComponenet);
-	m_pMeshTransform.emplace_back(static_cast<Engine::CTransform*>(pComponenet));
+	m_pMeshTransform.emplace_back(static_cast<Engine::CAnimationTransform*>(pComponenet));
 
 	pComponenet = Engine::CTransform::Create();
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Under_Transform", pComponenet);
-	m_pMeshTransform.emplace_back(static_cast<Engine::CTransform*>(pComponenet));
+	m_pMeshTransform.emplace_back(static_cast<Engine::CAnimationTransform*>(pComponenet));
 
 	m_pTransform = Engine::CTransform::Create();
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Total_Transform", m_pTransform);

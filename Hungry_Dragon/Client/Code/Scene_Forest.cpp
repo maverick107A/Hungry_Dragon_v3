@@ -237,7 +237,7 @@ HRESULT CScene_Forest::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 	FAILED_CHECK_RETURN(Register_GameObject<CTree_Locater>(pLayer, L"TreeObject"), E_FAIL);		// 무조건 터레인 로케이터 뒤에
 	FAILED_CHECK_RETURN(Register_GameObject<CTestPlayer>(pLayer, L"TestPlayer"), E_FAIL);
 
-	FAILED_CHECK_RETURN(Register_GameObject<CAnimate_Monster>((CAnimate_Monster**)&(m_pTempMovingObj), pLayer, L"testAnim"), E_FAIL);
+	//FAILED_CHECK_RETURN(Register_GameObject<CAnimate_Monster>((CAnimate_Monster**)&(m_pTempMovingObj), pLayer, L"testAnim"), E_FAIL);
 
 	
 

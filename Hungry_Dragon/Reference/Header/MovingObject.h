@@ -31,7 +31,7 @@ public:
 protected:
 	vector<CVICustom*>	m_pMeshArray;
 	vector<CAnimationTransform*>	m_pMeshTransform;
-	CAnimator*			m_pAnimator;
+	CAnimator*			m_pAnimator=nullptr;
 };
 
 END

@@ -29,6 +29,10 @@ public:
 	static CDragonFace*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 	virtual CComponent*	Clone(void)override;
 	virtual void Free(void) override;	
+
+public:
+	list<INDEX16> indexList;
+	list<VTXCOL>  vertexList;
 };
 
 END

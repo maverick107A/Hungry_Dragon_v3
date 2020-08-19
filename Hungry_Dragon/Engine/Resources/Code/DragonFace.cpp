@@ -88,10 +88,19 @@ HRESULT Engine::CDragonFace::Ready_Buffer(void)
 	pVertex[45].vPosition = _vec3(0.700000f, 0.500000f, 1.000000f);
 	pVertex[46].vPosition = _vec3(0.297691f, 0.116341f, -1.000000f);
 	pVertex[47].vPosition = _vec3(0.249538f, 0.500000f, 0.110244f);
+
 	for (int i = 0; i < 48; ++i)
 	{
 		pVertex[i].dwColor = D3DXCOLOR(0.f, 0.f, 0.f, 1.f);
 		pVertex[i].vPosition.z *= -1;
+	}
+
+	for (int i = 0; i < 23; ++i)
+	{
+		VTXCOL tempVertex;
+		tempVertex.vPosition = pVertex[i].vPosition;
+		tempVertex.dwColor = pVertex[i].dwColor;
+		vertexList.emplace_back(tempVertex);
 	}
 
 	m_pVB->Unlock();
@@ -188,6 +197,37 @@ HRESULT Engine::CDragonFace::Ready_Buffer(void)
 	pIndex[22]._1 = 47;
 	pIndex[22]._2 = 46;
 
+	for (int i = 0; i < 23; ++i)
+	{
+		indexList.emplace_back(pIndex[i]);
+	}
+
+
+	FILE* fp = nullptr;
+	errno_t err = fopen_s(&fp, "../DragonFace.dat", "wb");
+
+	if (0 == err)
+	{
+		int vertexSize = (int)vertexList.size();
+		fwrite(&vertexSize, sizeof(int), 1, fp);
+
+		for (list<VTXCOL>::iterator iter = vertexList.begin(); iter != vertexList.end(); ++iter)
+		{
+			VTXCOL tempVtx = (*iter);
+			fwrite(&tempVtx, sizeof(VTXCOL), 1, fp);
+		}
+
+		int indexSize = (int)indexList.size();
+		fwrite(&indexSize, sizeof(int), 1, fp);
+
+		for (list<INDEX16>::iterator iter = indexList.begin(); iter != indexList.end(); ++iter)
+		{
+			INDEX16 tempIdx = (*iter);
+			fwrite(&tempIdx, sizeof(INDEX16), 1, fp);
+		}
+
+		fclose(fp);
+	}
 	return S_OK;
 }
 
