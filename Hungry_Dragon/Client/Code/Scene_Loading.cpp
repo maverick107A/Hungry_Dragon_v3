@@ -30,7 +30,7 @@ HRESULT CScene_Loading::Ready_Loading(LOADINGID eLoadingID)
 
 _uint CScene_Loading::Loading_ForStage(void)
 {
-	lstrcpy(m_szFinish, L"Buffer Loading............");
+	lstrcpy(m_szFinish, L"버텍스 찍는 중...");
 
 	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
 		RESOURCE_STATIC,
@@ -192,7 +192,7 @@ _uint CScene_Loading::Loading_ForStage(void)
 		E_FAIL);
 		
 
-	lstrcpy(m_szFinish, L"Texture Loading............");
+	lstrcpy(m_szFinish, L"이미지 읽는 중...");
 
 	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
 		RESOURCE_STAGE,
@@ -380,6 +380,14 @@ _uint CScene_Loading::Loading_ForStage(void)
 		L"../../Asset/Billboard/logo/logo3.png"),
 		E_FAIL);
 
+
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+		RESOURCE_LOGO,
+		L"Texture_SelectMap",
+		Engine::TEX_NORMAL,
+		L"../../Asset/Billboard/SelectedMap/select_map%.2d.png", 10),
+		E_FAIL);
+
 	// 마스크
 	{
 
@@ -435,6 +443,8 @@ _uint CScene_Loading::Loading_ForStage(void)
 	}
 	// 마스크
 
+
+	lstrcpy(m_szFinish, L"사운드 추가 중...");
 	// 사운드
 	// 배경음악
 	Engine::Get_FMOD()->Initialize();
@@ -445,19 +455,23 @@ _uint CScene_Loading::Loading_ForStage(void)
 	Engine::Get_FMOD()->Insert_Bgm("../../Asset/Sound/Bgm/Flower_Valley.mp3", L"CloudBgm");
 	Engine::Get_FMOD()->Insert_Bgm("../../Asset/Sound/Bgm/Scrap_Valley_Entry.mp3", L"VolcanoBgm");
 	// 효과음
+	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/mouse_on.mp3", L"MouseOn");
+	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/breath_test.mp3", L"BreathTest");
 
 
 
 
 
-
-
+	lstrcpy(m_szFinish, L"지형 찍는 중...");
 
 	CIngame_Flow::GetInstance()->Load_ForestTerrain();
+
+	lstrcpy(m_szFinish, L"나무 까는 중...");
+
 	CIngame_Flow::GetInstance()->Load_TreeList();
 	CIngame_Flow::GetInstance()->Init_Mask();
 
-	lstrcpy(m_szFinish, L"Loading Complete");
+	lstrcpy(m_szFinish, L"게임이 시작됩니다!");
 
 	m_bFinish = true;
 

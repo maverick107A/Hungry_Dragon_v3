@@ -1,5 +1,5 @@
-#ifndef BackGroundLogo_h__
-#define BackGroundLogo_h__
+#ifndef Fire_Wall_h__
+#define Fire_Wall_h__
 
 #include "Define.h"
 #include "GameObject.h"
@@ -15,10 +15,10 @@ END
 
 
 
-class CBackGround_Logo : public Engine::CGameObject {
+class CFire_Wall : public Engine::CGameObject {
 private:
-	explicit CBackGround_Logo(LPDIRECT3DDEVICE9 pGraphicDev);
-	virtual ~CBackGround_Logo(void);
+	explicit CFire_Wall(LPDIRECT3DDEVICE9 pGraphicDev);
+	virtual ~CFire_Wall(void);
 
 public:
 	virtual HRESULT Ready_Object(void) override;
@@ -32,15 +32,14 @@ private:
 private:
 	Engine::CTexture_Square*			m_pBufferCom = nullptr;
 	Engine::CTexture*		m_pTextureCom = nullptr;
+	Engine::CTexture*		m_pTextureMask = nullptr;
 	Engine::CTransform*		m_pTransform = nullptr;
 	Engine::CRenderer*		m_pRendererCom = nullptr;
 
-private:
-	static TCHAR m_szLogo[128];
+	Engine::_uint m_uLogo = 0;
 
 public:
-	static CBackGround_Logo*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
-	static CBackGround_Logo*	Create(LPDIRECT3DDEVICE9 pGraphicDev, const Engine::_tchar* pLogo);
+	static CFire_Wall*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 private:
 	virtual void Free(void) override;
 

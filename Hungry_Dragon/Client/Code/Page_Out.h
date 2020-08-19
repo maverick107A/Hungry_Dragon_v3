@@ -1,5 +1,5 @@
-#ifndef BackGroundLogo_h__
-#define BackGroundLogo_h__
+#ifndef Page_Out_h__
+#define Page_Out_h__
 
 #include "Define.h"
 #include "GameObject.h"
@@ -15,15 +15,19 @@ END
 
 
 
-class CBackGround_Logo : public Engine::CGameObject {
+class CPage_Out : public Engine::CGameObject {
 private:
-	explicit CBackGround_Logo(LPDIRECT3DDEVICE9 pGraphicDev);
-	virtual ~CBackGround_Logo(void);
+	explicit CPage_Out(LPDIRECT3DDEVICE9 pGraphicDev);
+	virtual ~CPage_Out(void);
 
 public:
 	virtual HRESULT Ready_Object(void) override;
 	virtual int Update_Object(const float& fTimeDelta) override;
 	virtual void Render_Object(void) override;
+
+public:
+	Engine::_bool Get_PageOut() { return m_bPageOut; }
+	Engine::_bool Set_Activate(Engine::_bool _bActivate) { Engine::Get_FMOD()->PlayEffect(L"BreathTest"); return m_bActivate = _bActivate; }
 
 
 private:
@@ -35,12 +39,12 @@ private:
 	Engine::CTransform*		m_pTransform = nullptr;
 	Engine::CRenderer*		m_pRendererCom = nullptr;
 
-private:
-	static TCHAR m_szLogo[128];
+	Engine::_uint m_uLogo = 0;
+	Engine::_bool m_bActivate = false;
+	Engine::_bool m_bPageOut = false;
 
 public:
-	static CBackGround_Logo*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
-	static CBackGround_Logo*	Create(LPDIRECT3DDEVICE9 pGraphicDev, const Engine::_tchar* pLogo);
+	static CPage_Out*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 private:
 	virtual void Free(void) override;
 

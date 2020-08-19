@@ -55,6 +55,7 @@ HRESULT CMainApp::Ready_MainApp(void)
 
 Engine::_int CMainApp::Update_MainApp(const Engine::_float& fTimeDelta)
 {
+	Engine::Get_FMOD()->Update();
 	Engine::Set_InputDev();
 	CIngame_Flow::GetInstance()->Update_BeforeScene(fTimeDelta);
 	m_pManagementClass->Update_Scene(fTimeDelta);
@@ -102,6 +103,8 @@ HRESULT CMainApp::Set_DefaultSetting(LPDIRECT3DDEVICE9 * ppGraphicDev)
 
 	FAILED_CHECK_RETURN(Engine::Ready_Font((*ppGraphicDev), L"Font_Default", L"바탕", 60, 60, FW_HEAVY), E_FAIL);
 	FAILED_CHECK_RETURN(Engine::Ready_Font((*ppGraphicDev), L"Font_Jinji", L"궁서", 30, 30, FW_THIN), E_FAIL);
+	FAILED_CHECK_RETURN(Engine::Ready_Font((*ppGraphicDev), L"Font_Bold", L"메이플스토리", 30, 30, FW_BOLD), E_FAIL);
+	FAILED_CHECK_RETURN(Engine::Ready_Font((*ppGraphicDev), L"Font_Light", L"메이플스토리", 30, 30, FW_THIN), E_FAIL);
 
 	FAILED_CHECK_RETURN(Engine::Ready_InputDev(g_hInst, g_hWnd), E_FAIL);
 	return S_OK;

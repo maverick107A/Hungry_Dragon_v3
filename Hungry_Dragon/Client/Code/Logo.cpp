@@ -56,7 +56,7 @@ _int CLogo::Update_Scene(const _float& fTimeDelta) {
 
 void CLogo::Render_Scene(void) {
 	// debug¿ë
-	Engine::Render_Font(L"Font_Jinji", m_pLoading->Get_String(), &_vec2(10.f, 10.f), D3DXCOLOR(1.f, 0.f, 0.f, 1.f));
+	Engine::Render_Font_Center(L"Font_Light", m_pLoading->Get_String(), &_vec2(1600.f, 600.f), D3DXCOLOR(1.f, 0.f, 0.f, 1.f));
 	Engine::CScene::Render_Scene();
 }
 
@@ -107,7 +107,7 @@ HRESULT CLogo::Ready_Resource(LPDIRECT3DDEVICE9 pGraphicDev, RESOURCEID eMax) {
 		RESOURCE_LOGO,
 		L"Texture_Logo",
 		Engine::TEX_NORMAL,
-		L"../../Asset/Loading/Loading.png"),
+		L"../../Asset/Loading/Loading.jpg"),
 		E_FAIL);
 
 

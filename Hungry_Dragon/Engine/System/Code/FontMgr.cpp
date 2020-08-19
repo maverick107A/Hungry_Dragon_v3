@@ -23,6 +23,11 @@ HRESULT Engine::CFontMgr::Ready_Font(LPDIRECT3DDEVICE9 pGraphicDev, const _tchar
 
 	m_mapFont.emplace(pFontTag, pFont);
 
+	// 폰트 자동 설치
+	AddFontResource(L"../../Asset/Font/Maplestory Bold.ttf");
+	AddFontResource(L"../../Asset/Font/Maplestory Light.ttf");
+	SendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0);
+
 	return S_OK;
 }
 
@@ -31,6 +36,13 @@ void Engine::CFontMgr::Render_Font(const _tchar* pFontTag, const _tchar* pString
 	NULL_CHECK(pFont);
 
 	pFont->Render_Font(pString, pPos, Color);
+
+}
+void Engine::CFontMgr::Render_Font_Center(const _tchar* pFontTag, const _tchar* pString, const _vec2* pPos, D3DXCOLOR Color) {
+	CFont*	pFont = Find_Font(pFontTag);
+	NULL_CHECK(pFont);
+
+	pFont->Render_Font_Center(pString, pPos, Color);
 
 }
 
@@ -44,6 +56,11 @@ CFont* Engine::CFontMgr::Find_Font(const _tchar* pFontTag) {
 }
 
 void Engine::CFontMgr::Free(void) {
+	// 폰트 자동 삭제
+	RemoveFontResource(L"../../Asset/Font/Maplestory Bold.ttf");
+	RemoveFontResource(L"../../Asset/Font/Maplestory Light.ttf");
+	SendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0);
+
 	for_each(m_mapFont.begin(), m_mapFont.end(), CDeleteMap());
 	m_mapFont.clear();
 }

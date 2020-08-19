@@ -217,6 +217,18 @@
     <Filter Include="02. GameObject\00. Logo\01. Logo_Loop">
       <UniqueIdentifier>{4ba85861-df41-4f3c-abc9-d98f9c661de1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. GameObject\00. Logo\02. Page_Out">
+      <UniqueIdentifier>{091abde0-0796-4d46-b9bb-02aa50d5d217}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\00. Logo\03. Select_Scroller">
+      <UniqueIdentifier>{17ae8fba-9302-4423-be0c-48019086802c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\00. Logo\04. Select_Map">
+      <UniqueIdentifier>{923388b1-c147-471b-ad09-5b27f365e0e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\00. Logo\05. Fire_Wall">
+      <UniqueIdentifier>{7649ae48-c8cb-4946-9962-9a592f0e5831}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -405,6 +417,18 @@
     <ClInclude Include="..\Code\Logo_Loop.h">
       <Filter>02. GameObject\00. Logo\01. Logo_Loop</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\Page_Out.h">
+      <Filter>02. GameObject\00. Logo\02. Page_Out</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Select_Scroller.h">
+      <Filter>02. GameObject\00. Logo\03. Select_Scroller</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Select_Map.h">
+      <Filter>02. GameObject\00. Logo\04. Select_Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Fire_Wall.h">
+      <Filter>02. GameObject\00. Logo\05. Fire_Wall</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -583,6 +607,18 @@
     </ClCompile>
     <ClCompile Include="..\Code\Logo_Loop.cpp">
       <Filter>02. GameObject\00. Logo\01. Logo_Loop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Page_Out.cpp">
+      <Filter>02. GameObject\00. Logo\02. Page_Out</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Select_Scroller.cpp">
+      <Filter>02. GameObject\00. Logo\03. Select_Scroller</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Select_Map.cpp">
+      <Filter>02. GameObject\00. Logo\04. Select_Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Fire_Wall.cpp">
+      <Filter>02. GameObject\00. Logo\05. Fire_Wall</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

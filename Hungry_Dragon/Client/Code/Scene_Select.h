@@ -18,6 +18,8 @@
 #include "TestPlayer.h"
 #include "Scene_Loading.h"
 #include "BackGround_Logo.h"
+#include "Select_Scroller.h"
+#include "Fire_Wall.h"
 //-------------------------------------------------------
 
 using namespace Engine;
@@ -40,6 +42,7 @@ private:
 	HRESULT	Ready_Layer_UI(const _tchar* pLayerTag);
 
 private:
+	CSelect_Scroller* m_pScroller = nullptr;
 	_uint m_uFocusNum = 0;
 
 public:

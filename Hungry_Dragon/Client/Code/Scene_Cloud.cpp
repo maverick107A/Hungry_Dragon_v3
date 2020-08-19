@@ -77,6 +77,8 @@ HRESULT CScene_Cloud::Ready_Scene(void) {
 	m_hFogTechHandle = m_pFogEffect->GetTechniqueByName("TShader");
 	m_hvFog = m_pFogEffect->GetParameterByName(NULL, "vFog");
 	
+	Engine::Get_FMOD()->PlayBgm(L"CloudBgm");
+
 	return S_OK;
 }
 
@@ -123,7 +125,7 @@ _int CScene_Cloud::Update_Scene(const _float& fTimeDelta) {
 		m_far -= 0.001f;
 	}
 
-	Engine::Particle_Update(fTimeDelta);
+	//Engine::Particle_Update(fTimeDelta);
 
 	//플레이어 위치 최신화
 	pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);
@@ -134,7 +136,7 @@ _int CScene_Cloud::Update_Scene(const _float& fTimeDelta) {
 	Engine::CScene::Update_Scene(fTimeDelta);
 
 
-	Engine::Get_FMOD()->PlayBgm(L"CloudBgm");
+	
 	
 	return 0;
 }

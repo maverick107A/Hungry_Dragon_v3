@@ -36,6 +36,9 @@ HRESULT Engine::CFont::Ready_Font(const _tchar* pFontType,
 		return E_FAIL;
 	}
 
+	
+	
+
 	return S_OK;
 }
 
@@ -45,6 +48,17 @@ void Engine::CFont::Render_Font(const _tchar* pString, const _vec2* pPos, D3DXCO
 	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
 
 	m_pFont->DrawTextW(m_pSprite, pString, lstrlen(pString), &rc, DT_NOCLIP, Color);
+
+	m_pSprite->End();
+}
+
+void Engine::CFont::Render_Font_Center(const _tchar * pString, const _vec2 * pPos, D3DXCOLOR Color)
+{
+	RECT	rc{ _long(pPos->x), _long(pPos->y) };
+
+	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
+
+	m_pFont->DrawTextW(m_pSprite, pString, lstrlen(pString), &rc, DT_NOCLIP|DT_CENTER, Color);
 
 	m_pSprite->End();
 }
@@ -65,6 +79,7 @@ CFont* Engine::CFont::Create(LPDIRECT3DDEVICE9 pGraphicDev,
 }
 
 void Engine::CFont::Free(void) {
+
 	Engine::Safe_Release(m_pFont);
 	Engine::Safe_Release(m_pSprite);
 	Engine::Safe_Release(m_pGraphicDev);

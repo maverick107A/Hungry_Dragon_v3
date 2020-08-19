@@ -25,28 +25,52 @@ HRESULT CScene_Select::Ready_Scene(void) {
 
 _int CScene_Select::Update_Scene(const _float& fTimeDelta) {
 	_int iExit = Engine::CScene::Update_Scene(fTimeDelta);
-
+	m_pScroller->Set_Focus(m_uFocusNum);
 	
 	if (GetAsyncKeyState(VK_LEFT) & 0x0001) {
 		--m_uFocusNum;
-		if (0 > m_uFocusNum)
+		if (10 < m_uFocusNum)
 		{
-			m_uFocusNum = 3;
+			m_uFocusNum = 0;
+		}
+		else
+		{
+			Engine::Get_FMOD()->PlayEffect(L"MouseOn");
 		}
 	}
 	if (GetAsyncKeyState(VK_DOWN) & 0x0001) {
 		--m_uFocusNum;
-		if (0 > m_uFocusNum)
+		if (10 < m_uFocusNum)
 		{
-			m_uFocusNum = 3;
+			m_uFocusNum = 0;
+		}
+		else
+		{
+			Engine::Get_FMOD()->PlayEffect(L"MouseOn");
 		}
 	}
 
 	if (GetAsyncKeyState(VK_RIGHT) & 0x0001) {
-		m_uFocusNum = (m_uFocusNum + 1) % 4;
+		++m_uFocusNum;
+		if (9 < m_uFocusNum)
+		{
+			m_uFocusNum = 9;
+		}
+		else
+		{
+			Engine::Get_FMOD()->PlayEffect(L"MouseOn");
+		}
 	}
 	if (GetAsyncKeyState(VK_UP) & 0x0001) {
-		m_uFocusNum = (m_uFocusNum + 1) % 4;
+		++m_uFocusNum;
+		if (9 < m_uFocusNum)
+		{
+			m_uFocusNum = 9;
+		}
+		else
+		{
+			Engine::Get_FMOD()->PlayEffect(L"MouseOn");
+		}
 	}
 
 	if (GetAsyncKeyState(VK_RETURN) & 0x8000) {
@@ -63,7 +87,9 @@ _int CScene_Select::Update_Scene(const _float& fTimeDelta) {
 			CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_CLOUD);
 			break;
 		case 3:
-			//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_VOLCANO);
+			CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_VOLCANO);
+			break;
+		case 4:
 			//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_ICELAND);
 			break;
 		}
@@ -91,22 +117,38 @@ void CScene_Select::Render_Scene(void) {
 	switch (m_uFocusNum)
 	{
 	case 0:
-		wsprintf(str, L"1½ºÅ×ÀÌÁö : ½£");
+		wsprintf(str, L"»ê¸Æ");
 		break;
 	case 1:
-		wsprintf(str, L"2½ºÅ×ÀÌÁö : µ¿±¼");
+		wsprintf(str, L"µ¿±¼");
 		break;
 	case 2:
-		wsprintf(str, L"3½ºÅ×ÀÌÁö : ±¸¸§");
+		wsprintf(str, L"Çù°î");
 		break;
 	case 3:
-		wsprintf(str, L"4½ºÅ×ÀÌÁö : È­»ê");
-		//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_VOLCANO);
-		//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_ICELAND);
+		wsprintf(str, L"È­»ê");
+		break;
+	case 4:
+		wsprintf(str, L"ºùÇÏ");
+		break;
+	case 5:
+		wsprintf(str, L"»ç¸·");
+		break;
+	case 6:
+		wsprintf(str, L"±¤»ê");
+		break;
+	case 7:
+		wsprintf(str, L"´øÀü");
+		break;
+	case 8:
+		wsprintf(str, L"¿ìÁÖ");
+		break;
+	case 9:
+		wsprintf(str, L"ÀºÇÏ");
 		break;
 	}
 	
-	Engine::Render_Font(L"Font_Default", str, &_vec2(300.f, 450.f), D3DXCOLOR(0.f, 1.f, 1.f, 1.f));
+	Engine::Render_Font_Center(L"Font_Bold", str, &_vec2(1600.f, 800.f), D3DXCOLOR(0.f, 1.f, 1.f, 1.f));
 
 	Engine::CScene::Render_Scene();
 }
@@ -135,9 +177,13 @@ HRESULT CScene_Select::Ready_Layer_UI(const _tchar* pLayerTag) {
 	Engine::CGameObject*		pGameObject = nullptr;
 
 	// BackGround
-	pGameObject = CBackGround_Logo::Create(m_pGraphicDev);
+	pGameObject = CBackGround_Logo::Create(m_pGraphicDev, L"Texture_LogoSelect");
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(pLayer->Add_Object(L"BackGround", pGameObject), E_FAIL);
+
+	FAILED_CHECK(Register_GameObject<CSelect_Scroller>(&m_pScroller, pLayer, L"Scroller"));
+	FAILED_CHECK(Register_GameObject<CFire_Wall>(pLayer,L"FireWall"));
+
 
 	m_mapLayer.emplace(pLayerTag, pLayer);
 

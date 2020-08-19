@@ -5,6 +5,8 @@
 
 USING(Engine)
 
+TCHAR CBackGround_Logo::m_szLogo[128] = L"Texture_Logo";
+
 CBackGround_Logo::CBackGround_Logo(LPDIRECT3DDEVICE9 pGraphicDev)
 	: Engine::CGameObject(pGraphicDev) {
 
@@ -57,7 +59,7 @@ HRESULT CBackGround_Logo::Add_Component(void) {
 
 	// Texture
 	pComponent = m_pTextureCom = dynamic_cast<Engine::CTexture*>
-		(Engine::Clone(RESOURCE_LOGO, L"Texture_Logo"));
+		(Engine::Clone(RESOURCE_LOGO, m_szLogo));
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Texture", pComponent);
 
@@ -75,11 +77,24 @@ HRESULT CBackGround_Logo::Add_Component(void) {
 	return S_OK;
 }
 
-CBackGround_Logo* CBackGround_Logo::Create(LPDIRECT3DDEVICE9 pGraphicDev) {
+CBackGround_Logo* CBackGround_Logo::Create(LPDIRECT3DDEVICE9 pGraphicDev) 
+{
 	CBackGround_Logo*		pInstance = new CBackGround_Logo(pGraphicDev);
 
 	if (FAILED(pInstance->Ready_Object()))
 		Engine::Safe_Release(pInstance);
+
+	return pInstance;
+}
+
+CBackGround_Logo * CBackGround_Logo::Create(LPDIRECT3DDEVICE9 pGraphicDev, const _tchar * pLogo)
+{
+	CBackGround_Logo*		pInstance = new CBackGround_Logo(pGraphicDev);
+
+	if (FAILED(pInstance->Ready_Object()))
+		Engine::Safe_Release(pInstance);
+
+	lstrcpy(m_szLogo, pLogo);
 
 	return pInstance;
 }

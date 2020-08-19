@@ -18,6 +18,7 @@
 #include "TestPlayer.h"
 #include "Scene_Loading.h"
 #include "BackGround_Logo.h"
+#include "Page_Out.h"
 //-------------------------------------------------------
 
 using namespace Engine;
@@ -40,7 +41,9 @@ private:
 	HRESULT	Ready_Layer_UI(const _tchar* pLayerTag);
 
 private:
+	CPage_Out* m_pPageOut = nullptr;
 	_uint m_uFocusNum = 0;
+	_bool m_bSelected = false;
 
 public:
 	static CScene_Menu*		Create(LPDIRECT3DDEVICE9 pGraphicDev);

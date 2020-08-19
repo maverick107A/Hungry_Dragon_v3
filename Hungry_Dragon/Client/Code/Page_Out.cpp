@@ -1,57 +1,73 @@
 #include "stdafx.h"
-#include "Logo_Loop.h"
+#include "Page_Out.h"
 
 #include "Export_Function.h"
 
 USING(Engine)
 
-CLogo_Loop::CLogo_Loop(LPDIRECT3DDEVICE9 pGraphicDev)
+CPage_Out::CPage_Out(LPDIRECT3DDEVICE9 pGraphicDev)
 	: Engine::CGameObject(pGraphicDev) {
 
 }
 
-CLogo_Loop::~CLogo_Loop(void) {
+CPage_Out::~CPage_Out(void) {
 
 }
 
-HRESULT CLogo_Loop::Ready_Object(void) {
+HRESULT CPage_Out::Ready_Object(void) {
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
-	m_pTransform->m_vScale.x = 0.18f;
-	m_pTransform->m_vScale.y = 0.32f;
+	m_pTransform->m_vScale.x = 2.f;
+	m_pTransform->m_vScale.y = 2.f;
 
-	m_pTransform->m_vInfo[Engine::INFO_POS] = _vec3(0.82f,-0.68f,0.2f);
+	m_pTransform->m_vInfo[Engine::INFO_POS].z = 0.2f;
 	//m_pTransform->m_vAngle.z = D3DXToRadian(45.f);
 
 	return S_OK;
 }
 
-int CLogo_Loop::Update_Object(const float& fTimeDelta) {
+int CPage_Out::Update_Object(const float& fTimeDelta) {
+
+	if (!m_bActivate)
+	{
+		return 0;
+	}
+
 	Engine::CGameObject::Update_Object(fTimeDelta);
 
 	Engine::Add_RenderGroup(Engine::RENDER_UI, this);
 
-	m_uLogo = (m_uLogo + 1) % 240;
+	++m_uLogo;
+	if (75 < m_uLogo)
+	{
+		m_uLogo = 75;
+		m_bPageOut = true;
+	}
 
 	return 0;
 }
 
-void CLogo_Loop::Render_Object(void) {
+void CPage_Out::Render_Object(void) {
+	if (!m_bActivate)
+	{
+		return;
+	}
+
 	m_pTransform->Set_Transform(m_pGraphicDev);
 
-	m_pTextureCom->Set_Texture(m_uLogo/4);
+	m_pTextureCom->Set_Texture(m_uLogo);
 
 
 	m_pBufferCom->Render_Buffer();
 
 }
 
-void CLogo_Loop::Free(void) {
+void CPage_Out::Free(void) {
 	Engine::CGameObject::Free();
 }
 
 
-HRESULT CLogo_Loop::Add_Component(void) {
+HRESULT CPage_Out::Add_Component(void) {
 	Engine::CComponent*		pComponent = nullptr;
 
 	// buffer
@@ -62,7 +78,7 @@ HRESULT CLogo_Loop::Add_Component(void) {
 
 	// Texture
 	pComponent = m_pTextureCom = dynamic_cast<Engine::CTexture*>
-		(Engine::Clone(RESOURCE_LOGO, L"Texture_LoadingLoop"));
+		(Engine::Clone(RESOURCE_STAGE, L"Texture_SceneChange"));
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Texture", pComponent);
 
@@ -80,8 +96,8 @@ HRESULT CLogo_Loop::Add_Component(void) {
 	return S_OK;
 }
 
-CLogo_Loop* CLogo_Loop::Create(LPDIRECT3DDEVICE9 pGraphicDev) {
-	CLogo_Loop*		pInstance = new CLogo_Loop(pGraphicDev);
+CPage_Out* CPage_Out::Create(LPDIRECT3DDEVICE9 pGraphicDev) {
+	CPage_Out*		pInstance = new CPage_Out(pGraphicDev);
 
 	if (FAILED(pInstance->Ready_Object()))
 		Engine::Safe_Release(pInstance);

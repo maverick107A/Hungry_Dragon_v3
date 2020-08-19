@@ -1,57 +1,63 @@
 #include "stdafx.h"
-#include "Logo_Loop.h"
+#include "Fire_Wall.h"
 
 #include "Export_Function.h"
 
 USING(Engine)
 
-CLogo_Loop::CLogo_Loop(LPDIRECT3DDEVICE9 pGraphicDev)
+CFire_Wall::CFire_Wall(LPDIRECT3DDEVICE9 pGraphicDev)
 	: Engine::CGameObject(pGraphicDev) {
 
 }
 
-CLogo_Loop::~CLogo_Loop(void) {
+CFire_Wall::~CFire_Wall(void) {
 
 }
 
-HRESULT CLogo_Loop::Ready_Object(void) {
+HRESULT CFire_Wall::Ready_Object(void) {
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
-	m_pTransform->m_vScale.x = 0.18f;
-	m_pTransform->m_vScale.y = 0.32f;
+	m_pTransform->m_vScale.x = 2.f;
+	m_pTransform->m_vScale.y = 2.f;
 
-	m_pTransform->m_vInfo[Engine::INFO_POS] = _vec3(0.82f,-0.68f,0.2f);
+	m_pTransform->m_vInfo[Engine::INFO_POS] = _vec3(0.f,0.f,0.2f);
 	//m_pTransform->m_vAngle.z = D3DXToRadian(45.f);
 
 	return S_OK;
 }
 
-int CLogo_Loop::Update_Object(const float& fTimeDelta) {
+int CFire_Wall::Update_Object(const float& fTimeDelta) {
 	Engine::CGameObject::Update_Object(fTimeDelta);
 
 	Engine::Add_RenderGroup(Engine::RENDER_UI, this);
 
-	m_uLogo = (m_uLogo + 1) % 240;
+	m_uLogo = (m_uLogo + 1) % 76;
 
 	return 0;
 }
 
-void CLogo_Loop::Render_Object(void) {
+void CFire_Wall::Render_Object(void) {
 	m_pTransform->Set_Transform(m_pGraphicDev);
 
-	m_pTextureCom->Set_Texture(m_uLogo/4);
+	m_pTextureCom->Set_Texture(m_uLogo/2);
 
+	m_pGraphicDev->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
+	m_pGraphicDev->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCCOLOR);
+	m_pGraphicDev->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCCOLOR);
 
+	m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 	m_pBufferCom->Render_Buffer();
+	m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
+	
 
 }
 
-void CLogo_Loop::Free(void) {
+void CFire_Wall::Free(void) {
 	Engine::CGameObject::Free();
 }
 
 
-HRESULT CLogo_Loop::Add_Component(void) {
+HRESULT CFire_Wall::Add_Component(void) {
 	Engine::CComponent*		pComponent = nullptr;
 
 	// buffer
@@ -62,9 +68,15 @@ HRESULT CLogo_Loop::Add_Component(void) {
 
 	// Texture
 	pComponent = m_pTextureCom = dynamic_cast<Engine::CTexture*>
-		(Engine::Clone(RESOURCE_LOGO, L"Texture_LoadingLoop"));
+		(Engine::Clone(RESOURCE_STAGE, L"Texture_FireWall"));
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Texture", pComponent);
+
+	// Texture
+	pComponent = m_pTextureMask = dynamic_cast<Engine::CTexture*>
+		(Engine::Clone(RESOURCE_STAGE, L"TEX_RED"));
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Texture2", pComponent);
 
 	//Transform
 	pComponent = m_pTransform = Engine::CTransform::Create();
@@ -80,8 +92,8 @@ HRESULT CLogo_Loop::Add_Component(void) {
 	return S_OK;
 }
 
-CLogo_Loop* CLogo_Loop::Create(LPDIRECT3DDEVICE9 pGraphicDev) {
-	CLogo_Loop*		pInstance = new CLogo_Loop(pGraphicDev);
+CFire_Wall* CFire_Wall::Create(LPDIRECT3DDEVICE9 pGraphicDev) {
+	CFire_Wall*		pInstance = new CFire_Wall(pGraphicDev);
 
 	if (FAILED(pInstance->Ready_Object()))
 		Engine::Safe_Release(pInstance);

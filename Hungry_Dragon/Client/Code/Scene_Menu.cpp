@@ -27,6 +27,17 @@ HRESULT CScene_Menu::Ready_Scene(void) {
 _int CScene_Menu::Update_Scene(const _float& fTimeDelta) {
 	_int iExit = Engine::CScene::Update_Scene(fTimeDelta);
 
+
+	if (m_bSelected)
+	{
+		if (m_pPageOut->Get_PageOut())
+		{
+			CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_SELECT);
+		}
+		return 0;
+	}
+
+
 	
 	if (GetAsyncKeyState(VK_LEFT) & 0x0001) {
 		--m_uFocusNum;
@@ -34,6 +45,7 @@ _int CScene_Menu::Update_Scene(const _float& fTimeDelta) {
 		{
 			m_uFocusNum = 2;
 		}
+		Engine::Get_FMOD()->PlayEffect(L"MouseOn");
 	}
 	if (GetAsyncKeyState(VK_UP) & 0x0001) {
 		--m_uFocusNum;
@@ -41,13 +53,16 @@ _int CScene_Menu::Update_Scene(const _float& fTimeDelta) {
 		{
 			m_uFocusNum = 2;
 		}
+		Engine::Get_FMOD()->PlayEffect(L"MouseOn");
 	}
 
 	if (GetAsyncKeyState(VK_RIGHT) & 0x0001) {
 		m_uFocusNum = (m_uFocusNum + 1) % 3;
+		Engine::Get_FMOD()->PlayEffect(L"MouseOn");
 	}
 	if (GetAsyncKeyState(VK_DOWN) & 0x0001) {
 		m_uFocusNum = (m_uFocusNum + 1) % 3;
+		Engine::Get_FMOD()->PlayEffect(L"MouseOn");
 	}
 
 	if (GetAsyncKeyState(VK_RETURN) & 0x8000) {
@@ -55,7 +70,11 @@ _int CScene_Menu::Update_Scene(const _float& fTimeDelta) {
 		switch (m_uFocusNum)
 		{
 		case 0:
-			CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_SELECT);
+			
+			m_bSelected = true;
+			m_pPageOut->Set_Activate(true);
+			m_uFocusNum = -1;
+			
 			break;
 		case 1:
 			CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_OPTION);
@@ -89,33 +108,31 @@ _int CScene_Menu::Update_Scene(const _float& fTimeDelta) {
 void CScene_Menu::Render_Scene(void) {
 	// debug용
 	TCHAR str[128] = L"";
-	wsprintf(str, L"배고픈 용가리");
-	Engine::Render_Font(L"Font_Jinji", str, &_vec2(400.f, 200.f), D3DXCOLOR(0.f, 0.f, 1.f, 1.f));
 	switch (m_uFocusNum)
 	{
 	case 0:
 		wsprintf(str, L"게임 시작");
-		Engine::Render_Font(L"Font_Default", str, &_vec2(400.f, 450.f), D3DXCOLOR(0.f, 1.f, 1.f, 1.f));
+		Engine::Render_Font_Center(L"Font_Light", str, &_vec2(1600.f, 550.f), D3DXCOLOR(0.f, 1.f, 1.f, 1.f));
 		wsprintf(str, L"옵션 설정");
-		Engine::Render_Font(L"Font_Default", str, &_vec2(400.f, 550.f), D3DXCOLOR(0.f, 0.5f, 0.5f, 1.f));
+		Engine::Render_Font_Center(L"Font_Light", str, &_vec2(1600.f, 600.f), D3DXCOLOR(0.f, 0.5f, 0.5f, 1.f));
 		wsprintf(str, L"게임 종료");
-		Engine::Render_Font(L"Font_Default", str, &_vec2(400.f, 650.f), D3DXCOLOR(0.f, 0.5f, 0.5f, 1.f));
+		Engine::Render_Font_Center(L"Font_Light", str, &_vec2(1600.f, 650.f), D3DXCOLOR(0.f, 0.5f, 0.5f, 1.f));
 		break;
 	case 1:
 		wsprintf(str, L"게임 시작");
-		Engine::Render_Font(L"Font_Default", str, &_vec2(400.f, 450.f), D3DXCOLOR(0.f, 0.5f, 0.5f, 1.f));
+		Engine::Render_Font_Center(L"Font_Light", str, &_vec2(1600.f, 550.f), D3DXCOLOR(0.f, 0.5f, 0.5f, 1.f));
 		wsprintf(str, L"옵션 설정");
-		Engine::Render_Font(L"Font_Default", str, &_vec2(400.f, 550.f), D3DXCOLOR(0.f, 1.f, 1.f, 1.f));
+		Engine::Render_Font_Center(L"Font_Light", str, &_vec2(1600.f, 600.f), D3DXCOLOR(0.f, 1.f, 1.f, 1.f));
 		wsprintf(str, L"게임 종료");
-		Engine::Render_Font(L"Font_Default", str, &_vec2(400.f, 650.f), D3DXCOLOR(0.f, 0.5f, 0.5f, 1.f));
+		Engine::Render_Font_Center(L"Font_Light", str, &_vec2(1600.f, 650.f), D3DXCOLOR(0.f, 0.5f, 0.5f, 1.f));
 		break;
 	case 2:
 		wsprintf(str, L"게임 시작");
-		Engine::Render_Font(L"Font_Default", str, &_vec2(400.f, 450.f), D3DXCOLOR(0.f, 0.5f, 0.5f, 1.f));
+		Engine::Render_Font_Center(L"Font_Light", str, &_vec2(1600.f, 550.f), D3DXCOLOR(0.f, 0.5f, 0.5f, 1.f));
 		wsprintf(str, L"옵션 설정");
-		Engine::Render_Font(L"Font_Default", str, &_vec2(400.f, 550.f), D3DXCOLOR(0.f, 0.5f, 0.5f, 1.f));
+		Engine::Render_Font_Center(L"Font_Light", str, &_vec2(1600.f, 600.f), D3DXCOLOR(0.f, 0.5f, 0.5f, 1.f));
 		wsprintf(str, L"게임 종료");
-		Engine::Render_Font(L"Font_Default", str, &_vec2(400.f, 650.f), D3DXCOLOR(0.f, 1.f, 1.f, 1.f));
+		Engine::Render_Font_Center(L"Font_Light", str, &_vec2(1600.f, 650.f), D3DXCOLOR(0.f, 1.f, 1.f, 1.f));
 		break;
 	}
 	
@@ -148,9 +165,11 @@ HRESULT CScene_Menu::Ready_Layer_UI(const _tchar* pLayerTag) {
 	Engine::CGameObject*		pGameObject = nullptr;
 
 	// BackGround
-	pGameObject = CBackGround_Logo::Create(m_pGraphicDev);
+	pGameObject = CBackGround_Logo::Create(m_pGraphicDev,L"Texture_LogoMenu");
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(pLayer->Add_Object(L"BackGround", pGameObject), E_FAIL);
+
+	Register_GameObject<CPage_Out>(&m_pPageOut, pLayer, L"PageOut");
 
 	m_mapLayer.emplace(pLayerTag, pLayer);
 
