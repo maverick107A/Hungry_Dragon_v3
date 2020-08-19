@@ -24,7 +24,7 @@ _int CAnimator::Update_Component(const _float & fTimeDelta)
 {
 	m_nowFrame += fTimeDelta;
 
-	if (m_nowFrame > m_maxFrame)
+	if (m_nowFrame >= m_maxFrame+1)
 	{
 		m_nowFrame = 0;
 	}

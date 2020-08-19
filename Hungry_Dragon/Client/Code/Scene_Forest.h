@@ -80,7 +80,7 @@ private:
 	// 플레이어 받아오는곳
 	Engine::CTransform*		pPlayerTransformCom;
 
-	Engine::CMovingObject*			m_pTempMovingObj;
+	Engine::CMovingObject*	m_pTempMovingObj;
 };
 
 #endif //

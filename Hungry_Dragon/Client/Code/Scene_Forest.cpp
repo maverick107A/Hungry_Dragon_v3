@@ -72,9 +72,6 @@ HRESULT CScene_Forest::Ready_Scene(void) {
 
 	m_hFogTechHandle = m_pFogEffect->GetTechniqueByName("Fog");
 
-	m_pTempMovingObj = Engine::CMovingObject::Create(m_pGraphicDev);
-	m_pTempMovingObj->Ready_Object();
-
 	return S_OK;
 }
 
