@@ -30,6 +30,14 @@ public:
 private:
 	virtual void	State_Change() override;
 	virtual HRESULT	Add_Component(void) override;
+	void		Animation_Render();
+
+	float m_vAngle = 0.f;
+	float m_fSpeed = 0.05f;
+
+	D3DXMATRIX m_matOld1;
+	D3DXMATRIX m_matOld2;
+	D3DXMATRIX m_matOld3;
 
 public:
 	void	Switch_Phase(int _iPhase);

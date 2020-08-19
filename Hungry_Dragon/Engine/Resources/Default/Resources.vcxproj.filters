@@ -112,6 +112,9 @@
     <Filter Include="00. Resources\00. VIBuffer\01. CubeDra\02. Body">
       <UniqueIdentifier>{16686200-2669-4384-89d3-cfa75f907407}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00. Resources\00. VIBuffer\01. CubeDra\03. Wing">
+      <UniqueIdentifier>{3a249835-8424-42d9-b4e8-bd733ebb6da1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\Resources.cpp">
@@ -230,6 +233,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\DragonBody.cpp">
       <Filter>00. Resources\00. VIBuffer\01. CubeDra\02. Body</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DragonWing.cpp">
+      <Filter>00. Resources\00. VIBuffer\01. CubeDra\03. Wing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -352,6 +358,9 @@
     </ClInclude>
     <ClInclude Include="..\Code\DragonBody.h">
       <Filter>00. Resources\00. VIBuffer\01. CubeDra\02. Body</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\DragonWing.h">
+      <Filter>00. Resources\00. VIBuffer\01. CubeDra\03. Wing</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

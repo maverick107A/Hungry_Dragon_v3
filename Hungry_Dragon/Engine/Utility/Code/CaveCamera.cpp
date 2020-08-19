@@ -29,20 +29,20 @@ _int Engine::CCaveCamera::Update_Camera(const _float& fTimeDelta, LPDIRECT3DDEVI
 
 	Shock_Cam();
 
-	switch (m_ePhase)
-	{
-	case Engine::CCaveCamera::PHASE_ZERO:
-		Move_Phase01(pGraphicDev, _vPos, _fAngleX, _fAngleY);
-		break;
-	case Engine::CCaveCamera::PHASE_ONE:
-		Move_Phase01(pGraphicDev, _vPos, _fAngleX, _fAngleY);
-		break;
-	case Engine::CCaveCamera::PHASE_TWO:
-		Move_Phase2(pGraphicDev, _vPos, _fAngleX, _fAngleY);
-		break;
-	}
+	//switch (m_ePhase)
+	//{
+	//case Engine::CCaveCamera::PHASE_ZERO:
+	//	Move_Phase01(pGraphicDev, _vPos, _fAngleX, _fAngleY);
+	//	break;
+	//case Engine::CCaveCamera::PHASE_ONE:
+	//	Move_Phase01(pGraphicDev, _vPos, _fAngleX, _fAngleY);
+	//	break;
+	//case Engine::CCaveCamera::PHASE_TWO:
+	//	Move_Phase2(pGraphicDev, _vPos, _fAngleX, _fAngleY);
+	//	break;
+	//}
 
-	//Move_Camera(pGraphicDev, _vPos, _fAngleX, _fAngleY);
+	Move_Camera(pGraphicDev, _vPos, _fAngleX, _fAngleY);
 
 	D3DXMATRIX V;
 	D3DXMatrixLookAtLH(&V, &m_vPos, &m_vDir, &m_vUp);
@@ -51,14 +51,40 @@ _int Engine::CCaveCamera::Update_Camera(const _float& fTimeDelta, LPDIRECT3DDEVI
 	return 0;
 }
 
+_int CCaveCamera::Update_Camera(const _float & _fTimeDelta, float * _fAngleX, float * _fAngleY, _vec3 * _vLook, _vec3 * _vUp, CBaseLand * _pTerrain)
+{
+	if (GetAsyncKeyState(VK_F2) & 0x0001)
+	{
+		m_bShock = true;
+		m_fShockAngle = 5.f;
+	}
+
+	Shock_Cam();
+
+	switch (m_ePhase)
+	{
+	case Engine::CCaveCamera::PHASE_ZERO:
+		Move_Phase01(_fAngleX, _fAngleY, _vLook, _vUp);
+		break;
+	case Engine::CCaveCamera::PHASE_ONE:
+		Move_Phase01(_fAngleX, _fAngleY, _vLook, _vUp);
+		break;
+	case Engine::CCaveCamera::PHASE_TWO:
+		Move_Phase2(_fAngleX, _fAngleY, _vLook, _vUp);
+		break;
+	}
+
+	return 0;
+}
+
 void CCaveCamera::Move_Camera(LPDIRECT3DDEVICE9 & pGraphicDev, _vec3 _vPos, float* _fAngleX, float* _fAngleY)
 {
 	if (m_bLock)
 		return;
-	//POINT tPos = {};
-	//GetCursorPos(&tPos);
-	//m_vAfterAngle.y += (tPos.x - m_tCenter.x)*0.004f*cosf(m_vAngle.z) + (tPos.y - m_tCenter.y)*0.004f*sinf(m_vAngle.z);
-	//m_vAfterAngle.x += (tPos.y - m_tCenter.y)*0.004f*cosf(m_vAngle.z) + -(tPos.x - m_tCenter.x)*0.004f*sinf(m_vAngle.z);
+	POINT tPos = {};
+	GetCursorPos(&tPos);
+	m_vAfterAngle.y += (tPos.x - m_tCenter.x)*0.004f*cosf(m_vAngle.z) + (tPos.y - m_tCenter.y)*0.004f*sinf(m_vAngle.z);
+	m_vAfterAngle.x += (tPos.y - m_tCenter.y)*0.004f*cosf(m_vAngle.z) + -(tPos.x - m_tCenter.x)*0.004f*sinf(m_vAngle.z);
 	*_fAngleX = m_vAfterAngle.x;
 	*_fAngleY = m_vAfterAngle.y;
 
@@ -83,12 +109,12 @@ void CCaveCamera::Move_Camera(LPDIRECT3DDEVICE9 & pGraphicDev, _vec3 _vPos, floa
 	//업백터
 	D3DXVec3TransformNormal(&m_vUp, &m_vUp, &vRotTotal);
 
-	//SetCursorPos(m_tCenter.x, m_tCenter.y);
+	SetCursorPos(m_tCenter.x, m_tCenter.y);
 	m_vPos = _vPos - m_vDir*m_fCameraDis;
 	m_vDir = m_vPos + m_vDir;
 }
 
-void CCaveCamera::Move_Phase01(LPDIRECT3DDEVICE9 & pGraphicDev, _vec3 _vPos, float * _fAngleX, float * _fAngleY)
+void CCaveCamera::Move_Phase01(float * _fAngleX, float * _fAngleY, _vec3 * _vLook, _vec3 * _vUp)
 {
 	*_fAngleX = m_vAfterAngle.x;
 	*_fAngleY = m_vAfterAngle.y;
@@ -113,12 +139,9 @@ void CCaveCamera::Move_Phase01(LPDIRECT3DDEVICE9 & pGraphicDev, _vec3 _vPos, flo
 	D3DXVec3TransformNormal(&m_vDir, &m_vLook, &vRotTotal);
 	//업백터
 	D3DXVec3TransformNormal(&m_vUp, &m_vUp, &vRotTotal);
-
-	m_vPos = _vPos - m_vDir*m_fCameraDis;
-	m_vDir = m_vPos + m_vDir;
 }
 
-void CCaveCamera::Move_Phase2(LPDIRECT3DDEVICE9 & pGraphicDev, _vec3 _vPos, float * _fAngleX, float * _fAngleY)
+void CCaveCamera::Move_Phase2(float * _fAngleX, float * _fAngleY, _vec3 * _vLook, _vec3 * _vUp)
 {
 	*_fAngleX = m_vAfterAngle.x;
 	*_fAngleY = m_vAfterAngle.y;
@@ -143,10 +166,6 @@ void CCaveCamera::Move_Phase2(LPDIRECT3DDEVICE9 & pGraphicDev, _vec3 _vPos, floa
 	D3DXVec3TransformNormal(&m_vDir, &m_vLook, &vRotTotal);
 	//업백터
 	D3DXVec3TransformNormal(&m_vUp, &m_vUp, &vRotTotal);
-
-	//SetCursorPos(m_tCenter.x, m_tCenter.y);
-	m_vPos = _vPos - m_vDir*m_fCameraDis;
-	m_vDir = m_vPos + m_vDir;
 }
 
 void CCaveCamera::Switch_Phase(int _iPhase)

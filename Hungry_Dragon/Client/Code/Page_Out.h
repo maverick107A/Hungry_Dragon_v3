@@ -27,7 +27,7 @@ public:
 
 public:
 	Engine::_bool Get_PageOut() { return m_bPageOut; }
-	Engine::_bool Set_Activate(Engine::_bool _bActivate) { Engine::Get_FMOD()->PlayEffect(L"BreathTest"); return m_bActivate = _bActivate; }
+	Engine::_bool Set_Activate(Engine::_bool _bActivate) { /*Engine::Get_FMOD()->PlayEffect(L"BreathTest");*/ return m_bActivate = _bActivate; }
 
 
 private:

@@ -25,7 +25,7 @@ HRESULT Engine::CBreathBase::Ready_BreathBase(LPDIRECT3DDEVICE9& _pGraphicDev)
 	D3DXCreateCylinder(
 		m_pGraphicDev,
 		0.7f, // radius at negative z end
-		10.f, // radius at positive z end
+		0.7f, // radius at positive z end
 		100.f, // length of cylinder
 		10,   // slices
 		10,   // stacks

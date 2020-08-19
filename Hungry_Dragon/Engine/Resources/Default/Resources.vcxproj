@@ -172,6 +172,7 @@ call CopyResources.bat</Command>
     <ClCompile Include="..\Code\CliffCylinder.cpp" />
     <ClCompile Include="..\Code\DragonBody.cpp" />
     <ClCompile Include="..\Code\DragonJaw.cpp" />
+    <ClCompile Include="..\Code\DragonWing.cpp" />
     <ClCompile Include="..\Code\HeightCol.cpp" />
     <ClCompile Include="..\Code\MonsterBoard.cpp" />
     <ClCompile Include="..\Code\ObstacleCube.cpp" />
@@ -214,6 +215,7 @@ call CopyResources.bat</Command>
     <ClInclude Include="..\Code\CliffCylinder.h" />
     <ClInclude Include="..\Code\DragonBody.h" />
     <ClInclude Include="..\Code\DragonJaw.h" />
+    <ClInclude Include="..\Code\DragonWing.h" />
     <ClInclude Include="..\Code\HeightCol.h" />
     <ClInclude Include="..\Code\MonsterBoard.h" />
     <ClInclude Include="..\Code\ObstacleCube.h" />

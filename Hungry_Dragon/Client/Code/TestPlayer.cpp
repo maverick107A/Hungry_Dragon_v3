@@ -3,8 +3,6 @@
 
 #include "Export_Function.h"
 //Vi버퍼
-#include "CubeDra.h"
-#include "DragonJaw.h"
 
 #include "Camera.h"
 #include "PlayerState.h"
@@ -102,7 +100,7 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 		MessageBox(nullptr, szBuff, L"XY", 0);
 	}
 
-	//m_pTransform->m_vInCamPos = -m_vUp*25.f;
+	m_pTransform->m_vInCamPos -= m_vUp*0.1f;
 
 	//임시
 	if (m_bBreath)

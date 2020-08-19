@@ -16,6 +16,7 @@
 #include "DragonFace.h"
 #include "DragonJaw.h"
 #include "DragonBody.h"
+#include "DragonWing.h"
 
 #include "CubeCol.h"
 #include "ForestLand.h"

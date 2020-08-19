@@ -46,16 +46,52 @@ int CCavePlayer::Update_Object(const float& fTimeDelta)
 	//
 	State_Change();
 
+	//ÀÓ½Ã
+	if (m_bBreath)
+	{
+		m_pPartsTrans[PART_JAW]->m_vAngle.x = D3DX_PI*0.125f;
+		m_pPartsTrans[PART_JAW]->m_vInfo[Engine::INFO_POS].y = -sinf(D3DX_PI*0.125f);
+		m_pPartsTrans[PART_JAW]->m_vInfo[Engine::INFO_POS].z = cosf(D3DX_PI*0.125f);
+
+		m_pPartsTrans[PART_FACE]->m_vAngle.x = -D3DX_PI*0.125f;
+		m_pPartsTrans[PART_FACE]->m_vInfo[Engine::INFO_POS].y = sinf(D3DX_PI*0.125f);
+		m_pPartsTrans[PART_FACE]->m_vInfo[Engine::INFO_POS].z = cosf(D3DX_PI*0.125f);
+
+		//m_pPartsTrans[PART_BODY]->m_vAngle.x = -D3DX_PI*0.125f;
+		//m_pPartsTrans[PART_BODY]->m_vInfo[Engine::INFO_POS].y = sinf(D3DX_PI*0.125f);
+		m_pPartsTrans[PART_BODY]->m_vInfo[Engine::INFO_POS].z = -1.5f;
+		m_pPartsTrans[PART_2BODY]->m_vInfo[Engine::INFO_POS].z = -3.f;
+		m_pPartsTrans[PART_3BODY]->m_vInfo[Engine::INFO_POS].z = -4.5f;
+	}
+	else
+	{
+		m_pPartsTrans[PART_JAW]->m_vAngle.x = m_vAngle;
+		m_pPartsTrans[PART_JAW]->m_vInfo[Engine::INFO_POS].y = -sinf(m_vAngle);
+		m_pPartsTrans[PART_JAW]->m_vInfo[Engine::INFO_POS].z = cosf(m_vAngle);
+
+		m_pPartsTrans[PART_FACE]->m_vAngle.x = -m_vAngle;
+		m_pPartsTrans[PART_FACE]->m_vInfo[Engine::INFO_POS].y = sinf(m_vAngle);
+		m_pPartsTrans[PART_FACE]->m_vInfo[Engine::INFO_POS].z = cosf(m_vAngle);
+
+		m_pPartsTrans[PART_BODY]->m_vInfo[Engine::INFO_POS].z = -1.5f;
+		m_pPartsTrans[PART_2BODY]->m_vInfo[Engine::INFO_POS].z = -3.f;
+		m_pPartsTrans[PART_3BODY]->m_vInfo[Engine::INFO_POS].z = -4.5f;
+	}
+
+
+	if (m_vAngle < 0.f || m_vAngle > D3DX_PI*0.125f)
+		m_fSpeed *= -1;
+	m_vAngle += m_fSpeed;
+
+	//
+
 	Engine::CGameObject::Update_Object(fTimeDelta);
 	return 0;
 }
 
 void CCavePlayer::Render_Object(void)
 {
-	//m_pTransform->Set_Transform(m_pGraphicDev);
-	//m_pBufferFace->Render_Buffer();
-	////m_pTransform->Set_Transform(m_pGraphicDev);
-	//m_pBufferJaw->Render_Buffer();
+	Animation_Render();
 
 	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end(); ++iter) {
 		(*iter)->Render_Buffer();
@@ -101,6 +137,11 @@ HRESULT CCavePlayer::Add_Component(void)
 		(Engine::Clone(RESOURCE_STATIC, L"BUFFER_JAW"));
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_STATIC].emplace(L"Jaw_Buffer", pComponent);
+	//¸öÅë
+	pComponent = m_pPartsBuffer[PART_BODY] = static_cast<Engine::CVIBuffer*>
+		(Engine::Clone(RESOURCE_STATIC, L"BUFFER_BODY"));
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	m_mapComponent[Engine::ID_STATIC].emplace(L"Body_Buffer", pComponent);
 
 	//Transform
 	pComponent = m_pTransform = Engine::CTransform::Create();
@@ -114,6 +155,18 @@ HRESULT CCavePlayer::Add_Component(void)
 	pComponent = m_pPartsTrans[PART_JAW] = Engine::CTransform::Create();
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_JawTransform", pComponent);
+	//¸öÅë
+	pComponent = m_pPartsTrans[PART_BODY] = Engine::CTransform::Create();
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_BodyTransform", pComponent);
+
+	pComponent = m_pPartsTrans[PART_2BODY] = Engine::CTransform::Create();
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_2BodyTransform", pComponent);
+
+	pComponent = m_pPartsTrans[PART_3BODY] = Engine::CTransform::Create();
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_3BodyTransform", pComponent);
 
 	//Camera
 	pComponent = m_pCamera = Engine::CCaveCamera::Create();
@@ -126,6 +179,40 @@ HRESULT CCavePlayer::Add_Component(void)
 	//m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_State", m_pState);
 
 	return S_OK;
+}
+
+void CCavePlayer::Animation_Render()
+{
+	_matrix matWorld;
+	//¾ó±¼
+	matWorld = m_pPartsTrans[PART_FACE]->Get_World() * m_pTransform->Get_World();
+	m_pPartsTrans[PART_FACE]->Set_World(&matWorld);
+	m_pPartsTrans[PART_FACE]->Set_Transform(m_pGraphicDev);
+	m_pPartsBuffer[PART_FACE]->Render_Buffer();
+	//ÅÎ
+	matWorld = m_pPartsTrans[PART_JAW]->Get_World() * m_pTransform->Get_World();
+	m_pPartsTrans[PART_JAW]->Set_World(&matWorld);
+	m_pPartsTrans[PART_JAW]->Set_Transform(m_pGraphicDev);
+	m_pPartsBuffer[PART_JAW]->Render_Buffer();
+	//¸öÅë
+	matWorld = m_pPartsTrans[PART_BODY]->Get_World() * m_matOld1;
+	m_pPartsTrans[PART_BODY]->Set_World(&matWorld);
+	m_pPartsTrans[PART_BODY]->Set_Transform(m_pGraphicDev);
+	m_pPartsBuffer[PART_BODY]->Render_Buffer();
+
+	matWorld = m_pPartsTrans[PART_2BODY]->Get_World() * m_matOld2;
+	m_pPartsTrans[PART_2BODY]->Set_World(&matWorld);
+	m_pPartsTrans[PART_2BODY]->Set_Transform(m_pGraphicDev);
+	m_pPartsBuffer[PART_BODY]->Render_Buffer();
+
+	matWorld = m_pPartsTrans[PART_3BODY]->Get_World() * m_matOld3;
+	m_pPartsTrans[PART_3BODY]->Set_World(&matWorld);
+	m_pPartsTrans[PART_3BODY]->Set_Transform(m_pGraphicDev);
+	m_pPartsBuffer[PART_BODY]->Render_Buffer();
+
+	m_matOld3 = m_matOld2;
+	m_matOld2 = m_matOld1;
+	m_matOld1 = m_pTransform->Get_World();
 }
 
 void CCavePlayer::Switch_Phase(int _iPhase)
