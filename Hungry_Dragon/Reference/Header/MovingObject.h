@@ -30,7 +30,7 @@ public:
 
 protected:
 	vector<CVICustom*>	m_pMeshArray;
-	vector<CTransform*>	m_pMeshTransform;
+	vector<CAnimationTransform*>	m_pMeshTransform;
 	CAnimator*			m_pAnimator;
 };
 

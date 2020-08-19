@@ -5,6 +5,7 @@
 #include "Management.h"
 #include "ObjectPool.h"
 #include "Transform.h"
+#include "AnimationTransform.h"
 #include "Renderer.h"
 #include "Layer.h"
 #include "GameObject.h"

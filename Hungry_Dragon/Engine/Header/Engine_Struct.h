@@ -178,10 +178,12 @@ namespace Engine
 
 	typedef struct tagMovement
 	{
-		_matrix matScale;
-		_matrix matRot;
-		_matrix matTrans;
-		_matrix matRevolution;
+		_vec3 vecScale;
+		_vec3 vecRot;
+		_vec3 vecTrans;
+		_vec3 vecRevParent;
+		_vec3 vecRevolution;
+		_vec3 vecParent;
 		_int	tFrame;
 	}MOVEMENT;
 }

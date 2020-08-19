@@ -40,10 +40,12 @@ _int CAnimator::Register_MoveTarget()
 	//기본 위치
 	MOVEMENT idleMovement;
 	idleMovement.tFrame = 0;
-	D3DXMatrixIdentity(&idleMovement.matScale);
-	D3DXMatrixIdentity(&idleMovement.matRot);
-	D3DXMatrixIdentity(&idleMovement.matTrans);
-	D3DXMatrixIdentity(&idleMovement.matRevolution);
+	idleMovement.vecScale=_vec3(1.f,1.f,1.f);
+	idleMovement.vecRot=_vec3(0.f,0.f,0.f);
+	idleMovement.vecTrans = _vec3(0.f, 0.f, 0.f);
+	idleMovement.vecRevParent = _vec3(0.f, 0.f, 0.f);
+	idleMovement.vecRevolution = _vec3(0.f, 0.f, 0.f);
+	idleMovement.vecParent = _vec3(0.f, 0.f, 0.f);
 	
 	//움직임을 저장할 벡터
 	vector<MOVEMENT> tempVector;
@@ -67,7 +69,7 @@ void CAnimator::Insert_Scale(_int _targetIndex, _int _targetFrame, _vec3 _vecSca
 		Insert_Idle(-1);
 	}
 
-	D3DXMatrixScaling(&m_moventList[_targetIndex][_targetFrame].matScale, _vecScale.x,_vecScale.y,_vecScale.z);
+	m_moventList[_targetIndex][_targetFrame].vecScale = _vecScale;
 }
 
 void CAnimator::Insert_Ratate(_int _targetIndex, _int _targetFrame, _vec3 _vecRot)
@@ -82,7 +84,7 @@ void CAnimator::Insert_Ratate(_int _targetIndex, _int _targetFrame, _vec3 _vecRo
 		Insert_Idle(-1);
 	}
 
-	D3DXMatrixRotationYawPitchRoll(&m_moventList[_targetIndex][_targetFrame].matRot, _vecRot.y, _vecRot.x, _vecRot.z);
+	m_moventList[_targetIndex][_targetFrame].vecRot = _vecRot;
 }
 
 void CAnimator::Insert_Trans(_int _targetIndex, _int _targetFrame, _vec3 _vecTrans)
@@ -97,7 +99,7 @@ void CAnimator::Insert_Trans(_int _targetIndex, _int _targetFrame, _vec3 _vecTra
 		Insert_Idle(-1);
 	}
 
-	D3DXMatrixTranslation(&m_moventList[_targetIndex][_targetFrame].matTrans, _vecTrans.x, _vecTrans.y, _vecTrans.z);
+	m_moventList[_targetIndex][_targetFrame].vecTrans = _vecTrans;
 }
 
 void CAnimator::Insert_Revolute(LPDIRECT3DDEVICE9& pGraphicDev,_int _targetIndex, _int _targetFrame, _vec3 _vec3Parent, _vec3 _vecRev)
@@ -121,10 +123,8 @@ void CAnimator::Insert_Revolute(LPDIRECT3DDEVICE9& pGraphicDev,_int _targetIndex
 
 	_matrix matParent, matRevolution;
 
-	D3DXMatrixTranslation(&matParent, _vec3Parent.x, _vec3Parent.y, _vec3Parent.z);
-	D3DXMatrixRotationYawPitchRoll(&matRevolution, _vecRev.y, _vecRev.x, _vecRev.z);
-
-	m_moventList[_targetIndex][_targetFrame].matRevolution = matParent*matRevolution;
+	m_moventList[_targetIndex][_targetFrame].vecRevParent = _vec3Parent;
+	m_moventList[_targetIndex][_targetFrame].vecRevolution = _vecRev;
 }
 
 void CAnimator::Insert_Idle(_int exceptTarget)
@@ -137,10 +137,12 @@ void CAnimator::Insert_Idle(_int exceptTarget)
 			{
 				MOVEMENT idleMove;
 				idleMove.tFrame = j;
-				D3DXMatrixIdentity(&idleMove.matScale);
-				D3DXMatrixIdentity(&idleMove.matRot);
-				D3DXMatrixIdentity(&idleMove.matTrans);
-				D3DXMatrixIdentity(&idleMove.matRevolution);
+				idleMove.vecScale = _vec3(1.f, 1.f, 1.f);
+				idleMove.vecRot = _vec3(0.f, 0.f, 0.f);
+				idleMove.vecTrans = _vec3(0.f, 0.f, 0.f);
+				idleMove.vecRevParent = _vec3(0.f, 0.f, 0.f);
+				idleMove.vecRevolution = _vec3(0.f, 0.f, 0.f);
+				idleMove.vecParent = _vec3(0.f, 0.f, 0.f);
 
 				m_moventList[i].emplace_back(idleMove);
 			}
@@ -169,6 +171,11 @@ _int CAnimator::Get_FrameArraySize(_int _frame)
 	return (int)m_moventList[_frame].size();
 }
 
+_float CAnimator::Get_NowFrame()
+{
+	return m_nowFrame;
+}
+
 _int CAnimator::Get_TotalMaxFrame()
 {
 	return m_maxFrame;
@@ -176,8 +183,9 @@ _int CAnimator::Get_TotalMaxFrame()
 
 _matrix CAnimator::Get_MoveResult(LPDIRECT3DDEVICE9 pGraphicDev, _matrix _matTarget, _int _index)
 {
-	_matrix  matWorld;
+	/*_matrix  matWorld;
 	_matrix  matWorldInverse;
+	_matrix  matParent = _matTarget;
 
 	pGraphicDev->GetTransform(D3DTS_WORLD, &matWorld);
 
@@ -186,8 +194,21 @@ _matrix CAnimator::Get_MoveResult(LPDIRECT3DDEVICE9 pGraphicDev, _matrix _matTar
 	_matTarget = _matTarget*matWorldInverse;
 
 	MOVEMENT nowMovement = m_moventList[_index][(int)m_nowFrame];
-	_matrix	 matMovement = nowMovement.matScale*nowMovement.matRot*nowMovement.matTrans*nowMovement.matRevolution;
-	_matTarget = _matTarget*matMovement*matWorld;
+	_matrix	 matMovement = nowMovement.matScale*nowMovement.matRot*nowMovement.matTrans*nowMovement.matRevolution*matParent;
+	_matTarget = _matTarget*matMovement*matWorld;*/
 
 	return _matTarget;
+}
+
+MOVEMENT CAnimator::Get_Movement(_int _targetIndex, _int _targetFrame)
+{
+	//없는 오브젝트 찾으면 벡터 범위 넘어가서 터짐.
+	//없는 프레임을 찾으면 그 프레임까지 자동 확장
+	if (_targetFrame > m_maxFrame)
+	{
+		m_maxFrame = _targetFrame;
+		Insert_Idle(-1);
+	}
+
+	return m_moventList[_targetIndex][_targetFrame];
 }

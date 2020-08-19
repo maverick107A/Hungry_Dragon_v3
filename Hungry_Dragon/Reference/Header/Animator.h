@@ -17,9 +17,10 @@ private:
 	virtual ~CAnimator(void);
 
 public:
-	_int	Get_FrameArraySize(_int _frame);
-	_int	Get_TotalMaxFrame();
-	_matrix	Get_MoveResult(LPDIRECT3DDEVICE9 pGraphicDev, _matrix _matTarget,_int _index);
+	_int		Get_FrameArraySize(_int _frame);
+	_int		Get_TotalMaxFrame();
+	_matrix		Get_MoveResult(LPDIRECT3DDEVICE9 pGraphicDev, _matrix _matTarget,_int _index);
+	MOVEMENT	Get_Movement(_int _targetIndex, _int _targetFrame);
 
 public:
 	virtual _int Update_Component(const _float& fTimeDelta);

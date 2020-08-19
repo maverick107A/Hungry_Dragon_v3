@@ -35,6 +35,7 @@ HRESULT CAnimate_Monster::Ready_Object(void)
 int CAnimate_Monster::Update_Object(const float & fTimeDelta)
 {
 	CMovingObject::Update_Object(fTimeDelta);
+	
 	return 0;
 }
 
@@ -45,21 +46,7 @@ void CAnimate_Monster::LateUpdate_Object(const float & fTimeDelta)
 
 void CAnimate_Monster::Render_Object(void)
 {
-	_matrix matWorld, matOriginWorld;
-	
-	for (size_t i = 0; i < m_pMeshArray.size(); ++i)
-	{
-		m_pMeshTransform[i]->Set_Transform(m_pGraphicDev);
-
-		matWorld = matOriginWorld = m_pMeshTransform[i]->m_matWorld;
-
-		matWorld=m_pAnimator->Get_MoveResult(m_pGraphicDev, matWorld, 0);
-		m_pMeshTransform[i]->m_matWorld = matWorld;
-		m_pMeshTransform[i]->Set_Transform(m_pGraphicDev);
-		m_pMeshArray[i]->Render_Buffer();
-
-		m_pMeshTransform[i]->m_matWorld = matOriginWorld;
-	}
+	CMovingObject::Render_Object();
 }
 
 HRESULT CAnimate_Monster::Add_Componenet(void)
@@ -95,7 +82,7 @@ HRESULT CAnimate_Monster::Add_Componenet(void)
 
 	m_pAnimator->Set_FrameSpeed(10.f);
 
-	for (int i = 0; i < 360; ++i)
+	for (int i = 0; i < 36; ++i)
 	{
 		m_pAnimator->Insert_Scale(0, i, _vec3(30.f, 30.f, 30.f));
 		m_pAnimator->Insert_Revolute(m_pGraphicDev, 0, i, _vec3(0.f, 990.f, 0.f), _vec3(0.f, 0.f, D3DXToRadian((float)i)));

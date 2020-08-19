@@ -26,6 +26,11 @@ public:
 private:
 	virtual void Free(void);
 
+private:
+	_matrix nowFrame;
+	_matrix nextFrame;
+	float tFrame;
+
 };
 END
 #endif // AnimationTransform_h__
