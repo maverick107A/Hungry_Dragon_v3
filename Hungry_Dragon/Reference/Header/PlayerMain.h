@@ -19,7 +19,7 @@ class ENGINE_DLL CPlayerMain : public Engine::CGameObject
 {
 public:
 	enum STATE { STATE_FLYIDLE, STATE_FLY, STATE_LANDIDLE, STATE_LANDRUSH, STATE_BREATHIDLE, STATE_BREATHFLY, STATE_END };
-
+	enum PARTS { PART_FACE, PART_JAW, PARTS_END};
 protected:
 	explicit CPlayerMain(LPDIRECT3DDEVICE9 pGraphicDev);
 	virtual ~CPlayerMain(void);
@@ -37,8 +37,7 @@ public:
 	float					Get_ColSize() { return m_fColSize; }
 	bool					Get_Breath() { return m_bBreath; }
 	CTransform*				Get_Transform() { return m_pTransform; }
-	CTransform*				Get_FaceTrans() { return m_pFaceTrans; }
-	CTransform*				Get_JawTrans() { return m_pJawTrans; }
+	CTransform*				Get_PartsTrans(int _i) { return m_pPartsTrans[_i]; }
 	const D3DXVECTOR3&		Get_Look() { return m_vLook; }
 	const D3DXVECTOR3&		Get_Up() { return m_vUp; }
 	const float&			Get_AngleX() { return m_fAngleX; }
@@ -60,10 +59,8 @@ protected:
 	virtual HRESULT	Add_Component(void) { return 0; }
 
 protected:
-	CVIBuffer*				m_pBufferFace = nullptr;
-	CVIBuffer*				m_pBufferJaw = nullptr;
-	CTransform*				m_pFaceTrans = nullptr;
-	CTransform*				m_pJawTrans = nullptr;
+	CVIBuffer*				m_pPartsBuffer[PART_END];
+	CTransform*				m_pPartsTrans[PART_END];
 	CCameraMain*			m_pCamera = nullptr;
 	CTerrain_Locater*		m_pTerrrrrrrain = nullptr;
 	CBaseLand*				m_pTerrain = nullptr;

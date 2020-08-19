@@ -109,6 +109,9 @@
     <Filter Include="00. Resources\00. VIBuffer\01. CubeDra\00. Face">
       <UniqueIdentifier>{e328a9f6-f537-4df0-9ae4-ab110cb33784}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00. Resources\00. VIBuffer\01. CubeDra\02. Body">
+      <UniqueIdentifier>{16686200-2669-4384-89d3-cfa75f907407}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\Resources.cpp">
@@ -224,6 +227,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\DragonFace.cpp">
       <Filter>00. Resources\00. VIBuffer\01. CubeDra\00. Face</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DragonBody.cpp">
+      <Filter>00. Resources\00. VIBuffer\01. CubeDra\02. Body</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -343,6 +349,9 @@
     </ClInclude>
     <ClInclude Include="..\Code\DragonFace.h">
       <Filter>00. Resources\00. VIBuffer\01. CubeDra\00. Face</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\DragonBody.h">
+      <Filter>00. Resources\00. VIBuffer\01. CubeDra\02. Body</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

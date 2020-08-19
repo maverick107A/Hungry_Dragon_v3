@@ -21,8 +21,6 @@ Engine::CDragonJaw::~CDragonJaw(void)
 
 HRESULT Engine::CDragonJaw::Ready_Buffer(void)
 {
-	float OneOverLoot2 = 1/sqrtf(2);
-
 	m_dwVtxCnt = 24;
 	m_dwTriCnt = 12;
 	m_dwVtxSize = sizeof(VTXCOL);

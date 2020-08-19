@@ -21,10 +21,6 @@ Engine::CDragonFace::~CDragonFace(void)
 
 HRESULT Engine::CDragonFace::Ready_Buffer(void)
 {
-	float OneOverLoot2 = 1/sqrtf(2);
-
-	//m_dwVtxCnt = 24;
-	//m_dwTriCnt = 32;
 	m_dwVtxCnt = 48;
 	m_dwTriCnt = 23;
 	m_dwVtxSize = sizeof(VTXCOL);
@@ -34,9 +30,6 @@ HRESULT Engine::CDragonFace::Ready_Buffer(void)
 	m_IdxFmt = D3DFMT_INDEX16;
 
 	FAILED_CHECK_RETURN(CVIBuffer::Ready_Buffer(), E_FAIL);
-
-	//VTXCOL*		pVertex = nullptr;
-
 
 	m_pVB->Lock(0, 0, (void**)&pVertex, 0);
 
@@ -91,7 +84,10 @@ HRESULT Engine::CDragonFace::Ready_Buffer(void)
 
 	for (int i = 0; i < 48; ++i)
 	{
-		pVertex[i].dwColor = D3DXCOLOR(0.f, 0.f, 0.f, 1.f);
+		if(i%2)
+			pVertex[i].dwColor = D3DXCOLOR(0.f, 0.f, 0.f, 1.f);
+		else
+			pVertex[i].dwColor = D3DXCOLOR(0.8f, 0.8f, 0.8f, 1.f);
 		pVertex[i].vPosition.z *= -1;
 	}
 

@@ -96,13 +96,13 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 	}
 
 	//юс╫ц
-	m_pJawTrans->m_vAngle.x = m_vAngle;
-	m_pJawTrans->m_vInfo[Engine::INFO_POS].y = -sinf(m_vAngle);
-	m_pJawTrans->m_vInfo[Engine::INFO_POS].z = cosf(m_vAngle) - 1;
+	m_pPartsTrans[PART_JAW]->m_vAngle.x = m_vAngle;
+	m_pPartsTrans[PART_JAW]->m_vInfo[Engine::INFO_POS].y = -sinf(m_vAngle);
+	m_pPartsTrans[PART_JAW]->m_vInfo[Engine::INFO_POS].z = cosf(m_vAngle);
 
-	m_pFaceTrans->m_vAngle.x = -m_vAngle;
-	m_pFaceTrans->m_vInfo[Engine::INFO_POS].y = sinf(m_vAngle);
-	m_pFaceTrans->m_vInfo[Engine::INFO_POS].z = cosf(m_vAngle)-1;
+	m_pPartsTrans[PART_FACE]->m_vAngle.x = -m_vAngle;
+	m_pPartsTrans[PART_FACE]->m_vInfo[Engine::INFO_POS].y = sinf(m_vAngle);
+	m_pPartsTrans[PART_FACE]->m_vInfo[Engine::INFO_POS].z = cosf(m_vAngle);
 
 
 	if (m_vAngle < 0.f || m_vAngle > D3DX_PI*0.125f)
@@ -111,13 +111,13 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 
 	if (m_bBreath)
 	{
-		m_pJawTrans->m_vAngle.x = D3DX_PI*0.125f;
-		m_pJawTrans->m_vInfo[Engine::INFO_POS].y = -sinf(D3DX_PI*0.125f);
-		m_pJawTrans->m_vInfo[Engine::INFO_POS].z = cosf(D3DX_PI*0.125f) - 1;
+		m_pPartsTrans[PART_JAW]->m_vAngle.x = D3DX_PI*0.125f;
+		m_pPartsTrans[PART_JAW]->m_vInfo[Engine::INFO_POS].y = -sinf(D3DX_PI*0.125f);
+		m_pPartsTrans[PART_JAW]->m_vInfo[Engine::INFO_POS].z = cosf(D3DX_PI*0.125f);
 
-		m_pFaceTrans->m_vAngle.x = -D3DX_PI*0.125f;
-		m_pFaceTrans->m_vInfo[Engine::INFO_POS].y = sinf(D3DX_PI*0.125f);
-		m_pFaceTrans->m_vInfo[Engine::INFO_POS].z = cosf(D3DX_PI*0.125f) - 1;
+		m_pPartsTrans[PART_FACE]->m_vAngle.x = -D3DX_PI*0.125f;
+		m_pPartsTrans[PART_FACE]->m_vInfo[Engine::INFO_POS].y = sinf(D3DX_PI*0.125f);
+		m_pPartsTrans[PART_FACE]->m_vInfo[Engine::INFO_POS].z = cosf(D3DX_PI*0.125f);
 	}
 	//
 	Engine::CGameObject::Update_Object(fTimeDelta);
@@ -199,12 +199,12 @@ HRESULT CTestPlayer::Add_Component(void)
 
 	// buffer
 	//╬С╠╪
-	pComponent = m_pBufferFace = static_cast<Engine::CVIBuffer*>
+	pComponent = m_pPartsBuffer[PART_FACE] = static_cast<Engine::CVIBuffer*>
 		(Engine::Clone(RESOURCE_STATIC, L"BUFFER_FACE"));
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_STATIC].emplace(L"Face_Buffer", pComponent);
 	//ен
-	pComponent = m_pBufferJaw = static_cast<Engine::CVIBuffer*>
+	pComponent = m_pPartsBuffer[PART_JAW] = static_cast<Engine::CVIBuffer*>
 		(Engine::Clone(RESOURCE_STATIC, L"BUFFER_JAW"));
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_STATIC].emplace(L"Jaw_Buffer", pComponent);
@@ -214,11 +214,11 @@ HRESULT CTestPlayer::Add_Component(void)
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_Transform", pComponent);
 	//╬С╠╪
-	pComponent = m_pFaceTrans = Engine::CTransform::Create();
+	pComponent = m_pPartsTrans[PART_FACE] = Engine::CTransform::Create();
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_FaceTransform", pComponent);
 	//ен
-	pComponent = m_pJawTrans = Engine::CTransform::Create();
+	pComponent = m_pPartsTrans[PART_JAW] = Engine::CTransform::Create();
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_JawTransform", pComponent);
 
@@ -254,13 +254,13 @@ void CTestPlayer::Animation_Render()
 {
 	_matrix matWorld;
 
-	matWorld = m_pFaceTrans->Get_World() * m_pTransform->Get_World();
-	m_pFaceTrans->Set_World(&matWorld);
-	m_pFaceTrans->Set_Transform(m_pGraphicDev);
-	m_pBufferFace->Render_Buffer();
+	matWorld = m_pPartsTrans[PART_FACE]->Get_World() * m_pTransform->Get_World();
+	m_pPartsTrans[PART_FACE]->Set_World(&matWorld);
+	m_pPartsTrans[PART_FACE]->Set_Transform(m_pGraphicDev);
+	m_pPartsBuffer[PART_FACE]->Render_Buffer();
 
-	matWorld = m_pJawTrans->Get_World() * m_pTransform->Get_World();
-	m_pJawTrans->Set_World(&matWorld);
-	m_pJawTrans->Set_Transform(m_pGraphicDev);
-	m_pBufferJaw->Render_Buffer();
+	matWorld = m_pPartsTrans[PART_JAW]->Get_World() * m_pTransform->Get_World();
+	m_pPartsTrans[PART_JAW]->Set_World(&matWorld);
+	m_pPartsTrans[PART_JAW]->Set_Transform(m_pGraphicDev);
+	m_pPartsBuffer[PART_JAW]->Render_Buffer();
 }
