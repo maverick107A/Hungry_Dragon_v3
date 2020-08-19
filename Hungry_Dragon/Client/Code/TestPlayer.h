@@ -32,9 +32,10 @@ public:
 private:
 	virtual void	State_Change() override;
 	virtual HRESULT	Add_Component(void) override;
-	void		Key_Input(const float& fTimeDelta);
-	void		Ride_Terrain();
+	void		Animation_Render();
 
+	float m_vAngle = 0.f;
+	float m_fSpeed = 0.05f;
 
 public:
 	static CTestPlayer*	Create(LPDIRECT3DDEVICE9 pGraphicDev);

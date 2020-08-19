@@ -170,6 +170,7 @@ call CopyResources.bat</Command>
   <ItemGroup>
     <ClCompile Include="..\Code\CaveCylinder.cpp" />
     <ClCompile Include="..\Code\CliffCylinder.cpp" />
+    <ClCompile Include="..\Code\DragonJaw.cpp" />
     <ClCompile Include="..\Code\HeightCol.cpp" />
     <ClCompile Include="..\Code\MonsterBoard.cpp" />
     <ClCompile Include="..\Code\ObstacleCube.cpp" />
@@ -179,7 +180,7 @@ call CopyResources.bat</Command>
     <ClCompile Include="..\Code\BaseSector.cpp" />
     <ClCompile Include="..\Code\BoardSector.cpp" />
     <ClCompile Include="..\Code\CubeCol.cpp" />
-    <ClCompile Include="..\Code\CubeDra.cpp" />
+    <ClCompile Include="..\Code\DragonFace.cpp" />
     <ClCompile Include="..\Code\Part_Fragile.cpp" />
     <ClCompile Include="..\Code\Part_Wind.cpp" />
     <ClCompile Include="..\Code\Texture_Cube.cpp" />
@@ -210,6 +211,7 @@ call CopyResources.bat</Command>
     <ClInclude Include="..\..\Header\Export_Resources.h" />
     <ClInclude Include="..\Code\CaveCylinder.h" />
     <ClInclude Include="..\Code\CliffCylinder.h" />
+    <ClInclude Include="..\Code\DragonJaw.h" />
     <ClInclude Include="..\Code\HeightCol.h" />
     <ClInclude Include="..\Code\MonsterBoard.h" />
     <ClInclude Include="..\Code\ObstacleCube.h" />
@@ -219,7 +221,7 @@ call CopyResources.bat</Command>
     <ClInclude Include="..\Code\BaseSector.h" />
     <ClInclude Include="..\Code\BoardSector.h" />
     <ClInclude Include="..\Code\CubeCol.h" />
-    <ClInclude Include="..\Code\CubeDra.h" />
+    <ClInclude Include="..\Code\DragonFace.h" />
     <ClInclude Include="..\Code\Part_Fragile.h" />
     <ClInclude Include="..\Code\Part_Wind.h" />
     <ClInclude Include="..\Code\Texture_Cube.h" />

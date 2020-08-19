@@ -64,9 +64,6 @@
     <Filter Include="01. Scene\20. Scene_Monster">
       <UniqueIdentifier>{91154392-52f1-43dc-9b58-bbffba06c1e7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Scene\70. PlayerTest">
-      <UniqueIdentifier>{8da5808b-3fa5-4c62-b2fc-d769bd219cee}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. GameObject\01. Stage\00. Background">
       <UniqueIdentifier>{bc2a9999-d260-4edf-a3bb-6ddbd6b0b943}</UniqueIdentifier>
     </Filter>
@@ -78,9 +75,6 @@
     </Filter>
     <Filter Include="02. GameObject\00. Logo\00. Logo_Background">
       <UniqueIdentifier>{e64fed0d-f85e-43fd-ab19-204a6241f108}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01. Scene\Scene_PT">
-      <UniqueIdentifier>{8da5808b-3fa5-4c62-b2fc-d769bd219cee}</UniqueIdentifier>
     </Filter>
     <Filter Include="01. Scene\02. Scene_Forest">
       <UniqueIdentifier>{8763cec5-a2a1-4192-a6cd-cc6cebdd2aae}</UniqueIdentifier>
@@ -288,9 +282,6 @@
     <ClInclude Include="..\Code\BackGround_Logo.h">
       <Filter>02. GameObject\00. Logo\00. Logo_Background</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\Scene_PT.h">
-      <Filter>01. Scene\Scene_PT</Filter>
-    </ClInclude>
     <ClInclude Include="..\Code\Scene_Cave.h">
       <Filter>01. Scene\03. Scene_Cave</Filter>
     </ClInclude>
@@ -463,9 +454,6 @@
     </ClCompile>
     <ClCompile Include="..\Code\BackGround_Logo.cpp">
       <Filter>02. GameObject\00. Logo\00. Logo_Background</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\Scene_PT.cpp">
-      <Filter>01. Scene\Scene_PT</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\Scene_Cave.cpp">
       <Filter>01. Scene\03. Scene_Cave</Filter>

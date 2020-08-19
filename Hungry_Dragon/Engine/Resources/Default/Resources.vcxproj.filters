@@ -103,6 +103,12 @@
     <Filter Include="00. Resources\04. Sound">
       <UniqueIdentifier>{6af500a2-c85d-4a81-acdf-7a7c966d2bbf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00. Resources\00. VIBuffer\01. CubeDra\01. DragonJaw">
+      <UniqueIdentifier>{979cbd8c-6a6f-4c4d-a6cd-793e988d9363}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\00. VIBuffer\01. CubeDra\00. Face">
+      <UniqueIdentifier>{e328a9f6-f537-4df0-9ae4-ab110cb33784}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\Resources.cpp">
@@ -116,9 +122,6 @@
     </ClCompile>
     <ClCompile Include="..\Code\Texture.cpp">
       <Filter>00. Resources\01. Texture</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\CubeDra.cpp">
-      <Filter>00. Resources\00. VIBuffer\01. CubeDra</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\CubeCol.cpp">
       <Filter>00. Resources\00. VIBuffer\02. CubeCol</Filter>
@@ -216,6 +219,12 @@
     <ClCompile Include="..\Code\CliffCylinder.cpp">
       <Filter>00. Resources\00. VIBuffer\57. CliffCylinder</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\DragonJaw.cpp">
+      <Filter>00. Resources\00. VIBuffer\01. CubeDra\01. DragonJaw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\DragonFace.cpp">
+      <Filter>00. Resources\00. VIBuffer\01. CubeDra\00. Face</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Code\Resources.h">
@@ -232,9 +241,6 @@
     </ClInclude>
     <ClInclude Include="..\Code\Texture.h">
       <Filter>00. Resources\01. Texture</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\CubeDra.h">
-      <Filter>00. Resources\00. VIBuffer\01. CubeDra</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\CubeCol.h">
       <Filter>00. Resources\00. VIBuffer\02. CubeCol</Filter>
@@ -331,6 +337,12 @@
     </ClInclude>
     <ClInclude Include="..\Code\CliffCylinder.h">
       <Filter>00. Resources\00. VIBuffer\57. CliffCylinder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\DragonJaw.h">
+      <Filter>00. Resources\00. VIBuffer\01. CubeDra\01. DragonJaw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\DragonFace.h">
+      <Filter>00. Resources\00. VIBuffer\01. CubeDra\00. Face</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -31,11 +31,20 @@ public:
 	virtual void Render_Object(void) {}
 
 public:
-	int Get_Hp() { return m_iHp; }
-	int	Get_Stamina() { return m_iStamina; }
-	int Get_Mana() { return m_iMana; }
-	float	Get_ColSize() { return m_fColSize; }
-	bool	Get_Breath() { return m_bBreath; }
+	int						Get_Hp() { return m_iHp; }
+	int						Get_Stamina() { return m_iStamina; }
+	int						Get_Mana() { return m_iMana; }
+	float					Get_ColSize() { return m_fColSize; }
+	bool					Get_Breath() { return m_bBreath; }
+	CTransform*				Get_Transform() { return m_pTransform; }
+	CTransform*				Get_FaceTrans() { return m_pFaceTrans; }
+	CTransform*				Get_JawTrans() { return m_pJawTrans; }
+	const D3DXVECTOR3&		Get_Look() { return m_vLook; }
+	const D3DXVECTOR3&		Get_Up() { return m_vUp; }
+	const float&			Get_AngleX() { return m_fAngleX; }
+	const float&			Get_AngleY() { return m_fAngleY; }
+	CBaseLand*				Get_Terrain() { return m_pTerrain; }
+	CCameraMain*			Get_Camera() { return m_pCamera; }
 
 public:
 	void Set_Sate(STATE _eState) { m_eState = _eState; }
@@ -46,21 +55,15 @@ public:
 	void Add_Stamina(int _iStamina) { m_iStamina += _iStamina; }
 	void Add_Mana(int _iMana) { m_iMana += _iMana; }
 
-public:
-	CTransform* Get_Transform() { return m_pTransform; }
-	const D3DXVECTOR3&			Get_Look() { return m_vLook; }
-	const D3DXVECTOR3&			Get_Up() { return m_vUp; }
-	const float&			Get_AngleX() { return m_fAngleX; }
-	const float&			Get_AngleY() { return m_fAngleY; }
-	CBaseLand*	Get_Terrain() { return m_pTerrain; }
-	CCameraMain*	Get_Camera() { return m_pCamera; }
-
 protected:
 	virtual void State_Change() {};
 	virtual HRESULT	Add_Component(void) { return 0; }
 
 protected:
-	CVIBuffer*				m_pBufferCom = nullptr;
+	CVIBuffer*				m_pBufferFace = nullptr;
+	CVIBuffer*				m_pBufferJaw = nullptr;
+	CTransform*				m_pFaceTrans = nullptr;
+	CTransform*				m_pJawTrans = nullptr;
 	CCameraMain*			m_pCamera = nullptr;
 	CTerrain_Locater*		m_pTerrrrrrrain = nullptr;
 	CBaseLand*				m_pTerrain = nullptr;

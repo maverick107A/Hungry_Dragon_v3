@@ -12,7 +12,10 @@
 //-------------------------------------------------------
 //여기에 기타 헤더 추가
 #include "Terrain.h"
-#include "CubeDra.h"
+//플레이어
+#include "DragonFace.h"
+#include "DragonJaw.h"
+
 #include "CubeCol.h"
 #include "ForestLand.h"
 #include "TerrainTex.h"

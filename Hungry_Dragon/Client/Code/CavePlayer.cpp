@@ -53,7 +53,9 @@ int CCavePlayer::Update_Object(const float& fTimeDelta)
 void CCavePlayer::Render_Object(void)
 {
 	m_pTransform->Set_Transform(m_pGraphicDev);
-	m_pBufferCom->Render_Buffer();
+	m_pBufferFace->Render_Buffer();
+	//m_pTransform->Set_Transform(m_pGraphicDev);
+	m_pBufferJaw->Render_Buffer();
 
 	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end(); ++iter) {
 		(*iter)->Render_Buffer();
@@ -89,15 +91,29 @@ HRESULT CCavePlayer::Add_Component(void)
 	Engine::CComponent*		pComponent = nullptr;
 
 	// buffer
-	pComponent = m_pBufferCom = static_cast<Engine::CVIBuffer*>
-		(Engine::Clone(RESOURCE_STATIC, L"BUFFER_CUBEDRA"));
+	//¾ó±¼
+	pComponent = m_pBufferFace = static_cast<Engine::CVIBuffer*>
+		(Engine::Clone(RESOURCE_STATIC, L"BUFFER_FACE"));
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
-	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Buffer", pComponent);
+	m_mapComponent[Engine::ID_STATIC].emplace(L"Face_Buffer", pComponent);
+	//ÅÎ
+	pComponent = m_pBufferJaw = static_cast<Engine::CVIBuffer*>
+		(Engine::Clone(RESOURCE_STATIC, L"BUFFER_JAW"));
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	m_mapComponent[Engine::ID_STATIC].emplace(L"Jaw_Buffer", pComponent);
 
 	//Transform
 	pComponent = m_pTransform = Engine::CTransform::Create();
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_Transform", pComponent);
+	//¾ó±¼
+	pComponent = m_pFaceTrans = Engine::CTransform::Create();
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_FaceTransform", pComponent);
+	//ÅÎ
+	pComponent = m_pJawTrans = Engine::CTransform::Create();
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_JawTransform", pComponent);
 
 	//Camera
 	pComponent = m_pCamera = Engine::CCaveCamera::Create();

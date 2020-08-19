@@ -53,6 +53,11 @@ void CTransform::Set_Add_Scale(const _float _Scale)
 
 }
 
+void CTransform::Set_World(_matrix * _matWorld)
+{
+	memcpy(&m_matWorld, _matWorld,sizeof(_matrix));
+}
+
 HRESULT Engine::CTransform::Ready_Transform(void)
 {
 	D3DXMatrixIdentity(&m_matWorld);

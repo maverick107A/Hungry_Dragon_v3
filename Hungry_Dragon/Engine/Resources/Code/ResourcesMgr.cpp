@@ -52,8 +52,12 @@ HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 	case BUFFER_RCCOL:
 		pResources = CCubeCol::Create(pGraphicDev);
 		break;
-	case  BUFFER_CUBEDRA:
-		pResources = CCubeDra::Create(pGraphicDev);
+		//여기부터 플레이어꺼
+	case  BUFFER_FACE:
+		pResources = CDragonFace::Create(pGraphicDev);
+		break;
+	case  BUFFER_JAW:
+		pResources = CDragonJaw::Create(pGraphicDev);
 		break;
 	case BUFFER_TEXCUBE:
 		pResources = CTexture_Cube::Create(pGraphicDev);

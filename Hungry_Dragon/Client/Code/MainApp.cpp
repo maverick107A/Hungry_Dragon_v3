@@ -9,7 +9,6 @@
 
 #ifdef _DEBUG		// 테스트용입니다.
 #include "Scene_Monster.h"
-#include "Scene_PT.h"
 
 #endif // _DEBUG
 

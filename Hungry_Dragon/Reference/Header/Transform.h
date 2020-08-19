@@ -7,7 +7,7 @@ BEGIN(Engine)
 
 class ENGINE_DLL CTransform : public CComponent
 {
-private:
+protected:
 	explicit CTransform(void);
 	explicit CTransform(const CTransform& rhs);
 	virtual ~CTransform(void);
@@ -19,6 +19,7 @@ public:
 	void			Set_Trans(const _vec3* const newPos);
 	void			Set_Scale(const _float _Scale);
 	void			Set_Add_Scale(const _float _Scale);
+	void			Set_World(_matrix* _matWorld);
 
 	void			Add_Trans(const _vec3* const pDir);
 	void			Add_Trans(const _float* const _x, const _float* const _y, const _float* const _z);
