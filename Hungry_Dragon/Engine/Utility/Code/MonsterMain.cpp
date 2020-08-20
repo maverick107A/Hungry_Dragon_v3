@@ -152,20 +152,26 @@ void Engine::CMonsterMain::Dead_Monster()
 
 float Engine::CMonsterMain::Ride_Terrain()
 {
-	CBaseLand* pTerrain =  Get_Terrain();
+
+	float PosX = m_pTransform->m_vInfo[Engine::INFO_POS].x;
+	float PosZ = m_pTransform->m_vInfo[Engine::INFO_POS].z;
+
+
+	_uint uSectorNum = ((int)PosX + 25600) / 12800 + (9 - ((int)PosZ + 51200) / 12800) * 5;
+	CBaseLand* pTerrain = nullptr;
+	if (50 > uSectorNum)
+	{
+		pTerrain = Get_Terrain(uSectorNum);
+	}
 
 	if (pTerrain == nullptr)
 	{
 		if (m_fHeight)
 			m_fHeight = 0.f;
-	
+
 		return false;
 	}
 
-
-
-	float PosX = m_pTransform->m_vInfo[Engine::INFO_POS].x;
-	float PosZ = m_pTransform->m_vInfo[Engine::INFO_POS].z;
 
 	if (PosX > 0)
 	{
@@ -236,7 +242,7 @@ float Engine::CMonsterMain::Ride_Terrain()
 	}
 	else
 	{
-		Vertex2.y = (float)pTerrain->Get_TerrainHeight()[Vernum + 1] * 10.f + 20.f;
+		Vertex2.y = (float)pTerrain->Get_TerrainHeight()[Vernum + 1]*10.f + 20.f;
 		Vertex3.y = (float)pTerrain->Get_TerrainHeight()[Vernum + VERTEXSIZE] * 10.f + 20.f;
 		Vertex4.y = (float)pTerrain->Get_TerrainHeight()[Vernum + VERTEXSIZE + 1] * 10.f + 20.f;
 
@@ -266,6 +272,11 @@ void Engine::CMonsterMain::Kill_Monster(const float& fTimeDelta)
 void Engine::CMonsterMain::Kill_Lay_Monster(const float & fTimeDelta)
 {
 	m_eState = MONSTER_LAYDEAD;
+}
+
+CBaseLand * CMonsterMain::Get_Terrain(_uint _uNum)
+{
+	return m_pTerrain[_uNum];
 }
 
 HRESULT Engine::CMonsterMain::Add_Component(void)

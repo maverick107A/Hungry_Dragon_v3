@@ -309,9 +309,14 @@ vector<int> CTerrain_Locater::Get_PartsHeight(_uint _uNum)
 
 Engine::CBaseLand* CTerrain_Locater::Get_Terrain()
 {
-	if (m_uCurrSectorNum == -1)
+	if (m_uCurrSectorNum >= 50)
 		return nullptr;
 	return m_pParts[m_uCurrSectorNum]->Get_BufferCom();
+}
+
+Engine::CHeightCol** CTerrain_Locater::Get_TerrainArrEntry()
+{
+	return (CHeightCol**)(m_pHeights);
 }
 
 HRESULT CTerrain_Locater::Add_Component(void)
@@ -322,7 +327,10 @@ HRESULT CTerrain_Locater::Add_Component(void)
 
 	memcpy(m_pParts,CIngame_Flow::GetInstance()->GetEntry_ForestTerrain(),sizeof(CTerrain_Parts*)*50);
 
-
+	for (int i = 0; i < 50; ++i)
+	{
+		m_pHeights[i] = m_pParts[i]->Get_BufferCom();
+	}
 
 	
 

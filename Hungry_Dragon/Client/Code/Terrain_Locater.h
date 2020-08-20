@@ -9,6 +9,7 @@ BEGIN(Engine)
 class CTransform;
 class CRenderer;
 class CBaseLand;
+class CHeightCol;
 
 END
 
@@ -33,6 +34,7 @@ public:
 	list<_uint>& Get_RenderIdx() { return m_lstRenderIdx; }
 	vector<int> Get_PartsHeight(_uint _uNum);
 	Engine::CBaseLand*	Get_Terrain();
+	Engine::CHeightCol**	Get_TerrainArrEntry();
 
 private:
 	HRESULT		Add_Component(void);
@@ -42,6 +44,7 @@ private:
 	Engine::CTransform*		m_pPlayerTrans = nullptr;
 
 	CTerrain_Parts*	m_pParts[50] = { 0 };
+	Engine::CHeightCol* m_pHeights[50] = { 0 };
 
 	list<_uint> m_lstRenderIdx;
 	_uint m_uOldSectorNum = 0;

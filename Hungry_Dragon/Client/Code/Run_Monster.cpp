@@ -44,8 +44,8 @@ HRESULT CRun_Monster::Ready_Object(void)
 int CRun_Monster::Update_Object(const float & fTimeDelta)
 {
 
-	m_ptempTerain = static_cast<CTerrain_Locater*>(((Engine::CLayer*)(Get_Parent()))->Get_Object(L"BackGround", Engine::Find_First, nullptr));
-	m_pTerrain = m_ptempTerain->Get_Terrain();
+	m_ptempTerrain = static_cast<CTerrain_Locater*>(((Engine::CLayer*)(Get_Parent()))->Get_Object(L"BackGround", Engine::Find_First, nullptr));
+	m_pTerrain = m_ptempTerrain->Get_TerrainArrEntry();
 
 	if (m_eState == MONSTER_REBORN && m_eState != MONSTER_DEACTIVATE)
 	{

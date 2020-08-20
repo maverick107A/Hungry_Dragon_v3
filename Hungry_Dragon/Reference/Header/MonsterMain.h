@@ -16,6 +16,7 @@ class CTerrain;
 class CBaseLand;
 class CAtkPart;
 class CVICustom;
+class CHeightCol;
 
 class ENGINE_DLL CMonsterMain : public Engine::CGameObject
 {
@@ -45,7 +46,7 @@ public:
 public:
 	void Set_State(MONSTERSTATE _State) { m_eState = _State ; }
 	MONSTERSTATE Get_State() { return m_eState; }
-	CBaseLand*	Get_Terrain() { return m_pTerrain; }
+	CBaseLand*	Get_Terrain(_uint _uNum);
 
 private:
 	HRESULT		Add_Component(void);
@@ -64,8 +65,8 @@ protected:
 	Engine::CTexture*			m_pAuraTextureCom = nullptr;
 
 	Engine::CTexture*			m_pTextureCom = nullptr;
-	Engine::CBaseLand*			m_pTerrain = nullptr;
-	CTerrain_Locater*			m_ptempTerain = nullptr;
+	Engine::CHeightCol**		m_pTerrain = nullptr;
+	CTerrain_Locater*			m_ptempTerrain = nullptr;
 	Engine::CResources*			m_pParticle = nullptr;
 
 	D3DXVECTOR3					m_vLook;
