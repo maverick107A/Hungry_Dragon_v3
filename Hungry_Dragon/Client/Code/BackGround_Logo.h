@@ -36,11 +36,11 @@ private:
 	Engine::CRenderer*		m_pRendererCom = nullptr;
 
 private:
-	static TCHAR m_szLogo[128];
+	static Engine::_uint m_uBgNum;
 
 public:
 	static CBackGround_Logo*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
-	static CBackGround_Logo*	Create(LPDIRECT3DDEVICE9 pGraphicDev, const Engine::_tchar* pLogo);
+	static CBackGround_Logo*	Create(LPDIRECT3DDEVICE9 pGraphicDev, Engine::_uint _uNum);
 private:
 	virtual void Free(void) override;
 

@@ -22,8 +22,6 @@ HRESULT CScene_Option::Ready_Scene(void) {
 	D3DXMatrixIdentity(&matIdentity);
 	m_pGraphicDev->SetTransform(D3DTS_PROJECTION, &matIdentity);
 	m_pGraphicDev->SetTransform(D3DTS_VIEW, &matIdentity);
-	
-	Engine::Get_FMOD()->PlayBgm(L"MenuBgm");
 
 	return S_OK;
 }
@@ -36,14 +34,7 @@ _int CScene_Option::Update_Scene(const _float& fTimeDelta) {
 
 
 	
-	if (GetAsyncKeyState(VK_LEFT) & 0x0001) {
-		--m_uFocusNum;
-		if (99< m_uFocusNum)
-		{
-			m_uFocusNum = 3;
-		}
-		Engine::Get_FMOD()->PlayEffect(L"MouseOn");
-	}
+	
 	if (GetAsyncKeyState(VK_UP) & 0x0001) {
 		--m_uFocusNum;
 		if (99< m_uFocusNum)
@@ -52,32 +43,54 @@ _int CScene_Option::Update_Scene(const _float& fTimeDelta) {
 		}
 		Engine::Get_FMOD()->PlayEffect(L"MouseOn");
 	}
-
-	if (GetAsyncKeyState(VK_RIGHT) & 0x0001) {
-		m_uFocusNum = (m_uFocusNum + 1) % 4;
-		Engine::Get_FMOD()->PlayEffect(L"MouseOn");
-	}
+	
 	if (GetAsyncKeyState(VK_DOWN) & 0x0001) {
 		m_uFocusNum = (m_uFocusNum + 1) % 4;
 		Engine::Get_FMOD()->PlayEffect(L"MouseOn");
 	}
 
+
+	if (GetAsyncKeyState(VK_LEFT) & 0x0001) {
+		switch (m_uFocusNum)
+		{
+		case 0:
+			Get_FMOD()->Add_BgmVolume(-0.1f);
+			break;
+		case 1:
+			Get_FMOD()->Add_SfxVolume(-0.1f);
+			break;
+		case 2:
+
+			break;
+		}
+	}
+	if (GetAsyncKeyState(VK_RIGHT) & 0x0001) {
+		switch (m_uFocusNum)
+		{
+		case 0:
+			Get_FMOD()->Add_BgmVolume(0.1f);
+			break;
+		case 1:
+			Get_FMOD()->Add_SfxVolume(0.1f);
+			break;
+		case 2:
+
+			break;
+		}
+	}
 	if (GetAsyncKeyState(VK_RETURN) & 0x8000) {
 
 		switch (m_uFocusNum)
 		{
 		case 0:
 			
-			m_bSelected = true;
-			
-			m_uFocusNum = -1;
 			
 			break;
 		case 1:
-			CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_OPTION);
+
 			break;
 		case 2:
-			PostQuitMessage(0);
+
 			break;
 		case 3:
 			CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_MENU);
@@ -110,16 +123,16 @@ void CScene_Option::Render_Scene(void) {
 	Engine::Render_Font_Center(L"Font_Bold", str, &_vec2(1600.f, 150.f), D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.f));
 	wsprintf(str, L"사운드");
 	Engine::Render_Font_Center(L"Font_Bold", str, &_vec2(1600.f, 300.f), D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.f));
-	wsprintf(str, L"배경음 : %d", 0);
+	wsprintf(str, L"배경음 : %.2d", (int)(Get_FMOD()->Get_BgmVolume()*10.f));
 	Engine::Render_Font_Center(L"Font_Light", str, &_vec2(1600.f, 350.f), D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.f));
-	wsprintf(str, L"효과음 : %d", 0);
+	wsprintf(str, L"효과음 : %.2d", (int)(Get_FMOD()->Get_SfxVolume()*10.f));
 	Engine::Render_Font_Center(L"Font_Light", str, &_vec2(1600.f, 400.f), D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.f));
 	wsprintf(str, L"조작");
 	Engine::Render_Font_Center(L"Font_Bold", str, &_vec2(1600.f, 500.f), D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.f));
 	wsprintf(str, L"마우스 감도 : %d", 0);
 	Engine::Render_Font_Center(L"Font_Light", str, &_vec2(1600.f, 550.f), D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.f));
 
-	wsprintf(str, L"확인 : %d", 0);
+	wsprintf(str, L"확인", 0);
 	Engine::Render_Font_Center(L"Font_Light", str, &_vec2(1600.f, 800.f), D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.f));
 
 	switch (m_uFocusNum)
@@ -127,23 +140,23 @@ void CScene_Option::Render_Scene(void) {
 	case 0:
 		wsprintf(str, L"사운드");
 		Engine::Render_Font_Center(L"Font_Bold", str, &_vec2(1600.f, 300.f), D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
-		wsprintf(str, L"배경음 : %d", 0);
+		wsprintf(str, L"◀ 배경음 : %.2d ▶", (int)(Get_FMOD()->Get_BgmVolume()*10.f));
 		Engine::Render_Font_Center(L"Font_Light", str, &_vec2(1600.f, 350.f), D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
 		break;
 	case 1:
 		wsprintf(str, L"사운드");
 		Engine::Render_Font_Center(L"Font_Bold", str, &_vec2(1600.f, 300.f), D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
-		wsprintf(str, L"효과음 : %d", 0);
+		wsprintf(str, L"◀ 효과음 : %.2d ▶", (int)(Get_FMOD()->Get_SfxVolume()*10.f));
 		Engine::Render_Font_Center(L"Font_Light", str, &_vec2(1600.f, 400.f), D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
 		break;
 	case 2:
 		wsprintf(str, L"조작");
 		Engine::Render_Font_Center(L"Font_Bold", str, &_vec2(1600.f, 500.f), D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
-		wsprintf(str, L"마우스 감도 : %d", 0);
+		wsprintf(str, L"◀ 마우스 감도 : %d ▶", 0);
 		Engine::Render_Font_Center(L"Font_Light", str, &_vec2(1600.f, 550.f), D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
 		break;
 	case 3:
-		wsprintf(str, L"확인 : %d", 0);
+		wsprintf(str, L"▶ 확인 ◀", 0);
 		Engine::Render_Font_Center(L"Font_Light", str, &_vec2(1600.f, 800.f), D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
 		break;
 	}
@@ -177,9 +190,9 @@ HRESULT CScene_Option::Ready_Layer_UI(const _tchar* pLayerTag) {
 	Engine::CGameObject*		pGameObject = nullptr;
 
 	// BackGround
-	pGameObject = CBackGround_Logo::Create(m_pGraphicDev,L"Texture_LogoMenu");
+	pGameObject = CBackGround_Logo::Create(m_pGraphicDev, 1);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
-	FAILED_CHECK_RETURN(pLayer->Add_Object(L"BackGround", pGameObject), E_FAIL);
+	FAILED_CHECK_RETURN(pLayer->Add_Object(L"LogoOption", pGameObject), E_FAIL);
 
 	
 

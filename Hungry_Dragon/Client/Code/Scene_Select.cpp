@@ -182,9 +182,9 @@ HRESULT CScene_Select::Ready_Layer_UI(const _tchar* pLayerTag) {
 	Engine::CGameObject*		pGameObject = nullptr;
 
 	// BackGround
-	pGameObject = CBackGround_Logo::Create(m_pGraphicDev, L"Texture_LogoSelect");
+	pGameObject = CBackGround_Logo::Create(m_pGraphicDev, 2);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
-	FAILED_CHECK_RETURN(pLayer->Add_Object(L"BackGround", pGameObject), E_FAIL);
+	FAILED_CHECK_RETURN(pLayer->Add_Object(L"LogoSelect", pGameObject), E_FAIL);
 
 	FAILED_CHECK(Register_GameObject<CSelect_Scroller>(&m_pScroller, pLayer, L"Scroller"));
 	FAILED_CHECK(Register_GameObject<CFire_Wall>(pLayer,L"FireWall"));

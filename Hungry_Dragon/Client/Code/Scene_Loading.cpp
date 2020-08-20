@@ -378,26 +378,8 @@ _uint CScene_Loading::Loading_ForStage(void)
 		L"../../Asset/Environment/Passage_Through.png"),
 		E_FAIL);
 
-	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
-		RESOURCE_LOGO,
-		L"Texture_LogoSelect",
-		Engine::TEX_NORMAL,
-		L"../../Asset/Billboard/logo/logo.jpg"),
-		E_FAIL);
 
-	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
-		RESOURCE_LOGO,
-		L"Texture_LogoOption",
-		Engine::TEX_NORMAL,
-		L"../../Asset/Billboard/logo/logo2.png"),
-		E_FAIL);
-
-	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
-		RESOURCE_LOGO,
-		L"Texture_LogoMenu",
-		Engine::TEX_NORMAL,
-		L"../../Asset/Billboard/logo/logo3.png"),
-		E_FAIL);
+	
 
 
 	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,

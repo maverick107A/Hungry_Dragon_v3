@@ -169,9 +169,9 @@ HRESULT CScene_Menu::Ready_Layer_UI(const _tchar* pLayerTag) {
 	Engine::CGameObject*		pGameObject = nullptr;
 
 	// BackGround
-	pGameObject = CBackGround_Logo::Create(m_pGraphicDev,L"Texture_LogoMenu");
+	pGameObject = CBackGround_Logo::Create(m_pGraphicDev, 0);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
-	FAILED_CHECK_RETURN(pLayer->Add_Object(L"BackGround", pGameObject), E_FAIL);
+	FAILED_CHECK_RETURN(pLayer->Add_Object(L"LogoMenu", pGameObject), E_FAIL);
 
 	Register_GameObject<CPage_Out>(&m_pPageOut, pLayer, L"PageOut");
 

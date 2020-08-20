@@ -106,9 +106,9 @@ HRESULT CLogo::Ready_Resource(LPDIRECT3DDEVICE9 pGraphicDev, RESOURCEID eMax) {
 
 	FAILED_CHECK_RETURN(Engine::Ready_Texture(pGraphicDev,
 		RESOURCE_LOGO,
-		L"Texture_Logo",
+		L"Texture_LogoBg",
 		Engine::TEX_NORMAL,
-		L"../../Asset/Loading/Loading.jpg"),
+		L"../../Asset/Billboard/logo/logo%d.png", 3),
 		E_FAIL);
 
 

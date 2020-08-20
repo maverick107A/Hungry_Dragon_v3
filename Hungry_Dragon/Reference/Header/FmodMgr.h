@@ -24,7 +24,10 @@ public:
 public:
 	void Set_BgmVolume(float _fVol) { m_fBgmVolume = _fVol; }
 	void Set_SfxVolume(float _fVol) { m_fSfxVolume = _fVol; }
-
+	void Add_BgmVolume(float _fVol) { m_fBgmVolume += _fVol; if (m_fBgmVolume > 1.f) m_fBgmVolume = 1.f; if (m_fBgmVolume < 0.f) m_fBgmVolume = 0.f; }
+	void Add_SfxVolume(float _fVol) { m_fSfxVolume += _fVol;  if (m_fSfxVolume > 1.f) m_fSfxVolume = 1.f; if (m_fSfxVolume < 0.f) m_fSfxVolume = 0.f; }
+	float Get_BgmVolume() { return m_fBgmVolume; }
+	float Get_SfxVolume() { return m_fSfxVolume; }
 
 public:
 	void Initialize();
