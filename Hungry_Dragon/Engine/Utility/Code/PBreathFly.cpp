@@ -116,12 +116,7 @@ void CPBreathFly::Update_State(const float& fTimeDelta)
 	{
 		D3DXVec3Normalize(&vDir, &vDir);
 		if (bShift)
-		{
 			vDir *= m_fBoostMulti;
-			m_pPlayer->Add_Stamina(-2);
-		}
-		else
-			m_pPlayer->Add_Stamina(1);
 		//속도적용
 		vDir *= fTimeDelta*m_fSpeed;
 		//가속

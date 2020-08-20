@@ -78,16 +78,11 @@ void CPCaveRush::Phase_0(const float & fTimeDelta)
 
 	m_fAngle += m_fAngularSpeed*fTimeDelta;
 
-	if (m_fAngle > D3DX_PI * 2)
+	if(m_fAngle - m_pPlayer->Get_Transform()->m_vAngle.z > D3DX_PI*2.f)
 	{
-		m_fAngle -= D3DX_PI * 2;
-		m_pPlayer->Get_Transform()->m_vAngle.z -= D3DX_PI * 2;
+		m_fAngle -= D3DX_PI*2.f;
 	}
-	else if (m_fAngle < 0.f)
-	{
-		m_fAngle += D3DX_PI * 2;
-		m_pPlayer->Get_Transform()->m_vAngle.z += D3DX_PI * 2;
-	}
+	else if (m_pPlayer->Get_Transform()->m_vAngle.z - m_fAngle > D3DX_PI*2.f)
 
 	m_pPlayer->Get_Transform()->Add_Trans(&_vec3(0.f, 0.f, m_fSpeed));
 	m_pPlayer->Get_Transform()->m_vInCamPos.x = 7 * cosf(m_fAngle + Pi*0.5f);
