@@ -101,6 +101,11 @@ HRESULT CMainApp::Set_DefaultSetting(LPDIRECT3DDEVICE9 * ppGraphicDev)
 
 	(*ppGraphicDev)->SetRenderState(D3DRS_LIGHTING, FALSE);
 
+	// 폰트 자동 설치
+	//int i = AddFontResource(L"../../Asset/Font/Maplestory Bold.ttf");
+	//AddFontResource(L"../../Asset/Font/Maplestory Light.ttf");
+	//SendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0);
+
 	FAILED_CHECK_RETURN(Engine::Ready_Font((*ppGraphicDev), L"Font_Default", L"바탕", 60, 60, FW_HEAVY), E_FAIL);
 	FAILED_CHECK_RETURN(Engine::Ready_Font((*ppGraphicDev), L"Font_Jinji", L"궁서", 30, 30, FW_THIN), E_FAIL);
 	FAILED_CHECK_RETURN(Engine::Ready_Font((*ppGraphicDev), L"Font_Bold", L"메이플스토리", 30, 30, FW_BOLD), E_FAIL);
@@ -137,6 +142,11 @@ CMainApp* CMainApp::Create(void)
 
 void CMainApp::Free(void)
 {
+	// 폰트 자동 삭제
+	RemoveFontResource(L"../../Asset/Font/Maplestory Bold.ttf");
+	RemoveFontResource(L"../../Asset/Font/Maplestory Light.ttf");
+	SendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0);
+
 	CIngame_Flow::GetInstance()->Release_AllResources();
 	CIngame_Flow::DestroyInstance();
 
