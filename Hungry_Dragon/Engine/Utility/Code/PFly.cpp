@@ -58,6 +58,7 @@ void CPFly::Update_State(const float& fTimeDelta)
 
 	bool bCheck = false;
 	bool bShift = false;
+	bool bControl = false;
 	if (Engine::Get_DIKeyState(DIK_W))
 	{
 		vDir += vLook;
@@ -87,6 +88,10 @@ void CPFly::Update_State(const float& fTimeDelta)
 	{
 		bShift = true;
 	}
+	if (GetAsyncKeyState(VK_CONTROL))
+	{
+		bControl = true;
+	}
 	//if (GetAsyncKeyState('Q'))
 	//{
 	//	m_pPlayer->Get_Camera()->Set_AngleZPlus(m_fAngleSpeed*0.4f);
@@ -105,7 +110,12 @@ void CPFly::Update_State(const float& fTimeDelta)
 	{
 		D3DXVec3Normalize(&vDir, &vDir);
 		if (bShift)
+		{
 			vDir *= m_fBoostMulti;
+			m_pPlayer->Set_AccelCheck(true);
+		}
+		else if (bControl)
+			vDir *= m_fCheatMulti;
 		//속도적용
 		vDir *= fTimeDelta*m_fSpeed;
 		//가속

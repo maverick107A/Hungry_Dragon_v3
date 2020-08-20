@@ -111,17 +111,17 @@ _uint CScene_Loading::Loading_ForStage(void)
 		E_FAIL);
 
 	//플레이어 이미지
-	/*FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
-		RESOURCE_STATIC,
-		L"BUFFER_FACE",
-		Engine::BUFFER_FACE),
-		E_FAIL);*/
-
 	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
 		RESOURCE_STATIC,
 		L"BUFFER_FACE",
-		Engine::BUFFER_TWINFACE),
+		Engine::BUFFER_FACE),
 		E_FAIL);
+
+	//FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
+	//	RESOURCE_STATIC,
+	//	L"BUFFER_FACE",
+	//	Engine::BUFFER_TWINFACE),
+	//	E_FAIL);
 
 	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
 		RESOURCE_STATIC,

@@ -42,8 +42,8 @@ HRESULT CTestPlayer::Ready_Object(void)
 	D3DXMatrixIdentity(&m_matOld1);
 	D3DXMatrixIdentity(&m_matOld2);
 	D3DXMatrixIdentity(&m_matOld3);
-	//m_pFaceTrans->Set_Scale(10.f);
-	//m_pJawTrans->Set_Scale(10.f);
+
+
 	m_fColSize = 400.f;
 	return S_OK;
 }
@@ -56,6 +56,7 @@ void CTestPlayer::Initialize_Object(void)
 
 int CTestPlayer::Update_Object(const float& fTimeDelta)
 {
+	m_bAccelCheck = false;
 	if (Engine::Get_DIKeyState(DIK_K) & 0x80)
 		m_bBreath = !m_bBreath;
 
@@ -93,59 +94,24 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 	//
 	State_Change();
 
-	if (GetAsyncKeyState(VK_LBUTTON))
-	{
-		TCHAR szBuff[256] = L"";
-		wsprintf(szBuff, L"x :%d, z :%d", int(m_pTransform->m_vInfo[Engine::INFO_POS].x * 100), int(m_pTransform->m_vInfo[Engine::INFO_POS].z * 100));
-		MessageBox(nullptr, szBuff, L"XY", 0);
-	}
+	//if (GetAsyncKeyState(VK_LBUTTON))
+	//{
+	//	TCHAR szBuff[256] = L"";
+	//	wsprintf(szBuff, L"x :%d, z :%d", int(m_pTransform->m_vInfo[Engine::INFO_POS].x * 100), int(m_pTransform->m_vInfo[Engine::INFO_POS].z * 100));
+	//	MessageBox(nullptr, szBuff, L"XY", 0);
+	//}
 
 	m_pTransform->m_vInCamPos -= m_vUp*0.1f;
 
-	//임시
-	if (m_bBreath)
-	{
-		m_pPartsTrans[PART_JAW]->m_vAngle.x = D3DX_PI*0.125f;
-		m_pPartsTrans[PART_JAW]->m_vInfo[Engine::INFO_POS].y = -sinf(D3DX_PI*0.125f);
-		m_pPartsTrans[PART_JAW]->m_vInfo[Engine::INFO_POS].z = cosf(D3DX_PI*0.125f);
+	Animations(fTimeDelta);
 
-		m_pPartsTrans[PART_FACE]->m_vAngle.x = -D3DX_PI*0.125f;
-		m_pPartsTrans[PART_FACE]->m_vInfo[Engine::INFO_POS].y = sinf(D3DX_PI*0.125f);
-		m_pPartsTrans[PART_FACE]->m_vInfo[Engine::INFO_POS].z = cosf(D3DX_PI*0.125f);
-
-		//m_pPartsTrans[PART_BODY]->m_vAngle.x = -D3DX_PI*0.125f;
-		//m_pPartsTrans[PART_BODY]->m_vInfo[Engine::INFO_POS].y = sinf(D3DX_PI*0.125f);
-		m_pPartsTrans[PART_BODY]->m_vInfo[Engine::INFO_POS].z = -1.5f;
-		m_pPartsTrans[PART_2BODY]->m_vInfo[Engine::INFO_POS].z = -3.f;
-		m_pPartsTrans[PART_3BODY]->m_vInfo[Engine::INFO_POS].z = -4.5f;
-	}
-	else
-	{
-		m_pPartsTrans[PART_JAW]->m_vAngle.x = m_vAngle;
-		m_pPartsTrans[PART_JAW]->m_vInfo[Engine::INFO_POS].y = -sinf(m_vAngle);
-		m_pPartsTrans[PART_JAW]->m_vInfo[Engine::INFO_POS].z = cosf(m_vAngle);
-
-		m_pPartsTrans[PART_FACE]->m_vAngle.x = -m_vAngle;
-		m_pPartsTrans[PART_FACE]->m_vInfo[Engine::INFO_POS].y = sinf(m_vAngle);
-		m_pPartsTrans[PART_FACE]->m_vInfo[Engine::INFO_POS].z = cosf(m_vAngle);
-
-		m_pPartsTrans[PART_BODY]->m_vInfo[Engine::INFO_POS].z = -1.5f;
-		m_pPartsTrans[PART_2BODY]->m_vInfo[Engine::INFO_POS].z = -3.f;
-		m_pPartsTrans[PART_3BODY]->m_vInfo[Engine::INFO_POS].z = -4.5f;
-	}
-
-
-	if (m_vAngle < 0.f || m_vAngle > D3DX_PI*0.125f)
-		m_fSpeed *= -1;
-	m_vAngle += m_fSpeed;
-
-	//
 	Engine::CGameObject::Update_Object(fTimeDelta);
 	return 0;
 }
 
 void CTestPlayer::Render_Object(void)
 {
+	m_pGraphicDev->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_GOURAUD);
 	Animation_Render();
 	if(m_bBreath)
 		m_pBreath->Render_Breath(this);
@@ -153,6 +119,7 @@ void CTestPlayer::Render_Object(void)
 	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end();++iter) {
 		(*iter)->Render_Buffer();
 	}
+	m_pGraphicDev->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_FLAT);
 }
 
 void CTestPlayer::Free(void)
@@ -319,4 +286,51 @@ void CTestPlayer::Animation_Render()
 	m_matOld3 = m_matOld2;
 	m_matOld2 = m_matOld1;
 	m_matOld1 = m_pTransform->Get_World();
+}
+
+void CTestPlayer::Animations(const float& fTimeDelta)
+{
+	//임시
+	if (0.f < m_fMouseTime)
+	{
+		m_fMouseTime -= fTimeDelta;
+		m_pPartsTrans[PART_JAW]->m_vAngle.x = m_vAngle;
+		m_pPartsTrans[PART_JAW]->m_vInfo[Engine::INFO_POS].y = -sinf(m_vAngle);
+		m_pPartsTrans[PART_JAW]->m_vInfo[Engine::INFO_POS].z = cosf(m_vAngle);
+
+		m_pPartsTrans[PART_FACE]->m_vAngle.x = -m_vAngle;
+		m_pPartsTrans[PART_FACE]->m_vInfo[Engine::INFO_POS].y = sinf(m_vAngle);
+		m_pPartsTrans[PART_FACE]->m_vInfo[Engine::INFO_POS].z = cosf(m_vAngle);
+	}
+	else
+	{
+		m_pPartsTrans[PART_JAW]->m_vAngle.x = 0.f;
+		m_pPartsTrans[PART_JAW]->m_vInfo[Engine::INFO_POS].y = -sinf(0.f);
+		m_pPartsTrans[PART_JAW]->m_vInfo[Engine::INFO_POS].z = cosf(0.f);
+
+		m_pPartsTrans[PART_FACE]->m_vAngle.x = -0.f;
+		m_pPartsTrans[PART_FACE]->m_vInfo[Engine::INFO_POS].y = sinf(0.f);
+		m_pPartsTrans[PART_FACE]->m_vInfo[Engine::INFO_POS].z = cosf(0.f);
+	}
+
+	if (m_bBreath)
+	{
+		m_pPartsTrans[PART_JAW]->m_vAngle.x = D3DX_PI*0.15f;
+		m_pPartsTrans[PART_JAW]->m_vInfo[Engine::INFO_POS].y = -sinf(D3DX_PI*0.15f);
+		m_pPartsTrans[PART_JAW]->m_vInfo[Engine::INFO_POS].z = cosf(D3DX_PI*0.15f);
+
+		m_pPartsTrans[PART_FACE]->m_vAngle.x = -D3DX_PI*0.15f;
+		m_pPartsTrans[PART_FACE]->m_vInfo[Engine::INFO_POS].y = sinf(D3DX_PI*0.15f);
+		m_pPartsTrans[PART_FACE]->m_vInfo[Engine::INFO_POS].z = cosf(D3DX_PI*0.15f);
+	}
+	m_pPartsTrans[PART_BODY]->m_vInfo[Engine::INFO_POS].z = -1.5f;
+	m_pPartsTrans[PART_2BODY]->m_vInfo[Engine::INFO_POS].z = -3.f;
+	m_pPartsTrans[PART_3BODY]->m_vInfo[Engine::INFO_POS].z = -4.5f;
+
+
+	if (m_vAngle < 0.f || m_vAngle > D3DX_PI*0.125f)
+		m_fSpeed *= -1;
+	m_vAngle += m_fSpeed;
+
+	//
 }
