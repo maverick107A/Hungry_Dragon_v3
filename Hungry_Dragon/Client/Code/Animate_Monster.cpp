@@ -25,7 +25,8 @@ HRESULT CAnimate_Monster::Ready_Object(void)
 	m_pTransform->Update_Component(0.f);
 	for (size_t i = 0; i < m_pMeshTransform.size(); ++i)
 	{
-		m_pMeshTransform[i]->Set_Trans(&_vec3(0.f, 1000.f, 0.f));
+		//ÀÌ°Å ¹¹ÀÓ?
+		//m_pMeshTransform[i]->Set_Trans(&_vec3(0.f, 1000.f, 0.f));
 		m_pMeshTransform[i]->Update_Component(0.f);
 	}
 

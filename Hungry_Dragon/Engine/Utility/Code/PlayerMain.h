@@ -10,6 +10,7 @@ BEGIN(Engine)
 class CVIBuffer;
 class CTexture;
 class CTransform;
+class CAnimationTransform;
 class CCameraMain;
 class CBaseLand;
 class CPlayerState;
@@ -39,7 +40,7 @@ public:
 	bool					Get_Breath() { return m_bBreath; }
 	bool					Get_AccelCheck() { return m_bAccelCheck; }
 	CTransform*				Get_Transform() { return m_pTransform; }
-	CTransform*				Get_PartsTrans(int _i) { return m_pPartsTrans[_i]; }
+	CAnimationTransform*	Get_PartsTrans(int _i) { return m_pPartsTrans[_i]; }
 	const D3DXVECTOR3&		Get_Look() { return m_vLook; }
 	const D3DXVECTOR3&		Get_Up() { return m_vUp; }
 	const float&			Get_AngleX() { return m_fAngleX; }
@@ -64,7 +65,7 @@ protected:
 
 protected:
 	CVIBuffer*				m_pPartsBuffer[PARTS_END];
-	CTransform*				m_pPartsTrans[PARTS_END];
+	CAnimationTransform*	m_pPartsTrans[PARTS_END];
 	CCameraMain*			m_pCamera = nullptr;
 	CTerrain_Locater*		m_pTerrrrrrrain = nullptr;
 	CBaseLand*				m_pTerrain = nullptr;

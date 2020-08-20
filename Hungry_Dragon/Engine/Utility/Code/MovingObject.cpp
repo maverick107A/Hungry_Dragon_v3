@@ -25,7 +25,6 @@ int CMovingObject::Update_Object(const float & fTimeDelta)
 	CGameObject::Update_Object(fTimeDelta);
 
 	MOVEMENT nowMovement, nextMovement;
-	_matrix worldPosMatrix;
 	if (m_pAnimator != nullptr)
 	{
 		for (size_t i = 0; i < m_pMeshTransform.size(); ++i)
@@ -43,7 +42,7 @@ int CMovingObject::Update_Object(const float & fTimeDelta)
 				nextMovement = m_pAnimator->Get_Movement(i, (int)nowFrame + 1);
 			}
 
-			worldPosMatrix = m_pMeshTransform[i]->m_matWorld;
+			m_matParentWorld = m_pMeshTransform[i]->m_matWorld;
 
 			//여기서 건네주면 됨.
 		}
@@ -62,7 +61,7 @@ void CMovingObject::Render_Object(void)
 	{
 		for (size_t i = 0; i < m_pMeshTransform.size(); ++i)
 		{
-			m_pMeshTransform[i]->Set_Transform(m_pGraphicDev);
+			m_pMeshTransform[i]->Set_Transform(m_pGraphicDev, m_matParentWorld);
 			m_pMeshArray[i]->Render_Buffer();
 		}
 	}

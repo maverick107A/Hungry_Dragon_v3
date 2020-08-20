@@ -20,7 +20,7 @@ Engine::CAnimationTransform::~CAnimationTransform(void)
 HRESULT Engine::CAnimationTransform::Ready_Transform(void)
 {
 	D3DXMatrixIdentity(&m_matWorld);
-
+	
 	for (_uint i = 0; i < INFO_END; ++i)
 		memcpy(&m_vInfo[i], &m_matWorld.m[i][0], sizeof(_vec3));
 
@@ -29,6 +29,14 @@ HRESULT Engine::CAnimationTransform::Ready_Transform(void)
 
 _int Engine::CAnimationTransform::Update_Component(const _float& fTimeDelta)
 {
+	_vec3 vDeltaAngle =  (m_vAfterAngle - m_vAngle)*m_fDamping;
+	_vec3 vDeltaRevAngle = (m_vAfterRevAngle - m_vRevAngle)*m_fDamping;
+	_vec3 vDeltaMovePos = (m_vAfterPos - m_vInfo[INFO_POS])*m_fDamping;
+
+	m_vAngle += vDeltaAngle;
+	m_vRevAngle += vDeltaRevAngle;
+	m_vInfo[INFO_POS] += vDeltaMovePos;
+	
 	D3DXMatrixIdentity(&m_matWorld);
 
 	for (_uint i = 0; i < INFO_POS; ++i)
@@ -56,19 +64,30 @@ _int Engine::CAnimationTransform::Update_Component(const _float& fTimeDelta)
 		}
 	}
 
-	for(_uint i = 0; i < INFO_END ;++i)
-		memcpy(&m_matWorld.m[i][0], &m_vInfo[i], sizeof(_vec3));
+	//for(_uint i = 0; i < INFO_END ;++i)
+	//	memcpy(&m_matWorld.m[i][0], &m_vInfo[i], sizeof(_vec3));
 
 
 	//추가이동
-	for (int i = 0; i < 3; ++i)
-	{
-		m_matWorld.m[INFO_POS][i] += m_vInCamPos[i];
-	}
-	//여기까지
-	//이동기 관련
-	//m_vInfo[INFO_POS] += m_vInCamPos*0.1f;
-	m_vInCamPos *= 0.9f;
+	//for (int i = 0; i < 3; ++i)
+	//{
+	//	m_matWorld.m[INFO_POS][i] += m_vMovePos[i];
+	//}
+	//공전
+	D3DXMatrixRotationX(&matRot[ROT_X], m_vRevAngle.x);
+	D3DXMatrixRotationY(&matRot[ROT_Y], m_vRevAngle.y);
+	D3DXMatrixRotationZ(&matRot[ROT_Z], m_vRevAngle.z);
+
+	_matrix a = matRot[ROT_Z] * matRot[ROT_X] * matRot[ROT_Y];
+
+
+	for (_uint i = 0; i < INFO_END; ++i)
+		memcpy(&m_matWorld.m[i][0], &m_vInfo[i], sizeof(_vec3));
+
+
+	m_matWorld *= a;
+
+
 	return 0;
 }
 
@@ -92,11 +111,12 @@ CComponent* Engine::CAnimationTransform::Clone(void)
 	return new CAnimationTransform(*this);
 }
 
-void Engine::CAnimationTransform::Set_Transform(LPDIRECT3DDEVICE9& pGraphicDev)
+void Engine::CAnimationTransform::Set_Transform(LPDIRECT3DDEVICE9& pGraphicDev, _matrix _matWorld)
 {
 	if (nullptr == pGraphicDev)
 		return;
 
+	m_matWorld *= _matWorld;
 	pGraphicDev->SetTransform(D3DTS_WORLD, &m_matWorld);
 }
 

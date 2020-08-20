@@ -28,6 +28,9 @@ public:
 	static CMovingObject* Create(LPDIRECT3DDEVICE9 pGraphicDev);
 	virtual void Free(void) override;
 
+private:
+	_matrix		m_matParentWorld;
+
 protected:
 	vector<CVICustom*>	m_pMeshArray;
 	vector<CAnimationTransform*>	m_pMeshTransform;

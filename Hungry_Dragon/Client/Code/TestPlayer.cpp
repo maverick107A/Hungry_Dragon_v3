@@ -35,9 +35,15 @@ HRESULT CTestPlayer::Ready_Object(void)
 	//m_pTransform->m_vInfo[Engine::INFO_POS].z = 0.f;
 
 	m_pTransform->Set_Scale(10.f);
-	m_pPartsTrans[PART_BODY]->Set_Scale(0.7f);
-	m_pPartsTrans[PART_2BODY]->Set_Scale(0.7f);
-	m_pPartsTrans[PART_3BODY]->Set_Scale(0.7f);
+
+	for (int i = 0; i < PARTS_END; ++i)
+	{
+		m_pPartsTrans[i]->m_vScale = _vec3(1.f, 1.f, 1.f);
+	}
+
+	m_pPartsTrans[PART_BODY]->m_vScale = _vec3(0.7f, 0.7f, 0.7f);
+	m_pPartsTrans[PART_2BODY]->m_vScale = _vec3(0.7f, 0.7f, 0.7f);
+	m_pPartsTrans[PART_3BODY]->m_vScale = _vec3(0.7f, 0.7f, 0.7f);
 
 	D3DXMatrixIdentity(&m_matOld1);
 	D3DXMatrixIdentity(&m_matOld2);
@@ -216,31 +222,31 @@ HRESULT CTestPlayer::Add_Component(void)
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_Transform", pComponent);
 	//¾ó±¼
-	pComponent = m_pPartsTrans[PART_FACE] = Engine::CTransform::Create();
+	pComponent = m_pPartsTrans[PART_FACE] = Engine::CAnimationTransform::Create();
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_FaceTransform", pComponent);
 	//ÅÎ
-	pComponent = m_pPartsTrans[PART_JAW] = Engine::CTransform::Create();
+	pComponent = m_pPartsTrans[PART_JAW] = Engine::CAnimationTransform::Create();
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_JawTransform", pComponent);
 	//¸öÅë
-	pComponent = m_pPartsTrans[PART_BODY] = Engine::CTransform::Create();
+	pComponent = m_pPartsTrans[PART_BODY] = Engine::CAnimationTransform::Create();
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_BodyTransform", pComponent);
 
-	pComponent = m_pPartsTrans[PART_2BODY] = Engine::CTransform::Create();
+	pComponent = m_pPartsTrans[PART_2BODY] = Engine::CAnimationTransform::Create();
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_2BodyTransform", pComponent);
 
-	pComponent = m_pPartsTrans[PART_3BODY] = Engine::CTransform::Create();
+	pComponent = m_pPartsTrans[PART_3BODY] = Engine::CAnimationTransform::Create();
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_3BodyTransform", pComponent);
 	//³¯°³
-	pComponent = m_pPartsTrans[PART_WING] = Engine::CTransform::Create();
+	pComponent = m_pPartsTrans[PART_WING] = Engine::CAnimationTransform::Create();
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_WingTransform", pComponent);
 
-	pComponent = m_pPartsTrans[PART_LWING] = Engine::CTransform::Create();
+	pComponent = m_pPartsTrans[PART_LWING] = Engine::CAnimationTransform::Create();
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_LWingTransform", pComponent);
 	//Camera
@@ -275,40 +281,26 @@ void CTestPlayer::Animation_Render()
 {
 	_matrix matWorld;
 	//¾ó±¼
-	matWorld = m_pPartsTrans[PART_FACE]->Get_World() * m_pTransform->Get_World();
-	m_pPartsTrans[PART_FACE]->Set_World(&matWorld);
-	m_pPartsTrans[PART_FACE]->Set_Transform(m_pGraphicDev);
+	m_pPartsTrans[PART_FACE]->Set_Transform(m_pGraphicDev, m_pTransform->Get_World());
 	m_pPartsBuffer[PART_FACE]->Render_Buffer();
 	//ÅÎ
-	matWorld = m_pPartsTrans[PART_JAW]->Get_World() * m_pTransform->Get_World();
-	m_pPartsTrans[PART_JAW]->Set_World(&matWorld);
-	m_pPartsTrans[PART_JAW]->Set_Transform(m_pGraphicDev);
+	m_pPartsTrans[PART_JAW]->Set_Transform(m_pGraphicDev, m_pTransform->Get_World());
 	m_pPartsBuffer[PART_JAW]->Render_Buffer();
 	//¸öÅë
-	matWorld = m_pPartsTrans[PART_BODY]->Get_World() * m_matOld1;
-	m_pPartsTrans[PART_BODY]->Set_World(&matWorld);
-	m_pPartsTrans[PART_BODY]->Set_Transform(m_pGraphicDev);
+	m_pPartsTrans[PART_BODY]->Set_Transform(m_pGraphicDev, m_matOld1);
 	m_pPartsBuffer[PART_BODY]->Render_Buffer();
 
-	matWorld = m_pPartsTrans[PART_2BODY]->Get_World() * m_matOld2;
-	m_pPartsTrans[PART_2BODY]->Set_World(&matWorld);
-	m_pPartsTrans[PART_2BODY]->Set_Transform(m_pGraphicDev);
+	m_pPartsTrans[PART_2BODY]->Set_Transform(m_pGraphicDev, m_matOld2);
 	m_pPartsBuffer[PART_BODY]->Render_Buffer();
 
-	matWorld = m_pPartsTrans[PART_3BODY]->Get_World() * m_matOld3;
-	m_pPartsTrans[PART_3BODY]->Set_World(&matWorld);
-	m_pPartsTrans[PART_3BODY]->Set_Transform(m_pGraphicDev);
+	m_pPartsTrans[PART_3BODY]->Set_Transform(m_pGraphicDev, m_matOld3);
 	m_pPartsBuffer[PART_BODY]->Render_Buffer();
 
 	//³¯°³
-	matWorld = m_pPartsTrans[PART_WING]->Get_World() * m_matOld2;
-	m_pPartsTrans[PART_WING]->Set_World(&matWorld);
-	m_pPartsTrans[PART_WING]->Set_Transform(m_pGraphicDev);
+	m_pPartsTrans[PART_WING]->Set_Transform(m_pGraphicDev, m_matOld2);
 	m_pPartsBuffer[PART_WING]->Render_Buffer();
 
-	matWorld = m_pPartsTrans[PART_LWING]->Get_World() * m_matOld2;
-	m_pPartsTrans[PART_LWING]->Set_World(&matWorld);
-	m_pPartsTrans[PART_LWING]->Set_Transform(m_pGraphicDev);
+	m_pPartsTrans[PART_LWING]->Set_Transform(m_pGraphicDev, m_matOld2);
 	m_pPartsBuffer[PART_LWING]->Render_Buffer();
 
 	m_matOld3 = m_matOld2;
@@ -322,50 +314,66 @@ void CTestPlayer::Animations(const float& fTimeDelta)
 	if (0.f < m_fMouseTime)
 	{
 		m_fMouseTime -= fTimeDelta;
-		m_pPartsTrans[PART_JAW]->m_vAngle.x = m_vAngle;
-		m_pPartsTrans[PART_JAW]->m_vInfo[Engine::INFO_POS].y = -sinf(m_vAngle);
-		m_pPartsTrans[PART_JAW]->m_vInfo[Engine::INFO_POS].z = cosf(m_vAngle);
+		//m_pPartsTrans[PART_JAW]->m_vAfterAngle.x = m_vAngle;
+		//m_pPartsTrans[PART_JAW]->m_vAfterPos.y = -sinf(m_vAngle);
+		//m_pPartsTrans[PART_JAW]->m_vAfterPos.z = cosf(m_vAngle);
 
-		m_pPartsTrans[PART_FACE]->m_vAngle.x = -m_vAngle;
-		m_pPartsTrans[PART_FACE]->m_vInfo[Engine::INFO_POS].y = sinf(m_vAngle);
-		m_pPartsTrans[PART_FACE]->m_vInfo[Engine::INFO_POS].z = cosf(m_vAngle);
+		//m_pPartsTrans[PART_FACE]->m_vAfterAngle.x = -m_vAngle;
+		//m_pPartsTrans[PART_FACE]->m_vAfterPos.y = sinf(m_vAngle);
+		//m_pPartsTrans[PART_FACE]->m_vAfterPos.z = cosf(m_vAngle);
+
+		m_pPartsTrans[PART_JAW]->m_vAfterRevAngle.x = m_vAngle;
+		m_pPartsTrans[PART_JAW]->m_vAfterPos.z = 1.f;
+
+		m_pPartsTrans[PART_FACE]->m_vAfterRevAngle.x = -m_vAngle;
+		m_pPartsTrans[PART_FACE]->m_vAfterPos.z = 1.f;
 	}
 	else
 	{
-		m_pPartsTrans[PART_JAW]->m_vAngle.x = 0.f;
-		m_pPartsTrans[PART_JAW]->m_vInfo[Engine::INFO_POS].y = -sinf(0.f);
-		m_pPartsTrans[PART_JAW]->m_vInfo[Engine::INFO_POS].z = cosf(0.f);
+		//m_pPartsTrans[PART_JAW]->m_vAfterAngle.x = 0.f;
+		//m_pPartsTrans[PART_JAW]->m_vAfterPos.y = -sinf(0.f);
+		//m_pPartsTrans[PART_JAW]->m_vAfterPos.z = cosf(0.f);
 
-		m_pPartsTrans[PART_FACE]->m_vAngle.x = -0.f;
-		m_pPartsTrans[PART_FACE]->m_vInfo[Engine::INFO_POS].y = sinf(0.f);
-		m_pPartsTrans[PART_FACE]->m_vInfo[Engine::INFO_POS].z = cosf(0.f);
+		//m_pPartsTrans[PART_FACE]->m_vAfterAngle.x = -0.f;
+		//m_pPartsTrans[PART_FACE]->m_vAfterPos.y = sinf(0.f);
+		//m_pPartsTrans[PART_FACE]->m_vAfterPos.z = cosf(0.f);
+		m_pPartsTrans[PART_JAW]->m_vAfterRevAngle.x = 0.f;
+		//m_pPartsTrans[PART_JAW]->m_vAfterPos.z = 1.f;
+
+		m_pPartsTrans[PART_FACE]->m_vAfterRevAngle.x = -0.f;
+		//m_pPartsTrans[PART_FACE]->m_vAfterPos.z = 1.f;
 	}
 
 	if (m_bBreath)
 	{
-		m_pPartsTrans[PART_JAW]->m_vAngle.x = D3DX_PI*0.15f;
-		m_pPartsTrans[PART_JAW]->m_vInfo[Engine::INFO_POS].y = -sinf(D3DX_PI*0.15f);
-		m_pPartsTrans[PART_JAW]->m_vInfo[Engine::INFO_POS].z = cosf(D3DX_PI*0.15f);
+		//m_pPartsTrans[PART_JAW]->m_vAfterAngle.x = D3DX_PI*0.15f;
+		//m_pPartsTrans[PART_JAW]->m_vAfterPos.y = -sinf(D3DX_PI*0.15f);
+		//m_pPartsTrans[PART_JAW]->m_vAfterPos.z = cosf(D3DX_PI*0.15f);
 
-		m_pPartsTrans[PART_FACE]->m_vAngle.x = -D3DX_PI*0.15f;
-		m_pPartsTrans[PART_FACE]->m_vInfo[Engine::INFO_POS].y = sinf(D3DX_PI*0.15f);
-		m_pPartsTrans[PART_FACE]->m_vInfo[Engine::INFO_POS].z = cosf(D3DX_PI*0.15f);
+		//m_pPartsTrans[PART_FACE]->m_vAfterAngle.x = -D3DX_PI*0.15f;
+		//m_pPartsTrans[PART_FACE]->m_vAfterPos.y = sinf(D3DX_PI*0.15f);
+		//m_pPartsTrans[PART_FACE]->m_vAfterPos.z = cosf(D3DX_PI*0.15f);
+		m_pPartsTrans[PART_JAW]->m_vAfterRevAngle.x = D3DX_PI*0.15f;
+		m_pPartsTrans[PART_JAW]->m_vAfterPos.z = 1.f;
+
+		m_pPartsTrans[PART_FACE]->m_vAfterRevAngle.x = -D3DX_PI*0.15f;
+		m_pPartsTrans[PART_FACE]->m_vAfterPos.z = 1.f;
 	}
-	m_pPartsTrans[PART_BODY]->m_vInfo[Engine::INFO_POS].z = -1.5f;
-	m_pPartsTrans[PART_2BODY]->m_vInfo[Engine::INFO_POS].z = -3.f;
-	m_pPartsTrans[PART_3BODY]->m_vInfo[Engine::INFO_POS].z = -4.5f;
+	m_pPartsTrans[PART_BODY]->m_vAfterPos.z = -1.5f;
+	m_pPartsTrans[PART_2BODY]->m_vAfterPos.z = -3.f;
+	m_pPartsTrans[PART_3BODY]->m_vAfterPos.z = -4.5f;
 
-	m_pPartsTrans[PART_WING]->m_vAngle.z = m_vWAngle;
-	m_pPartsTrans[PART_WING]->m_vInfo[Engine::INFO_POS].x = cosf(m_vWAngle);
-	m_pPartsTrans[PART_WING]->m_vInfo[Engine::INFO_POS].y = sinf(m_vWAngle);
-	m_pPartsTrans[PART_WING]->m_vInfo[Engine::INFO_POS].z = -3.f;
+	m_pPartsTrans[PART_WING]->m_vAfterAngle.z = m_vWAngle;
+	m_pPartsTrans[PART_WING]->m_vAfterPos.x = cosf(m_vWAngle);
+	m_pPartsTrans[PART_WING]->m_vAfterPos.y = sinf(m_vWAngle);
+	m_pPartsTrans[PART_WING]->m_vAfterPos.z = -3.f;
 
-	m_pPartsTrans[PART_LWING]->m_vAngle.z = -m_vWAngle;
-	m_pPartsTrans[PART_LWING]->m_vInfo[Engine::INFO_POS].x = -cosf(m_vWAngle);
-	m_pPartsTrans[PART_LWING]->m_vInfo[Engine::INFO_POS].y = sinf(m_vWAngle);
-	m_pPartsTrans[PART_LWING]->m_vInfo[Engine::INFO_POS].z = -3.f;
+	m_pPartsTrans[PART_LWING]->m_vAfterAngle.z = -m_vWAngle;
+	m_pPartsTrans[PART_LWING]->m_vAfterPos.x = -cosf(m_vWAngle);
+	m_pPartsTrans[PART_LWING]->m_vAfterPos.y = sinf(m_vWAngle);
+	m_pPartsTrans[PART_LWING]->m_vAfterPos.z = -3.f;
 
-	if (m_vWAngle < 0.f || m_vWAngle > D3DX_PI*0.25f)
+	if (m_vWAngle < -D3DX_PI*0.33f || m_vWAngle > D3DX_PI*0.33f)
 		m_fWSpeed *= -1;
 
 	if (m_vAngle < 0.f || m_vAngle > D3DX_PI*0.125f)

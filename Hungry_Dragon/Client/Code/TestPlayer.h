@@ -8,8 +8,6 @@ BEGIN(Engine)
 
 class CVIBuffer;
 class CTexture;
-class CTransform;
-class CCamera;
 class CTerrain;
 class CPart_Atk;
 class CResources;
@@ -39,7 +37,7 @@ private:
 	float m_fSpeed = 0.05f;
 
 	float m_vWAngle = 0.f;
-	float m_fWSpeed = 0.01f;
+	float m_fWSpeed = 0.03f;
 
 	D3DXMATRIX m_matOld1;
 	D3DXMATRIX m_matOld2;
