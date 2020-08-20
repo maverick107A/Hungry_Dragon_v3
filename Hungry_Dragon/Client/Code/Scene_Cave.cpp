@@ -202,7 +202,7 @@ void CScene_Cave::Render_Scene(void)
 void CScene_Cave::Free(void)
 {
 	Engine::CScene::Free();
-
+	Engine::Clear_ObjectPool();
 	Safe_Release(m_pFogEffect);
 }
 
