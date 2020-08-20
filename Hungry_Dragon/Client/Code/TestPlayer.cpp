@@ -200,6 +200,16 @@ HRESULT CTestPlayer::Add_Component(void)
 		(Engine::Clone(RESOURCE_STATIC, L"BUFFER_BODY"));
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_STATIC].emplace(L"Body_Buffer", pComponent);
+	//날개
+	pComponent = m_pPartsBuffer[PART_WING] = static_cast<Engine::CVIBuffer*>
+		(Engine::Clone(RESOURCE_STATIC, L"BUFFER_WING"));
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	m_mapComponent[Engine::ID_STATIC].emplace(L"Wing_Buffer", pComponent);
+
+	pComponent = m_pPartsBuffer[PART_LWING] = static_cast<Engine::CVIBuffer*>
+		(Engine::Clone(RESOURCE_STATIC, L"BUFFER_LWING"));
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	m_mapComponent[Engine::ID_STATIC].emplace(L"LWing_Buffer", pComponent);
 
 	//Transform
 	pComponent = m_pTransform = Engine::CTransform::Create();
@@ -225,7 +235,14 @@ HRESULT CTestPlayer::Add_Component(void)
 	pComponent = m_pPartsTrans[PART_3BODY] = Engine::CTransform::Create();
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_3BodyTransform", pComponent);
+	//날개
+	pComponent = m_pPartsTrans[PART_WING] = Engine::CTransform::Create();
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_WingTransform", pComponent);
 
+	pComponent = m_pPartsTrans[PART_LWING] = Engine::CTransform::Create();
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_LWingTransform", pComponent);
 	//Camera
 	pComponent = m_pCamera = Engine::CCamera::Create();
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
@@ -283,6 +300,17 @@ void CTestPlayer::Animation_Render()
 	m_pPartsTrans[PART_3BODY]->Set_Transform(m_pGraphicDev);
 	m_pPartsBuffer[PART_BODY]->Render_Buffer();
 
+	//날개
+	matWorld = m_pPartsTrans[PART_WING]->Get_World() * m_matOld2;
+	m_pPartsTrans[PART_WING]->Set_World(&matWorld);
+	m_pPartsTrans[PART_WING]->Set_Transform(m_pGraphicDev);
+	m_pPartsBuffer[PART_WING]->Render_Buffer();
+
+	matWorld = m_pPartsTrans[PART_LWING]->Get_World() * m_matOld2;
+	m_pPartsTrans[PART_LWING]->Set_World(&matWorld);
+	m_pPartsTrans[PART_LWING]->Set_Transform(m_pGraphicDev);
+	m_pPartsBuffer[PART_LWING]->Render_Buffer();
+
 	m_matOld3 = m_matOld2;
 	m_matOld2 = m_matOld1;
 	m_matOld1 = m_pTransform->Get_World();
@@ -327,9 +355,22 @@ void CTestPlayer::Animations(const float& fTimeDelta)
 	m_pPartsTrans[PART_2BODY]->m_vInfo[Engine::INFO_POS].z = -3.f;
 	m_pPartsTrans[PART_3BODY]->m_vInfo[Engine::INFO_POS].z = -4.5f;
 
+	m_pPartsTrans[PART_WING]->m_vAngle.z = m_vWAngle;
+	m_pPartsTrans[PART_WING]->m_vInfo[Engine::INFO_POS].x = cosf(m_vWAngle);
+	m_pPartsTrans[PART_WING]->m_vInfo[Engine::INFO_POS].y = sinf(m_vWAngle);
+	m_pPartsTrans[PART_WING]->m_vInfo[Engine::INFO_POS].z = -3.f;
+
+	m_pPartsTrans[PART_LWING]->m_vAngle.z = -m_vWAngle;
+	m_pPartsTrans[PART_LWING]->m_vInfo[Engine::INFO_POS].x = -cosf(m_vWAngle);
+	m_pPartsTrans[PART_LWING]->m_vInfo[Engine::INFO_POS].y = sinf(m_vWAngle);
+	m_pPartsTrans[PART_LWING]->m_vInfo[Engine::INFO_POS].z = -3.f;
+
+	if (m_vWAngle < 0.f || m_vWAngle > D3DX_PI*0.25f)
+		m_fWSpeed *= -1;
 
 	if (m_vAngle < 0.f || m_vAngle > D3DX_PI*0.125f)
 		m_fSpeed *= -1;
+	m_vWAngle += m_fWSpeed;
 	m_vAngle += m_fSpeed;
 
 	//

@@ -63,7 +63,10 @@ HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 		pResources = CDragonBody::Create(pGraphicDev);
 		break;
 	case  BUFFER_WING:
-		pResources = CDragonWing::Create(pGraphicDev);
+		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/RightWing.dat");
+		break;
+	case  BUFFER_LWING:
+		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/LeftWing.dat");
 		break;
 	case BUFFER_TEXCUBE:
 		pResources = CTexture_Cube::Create(pGraphicDev);

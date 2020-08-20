@@ -38,6 +38,9 @@ private:
 	float m_vAngle = 0.f;
 	float m_fSpeed = 0.05f;
 
+	float m_vWAngle = 0.f;
+	float m_fWSpeed = 0.01f;
+
 	D3DXMATRIX m_matOld1;
 	D3DXMATRIX m_matOld2;
 	D3DXMATRIX m_matOld3;
