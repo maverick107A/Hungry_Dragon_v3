@@ -19,24 +19,15 @@ HRESULT CRun_Monster::Ready_Object(void)
 	m_fSpeed = 10.f;
 	m_fMonster_HP = 100.f;
 	m_fMonster_MaxHP = 100.f;
-	m_fScale = 5.f;
-	m_fMaxScale = 5.f;
+	m_fScale =    10.f;
+	m_fMaxScale = 10.f;
 	m_fDamaged = 5.f;
 	m_eState = MONSTER_REBORN;
-
-
 
 	m_tFrame.fStartFrame = 0.f;
 	m_tFrame.fMaxFrame = 14.f;
 	m_tFrame.fFrameSpeed = 1.5f;
 	m_fHeight = 0.f;
-
-	
-
-
-
-
-
 
 	return S_OK;
 }
@@ -51,16 +42,19 @@ int CRun_Monster::Update_Object(const float & fTimeDelta)
 	{
 		m_pTransform->Set_Trans(&m_vFirstPos);
 		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
+
+
+		m_vAuraPos = m_pTransform->m_vInfo[Engine::INFO_POS]; 
+		m_pAuraTransform->Set_Trans(&m_vAuraPos);
+
 		m_pTransform->Set_Scale(m_fMaxScale);
-		m_pAuraTransform->Set_Scale(m_fMaxScale * 4.f);
-		m_fMonster_HP = 100.f;
-		m_fScale = 10.f;
+		m_pAuraTransform->Set_Bilborad_Scale(m_fMaxScale * 5);
+		m_fMonster_HP = m_fMonster_MaxHP;
+
 		m_pParticle = nullptr;
 		m_iEvent = OBJ_NOEVENT;
 		m_eState = MONSTER_IDLE;
-		
 
-	
 	}
 
 
@@ -77,23 +71,26 @@ int CRun_Monster::Update_Object(const float & fTimeDelta)
 		
 		vPlayerPos = { m_vPlayerPos.x  , 0.f  , m_vPlayerPos.z };
 		m_pTransform->Chase_Target(&vPlayerPos, -(fTimeDelta * m_fSpeed));
-		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
-		
+		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();	
 	}
 	else
 		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
 
+
+
 	if(true)
 	{
-		m_vAuraPos = m_pTransform->m_vInfo[Engine::INFO_POS];
-		m_pAuraTransform->Set_Trans(&m_vAuraPos);
-		
+		m_pAuraTransform->m_matWorld = m_pTransform->m_matWorld;
+		//m_vAuraPos = m_pTransform->m_vInfo[Engine::INFO_POS];
+		//m_pAuraTransform->Set_Trans(&m_vAuraPos);
+
 		//¿ùµå ºôº¸µå
-	/*	D3DXMATRIX		matView;
-		m_pGraphicDev->GetTransform(D3DTS_VIEW, &matView);
-		ZeroMemory(&matView.m[3][0], sizeof(D3DXVECTOR3));
-		D3DXMatrixInverse(&matView, NULL, &matView);
-		m_pAuraTransform->m_matWorld = matView *  m_pAuraTransform->m_matWorld;*/
+		//D3DXMATRIX		matView;
+		//m_pGraphicDev->GetTransform(D3DTS_VIEW, &matView);
+		//ZeroMemory(&matView.m[3][0], sizeof(D3DXVECTOR3));
+		//D3DXMatrixInverse(&matView, NULL, &matView);
+		// m_pAuraTransform->m_matWorld = matView *  m_pAuraTransform->m_matWorld;
+
 
 		//  Y ºôº¸µå
 		//D3DXMATRIX		matView;
@@ -103,6 +100,7 @@ int CRun_Monster::Update_Object(const float & fTimeDelta)
 		//m_pAuraTransform->m_matWorld._13 = matView._13;
 		//m_pAuraTransform->m_matWorld._31 = matView._31;
 		//m_pAuraTransform->m_matWorld._33 = matView._33;
+	
 	}
 
 	Update_Animation(fTimeDelta);
@@ -114,7 +112,7 @@ void CRun_Monster::Render_Object(void)
 	m_pTransform->Set_Transform(m_pGraphicDev);
 	m_pTextureCom->Set_Texture(4);
 	m_pBufferCubeCom->Render_Buffer();
-
+   
 
 	if (true)
 	{
@@ -187,9 +185,6 @@ void CRun_Monster::Update_Animation(const float & fTimeDelta)
 		m_tFrame.fStartFrame = 0.f;
 	}
 }
-
-
-
 
 CRun_Monster * CRun_Monster::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 {

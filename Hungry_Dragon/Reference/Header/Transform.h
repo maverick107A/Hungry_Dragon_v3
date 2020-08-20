@@ -18,6 +18,8 @@ public:
 
 	void			Set_Trans(const _vec3* const newPos);
 	void			Set_Scale(const _float _Scale);
+	void			Set_Bilborad_Scale(const _float _Scale);
+
 	void			Set_Add_Scale(const _float _Scale);
 	void			Set_World(_matrix* _matWorld);
 

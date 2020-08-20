@@ -44,6 +44,12 @@ void CTransform::Set_Scale(const _float _Scale)
 
 }
 
+void CTransform::Set_Bilborad_Scale(const _float _Scale)
+{
+	m_vScale.x = _Scale;
+	m_vScale.y = _Scale;
+}
+
 
 void CTransform::Set_Add_Scale(const _float _Scale)
 {
