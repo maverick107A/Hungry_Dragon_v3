@@ -154,7 +154,7 @@ _int CScene_Cave::Update_Scene(const _float& fTimeDelta)
 		Engine::Set_Monster_CaveMap(OBJID::STAND_MONSTER, 9999, m_vPlayerPos);
 		break;
 	case CScene_Cave::PHASE_2:			// 카메라 횡스크롤
-		Engine::Set_Monster_CaveMap(OBJID::STAND_MONSTER, 9999, m_vPlayerPos);	// 횡스크롤로 변경
+		Engine::Set_Monster_CaveMap(OBJID::HORIZON_MONSTER, 9999, m_vPlayerPos);	// 횡스크롤로 변경
 
 		break;
 	case CScene_Cave::PHASE_3:			// 카메라 Z회전 함
@@ -268,11 +268,11 @@ HRESULT CScene_Cave::Ready_Layer_Environment(const _tchar * pLayerTag) {
 	FAILED_CHECK_RETURN(Register_GameObject<CCave>(&m_pCave, pLayer, L"Cave"), E_FAIL);
 	FAILED_CHECK_RETURN(Register_GameObject<CVent>(&m_pVent, pLayer, L"Vent"), E_FAIL);
 	
-	//for (int i = 0; i < 1000; ++i)
-	//{
-	//	FAILED_CHECK_RETURN(Register_ObjectPool<CBat_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
-	//	FAILED_CHECK_RETURN(Register_ObjectPool<CHorizon_Bat_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);	
-	//}
+	for (int i = 0; i < 1000; ++i)
+	{
+		FAILED_CHECK_RETURN(Register_ObjectPool<CBat_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
+		FAILED_CHECK_RETURN(Register_ObjectPool<CHorizonBat_Monster>(pLayer, OBJID::HORIZON_MONSTER), E_FAIL);
+	}
 
 	//m_pVent->Set_Trans(_vec3(0.f,0.f, m_pCave->Get_EndPoint()+4000.f));
 	m_pVent->Set_Active(false);

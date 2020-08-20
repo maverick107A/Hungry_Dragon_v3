@@ -195,6 +195,19 @@ void Engine::CLayer::Free(void)
 	m_mapObject.clear();
 }
 
+void CLayer::Delete_Object(const _tchar * _pObjTag)
+{
+	auto	iter = find_if(m_mapObject.begin(), m_mapObject.end(), CTag_Finder(_pObjTag));
+
+	for (auto& listiter = iter->second.begin(); listiter != iter->second.end(); ++listiter)
+	{
+		if(*listiter != nullptr)
+		Safe_Release(*listiter);	
+	}
+
+	iter->second.clear();
+}
+
 HRESULT Engine::CLayer::Add_Object(const _tchar* pObjTag, CGameObject* pGameObject)
 {
 	if (nullptr == pGameObject)

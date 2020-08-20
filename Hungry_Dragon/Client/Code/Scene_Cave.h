@@ -53,7 +53,6 @@ public:
 private:
 	CCave* m_pCave = nullptr;
 	CVent* m_pVent = nullptr;
-
 	SCENEPHASE m_ePhaseNum = PHASE_1;
 
 

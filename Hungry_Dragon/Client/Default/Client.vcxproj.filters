@@ -82,9 +82,6 @@
     <Filter Include="01. Scene\03. Scene_Cave">
       <UniqueIdentifier>{b3030010-b54c-4f93-b948-3cd6a96e112a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Scene\04. Scene_Cloud">
-      <UniqueIdentifier>{22a5ed4e-7e0b-4630-ad47-7edcdca71be2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01. Scene\05. Scene_Volcano">
       <UniqueIdentifier>{a1fd4ff7-25f1-4246-98e2-ce08026c75fd}</UniqueIdentifier>
     </Filter>
@@ -228,6 +225,9 @@
     </Filter>
     <Filter Include="02. GameObject\00. Logo\05. Fire_Wall">
       <UniqueIdentifier>{7649ae48-c8cb-4946-9962-9a592f0e5831}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Scene\04. Scene_Cloud">
+      <UniqueIdentifier>{22a5ed4e-7e0b-4630-ad47-7edcdca71be2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

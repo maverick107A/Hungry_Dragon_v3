@@ -23,6 +23,9 @@ public:
 	void			Set_Address(void);
 	void			Set_Player(const _vec3 fPlayerPos) { m_vPlayerPos = fPlayerPos; }
 
+	// 승민이가 만든 임시 함수
+	void			Delete_Object(const _tchar* _pObjTag);
+
 	HRESULT			Add_Object(const _tchar* pObjTag, CGameObject* pGameObject);
 public:
 	HRESULT			Ready_Layer(void);

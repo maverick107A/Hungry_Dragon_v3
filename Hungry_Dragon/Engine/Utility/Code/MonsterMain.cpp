@@ -106,15 +106,10 @@ void Engine::CMonsterMain::State_Change()
 			m_pParticle = Engine::Particle_Create(Engine::PART_FRAGILE,_vec3(0.f, 0.f, 0.f));
 			//Engine::Set_ParticleColor(static_cast<CParticle*>(m_pParticle), D3DXCOLOR(1.f, 0.f, 0.f, 1.f));
 		}
-		if (m_eState == MONSTER_SUICIDE)
+		if (m_eState == MONSTER_SUICIDE || m_eState == MONSTER_LAYDEAD)
 		{
 			m_pParticle = Engine::Particle_Create(Engine::PART_FRAGILE, _vec3(0.f, 0.f, 0.f));
-		}
-		if (m_eState == MONSTER_LAYDEAD)
-		{
-			m_pParticle = Engine::Particle_Create(Engine::PART_FRAGILE, _vec3(0.f, 0.f, 0.f));
-		}
-		
+		}		
 		if (m_eState == MONSTER_DYING)
 		{
 			m_pParticle = nullptr;
