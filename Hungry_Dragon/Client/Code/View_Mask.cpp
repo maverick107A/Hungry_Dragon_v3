@@ -47,7 +47,7 @@ int CView_Mask::Update_Object(const float& fTimeDelta) {
 	{
 		if (!m_bAccel)
 		{
-			//Engine::Get_FMOD()->PlayEffect(L"Downhill");
+			Engine::Get_FMOD()->PlayEffect(L"FlightOnce");
 		}
 	}
 

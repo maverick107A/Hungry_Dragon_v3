@@ -102,6 +102,10 @@ _int CScene_Cave::Update_Scene(const _float& fTimeDelta)
 {
 	Engine::CScene::Update_Scene(fTimeDelta);
 
+	if (GetAsyncKeyState(VK_F4) & 0x0001)
+	{
+		CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_MENU);
+	}
 	if (GetAsyncKeyState(VK_F5) & 0x0001)
 	{
 		m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);

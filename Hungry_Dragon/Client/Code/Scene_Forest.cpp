@@ -87,10 +87,15 @@ _int CScene_Forest::Update_Scene(const _float& fTimeDelta) {
 			m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 		m_bWireFrameMode = !m_bWireFrameMode;
 	}
+	if (GetAsyncKeyState(VK_F4) & 0x0001)
+	{
+		CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_MENU);
+	}
 	if (GetAsyncKeyState(VK_F5) & 0x0001)
 	{
 		m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 		m_bWireFrameMode = true;
+		
 	}
 	if (GetAsyncKeyState(VK_F6) & 0x0001)
 	{

@@ -461,7 +461,7 @@ _uint CScene_Loading::Loading_ForStage(void)
 	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/Fragile1.mp3", L"Fragile1");
 	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/Fragile2.mp3", L"Fragile2");
 	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/Fragile3.mp3", L"Fragile3");
-
+	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/flight_once.mp3", L"FlightOnce");
 
 
 

@@ -62,6 +62,12 @@ void CPage_Out::Render_Object(void) {
 
 }
 
+Engine::_bool CPage_Out::Set_Activate(Engine::_bool _bActivate)
+{
+	Engine::Get_FMOD()->PlayEffect(L"BreathTest"); 
+	return m_bActivate = _bActivate;
+}
+
 void CPage_Out::Free(void) {
 	Engine::CGameObject::Free();
 }
