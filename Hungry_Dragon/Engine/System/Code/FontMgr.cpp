@@ -18,16 +18,19 @@ HRESULT Engine::CFontMgr::Ready_Font(LPDIRECT3DDEVICE9 pGraphicDev, const _tchar
 	if (nullptr != pFont)
 		return E_FAIL;
 
+
+	AddFontResource(L"../../Asset/Font/Maplestory Bold.ttf");
+	AddFontResource(L"../../Asset/Font/Maplestory Light.ttf");
+	SendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0);
+
+
+
 	pFont = CFont::Create(pGraphicDev, pFontType, iWidth, iHeight, iWeight);
 	NULL_CHECK_RETURN(pFont, E_FAIL);
 
 	m_mapFont.emplace(pFontTag, pFont);
 
 	// 폰트 자동 설치
-	AddFontResource(L"../../Asset/Font/Maplestory Bold.ttf");
-	AddFontResource(L"../../Asset/Font/Maplestory Light.ttf");
-	SendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0);
-
 	return S_OK;
 }
 

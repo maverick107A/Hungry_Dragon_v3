@@ -57,8 +57,11 @@ protected:
 	Engine::CVICustom*			m_pBufferMeshCom = nullptr;
 	Engine::CVICustom*			m_pBufferBodyMeshCom = nullptr;
 	Engine::CVICustom*			m_pBufferHeadMeshCom = nullptr;
-
 	Engine::CVICustom*			m_pBufferChrystalMeshCom = nullptr;
+
+
+	CTransform*					m_pAuraTransform = nullptr;
+
 
 	Engine::CTexture*			m_pTextureCom = nullptr;
 	Engine::CBaseLand*			m_pTerrain = nullptr;

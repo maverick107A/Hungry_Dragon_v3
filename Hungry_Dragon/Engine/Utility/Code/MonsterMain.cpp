@@ -277,6 +277,8 @@ HRESULT Engine::CMonsterMain::Add_Component(void)
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_Transform", pComponent);
 
+
+
 	return S_OK;
 }
 
