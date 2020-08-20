@@ -30,11 +30,11 @@ public:
 	bool Set_ParticleTrans(CResources* _particle,_vec3 _pos);
 
 private:
-	list<Engine::CResources*>  m_arrParticle;
-	vector<Engine::_vec3>	m_vecTrans;
-	LPDIRECT3DDEVICE9		m_pGraphicDev;
-	CTransform*				m_pParticleTrans;
-	size_t					m_iParticleLimite  = 30;
+	list<Engine::CResources*>	m_arrParticle;
+	list<Engine::_vec3>			m_arrTrans;
+	LPDIRECT3DDEVICE9			m_pGraphicDev;
+	CTransform*					m_pParticleTrans;
+	size_t						m_iParticleLimite  = 30;
 
 public:
 	virtual void Free(void) override;

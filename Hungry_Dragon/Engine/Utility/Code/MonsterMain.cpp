@@ -117,9 +117,7 @@ void Engine::CMonsterMain::State_Change()
 		
 		if (m_eState == MONSTER_DYING)
 		{
-			//// 이거 살릴수 있으면 좋음
-			if (nullptr != m_pParticle)
-				static_cast<Engine::CParticle*>(m_pParticle)->Set_Empty();
+			m_pParticle = nullptr;
 		}
 
 		m_preState = m_eState;

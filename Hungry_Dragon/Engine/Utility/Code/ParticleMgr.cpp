@@ -25,41 +25,35 @@ void CParticleMgr::Ready_ParticleMgr(LPDIRECT3DDEVICE9 _pGraphicDev)
 
 void CParticleMgr::Particle_Update(const float & fTimeDelta)
 {
+	list<_vec3>::iterator iter_pos = m_arrTrans.begin();
 	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end();)
 	{
 		int life = (*iter)->Update_Component(fTimeDelta);
 
 		if (life == 0) {
 			++iter;
+			++iter_pos;
 		}
 		else {
 			Safe_Release(*iter);
 			iter = m_arrParticle.erase(iter);
+			iter_pos = m_arrTrans.erase(iter_pos);
 		}
 	}
-
-	m_vecTrans.clear();
 }
 
 void CParticleMgr::Particle_LateUpdate(const float & fTimeDelta)
 {
 	int tempParticleListSize = (int)m_arrParticle.size();
-	m_vecTrans.clear();
-	m_vecTrans.reserve(tempParticleListSize);
-
-	for (int i = 0; i < tempParticleListSize; ++i)
-	{
-		m_vecTrans.emplace_back(Engine::_vec3(0.f,0.f,0.f));
-	}
 }
 
 void CParticleMgr::Particle_Render()
 {
-	int index = 0;
-	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end(); ++iter,++index)
+	list<_vec3>::iterator iter_pos = m_arrTrans.begin();
+	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end(); ++iter,++iter_pos)
 	{
 		
-		m_pParticleTrans->Set_Trans(&m_vecTrans[index]);
+		m_pParticleTrans->Set_Trans(&(*iter_pos));
 		m_pParticleTrans->Update_Component(0.1f);
 		m_pParticleTrans->Set_Transform(m_pGraphicDev);
 		(*iter)->Render_Buffer();
@@ -73,6 +67,7 @@ CResources* CParticleMgr::Particle_Create(Engine::PARTICLEID _eID, const _vec3 _
 		Safe_Release(m_arrParticle.front());
 		m_arrParticle.front() = nullptr;
 		m_arrParticle.pop_front();
+		m_arrTrans.pop_front();
 	}
 
 	Engine::_vec3 vOrigin = _pos;
@@ -82,6 +77,7 @@ CResources* CParticleMgr::Particle_Create(Engine::PARTICLEID _eID, const _vec3 _
 	Engine::CResources* tempParticle = Engine::Get_Particle(m_pGraphicDev, _eID, tempBoundingBox, vOrigin);
 
 	m_arrParticle.emplace_back(tempParticle);
+	m_arrTrans.emplace_back(_vec3(0.f, 0.f, 0.f));
 	return tempParticle;
 }
 
@@ -90,7 +86,8 @@ bool CParticleMgr::Set_ParticleTrans(CResources* _particle, _vec3 _pos)
 
 	int index;
 	list<CResources*>::iterator iter_part = m_arrParticle.begin();
-	for (index = 0; index < (int)m_arrParticle.size(); ++index, ++iter_part)
+	list<_vec3>::iterator iter_pos = m_arrTrans.begin();
+	for (index = 0; index < (int)m_arrParticle.size(); ++index, ++iter_part,++iter_pos)
 	{
 		if (_particle == (*iter_part))
 		{
@@ -100,7 +97,7 @@ bool CParticleMgr::Set_ParticleTrans(CResources* _particle, _vec3 _pos)
 
 	if (iter_part != m_arrParticle.end())
 	{
-		m_vecTrans[index] = _pos;
+		(*iter_pos) = _pos;
 		return true;
 	}
 

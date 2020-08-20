@@ -125,7 +125,7 @@ _int CScene_Cloud::Update_Scene(const _float& fTimeDelta) {
 		m_far -= 0.001f;
 	}
 
-	//Engine::Particle_Update(fTimeDelta);
+	Engine::Particle_Update(fTimeDelta);
 
 	//플레이어 위치 최신화
 	pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);
@@ -149,8 +149,6 @@ void CScene_Cloud::LateUpdate_Scene(const _float & fTimeDelta)
 }
 
 void CScene_Cloud::Render_Scene(void) {
-
-	
 
 	// set the technique to use
 	m_pFogEffect->SetTechnique(m_hFogTechHandle);
