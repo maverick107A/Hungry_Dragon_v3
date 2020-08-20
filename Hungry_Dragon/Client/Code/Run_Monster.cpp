@@ -27,7 +27,7 @@ HRESULT CRun_Monster::Ready_Object(void)
 
 
 	m_tFrame.fStartFrame = 0.f;
-	m_tFrame.fMaxFrame = 7.f;
+	m_tFrame.fMaxFrame = 14.f;
 	m_tFrame.fFrameSpeed = 1.5f;
 	m_fHeight = 0.f;
 
@@ -52,7 +52,7 @@ int CRun_Monster::Update_Object(const float & fTimeDelta)
 		m_pTransform->Set_Trans(&m_vFirstPos);
 		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
 		m_pTransform->Set_Scale(m_fMaxScale);
-		
+		m_pAuraTransform->Set_Scale(m_fMaxScale * 4.f);
 		m_fMonster_HP = 100.f;
 		m_fScale = 10.f;
 		m_pParticle = nullptr;
@@ -87,12 +87,22 @@ int CRun_Monster::Update_Object(const float & fTimeDelta)
 	{
 		m_vAuraPos = m_pTransform->m_vInfo[Engine::INFO_POS];
 		m_pAuraTransform->Set_Trans(&m_vAuraPos);
-
-		D3DXMATRIX		matView;
+		
+		//¿ùµå ºôº¸µå
+	/*	D3DXMATRIX		matView;
 		m_pGraphicDev->GetTransform(D3DTS_VIEW, &matView);
 		ZeroMemory(&matView.m[3][0], sizeof(D3DXVECTOR3));
 		D3DXMatrixInverse(&matView, NULL, &matView);
-		m_pAuraTransform->m_matWorld = matView *  m_pAuraTransform->m_matWorld;
+		m_pAuraTransform->m_matWorld = matView *  m_pAuraTransform->m_matWorld;*/
+
+		//  Y ºôº¸µå
+		//D3DXMATRIX		matView;
+		//m_pGraphicDev->GetTransform(D3DTS_VIEW, &matView);
+		//D3DXMatrixInverse(&matView, NULL, &matView);
+		//m_pAuraTransform->m_matWorld._11 = matView._11;
+		//m_pAuraTransform->m_matWorld._13 = matView._13;
+		//m_pAuraTransform->m_matWorld._31 = matView._31;
+		//m_pAuraTransform->m_matWorld._33 = matView._33;
 	}
 
 	Update_Animation(fTimeDelta);
@@ -115,7 +125,7 @@ void CRun_Monster::Render_Object(void)
 		m_pGraphicDev->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 		m_pGraphicDev->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
 	
-		m_pTextureCom->Set_Texture((int)m_tFrame.fStartFrame);
+		m_pAuraTextureCom->Set_Texture((int)m_tFrame.fStartFrame);
 		m_pBufferBoradCom->Render_Buffer();
 	
 		m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
@@ -144,20 +154,20 @@ HRESULT CRun_Monster::Add_Component(void)
 	pComponent = m_pBufferBoradCom = dynamic_cast<Engine::CMonsterBoard*>
 		(Engine::Clone(RESOURCE_STATIC, L"Sprite_Bat"));
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
-	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_Buffer", pComponent);
+	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_BoardBuffer", pComponent);
 
 
-	pComponent = m_pTextureCom = dynamic_cast<Engine::CTexture*>
-		(Engine::Clone(RESOURCE_STAGE, L"Texture_Bat"));
+	pComponent = m_pAuraTextureCom = dynamic_cast<Engine::CTexture*>
+		(Engine::Clone(RESOURCE_STAGE, L"Test_Aura"));
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
-	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Texture", pComponent);
+	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_AuraTexture", pComponent);
 
 	//pComponent = m_pTransform = Engine::CTransform::Create();
 	//NULL_CHECK_RETURN(pComponent, E_FAIL);
 	//m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_Transform", pComponent);
 
 
-	//FAILED_CHECK(Register_Component<Engine::CTransform>(&m_pAuraTransform, ID_DYNAMIC, L"Com_AuraTransform"));
+	FAILED_CHECK(Register_Component<Engine::CTransform>(&m_pAuraTransform, ID_DYNAMIC, L"Com_AuraTransform"));
 
 	return S_OK;
 }

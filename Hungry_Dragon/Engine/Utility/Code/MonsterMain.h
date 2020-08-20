@@ -61,7 +61,7 @@ protected:
 
 
 	CTransform*					m_pAuraTransform = nullptr;
-
+	Engine::CTexture*			m_pAuraTextureCom = nullptr;
 
 	Engine::CTexture*			m_pTextureCom = nullptr;
 	Engine::CBaseLand*			m_pTerrain = nullptr;

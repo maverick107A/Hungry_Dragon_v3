@@ -429,6 +429,9 @@
     <ClInclude Include="..\Code\Fire_Wall.h">
       <Filter>02. GameObject\00. Logo\05. Fire_Wall</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\Scene_Option.h">
+      <Filter>01. Scene\08. Scene_Option</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -619,6 +622,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Fire_Wall.cpp">
       <Filter>02. GameObject\00. Logo\05. Fire_Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Scene_Option.cpp">
+      <Filter>01. Scene\08. Scene_Option</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

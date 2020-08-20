@@ -12,6 +12,7 @@
 //#include "Scene_Iceland.h"
 #include "Scene_Select.h"
 #include "Scene_Menu.h"
+#include "Scene_Option.h"
 
 // 리소스들
 #include "Terrain_Parts.h"
@@ -104,7 +105,7 @@ void CIngame_Flow::Occur_Event(int _iEvent)
 			CScene_Menu::Create(m_pGraphicDev);
 			break;
 		case SCENENUM::SCENE_OPTION:
-			//CScene_Option::Create(m_pGraphicDev);
+			CScene_Option::Create(m_pGraphicDev);
 			break;
 		case SCENENUM::SCENE_SELECT:
 			CScene_Select::Create(m_pGraphicDev);
