@@ -52,12 +52,12 @@ _int CVent::Update_Object(const _float& fTimeDelta)
 	m_pTransformBeyond->Add_Trans(&_vec3(0.f, 0.f, -m_fForwardSpeed*fTimeDelta));
 
 	
-		if (-m_fCaveLength*0.5f >= m_pTransform->Get_World()._43)
+		if (-m_fCaveLength*0.8f >= m_pTransform->Get_World()._43)
 		{
 			m_pTransform->Add_Trans(&_vec3(0.f, 0.f, m_fCaveLength*2.f));
 
 		}
-		if (-m_fCaveLength*0.5f >= m_pTransformBeyond->Get_World()._43)
+		if (-m_fCaveLength*0.8f >= m_pTransformBeyond->Get_World()._43)
 		{
 			m_pTransformBeyond->Add_Trans(&_vec3(0.f, 0.f, m_fCaveLength*2.f));
 

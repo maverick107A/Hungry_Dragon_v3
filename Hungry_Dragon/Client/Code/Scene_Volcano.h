@@ -27,6 +27,7 @@
 #include "AshCloud_Locater.h"
 #include "Volcano_Parts.h"
 #include "Meteor_Spawner.h"
+#include "View_Mask.h"
 
 //-------------------------------------------------------
 
@@ -47,6 +48,7 @@ private:
 	HRESULT	Ready_Resource(LPDIRECT3DDEVICE9 pGraphicDev, RESOURCEID eMax);
 	HRESULT	Ready_Layer_Environment(const _tchar* pLayerTag);
 	HRESULT	Ready_Layer_IgnoreEffect(const _tchar* pLayerTag);
+	HRESULT	Ready_Layer_Billboard(const _tchar* pLayerTag);
 	HRESULT	Ready_Layer_GameLogic(const _tchar* pLayerTag);
 	HRESULT	Ready_Layer_UI(const _tchar* pLayerTag);
 

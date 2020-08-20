@@ -457,6 +457,10 @@ _uint CScene_Loading::Loading_ForStage(void)
 	// È¿°úÀ½
 	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/mouse_on.mp3", L"MouseOn");
 	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/breath_test.mp3", L"BreathTest");
+	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/Fragile0.mp3", L"Fragile0");
+	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/Fragile1.mp3", L"Fragile1");
+	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/Fragile2.mp3", L"Fragile2");
+	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/Fragile3.mp3", L"Fragile3");
 
 
 

@@ -105,14 +105,31 @@ void Engine::CMonsterMain::State_Change()
 			//m_pParticle = Engine::Particle_Create(Engine::PART_ATK, _vec3(0.f, 0.f, 0.f));
 			m_pParticle = Engine::Particle_Create(Engine::PART_FRAGILE,_vec3(0.f, 0.f, 0.f));
 			//Engine::Set_ParticleColor(static_cast<CParticle*>(m_pParticle), D3DXCOLOR(1.f, 0.f, 0.f, 1.f));
+			switch (rand() % 4)
+			{
+			case 0:
+				Get_FMOD()->PlayEffect(L"Fragile0");
+				break;
+			case 1:
+				Get_FMOD()->PlayEffect(L"Fragile1");
+				break;
+			case 2:
+				Get_FMOD()->PlayEffect(L"Fragile2");
+				break;
+			case 3:
+				Get_FMOD()->PlayEffect(L"Fragile3");
+				break;
+			}
 		}
 		if (m_eState == MONSTER_SUICIDE || m_eState == MONSTER_LAYDEAD)
 		{
 			m_pParticle = Engine::Particle_Create(Engine::PART_FRAGILE, _vec3(0.f, 0.f, 0.f));
-		}		
+
+		}				
 		if (m_eState == MONSTER_DYING)
 		{
 			m_pParticle = nullptr;
+			
 		}
 
 		m_preState = m_eState;

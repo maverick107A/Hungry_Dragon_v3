@@ -20,6 +20,7 @@ HRESULT CScene_Volcano::Ready_Scene(void) {
 	FAILED_CHECK_RETURN(Ready_Resource(m_pGraphicDev, RESOURCE_END), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_Layer_Environment(L"Environment"), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_Layer_IgnoreEffect(L"IgnoreEffect"), E_FAIL);
+	FAILED_CHECK_RETURN(Ready_Layer_Billboard(L"Billboard"), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_Layer_GameLogic(L"GameLogic"), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_Layer_UI(L"UI"), E_FAIL);
 	// 임시 적용
@@ -169,6 +170,7 @@ void CScene_Volcano::Render_Scene(void) {
 	m_pFogEffect->End();
 
 	m_mapLayer[L"IgnoreEffect"]->Render_Layer();
+	m_mapLayer[L"Billboard"]->Render_Layer();
 
 	m_mapLayer[L"UI"]->Render_Layer();
 
@@ -207,6 +209,7 @@ HRESULT CScene_Volcano::Ready_Layer_UI(const _tchar* pLayerTag) {
 	m_mapLayer.emplace(pLayerTag, pLayer);
 
 	FAILED_CHECK_RETURN(Register_GameObject<CPlayerUI>(pLayer, L"PlayerUI"), E_FAIL);
+	FAILED_CHECK_RETURN(Register_GameObject<CView_Mask>(pLayer, L"Sprite"), E_FAIL);
 
 	return S_OK;
 }
@@ -235,6 +238,18 @@ HRESULT CScene_Volcano::Ready_Layer_IgnoreEffect(const _tchar * pLayerTag)
 
 
 	FAILED_CHECK_RETURN(Register_GameObject<CAshCloud_Locater>(pLayer, L"AshCloud"), E_FAIL);
+
+	return S_OK;
+}
+
+HRESULT CScene_Volcano::Ready_Layer_Billboard(const _tchar * pLayerTag)
+{
+	Engine::CLayer*		pLayer = Engine::CLayer::Create();
+	NULL_CHECK_RETURN(pLayer, E_FAIL);
+	m_mapLayer.emplace(pLayerTag, pLayer);
+	pLayer->Set_Address();
+
+
 	FAILED_CHECK_RETURN(Register_GameObject<CMeteor_Spawner>(&m_pSpawner, pLayer, L"Spawner"), E_FAIL);
 
 	return S_OK;

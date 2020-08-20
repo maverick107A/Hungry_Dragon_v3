@@ -71,6 +71,7 @@ private:
 	FLOAT						m_far = -0.2f;		// 포그종료
 	
 	CBillCloud_Locater*			m_pBillCloudLocater = nullptr;
+	CView_Mask*					m_pMaskSprite = nullptr;
 
 private:
 	virtual void Free(void) override;

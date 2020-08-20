@@ -166,9 +166,6 @@
     <Filter Include="02. GameObject\01. Stage\62. Cliff_Locater">
       <UniqueIdentifier>{515b359b-6db9-4590-af29-902ebb72d40e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01. Scene\07. Scene_Select">
-      <UniqueIdentifier>{940311cb-3c40-4cd5-ad3d-4e7304b318dd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01. Scene\09. Scene_Menu">
       <UniqueIdentifier>{496abfac-4fcf-4338-bb7a-8efe2b23e3b8}</UniqueIdentifier>
     </Filter>
@@ -228,6 +225,9 @@
     </Filter>
     <Filter Include="01. Scene\04. Scene_Cloud">
       <UniqueIdentifier>{22a5ed4e-7e0b-4630-ad47-7edcdca71be2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Scene\07. Scene_Select">
+      <UniqueIdentifier>{940311cb-3c40-4cd5-ad3d-4e7304b318dd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

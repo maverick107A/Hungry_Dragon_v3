@@ -34,7 +34,7 @@ int CView_Mask::Update_Object(const float& fTimeDelta) {
 	_matrix matScale;
 	_matrix matTrans;
 	_vec3	vecTrans = m_pCam->Get_Pos() + m_pCam->Get_Dir()*10.f;
-	D3DXMatrixScaling(&matScale, 16.f, 9.f, 1.f);			// 텍스처의 크기
+	D3DXMatrixScaling(&matScale, 16.f+ m_fAccel*16.f, 9.f + m_fAccel*9.f, 1.f);			// 텍스처의 크기
 	m_pGraphicDev->GetTransform(D3DTS_VIEW, &matView);
 	ZeroMemory(&matView.m[3][0], sizeof(D3DXVECTOR3));
 	D3DXMatrixInverse(&matView, NULL, &matView);
@@ -42,6 +42,29 @@ int CView_Mask::Update_Object(const float& fTimeDelta) {
 	memcpy( &m_pTransform->m_matWorld._41, &vecTrans, sizeof(_vec3));
 
 	m_uTexFrame = (m_uTexFrame + 1) % 30;
+
+	if (GetAsyncKeyState(VK_SHIFT) & 0x0001)
+	{
+		if (!m_bAccel)
+		{
+			//Engine::Get_FMOD()->PlayEffect(L"Downhill");
+		}
+	}
+
+	if (GetAsyncKeyState(VK_SHIFT) & 0x8000)
+	{
+		m_bAccel = true;
+		m_fAccel -= fTimeDelta;
+		if (0.f > m_fAccel)
+		{
+			m_fAccel = 0.f;
+		}
+	}
+	else
+	{
+		m_bAccel = false;
+		m_fAccel = 2.f;
+	}
 
 	return 0;
 }

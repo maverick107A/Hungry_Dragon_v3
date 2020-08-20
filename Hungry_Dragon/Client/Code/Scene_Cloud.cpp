@@ -228,7 +228,7 @@ HRESULT CScene_Cloud::Ready_Layer_UI(const _tchar* pLayerTag) {
 	m_mapLayer.emplace(pLayerTag, pLayer);
 
 	FAILED_CHECK_RETURN(Register_GameObject<CPlayerUI>(pLayer, L"PlayerUI"), E_FAIL);
-	FAILED_CHECK_RETURN(Register_GameObject<CView_Mask>(pLayer, L"Sprite"), E_FAIL);
+	FAILED_CHECK_RETURN(Register_GameObject<CView_Mask>(&m_pMaskSprite, pLayer, L"Sprite"), E_FAIL);
 
 
 	return S_OK;

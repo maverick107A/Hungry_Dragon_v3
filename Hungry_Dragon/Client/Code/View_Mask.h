@@ -27,6 +27,8 @@ public:
 	virtual int Update_Object(const float& fTimeDelta) override;
 	virtual void Render_Object(void) override;
 
+public:
+
 
 private:
 	HRESULT		Add_Component(void);
@@ -39,6 +41,7 @@ private:
 
 	Engine::_uint m_uTexFrame = 0;
 	bool					m_bAccel = true;
+	Engine::_float	m_fAccel = 1.f;
 
 	Engine::CCameraMain*			m_pCam = nullptr;
 
