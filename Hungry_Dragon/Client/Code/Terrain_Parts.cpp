@@ -43,6 +43,11 @@ void CTerrain_Parts::Set_HeightMap(const _tchar * _pPath)
 	m_pBufferCom->Set_Height(_pPath);
 }
 
+void CTerrain_Parts::Set_A()
+{
+	m_pBufferCom->Set_Height();
+}
+
 void CTerrain_Parts::Set_Trans(_vec3 & _vPos)
 {
 	m_pTransform->Set_Trans(&_vPos);
@@ -95,9 +100,11 @@ void CTerrain_Parts::Weld_Edge(CTerrain_Parts * _Dst, bool _bHorizontal)
 			//rSrcHeightMap[(128 - i) * 129 + 128] = fJoinPoint[i];
 			//rDstHeightMap[(128 - i) * 129] = fJoinPoint[i];
 
-			rSrcHeightMap[(i) * 129 + 128] = fJoinPoint[i];
-			rDstHeightMap[(i) * 129] = fJoinPoint[i];
+			rSrcHeightMap[i * 129 + 128] = fJoinPoint[i];
+			rDstHeightMap[i * 129] = fJoinPoint[i];
 		}
+		rSrcHeightMap[128 * 129 + 128] = fJoinPoint[128];
+		rDstHeightMap[28 * 129] = fJoinPoint[128];
 
 	}
 	else                // 아래쪽이랑 접합
@@ -140,6 +147,8 @@ void CTerrain_Parts::Weld_Edge(CTerrain_Parts * _Dst, bool _bHorizontal)
 			rSrcHeightMap[i] = fJoinPoint[i];
 			rDstHeightMap[uPivot + i] = fJoinPoint[i];
 		}
+		rSrcHeightMap[128] = fJoinPoint[128];
+		rDstHeightMap[uPivot + 128] = fJoinPoint[128];
 	}
 
 }

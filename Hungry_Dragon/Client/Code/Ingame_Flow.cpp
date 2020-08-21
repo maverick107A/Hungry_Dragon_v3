@@ -183,6 +183,12 @@ void CIngame_Flow::Load_ForestTerrain()
 			m_pParts[i * 5 + j]->Weld_Edge(m_pParts[(i + 1) * 5 + j], false);
 		}
 	}
+
+	for (int i = 0; i < 50; ++i)
+	{
+		m_pParts[i]->Set_A();
+	}
+
 }
 
 void CIngame_Flow::Release_ForestTerrain()

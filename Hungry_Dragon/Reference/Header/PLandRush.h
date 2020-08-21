@@ -17,6 +17,7 @@ private:
 public:
 	virtual void Enter_State(CPlayerMain* _pPlayer);
 	virtual void Update_State(const float& fTimeDelta);
+	virtual void LateUpdate_State();
 	virtual void Out_State();
 
 private:

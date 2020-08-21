@@ -18,6 +18,7 @@ public:
 	virtual void Enter_State(CPlayerMain* _pPlayer);
 	virtual void Update_State(const float& fTimeDelta);
 	virtual void Out_State();
+	virtual void LateUpdate_State();
 
 public:
 	static CPLandIdle*		Create(void);

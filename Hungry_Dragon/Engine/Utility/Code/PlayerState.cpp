@@ -153,6 +153,87 @@ bool CPlayerState::Land_Check(float* _fHeight, _vec3* _vNorm)
 	return false;
 }
 
+void CPlayerState::Aim()
+{
+	//float fAngleY = m_pPlayer->Get_AngleY();
+
+	//if (fAngleY > D3DX_PI*2.f)
+	//{
+	//	while (true)
+	//	{
+	//		fAngleY -= D3DX_PI*2.f;
+	//		if (fAngleY < D3DX_PI*2.f)
+	//			break;
+	//	}
+	//}
+	//else if (fAngleY < 0.f)
+	//{
+	//	while (true)
+	//	{
+	//		fAngleY += D3DX_PI*2.f;
+	//		if (fAngleY > 0.f)
+	//			break;
+	//	}
+	//}
+
+	//float fDeltaAngleX = (m_pPlayer->Get_AngleX() - m_pPlayer->Get_Transform()->m_vAngle.x)*0.25f;
+	//float fDeltaAngleY = (fAngleY - m_pPlayer->Get_Transform()->m_vAngle.y)*0.25f;
+
+
+
+	//m_pPlayer->Get_Transform()->m_vAngle.x += fDeltaAngleX;
+	//m_pPlayer->Get_Transform()->m_vAngle.y += fDeltaAngleY;
+
+	D3DXVECTOR3 vLook = { 0.f,0.f,0.f };
+
+	D3DXMATRIX vRotX, vRotY, vRotTotal;
+	D3DXMatrixRotationX(&vRotX, m_pPlayer->Get_AngleX());
+	D3DXMatrixRotationY(&vRotY, m_pPlayer->Get_AngleY());
+
+	vRotTotal = vRotX*vRotY;
+	D3DXVec3TransformNormal(&vLook, &_vec3(0.f, 0.f, 1.f), &vRotTotal);
+
+	float fDis = sqrtf(vLook.x*vLook.x + vLook.y*vLook.y + vLook.z*vLook.z);
+	float fPlaneDis = sqrtf(vLook.x*vLook.x + vLook.z*vLook.z);
+	float fAngleX = acosf(fPlaneDis / fDis);
+	if (0 < vLook.y)
+		fAngleX *= -1;
+	//부드러운 이동 시작
+	float fDeltaX = (fAngleX - m_pPlayer->Get_Transform()->m_vAngle.x)*0.1f;
+	m_pPlayer->Get_Transform()->m_vAngle.x += fDeltaX;
+
+	if (0.f != fPlaneDis)
+	{
+		float fAngleY = acosf(vLook.z / fPlaneDis);
+		if (0 > vLook.x)
+		{
+			fAngleY *= -1;
+			fAngleY += D3DX_PI * 2;
+		}
+		//부드러운이동 시작
+		float fDeltaY = (fAngleY - m_pPlayer->Get_Transform()->m_vAngle.y);
+
+		if (fDeltaY > 0.f)
+		{
+			if (fDeltaY < D3DX_PI)
+				m_pPlayer->Get_Transform()->m_vAngle.y += fDeltaY*0.9f;
+			else
+				m_pPlayer->Get_Transform()->m_vAngle.y += (fDeltaY - D3DX_PI * 2)*0.9f;
+		}
+		else
+		{
+			if (fDeltaY > -D3DX_PI)
+				m_pPlayer->Get_Transform()->m_vAngle.y += fDeltaY*0.9f;
+			else
+				m_pPlayer->Get_Transform()->m_vAngle.y += (D3DX_PI * 2 + fDeltaY)*0.9f;
+		}
+		if (m_pPlayer->Get_Transform()->m_vAngle.y < 0)
+			m_pPlayer->Get_Transform()->m_vAngle.y += D3DX_PI * 2;
+		if (m_pPlayer->Get_Transform()->m_vAngle.y > D3DX_PI * 2)
+			m_pPlayer->Get_Transform()->m_vAngle.y -= D3DX_PI * 2;
+	}
+}
+
 void Engine::CPlayerState::Free(void)
 {
 

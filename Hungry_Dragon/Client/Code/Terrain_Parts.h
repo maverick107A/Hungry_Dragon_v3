@@ -27,6 +27,7 @@ public:
 
 public:
 	void Set_HeightMap(const _tchar* _pPath);
+	void Set_A();
 	void Set_Trans(_vec3& _vPos);
 	CHeightCol*	Get_BufferCom() { return m_pBufferCom; }
 	vector<int> Get_HeightVector();

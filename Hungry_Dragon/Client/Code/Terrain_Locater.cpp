@@ -34,8 +34,8 @@ _int CTerrain_Locater::Update_Object(const _float& fTimeDelta)
 	Engine::CGameObject::Update_Object(fTimeDelta);
 	//Engine::Add_RenderGroup(Engine::RENDER_PRIORITY, this);
 
-	_float fPlayerX = m_pPlayerTrans->Get_World()._41;
-	_float fPlayerZ = m_pPlayerTrans->Get_World()._43;
+	_float fPlayerX = m_pPlayerTrans->m_vInfo[Engine::INFO_POS].x;
+	_float fPlayerZ = m_pPlayerTrans->m_vInfo[Engine::INFO_POS].z;
 	_bool bOutline = true;
 
 	if (GetAsyncKeyState(VK_LBUTTON))

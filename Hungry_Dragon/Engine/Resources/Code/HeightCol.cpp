@@ -264,6 +264,113 @@ void CHeightCol::Set_Height(const _tchar* _pPath, _float _fHeight)
 	Safe_Delete_Array(pPixel);
 }
 
+void CHeightCol::Set_Height()
+{
+	VTXCOL*		pVertex = nullptr;
+
+	m_pVB->Lock(0, 0, (void**)&pVertex, 0);
+
+	for (_uint i = 0; i < m_dwCntZ - 1; ++i)
+	{
+		for (_uint j = 0; j < m_dwCntX - 1; ++j)
+		{
+
+			_ulong dwIdx = (i * (m_dwCntX - 1) + j) * 6;
+
+			float fHeight255[6] = {
+				(float)m_vecAdvanceHeight[((i + 1) * (m_dwCntX)+j)],
+				(float)m_vecAdvanceHeight[((i + 1) * (m_dwCntX)+(j + 1))],
+				(float)m_vecAdvanceHeight[(i * (m_dwCntX)+(j + 1))],
+				(float)m_vecAdvanceHeight[((i + 1) * (m_dwCntX)+j)],
+				(float)m_vecAdvanceHeight[(i * (m_dwCntX)+(j + 1))],
+				(float)m_vecAdvanceHeight[(i * (m_dwCntX)+j)],
+			};
+
+			// 프리셋1
+			_uint uColorR[6] = { 0,124,0,25,0,128 };
+			_uint uColorG[6] = { 146,157,166,223,200,222 };
+			_uint uColorB[6] = { 81,118,81,148,87,81 };
+
+			_uint uColor[6] = { 0 };
+
+			for (int k = 0; k < 6; ++k)
+			{
+								   // 높이 설정
+				pVertex[dwIdx + k].vPosition.y = fHeight255[k];
+
+
+				// 일단 여기 다중 프리셋 없이 하나로만 적용
+
+				if ((fHeight255[k]) == 0.f)			uColor[k] = D3DCOLOR_XRGB(uColorR[0], uColorG[0], uColorB[0]);
+				else if ((fHeight255[k]) < 500.f) 	uColor[k] = D3DCOLOR_XRGB(uColorR[0], uColorG[0], uColorB[0]);
+				else if ((fHeight255[k]) < 1000.f)	uColor[k] = D3DCOLOR_XRGB(uColorR[1], uColorG[1], uColorB[1]);
+				else if ((fHeight255[k]) < 1500.f)	uColor[k] = D3DCOLOR_XRGB(uColorR[2], uColorG[2], uColorB[2]);
+				else if ((fHeight255[k]) < 2000.f)	uColor[k] = D3DCOLOR_XRGB(uColorR[3], uColorG[3], uColorB[3]);
+				else								uColor[k] = D3DCOLOR_XRGB(uColorR[4], uColorG[4], uColorB[4]);
+
+				pVertex[dwIdx + k].dwColor = uColor[k];
+
+			}
+
+			//일단 버림
+			//if (fHeightRate == 0.f)	pVertex[iIndex * 6].vPosition.y = -100.f;
+
+			// 조명 방향에 따라 베이킹 준비
+			_vec3 vLightDirection = { 0.f,-1.f,0.f };
+
+			// 면 노말 계산
+			_vec3 vVertexU = pVertex[dwIdx + 1].vPosition - pVertex[dwIdx].vPosition;
+			_vec3 vVertexV = pVertex[dwIdx + 2].vPosition - pVertex[dwIdx + 1].vPosition;
+			_vec3 vVertexN;
+			D3DXVec3Cross(&vVertexN, &vVertexU, &vVertexV);
+			D3DXVec3Normalize(&vVertexN, &vVertexN);
+			float fCosR = -D3DXVec3Dot(&vVertexN, &vLightDirection);
+
+			vVertexU = pVertex[dwIdx + 4].vPosition - pVertex[dwIdx + 3].vPosition;
+			vVertexV = pVertex[dwIdx + 5].vPosition - pVertex[dwIdx + 4].vPosition;
+			D3DXVec3Cross(&vVertexN, &vVertexU, &vVertexV);
+			D3DXVec3Normalize(&vVertexN, &vVertexN);
+			float fCosL = -D3DXVec3Dot(&vVertexN, &vLightDirection);
+
+			// 색 평균 적용 + 음영 적용
+			_uint uIdxColorR = (((pVertex[dwIdx].dwColor & 0x00ff0000) >> 16) + ((pVertex[dwIdx + 1].dwColor & 0x00ff0000) >> 16) + ((pVertex[dwIdx + 2].dwColor & 0x00ff0000) >> 16)) / 3;
+			_uint uIdxColorG = (((pVertex[dwIdx].dwColor & 0x0000ff00) >> 8) + ((pVertex[dwIdx + 1].dwColor & 0x0000ff00) >> 8) + ((pVertex[dwIdx + 2].dwColor & 0x0000ff00) >> 8)) / 3;
+			_uint uIdxColorB = ((pVertex[dwIdx].dwColor & 0x000000ff) + (pVertex[dwIdx + 1].dwColor & 0x000000ff) + (pVertex[dwIdx + 2].dwColor & 0x000000ff)) / 3;
+
+			// 현재 칼라 받아서 빛에 따라 색 계산해서 곱해주기 (음영 적용)
+			D3DXCOLOR tColorR(pVertex[dwIdx].dwColor);
+			tColorR *= fCosR;
+			pVertex[dwIdx].dwColor = D3DCOLOR_XRGB((_uint)(tColorR.r * 255.f), (_uint)(tColorR.g* 255.f), (_uint)(tColorR.b* 255.f));
+
+
+			//pVertex[dwIdx].dwColor = D3DCOLOR_XRGB((_uint)(uIdxColorR*fCosR), (_uint)(uIdxColorG*fCosR), (_uint)(uIdxColorB*fCosR));
+
+
+
+			uIdxColorR = (((pVertex[dwIdx + 3].dwColor & 0x00ff0000) >> 16) + ((pVertex[dwIdx + 4].dwColor & 0x00ff0000) >> 16) + ((pVertex[dwIdx + 5].dwColor & 0x00ff0000) >> 16)) / 3;
+			uIdxColorG = (((pVertex[dwIdx + 3].dwColor & 0x0000ff00) >> 8) + ((pVertex[dwIdx + 4].dwColor & 0x0000ff00) >> 8) + ((pVertex[dwIdx + 5].dwColor & 0x0000ff00) >> 8)) / 3;
+			uIdxColorB = ((pVertex[dwIdx + 3].dwColor & 0x000000ff) + (pVertex[dwIdx + 4].dwColor & 0x000000ff) + (pVertex[dwIdx + 5].dwColor & 0x000000ff)) / 3;
+
+			// 현재 칼라 받아서 빛에 따라 색 계산해서 곱해주기 (음영 적용)
+			D3DXCOLOR tColorL(pVertex[dwIdx + 3].dwColor);
+			tColorL *= fCosL;
+			pVertex[dwIdx + 3].dwColor = D3DCOLOR_XRGB((_uint)(tColorL.r * 255.f), (_uint)(tColorL.g* 255.f), (_uint)(tColorL.b* 255.f));
+
+
+			//pVertex[dwIdx+3].dwColor = D3DCOLOR_XRGB((_uint)(uIdxColorR*fCosL), (_uint)(uIdxColorG*fCosL), (_uint)(uIdxColorB*fCosL));
+
+
+
+		}
+	}
+
+
+
+
+
+	m_pVB->Unlock();
+}
+
 void CHeightCol::Set_HeightRedBase(const _tchar* _pPath, _float _fHeight)
 {
 

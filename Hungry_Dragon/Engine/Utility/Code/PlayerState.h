@@ -16,12 +16,14 @@ public:
 	virtual void Enter_State(CPlayerMain* _pPlayer) PURE;
 	virtual void Update_State(const float& fTimeDelta) PURE;
 	virtual void Out_State() PURE;
+	virtual void LateUpdate_State() {};
 
 protected:
 	CPlayerMain*				m_pPlayer = nullptr;
 
 protected:
-	virtual bool Land_Check(float* _fHeight = nullptr, _vec3* _vNorm = nullptr);
+	bool Land_Check(float* _fHeight = nullptr, _vec3* _vNorm = nullptr);
+	void Aim();
 
 public:
 	static CPlayerState*		Create(void) { return nullptr; }

@@ -45,11 +45,7 @@ void CPBreathIdle::Update_State(const float& fTimeDelta)
 
 	if (GetAsyncKeyState(VK_RBUTTON))
 	{
-		float fDeltaAngleX = (m_pPlayer->Get_AngleX() - m_pPlayer->Get_Transform()->m_vAngle.x)*0.25f;
-		float fDeltaAngleY = (m_pPlayer->Get_AngleY() - m_pPlayer->Get_Transform()->m_vAngle.y)*0.25f;
-
-		m_pPlayer->Get_Transform()->m_vAngle.x += fDeltaAngleX;
-		m_pPlayer->Get_Transform()->m_vAngle.y += fDeltaAngleY;
+		Aim();
 	}
 	else
 	{

@@ -66,9 +66,6 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 	if (Engine::Get_DIKeyState(DIK_K) & 0x80)
 		m_bBreath = !m_bBreath;
 
-	if(m_pTerrrrrrrain)
-		m_pTerrain = m_pTerrrrrrrain->Get_Terrain();
-
 	//애니메이션 테스트
 
 	//R 키 누르면 생성
@@ -126,6 +123,13 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 
 	}
 	return 0;
+}
+
+void CTestPlayer::LateUpdate_Object(const float & fTimeDelta)
+{
+	if (m_pTerrrrrrrain)
+		m_pTerrain = m_pTerrrrrrrain->Get_Terrain();
+	m_pState->LateUpdate_State();
 }
 
 void CTestPlayer::Render_Object(void)
