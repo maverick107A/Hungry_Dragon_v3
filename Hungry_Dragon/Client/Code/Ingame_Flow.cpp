@@ -18,6 +18,7 @@
 #include "Terrain_Parts.h"
 #include "Tree_Object.h"
 #include "Color_Mask.h"
+#include "Transform.h"
 
 USING(Engine)
 
@@ -147,6 +148,13 @@ void CIngame_Flow::Set_DefaultTex()
 	m_pGraphicDev->SetTexture(0, 0);
 }
 
+Engine::CTransform* CIngame_Flow::Get_Player()
+{
+	if(m_pPlayerTransform==nullptr)
+		m_pPlayerTransform = static_cast<Engine::CTransform*>(Get_Component(L"GameLogic", L"TestPlayer", L"Com_Transform", ID_DYNAMIC));
+	return m_pPlayerTransform;
+}
+
 void CIngame_Flow::Load_ForestTerrain()
 {
 	TCHAR szBuf[256] = L"";
@@ -196,7 +204,7 @@ void CIngame_Flow::Load_TreeList()
 	{
 		return;
 	}
-	for (int i = 0; i < 50; ++i)
+	for (int i = 26; i < 28; ++i)
 	{
 		vector<int> vecHeight = m_pParts[i]->Get_HeightVector();
 
@@ -211,6 +219,7 @@ void CIngame_Flow::Load_TreeList()
 					pTree->Set_Trans(_vec3((float)(100 * k - 12800 * (2 - (i % 5))), vecHeight[j * 129 + k] / 255.f*2560.f, (float)(100 * j + 12800 * (5 - (i / 5)))));
 					pTree->Set_Scale(10);
 					pTree->Update_Object(0);
+					pTree->Set_Destroyed(false);
 					m_arrRenderGroupIdx[i].emplace_back(pTree);
 				}
 			}

@@ -127,6 +127,9 @@ HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 	case BUFFER_TREEMESH:
 		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/PolyTree.dat");
 		break;
+	case BUFFER_STUMPMESH:
+		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/PolyStump.dat");
+		break;
 	case BUFFER_CHRYSTAL:
 		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/Chrystal.dat");
 		break;

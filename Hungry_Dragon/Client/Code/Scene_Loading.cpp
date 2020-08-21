@@ -173,6 +173,12 @@ _uint CScene_Loading::Loading_ForStage(void)
 		E_FAIL);
 
 	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"BUFFER_STUMPMESH",
+		Engine::BUFFER_STUMPMESH),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
 		RESOURCE_STATIC,
 		L"BUFFER_DIAMOB_UPPER",
 		Engine::BUFFER_DIAMOB_UPPER),

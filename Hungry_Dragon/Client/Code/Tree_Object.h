@@ -27,6 +27,7 @@ public:
 public:
 	void Set_Trans(_vec3& _vPos);
 	void Set_Scale(_uint _uTimes);
+	void Set_Destroyed(_bool _bDes) { m_bDestroyed = _bDes; }
 	CVICustom*	Get_BufferCom() { return m_pBufferCom; }
 
 
@@ -35,7 +36,11 @@ private:
 
 private:
 	Engine::CVICustom*		m_pBufferCom = nullptr;
+	Engine::CVICustom*		m_pBufferComDest = nullptr;
 	Engine::CTransform*		m_pTransform = nullptr;
+
+private:
+	Engine::_bool			m_bDestroyed = true;
 
 public:
 	static CTree_Object*	Create(LPDIRECT3DDEVICE9 pGraphicDev);

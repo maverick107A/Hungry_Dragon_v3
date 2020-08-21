@@ -3,6 +3,8 @@
 
 #include "Define.h"
 #include "Engine_Define.h"
+#include "Transform.h"
+
 
 class CTerrain_Parts;
 class CTree_Object;
@@ -39,6 +41,7 @@ public:			// 셋터/겟터
 	void Set_MaskColor(int _iIdx);
 	void Set_DefaultTex();
 	LPD3DXSPRITE Get_Sprite() { return m_pSprite; }
+	Engine::CTransform* Get_Player();
 
 	void Set_StageID(STAGEID eStageID) { m_eStageID = eStageID; }
 	STAGEID Get_StageID() { return m_eStageID; }
@@ -65,6 +68,7 @@ private:		// 씬 공용 혹은 임시 인게임용 데이터
 
 private:
 	CColor_Mask*	m_pMaskTexObj[8];
+	Engine::CTransform*		m_pPlayerTransform = nullptr;
 
 private:
 	// 출력할 글디바.

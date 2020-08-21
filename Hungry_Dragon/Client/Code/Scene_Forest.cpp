@@ -255,7 +255,7 @@ HRESULT CScene_Forest::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 	
 
 
-	for (int i = 0; i < 150; ++i)
+	for (int i = 0; i < 50; ++i)
 	{
 		FAILED_CHECK_RETURN(Register_ObjectPool<CGolem>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
 		FAILED_CHECK_RETURN(Register_ObjectPool<CChase_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
@@ -264,7 +264,7 @@ HRESULT CScene_Forest::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 		FAILED_CHECK_RETURN(Register_ObjectPool<CFly_Monster>(pLayer,OBJID::STAND_MONSTER), E_FAIL);
 	}
 	
-	for(int i = 0 ;  i < 10000; ++i)
+	for(int i = 0 ;  i < 1000; ++i)
 	{	
 		FAILED_CHECK_RETURN(Register_ObjectPool<CNormal_Bullet>(pLayer, OBJID::NORMAL_BULLET), E_FAIL);
 		//	FAILED_CHECK_RETURN(Register_ObjectPool<CMonsterBeam>(pLayer, OBJID::NORMAL_BULLET), E_FAIL);

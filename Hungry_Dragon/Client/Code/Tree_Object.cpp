@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Tree_Object.h"
 #include "Export_Function.h"
+#include "Ingame_Flow.h"
+
 
 
 CTree_Object::CTree_Object(LPDIRECT3DDEVICE9 pGraphicDev)
@@ -16,6 +18,7 @@ CTree_Object::~CTree_Object(void)
 
 HRESULT CTree_Object::Ready_Object(void)
 {
+	m_bDestroyed = true;
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
 	return S_OK;
@@ -25,7 +28,19 @@ _int CTree_Object::Update_Object(const _float& fTimeDelta)
 {
 	Engine::CGameObject::Update_Object(fTimeDelta);
 	//Engine::Add_RenderGroup(Engine::RENDER_PRIORITY, this);
-
+	if (!m_bDestroyed)
+	{
+		_vec3 vPlayerPos;
+		_vec3 vPos;
+		CIngame_Flow::GetInstance()->Get_Player()->Get_Info(INFO_POS, &vPlayerPos);
+		m_pTransform->Get_Info(INFO_POS, &vPos);
+		vPos.y += 20.f;
+		vPos -= vPlayerPos;
+		if (100.f > D3DXVec3Length(&vPos))
+		{
+			m_bDestroyed = true;
+		}
+	}
 	return 0;
 }
 
@@ -33,8 +48,14 @@ void CTree_Object::Render_Object(void)
 {
 	m_pTransform->Set_Transform(m_pGraphicDev);
 	m_pGraphicDev->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_FLAT);
-	
-	m_pBufferCom->Render_Buffer();
+	if (m_bDestroyed)
+	{
+		m_pBufferComDest->Render_Buffer();
+	}
+	else
+	{
+		m_pBufferCom->Ready_Buffer();
+	}
 }
 
 
@@ -64,6 +85,7 @@ HRESULT CTree_Object::Add_Component(void)
 {
 	Engine::CComponent*		pComponent = nullptr;
 
+	FAILED_CHECK(Clone_Component<CVICustom>(&m_pBufferComDest, RESOURCE_STAGE, L"BUFFER_STUMPMESH", ID_STATIC, L"Com_Buffer2"));
 	FAILED_CHECK(Clone_Component<CVICustom>(&m_pBufferCom, RESOURCE_STAGE, L"BUFFER_TREEMESH", ID_STATIC, L"Com_Buffer"));
 	//m_pBufferCom = CVICustom::Create(m_pGraphicDev, L"BUFFER_TREEMESH");
 	//FAILED_CHECK(Clone_Component<CHeightCol>(&m_pBufferCom, RESOURCE_STATIC, L"BUFFER_KOREA", ID_STATIC, L"Com_Buffer"));
