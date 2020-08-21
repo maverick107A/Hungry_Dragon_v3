@@ -4,8 +4,8 @@ USING(Engine)
 
 Engine::CMonsterBoard::CMonsterBoard(LPDIRECT3DDEVICE9 pGraphicDev, _float _iAnimUCnt, _float _iAnimVCnt)
 	: CVIBuffer(pGraphicDev),
-	m_iAnimUCnt(_iAnimUCnt),
-	m_iAnimVCnt(_iAnimVCnt)
+	m_iAnimUCnt((_int)_iAnimUCnt),
+	m_iAnimVCnt((_int)_iAnimVCnt)
 {
 
 }

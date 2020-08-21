@@ -17,27 +17,29 @@ private:
 
 public:
 	_int		Get_FrameArraySize(_int _frame);
-	_float		Get_NowFrame();
-	_int		Get_MaxFrame(int _targetIndex);
-	_matrix		Get_MoveResult(LPDIRECT3DDEVICE9 pGraphicDev, _matrix _matTarget,_int _index);
+	_float		Get_NowFrame(_int _targetIndex);
+	_int		Get_MaxFrame(_int _targetIndex);
 	MOVEMENT	Get_Movement(_int _targetIndex);
 	_int		Get_TotalMaxFrame();
 	_int		Get_PartsCnt();
 
 	void		Set_PartsSize(_int _partSize);
+	void		Set_SpecificFrame(_int _partsIndex);
 
 public:
 	virtual _int Update_Component(const _float& fTimeDelta);
-	void			Update_Frame(_float _nowFrame);
+	void			Update_Frame(_float _addFrame);
 
 public:
-	_int	Register_MoveTarget();
-
 	void	Insert_Scale(_int _targetIndex,_int _targetFrame,_vec3 _vecScle);
 	void	Insert_Rotate(_int _targetIndex, _int _targetFrame,_vec3 _vecRot);
 	void	Insert_Trans(_int _targetIndex, _int _targetFrame,_vec3 _vecTrans);
-	void	Insert_Revolute(LPDIRECT3DDEVICE9& pGraphicDev,_int _targetIndex, _int _targetFrame,_vec3 _vec3Parent,_vec3 _vecRev);
+	void	Insert_Revolute(_int _targetIndex, _int _targetFrame,_vec3 _vec3Parent,_vec3 _vecRev);
 	void	Insert_Idle(_int exceptTarget,_int targetFrame);
+
+	void	Add_Scale(_int _targetIndex, _int _targetFrame, _vec3 _vecScle);
+	void	Add_Rotate(_int _targetIndex, _int _targetFrame, _vec3 _vecRot);
+	void	Add_Trans(_int _targetIndex, _int _targetFrame, _vec3 _vecTrans);
 
 public:
 	static CAnimator* Create(void);
@@ -48,8 +50,9 @@ private:
 
 private:
 	vector<vector<MOVEMENT>>		m_movementList;
-	_int							m_maxFrame=0;
-	_float							m_nowFrame = 0;
+	vector<_int>					m_arrMaxFrame;
+	vector<_float>					m_arrFrame;
+	_int							m_maxFrame;
 };
 
 END
