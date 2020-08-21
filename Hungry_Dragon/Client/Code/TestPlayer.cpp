@@ -293,7 +293,7 @@ HRESULT CTestPlayer::Add_Component(void)
 	m_pAnimator->Set_PartsSize(PARTS_END);
 
 	//애니메이션 설정
-	Preset_Animation();
+	//Preset_Animation();
 	
 
 	return S_OK;

@@ -103,6 +103,9 @@
     <Filter Include="02. UtilBase\02. Component\00. Transform\00. Animation">
       <UniqueIdentifier>{8429e82e-0462-4602-84dd-c416b87f5b0d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. UtilBase\02. Component\07. Animation_Controller">
+      <UniqueIdentifier>{18cca149-97fc-4a68-a9fb-99b8981b2095}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\Component.cpp">
@@ -203,6 +206,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\AnimationTransform.cpp">
       <Filter>02. UtilBase\02. Component\00. Transform\00. Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Animation_Controller.cpp">
+      <Filter>02. UtilBase\02. Component\07. Animation_Controller</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -307,6 +313,9 @@
     </ClInclude>
     <ClInclude Include="..\Code\AnimationTransform.h">
       <Filter>02. UtilBase\02. Component\00. Transform\00. Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Animation_Controller.h">
+      <Filter>02. UtilBase\02. Component\07. Animation_Controller</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
