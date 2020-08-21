@@ -44,6 +44,7 @@ private:
 	CPage_Out* m_pPageOut = nullptr;
 	_uint m_uFocusNum = 0;
 	_bool m_bSelected = false;
+	CBackGround_Logo* m_pLogo = nullptr;
 
 public:
 	static CScene_Menu*		Create(LPDIRECT3DDEVICE9 pGraphicDev);

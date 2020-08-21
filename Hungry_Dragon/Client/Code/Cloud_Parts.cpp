@@ -20,7 +20,7 @@ HRESULT CCloud_Parts::Ready_Object(void)
 {
 	m_uVerCntX = 129;
 	m_uVerCntZ = 129;
-	m_uLength = 1000;
+	m_uLength = 100;
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
 	return S_OK;

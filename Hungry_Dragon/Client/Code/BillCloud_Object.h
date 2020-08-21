@@ -13,7 +13,7 @@ class CRenderer;
 
 END
 
-
+USING(Engine)
 
 class CBillCloud_Object : public Engine::CGameObject {
 private:
@@ -25,18 +25,25 @@ public:
 	virtual int Update_Object(const float& fTimeDelta) override;
 	virtual void Render_Object(void) override;
 
+public:
+	void Set_Pos(_vec3 _vPos) { m_vPosOrigin = _vPos; }
+	void Set_Scale(_vec3 _vScale) { m_vScaleOrigin = _vScale; }
+	void Set_Cloud(_uint _uNum) { m_uTexFrame = _uNum; }
 
 private:
 	HRESULT		Add_Component(void);
 
-private:
-	Engine::CTexture_Square*			m_pBufferCom = nullptr;
-	Engine::CTexture*		m_pTextureCom = nullptr;
-	Engine::CTransform*		m_pTransform = nullptr;
-	Engine::CRenderer*		m_pRendererCom = nullptr;
 
-	Engine::_uint m_uTexFrame = 0;
-	Engine::_vec3 m_vPosOrigin;
+private:
+	CTexture_Square*			m_pBufferCom = nullptr;
+	CTexture*		m_pTextureCom = nullptr;
+	CTransform*		m_pTransform = nullptr;
+	CRenderer*		m_pRendererCom = nullptr;
+
+	_uint m_uTexFrame = 0;
+	_vec3 m_vPosOrigin;
+	_vec3 m_vScaleOrigin;
+
 
 public:
 	static CBillCloud_Object*	Create(LPDIRECT3DDEVICE9 pGraphicDev);

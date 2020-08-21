@@ -25,6 +25,8 @@ public:
 	virtual int Update_Object(const float& fTimeDelta) override;
 	virtual void Render_Object(void) override;
 
+public:
+	void Set_BgNum(Engine::_uint _uNum) { m_uBgNum = _uNum; }
 
 private:
 	HRESULT		Add_Component(void);

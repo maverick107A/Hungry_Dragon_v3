@@ -22,7 +22,7 @@ HRESULT CCloud_Locater::Ready_Object(void)
 {
 	m_uVerCntX = 129;
 	m_uVerCntZ = 129;
-	m_uLength = 1000;		// 생성자 통해서 파츠에 넘겨주는부분이 없음, 그냥 상수 때려박은것
+	m_uLength = 100;		// 생성자 통해서 파츠에 넘겨주는부분이 없음, 그냥 상수 때려박은것
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
 
@@ -83,8 +83,7 @@ void CCloud_Locater::Render_Object(void)
 	{
 		for (int j = 0; j < 3; ++j)
 		{
-			m_pCloud[_iIdx]->Set_Trans(_vec3((float)((int)(m_uLength*(m_uVerCntX-1))*(-1+j)),
-										-5000, (float)((int)(m_uLength*(m_uVerCntZ - 1))*(iPlayerZ-1+i))));
+			m_pCloud[_iIdx]->Set_Trans(_vec3(-6400.f,-1000.f, (float)((int)(m_uLength*(m_uVerCntZ - 1))*(iPlayerZ-1+i)) + j*38400.f ));
 			m_pCloud[_iIdx]->Render_Object();
 			_iIdx = (_iIdx+1)%9;
 		}
@@ -95,8 +94,7 @@ void CCloud_Locater::Render_Object(void)
 	{
 		for (int j = 0; j < 3; ++j)
 		{
-			m_pCloud[_iIdx]->Set_Trans(_vec3((float)((int)(m_uLength*(m_uVerCntX - 1))*( - 1 + j)),
-				5000, (float)((int)(m_uLength*(m_uVerCntZ - 1))*(iPlayerZ - 1 + i))));
+			m_pCloud[_iIdx]->Set_Trans(_vec3(-6400.f, 1000.f, (float)((int)(m_uLength*(m_uVerCntZ - 1))*(iPlayerZ - 1 + i)) + j*38400.f));
 			m_pCloud[_iIdx]->Render_Object();
 			_iIdx = (_iIdx + 1) % 9;
 		}
@@ -134,12 +132,12 @@ HRESULT CCloud_Locater::Add_Component(void)
 	for (int i = 0; i < 9; ++i)
 	{
 		m_pCloud[i] = CCloud_Parts::Create(m_pGraphicDev);
-		m_pCloud[i]->Set_Height(1000.f, 255);
+		m_pCloud[i]->Set_Height(100.f, 255);
 	}
 	for (int i = 0; i < 9; ++i)
 	{
 		m_pCloudRoof[i] = CCloud_Parts::Create(m_pGraphicDev);
-		m_pCloudRoof[i]->Set_Height(1000.f, 255);
+		m_pCloudRoof[i]->Set_Height(100.f, 255);
 		m_pCloudRoof[i]->Set_RotationReverse();
 		
 	}

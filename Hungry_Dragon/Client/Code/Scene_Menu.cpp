@@ -76,6 +76,7 @@ _int CScene_Menu::Update_Scene(const _float& fTimeDelta) {
 		case 0:
 			
 			m_bSelected = true;
+			m_pLogo->Set_BgNum(1);
 			m_pPageOut->Set_Activate(true);
 			m_uFocusNum = -1;
 			
@@ -169,7 +170,7 @@ HRESULT CScene_Menu::Ready_Layer_UI(const _tchar* pLayerTag) {
 	Engine::CGameObject*		pGameObject = nullptr;
 
 	// BackGround
-	pGameObject = CBackGround_Logo::Create(m_pGraphicDev, 0);
+	pGameObject = m_pLogo = CBackGround_Logo::Create(m_pGraphicDev, 0);
 	NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	FAILED_CHECK_RETURN(pLayer->Add_Object(L"LogoMenu", pGameObject), E_FAIL);
 

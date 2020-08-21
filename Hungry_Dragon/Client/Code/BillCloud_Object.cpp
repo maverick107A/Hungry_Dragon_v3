@@ -18,6 +18,7 @@ CBillCloud_Object::~CBillCloud_Object(void) {
 HRESULT CBillCloud_Object::Ready_Object(void) {
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 	m_vPosOrigin = _vec3(0.f, 100.f,0.f);
+	m_vScaleOrigin = { 500.f,500.f,1.f };
 	return S_OK;
 }
 
@@ -30,13 +31,20 @@ int CBillCloud_Object::Update_Object(const float& fTimeDelta) {
 	_matrix matScale;
 	_matrix matTrans;
 	_vec3	vecTrans;
-	D3DXMatrixScaling(&matScale, 1920.f, 524.f, 1.f);			// 텍스처의 크기
+	D3DXMatrixScaling(&matScale, m_vScaleOrigin.x, m_vScaleOrigin.y, 1.f);			// 텍스처의 크기
 	m_pGraphicDev->GetTransform(D3DTS_VIEW, &matView);
 	memcpy(&vecTrans, &m_vPosOrigin, sizeof(_vec3));
 	ZeroMemory(&matView.m[3][0], sizeof(D3DXVECTOR3));
 	D3DXMatrixInverse(&matView, NULL, &matView);
 	m_pTransform->m_matWorld = matScale * matView * m_pTransform->m_matWorld;
 	memcpy( &m_pTransform->m_matWorld._41, &vecTrans, sizeof(_vec3));
+
+	m_vPosOrigin.x += 1000.f * fTimeDelta;
+	if (15000.f < m_vPosOrigin.x)
+	{
+		m_vPosOrigin.x -= 30000.f;
+	}
+
 
 	return 0;
 }
@@ -45,7 +53,7 @@ void CBillCloud_Object::Render_Object(void) {
 
 	m_pTransform->Set_Transform(m_pGraphicDev);
 	
-	m_pTextureCom->Set_Texture();
+	m_pTextureCom->Set_Texture(m_uTexFrame);
 
 	m_pGraphicDev->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
 	m_pGraphicDev->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);

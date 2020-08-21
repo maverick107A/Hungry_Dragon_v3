@@ -22,7 +22,7 @@ HRESULT CPage_Out::Ready_Object(void) {
 
 	m_pTransform->m_vInfo[Engine::INFO_POS].z = 0.2f;
 	//m_pTransform->m_vAngle.z = D3DXToRadian(45.f);
-
+	m_uLogo = 0;
 	return S_OK;
 }
 
@@ -57,8 +57,13 @@ void CPage_Out::Render_Object(void) {
 
 	m_pTextureCom->Set_Texture(m_uLogo);
 
+	m_pGraphicDev->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
+	m_pGraphicDev->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCCOLOR);
+	m_pGraphicDev->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCCOLOR);
 
+	m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 	m_pBufferCom->Render_Buffer();
+	m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 
 }
 

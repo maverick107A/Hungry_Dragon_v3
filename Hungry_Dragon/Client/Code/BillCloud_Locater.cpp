@@ -22,7 +22,7 @@ HRESULT CBillCloud_Locater::Ready_Object(void)
 {
 
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
-
+	
 
 	return S_OK;
 }
@@ -40,7 +40,10 @@ _int CBillCloud_Locater::Update_Object(const _float& fTimeDelta)
 
 	
 	_bool bOutline = true;
-	//m_pCloud->Update_Object(fTimeDelta);
+	for (auto& pObj : m_listRenderGroup)
+	{
+		pObj->Update_Object(fTimeDelta);
+	}
 
 	return 0;
 }
@@ -53,10 +56,19 @@ void CBillCloud_Locater::Render_Object(void)
 	m_pGraphicDev->SetTexture(0, 0);
 	//m_pGraphicDev->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_FLAT);
 	//m_pGraphicDev->SetRenderState(D3DRS_ZENABLE, FALSE);
+
+	m_pGraphicDev->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
+	m_pGraphicDev->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
+	m_pGraphicDev->SetRenderState(D3DRS_ALPHAREF, 0);
+	m_pGraphicDev->SetRenderState(D3DRS_ZWRITEENABLE, false);
+
 	for (auto& pObj : m_listRenderGroup)
 	{
 		pObj->Render_Object();
 	}
+	m_pGraphicDev->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
+	m_pGraphicDev->SetRenderState(D3DRS_ZWRITEENABLE, true);
+
 	//m_pCloud->Render_Object();
 	//m_pGraphicDev->SetRenderState(D3DRS_ZENABLE, TRUE);
 
@@ -74,7 +86,7 @@ void CBillCloud_Locater::Free(void)
 		Safe_Release(m_pParts[i]);
 	}*/
 
-	Safe_Release(m_pCloud);
+	//Safe_Release(m_pCloud);
 	Engine::CGameObject::Free();
 
 	for (auto& pObj : m_vecObjectPool)
@@ -93,8 +105,16 @@ HRESULT CBillCloud_Locater::Add_Component(void)
 	FAILED_CHECK(Register_Component<CTransform>(&m_pTransform, ID_DYNAMIC, L"Com_Transform"));
 	
 	// 구름 세팅
-	m_pCloud = CBillCloud_Object::Create(m_pGraphicDev);
-	
+	for (int i = 0; i < 100; ++i)
+	{
+		m_pCloud = CBillCloud_Object::Create(m_pGraphicDev);
+		m_pCloud->Set_Pos(_vec3((float)(rand()%20000 - 10000),-1000.f, 4000.f * i));
+		float fRand = (float)(rand() % 5000);
+		m_pCloud->Set_Scale(_vec3(fRand, fRand,1.f));
+		m_pCloud->Set_Cloud(2);
+		m_vecObjectPool.emplace_back(m_pCloud);
+		m_listRenderGroup.emplace_back(m_pCloud);
+	}
 	return S_OK;
 }
 
