@@ -24,8 +24,6 @@
 
 #include "Golem.h"
 
-#include "GiantGolem.h"
-
 
 
 #include "MonsterBeam.h"

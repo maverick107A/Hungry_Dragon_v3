@@ -226,6 +226,9 @@
     <Filter Include="01. Scene\07. Scene_Select">
       <UniqueIdentifier>{940311cb-3c40-4cd5-ad3d-4e7304b318dd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem\Giants">
+      <UniqueIdentifier>{fafdc6d2-7c8c-4f98-b533-717cad99acc2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -405,9 +408,6 @@
     <ClInclude Include="..\Code\BillCloud_Object.h">
       <Filter>02. GameObject\01. Stage\70. BillCloud_Object</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\GiantGolem.h">
-      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem</Filter>
-    </ClInclude>
     <ClInclude Include="..\Code\Logo_Loop.h">
       <Filter>02. GameObject\00. Logo\01. Logo_Loop</Filter>
     </ClInclude>
@@ -428,6 +428,24 @@
     </ClInclude>
     <ClInclude Include="..\Code\Ingame_Info.h">
       <Filter>97. WorkFlow</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\GiantGolem_Left_Arm.h">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem\Giants</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\GiantGolem_Left_Hand.h">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem\Giants</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\GiantGolem_Right_Arm.h">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem\Giants</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\GiantGolem_Right_Hand.h">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem\Giants</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\GiantGolem_Head.h">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem\Giants</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\GiantGolem_Body.h">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem\Giants</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -599,9 +617,6 @@
     <ClCompile Include="..\Code\BillCloud_Object.cpp">
       <Filter>02. GameObject\01. Stage\70. BillCloud_Object</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\GiantGolem.cpp">
-      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem</Filter>
-    </ClCompile>
     <ClCompile Include="..\Code\Logo_Loop.cpp">
       <Filter>02. GameObject\00. Logo\01. Logo_Loop</Filter>
     </ClCompile>
@@ -622,6 +637,24 @@
     </ClCompile>
     <ClCompile Include="..\Code\Ingame_Info.cpp">
       <Filter>97. WorkFlow</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\GiantGolem_Left_Hand.cpp">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem\Giants</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\GiantGolem_Right_Arm.cpp">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem\Giants</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\GiantGolem_Right_Hand.cpp">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem\Giants</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\GiantGolem_Left_Arm.cpp">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem\Giants</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\GiantGolem_Head.cpp">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem\Giants</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\GiantGolem_Body.cpp">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem\Giants</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

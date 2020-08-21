@@ -2,7 +2,7 @@
 #include "Export_Function.h"
 #include "Terrain_Locater.h"
 #include "FlyGolem.h"
-
+#include "Ingame_Flow.h"
 
 CFlyGolem::CFlyGolem(LPDIRECT3DDEVICE9 pGraphicDev)
 	:Engine::CMonsterMain(pGraphicDev)
@@ -53,8 +53,6 @@ int CFlyGolem::Update_Object(const float & fTimeDelta)
 	}
 
 
-
-
 	//if (m_eState == MONSTER_ACTIVATE && m_eState != MONSTER_DEACTIVATE)
 	//{
 	//	vPlayerPos = { m_vPlayerPos.x  , 0.f  , m_vPlayerPos.z };
@@ -84,6 +82,7 @@ void CFlyGolem::Render_Object(void)
 	m_pTransform->Get_Info(Engine::INFO_POS, &m_vBodyPos);
 
 
+	CIngame_Flow::GetInstance()->Set_MaskColor(2);
 
 	// ¿À¸¥ÆÈ
 	m_pTransform->Set_Scale(5);

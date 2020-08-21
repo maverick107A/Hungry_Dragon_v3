@@ -15,7 +15,16 @@
 //-------------------------------------------------------
 //여기에 기타 헤더 추가
 // 몬스터
-#include "GiantGolem.h"
+#include "GiantGolem_Body.h"
+#include "GiantGolem_Head.h"
+#include "GiantGolem_Left_Arm.h"
+#include "GiantGolem_Left_Hand.h"
+
+#include "GiantGolem_Right_Arm.h"
+#include "GiantGolem_Right_Hand.h"
+
+
+
 
 #include "BackGround.h"
 
@@ -62,6 +71,8 @@ private:
 	int							m_iMaskNum=0;
 	ID3DXEffect* m_pFogEffect = 0;
 	D3DXHANDLE m_hFogTechHandle = 0;
+	Engine::CMonsterMain*		m_pParentsBody;
+	Engine::CMonsterMain*		m_pParentsArm;
 
 	CMeteor_Spawner*			m_pSpawner = nullptr;
 

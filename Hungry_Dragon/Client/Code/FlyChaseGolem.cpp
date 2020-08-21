@@ -2,7 +2,7 @@
 #include "Export_Function.h"
 #include "Terrain_Locater.h"
 #include "FlyChaseGolem.h"
-
+#include "Ingame_Flow.h"
 
 CFlyChaseGolem::CFlyChaseGolem(LPDIRECT3DDEVICE9 pGraphicDev)
 	:Engine::CMonsterMain(pGraphicDev)
@@ -79,6 +79,7 @@ void CFlyChaseGolem::Render_Object(void)
 
 
 
+		CIngame_Flow::GetInstance()->Set_MaskColor(5);
 		// ¸öÃ¼
 		m_pTransform->Set_Scale(8);
 		m_pTransform->Update_Component(0.01f);

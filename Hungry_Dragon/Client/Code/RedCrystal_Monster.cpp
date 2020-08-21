@@ -2,7 +2,7 @@
 #include "Export_Function.h"
 #include "Terrain_Locater.h"
 #include "RedCrystal_Monster.h"
-
+#include "Ingame_Flow.h"
 
 CRedCrystal_Monster::CRedCrystal_Monster(LPDIRECT3DDEVICE9 pGraphicDev)
 	:Engine::CMonsterMain(pGraphicDev)
@@ -77,7 +77,7 @@ int CRedCrystal_Monster::Update_Object(const float & fTimeDelta)
 		m_pGraphicDev->GetTransform(D3DTS_VIEW, &matView);
 		ZeroMemory(&matView.m[3][0], sizeof(D3DXVECTOR3));
 		D3DXMatrixInverse(&matView, NULL, &matView);
-		m_pAuraTransform->m_matWorld = matView *  m_pAuraTransform->m_matWorld;
+		m_pAuraTransform->m_matWorld = matView *  m_pAuraTransform->m_matWorld;		
 	}
 
 	Update_Animation(fTimeDelta);
@@ -98,6 +98,7 @@ void CRedCrystal_Monster::Render_Object(void)
 
 
 
+		CIngame_Flow::GetInstance()->Set_MaskColor(5);
 		// ¸öÃ¼
 		m_pTransform->Set_Scale(8);
 		m_pTransform->m_vScale.y += 3;

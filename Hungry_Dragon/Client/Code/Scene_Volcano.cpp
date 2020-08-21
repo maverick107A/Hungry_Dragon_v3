@@ -273,9 +273,50 @@ HRESULT CScene_Volcano::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 	
 	FAILED_CHECK_RETURN(Register_GameObject<CTestPlayer>(pLayer, L"TestPlayer"), E_FAIL);
 	FAILED_CHECK_RETURN(Register_GameObject<CVolcano_Parts>(pLayer, L"Land"), E_FAIL);
-	FAILED_CHECK_RETURN(Register_ObjectPool<CGiantGolem>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
-	//
+	//FAILED_CHECK_RETURN(Register_ObjectPool<CGiantGolem_Body>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
+
+	pGameObject = m_pParentsBody = CGiantGolem_Body::Create(m_pGraphicDev);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	pGameObject->Set_Address(pLayer);
+	Engine::Add_Object_Pool(pGameObject, OBJID::STAND_MONSTER);
+
+	pGameObject = CGiantGolem_Head::Create(m_pGraphicDev , m_pParentsBody);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	pGameObject->Set_Address(pLayer);
+	Engine::Add_Object_Pool(pGameObject, OBJID::STAND_MONSTER);
+
+	pGameObject = m_pParentsArm = CGiantGolem_Left_Arm::Create(m_pGraphicDev, m_pParentsBody);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	pGameObject->Set_Address(pLayer);
+	Engine::Add_Object_Pool(pGameObject, OBJID::STAND_MONSTER);
+
+
+	pGameObject = CGiantGolem_Left_Hand::Create(m_pGraphicDev, m_pParentsArm);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	pGameObject->Set_Address(pLayer);
+	Engine::Add_Object_Pool(pGameObject, OBJID::STAND_MONSTER);
+
+
+	pGameObject = m_pParentsArm = CGiantGolem_Right_Arm::Create(m_pGraphicDev, m_pParentsBody);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	pGameObject->Set_Address(pLayer);
+	Engine::Add_Object_Pool(pGameObject, OBJID::STAND_MONSTER);
 	
+
+	pGameObject =  CGiantGolem_Right_Hand::Create(m_pGraphicDev, m_pParentsArm);
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	pGameObject->Set_Address(pLayer);
+	Engine::Add_Object_Pool(pGameObject, OBJID::STAND_MONSTER);
+
+
+
+
+
+
+
+
+
+
 	CGameObject* tempPlayer = pLayer->Get_Object(L"TestPlayer", Engine::Find_First, nullptr);
 	pPlayerTransformCom = static_cast<CTransform*>(tempPlayer->Get_Component(L"Com_Transform", Engine::ID_DYNAMIC));
 	pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);
