@@ -12,7 +12,8 @@ CAnimator::CAnimator(const CAnimator & rhs)
 {
 	m_nowFrame = m_nowFrame;
 	m_maxFrame = m_maxFrame;
-	m_fFrameSpeed = rhs.m_fFrameSpeed;
+
+	m_movementList = rhs.m_movementList;
 }
 
 CAnimator::~CAnimator(void)
@@ -21,14 +22,16 @@ CAnimator::~CAnimator(void)
 
 _int CAnimator::Update_Component(const _float & fTimeDelta)
 {
-	m_nowFrame += fTimeDelta*m_fFrameSpeed;
-
-	if (m_nowFrame >= m_maxFrame+1)
-	{
-		m_nowFrame -= m_maxFrame+1;
-	}
-
 	return 0;
+}
+
+//월드 프레임을 애니메이터 프레임 단위로 가공
+void CAnimator::Update_Frame(_float _nowFrame)
+{
+	m_nowFrame = _nowFrame;
+	while (m_nowFrame < (_float)m_maxFrame+1.f) {
+		m_nowFrame -= (_float)m_maxFrame + 1.f;
+	}
 }
 
 _int CAnimator::Register_MoveTarget()
@@ -93,7 +96,7 @@ void CAnimator::Insert_Scale(_int _targetIndex, _int _targetFrame, _vec3 _vecSca
 	}
 }
 
-void CAnimator::Insert_Ratate(_int _targetIndex, _int _targetFrame, _vec3 _vecRot)
+void CAnimator::Insert_Rotate(_int _targetIndex, _int _targetFrame, _vec3 _vecRot)
 {
 	if ((size_t)_targetIndex >= m_movementList.size())
 		return;
@@ -205,7 +208,7 @@ void CAnimator::Insert_Revolute(LPDIRECT3DDEVICE9& pGraphicDev,_int _targetIndex
 	}
 }
 
-void CAnimator::Insert_Idle(int _targetIndex,int _targetFrame)
+void CAnimator::Insert_Idle(_int _targetIndex,_int _targetFrame)
 {
 	if ((size_t)_targetIndex >= m_movementList.size())
 		return;
@@ -317,6 +320,11 @@ MOVEMENT CAnimator::Get_Movement(_int _targetIndex)
 _int CAnimator::Get_TotalMaxFrame()
 {
 	return m_maxFrame;
+}
+
+_int CAnimator::Get_PartsCnt()
+{
+	return (_int)m_movementList.size();
 }
 
 void CAnimator::Set_PartsSize(_int _partSize)

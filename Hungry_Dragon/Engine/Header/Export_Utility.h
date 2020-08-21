@@ -5,6 +5,7 @@
 #include "Management.h"
 #include "ObjectPool.h"
 #include "Transform.h"
+
 #include "AnimationTransform.h"
 #include "Renderer.h"
 #include "Layer.h"
@@ -12,6 +13,7 @@
 #include "Camera.h"
 #include "Component.h"
 #include "Animator.h"
+#include "Animation_Controller.h"
 #include "CollisionMgr.h"
 #include "ParticleMgr.h"
 BEGIN(Engine)

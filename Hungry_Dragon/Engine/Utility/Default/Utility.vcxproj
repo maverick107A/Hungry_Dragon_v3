@@ -167,6 +167,7 @@ call CopyUtility.bat</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\AnimationTransform.cpp" />
+    <ClCompile Include="..\Code\Animation_Controller.cpp" />
     <ClCompile Include="..\Code\Animator.cpp" />
     <ClCompile Include="..\Code\BeamBase.cpp" />
     <ClCompile Include="..\Code\BreathBase.cpp" />
@@ -203,6 +204,7 @@ call CopyUtility.bat</Command>
   <ItemGroup>
     <ClInclude Include="..\..\Header\Export_Utility.h" />
     <ClInclude Include="..\Code\AnimationTransform.h" />
+    <ClInclude Include="..\Code\Animation_Controller.h" />
     <ClInclude Include="..\Code\Animator.h" />
     <ClInclude Include="..\Code\BeamBase.h" />
     <ClInclude Include="..\Code\BreathBase.h" />
