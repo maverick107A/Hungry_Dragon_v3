@@ -444,14 +444,14 @@ void CTestPlayer::Preset_Animation()
 
 	//³¯°³
 	m_pPartsTrans[PART_WING]->m_fDamping = 0.02f;
-	m_pAnimator->Insert_Ratate(PART_WING, 0, _vec3(0.f, 0.f, D3DX_PI*0.33f));
-	m_pAnimator->Insert_Ratate(PART_WING, 1, _vec3(0.f,0.f,-D3DX_PI*0.33f));
+	m_pAnimator->Insert_Rotate(PART_WING, 0, _vec3(0.f, 0.f, D3DX_PI*0.33f));
+	m_pAnimator->Insert_Rotate(PART_WING, 1, _vec3(0.f,0.f,-D3DX_PI*0.33f));
 	m_pAnimator->Insert_Trans(PART_WING, 0, _vec3(cosf(D3DX_PI*0.33f), sinf(D3DX_PI*0.33f), -3.f));
 	m_pAnimator->Insert_Trans(PART_WING, 1, _vec3(cosf(-D3DX_PI*0.33f),sinf(-D3DX_PI*0.33f), -3.f));
 
 	m_pPartsTrans[PART_LWING]->m_fDamping = 0.02f;
-	m_pAnimator->Insert_Ratate(PART_LWING, 0, _vec3(0.f, 0.f, -D3DX_PI*0.33f));
-	m_pAnimator->Insert_Ratate(PART_LWING, 1, _vec3(0.f, 0.f, D3DX_PI*0.33f));
+	m_pAnimator->Insert_Rotate(PART_LWING, 0, _vec3(0.f, 0.f, -D3DX_PI*0.33f));
+	m_pAnimator->Insert_Rotate(PART_LWING, 1, _vec3(0.f, 0.f, D3DX_PI*0.33f));
 	m_pAnimator->Insert_Trans(PART_LWING, 0, _vec3(-cosf(D3DX_PI*0.33f), sinf(D3DX_PI*0.33f), -3.f));
 	m_pAnimator->Insert_Trans(PART_LWING, 1, _vec3(-cosf(-D3DX_PI*0.33f), sinf(-D3DX_PI*0.33f), -3.f));
 }

@@ -12,7 +12,7 @@ CAnimation_Controller::CAnimation_Controller(const CAnimation_Controller& rhs)
 {
 	for (size_t i = 0; i < rhs.m_arrAnimatior.size(); ++i) {
 		CAnimator* tempAnimator=rhs.m_arrAnimatior[i];
-		m_arrAnimatior.emplace_back(tempAnimator->Clone());
+		m_arrAnimatior.emplace_back(static_cast<CAnimator*>(tempAnimator->Clone()));
 	}
 
 	m_iAnimatorCnt = rhs.m_iAnimatorCnt;
@@ -50,7 +50,7 @@ _int CAnimation_Controller::Update_Component(const _float & fTimeDelta)
 		m_fNowFrame -= (_float)m_iMaxFrame + 1.f;
 	}
 
-	
+	return 0;
 }
 
 void CAnimation_Controller::Add_Animator(_int _clonedAnimationPos)

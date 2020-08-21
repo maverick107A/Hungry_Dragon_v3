@@ -173,6 +173,8 @@ namespace Engine
 		float fStartFrame;
 		float fMaxFrame;
 		float fFrameSpeed;
+		float fFirstFrame;
+
 
 	}FRAME;
 
@@ -186,6 +188,28 @@ namespace Engine
 		_vec3 vecParent;
 		_int	tFrame;
 	}MOVEMENT;
+
+
+	typedef struct tagPlayer
+	{
+		// 체력 게이지
+		float fHp;
+		float fMax_Hp;
+
+		// 브레스 게이지
+		float fMp;
+		float fMax_Mp;
+
+		// 스피드 게이지
+		float fSp;
+		float fMax_Sp;
+
+		// 진화 게이지
+		float fEvo;
+		float fMax_Evo;
+
+	}STATUS;
+
 }
 
 

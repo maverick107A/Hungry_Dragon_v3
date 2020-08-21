@@ -26,10 +26,6 @@ HRESULT CRedCrystal_Monster::Ready_Object(void)
 	m_eState = MONSTER_REBORN;
 
 
-	m_tFrame.fStartFrame = 0.f;
-	m_tFrame.fMaxFrame = 14.f;
-	m_tFrame.fFrameSpeed = 1.5f;
-
 	return S_OK;
 }
 
@@ -91,9 +87,9 @@ int CRedCrystal_Monster::Update_Object(const float & fTimeDelta)
 
 void CRedCrystal_Monster::Render_Object(void)
 {
-	if(m_eState != MONSTER_SUICIDE)
-	{ 
-		m_fAngle	+= 0.25f;
+	if (m_eState != MONSTER_SUICIDE)
+	{
+		m_fAngle += 0.25f;
 		m_fLeft_Angle += 0.5f;
 		if (m_fAngle > 6.28319f)
 		{
@@ -181,7 +177,7 @@ void CRedCrystal_Monster::Render_Object(void)
 			m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 		}
 	}
-	
+
 	Engine::CMonsterMain::Render_Object();
 }
 
@@ -235,7 +231,7 @@ void CRedCrystal_Monster::Update_Animation(const float & fTimeDelta)
 
 	if (m_tFrame.fStartFrame >= m_tFrame.fMaxFrame)
 	{
-		m_tFrame.fStartFrame = 0.f;
+		m_tFrame.fStartFrame = m_tFrame.fFirstFrame;
 	}
 }
 

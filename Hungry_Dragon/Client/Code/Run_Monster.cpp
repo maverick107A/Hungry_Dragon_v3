@@ -19,15 +19,11 @@ HRESULT CRun_Monster::Ready_Object(void)
 	m_fSpeed = 10.f;
 	m_fMonster_HP = 100.f;
 	m_fMonster_MaxHP = 100.f;
-	m_fScale =    10.f;
+	m_fScale = 10.f;
 	m_fMaxScale = 10.f;
 	m_fDamaged = 5.f;
 	m_eState = MONSTER_REBORN;
 
-	m_tFrame.fStartFrame = 0.f;
-	m_tFrame.fMaxFrame = 14.f;
-	m_tFrame.fFrameSpeed = 1.5f;
-	m_fHeight = 0.f;
 
 	return S_OK;
 }
@@ -44,7 +40,7 @@ int CRun_Monster::Update_Object(const float & fTimeDelta)
 		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
 
 
-		m_vAuraPos = m_pTransform->m_vInfo[Engine::INFO_POS]; 
+		m_vAuraPos = m_pTransform->m_vInfo[Engine::INFO_POS];
 		m_pAuraTransform->Set_Trans(&m_vAuraPos);
 
 		m_pTransform->Set_Scale(m_fMaxScale);
@@ -68,15 +64,15 @@ int CRun_Monster::Update_Object(const float & fTimeDelta)
 
 	if (m_eState == MONSTER_ACTIVATE)
 	{
-		
+
 		vPlayerPos = { m_vPlayerPos.x  , 0.f  , m_vPlayerPos.z };
 		m_pTransform->Chase_Target(&vPlayerPos, -(fTimeDelta * m_fSpeed));
-		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();	
+		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
 	}
 
 
 
-	if(m_eType != CMonsterMain::BUFF_NONE)
+	if (m_eType != CMonsterMain::BUFF_NONE)
 	{
 		//m_pAuraTransform->m_matWorld = m_pTransform->m_matWorld;
 		m_vAuraPos = m_pTransform->m_vInfo[Engine::INFO_POS];
@@ -87,7 +83,7 @@ int CRun_Monster::Update_Object(const float & fTimeDelta)
 		m_pGraphicDev->GetTransform(D3DTS_VIEW, &matView);
 		ZeroMemory(&matView.m[3][0], sizeof(D3DXVECTOR3));
 		D3DXMatrixInverse(&matView, NULL, &matView);
-		 m_pAuraTransform->m_matWorld = matView *  m_pAuraTransform->m_matWorld;
+		m_pAuraTransform->m_matWorld = matView *  m_pAuraTransform->m_matWorld;
 
 	}
 
@@ -100,20 +96,20 @@ void CRun_Monster::Render_Object(void)
 	m_pTransform->Set_Transform(m_pGraphicDev);
 	m_pTextureCom->Set_Texture(4);
 	m_pBufferCubeCom->Render_Buffer();
-   
+
 
 	if (m_eType != CMonsterMain::BUFF_NONE)
 	{
 		m_pAuraTransform->Set_Transform(m_pGraphicDev);
-	
+
 		m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
-	
+
 		m_pGraphicDev->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 		m_pGraphicDev->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
-	
+
 		m_pAuraTextureCom->Set_Texture((int)m_tFrame.fStartFrame);
 		m_pBufferBoradCom->Render_Buffer();
-	
+
 		m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 	}
 
@@ -170,7 +166,7 @@ void CRun_Monster::Update_Animation(const float & fTimeDelta)
 
 	if (m_tFrame.fStartFrame >= m_tFrame.fMaxFrame)
 	{
-		m_tFrame.fStartFrame = 0.f;
+		m_tFrame.fStartFrame = m_tFrame.fFirstFrame;
 	}
 }
 

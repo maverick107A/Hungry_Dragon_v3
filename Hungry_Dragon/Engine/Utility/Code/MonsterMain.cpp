@@ -18,28 +18,41 @@ HRESULT Engine::CMonsterMain::Ready_Object(void)
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
 
+
 	switch (rand() % 4)
 	{
 	case 0:
 		m_eType = BUFF_SPEED;
+		m_tFrame.fStartFrame = 0.f;
+		m_tFrame.fFirstFrame = 0.f;
+		m_tFrame.fMaxFrame = 14.f;
+		m_tFrame.fFrameSpeed = 1.0f;
 		break;
 	case 1:
 		m_eType = BUFF_HP;
+		m_tFrame.fStartFrame = 16.f;
+		m_tFrame.fFirstFrame = 16.f;
+		m_tFrame.fMaxFrame = 29.f;
+		m_tFrame.fFrameSpeed = 1.0f;
 		break;
 	case 2:
 		m_eType = BUFF_EXP;
+		m_tFrame.fStartFrame = 31.f;
+		m_tFrame.fFirstFrame = 31.f;
+		m_tFrame.fMaxFrame = 44.f;
+		m_tFrame.fFrameSpeed = 1.0f;
 		break;
 	case 3:
 		m_eType = BUFF_SP;
+		m_tFrame.fStartFrame = 46.f;
+		m_tFrame.fFirstFrame = 46.f;
+		m_tFrame.fMaxFrame = 59.f;
+		m_tFrame.fFrameSpeed = 1.0f;
 		break;
 	}
 
-	//if ((rand() % 20) == 2)
-	//{
-	//
-	//}
-	//else
-	//	m_eType = BUFF_NONE;
+
+
 
 	return S_OK;
 }

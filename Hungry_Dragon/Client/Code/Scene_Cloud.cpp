@@ -294,15 +294,19 @@ HRESULT CScene_Cloud::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 	pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);
 
 
-	for (int i = 0; i < 400; ++i)
+	for (int i = 0; i < 250; ++i)
 	{
 		FAILED_CHECK_RETURN(Register_ObjectPool<CFlyGolem>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
 
 		FAILED_CHECK_RETURN(Register_ObjectPool<CFlyChaseGolem>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
 
-		FAILED_CHECK_RETURN(Register_ObjectPool<CRedCrystal_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
 
 		FAILED_CHECK_RETURN(Register_ObjectPool<CFly_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
+	}
+
+	for (int i = 0; i < 50; ++i)
+	{
+		FAILED_CHECK_RETURN(Register_ObjectPool<CRedCrystal_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
 	}
 
 	for (int i = 0; i < 10000; ++i)
