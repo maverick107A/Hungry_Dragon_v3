@@ -157,13 +157,13 @@ void CTestPlayer::Render_Object(void)
 
 	m_pGraphicDev->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_GOURAUD);
 	Animation_Render();
+	m_pGraphicDev->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_FLAT);
 	if(m_bBreath)
 		m_pBreath->Render_Breath(this);
 
 	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end();++iter) {
 		(*iter)->Render_Buffer();
 	}
-	m_pGraphicDev->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_FLAT);
 }
 
 void CTestPlayer::Free(void)

@@ -63,7 +63,7 @@ void CPLandRush::Update_State(const float& fTimeDelta)
 		m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS] += vDir;
 		float fDis = sqrtf(vDir.x*vDir.x + vDir.y*vDir.y + vDir.z*vDir.z);
 		float fPlaneDis = sqrtf(vDir.x*vDir.x + vDir.z*vDir.z);
-		m_pPlayer->Get_Transform()->m_vAngle.x = 0.f;
+		//m_pPlayer->Get_Transform()->m_vAngle.x = 0.f;
 		if (0.f != fPlaneDis)
 		{
 			float fAngleY = acosf(vDir.z / fPlaneDis);
