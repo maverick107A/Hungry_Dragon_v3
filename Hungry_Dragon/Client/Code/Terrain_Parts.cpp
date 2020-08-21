@@ -41,7 +41,6 @@ void CTerrain_Parts::Render_Object(void)
 void CTerrain_Parts::Set_HeightMap(const _tchar * _pPath)
 {
 	m_pBufferCom->Set_Height(_pPath);
-	
 }
 
 void CTerrain_Parts::Set_Trans(_vec3 & _vPos)
@@ -68,12 +67,12 @@ void CTerrain_Parts::Weld_Edge(CTerrain_Parts * _Dst, bool _bHorizontal)
 	{
 		VTXCOL* pLeft = m_pBufferCom->Get_EntryVB();
 		VTXCOL* pRight = _Dst->Get_BufferCom()->Get_EntryVB();
-		
+
 		for (int i = 0; i < 128; ++i)
 		{
-			fJoinPoint[i+1] = (pLeft[(i * 128 + 127) * 6 + 1].vPosition.y + pRight[i * 128 * 6].vPosition.y)*0.5f;
+			fJoinPoint[i + 1] = (pLeft[(i * 128 + 127) * 6 + 1].vPosition.y + pRight[i * 128 * 6].vPosition.y)*0.5f;
 		}
-		fJoinPoint[0] = (pLeft[( 127) * 6 + 2].vPosition.y + pRight[5].vPosition.y)*0.5f;
+		fJoinPoint[0] = (pLeft[(127) * 6 + 2].vPosition.y + pRight[5].vPosition.y)*0.5f;
 
 		for (int i = 0; i < 128; ++i)
 		{
@@ -81,7 +80,7 @@ void CTerrain_Parts::Weld_Edge(CTerrain_Parts * _Dst, bool _bHorizontal)
 			//fJoinPoint = (pLeft[(i * 128 + 127)* 6+1].vPosition.y + pRight[i * 128 * 6].vPosition.y)*0.5f;
 			pLeft[(i * 128 + 127) * 6 + 1].vPosition.y = fJoinPoint[i + 1];
 			pRight[i * 128 * 6].vPosition.y = fJoinPoint[i + 1];
-			pRight[i * 128 * 6+3].vPosition.y = fJoinPoint[i+1];
+			pRight[i * 128 * 6 + 3].vPosition.y = fJoinPoint[i + 1];
 
 			//fJoinPoint = (pLeft[(i * 128 + 127) * 6+2].vPosition.y + pRight[i * 128 * 6 + 5].vPosition.y)*0.5f;
 			pLeft[(i * 128 + 127) * 6 + 2].vPosition.y = fJoinPoint[i];
@@ -89,11 +88,15 @@ void CTerrain_Parts::Weld_Edge(CTerrain_Parts * _Dst, bool _bHorizontal)
 			pRight[i * 128 * 6 + 5].vPosition.y = fJoinPoint[i];
 
 			// 높이맵 갱신
-			rSrcHeightMap[(127 - i) * 129 + 128] = fJoinPoint[i + 1];
-			rDstHeightMap[(127 - i) * 129] = fJoinPoint[i + 1] ;
-			rSrcHeightMap[(128 - i) * 129 + 128] = fJoinPoint[i ];
-			rDstHeightMap[(128 - i) * 129] = fJoinPoint[i ];
 
+			//구버전 잘못된 버전
+			//rSrcHeightMap[(127 - i) * 129 + 128] = fJoinPoint[i + 1];
+			//rDstHeightMap[(127 - i) * 129] = fJoinPoint[i + 1];
+			//rSrcHeightMap[(128 - i) * 129 + 128] = fJoinPoint[i];
+			//rDstHeightMap[(128 - i) * 129] = fJoinPoint[i];
+
+			rSrcHeightMap[(i) * 129 + 128] = fJoinPoint[i];
+			rDstHeightMap[(i) * 129] = fJoinPoint[i];
 		}
 
 	}
@@ -101,7 +104,7 @@ void CTerrain_Parts::Weld_Edge(CTerrain_Parts * _Dst, bool _bHorizontal)
 	{
 		VTXCOL* pUp = m_pBufferCom->Get_EntryVB();
 		VTXCOL* pDown = _Dst->Get_BufferCom()->Get_EntryVB();
-		
+
 		_uint uPivot = 129 * 128;
 
 		for (int i = 0; i < 128; ++i)
@@ -128,13 +131,17 @@ void CTerrain_Parts::Weld_Edge(CTerrain_Parts * _Dst, bool _bHorizontal)
 			pDown[(i + iPivot) * 6 + 1].vPosition.y = fJoinPoint[i + 1];
 
 			// 높이맵 갱신
-			rSrcHeightMap[uPivot + i+1] = fJoinPoint[i + 1] ;
-			rDstHeightMap[i+1] = fJoinPoint[i + 1] ;
+			//구버전 잘못된 버전
+			/*rSrcHeightMap[uPivot + i + 1] = fJoinPoint[i + 1];
+			rDstHeightMap[i + 1] = fJoinPoint[i + 1];
 			rSrcHeightMap[uPivot + i] = fJoinPoint[i];
-			rDstHeightMap[i] = fJoinPoint[i];
+			rDstHeightMap[i] = fJoinPoint[i];*/
+
+			rSrcHeightMap[i] = fJoinPoint[i];
+			rDstHeightMap[uPivot + i] = fJoinPoint[i];
 		}
 	}
-	
+
 }
 
 void CTerrain_Parts::Free(void)

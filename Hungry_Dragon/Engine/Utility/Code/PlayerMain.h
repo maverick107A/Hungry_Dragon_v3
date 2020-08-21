@@ -90,6 +90,9 @@ protected:
 	float					m_fColSize = 0.f;
 
 public:
+	D3DXVECTOR3				m_vNorm = { 0.f,1.f,0.f };
+
+public:
 	static CPlayerMain*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 protected:
 	virtual void Free(void) override;

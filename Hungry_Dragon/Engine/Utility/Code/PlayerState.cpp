@@ -108,9 +108,9 @@ bool CPlayerState::Land_Check(float* _fHeight, _vec3* _vNorm)
 	D3DXVECTOR3	vTemp2 = { -1.f,0.f,-1.f };
 	if (D3DXVec3Dot(&vTemp1, &vTemp2) > 0)
 	{
-		Vertex1.y = (float)pTerrain->Get_TerrainHeight()[Vernum] * 10.f +20.f;
-		Vertex2.y = (float)pTerrain->Get_TerrainHeight()[Vernum + 1] * 10.f + 20.f;
-		Vertex3.y = (float)pTerrain->Get_TerrainHeight()[Vernum + VERTEXSIZE] * 10.f + 20.f;
+		Vertex1.y = (float)pTerrain->Get_AdvanceHeight()[Vernum] +40.f;
+		Vertex2.y = (float)pTerrain->Get_AdvanceHeight()[Vernum + 1] + 40.f;
+		Vertex3.y = (float)pTerrain->Get_AdvanceHeight()[Vernum + VERTEXSIZE] + 40.f;
 
 		vTemp1 = Vertex2 - Vertex1;
 		vTemp2 = Vertex3 - Vertex1;
@@ -130,9 +130,9 @@ bool CPlayerState::Land_Check(float* _fHeight, _vec3* _vNorm)
 	}
 	else
 	{
-		Vertex2.y = (float)pTerrain->Get_TerrainHeight()[Vernum + 1]* 10.f + 20.f;
-		Vertex3.y = (float)pTerrain->Get_TerrainHeight()[Vernum + VERTEXSIZE] * 10.f + 20.f;
-		Vertex4.y = (float)pTerrain->Get_TerrainHeight()[Vernum + VERTEXSIZE + 1] * 10.f + 20.f;
+		Vertex2.y = (float)pTerrain->Get_AdvanceHeight()[Vernum + 1] + 40.f;
+		Vertex3.y = (float)pTerrain->Get_AdvanceHeight()[Vernum + VERTEXSIZE] + 40.f;
+		Vertex4.y = (float)pTerrain->Get_AdvanceHeight()[Vernum + VERTEXSIZE + 1] + 40.f;
 
 		vTemp1 = Vertex3 - Vertex4;
 		vTemp2 = Vertex2 - Vertex4;

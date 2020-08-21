@@ -74,7 +74,12 @@ void CPLandRush::Update_State(const float& fTimeDelta)
 		float fHeight;
 		_vec3 vNorm;
 		Land_Check(&fHeight, &vNorm);
-		m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS].y = fHeight;
+
+		m_pPlayer->m_vNorm += (vNorm - m_pPlayer->m_vNorm)*0.2f;
+
+		vNorm = m_pPlayer->m_vNorm;
+
+		m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS].y += (fHeight - m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS].y)*0.2f;
 
 		//지형탈때 X각 구하기
 		//X각도

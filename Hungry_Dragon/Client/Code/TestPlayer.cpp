@@ -105,15 +105,9 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 	//if (GetAsyncKeyState(VK_LBUTTON))
 	//{
 	//	TCHAR szBuff[256] = L"";
-	//	wsprintf(szBuff, L"x :%d, z :%d", int(m_pTransform->m_vInfo[Engine::INFO_POS].x * 100), int(m_pTransform->m_vInfo[Engine::INFO_POS].z * 100));
+	//	wsprintf(szBuff, L"x :%d, z :%d", int(m_pTransform->m_vInfo[Engine::INFO_POS].x * 1000), int(m_pTransform->m_vInfo[Engine::INFO_POS].z * 1000));
 	//	MessageBox(nullptr, szBuff, L"XY", 0);
 	//}
-	if (GetAsyncKeyState(VK_F2))
-	{
-		TCHAR szBuff[256] = L"";
-		wsprintf(szBuff, L"x :%d, z :%d", int(m_pTransform->m_vInfo[Engine::INFO_POS].x ), int(m_pTransform->m_vInfo[Engine::INFO_POS].z ));
-		MessageBox(nullptr, szBuff, L"XY", 0);
-	}
 
 	m_pTransform->m_vInCamPos -= m_vUp*0.1f;
 
@@ -330,7 +324,7 @@ void CTestPlayer::Animation_Render()
 	m_pPartsBuffer[PART_BODY]->Render_Buffer();
 
 	//날개
-	m_pPartsTrans[PART_WING]->Set_Transform(m_pGraphicDev, m_matOld2);
+	m_pPartsTrans[PART_WING]->Set_Transform(m_pGraphicDev, m_pPartsTrans[PART_2BODY]->m_matWorld);
 	m_pPartsBuffer[PART_WING]->Render_Buffer();
 
 	m_pPartsTrans[PART_LWING]->Set_Transform(m_pGraphicDev, m_matOld2);
@@ -396,10 +390,17 @@ void CTestPlayer::Animations(const float& fTimeDelta)
 	m_pPartsTrans[PART_2BODY]->m_vAfterPos.z = -3.f;
 	m_pPartsTrans[PART_3BODY]->m_vAfterPos.z = -4.5f;
 
-	m_pPartsTrans[PART_WING]->m_vAfterAngle.z = m_vWAngle;
-	m_pPartsTrans[PART_WING]->m_vAfterPos.x = cosf(m_vWAngle);
-	m_pPartsTrans[PART_WING]->m_vAfterPos.y = sinf(m_vWAngle);
-	m_pPartsTrans[PART_WING]->m_vAfterPos.z = -3.f;
+
+	//공전모드 부모행렬 마지막 곱하는거 다르게 줬음
+	m_pPartsTrans[PART_WING]->m_vAfterRevAngle.z = m_vWAngle;
+	//m_pPartsTrans[PART_WING]->m_vAfterPos.x = cosf(m_vWAngle);
+	//m_pPartsTrans[PART_WING]->m_vAfterPos.y = sinf(m_vWAngle);
+	m_pPartsTrans[PART_WING]->m_vAfterPos.x = 1.f;
+
+	//m_pPartsTrans[PART_WING]->m_vAfterAngle.z = m_vWAngle;
+	//m_pPartsTrans[PART_WING]->m_vAfterPos.x = cosf(m_vWAngle);
+	//m_pPartsTrans[PART_WING]->m_vAfterPos.y = sinf(m_vWAngle);
+	//m_pPartsTrans[PART_WING]->m_vAfterPos.z = -3.f;
 
 	m_pPartsTrans[PART_LWING]->m_vAfterAngle.z = -m_vWAngle;
 	m_pPartsTrans[PART_LWING]->m_vAfterPos.x = -cosf(m_vWAngle);

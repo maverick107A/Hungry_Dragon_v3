@@ -49,7 +49,7 @@ HRESULT Engine::CHeightCol::Ready_Buffer(const _ulong& dwCntX, const _ulong& dwC
 		{
 			dwIndex = (i * (dwCntX-1) + j) * 6;
 
-			pVertex[dwIndex + 0].vPosition = _vec3(_float(j) * dwVtxItv, 0.f, _float(i+1) * dwVtxItv);
+			pVertex[dwIndex + 0].vPosition = _vec3(_float(j) * dwVtxItv, 0.f, _float(i + 1) * dwVtxItv);
 			pVertex[dwIndex + 1].vPosition = _vec3(_float(j + 1) * dwVtxItv, 0.f, _float(i + 1) * dwVtxItv);
 			pVertex[dwIndex + 2].vPosition = _vec3(_float(j + 1) * dwVtxItv, 0.f, _float(i) * dwVtxItv);
 			pVertex[dwIndex].dwColor = D3DCOLOR_XRGB(255, 255, 255);
@@ -146,7 +146,7 @@ void CHeightCol::Set_Height(const _tchar* _pPath, _float _fHeight)
 			int iIndex = i * m_dwCntX + j;
 			//m_vecHeight[iIndex] = (_uint)((pPixel[iIndex]._b));
 			m_vecHeight[iIndex] = (_uint)((pPixel[iIndex] & 0x000000ff));
-			m_vecAdvanceHeight[iIndex] = ((float)(m_vecHeight[iIndex])) / 255.f * _fHeight;
+			m_vecAdvanceHeight[iIndex] = (((float)(m_vecHeight[iIndex])) * _fHeight) / 255.f;
 		}
 	}
 

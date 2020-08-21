@@ -26,6 +26,12 @@ void CPLandIdle::Enter_State(CPlayerMain* _pPlayer)
 
 void CPLandIdle::Update_State(const float& fTimeDelta)
 {
+	float fHeight;
+	_vec3 vNorm;
+
+	Land_Check(&fHeight, &vNorm);
+
+	m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS].y += (fHeight - m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS].y)*0.2f;
 	if (GetAsyncKeyState('W') || GetAsyncKeyState('S'))
 	{
 		m_pPlayer->Set_Sate(CPlayerMain::STATE_LANDRUSH);
