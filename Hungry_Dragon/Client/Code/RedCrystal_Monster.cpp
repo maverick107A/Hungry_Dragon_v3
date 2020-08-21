@@ -25,21 +25,24 @@ HRESULT CRedCrystal_Monster::Ready_Object(void)
 	m_fDamaged = 2.f;
 	m_eState = MONSTER_REBORN;
 
+
+	m_tFrame.fStartFrame = 0.f;
+	m_tFrame.fMaxFrame = 14.f;
+	m_tFrame.fFrameSpeed = 1.5f;
+
 	return S_OK;
 }
 
 int CRedCrystal_Monster::Update_Object(const float & fTimeDelta)
 {
 
-	//m_ptempTerain = static_cast<CTerrain_Locater*>(((Engine::CLayer*)(Get_Parent()))->Get_Object(L"BackGround", Engine::Find_First, nullptr));
-	//m_pTerrain = m_ptempTerain->Get_Terrain();
-
 	if (m_eState == MONSTER_REBORN && m_eState != MONSTER_DEACTIVATE)
 	{
 		m_pTransform->Set_Trans(&m_vFirstPos);
-		//m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain() + 1000.f;
-		m_pTransform->Set_Scale(m_fMaxScale);
+		m_pAuraTransform->Set_Trans(&m_vFirstPos);
 
+		m_pTransform->Set_Scale(m_fMaxScale);
+		m_pAuraTransform->Set_Scale(m_fMaxScale * 5);
 		m_fMonster_HP = 100.f;
 		m_fScale = 15.f;
 		m_pParticle = nullptr;
@@ -65,6 +68,23 @@ int CRedCrystal_Monster::Update_Object(const float & fTimeDelta)
 		m_eState = MONSTER_SUICIDE;
 		State_Change();
 	}
+
+
+	if (m_eType != CMonsterMain::BUFF_NONE)
+	{
+		//m_pAuraTransform->m_matWorld = m_pTransform->m_matWorld;
+		m_vAuraPos = m_pTransform->m_vInfo[Engine::INFO_POS];
+		m_pAuraTransform->Set_Trans(&m_vAuraPos);
+
+		//¿ùµå ºôº¸µå
+		D3DXMATRIX		matView;
+		m_pGraphicDev->GetTransform(D3DTS_VIEW, &matView);
+		ZeroMemory(&matView.m[3][0], sizeof(D3DXVECTOR3));
+		D3DXMatrixInverse(&matView, NULL, &matView);
+		m_pAuraTransform->m_matWorld = matView *  m_pAuraTransform->m_matWorld;
+	}
+
+	Update_Animation(fTimeDelta);
 
 	return m_iEvent;
 }
@@ -141,23 +161,25 @@ void CRedCrystal_Monster::Render_Object(void)
 
 		m_pBufferMeshCom->Render_Buffer();
 
-		////// ÆøÅº
-		//if (m_eState == MONSTER_DEACTIVATE || m_fMonster_HP < 0)
-		//{
-		//	m_vBombPos = { m_vBombPos.x ,m_vBombPos.y - 20.f ,m_vBombPos.z };
-		//}
-		//else
-		//{
-		//	m_vBombPos = { m_vBodyPos.x ,m_vBodyPos.y - 20.f ,m_vBodyPos.z };
-		//}
-		//m_pTransform->Set_Trans(&m_vBombPos);
-		//m_pTransform->Set_Scale(8);
-		//m_pTransform->Update_Component(0.01f);
-		//m_pTransform->Set_Transform(m_pGraphicDev);
-
-		//m_pBufferMeshCom->Render_Buffer();
 
 		m_pTransform->Set_Trans(&m_vBodyPos);
+
+
+
+		if (m_eType != CMonsterMain::BUFF_NONE)
+		{
+			m_pAuraTransform->Set_Transform(m_pGraphicDev);
+
+			m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
+
+			m_pGraphicDev->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+			m_pGraphicDev->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+
+			m_pAuraTextureCom->Set_Texture((int)m_tFrame.fStartFrame);
+			m_pBufferBoradCom->Render_Buffer();
+
+			m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
+		}
 	}
 	
 	Engine::CMonsterMain::Render_Object();
@@ -172,6 +194,20 @@ HRESULT CRedCrystal_Monster::Add_Component(void)
 		(Engine::Clone(RESOURCE_STAGE, L"BUFFER_DIAMESH"));
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_STATIC].emplace(L"Chrystal_Buffer", pComponent);
+
+	// buffer
+	pComponent = m_pBufferBoradCom = dynamic_cast<Engine::CMonsterBoard*>
+		(Engine::Clone(RESOURCE_STATIC, L"Sprite_Bat"));
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_BoardBuffer", pComponent);
+
+
+	pComponent = m_pAuraTextureCom = dynamic_cast<Engine::CTexture*>
+		(Engine::Clone(RESOURCE_STAGE, L"Test_Aura"));
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_AuraTexture", pComponent);
+
+	FAILED_CHECK(Register_Component<Engine::CTransform>(&m_pAuraTransform, ID_DYNAMIC, L"Com_AuraTransform"));
 
 
 	return S_OK;
@@ -190,10 +226,17 @@ CRedCrystal_Monster * CRedCrystal_Monster::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 	if (FAILED(pInstance->Ready_Object()))
 		Engine::Safe_Release(pInstance);
 
-
-
-
 	return pInstance;
+}
+
+void CRedCrystal_Monster::Update_Animation(const float & fTimeDelta)
+{
+	m_tFrame.fStartFrame += m_tFrame.fMaxFrame * fTimeDelta * m_tFrame.fFrameSpeed;
+
+	if (m_tFrame.fStartFrame >= m_tFrame.fMaxFrame)
+	{
+		m_tFrame.fStartFrame = 0.f;
+	}
 }
 
 void CRedCrystal_Monster::Free(void)

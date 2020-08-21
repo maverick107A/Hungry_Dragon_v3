@@ -30,6 +30,8 @@ private:
 public:
 	static CRedCrystal_Monster*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 
+	void Update_Animation(const float & fTimeDelta);
+
 private:
 	D3DXVECTOR3 m_vBodyPos;
 	D3DXVECTOR3 m_vBombPos;

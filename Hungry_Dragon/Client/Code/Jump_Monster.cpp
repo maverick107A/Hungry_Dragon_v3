@@ -70,9 +70,6 @@ int CJump_Monster::Update_Object(const float & fTimeDelta)
 			Jump(fTimeDelta);
 		}		
 	}
-	else
-		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
-
 	return m_iEvent;
 }
 

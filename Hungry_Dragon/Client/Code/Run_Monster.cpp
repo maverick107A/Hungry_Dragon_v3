@@ -48,7 +48,7 @@ int CRun_Monster::Update_Object(const float & fTimeDelta)
 		m_pAuraTransform->Set_Trans(&m_vAuraPos);
 
 		m_pTransform->Set_Scale(m_fMaxScale);
-		m_pAuraTransform->Set_Bilborad_Scale(m_fMaxScale * 5);
+		m_pAuraTransform->Set_Scale(m_fMaxScale * 5);
 		m_fMonster_HP = m_fMonster_MaxHP;
 
 		m_pParticle = nullptr;
@@ -73,34 +73,22 @@ int CRun_Monster::Update_Object(const float & fTimeDelta)
 		m_pTransform->Chase_Target(&vPlayerPos, -(fTimeDelta * m_fSpeed));
 		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();	
 	}
-	else
-		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
 
 
 
-	if(true)
+	if(m_eType != CMonsterMain::BUFF_NONE)
 	{
-		m_pAuraTransform->m_matWorld = m_pTransform->m_matWorld;
-		//m_vAuraPos = m_pTransform->m_vInfo[Engine::INFO_POS];
-		//m_pAuraTransform->Set_Trans(&m_vAuraPos);
+		//m_pAuraTransform->m_matWorld = m_pTransform->m_matWorld;
+		m_vAuraPos = m_pTransform->m_vInfo[Engine::INFO_POS];
+		m_pAuraTransform->Set_Trans(&m_vAuraPos);
 
 		//¿ùµå ºôº¸µå
-		//D3DXMATRIX		matView;
-		//m_pGraphicDev->GetTransform(D3DTS_VIEW, &matView);
-		//ZeroMemory(&matView.m[3][0], sizeof(D3DXVECTOR3));
-		//D3DXMatrixInverse(&matView, NULL, &matView);
-		// m_pAuraTransform->m_matWorld = matView *  m_pAuraTransform->m_matWorld;
+		D3DXMATRIX		matView;
+		m_pGraphicDev->GetTransform(D3DTS_VIEW, &matView);
+		ZeroMemory(&matView.m[3][0], sizeof(D3DXVECTOR3));
+		D3DXMatrixInverse(&matView, NULL, &matView);
+		 m_pAuraTransform->m_matWorld = matView *  m_pAuraTransform->m_matWorld;
 
-
-		//  Y ºôº¸µå
-		//D3DXMATRIX		matView;
-		//m_pGraphicDev->GetTransform(D3DTS_VIEW, &matView);
-		//D3DXMatrixInverse(&matView, NULL, &matView);
-		//m_pAuraTransform->m_matWorld._11 = matView._11;
-		//m_pAuraTransform->m_matWorld._13 = matView._13;
-		//m_pAuraTransform->m_matWorld._31 = matView._31;
-		//m_pAuraTransform->m_matWorld._33 = matView._33;
-	
 	}
 
 	Update_Animation(fTimeDelta);
@@ -114,7 +102,7 @@ void CRun_Monster::Render_Object(void)
 	m_pBufferCubeCom->Render_Buffer();
    
 
-	if (true)
+	if (m_eType != CMonsterMain::BUFF_NONE)
 	{
 		m_pAuraTransform->Set_Transform(m_pGraphicDev);
 	

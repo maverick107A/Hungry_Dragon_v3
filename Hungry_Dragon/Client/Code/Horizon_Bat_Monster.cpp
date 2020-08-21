@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Export_Function.h"
-
+#include "Ingame_Flow.h"
 #include "Horizon_Bat_Monster.h"
 
 
@@ -28,7 +28,7 @@ HRESULT CHorizonBat_Monster::Ready_Object(void)
 	m_fHeight = 0.f;
 
 
-	m_fSpeed = 1.f;
+	m_fSpeed = 0.5f;
 	m_fMonster_MaxHP = 100.f;
 	m_fMonster_HP = 100.f;
 	m_fScale = 1.f;
@@ -53,10 +53,10 @@ int CHorizonBat_Monster::Update_Object(const float & fTimeDelta)
 	}
 
 	// 파티클만 취급 안하는 업데이트 만들어
-	if (MONSTER_DEAD == Engine::CMonsterMain::Update_Object(fTimeDelta))
+	if (MONSTER_DEAD == Engine::CMonsterMain::Update_Object(fTimeDelta) || CIngame_Flow::GetInstance()->Get_StageID() != CIngame_Flow::STAGE_CAVE_TWO)
 	{
 		m_eState = MONSTER_REBORN;
-
+		m_iEvent = MONSTER_DEAD;
 		return m_iEvent;
 	}
 

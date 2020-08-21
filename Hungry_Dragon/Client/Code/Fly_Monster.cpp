@@ -2,6 +2,7 @@
 #include "Fly_Monster.h"
 #include "Export_Function.h"
 #include "Terrain_Locater.h"
+#include "Ingame_Flow.h"
 CFly_Monster::CFly_Monster(LPDIRECT3DDEVICE9 pGraphicDev)
 	:Engine::CMonsterMain(pGraphicDev)
 {
@@ -35,9 +36,12 @@ int CFly_Monster::Update_Object(const float & fTimeDelta)
 
 	if (m_eState == MONSTER_REBORN && m_eState != MONSTER_DEACTIVATE)
 	{
+		
 		m_pTransform->Set_Trans(&m_vFirstPos);
-		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain() + m_fHeight; ;
 		m_pTransform->Set_Scale(m_fMaxScale);
+
+		if (CIngame_Flow::GetInstance()->Get_StageID() != CIngame_Flow::STAGE_SKY)
+			m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain() + m_fHeight; ;
 
 		m_fMonster_HP = 100.f;
 		m_fScale = 10.f;
@@ -61,14 +65,14 @@ int CFly_Monster::Update_Object(const float & fTimeDelta)
 			m_fShotingLate += fTimeDelta;
 			if (m_fShotingLate > 0.3f)
 			{
-				m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain() + m_fHeight;
+				if (CIngame_Flow::GetInstance()->Get_StageID() != CIngame_Flow::STAGE_SKY)
+					m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain() + m_fHeight; ;
+
 				Shooting();
 				m_fShotingLate = 0;
 			}
 		
 	}
-	else
-		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain() + m_fHeight;
 
 	return m_iEvent;
 }

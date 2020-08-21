@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Export_Function.h"
-
+#include "Ingame_Flow.h"
 #include "Bat_Monster.h"
 
 
@@ -53,10 +53,10 @@ int CBat_Monster::Update_Object(const float & fTimeDelta)
 	}
 
 	//파티클만 취급 안하는 업데이트 만들어
-	if (MONSTER_DEAD == Engine::CMonsterMain::Update_Object(fTimeDelta))
+	if (MONSTER_DEAD == Engine::CMonsterMain::Update_Object(fTimeDelta) || CIngame_Flow::GetInstance()->Get_StageID() != CIngame_Flow::STAGE_CAVE_ONE)
 	{
 		m_eState = MONSTER_REBORN;
-	
+		m_iEvent = MONSTER_DEAD;
 		return m_iEvent;
 	}
 

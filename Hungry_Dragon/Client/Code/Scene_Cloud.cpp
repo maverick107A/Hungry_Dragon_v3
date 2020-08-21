@@ -79,6 +79,7 @@ HRESULT CScene_Cloud::Ready_Scene(void) {
 	
 	Engine::Get_FMOD()->PlayBgm(L"CloudBgm");
 
+	CIngame_Flow::GetInstance()->Set_StageID(CIngame_Flow::STAGE_SKY);
 	return S_OK;
 }
 
@@ -301,7 +302,7 @@ HRESULT CScene_Cloud::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 
 		FAILED_CHECK_RETURN(Register_ObjectPool<CRedCrystal_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
 
-		//FAILED_CHECK_RETURN(Register_ObjectPool<CFly_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
+		FAILED_CHECK_RETURN(Register_ObjectPool<CFly_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
 	}
 
 	for (int i = 0; i < 10000; ++i)

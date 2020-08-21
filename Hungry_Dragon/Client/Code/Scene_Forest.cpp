@@ -75,6 +75,9 @@ HRESULT CScene_Forest::Ready_Scene(void) {
 	Engine::Get_FMOD()->PlayBgm(L"ForestBgm");
 
 
+	//enum STAGEID { STAGE_FOREST, STAGE_CAVE_ONE, STAGE_CAVE_TWO, STAGE_CAVE_FINAL, STAGE_SKY, STAGE_LAVA, EVENT_END };
+	CIngame_Flow::GetInstance()->Set_StageID(CIngame_Flow::STAGE_FOREST);
+	int i = CIngame_Flow::GetInstance()->Get_StageID();
 	return S_OK;
 }
 

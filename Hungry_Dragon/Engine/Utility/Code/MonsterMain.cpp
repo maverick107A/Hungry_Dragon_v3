@@ -16,6 +16,31 @@ HRESULT Engine::CMonsterMain::Ready_Object(void)
 {
 
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
+
+
+	switch (rand() % 4)
+	{
+	case 0:
+		m_eType = BUFF_SPEED;
+		break;
+	case 1:
+		m_eType = BUFF_HP;
+		break;
+	case 2:
+		m_eType = BUFF_EXP;
+		break;
+	case 3:
+		m_eType = BUFF_SP;
+		break;
+	}
+
+	//if ((rand() % 20) == 2)
+	//{
+	//
+	//}
+	//else
+	//	m_eType = BUFF_NONE;
+
 	return S_OK;
 }
 

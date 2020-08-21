@@ -22,6 +22,7 @@ class ENGINE_DLL CMonsterMain : public Engine::CGameObject
 {
 protected:
 	enum MONSTERSTATE { MONSTER_IDLE, MONSTER_REBORN , MONSTER_ACTIVATE, MONSTER_SUICIDE, MONSTER_LAYDEAD , MONSTER_DEACTIVATE, MONSTER_DYING , MONSTER_END };
+	enum MONSTERTYPE { BUFF_HP, BUFF_SPEED, BUFF_SP, BUFF_EXP, BUFF_NONE, BUFF_END };
 
 protected:
 	explicit CMonsterMain(LPDIRECT3DDEVICE9 pGraphicDev);
@@ -71,12 +72,14 @@ protected:
 
 	D3DXVECTOR3					m_vLook;
 	D3DXVECTOR3					vPlayerPos;
+	D3DXVECTOR3					m_vAuraPos;
 	int							m_iEvent = 0;
 
 	FRAME						m_tFrame;
 	MONSTERSTATE				m_preState;
 	MONSTERSTATE				m_eState;
 
+	MONSTERTYPE					m_eType;
 
 	float						m_fPlayerDistance;
 	float						m_fDistance;

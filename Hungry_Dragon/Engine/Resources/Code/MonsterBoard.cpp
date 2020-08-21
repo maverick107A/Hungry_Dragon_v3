@@ -49,11 +49,11 @@ HRESULT Engine::CMonsterBoard::Ready_Buffer(void)
 	//pVertex[2] = VTXTEX( 1.0f, 1.0f, -1.0f ,     0.0f, 0.0f, -1.0f         , m_fTexU * m_fFrameUCnt        , m_fTexV *  m_fFrameVCnt);
 	//pVertex[3] = VTXTEX( 1.0f, -1.0f, -1.0f,     0.0f, 0.0f, -1.0f         , m_fTexU * m_fFrameUCnt        , m_fTexV * (m_fFrameVCnt - 1));
 
-	pVertex[0] = VTXTEX(-1.0f, -1.0f, -1.0f, 0.0f, 0.0f, -1.0f, 1.f, 1.f);
-	pVertex[1] = VTXTEX(-1.0f, 1.0f, -1.0f, 0.0f, 0.0f, -1.0f,  1.f, 0.f);
-	pVertex[2] = VTXTEX(1.0f, 1.0f, -1.0f, 0.0f, 0.0f, -1.0f,   0.f, 0.f);
-	pVertex[3] = VTXTEX(1.0f, -1.0f, -1.0f, 0.0f, 0.0f, -1.0f,  0.f, 1.f);
-
+	pVertex[0] = VTXTEX(-1.0f, -1.0f, 0.0f, 0.0f, 0.0f, -1.0f, 1.f, 1.f);
+	pVertex[1] = VTXTEX(-1.0f, 1.0f,  0.0f, 0.0f, 0.0f, -1.0f,  1.f, 0.f);
+	pVertex[2] = VTXTEX(1.0f, 1.0f,   0.0f, 0.0f, 0.0f, -1.0f,   0.f, 0.f);
+	pVertex[3] = VTXTEX(1.0f, -1.0f,  0.0f, 0.0f, 0.0f, -1.0f,  0.f, 1.f);
+									  
 
 
 	m_pVB->Unlock();
