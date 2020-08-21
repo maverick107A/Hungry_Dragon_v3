@@ -11,8 +11,10 @@ class CTexture;
 class CTerrain;
 class CPart_Atk;
 class CResources;
+class CAnimator;
 
 END
+
 class CTestPlayer : public Engine::CPlayerMain
 {
 private:
@@ -32,6 +34,7 @@ private:
 	virtual HRESULT	Add_Component(void) override;
 	void			Animation_Render();
 	void			Animations(const float& fTimeDelta);
+	void			Preset_Animation();
 
 	float m_vAngle = 0.f;
 	float m_fSpeed = 0.05f;
@@ -51,6 +54,7 @@ private:
 
 public:
 	list<Engine::CResources*>  m_arrParticle;
+	Engine::CAnimator* m_pAnimator;
 
 };
 

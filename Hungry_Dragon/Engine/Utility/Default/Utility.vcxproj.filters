@@ -100,9 +100,6 @@
     <Filter Include="02. UtilBase\02. Component\06. Animatior">
       <UniqueIdentifier>{e2252d88-223e-4068-b7fc-80672ea2d48b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. UtilBase\01. GameObject\03. MovingObject">
-      <UniqueIdentifier>{5f523a2c-b0ed-4f6c-a34f-a9e70bfb7d2a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. UtilBase\02. Component\00. Transform\00. Animation">
       <UniqueIdentifier>{8429e82e-0462-4602-84dd-c416b87f5b0d}</UniqueIdentifier>
     </Filter>
@@ -203,9 +200,6 @@
     </ClCompile>
     <ClCompile Include="..\Code\Animator.cpp">
       <Filter>02. UtilBase\02. Component\06. Animatior</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Code\MovingObject.cpp">
-      <Filter>02. UtilBase\01. GameObject\03. MovingObject</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\AnimationTransform.cpp">
       <Filter>02. UtilBase\02. Component\00. Transform\00. Animation</Filter>
@@ -310,9 +304,6 @@
     </ClInclude>
     <ClInclude Include="..\Code\Animator.h">
       <Filter>02. UtilBase\02. Component\06. Animatior</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Code\MovingObject.h">
-      <Filter>02. UtilBase\01. GameObject\03. MovingObject</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\AnimationTransform.h">
       <Filter>02. UtilBase\02. Component\00. Transform\00. Animation</Filter>

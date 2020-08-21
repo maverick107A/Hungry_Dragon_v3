@@ -19,9 +19,12 @@ private:
 public:
 	_int		Get_FrameArraySize(_int _frame);
 	_float		Get_NowFrame();
-	_int		Get_TotalMaxFrame();
+	_int		Get_MaxFrame(int _targetIndex);
 	_matrix		Get_MoveResult(LPDIRECT3DDEVICE9 pGraphicDev, _matrix _matTarget,_int _index);
-	MOVEMENT	Get_Movement(_int _targetIndex, _int _targetFrame);
+	MOVEMENT	Get_Movement(_int _targetIndex);
+	_int		Get_TotalMaxFrame();
+
+	void		Set_PartsSize(_int _partSize);
 
 public:
 	virtual _int Update_Component(const _float& fTimeDelta);
@@ -33,11 +36,11 @@ public:
 	void	Insert_Ratate(_int _targetIndex, _int _targetFrame,_vec3 _vecRot);
 	void	Insert_Trans(_int _targetIndex, _int _targetFrame,_vec3 _vecTrans);
 	void	Insert_Revolute(LPDIRECT3DDEVICE9& pGraphicDev,_int _targetIndex, _int _targetFrame,_vec3 _vec3Parent,_vec3 _vecRev);
-	void	Insert_Idle(_int exceptTarget);
+	void	Insert_Idle(_int exceptTarget,_int targetFrame);
 
 	void	Set_FrameSpeed(float _fSpeed)
 	{
-		m_fFrmaeSpeed = _fSpeed;
+		m_fFrameSpeed = _fSpeed;
 	}
 
 public:
@@ -48,11 +51,10 @@ private:
 	virtual void Free(void) override;
 
 private:
-	vector<vector<MOVEMENT>>	m_moventList;
-	_int						m_maxFrame=0;
-	_float						m_nowFrame = 0;
-	bool						m_bFlow = true;
-	float						m_fFrmaeSpeed = 1.f;
+	vector<vector<MOVEMENT>>		m_movementList;
+	_int							m_maxFrame=0;
+	_float							m_nowFrame = 0;
+	float							m_fFrameSpeed = 1.f;
 };
 
 END

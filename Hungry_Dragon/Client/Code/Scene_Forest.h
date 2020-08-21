@@ -41,7 +41,6 @@
 #include "PlayerUI.h"
 #include "Terrain_Locater.h"
 #include "Tree_Locater.h"
-#include "Animate_Monster.h"
 #include "View_Mask.h"
 //-------------------------------------------------------
 

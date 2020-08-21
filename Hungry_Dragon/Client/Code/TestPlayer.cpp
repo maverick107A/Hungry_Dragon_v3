@@ -69,6 +69,8 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 	if(m_pTerrrrrrrain)
 		m_pTerrain = m_pTerrrrrrrain->Get_Terrain();
 
+	//애니메이션 테스트
+
 	//R 키 누르면 생성
 	//if ((GetAsyncKeyState('R') & 0x8000) ) {
 	//	Engine::_vec3 vOrigin=Engine::_vec3(0.f,0.f,3.f);
@@ -115,9 +117,20 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 
 	m_pTransform->m_vInCamPos -= m_vUp*0.1f;
 
-	Animations(fTimeDelta);
+	//Animations(fTimeDelta);2
 
 	Engine::CGameObject::Update_Object(fTimeDelta);
+
+	for (int i = 0; i < PARTS_END; ++i)
+	{
+		MOVEMENT nextFrameMovement=m_pAnimator->Get_Movement(i);
+		m_pPartsTrans[i]->m_vAfterAngle = nextFrameMovement.vecRot;
+		m_pPartsTrans[i]->m_vAfterPos = nextFrameMovement.vecTrans;
+		m_pPartsTrans[i]->m_vAfterRevAngle = nextFrameMovement.vecRevolution;
+		m_pPartsTrans[i]->m_vScale = nextFrameMovement.vecScale;
+
+
+	}
 	return 0;
 }
 
@@ -273,6 +286,16 @@ HRESULT CTestPlayer::Add_Component(void)
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_Breath", pComponent);
 
+	//애니메이터
+	pComponent = m_pAnimator = Engine::CAnimator::Create();
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_Animation", pComponent);
+	m_pAnimator->Set_PartsSize(PARTS_END);
+
+	//애니메이션 설정
+	Preset_Animation();
+	
+
 	return S_OK;
 }
 
@@ -392,4 +415,42 @@ void CTestPlayer::Animations(const float& fTimeDelta)
 	m_vAngle += m_fSpeed;
 
 	//
+}
+
+void CTestPlayer::Preset_Animation()
+{
+	//현재 최대 프레임->6
+
+	//얼굴
+	m_pAnimator->Insert_Revolute(m_pGraphicDev, PART_JAW, 1, _vec3(0.f, 0.f, 1.f), _vec3(D3DX_PI*0.125f, 0.f, 0.f));
+	//m_pAnimator->Insert_Ratate(PART_JAW, 1,_vec3(m_vAngle, 0.f, 0.f));
+	m_pAnimator->Insert_Trans(PART_JAW, 0, _vec3(0.f, 0.f, 1.f));
+	m_pAnimator->Insert_Trans(PART_JAW, 1, _vec3(0.f, 0.f, 1.f));
+
+	m_pAnimator->Insert_Revolute(m_pGraphicDev, PART_FACE, 1, _vec3(0.f, 0.f, 1.f), _vec3(-D3DX_PI*0.125f, 0.f, 0.f));
+	m_pAnimator->Insert_Trans(PART_FACE, 0, _vec3(0.f, 0.f, 1.f));
+	m_pAnimator->Insert_Trans(PART_FACE, 1, _vec3(0.f, 0.f, 1.f));
+
+	//몸통
+	m_pAnimator->Insert_Trans(PART_BODY, 0, _vec3(0.f, 0.f, -1.5f));
+	m_pAnimator->Insert_Trans(PART_BODY, 1, _vec3(0.f, 0.f, -1.5f));
+
+	m_pAnimator->Insert_Trans(PART_2BODY, 0, _vec3(0.f, 0.f, -3.f));
+	m_pAnimator->Insert_Trans(PART_2BODY, 1, _vec3(0.f, 0.f, -3.f));
+
+	m_pAnimator->Insert_Trans(PART_3BODY, 0, _vec3(0.f, 0.f, -4.5f));
+	m_pAnimator->Insert_Trans(PART_3BODY, 1, _vec3(0.f, 0.f, -4.5f));
+
+	//날개
+	m_pPartsTrans[PART_WING]->m_fDamping = 0.02f;
+	m_pAnimator->Insert_Ratate(PART_WING, 0, _vec3(0.f, 0.f, D3DX_PI*0.33f));
+	m_pAnimator->Insert_Ratate(PART_WING, 1, _vec3(0.f,0.f,-D3DX_PI*0.33f));
+	m_pAnimator->Insert_Trans(PART_WING, 0, _vec3(cosf(D3DX_PI*0.33f), sinf(D3DX_PI*0.33f), -3.f));
+	m_pAnimator->Insert_Trans(PART_WING, 1, _vec3(cosf(-D3DX_PI*0.33f),sinf(-D3DX_PI*0.33f), -3.f));
+
+	m_pPartsTrans[PART_LWING]->m_fDamping = 0.02f;
+	m_pAnimator->Insert_Ratate(PART_LWING, 0, _vec3(0.f, 0.f, -D3DX_PI*0.33f));
+	m_pAnimator->Insert_Ratate(PART_LWING, 1, _vec3(0.f, 0.f, D3DX_PI*0.33f));
+	m_pAnimator->Insert_Trans(PART_LWING, 0, _vec3(-cosf(D3DX_PI*0.33f), sinf(D3DX_PI*0.33f), -3.f));
+	m_pAnimator->Insert_Trans(PART_LWING, 1, _vec3(-cosf(-D3DX_PI*0.33f), sinf(-D3DX_PI*0.33f), -3.f));
 }

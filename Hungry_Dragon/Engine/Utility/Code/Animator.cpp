@@ -10,10 +10,9 @@ CAnimator::CAnimator(void)
 
 CAnimator::CAnimator(const CAnimator & rhs)
 {
-	m_moventList.clear();
-	m_nowFrame = 0;
-	m_maxFrame = 0;
-	m_fFrmaeSpeed = rhs.m_fFrmaeSpeed;
+	m_nowFrame = m_nowFrame;
+	m_maxFrame = m_maxFrame;
+	m_fFrameSpeed = rhs.m_fFrameSpeed;
 }
 
 CAnimator::~CAnimator(void)
@@ -22,11 +21,11 @@ CAnimator::~CAnimator(void)
 
 _int CAnimator::Update_Component(const _float & fTimeDelta)
 {
-	m_nowFrame += fTimeDelta;
+	m_nowFrame += fTimeDelta*m_fFrameSpeed;
 
 	if (m_nowFrame >= m_maxFrame+1)
 	{
-		m_nowFrame = 0;
+		m_nowFrame -= m_maxFrame+1;
 	}
 
 	return 0;
@@ -35,7 +34,7 @@ _int CAnimator::Update_Component(const _float & fTimeDelta)
 _int CAnimator::Register_MoveTarget()
 {
 	//지금 등록하는 트랜스폼이 저장될 위치==벡터의 마지막
-	_int tempIndex = (_int)m_moventList.size();
+	_int tempIndex = (_int)m_movementList.size();
 
 	//기본 위치
 	MOVEMENT idleMovement;
@@ -52,105 +51,178 @@ _int CAnimator::Register_MoveTarget()
 	tempVector.emplace_back(idleMovement);
 
 	//만든 벡터를 멤버 변수 벡터에 삽입
-	m_moventList.emplace_back(tempVector);
+	m_movementList.emplace_back(tempVector);
 
 	return tempIndex;
 }
 
 void CAnimator::Insert_Scale(_int _targetIndex, _int _targetFrame, _vec3 _vecScale)
 {
-	if ((size_t)_targetIndex >= m_moventList.size())
+	if ((size_t)_targetIndex >= m_movementList.size())
 		return;
 
-	//없는 프레임을 찾으면 그 프레임까지 자동 확장
-	if (_targetFrame > m_maxFrame)
+	if (m_maxFrame < _targetFrame)
 	{
 		m_maxFrame = _targetFrame;
-		Insert_Idle(-1);
 	}
 
-	m_moventList[_targetIndex][_targetFrame].vecScale = _vecScale;
+	vector<MOVEMENT>::iterator iter_find = m_movementList[_targetIndex].begin();
+	for (; iter_find!=m_movementList[_targetIndex].end(); ++iter_find)
+	{
+		if ((*iter_find).tFrame == _targetFrame)
+		{
+			break;
+		}
+	}
+
+	if (iter_find != m_movementList[_targetIndex].end())
+	{
+		iter_find->vecScale = _vecScale;
+	}
+	else
+	{
+		MOVEMENT tempMovement;
+		tempMovement.tFrame = _targetFrame;
+		tempMovement.vecParent = _vec3(0.f, 0.f, 0.f);
+		tempMovement.vecRevolution = _vec3(0.f, 0.f, 0.f);
+		tempMovement.vecRevParent = _vec3(0.f, 0.f, 0.f);
+		tempMovement.vecRot = _vec3(0.f, 0.f, 0.f);
+		tempMovement.vecScale = _vecScale;
+		tempMovement.vecTrans = _vec3(0.f,0.f,0.f);
+		m_movementList[_targetIndex].emplace_back(tempMovement);
+	}
 }
 
 void CAnimator::Insert_Ratate(_int _targetIndex, _int _targetFrame, _vec3 _vecRot)
 {
-	if ((size_t)_targetIndex >= m_moventList.size())
+	if ((size_t)_targetIndex >= m_movementList.size())
 		return;
 
-	//없는 프레임을 찾으면 그 프레임까지 자동 확장
-	if (_targetFrame > m_maxFrame)
+	if (m_maxFrame < _targetFrame)
 	{
 		m_maxFrame = _targetFrame;
-		Insert_Idle(-1);
 	}
 
-	m_moventList[_targetIndex][_targetFrame].vecRot = _vecRot;
+	vector<MOVEMENT>::iterator iter_find = m_movementList[_targetIndex].begin();
+	for (; iter_find != m_movementList[_targetIndex].end(); ++iter_find)
+	{
+		if ((*iter_find).tFrame == _targetFrame)
+		{
+			break;
+		}
+	}
+
+	if (iter_find != m_movementList[_targetIndex].end())
+	{
+		iter_find->vecRot = _vecRot;
+	}
+	else
+	{
+		MOVEMENT tempMovement;
+		tempMovement.tFrame = _targetFrame;
+		tempMovement.vecParent = _vec3(0.f, 0.f, 0.f);
+		tempMovement.vecRevolution = _vec3(0.f, 0.f, 0.f);
+		tempMovement.vecRevParent = _vec3(0.f, 0.f, 0.f);
+		tempMovement.vecRot = _vecRot;
+		tempMovement.vecScale = _vec3(1.f,1.f,1.f);
+		tempMovement.vecTrans = _vec3(0.f, 0.f, 0.f);
+		m_movementList[_targetIndex].emplace_back(tempMovement);
+	}
 }
 
 void CAnimator::Insert_Trans(_int _targetIndex, _int _targetFrame, _vec3 _vecTrans)
 {
-	if ((size_t)_targetIndex >= m_moventList.size())
+	if ((size_t)_targetIndex >= m_movementList.size())
 		return;
 
-	//없는 프레임을 찾으면 그 프레임까지 자동 확장
-	if (_targetFrame > m_maxFrame)
+	if (m_maxFrame < _targetFrame)
 	{
 		m_maxFrame = _targetFrame;
-		Insert_Idle(-1);
 	}
 
-	m_moventList[_targetIndex][_targetFrame].vecTrans = _vecTrans;
+	vector<MOVEMENT>::iterator iter_find = m_movementList[_targetIndex].begin();
+	for (; iter_find != m_movementList[_targetIndex].end(); ++iter_find)
+	{
+		if ((*iter_find).tFrame == _targetFrame)
+		{
+			break;
+		}
+	}
+
+	if (iter_find != m_movementList[_targetIndex].end())
+	{
+		iter_find->vecTrans = _vecTrans;
+	}
+	else
+	{
+		MOVEMENT tempMovement;
+		tempMovement.tFrame = _targetFrame;
+		tempMovement.vecParent = _vec3(0.f, 0.f, 0.f);
+		tempMovement.vecRevolution = _vec3(0.f, 0.f, 0.f);
+		tempMovement.vecRevParent = _vec3(0.f, 0.f, 0.f);
+		tempMovement.vecRot = _vec3(0.f,0.f,0.f);
+		tempMovement.vecScale = _vec3(1.f, 1.f, 1.f);
+		tempMovement.vecTrans = _vecTrans;
+		m_movementList[_targetIndex].emplace_back(tempMovement);
+	}
 }
 
 void CAnimator::Insert_Revolute(LPDIRECT3DDEVICE9& pGraphicDev,_int _targetIndex, _int _targetFrame, _vec3 _vec3Parent, _vec3 _vecRev)
 {
-	if ((size_t)_targetIndex >= m_moventList.size())
+	if ((size_t)_targetIndex >= m_movementList.size())
 		return;
 
-	//없는 프레임을 찾으면 그 프레임까지 자동 확장
-	if (_targetFrame > m_maxFrame)
+	if (m_maxFrame < _targetFrame)
 	{
 		m_maxFrame = _targetFrame;
-		Insert_Idle(-1);
 	}
 	
-	_matrix wordlMatrix;
-	//주의! 월드 매트릭스를 올바르게 가져오기 위해서는 먼저 그래픽 디바이스를 여기로 옮겨야 함을 주의하자.
-	pGraphicDev->GetTransform(D3DTS_WORLD, &wordlMatrix);
-	D3DXMatrixInverse(&wordlMatrix, nullptr ,&wordlMatrix);
-
-	D3DXVec3TransformCoord(&_vec3Parent, &_vec3Parent, &wordlMatrix);
-
-	_matrix matParent, matRevolution;
-
-	m_moventList[_targetIndex][_targetFrame].vecRevParent = _vec3Parent;
-	m_moventList[_targetIndex][_targetFrame].vecRevolution = _vecRev;
-}
-
-void CAnimator::Insert_Idle(_int exceptTarget)
-{
-	for (size_t i = 0; i < m_moventList.size(); ++i)
+	vector<MOVEMENT>::iterator iter_find = m_movementList[_targetIndex].begin();
+	for (; iter_find != m_movementList[_targetIndex].end(); ++iter_find)
 	{
-		if (i != exceptTarget)
+		if ((*iter_find).tFrame == _targetFrame)
 		{
-			for (size_t j = m_moventList[i].size(); j <= (size_t)m_maxFrame; ++j)
-			{
-				MOVEMENT idleMove;
-				idleMove.tFrame = j;
-				idleMove.vecScale = _vec3(1.f, 1.f, 1.f);
-				idleMove.vecRot = _vec3(0.f, 0.f, 0.f);
-				idleMove.vecTrans = _vec3(0.f, 0.f, 0.f);
-				idleMove.vecRevParent = _vec3(0.f, 0.f, 0.f);
-				idleMove.vecRevolution = _vec3(0.f, 0.f, 0.f);
-				idleMove.vecParent = _vec3(0.f, 0.f, 0.f);
-
-				m_moventList[i].emplace_back(idleMove);
-			}
+			break;
 		}
+	}
+
+	if (iter_find != m_movementList[_targetIndex].end())
+	{
+		iter_find->vecParent = _vec3Parent;
+		iter_find->vecRevolution = _vecRev;
+	}
+	else
+	{
+		MOVEMENT tempMovement;
+		tempMovement.tFrame = _targetFrame;
+		tempMovement.vecParent = _vec3(0.f, 0.f, 0.f);
+		tempMovement.vecRevolution = _vecRev;
+		tempMovement.vecRevParent = _vec3Parent;
+		tempMovement.vecRot = _vec3(0.f, 0.f, 0.f);
+		tempMovement.vecScale = _vec3(1.f, 1.f, 1.f);
+		tempMovement.vecTrans = _vec3(0.f,0.f,0.f);
+		m_movementList[_targetIndex].emplace_back(tempMovement);
 	}
 }
 
-CAnimator * CAnimator::Create(void)
+void CAnimator::Insert_Idle(int _targetIndex,int _targetFrame)
+{
+	if ((size_t)_targetIndex >= m_movementList.size())
+		return;
+
+	MOVEMENT idleMove;
+	idleMove.tFrame = _targetFrame;
+	idleMove.vecScale = _vec3(1.f, 1.f, 1.f);
+	idleMove.vecRot = _vec3(0.f, 0.f, 0.f);
+	idleMove.vecTrans = _vec3(0.f, 0.f, 0.f);
+	idleMove.vecRevParent = _vec3(0.f, 0.f, 0.f);
+	idleMove.vecRevolution = _vec3(0.f, 0.f, 0.f);
+	idleMove.vecParent = _vec3(0.f, 0.f, 0.f);
+
+	m_movementList[_targetIndex].emplace_back(idleMove);
+}
+
+CAnimator* CAnimator::Create(void)
 {
 	CAnimator* pInstance = new CAnimator;
 
@@ -168,7 +240,7 @@ void CAnimator::Free(void)
 
 _int CAnimator::Get_FrameArraySize(_int _frame)
 {
-	return (int)m_moventList[_frame].size();
+	return (int)m_movementList[_frame].size();
 }
 
 _float CAnimator::Get_NowFrame()
@@ -176,9 +248,12 @@ _float CAnimator::Get_NowFrame()
 	return m_nowFrame;
 }
 
-_int CAnimator::Get_TotalMaxFrame()
+_int CAnimator::Get_MaxFrame(int _targetIndex)
 {
-	return m_maxFrame;
+	if ((size_t)_targetIndex >= m_movementList.size())
+		return -1;
+
+	return m_movementList[_targetIndex].back().tFrame;
 }
 
 _matrix CAnimator::Get_MoveResult(LPDIRECT3DDEVICE9 pGraphicDev, _matrix _matTarget, _int _index)
@@ -193,22 +268,70 @@ _matrix CAnimator::Get_MoveResult(LPDIRECT3DDEVICE9 pGraphicDev, _matrix _matTar
 
 	_matTarget = _matTarget*matWorldInverse;
 
-	MOVEMENT nowMovement = m_moventList[_index][(int)m_nowFrame];
+	MOVEMENT nowMovement = m_movementList[_index][(int)m_nowFrame];
 	_matrix	 matMovement = nowMovement.matScale*nowMovement.matRot*nowMovement.matTrans*nowMovement.matRevolution*matParent;
 	_matTarget = _matTarget*matMovement*matWorld;*/
 
 	return _matTarget;
 }
 
-MOVEMENT CAnimator::Get_Movement(_int _targetIndex, _int _targetFrame)
+MOVEMENT CAnimator::Get_Movement(_int _targetIndex)
 {
-	//없는 오브젝트 찾으면 벡터 범위 넘어가서 터짐.
-	//없는 프레임을 찾으면 그 프레임까지 자동 확장
-	if (_targetFrame > m_maxFrame)
+	//없는거 찾지 마라.
+	if ((size_t)_targetIndex >= m_movementList.size())
+		return MOVEMENT();
+
+	if (m_movementList[_targetIndex].size() == (size_t)1)
 	{
-		m_maxFrame = _targetFrame;
-		Insert_Idle(-1);
+		return m_movementList[_targetIndex].front();
 	}
 
-	return m_moventList[_targetIndex][_targetFrame];
+	if (m_movementList[_targetIndex].back().tFrame == (int)m_nowFrame)
+	{
+		return m_movementList[_targetIndex].front();
+	}
+	else if (m_movementList[_targetIndex].back().tFrame < (int)m_nowFrame)
+	{
+		int tempFrame = ((int)m_nowFrame) % m_movementList[_targetIndex].back().tFrame;
+		
+		for (vector<MOVEMENT>::iterator iter = m_movementList[_targetIndex].begin(); iter != m_movementList[_targetIndex].end(); ++iter)
+		{
+			if (iter->tFrame > tempFrame)
+			{
+				return (*iter);
+			}
+		}
+	}
+
+	for (vector<MOVEMENT>::iterator iter = m_movementList[_targetIndex].begin(); iter != m_movementList[_targetIndex].end(); ++iter)
+	{
+		if (iter->tFrame > m_nowFrame)
+		{
+			return (*iter);
+		}
+	}
+
+	return m_movementList[_targetIndex].back();
+}
+
+_int CAnimator::Get_TotalMaxFrame()
+{
+	return m_maxFrame;
+}
+
+void CAnimator::Set_PartsSize(_int _partSize)
+{
+	if (_partSize <= 0)
+	{
+		return;
+	}
+
+	m_movementList.reserve(_partSize);
+
+	for (int i = 0; i < _partSize; ++i)
+	{
+		vector<MOVEMENT> tempMoveVector;
+		m_movementList.emplace_back(tempMoveVector);
+		Insert_Idle(i, 0);
+	}
 }
