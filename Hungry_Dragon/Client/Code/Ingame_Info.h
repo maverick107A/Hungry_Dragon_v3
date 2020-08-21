@@ -20,7 +20,7 @@ public:
 	void Init_Info(LPDIRECT3DDEVICE9 pGraphicDev);
 
 public:
-	Engine::STATUS * Get_PlayerInfo() { return &m_pPlayerStatus; }
+	Engine::STATUS * Get_PlayerInfo() { return m_pPlayerStatus; }
 
 private:
 	// 출력할 글디바.
