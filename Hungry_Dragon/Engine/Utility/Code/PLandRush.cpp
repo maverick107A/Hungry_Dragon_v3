@@ -128,7 +128,7 @@ void CPLandRush::LateUpdate_State()
 
 	vNorm = m_pPlayer->m_vNorm;
 
-	m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS].y += (fHeight - m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS].y)*0.2f;
+	m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS].y += (fHeight - m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS].y)*0.3f;
 
 	//지형탈때 X각 구하기
 	//X각도

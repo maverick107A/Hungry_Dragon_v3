@@ -170,6 +170,7 @@ call CopyUtility.bat</Command>
     <ClCompile Include="..\Code\Animation_Controller.cpp" />
     <ClCompile Include="..\Code\Animator.cpp" />
     <ClCompile Include="..\Code\BeamBase.cpp" />
+    <ClCompile Include="..\Code\BossCamera.cpp" />
     <ClCompile Include="..\Code\BreathBase.cpp" />
     <ClCompile Include="..\Code\BulletMain.cpp" />
     <ClCompile Include="..\Code\Camera.cpp" />
@@ -207,6 +208,7 @@ call CopyUtility.bat</Command>
     <ClInclude Include="..\Code\Animation_Controller.h" />
     <ClInclude Include="..\Code\Animator.h" />
     <ClInclude Include="..\Code\BeamBase.h" />
+    <ClInclude Include="..\Code\BossCamera.h" />
     <ClInclude Include="..\Code\BreathBase.h" />
     <ClInclude Include="..\Code\BulletMain.h" />
     <ClInclude Include="..\Code\Camera.h" />

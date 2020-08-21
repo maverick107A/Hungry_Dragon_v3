@@ -184,10 +184,10 @@ void CIngame_Flow::Load_ForestTerrain()
 		}
 	}
 
-	for (int i = 0; i < 50; ++i)
-	{
-		m_pParts[i]->Set_A();
-	}
+	//for (int i = 0; i < 50; ++i)
+	//{
+	//	m_pParts[i]->Set_A();
+	//}
 
 }
 

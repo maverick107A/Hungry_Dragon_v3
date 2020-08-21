@@ -106,6 +106,9 @@
     <Filter Include="02. UtilBase\02. Component\07. Animation_Controller">
       <UniqueIdentifier>{18cca149-97fc-4a68-a9fb-99b8981b2095}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. UtilBase\02. Component\01. Camera\03. BossCamera">
+      <UniqueIdentifier>{97d9eff1-7d51-4743-869e-5ad2c79c3287}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\Component.cpp">
@@ -209,6 +212,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Animation_Controller.cpp">
       <Filter>02. UtilBase\02. Component\07. Animation_Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BossCamera.cpp">
+      <Filter>02. UtilBase\02. Component\01. Camera\03. BossCamera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -316,6 +322,9 @@
     </ClInclude>
     <ClInclude Include="..\Code\Animation_Controller.h">
       <Filter>02. UtilBase\02. Component\07. Animation_Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\BossCamera.h">
+      <Filter>02. UtilBase\02. Component\01. Camera\03. BossCamera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
