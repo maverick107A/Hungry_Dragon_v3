@@ -26,8 +26,11 @@ HRESULT CTree_Object::Ready_Object(void)
 
 _int CTree_Object::Update_Object(const _float& fTimeDelta)
 {
+	
 	Engine::CGameObject::Update_Object(fTimeDelta);
 	//Engine::Add_RenderGroup(Engine::RENDER_PRIORITY, this);
+
+
 	if (!m_bDestroyed)
 	{
 		_vec3 vPlayerPos;
@@ -35,9 +38,14 @@ _int CTree_Object::Update_Object(const _float& fTimeDelta)
 		CIngame_Flow::GetInstance()->Get_Player()->Get_Info(INFO_POS, &vPlayerPos);
 		m_pTransform->Get_Info(INFO_POS, &vPos);
 		vPos.y += 20.f;
-		vPos -= vPlayerPos;
-		if (100.f > D3DXVec3Length(&vPos))
+
+		
+
+		vPlayerPos -= vPos;
+		if (100.f > D3DXVec3Length(&vPlayerPos))
 		{
+			vPos.y += 80.f;
+			Engine::Set_ParticleTrans(Engine::Particle_Create(Engine::PART_LEAF, _vec3(0.f, 0.f, 0.f)), vPos);
 			m_bDestroyed = true;
 		}
 	}
@@ -47,14 +55,14 @@ _int CTree_Object::Update_Object(const _float& fTimeDelta)
 void CTree_Object::Render_Object(void)
 {
 	m_pTransform->Set_Transform(m_pGraphicDev);
-	m_pGraphicDev->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_FLAT);
+
 	if (m_bDestroyed)
 	{
 		m_pBufferComDest->Render_Buffer();
 	}
 	else
 	{
-		m_pBufferCom->Ready_Buffer();
+		m_pBufferCom->Render_Buffer();
 	}
 }
 

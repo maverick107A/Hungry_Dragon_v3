@@ -289,6 +289,9 @@ HRESULT CScene_Cloud::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 	CTestPlayer* tempPlayer = nullptr;
 	FAILED_CHECK_RETURN(Register_GameObject<CCloud_Locater>(pLayer, L"Cloud"), E_FAIL);
 	FAILED_CHECK_RETURN(Register_GameObject<CCliff_Locater>(pLayer, L"Cliff"), E_FAIL);
+
+	FAILED_CHECK(Register_GameObject<CBillCloud_Locater>(&m_pBillCloudLocater,pLayer,L"BillCloudLocater"));
+
 	FAILED_CHECK_RETURN(Register_GameObject<CTestPlayer>(&tempPlayer, pLayer, L"TestPlayer"), E_FAIL);
 	pPlayerTransformCom = static_cast<CTransform*>(tempPlayer->Get_Component(L"Com_Transform", Engine::ID_DYNAMIC));
 	pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);

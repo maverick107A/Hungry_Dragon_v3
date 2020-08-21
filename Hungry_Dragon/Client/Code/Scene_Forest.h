@@ -61,6 +61,7 @@ private:
 	HRESULT	Ready_Resource(LPDIRECT3DDEVICE9 pGraphicDev, RESOURCEID eMax);
 	HRESULT	Ready_Layer_Environment(const _tchar* pLayerTag);
 	HRESULT	Ready_Layer_GameLogic(const _tchar* pLayerTag);
+	HRESULT	Ready_Layer_Mask(const _tchar* pLayerTag);
 	HRESULT	Ready_Layer_UI(const _tchar* pLayerTag);
 
 public:
@@ -73,6 +74,7 @@ private:
 	int							m_iMaskNum=0;
 	ID3DXEffect* m_pFogEffect = 0;
 	D3DXHANDLE m_hFogTechHandle = 0;
+	CTestPlayer* m_pPlayerMesh = nullptr;
 
 private:
 	virtual void Free(void) override;

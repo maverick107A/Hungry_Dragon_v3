@@ -347,13 +347,11 @@ _uint CScene_Loading::Loading_ForStage(void)
 		L"../../Asset/Billboard/SceneChange/SceneChange00%.2d.png", 76),
 		E_FAIL);
 
-	
-
 	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
 		RESOURCE_STAGE,
 		L"Texture_BillCloud",
 		Engine::TEX_NORMAL,
-		L"../../Asset/Billboard/bill_cloud.png"),
+		L"../../Asset/Billboard/Cloud/billcloud%.2d.png", 3),
 		E_FAIL);
 
 

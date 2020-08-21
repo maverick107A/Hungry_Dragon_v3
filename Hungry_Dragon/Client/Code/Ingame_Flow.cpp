@@ -210,7 +210,7 @@ void CIngame_Flow::Load_TreeList()
 	{
 		return;
 	}
-	for (int i = 26; i < 28; ++i)
+	for (int i = 26; i < 27; ++i)
 	{
 		vector<int> vecHeight = m_pParts[i]->Get_HeightVector();
 
@@ -218,7 +218,7 @@ void CIngame_Flow::Load_TreeList()
 		{
 			for (int k = 0; k < 128; ++k)
 			{
-				if (5 >(rand() % 100))
+				if (2 >(rand() % 100))
 				{
 					CTree_Object* pTree = CTree_Object::Create(m_pGraphicDev);
 					// 인덱스 안맞음 고쳐야함

@@ -49,6 +49,10 @@ void CParticleMgr::Particle_LateUpdate(const float & fTimeDelta)
 
 void CParticleMgr::Particle_Render()
 {
+
+	m_pGraphicDev->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
+	m_pGraphicDev->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
+	m_pGraphicDev->SetRenderState(D3DRS_ALPHAREF, 0);
 	list<_vec3>::iterator iter_pos = m_arrTrans.begin();
 	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end(); ++iter,++iter_pos)
 	{
@@ -58,6 +62,9 @@ void CParticleMgr::Particle_Render()
 		m_pParticleTrans->Set_Transform(m_pGraphicDev);
 		(*iter)->Render_Buffer();
 	}
+	m_pGraphicDev->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
+
+
 }
 
 CResources* CParticleMgr::Particle_Create(Engine::PARTICLEID _eID, const _vec3 _pos)
@@ -72,9 +79,33 @@ CResources* CParticleMgr::Particle_Create(Engine::PARTICLEID _eID, const _vec3 _
 
 	Engine::_vec3 vOrigin = _pos;
 	Engine::BoundingBox tempBoundingBox;
-	tempBoundingBox.vMax = vOrigin+ Engine::_vec3(250.f, 250.f, 250.f);
-	tempBoundingBox.vMin = vOrigin+Engine::_vec3(-250.f, -25.f, -250.f);
+
+	switch (_eID)
+	{
+	case Engine::PART_ATK:
+		
+		tempBoundingBox.vMax = vOrigin + Engine::_vec3(250.f, 250.f, 250.f);
+		tempBoundingBox.vMin = vOrigin + Engine::_vec3(-250.f, -25.f, -250.f);
+		break;
+	case Engine::PART_WIND:
+		tempBoundingBox.vMax = vOrigin + Engine::_vec3(250.f, 250.f, 250.f);
+		tempBoundingBox.vMin = vOrigin + Engine::_vec3(-250.f, -25.f, -250.f);
+		break;
+	case Engine::PART_FRAGILE:
+		tempBoundingBox.vMax = vOrigin + Engine::_vec3(250.f, 250.f, 250.f);
+		tempBoundingBox.vMin = vOrigin + Engine::_vec3(-250.f, -25.f, -250.f);
+		break;
+	case Engine::PART_LEAF:
+		tempBoundingBox.vMax = vOrigin + Engine::_vec3(250.f, 25.f, 250.f);
+		tempBoundingBox.vMin = vOrigin + Engine::_vec3(-250.f, -125.f, -250.f);
+		break;
+	case Engine::PART_END:
+		break;
+	}
+	
 	Engine::CResources* tempParticle = Engine::Get_Particle(m_pGraphicDev, _eID, tempBoundingBox, vOrigin);
+	
+
 
 	m_arrParticle.emplace_back(tempParticle);
 	m_arrTrans.emplace_back(_vec3(0.f, 0.f, 0.f));
@@ -83,7 +114,8 @@ CResources* CParticleMgr::Particle_Create(Engine::PARTICLEID _eID, const _vec3 _
 
 bool CParticleMgr::Set_ParticleTrans(CResources* _particle, _vec3 _pos)
 {
-
+	// 파티클 위치 정보 갱신하는곳 
+	// 개적화되어있음 고쳐
 	int index;
 	list<CResources*>::iterator iter_part = m_arrParticle.begin();
 	list<_vec3>::iterator iter_pos = m_arrTrans.begin();

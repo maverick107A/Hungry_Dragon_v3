@@ -30,13 +30,13 @@ public:
 	virtual int Update_Object(const float& fTimeDelta) override;
 	virtual void LateUpdate_Object(const float& fTimeDelta);
 	virtual void Render_Object(void) override;
-	
+	void			Animation_Render();
 
 
 private:
 	virtual void	State_Change() override;
 	virtual HRESULT	Add_Component(void) override;
-	void			Animation_Render();
+	
 	void			Animations(const float& fTimeDelta);
 	void			Preset_Animation();
 

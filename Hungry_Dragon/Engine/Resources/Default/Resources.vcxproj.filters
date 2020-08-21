@@ -115,6 +115,9 @@
     <Filter Include="00. Resources\00. VIBuffer\01. CubeDra\03. Wing">
       <UniqueIdentifier>{3a249835-8424-42d9-b4e8-bd733ebb6da1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00. Resources\02. Particle\03. Part_Leaf">
+      <UniqueIdentifier>{2a7e8980-dfa1-4e23-8c0c-9c033392ff4f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\Resources.cpp">
@@ -236,6 +239,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\DragonWing.cpp">
       <Filter>00. Resources\00. VIBuffer\01. CubeDra\03. Wing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Part_Leaf.cpp">
+      <Filter>00. Resources\02. Particle\03. Part_Leaf</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -361,6 +367,9 @@
     </ClInclude>
     <ClInclude Include="..\Code\DragonWing.h">
       <Filter>00. Resources\00. VIBuffer\01. CubeDra\03. Wing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Part_Leaf.h">
+      <Filter>00. Resources\02. Particle\03. Part_Leaf</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

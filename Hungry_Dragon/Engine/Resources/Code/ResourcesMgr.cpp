@@ -255,6 +255,10 @@ void CResourcesMgr::Load_Particle(LPDIRECT3DDEVICE9 pGraphicDev) {
 			pParticle = CPart_Fragile::Create(pGraphicDev, 500);
 			static_cast<Engine::CPart_Fragile*>(pParticle)->Set_TexArray();
 			break;
+		case PART_LEAF:
+			pParticle = CPart_Leaf::Create(pGraphicDev, 500);
+			static_cast<Engine::CPart_Leaf*>(pParticle)->Set_Texture(L"../../Asset/Particle/leaf.png");
+			break;
 		default:
 			pParticle = nullptr;
 			break;

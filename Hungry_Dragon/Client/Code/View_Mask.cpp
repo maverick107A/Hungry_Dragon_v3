@@ -80,7 +80,7 @@ void CView_Mask::Render_Object(void) {
 
 	m_pGraphicDev->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
 	m_pGraphicDev->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_INVSRCCOLOR);
-	m_pGraphicDev->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_DESTCOLOR);
+	m_pGraphicDev->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_SRCCOLOR);
 
 	m_pGraphicDev->SetRenderState(D3DRS_ZENABLE, false);
 	m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
