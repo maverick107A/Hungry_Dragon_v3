@@ -19,9 +19,9 @@
 #include "GiantGolem_Head.h"
 #include "GiantGolem_Left_Arm.h"
 #include "GiantGolem_Left_Hand.h"
-
 #include "GiantGolem_Right_Arm.h"
 #include "GiantGolem_Right_Hand.h"
+#include "GiantGolem.h"
 
 
 

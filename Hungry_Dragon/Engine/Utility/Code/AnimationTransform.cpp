@@ -120,6 +120,16 @@ void Engine::CAnimationTransform::Set_Transform(LPDIRECT3DDEVICE9& pGraphicDev, 
 	pGraphicDev->SetTransform(D3DTS_WORLD, &m_matWorld);
 }
 
+_matrix CAnimationTransform::Get_WorldWithoutScale()
+{
+	D3DXMATRIX matInvScale;
+	D3DXMatrixScaling(&matInvScale, m_vScale.x, m_vScale.y, m_vScale.z);
+	D3DXMatrixInverse(&matInvScale, 0, &matInvScale);
+
+	
+	return matInvScale*m_matWorld;
+}
+
 void Engine::CAnimationTransform::Rotation(ROTATION eType, const _float& fAngle)
 {
 	*(((_float*)&m_vAngle) + eType) += fAngle;

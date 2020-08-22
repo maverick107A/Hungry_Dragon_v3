@@ -166,7 +166,7 @@ void CAnimation_Controller::Add_Trans(_int _animatorIndex, _int _partIndex, _int
 	if (m_iMaxFrame < _frameIndex)
 		m_iMaxFrame = _frameIndex;
 
-	m_arrAnimatior[_animatorIndex]->Add_Scale(_partIndex, _frameIndex, _vecTrans);
+	m_arrAnimatior[_animatorIndex]->Add_Trans(_partIndex, _frameIndex, _vecTrans);
 }
 
 void CAnimation_Controller::Insert_Revolute(_int _animatorIndex, _int _partIndex, _int _frameIndex, _vec3 _vecParent, _vec3 _vecRevolution)

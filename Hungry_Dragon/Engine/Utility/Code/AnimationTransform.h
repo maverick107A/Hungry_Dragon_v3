@@ -15,7 +15,7 @@ public:
 	HRESULT			Ready_Transform(void);
 	virtual _int	Update_Component(const _float& fTimeDelta);
 	void			Set_Transform(LPDIRECT3DDEVICE9& pGraphicDev, _matrix _matWorld);
-
+	_matrix			Get_WorldWithoutScale();
 public:
 	void			Rotation(ROTATION eType, const _float& fAngle);
 

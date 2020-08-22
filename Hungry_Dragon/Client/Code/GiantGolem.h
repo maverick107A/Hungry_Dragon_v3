@@ -11,11 +11,17 @@ class CVICustom;
 class CTexture;
 class CTransform;
 class CTerrainTex;
+class CAnimation_Controller;
 
 END
 
 class  CGiantGolem : public Engine::CMonsterMain
 {
+
+
+public:
+	enum BOSSPATTERN { PAT_IDLE, PAT_PUNCH , PAT_SOLARBEAM , PAT_END };
+
 private:
 	explicit CGiantGolem(LPDIRECT3DDEVICE9 pGraphicDev);
 	virtual ~CGiantGolem(void);
@@ -26,6 +32,9 @@ public:
 	virtual void LateUpdate_Object(const float& fTimeDelta) override;
 private:
 	HRESULT		Add_Component(void);
+	void		Preset_Animation();
+
+	void Animation_Render();
 
 public:
 	static CGiantGolem*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
@@ -33,9 +42,13 @@ public:
 private:
 	D3DXVECTOR3 m_vBodyPos;
 	float		m_fAngle = 0;
-	D3DXVECTOR3 m_vLeftArmPos;
-	D3DXVECTOR3 m_vRightArmPos;
-	D3DXVECTOR3 m_vHeadPos;
+	D3DXVECTOR3 m_vPos;
+	D3DXVECTOR3 m_vLookPos;
+
+
+
+	Engine::CAnimation_Controller* m_pAnimationController;
+	BOSSPATTERN						m_ePattern = PAT_IDLE;
 
 private:
 	virtual void Free(void) override;

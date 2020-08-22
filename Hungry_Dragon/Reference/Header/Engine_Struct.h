@@ -180,12 +180,25 @@ namespace Engine
 
 	typedef struct tagMovement
 	{
+		//크기
 		_vec3 vecScale;
+		
+		//자전
 		_vec3 vecRot;
+		
+		//이동
 		_vec3 vecTrans;
+		
+		//공전 기준점
 		_vec3 vecRevParent;
+		
+		//공전 각도
 		_vec3 vecRevolution;
+		
+		//부모 이동
 		_vec3 vecParent;
+		
+		///해당 애니메이션이 실행될 프레임
 		_int	tFrame;
 	}MOVEMENT;
 

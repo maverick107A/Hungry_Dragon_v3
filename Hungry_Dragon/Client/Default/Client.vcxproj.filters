@@ -447,6 +447,9 @@
     <ClInclude Include="..\Code\GiantGolem_Body.h">
       <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem\Giants</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\GiantGolem.h">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -655,6 +658,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\GiantGolem_Body.cpp">
       <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem\Giants</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\GiantGolem.cpp">
+      <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
