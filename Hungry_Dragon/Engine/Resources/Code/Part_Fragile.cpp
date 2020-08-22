@@ -164,7 +164,9 @@ _int CPart_Fragile::Update_Component(const _float & _fTimeDelta)
 		return -1;
 	}
 
-	
+	if (-1 == CParticle::Update_Component(_fTimeDelta)) {
+		return -1;
+	}
 
 	list<ATTRIBUTE>::iterator iter = m_arrParticle.begin();
 	for (; iter != m_arrParticle.end();)

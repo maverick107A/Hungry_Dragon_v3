@@ -19,11 +19,13 @@ public:
 	void			Set_Color(D3DXCOLOR _color);
 	void			Set_Size(_float _fSize);
 	void			Set_Empty();
+	void			Set_LifeTime(bool _isLifeLimit, _float _lifeTime);
 
 public:
 	virtual HRESULT Ready_Buffer(void);
 	virtual void	Render_Buffer(void);
 	virtual void	Render_Begin(void);
+	virtual _int	Update_Component(const _float& fTimeDelta);
 	virtual void	Render_End(void);
 	virtual void	Reset_Buffer(void);
 
@@ -58,6 +60,9 @@ protected:
 	DWORD					m_VbSize;
 	DWORD					m_vOffset;
 	DWORD					m_BatchSize;
+
+	bool					m_bIsLifeLimit=false;
+	_float					m_fLifeTime;
 };
 
 END

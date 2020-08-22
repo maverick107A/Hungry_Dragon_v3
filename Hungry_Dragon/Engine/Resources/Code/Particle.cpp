@@ -126,6 +126,19 @@ void CParticle::Render_Begin(void) {
 
 }
 
+_int CParticle::Update_Component(const _float & fTimeDelta)
+{
+	if (m_bIsLifeLimit) {
+		m_fLifeTime -= fTimeDelta;
+
+		if (m_fLifeTime <= 0.f) {
+			return -1;
+		}
+	}
+
+	return 0;
+}
+
 void CParticle::Render_End(void) {
 	m_pGraphicDev->SetTexture(0, 0);
 	m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
@@ -196,6 +209,16 @@ void CParticle::Set_Empty()
 	if(!m_arrParticle.empty())
 	m_arrParticle.clear();
 
+}
+
+void CParticle::Set_LifeTime(bool _isLifeLimit, _float _lifeTime)
+{
+	if (_lifeTime <= 0.f)
+		m_fLifeTime = 1.f;
+	else
+		m_fLifeTime = _lifeTime;
+
+	m_bIsLifeLimit = _isLifeLimit;
 }
 
 void CParticle::Free(void) {
