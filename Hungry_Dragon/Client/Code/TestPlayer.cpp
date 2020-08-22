@@ -344,7 +344,7 @@ void CTestPlayer::Animation_Render()
 	m_pPartsBuffer[PART_BODY]->Render_Buffer();
 
 	//³¯°³
-	m_pPartsTrans[PART_WING]->Set_Transform(m_pGraphicDev, m_pPartsTrans[PART_2BODY]->m_matWorld);
+	m_pPartsTrans[PART_WING]->Set_Transform(m_pGraphicDev, m_matOld2);
 	m_pPartsBuffer[PART_WING]->Render_Buffer();
 
 	m_pPartsTrans[PART_LWING]->Set_Transform(m_pGraphicDev, m_matOld2);

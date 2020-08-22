@@ -38,12 +38,12 @@ _int CTerrain_Locater::Update_Object(const _float& fTimeDelta)
 	_float fPlayerZ = m_pPlayerTrans->m_vInfo[Engine::INFO_POS].z;
 	_bool bOutline = true;
 
-	if (GetAsyncKeyState(VK_LBUTTON))
-	{
-		TCHAR szBuff[256] = L"";
-		wsprintf(szBuff, L"x :%d", m_uCurrSectorNum);
-		MessageBox(nullptr, szBuff, L"XY", 0);
-	}
+	//if (GetAsyncKeyState(VK_LBUTTON))
+	//{
+	//	TCHAR szBuff[256] = L"";
+	//	wsprintf(szBuff, L"x :%d", m_uCurrSectorNum);
+	//	MessageBox(nullptr, szBuff, L"XY", 0);
+	//}
 
 	if (-25600.f > fPlayerX)	// аб╟Ф╟Х
 	{

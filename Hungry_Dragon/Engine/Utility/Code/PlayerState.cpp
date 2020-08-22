@@ -41,7 +41,7 @@ bool CPlayerState::Land_Check(float* _fHeight, _vec3* _vNorm)
 	{
 		while (true)
 		{
-			if (PosX < 12800.f)
+			if (PosX <= 12800.f)
 				break;
 			PosX -= 12800.f;
 		}
@@ -60,7 +60,7 @@ bool CPlayerState::Land_Check(float* _fHeight, _vec3* _vNorm)
 	{
 		while (true)
 		{
-			if (PosZ < 12800.f)
+			if (PosZ <= 12800.f)
 				break;
 			PosZ -= 12800.f;
 		}
@@ -103,14 +103,15 @@ bool CPlayerState::Land_Check(float* _fHeight, _vec3* _vNorm)
 	D3DXVECTOR3 Vertex3 = { float(int(PosX*INVERSETILESIZE)*TILECX), 0.f, float(int(PosZ*INVERSETILESIZE)*TILECZ + TILECZ) };
 	D3DXVECTOR3 Vertex4 = { float(int(PosX*INVERSETILESIZE)*TILECX + TILECX), 0.f, float(int(PosZ*INVERSETILESIZE)*TILECZ + TILECZ) };
 
+	_vec3 vPlayerPos = { PosX, 0.f, PosZ };
 
-	D3DXVECTOR3 vTemp1 = m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS] - Vertex3;
+	D3DXVECTOR3 vTemp1 = vPlayerPos - Vertex3;
 	D3DXVECTOR3	vTemp2 = { -1.f,0.f,-1.f };
 	if (D3DXVec3Dot(&vTemp1, &vTemp2) > 0)
 	{
-		Vertex1.y = (float)pTerrain->Get_AdvanceHeight()[Vernum] +40.f;
-		Vertex2.y = (float)pTerrain->Get_AdvanceHeight()[Vernum + 1] + 40.f;
-		Vertex3.y = (float)pTerrain->Get_AdvanceHeight()[Vernum + VERTEXSIZE] + 40.f;
+		Vertex1.y = pTerrain->Get_AdvanceHeight()[Vernum] + 40.f;
+		Vertex2.y = pTerrain->Get_AdvanceHeight()[Vernum + 1] + 40.f;
+		Vertex3.y = pTerrain->Get_AdvanceHeight()[Vernum + VERTEXSIZE] + 40.f;
 
 		vTemp1 = Vertex2 - Vertex1;
 		vTemp2 = Vertex3 - Vertex1;
@@ -125,14 +126,22 @@ bool CPlayerState::Land_Check(float* _fHeight, _vec3* _vNorm)
 		if (_vNorm)
 			*_vNorm = vNorm;
 
+
+		if (GetAsyncKeyState(VK_LBUTTON))
+		{
+			TCHAR szBuff[256] = L"";
+			wsprintf(szBuff, L"1 :%d, 2 :%d, 3 :%d", (int)Vertex1.y * 100, (int)Vertex2.y * 100, (int)Vertex3.y * 100);
+			MessageBox(nullptr, szBuff, L"XY", 0);
+		}
+
 		if (m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS].y <= fTerrainHieght)
 			return true;
 	}
 	else
 	{
-		Vertex2.y = (float)pTerrain->Get_AdvanceHeight()[Vernum + 1] + 40.f;
-		Vertex3.y = (float)pTerrain->Get_AdvanceHeight()[Vernum + VERTEXSIZE] + 40.f;
-		Vertex4.y = (float)pTerrain->Get_AdvanceHeight()[Vernum + VERTEXSIZE + 1] + 40.f;
+		Vertex2.y = pTerrain->Get_AdvanceHeight()[Vernum + 1] + 40.f;
+		Vertex3.y = pTerrain->Get_AdvanceHeight()[Vernum + VERTEXSIZE] + 40.f;
+		Vertex4.y = pTerrain->Get_AdvanceHeight()[Vernum + VERTEXSIZE + 1] + 40.f;
 
 		vTemp1 = Vertex3 - Vertex4;
 		vTemp2 = Vertex2 - Vertex4;
@@ -146,6 +155,13 @@ bool CPlayerState::Land_Check(float* _fHeight, _vec3* _vNorm)
 			*_fHeight = fTerrainHieght;
 		if (_vNorm)
 			*_vNorm = vNorm;
+
+		if (GetAsyncKeyState(VK_LBUTTON))
+		{
+			TCHAR szBuff[256] = L"";
+			wsprintf(szBuff, L"2 :%d, 3 :%d, 4 :%d", (int)(Vertex2.y * 100), (int)(Vertex3.y * 100), (int)(Vertex4.y * 100));
+			MessageBox(nullptr, szBuff, L"XY", 0);
+		}
 
 		if (m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS].y <= fTerrainHieght)
 			return true;
