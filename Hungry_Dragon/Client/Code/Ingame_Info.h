@@ -20,13 +20,15 @@ public:
 	void Init_Info(LPDIRECT3DDEVICE9 pGraphicDev);
 
 public:
-	Engine::STATUS * Get_PlayerInfo() { return m_pPlayerStatus; }
+	Engine::STATUS * Get_PlayerInfo() { return &m_pPlayerStatus; }
+	Engine::GOODS * Get_PlayerGoods() { return &m_pPlayerGoods; }
 
 private:
 	// 출력할 글디바.
 	LPDIRECT3DDEVICE9						m_pGraphicDev;
 private:
-	Engine::STATUS *						m_pPlayerStatus;
+	Engine::STATUS 						m_pPlayerStatus;
+	Engine::GOODS 							m_pPlayerGoods;
 };
 
 

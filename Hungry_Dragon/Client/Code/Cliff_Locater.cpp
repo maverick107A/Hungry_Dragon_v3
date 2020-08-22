@@ -20,9 +20,6 @@ CCliff_Locater::~CCliff_Locater(void)
 
 HRESULT CCliff_Locater::Ready_Object(void)
 {
-	m_uVerCntX = 129;
-	m_uVerCntZ = 129;
-	m_uLength = 1000;		// 생성자 통해서 파츠에 넘겨주는부분이 없음, 그냥 상수 때려박은것
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
 
