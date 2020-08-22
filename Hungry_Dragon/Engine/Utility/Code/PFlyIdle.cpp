@@ -22,6 +22,7 @@ Engine::CPFlyIdle::~CPFlyIdle(void)
 void CPFlyIdle::Enter_State(CPlayerMain* _pPlayer)
 {
 	m_pPlayer = _pPlayer;
+	m_pPlayer->Set_Animation(ANI_IDLE);
 }
 
 void CPFlyIdle::Update_State(const float& fTimeDelta)

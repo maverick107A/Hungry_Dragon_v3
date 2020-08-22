@@ -22,6 +22,7 @@ Engine::CPLandIdle::~CPLandIdle(void)
 void CPLandIdle::Enter_State(CPlayerMain* _pPlayer)
 {
 	m_pPlayer = _pPlayer;
+	m_pPlayer->Set_Animation(ANI_IDLE);
 }
 
 void CPLandIdle::Update_State(const float& fTimeDelta)

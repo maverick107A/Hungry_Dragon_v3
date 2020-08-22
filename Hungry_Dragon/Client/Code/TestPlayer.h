@@ -17,9 +17,6 @@ END
 
 class CTestPlayer : public Engine::CPlayerMain
 {
-public:
-	enum ANIMATION{ANI_IDLE, ANI_EAT, ANI_FLY, ANI_BREATHIDLE, ANI_BREATHFLY, ANI_END};
-
 private:
 	explicit CTestPlayer(LPDIRECT3DDEVICE9 pGraphicDev);
 	virtual ~CTestPlayer(void);
@@ -59,7 +56,6 @@ private:
 public:
 	list<Engine::CResources*>  m_arrParticle;
 	Engine::CAnimation_Controller* m_pAnimationController;
-	ANIMATION					m_eAnimation=ANI_IDLE;
 
 	//먹는거 컨트롤할 임시 변수
 	bool						m_bEatFirst=true;

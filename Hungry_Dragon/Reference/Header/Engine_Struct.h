@@ -210,7 +210,8 @@ namespace Engine
 
 	}STATUS;
 
-	typedef struct tagGoods {
+	typedef struct tagGoods 		
+	{
 		_uint uPolygons;
 
 	}GOODS;

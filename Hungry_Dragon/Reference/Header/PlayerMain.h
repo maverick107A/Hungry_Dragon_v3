@@ -49,11 +49,14 @@ public:
 	CBaseLand*				Get_Terrain() { return m_pTerrain; }
 	CCameraMain*			Get_Camera() { return m_pCamera; }
 
+	ANIMATION				m_eAnimation = ANI_IDLE;
+
 public:
 	void Set_Sate(STATE _eState) { m_eState = _eState; }
 	void Set_Breath(bool _bCheck) { m_bBreath = _bCheck; }
 	void Set_MouseTime(float _fTime) { m_fMouseTime = _fTime; }
 	void Set_AccelCheck(bool _bCheck) { m_bAccelCheck = _bCheck; }
+	void Set_Animation(ANIMATION _eAni) { m_eAnimation = _eAni; }
 
 public:
 	void Add_Hp(int _iHp) { m_iHp += _iHp; }

@@ -22,6 +22,7 @@ Engine::CPLandRush::~CPLandRush(void)
 void CPLandRush::Enter_State(CPlayerMain* _pPlayer)
 {
 	m_pPlayer = _pPlayer;
+	m_pPlayer->Set_Animation(ANI_FLY);
 }
 
 void CPLandRush::Update_State(const float& fTimeDelta)

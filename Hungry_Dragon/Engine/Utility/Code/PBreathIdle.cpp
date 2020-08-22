@@ -23,6 +23,7 @@ void CPBreathIdle::Enter_State(CPlayerMain* _pPlayer)
 {
 	m_pPlayer = _pPlayer;
 	m_pPlayer->Set_Breath(true);
+	m_pPlayer->Set_Animation(ANI_BREATHIDLE);
 }
 
 void CPBreathIdle::Update_State(const float& fTimeDelta)
