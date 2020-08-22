@@ -487,6 +487,7 @@ void CTestPlayer::Preset_Animation()
 	m_pAnimationController->Insert_Trans(ANI_EAT, PART_FACE, 3, _vec3(0.f, 0.f, 1.f));
 
 	//브레스 0프레임
+	m_pAnimationController->Add_Animator(ANI_IDLE);
 	for (int i = 0; i < PARTS_END; ++i)
 		m_pAnimationController->Insert_Scale(ANI_BREATHIDLE, i, 0, _vec3(1.f, 1.f, 1.f));
 
