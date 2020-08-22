@@ -21,7 +21,7 @@ public:
 
 private:
 	float			m_fSpeed = 40.f;
-	float			m_fBoostMulti = 100.f;
+	float			m_fBoostMulti = 3.f;
 	float			m_fAngleSpeed = 0.1f;
 	float			m_fDamping = 0.85f;
 	float			m_fAngleDamping = 0.25f;

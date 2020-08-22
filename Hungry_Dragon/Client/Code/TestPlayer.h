@@ -18,7 +18,7 @@ END
 class CTestPlayer : public Engine::CPlayerMain
 {
 public:
-	enum ANIMATION{ANI_IDLE, ANI_EAT, ANI_END};
+	enum ANIMATION{ANI_IDLE, ANI_EAT, ANI_FLY, ANI_BREATHIDLE, ANI_BREATHFLY, ANI_END};
 
 private:
 	explicit CTestPlayer(LPDIRECT3DDEVICE9 pGraphicDev);
