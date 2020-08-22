@@ -354,6 +354,35 @@ _uint CScene_Loading::Loading_ForStage(void)
 		L"../../Asset/Billboard/Cloud/billcloud%.2d.png", 3),
 		E_FAIL);
 
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"Texture_GageBar",
+		Engine::TEX_NORMAL,
+		L"../../Asset/HUD/gagebar%.2d.png", 6),
+		E_FAIL);
+
+
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"Texture_DelayBar",
+		Engine::TEX_NORMAL,
+		L"../../Asset/HUD/delaybar%.2d.png", 1),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"Texture_BlankBar",
+		Engine::TEX_NORMAL,
+		L"../../Asset/HUD/blankbar.png"),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"Texture_HudIcon",
+		Engine::TEX_NORMAL,
+		L"../../Asset/HUD/hudicon%.2d.png", 4),
+		E_FAIL);
+
 
 	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
 		RESOURCE_STAGE,

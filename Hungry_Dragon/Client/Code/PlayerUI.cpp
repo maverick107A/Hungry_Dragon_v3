@@ -25,15 +25,15 @@ HRESULT CPlayerUI::Ready_Object(void)
 
 	D3DXCreateTextureFromFile(
 		m_pGraphicDev,
-		L"../../Asset/Bar/Red.png",
+		L"../../Asset/HUD/gagebar00.png",
 		&m_pRedTex);
 	D3DXCreateTextureFromFile(
 		m_pGraphicDev,
-		L"../../Asset/Bar/Green.png",
+		L"../../Asset/HUD/gagebar01.png",
 		&m_pGreenTex);
 	D3DXCreateTextureFromFile(
 		m_pGraphicDev,
-		L"../../Asset/Bar/Yellow.png",
+		L"../../Asset/HUD/gagebar02.png",
 		&m_pYellowTex);
 
 	return S_OK;
@@ -86,9 +86,9 @@ void CPlayerUI::Render_Object(void)
 	m_pSprite->SetTransform(&matTrans);
 	m_pSprite->Draw(m_pGreenTex, &tRect, nullptr, nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
 
-	tRect = { 0,0,int(m_pPlayer->Get_Stamina()),20 };
+	tRect = { 0,0,int(m_pPlayer->Get_Stamina()),100 };
 
-	D3DXMatrixTranslation(&matTrans, 300, 880, 0.f);
+	D3DXMatrixTranslation(&matTrans, 300, 580, 0.f);
 	m_pSprite->SetTransform(&matTrans);
 	m_pSprite->Draw(m_pYellowTex, &tRect, nullptr, nullptr, D3DCOLOR_ARGB(100, 255, 255, 255));
 
