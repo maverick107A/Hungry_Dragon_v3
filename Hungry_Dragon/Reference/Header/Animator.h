@@ -28,7 +28,7 @@ public:
 
 public:
 	virtual _int Update_Component(const _float& fTimeDelta);
-	void			Update_Frame(_float _addFrame);
+	_bool			Update_Frame(_float _addFrame);
 
 public:
 	void	Insert_Scale(_int _targetIndex,_int _targetFrame,_vec3 _vecScle);
@@ -53,6 +53,7 @@ private:
 	vector<_int>					m_arrMaxFrame;
 	vector<_float>					m_arrFrame;
 	_int							m_maxFrame;
+	_bool							m_bFrameNotReset=true;
 };
 
 END

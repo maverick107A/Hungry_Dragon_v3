@@ -1,6 +1,7 @@
 #include "Animation_Controller.h"
 
 #include "Export_Function.h"
+#include "MonsterMain.h"
 
 USING(Engine)
 
@@ -62,7 +63,11 @@ _int CAnimation_Controller::Update_Component(const _float & fTimeDelta)
 
 	for (int i = 0; i < m_iAnimatorCnt; ++i)
 	{
-		m_arrAnimatior[i]->Update_Frame(m_fNowFrame);
+		bool isPatternEnd=m_arrAnimatior[i]->Update_Frame(m_fNowFrame);
+
+		if (isPatternEnd) {
+			//((Engine::CGameObject*)(Get_Parent()))->Set_PatternEnd(isPatternEnd);
+		}
 	}
 
 	return 0;

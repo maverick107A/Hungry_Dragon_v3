@@ -26,16 +26,27 @@ _int CAnimator::Update_Component(const _float & fTimeDelta)
 }
 
 //월드 프레임을 애니메이터 프레임 단위로 가공
-void CAnimator::Update_Frame(_float _addFrame)
+_bool CAnimator::Update_Frame(_float _addFrame)
 {
 	for (size_t i = 0; i < m_arrFrame.size(); ++i)
 	{
 		m_arrFrame[i] += _addFrame;
+
 		while (m_arrFrame[i] >= m_arrMaxFrame[i] + 1.f)
 		{
 			m_arrFrame[i] -= m_arrMaxFrame[i] + 1.f;
+			if (m_arrMaxFrame[i] == m_maxFrame) {
+				m_bFrameNotReset = false;
+			}
 		}
 	}
+
+	if (!m_bFrameNotReset) {
+		m_bFrameNotReset = true;
+		return false;
+	}
+
+	return m_bFrameNotReset;
 }
 
 void CAnimator::Insert_Scale(_int _targetIndex, _int _targetFrame, _vec3 _vecScale)

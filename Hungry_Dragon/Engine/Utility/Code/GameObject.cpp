@@ -57,6 +57,11 @@ void Engine::CGameObject::Render_Object(void)
 
 }
 
+void CGameObject::Set_PatternEnd(_bool _bPatternEnd)
+{
+	m_bPatternEnd = _bPatternEnd;
+}
+
 void Engine::CGameObject::Free(void)
 {
 	for (_uint i = 0; i < ID_END; ++i)

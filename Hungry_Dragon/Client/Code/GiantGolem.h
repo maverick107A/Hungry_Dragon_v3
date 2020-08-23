@@ -20,11 +20,12 @@ class  CGiantGolem : public Engine::CMonsterMain
 
 
 public:
-	enum BOSSPATTERN { PAT_IDLE, PAT_PUNCH , PAT_SOLARBEAM , PAT_END };
+	enum BOSSPATTERN { PAT_IDLE, PAT_APEAR , PAT_PUNCH , PAT_STOMP , PAT_CICLE , PAT_FIREBALL , PAT_END };
 
 private:
 	explicit CGiantGolem(LPDIRECT3DDEVICE9 pGraphicDev);
 	virtual ~CGiantGolem(void);
+
 public:
 	virtual HRESULT Ready_Object(void) override;
 	virtual int Update_Object(const float& fTimeDelta) override;
@@ -42,6 +43,15 @@ public:
 private:
 	D3DXVECTOR3 m_vBodyPos;
 	float		m_fAngle = 0;
+
+	float		m_fPatternTime = 0;
+	float		m_fPatternDelay = 10;
+
+	int		m_iMaxPatternNum = 6;
+	int		m_iPatternNum	 = 0;
+
+
+
 	D3DXVECTOR3 m_vPos;
 	D3DXVECTOR3 m_vLookPos;
 

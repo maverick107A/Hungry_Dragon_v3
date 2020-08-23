@@ -28,7 +28,7 @@ public:
 	virtual void		Render_Object(void);
 	void				Set_Player(const _vec3 fPlayerPos) { m_vPlayerPos = fPlayerPos; }
 	void				Set_Pos(const _vec3 _Pos) { m_vFirstPos = _Pos; }
-
+	void				Set_PatternEnd(_bool _bPatternEnd);
 
 public:
 	template <typename T>
@@ -60,6 +60,7 @@ protected:
 	CTransform*				m_pTransform = nullptr;
 	LPDIRECT3DDEVICE9		m_pGraphicDev;
 	map<const _tchar*, CComponent*>		m_mapComponent[ID_END];
+	_bool						m_bPatternEnd = false;
 
 private:
 	CComponent*		Find_Component(const _tchar* pComponentTag, COMPONENTID eID);
