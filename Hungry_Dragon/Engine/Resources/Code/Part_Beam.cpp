@@ -97,17 +97,25 @@ void CPart_Beam::Reset_Particle(ATTRIBUTE * _attribute) {
 		_attribute->vVelocity = _vec3(0.f, 0.f, 1.f);
 	}
 
-	do {
-		tempRadX = rand()*0.0000305185f * 14 - 7;
-		tempRadY = rand()*0.0000305185f * 14 - 7;
-		tempZ = rand()*0.0000305185f * 3;
-	} while (tempRadX*tempRadX + tempRadY*tempRadY <= 25 || tempRadX*tempRadX + tempRadY*tempRadY > 49);
+	//do {
+	//	tempRadX = rand()*0.0000305185f * 14 - 7;
+	//	tempRadY = rand()*0.0000305185f * 14 - 7;
+	//	tempZ = rand()*0.0000305185f * 3;
+	//} while (tempRadX*tempRadX + tempRadY*tempRadY <= 25 || tempRadX*tempRadX + tempRadY*tempRadY > 49);
 
+	_vec3 b;
+	
+	if (m_pPlayer)
+	{
+		_matrix a;
+		_vec3 c = m_pPlayer->Get_Up()*10.f;
+		D3DXMatrixRotationAxis(&a, &m_pPlayer->Get_Look(), rand());
+		D3DXVec3TransformCoord(&b, &c, &a);
+	}
 
-
-	_attribute->vPosition.x += tempRotZ*tempRadX;
-	_attribute->vPosition.y += (1- tempRotY)*tempRadY;
-	_attribute->vPosition.z += tempRotX*tempZ;
+	_attribute->vPosition.x += b.x;
+	_attribute->vPosition.y += b.y;
+	_attribute->vPosition.z += b.z;
 
 	
 

@@ -64,10 +64,10 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 		m_bBreath = !m_bBreath;
 
 	//애니메이션 테스트
-
+	
 
 	//화면 내에서 플레어이거 아래에 위치하도록
-	m_pTransform->m_vInCamPos -= m_vUp*1.6f;
+	m_pTransform->m_vInCamPos -= m_vUp*2.f;
 	m_pCamera->Update_Camera(fTimeDelta, &m_fAngleX, &m_fAngleY, &m_vLook, &m_vUp, m_pTerrain);
 	m_pState->Update_State(fTimeDelta);
 	m_pCamera->Camera_Set(m_pGraphicDev, m_pTransform->m_vInfo[Engine::INFO_POS]);
@@ -86,13 +86,6 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 
 	if (0.f < m_fMouseTime) {
 		m_fMouseTime -= fTimeDelta;
-		//m_pPartsTrans[PART_JAW]->m_vAfterAngle.x = m_vAngle;
-		//m_pPartsTrans[PART_JAW]->m_vAfterPos.y = -sinf(m_vAngle);
-		//m_pPartsTrans[PART_JAW]->m_vAfterPos.z = cosf(m_vAngle);
-
-		//m_pPartsTrans[PART_FACE]->m_vAfterAngle.x = -m_vAngle;
-		//m_pPartsTrans[PART_FACE]->m_vAfterPos.y = sinf(m_vAngle);
-		//m_pPartsTrans[PART_FACE]->m_vAfterPos.z = cosf(m_vAngle);
 
 		m_pPartsTrans[PART_JAW]->m_vAfterRevAngle.x = m_vAngle;
 		m_pPartsTrans[PART_JAW]->m_vAfterPos.z = 1.f;
@@ -103,6 +96,8 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 			m_fSpeed *= -1;
 		m_vAngle += m_fSpeed;
 	}
+	
+	Engine::CGameObject::Update_Object(fTimeDelta);
 
 	if (m_bBreath&&m_pParticle == nullptr) {
 		_vec3 BeamPos;
@@ -123,8 +118,6 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 	}
 	
 
-	Engine::CGameObject::Update_Object(fTimeDelta);
-
 	return 0;
 }
 
@@ -144,9 +137,9 @@ void CTestPlayer::Render_Object(void)
 	m_pGraphicDev->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_GOURAUD);
 	Animation_Render();
 	m_pGraphicDev->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_FLAT);
-	if (m_bBreath) {
-		m_pBreath->Render_Breath(this);
-	}
+	//if (m_bBreath) {
+	//	m_pBreath->Render_Breath(this);
+	//}
 }
 
 void CTestPlayer::Free(void)

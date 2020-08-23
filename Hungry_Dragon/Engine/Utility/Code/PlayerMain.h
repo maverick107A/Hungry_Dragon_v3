@@ -95,6 +95,10 @@ protected:
 
 public:
 	D3DXVECTOR3				m_vNorm = { 0.f,1.f,0.f };
+	float					m_fCosX = 0.f;
+	float					m_fCosY = 0.f;
+	float					m_fSinX = 0.f;
+	float					m_fSinY = 0.f;
 
 public:
 	static CPlayerMain*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
