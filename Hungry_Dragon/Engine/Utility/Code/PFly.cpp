@@ -30,7 +30,7 @@ void CPFly::Enter_State(CPlayerMain* _pPlayer)
 void CPFly::Update_State(const float& fTimeDelta)
 {
 	if (GetAsyncKeyState('G') & 0x0001 && 0 < m_pPlayer->Get_Mana())
-		m_pPlayer->Set_Sate(CPlayerMain::STATE_BREATHIDLE);
+		m_pPlayer->Set_Sate(CPlayerMain::STATE_BREATHFLY);
 	D3DXVECTOR3 vDir = { 0.f,0.f,0.f };
 	D3DXVECTOR3 vLook = { 0.f,0.f,0.f };
 	D3DXVECTOR3 vRight = { 0.f,0.f,0.f };
@@ -93,20 +93,20 @@ void CPFly::Update_State(const float& fTimeDelta)
 	{
 		bControl = true;
 	}
-	//if (GetAsyncKeyState('Q'))
-	//{
-	//	m_pPlayer->Get_Camera()->Set_AngleZPlus(m_fAngleSpeed*0.4f);
-	//	m_pPlayer->Get_Transform()->m_vAngle.z += m_fAngleSpeed*0.4f;
-	//}
-	//if (GetAsyncKeyState('E'))
-	//{
-	//	m_pPlayer->Get_Camera()->Set_AngleZPlus(-m_fAngleSpeed*0.4f);
-	//	m_pPlayer->Get_Transform()->m_vAngle.z -= m_fAngleSpeed*0.4f;
-	// 
+	if (GetAsyncKeyState('Q'))
+	{
+		m_pPlayer->Get_Camera()->Set_AngleZPlus(m_fAngleSpeed*0.4f);
+		m_pPlayer->Get_Transform()->m_vAngle.z += m_fAngleSpeed*0.4f;
+	}
 	if (GetAsyncKeyState('E'))
 	{
-		m_pPlayer->Get_Transform()->m_vInCamPos = vDir*100.f;
+		m_pPlayer->Get_Camera()->Set_AngleZPlus(-m_fAngleSpeed*0.4f);
+		m_pPlayer->Get_Transform()->m_vAngle.z -= m_fAngleSpeed*0.4f;
 	}
+	//if (GetAsyncKeyState('E'))
+	//{
+	//	m_pPlayer->Get_Transform()->m_vInCamPos = vDir*100.f;
+	//}
 	if (bCheck)
 	{
 		D3DXVec3Normalize(&vDir, &vDir);
