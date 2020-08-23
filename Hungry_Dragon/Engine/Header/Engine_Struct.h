@@ -230,6 +230,7 @@ namespace Engine
 	{
 		_uint uPolygons;
 		_uint uDelay_Polygons;
+		_uint uGame_Point;
 
 	}GOODS;
 }

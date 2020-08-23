@@ -84,10 +84,15 @@ void CPart_Beam::Reset_Particle(ATTRIBUTE * _attribute) {
 		float randSpeed= rand()*0.0000305185f * 2;
 		_attribute->vVelocity *= randSpeed;
 
-		if (rand() % 2 == 0)
+
+		float randShad = rand() % 101 * 0.01f;
+		float randAlpha = rand() % 101 * 0.01f;
+		_attribute->tColor = D3DXCOLOR(1.f, randShad, 0.f, randAlpha);
+		// X컬러는 0.f ~ 1.f 사이 값임 DWORD가 아님
+		/*if (rand() % 2 == 0)
 			_attribute->tColor = D3DXCOLOR(255.f, 255.f, 0.f, 255.f);
 		else
-			_attribute->tColor = D3DXCOLOR(255.f, 0.f, 0.f, 255.f);
+			_attribute->tColor = D3DXCOLOR(255.f, 0.f, 0.f, 255.f);*/
 		tempRotZ = matPlayer._33;
 		tempRotX = matPlayer._31;
 		tempRotY = matPlayer._32;

@@ -366,7 +366,7 @@ _uint CScene_Loading::Loading_ForStage(void)
 		RESOURCE_STAGE,
 		L"Texture_DelayBar",
 		Engine::TEX_NORMAL,
-		L"../../Asset/HUD/delaybar%.2d.png", 1),
+		L"../../Asset/HUD/delaybar%.2d.png", 6),
 		E_FAIL);
 
 	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
@@ -380,7 +380,7 @@ _uint CScene_Loading::Loading_ForStage(void)
 		RESOURCE_STAGE,
 		L"Texture_HudIcon",
 		Engine::TEX_NORMAL,
-		L"../../Asset/HUD/hudicon%.2d.png", 4),
+		L"../../Asset/HUD/hudicon%.2d.png", 6),
 		E_FAIL);
 
 

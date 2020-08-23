@@ -261,7 +261,7 @@ void CResourcesMgr::Load_Particle(LPDIRECT3DDEVICE9 pGraphicDev) {
 			break;
 		case  PART_BEAM:
 			pParticle = CPart_Beam::Create(pGraphicDev, 1000);
-			static_cast<Engine::CPart_Beam*>(pParticle)->Set_Texture(L"../../Asset/snowFlake.dds");
+			static_cast<Engine::CPart_Beam*>(pParticle)->Set_Texture(L"../../Asset/FogTex4.png");
 			break;
 		default:
 			pParticle = nullptr;

@@ -23,8 +23,8 @@ HRESULT CLogo::Ready_Scene(void) {
 
 	m_pLoading = CScene_Loading::Create(m_pGraphicDev, LOADING_STAGE);
 	NULL_CHECK_RETURN(m_pLoading, E_FAIL);
-	Engine::Get_FMOD()->Set_BgmVolume(0.f);
-	Engine::Get_FMOD()->Set_SfxVolume(0.f);
+	//Engine::Get_FMOD()->Set_BgmVolume(0.f);
+	//Engine::Get_FMOD()->Set_SfxVolume(0.f);
 
 	return S_OK;
 }

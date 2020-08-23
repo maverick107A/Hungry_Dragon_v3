@@ -109,31 +109,43 @@ void CIngame_Info::Render_UI()
 {
 	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
 
-	float _fRectY = 0.3f;
+	float _fRectY = 0.2f;
 
-	Draw_Tex((LPDIRECT3DTEXTURE9)m_pIconCon->Get_Texture(0), 512, 512, 0.1f, 0.1f, 60.f, 50.f);
-	Draw_Tex(m_pTexBar, 1024, 128, 0.5f, _fRectY, 100.f, 50.f);
-	Draw_Tex((LPDIRECT3DTEXTURE9)m_pBarCon->Get_Texture(0), 1024 * m_tPlayerStatus.fHp / m_tPlayerStatus.fMax_Hp, 128, 0.5f, _fRectY, 100.f, 50.f);
-	Draw_Tex((LPDIRECT3DTEXTURE9)m_pBarCon->Get_Texture(0), 1024* m_tPlayerStatus.fDelay_Hp / m_tPlayerStatus.fMax_Hp, 128, 0.5f, _fRectY, 100.f, 50.f, D3DCOLOR_ARGB(155, 255, 255, 255));
+	
+	Draw_Tex(m_pTexBar, 1024, 128, 0.5f, _fRectY, 40.f, 50.f);
+	Draw_Tex((LPDIRECT3DTEXTURE9)m_pBarCon->Get_Texture(0), 1024 * m_tPlayerStatus.fHp / m_tPlayerStatus.fMax_Hp, 128, 0.5f, _fRectY, 40.f, 50.f);
+	Draw_Tex((LPDIRECT3DTEXTURE9)m_pBarCon->Get_Texture(0), 1024* m_tPlayerStatus.fDelay_Hp / m_tPlayerStatus.fMax_Hp, 128, 0.5f, _fRectY, 40.f, 50.f, D3DCOLOR_ARGB(155, 255, 255, 255));
+	Draw_Tex((LPDIRECT3DTEXTURE9)m_pIconCon->Get_Texture(0), 512, 512, 0.05f, 0.05f, 60.f, 50.f);
 
-	Draw_Tex((LPDIRECT3DTEXTURE9)m_pIconCon->Get_Texture(1), 512, 512, 0.1f, 0.1f, 60.f, 110.f);
-	Draw_Tex(m_pTexBar, 1024, 128, 0.5f, _fRectY, 100.f, 110.f);
-	Draw_Tex((LPDIRECT3DTEXTURE9)m_pBarCon->Get_Texture(1), 1024 * m_tPlayerStatus.fMp / m_tPlayerStatus.fMax_Mp, 128, 0.5f, _fRectY, 100.f, 110.f);
-	Draw_Tex((LPDIRECT3DTEXTURE9)m_pBarCon->Get_Texture(1), 1024* m_tPlayerStatus.fDelay_Mp / m_tPlayerStatus.fMax_Mp, 128, 0.5f, _fRectY, 100.f, 110.f, D3DCOLOR_ARGB(155, 255, 255, 255));
+	
+	Draw_Tex(m_pTexBar, 1024, 128, 0.5f, _fRectY, 40.f, 80.f);
+	Draw_Tex((LPDIRECT3DTEXTURE9)m_pBarCon->Get_Texture(1), 1024 * m_tPlayerStatus.fMp / m_tPlayerStatus.fMax_Mp, 128, 0.5f, _fRectY, 40.f, 80.f);
+	Draw_Tex((LPDIRECT3DTEXTURE9)m_pBarCon->Get_Texture(1), 1024* m_tPlayerStatus.fDelay_Mp / m_tPlayerStatus.fMax_Mp, 128, 0.5f, _fRectY, 40.f, 80.f, D3DCOLOR_ARGB(155, 255, 255, 255));
+	Draw_Tex((LPDIRECT3DTEXTURE9)m_pIconCon->Get_Texture(1), 512, 512, 0.05f, 0.05f, 60.f, 80.f);
 
-	Draw_Tex((LPDIRECT3DTEXTURE9)m_pIconCon->Get_Texture(2), 512, 512, 0.1f, 0.1f, 60.f, 170.f);
-	Draw_Tex(m_pTexBar, 1024, 128, 0.5f, _fRectY, 100.f, 170.f);
-	Draw_Tex((LPDIRECT3DTEXTURE9)m_pBarCon->Get_Texture(2), 1024 * m_tPlayerStatus.fSp / m_tPlayerStatus.fMax_Sp, 128, 0.5f, _fRectY, 100.f, 170.f);
-	Draw_Tex((LPDIRECT3DTEXTURE9)m_pBarCon->Get_Texture(2), 1024* m_tPlayerStatus.fDelay_Sp / m_tPlayerStatus.fMax_Sp, 128, 0.5f, _fRectY, 100.f, 170.f, D3DCOLOR_ARGB(155, 255, 255, 255));
+	
+	Draw_Tex(m_pTexBar, 1024, 128, 0.5f, _fRectY, 40.f, 110.f);
+	Draw_Tex((LPDIRECT3DTEXTURE9)m_pBarCon->Get_Texture(2), 1024 * m_tPlayerStatus.fSp / m_tPlayerStatus.fMax_Sp, 128, 0.5f, _fRectY, 40.f, 110.f);
+	Draw_Tex((LPDIRECT3DTEXTURE9)m_pBarCon->Get_Texture(2), 1024* m_tPlayerStatus.fDelay_Sp / m_tPlayerStatus.fMax_Sp, 128, 0.5f, _fRectY, 40.f, 110.f, D3DCOLOR_ARGB(155, 255, 255, 255));
+	Draw_Tex((LPDIRECT3DTEXTURE9)m_pIconCon->Get_Texture(2), 512, 512, 0.05f, 0.05f, 60.f, 110.f);
 
-	Draw_Tex((LPDIRECT3DTEXTURE9)m_pIconCon->Get_Texture(3), 512, 512, 0.1f, 0.1f, 60.f, 230.f);
+	
 
-	Draw_Tex(m_pTexBar, 1024, 128, 1.f, _fRectY, 300.f, 680.f, D3DCOLOR_ARGB(155, 255, 255, 255));
-	Draw_Tex((LPDIRECT3DTEXTURE9)m_pBarCon->Get_Texture(4), 1024* m_tPlayerStatus.fStage * 0.01f, 128, 1.f, _fRectY, 300.f, 680.f, D3DCOLOR_ARGB(155, 255, 255, 255));
+	Draw_Tex(m_pTexBar, 1024, 128, 1.f, _fRectY, 300.f, 850.f, D3DCOLOR_ARGB(155, 255, 255, 255));
+	Draw_Tex((LPDIRECT3DTEXTURE9)m_pBarCon->Get_Texture(4), 1024* m_tPlayerStatus.fStage * 0.01f, 128, 1.f, _fRectY, 300.f, 850.f, D3DCOLOR_ARGB(155, 255, 255, 255));
 
+	Draw_Tex((LPDIRECT3DTEXTURE9)m_pIconCon->Get_Texture(3), 512, 512, 0.05f, 0.05f, 50.f, 140.f);
 	TCHAR str[32];
 	wsprintf(str, L"%d", m_tPlayerGoods.uDelay_Polygons);
-	Engine::Render_Font(L"Font_BoldBig", str, &_vec2(130.f, 230.f), D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
+	Engine::Render_Font(L"Font_Light", str, &_vec2(80.f, 140.f), D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
+
+	Draw_Tex((LPDIRECT3DTEXTURE9)m_pIconCon->Get_Texture(4), 512, 512, 0.05f, 0.05f, 50.f, 170.f);
+	wsprintf(str, L"포인트 자리", m_tPlayerGoods.uDelay_Polygons);
+	Engine::Render_Font(L"Font_Light", str, &_vec2(80.f, 170.f), D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
+
+	Draw_Tex((LPDIRECT3DTEXTURE9)m_pIconCon->Get_Texture(5), 512, 512, 0.05f, 0.05f, 50.f, 200.f);
+	wsprintf(str, L"시간 자리", m_tPlayerGoods.uDelay_Polygons);
+	Engine::Render_Font(L"Font_Light", str, &_vec2(80.f, 200.f), D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
 
 
 	m_pSprite->End();
