@@ -18,7 +18,7 @@ public:
 								const _uint& iCnt);
 
 	void		Set_Texture(const _uint& iIndex = 0);
-	PDIRECT3DTEXTURE9 Get_Texture() {return m_pTexture;}
+	IDirect3DBaseTexture9* Get_Texture(_uint _uNum) {return m_vecTexture[_uNum];}
 
 private:
 	vector<IDirect3DBaseTexture9*>			m_vecTexture;

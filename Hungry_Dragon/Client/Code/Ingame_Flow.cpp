@@ -148,11 +148,23 @@ void CIngame_Flow::Set_DefaultTex()
 	m_pGraphicDev->SetTexture(0, 0);
 }
 
-Engine::CTransform* CIngame_Flow::Get_Player()
+Engine::CTransform* CIngame_Flow::Get_PlayerTransform()
 {
 	if(m_pPlayerTransform==nullptr)
 		m_pPlayerTransform = static_cast<Engine::CTransform*>(Get_Component(L"GameLogic", L"TestPlayer", L"Com_Transform", ID_DYNAMIC));
 	return m_pPlayerTransform;
+}
+
+Engine::CPlayerMain * CIngame_Flow::Get_PlayerObject()
+{
+	if (m_pPlayer == nullptr)
+		m_pPlayer = static_cast<Engine::CPlayerMain*>(Get_Object(L"GameLogic", L"TestPlayer"));
+	return m_pPlayer;
+}
+
+void CIngame_Flow::Init_PlayerObjectByScene()
+{
+	m_pPlayer = static_cast<Engine::CPlayerMain*>(Get_Object(L"GameLogic", L"TestPlayer"));
 }
 
 void CIngame_Flow::Load_ForestTerrain()

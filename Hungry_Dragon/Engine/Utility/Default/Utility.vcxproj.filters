@@ -16,17 +16,11 @@
     <Filter Include="03. Renderer">
       <UniqueIdentifier>{712e0a2f-0cd7-48e1-bb60-af37e2c77fe4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04.ObjectPool">
-      <UniqueIdentifier>{a8b34d0c-8142-41d2-bb5d-f1ff4e28b92e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. UtilBase\00. Layer">
       <UniqueIdentifier>{33de7a8e-1c86-4263-903a-a6d5917a8f26}</UniqueIdentifier>
     </Filter>
     <Filter Include="02. UtilBase\01. GameObject">
       <UniqueIdentifier>{8460ec04-c97d-4f02-8a14-e4479c49f72c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. UtilBase\01. GameObject\00.Player">
-      <UniqueIdentifier>{1ca9482e-39ce-4e81-83db-902fce8aeb43}</UniqueIdentifier>
     </Filter>
     <Filter Include="05. ColllisionMgr">
       <UniqueIdentifier>{8d7b7bd7-eae3-492b-b518-ed13ea9ee861}</UniqueIdentifier>
@@ -45,9 +39,6 @@
     </Filter>
     <Filter Include="02. UtilBase\02. Component\04. TerrainMgr">
       <UniqueIdentifier>{17d9424d-c3c4-4a17-be31-f3037a6f193e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02. UtilBase\01. GameObject\01.Monster">
-      <UniqueIdentifier>{fcb9cbea-b837-4bd4-bb85-365954e13e92}</UniqueIdentifier>
     </Filter>
     <Filter Include="02. UtilBase\02. Component\02. State">
       <UniqueIdentifier>{c53d4e61-51f9-4dfa-aaf3-0d27ed7f1a85}</UniqueIdentifier>
@@ -79,9 +70,6 @@
     <Filter Include="02. UtilBase\02. Component\01. Camera\02. CaveCamera">
       <UniqueIdentifier>{d7eb16a6-4dbc-4998-9111-af3eac7ebaef}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. UtilBase\01. GameObject\36.Bullet">
-      <UniqueIdentifier>{cb978f01-7c9e-4279-a5b1-7a1fd65c8196}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. UtilBase\01. GameObject\02. Beam">
       <UniqueIdentifier>{5218bc86-b9c0-4b88-b774-1bf4c9f259c0}</UniqueIdentifier>
     </Filter>
@@ -109,6 +97,18 @@
     <Filter Include="02. UtilBase\02. Component\01. Camera\03. BossCamera">
       <UniqueIdentifier>{97d9eff1-7d51-4743-869e-5ad2c79c3287}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04. ObjectPool">
+      <UniqueIdentifier>{a8b34d0c-8142-41d2-bb5d-f1ff4e28b92e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. UtilBase\01. GameObject\01. Monster">
+      <UniqueIdentifier>{fcb9cbea-b837-4bd4-bb85-365954e13e92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. UtilBase\01. GameObject\00. Player">
+      <UniqueIdentifier>{1ca9482e-39ce-4e81-83db-902fce8aeb43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. UtilBase\01. GameObject\36. Bullet">
+      <UniqueIdentifier>{cb978f01-7c9e-4279-a5b1-7a1fd65c8196}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\Component.cpp">
@@ -133,10 +133,10 @@
       <Filter>03. Renderer</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\ObjectPool.cpp">
-      <Filter>04.ObjectPool</Filter>
+      <Filter>04. ObjectPool</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\PlayerMain.cpp">
-      <Filter>02. UtilBase\01. GameObject\00.Player</Filter>
+      <Filter>02. UtilBase\01. GameObject\00. Player</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\PFlyIdle.cpp">
       <Filter>02. UtilBase\02. Component\02. State\00.PlayerState\00.FlyIdle</Filter>
@@ -172,7 +172,7 @@
       <Filter>05. ColllisionMgr</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\MonsterMain.cpp">
-      <Filter>02. UtilBase\01. GameObject\01.Monster</Filter>
+      <Filter>02. UtilBase\01. GameObject\01. Monster</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\PCaveRush.cpp">
       <Filter>02. UtilBase\02. Component\02. State\00.PlayerState\06.CaveRush</Filter>
@@ -190,7 +190,7 @@
       <Filter>02. UtilBase\02. Component\01. Camera\01. Camera</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\BulletMain.cpp">
-      <Filter>02. UtilBase\01. GameObject\36.Bullet</Filter>
+      <Filter>02. UtilBase\01. GameObject\36. Bullet</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\BeamBase.cpp">
       <Filter>02. UtilBase\01. GameObject\02. Beam</Filter>
@@ -243,10 +243,10 @@
       <Filter>03. Renderer</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\ObjectPool.h">
-      <Filter>04.ObjectPool</Filter>
+      <Filter>04. ObjectPool</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\PlayerMain.h">
-      <Filter>02. UtilBase\01. GameObject\00.Player</Filter>
+      <Filter>02. UtilBase\01. GameObject\00. Player</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\PFlyIdle.h">
       <Filter>02. UtilBase\02. Component\02. State\00.PlayerState\00.FlyIdle</Filter>
@@ -282,7 +282,7 @@
       <Filter>05. ColllisionMgr</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\MonsterMain.h">
-      <Filter>02. UtilBase\01. GameObject\01.Monster</Filter>
+      <Filter>02. UtilBase\01. GameObject\01. Monster</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\PCaveRush.h">
       <Filter>02. UtilBase\02. Component\02. State\00.PlayerState\06.CaveRush</Filter>
@@ -300,7 +300,7 @@
       <Filter>02. UtilBase\02. Component\01. Camera\01. Camera</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\BulletMain.h">
-      <Filter>02. UtilBase\01. GameObject\36.Bullet</Filter>
+      <Filter>02. UtilBase\01. GameObject\36. Bullet</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\BeamBase.h">
       <Filter>02. UtilBase\01. GameObject\02. Beam</Filter>

@@ -1,22 +1,22 @@
 #include "stdafx.h"
-#include "Tree_Object.h"
+#include "IconCon.h"
 #include "Export_Function.h"
 #include "Ingame_Flow.h"
 
 
 
-CTree_Object::CTree_Object(LPDIRECT3DDEVICE9 pGraphicDev)
+CIconCon::CIconCon(LPDIRECT3DDEVICE9 pGraphicDev)
 	: Engine::CGameObject(pGraphicDev)
 {
 	
 }
 
-CTree_Object::~CTree_Object(void)
+CIconCon::~CIconCon(void)
 {
 
 }
 
-HRESULT CTree_Object::Ready_Object(void)
+HRESULT CIconCon::Ready_Object(void)
 {
 	m_bDestroyed = true;
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
@@ -24,7 +24,7 @@ HRESULT CTree_Object::Ready_Object(void)
 	return S_OK;
 }
 
-_int CTree_Object::Update_Object(const _float& fTimeDelta)
+_int CIconCon::Update_Object(const _float& fTimeDelta)
 {
 	
 	Engine::CGameObject::Update_Object(fTimeDelta);
@@ -52,35 +52,31 @@ _int CTree_Object::Update_Object(const _float& fTimeDelta)
 	return 0;
 }
 
-void CTree_Object::Render_Object(void)
+void CIconCon::Render_Object(void)
 {
 	m_pTransform->Set_Transform(m_pGraphicDev);
-
-	if (m_bDestroyed)
-	{
-		m_pBufferComDest->Render_Buffer();
-	}
-	else
-	{
-		m_pBufferCom->Render_Buffer();
-	}
 }
 
 
 
-void CTree_Object::Set_Trans(_vec3 & _vPos)
+void CIconCon::Set_Trans(_vec3 & _vPos)
 {
 	m_pTransform->Set_Trans(&_vPos);
 }
 
-void CTree_Object::Set_Scale(_uint _uTimes)
+void CIconCon::Set_Scale(_uint _uTimes)
 {
 	m_pTransform->Set_Scale((_float)_uTimes);
 }
 
+IDirect3DBaseTexture9* CIconCon::Get_Texture(_uint _uNum)
+{
+	return m_pTex->Get_Texture(_uNum);
+}
 
 
-void CTree_Object::Free(void)
+
+void CIconCon::Free(void)
 {
 
 	Engine::CGameObject::Free();
@@ -89,12 +85,11 @@ void CTree_Object::Free(void)
 }
 
 
-HRESULT CTree_Object::Add_Component(void)
+HRESULT CIconCon::Add_Component(void)
 {
 	Engine::CComponent*		pComponent = nullptr;
 
-	FAILED_CHECK(Clone_Component<CVICustom>(&m_pBufferComDest, RESOURCE_STAGE, L"BUFFER_STUMPMESH", ID_STATIC, L"Com_Buffer2"));
-	FAILED_CHECK(Clone_Component<CVICustom>(&m_pBufferCom, RESOURCE_STAGE, L"BUFFER_TREEMESH", ID_STATIC, L"Com_Buffer"));
+	FAILED_CHECK(Clone_Component<CTexture>(&m_pTex, RESOURCE_STAGE, L"Texture_HudIcon", ID_STATIC, L"Com_Tex"));
 	//m_pBufferCom = CVICustom::Create(m_pGraphicDev, L"BUFFER_TREEMESH");
 	//FAILED_CHECK(Clone_Component<CHeightCol>(&m_pBufferCom, RESOURCE_STATIC, L"BUFFER_KOREA", ID_STATIC, L"Com_Buffer"));
 
@@ -105,9 +100,9 @@ HRESULT CTree_Object::Add_Component(void)
 	return S_OK;
 }
 
-CTree_Object* CTree_Object::Create(LPDIRECT3DDEVICE9 pGraphicDev)
+CIconCon* CIconCon::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 {
-	CTree_Object*		pInstance = new CTree_Object(pGraphicDev);
+	CIconCon*		pInstance = new CIconCon(pGraphicDev);
 
 	if (FAILED(pInstance->Ready_Object()))
 		Engine::Safe_Release(pInstance);

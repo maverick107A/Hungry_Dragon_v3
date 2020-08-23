@@ -30,6 +30,7 @@ private:
 	IDirect3DTexture9*	m_pRedTex;
 	IDirect3DTexture9*	m_pGreenTex;
 	IDirect3DTexture9*	m_pYellowTex;
+	IDirect3DTexture9*	m_pPurpleTex;
 	LPD3DXSPRITE		m_pSprite = nullptr;
 	float				m_fRight = 0.f;
 	float				m_fUp = 0.f;

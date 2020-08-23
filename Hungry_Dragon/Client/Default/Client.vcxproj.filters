@@ -67,9 +67,6 @@
     <Filter Include="02. GameObject\01. Stage\00. Background">
       <UniqueIdentifier>{bc2a9999-d260-4edf-a3bb-6ddbd6b0b943}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. GameObject\02. Public">
-      <UniqueIdentifier>{007abf82-1595-400b-b2b7-11c552ebdbaa}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01. Scene\90. Scene_Loading">
       <UniqueIdentifier>{c110545e-7a4b-4828-8604-509975a6d557}</UniqueIdentifier>
     </Filter>
@@ -228,6 +225,15 @@
     </Filter>
     <Filter Include="02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem\Giants">
       <UniqueIdentifier>{fafdc6d2-7c8c-4f98-b533-717cad99acc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\02. UI">
+      <UniqueIdentifier>{007abf82-1595-400b-b2b7-11c552ebdbaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\02. UI\00. BarCon">
+      <UniqueIdentifier>{933ee61d-aef4-4356-b57b-7f08ce4f8893}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\02. UI\01.IconCon">
+      <UniqueIdentifier>{c9ed5aaf-da31-4e1c-9b9c-4e0abdf66229}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -450,6 +456,12 @@
     <ClInclude Include="..\Code\GiantGolem.h">
       <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\BarCon.h">
+      <Filter>02. GameObject\02. UI\00. BarCon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\IconCon.h">
+      <Filter>02. GameObject\02. UI\01.IconCon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -661,6 +673,12 @@
     </ClCompile>
     <ClCompile Include="..\Code\GiantGolem.cpp">
       <Filter>02. GameObject\01. Stage\01. Scene_Monster\00.Monster\00.CubeMonster\67.Golem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BarCon.cpp">
+      <Filter>02. GameObject\02. UI\00. BarCon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\IconCon.cpp">
+      <Filter>02. GameObject\02. UI\01.IconCon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

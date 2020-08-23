@@ -207,25 +207,29 @@ namespace Engine
 	{
 		// 체력 게이지
 		float fHp;
+		float fDelay_Hp;
 		float fMax_Hp;
 
 		// 브레스 게이지
 		float fMp;
+		float fDelay_Mp;
 		float fMax_Mp;
 
 		// 스피드 게이지
 		float fSp;
+		float fDelay_Sp;
 		float fMax_Sp;
 
 		// 진화 게이지
-		float fEvo;
-		float fMax_Evo;
+		float fStage;
+		float fMax_Stage;
 
 	}STATUS;
 
 	typedef struct tagGoods 		
 	{
 		_uint uPolygons;
+		_uint uDelay_Polygons;
 
 	}GOODS;
 }

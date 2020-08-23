@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Logo.h"
 #include "Ingame_Flow.h"
+#include "Ingame_Info.h"
 
 #include "Export_Function.h"
 
@@ -30,6 +31,7 @@ _int CLogo::Update_Scene(const _float& fTimeDelta) {
 	_int iExit = Engine::CScene::Update_Scene(fTimeDelta);
 
 	if (true == m_pLoading->Get_Finish()) {
+		CIngame_Info::GetInstance()->Init_Info(m_pGraphicDev);
 		CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_MENU);
 		//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_PROTO);
 		//CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_FOREST);

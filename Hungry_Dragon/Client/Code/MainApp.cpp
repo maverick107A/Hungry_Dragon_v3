@@ -21,6 +21,7 @@
 //여기에 매니저 헤더 추가
 #include "Export_Function.h"
 #include "Ingame_Flow.h"
+#include "Ingame_Info.h"
 
 //-------------------------------------------------------
 //기타 헤더**********************************************
@@ -109,6 +110,7 @@ HRESULT CMainApp::Set_DefaultSetting(LPDIRECT3DDEVICE9 * ppGraphicDev)
 	FAILED_CHECK_RETURN(Engine::Ready_Font((*ppGraphicDev), L"Font_Default", L"바탕", 60, 60, FW_HEAVY), E_FAIL);
 	FAILED_CHECK_RETURN(Engine::Ready_Font((*ppGraphicDev), L"Font_Jinji", L"궁서", 30, 30, FW_THIN), E_FAIL);
 	FAILED_CHECK_RETURN(Engine::Ready_Font((*ppGraphicDev), L"Font_Bold", L"메이플스토리", 30, 30, FW_BOLD), E_FAIL);
+	FAILED_CHECK_RETURN(Engine::Ready_Font((*ppGraphicDev), L"Font_BoldBig", L"메이플스토리", 50, 50, FW_BOLD), E_FAIL);
 	FAILED_CHECK_RETURN(Engine::Ready_Font((*ppGraphicDev), L"Font_Light", L"메이플스토리", 30, 30, FW_THIN), E_FAIL);
 
 	FAILED_CHECK_RETURN(Engine::Ready_InputDev(g_hInst, g_hWnd), E_FAIL);
@@ -147,6 +149,7 @@ void CMainApp::Free(void)
 	RemoveFontResource(L"../../Asset/Font/Maplestory Light.ttf");
 	SendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0);
 
+	CIngame_Info::DestroyInstance();
 	CIngame_Flow::GetInstance()->Release_AllResources();
 	CIngame_Flow::DestroyInstance();
 

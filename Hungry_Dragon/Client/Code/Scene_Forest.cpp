@@ -2,6 +2,7 @@
 #include "Scene_Forest.h"
 #include "Export_Function.h"
 #include "Ingame_Flow.h"
+#include "Ingame_Info.h"
 
 CScene_Forest::CScene_Forest(LPDIRECT3DDEVICE9 pGraphicDev)
 	: Engine::CScene(pGraphicDev) {
@@ -21,6 +22,8 @@ HRESULT CScene_Forest::Ready_Scene(void) {
 	FAILED_CHECK_RETURN(Ready_Layer_Environment(L"Environment"), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_Layer_GameLogic(L"GameLogic"), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_Layer_UI(L"UI"), E_FAIL);
+
+	CIngame_Flow::GetInstance()->Init_PlayerObjectByScene();
 	// 임시 적용
 	_matrix		 matProj;
 
@@ -127,7 +130,8 @@ _int CScene_Forest::Update_Scene(const _float& fTimeDelta) {
 	
 	Engine::CScene::Update_Scene(fTimeDelta);
 
-	
+	CIngame_Info::GetInstance()->Update_Info(fTimeDelta);
+
 	return 0;
 }
 
@@ -173,6 +177,8 @@ void CScene_Forest::Render_Scene(void) {
 	m_mapLayer[L"UI"]->Render_Layer();
 
 	Engine::Particle_Render();
+
+	CIngame_Info::GetInstance()->Render_UI();
 }
 
 void CScene_Forest::Free(void) {

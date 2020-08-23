@@ -4,6 +4,10 @@
 #include "Define.h"
 #include "Engine_Define.h"
 #include "Transform.h"
+#include "Texture.h"
+
+class CBarCon;
+class CIconCon;
 
 class CIngame_Info
 {
@@ -18,17 +22,30 @@ private:
 
 public:			
 	void Init_Info(LPDIRECT3DDEVICE9 pGraphicDev);
+	void Update_Info(const Engine::_float& _fTimeDelta);
+	void Render_UI();
 
 public:
-	Engine::STATUS * Get_PlayerInfo() { return &m_pPlayerStatus; }
-	Engine::GOODS * Get_PlayerGoods() { return &m_pPlayerGoods; }
+	void Draw_Tex(LPDIRECT3DTEXTURE9 _pTex, int _iRectX, int _iRectY, float _fScaleX, float _fScaleY, float _fPosX, float _fPosY, DWORD _dwColor = D3DCOLOR_ARGB(255, 255, 255, 255));
+
+
+public:
+	Engine::STATUS * Get_PlayerInfo() { return &m_tPlayerStatus; }
+	Engine::GOODS * Get_PlayerGoods() { return &m_tPlayerGoods; }
 
 private:
 	// 출력할 글디바.
-	LPDIRECT3DDEVICE9						m_pGraphicDev;
+	LPDIRECT3DDEVICE9	m_pGraphicDev;
 private:
-	Engine::STATUS 						m_pPlayerStatus;
-	Engine::GOODS 							m_pPlayerGoods;
+	Engine::STATUS 		m_tPlayerStatus;
+	Engine::GOODS 		m_tPlayerGoods;
+	Engine::_bool		m_bStageClear = false;
+	Engine::_bool		m_bChargeReadySp = true;
+
+	IDirect3DTexture9*	m_pTexBar = nullptr;
+	CBarCon*			m_pBarCon = nullptr;
+	CIconCon*			m_pIconCon = nullptr;
+	LPD3DXSPRITE		m_pSprite = nullptr;
 };
 
 

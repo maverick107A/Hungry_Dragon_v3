@@ -2,6 +2,7 @@
 #include "Scene_Volcano.h"
 #include "Export_Function.h"
 #include "Ingame_Flow.h"
+#include "Ingame_Info.h"
 
 CScene_Volcano::CScene_Volcano(LPDIRECT3DDEVICE9 pGraphicDev)
 	: Engine::CScene(pGraphicDev) {
@@ -23,6 +24,9 @@ HRESULT CScene_Volcano::Ready_Scene(void) {
 	FAILED_CHECK_RETURN(Ready_Layer_Billboard(L"Billboard"), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_Layer_GameLogic(L"GameLogic"), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_Layer_UI(L"UI"), E_FAIL);
+
+	CIngame_Flow::GetInstance()->Init_PlayerObjectByScene();
+
 	// 임시 적용
 	_matrix		 matProj;
 
@@ -125,6 +129,7 @@ _int CScene_Volcano::Update_Scene(const _float& fTimeDelta) {
 	
 	Engine::CScene::Update_Scene(fTimeDelta);
 
+	CIngame_Info::GetInstance()->Update_Info(fTimeDelta);
 	
 	return 0;
 }
@@ -180,6 +185,8 @@ void CScene_Volcano::Render_Scene(void) {
 	m_mapLayer[L"UI"]->Render_Layer();
 
 	Engine::Particle_Render();
+
+	CIngame_Info::GetInstance()->Render_UI();
 }
 
 void CScene_Volcano::Free(void) {

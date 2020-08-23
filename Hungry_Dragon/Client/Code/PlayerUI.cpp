@@ -23,6 +23,8 @@ HRESULT CPlayerUI::Ready_Object(void)
 
 	D3DXCreateSprite(m_pGraphicDev, &m_pSprite);
 
+
+
 	D3DXCreateTextureFromFile(
 		m_pGraphicDev,
 		L"../../Asset/HUD/gagebar00.png",
@@ -35,6 +37,10 @@ HRESULT CPlayerUI::Ready_Object(void)
 		m_pGraphicDev,
 		L"../../Asset/HUD/gagebar02.png",
 		&m_pYellowTex);
+	D3DXCreateTextureFromFile(
+		m_pGraphicDev,
+		L"../../Asset/HUD/gagebar04.png",
+		&m_pPurpleTex);
 
 	return S_OK;
 }
@@ -53,6 +59,7 @@ int CPlayerUI::Update_Object(const float& fTimeDelta)
 
 void CPlayerUI::Render_Object(void)
 {
+	return;									//================================= 비활성화 ====================================================================
 	//if (GetAsyncKeyState(VK_LBUTTON))
 	//{
 	//	TCHAR szBuff[32] = L"";
@@ -72,25 +79,38 @@ void CPlayerUI::Render_Object(void)
 
 	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
 
+	D3DXMATRIX matScale = {};
 	D3DXMATRIX matTrans = {};
+	D3DXMATRIX matWorld = {};
 
-	RECT tRect = { 0,0,int(m_pPlayer->Get_Hp()),30 };
+	RECT tRect = { 0,0,int(m_pPlayer->Get_Hp()),128 };
 
+	D3DXMatrixScaling(&matScale, 1.f, 0.2f, 0.f);
 	D3DXMatrixTranslation(&matTrans, 100.f, 50.f, 0.f);
-	m_pSprite->SetTransform(&matTrans);
+	matWorld = matScale * matTrans;
+	m_pSprite->SetTransform(&matWorld);
 	m_pSprite->Draw(m_pRedTex, &tRect, nullptr, nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
 
-	tRect = { 0,0,int(m_pPlayer->Get_Mana()),30 };
+	tRect = { 0,0,int(m_pPlayer->Get_Mana()),128 };
 
 	D3DXMatrixTranslation(&matTrans, 100.f, 80.f, 0.f);
-	m_pSprite->SetTransform(&matTrans);
+	matWorld = matScale * matTrans;
+	m_pSprite->SetTransform(&matWorld);
 	m_pSprite->Draw(m_pGreenTex, &tRect, nullptr, nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
 
-	tRect = { 0,0,int(m_pPlayer->Get_Stamina()),100 };
+	tRect = { 0,0,int(m_pPlayer->Get_Stamina()),128 };
 
-	D3DXMatrixTranslation(&matTrans, 300, 580, 0.f);
-	m_pSprite->SetTransform(&matTrans);
-	m_pSprite->Draw(m_pYellowTex, &tRect, nullptr, nullptr, D3DCOLOR_ARGB(100, 255, 255, 255));
+	D3DXMatrixTranslation(&matTrans, 100.f, 110.f, 0.f);
+	matWorld = matScale * matTrans;
+	m_pSprite->SetTransform(&matWorld);
+	m_pSprite->Draw(m_pYellowTex, &tRect, nullptr, nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+	tRect = { 0,0,int(m_pPlayer->Get_Stamina()),128};
+
+	D3DXMatrixTranslation(&matTrans, 300.f, 680.f, 0.f);
+	matWorld = matScale * matTrans;
+	m_pSprite->SetTransform(&matWorld);
+	m_pSprite->Draw(m_pPurpleTex, &tRect, nullptr, nullptr, D3DCOLOR_ARGB(155, 255, 255, 255));
 
 
 
@@ -102,6 +122,7 @@ void CPlayerUI::Free(void)
 	m_pYellowTex->Release();
 	m_pRedTex->Release();
 	m_pGreenTex->Release();
+	m_pPurpleTex->Release();
 	m_pSprite->Release();
 	Engine::CGameObject::Free();
 }

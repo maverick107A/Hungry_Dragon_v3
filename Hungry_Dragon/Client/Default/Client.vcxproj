@@ -168,6 +168,7 @@ call CopyUtility.bat</Command>
     <ClInclude Include="..\Code\AshCloud_Locater.h" />
     <ClInclude Include="..\Code\BackGround.h" />
     <ClInclude Include="..\Code\BackGround_Logo.h" />
+    <ClInclude Include="..\Code\BarCon.h" />
     <ClInclude Include="..\Code\Bat_Monster.h" />
     <ClInclude Include="..\Code\BillCloud_Locater.h" />
     <ClInclude Include="..\Code\BillCloud_Object.h" />
@@ -192,6 +193,7 @@ call CopyUtility.bat</Command>
     <ClInclude Include="..\Code\GiantGolem_Right_Hand.h" />
     <ClInclude Include="..\Code\Golem.h" />
     <ClInclude Include="..\Code\Horizon_Bat_Monster.h" />
+    <ClInclude Include="..\Code\IconCon.h" />
     <ClInclude Include="..\Code\Ingame_Flow.h" />
     <ClInclude Include="..\Code\Ingame_Info.h" />
     <ClInclude Include="..\Code\Jump_Monster.h" />
@@ -243,6 +245,7 @@ call CopyUtility.bat</Command>
     <ClCompile Include="..\Code\AshCloud_Locater.cpp" />
     <ClCompile Include="..\Code\BackGround.cpp" />
     <ClCompile Include="..\Code\BackGround_Logo.cpp" />
+    <ClCompile Include="..\Code\BarCon.cpp" />
     <ClCompile Include="..\Code\Bat_Monster.cpp" />
     <ClCompile Include="..\Code\BillCloud_Locater.cpp" />
     <ClCompile Include="..\Code\BillCloud_Object.cpp" />
@@ -267,6 +270,7 @@ call CopyUtility.bat</Command>
     <ClCompile Include="..\Code\GiantGolem_Right_Hand.cpp" />
     <ClCompile Include="..\Code\Golem.cpp" />
     <ClCompile Include="..\Code\Horizon_Bat_Monster.cpp" />
+    <ClCompile Include="..\Code\IconCon.cpp" />
     <ClCompile Include="..\Code\Ingame_Flow.cpp" />
     <ClCompile Include="..\Code\Ingame_Info.cpp" />
     <ClCompile Include="..\Code\Jump_Monster.cpp" />
