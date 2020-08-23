@@ -20,6 +20,7 @@ public:
 	void			Set_Size(_float _fSize);
 	void			Set_Empty();
 	void			Set_LifeTime(bool _isLifeLimit, _float _lifeTime);
+	void			Set_Origin(_vec3 _newOriginPos);
 
 public:
 	virtual HRESULT Ready_Buffer(void);

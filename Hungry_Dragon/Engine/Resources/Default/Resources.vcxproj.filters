@@ -118,6 +118,9 @@
     <Filter Include="00. Resources\02. Particle\03. Part_Leaf">
       <UniqueIdentifier>{2a7e8980-dfa1-4e23-8c0c-9c033392ff4f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00. Resources\02. Particle\04. Part_Beam">
+      <UniqueIdentifier>{efad24f0-3d9d-413d-bb5d-d80483f85864}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\Resources.cpp">
@@ -242,6 +245,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Part_Leaf.cpp">
       <Filter>00. Resources\02. Particle\03. Part_Leaf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Part_Beam.cpp">
+      <Filter>00. Resources\02. Particle\04. Part_Beam</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -370,6 +376,9 @@
     </ClInclude>
     <ClInclude Include="..\Code\Part_Leaf.h">
       <Filter>00. Resources\02. Particle\03. Part_Leaf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Part_Beam.h">
+      <Filter>00. Resources\02. Particle\04. Part_Beam</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -16,6 +16,7 @@
 #include "Animation_Controller.h"
 #include "CollisionMgr.h"
 #include "ParticleMgr.h"
+#include "PlayerMain.h"
 BEGIN(Engine)
 
 // Management

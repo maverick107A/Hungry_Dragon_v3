@@ -9,7 +9,7 @@ BEGIN(Engine)
 class CVIBuffer;
 class CTexture;
 class CTerrain;
-class CPart_Atk;
+class CParticle;
 class CResources;
 class CAnimation_Controller;
 
@@ -54,7 +54,7 @@ private:
 	virtual void Free(void) override;
 
 public:
-	list<Engine::CResources*>  m_arrParticle;
+	Engine::CParticle*				m_pParticle=nullptr;
 	Engine::CAnimation_Controller* m_pAnimationController;
 
 	//먹는거 컨트롤할 임시 변수

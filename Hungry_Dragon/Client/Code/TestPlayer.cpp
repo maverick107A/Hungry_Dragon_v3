@@ -65,30 +65,7 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 
 	//애니메이션 테스트
 
-	//R 키 누르면 생성
-	//if ((GetAsyncKeyState('R') & 0x8000) ) {
-	//	Engine::_vec3 vOrigin=Engine::_vec3(0.f,0.f,3.f);
-	//	Engine::BoundingBox tempBoundingBox;
-	//	tempBoundingBox.vMax = Engine::_vec3(WINCX,WINCY,100.f);
-	//	tempBoundingBox.vMin = Engine::_vec3(-WINCX, -WINCY, -100.f);
-	//	Engine::CResources* tempParticle = Engine::Get_Particle(m_pGraphicDev, Engine::PART_WIND, tempBoundingBox, vOrigin);
 
-	//	//나중엔 미리 올려 놓는 식으로 구현하자
-	//	static_cast<Engine::CPart_Wind*>(tempParticle)->Set_Texture(L"../../Asset/snowflake.dds");
-	//	m_arrParticle.emplace_back( tempParticle);
-	//}
-
-	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end();) {
-		int life = (*iter)->Update_Component(fTimeDelta);
-
-		if (life == 0) {
-			++iter;
-		}
-		else {
-			Safe_Release(*iter);
-			iter = m_arrParticle.erase(iter);
-		}
-	}
 	//화면 내에서 플레어이거 아래에 위치하도록
 	m_pTransform->m_vInCamPos -= m_vUp*1.6f;
 	m_pCamera->Update_Camera(fTimeDelta, &m_fAngleX, &m_fAngleY, &m_vLook, &m_vUp, m_pTerrain);
@@ -107,8 +84,7 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 		m_pPartsTrans[i]->m_vScale = nextFrameMovement.vecScale;
 	}
 
-	if (0.f < m_fMouseTime)
-	{
+	if (0.f < m_fMouseTime) {
 		m_fMouseTime -= fTimeDelta;
 		//m_pPartsTrans[PART_JAW]->m_vAfterAngle.x = m_vAngle;
 		//m_pPartsTrans[PART_JAW]->m_vAfterPos.y = -sinf(m_vAngle);
@@ -126,6 +102,24 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 		if (m_vAngle < -D3DX_PI*0.15f || m_vAngle > D3DX_PI*0.33f)
 			m_fSpeed *= -1;
 		m_vAngle += m_fSpeed;
+	}
+
+	if (m_bBreath&&m_pParticle == nullptr) {
+		_vec3 BeamPos;
+		memcpy(&BeamPos, &m_pTransform->m_matWorld._31, sizeof(_vec3));
+		m_pParticle = static_cast<CParticle*>(Engine::Particle_Create(Engine::PART_BEAM, BeamPos*2));
+		static_cast<CPart_Beam*>(m_pParticle)->Set_Player(this);
+		static_cast<CPart_Beam*>(m_pParticle)->Manual_Reset_Particle();
+		_matrix matMyPos = Get_Transform()->Get_World();
+		Engine::Set_ParticleTrans(m_pParticle, _vec3(matMyPos._41, matMyPos._42, matMyPos._43));
+	}
+	else if (!m_bBreath&&m_pParticle!=nullptr) {
+		m_pParticle->Set_Empty();
+		m_pParticle = nullptr;
+	}
+	else if (m_bBreath) {
+		_matrix matMyPos = Get_Transform()->Get_World();
+		Engine::Set_ParticleTrans(m_pParticle, _vec3(matMyPos._41, matMyPos._42, matMyPos._43));
 	}
 	
 
@@ -150,22 +144,13 @@ void CTestPlayer::Render_Object(void)
 	m_pGraphicDev->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_GOURAUD);
 	Animation_Render();
 	m_pGraphicDev->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_FLAT);
-	if(m_bBreath)
+	if (m_bBreath) {
 		m_pBreath->Render_Breath(this);
-
-	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end();++iter) {
-		(*iter)->Render_Buffer();
 	}
 }
 
 void CTestPlayer::Free(void)
 {
-	for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end();) {
-		Engine::Safe_Release((*iter));
-		iter = m_arrParticle.erase(iter);
-
-	}
-	m_arrParticle.clear();
 	
 	m_pState->Release();
 	Engine::CGameObject::Free();
@@ -300,7 +285,6 @@ HRESULT CTestPlayer::Add_Component(void)
 
 	//애니메이션 설정
 	Preset_Animation();
-	
 
 	return S_OK;
 }

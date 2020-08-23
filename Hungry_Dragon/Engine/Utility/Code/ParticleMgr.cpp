@@ -69,7 +69,7 @@ void CParticleMgr::Particle_Render()
 
 CResources* CParticleMgr::Particle_Create(Engine::PARTICLEID _eID, const _vec3 _pos)
 {
-	if (m_arrParticle.size() > m_iParticleLimite)
+	if (m_arrParticle.size() > m_iParticleLimit)
 	{
 		Safe_Release(m_arrParticle.front());
 		m_arrParticle.front() = nullptr;
@@ -98,6 +98,10 @@ CResources* CParticleMgr::Particle_Create(Engine::PARTICLEID _eID, const _vec3 _
 	case Engine::PART_LEAF:
 		tempBoundingBox.vMax = vOrigin + Engine::_vec3(250.f, 25.f, 250.f);
 		tempBoundingBox.vMin = vOrigin + Engine::_vec3(-250.f, -125.f, -250.f);
+		break;
+	case Engine::PART_BEAM:
+		tempBoundingBox.vMax = vOrigin + Engine::_vec3(1000.f, 1000.f, 1000.f);
+		tempBoundingBox.vMin = vOrigin + Engine::_vec3(-1000.f, -1000.f, -1000.f);
 		break;
 	case Engine::PART_END:
 		break;

@@ -17,8 +17,7 @@ CPart_Atk::CPart_Atk(const CPart_Atk & rhs)
 	
 }
 
-CPart_Atk
-::CPart_Atk(LPDIRECT3DDEVICE9 pGraphicDev, _vec3 vOrigin ,BoundingBox * boundingBox, int numParticle,float _fSize)
+CPart_Atk::CPart_Atk(LPDIRECT3DDEVICE9 pGraphicDev, _vec3 vOrigin ,BoundingBox * boundingBox, int numParticle,float _fSize)
 	:CParticle(pGraphicDev)
 {
 	m_BoundingBox = *boundingBox;

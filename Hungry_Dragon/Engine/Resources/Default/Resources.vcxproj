@@ -183,6 +183,7 @@ call CopyResources.bat</Command>
     <ClCompile Include="..\Code\BoardSector.cpp" />
     <ClCompile Include="..\Code\CubeCol.cpp" />
     <ClCompile Include="..\Code\DragonFace.cpp" />
+    <ClCompile Include="..\Code\Part_Beam.cpp" />
     <ClCompile Include="..\Code\Part_Fragile.cpp" />
     <ClCompile Include="..\Code\Part_Leaf.cpp" />
     <ClCompile Include="..\Code\Part_Wind.cpp" />
@@ -227,6 +228,7 @@ call CopyResources.bat</Command>
     <ClInclude Include="..\Code\BoardSector.h" />
     <ClInclude Include="..\Code\CubeCol.h" />
     <ClInclude Include="..\Code\DragonFace.h" />
+    <ClInclude Include="..\Code\Part_Beam.h" />
     <ClInclude Include="..\Code\Part_Fragile.h" />
     <ClInclude Include="..\Code\Part_Leaf.h" />
     <ClInclude Include="..\Code\Part_Wind.h" />

@@ -5,6 +5,7 @@
 
 BEGIN(Engine)
 class CPlayerMain;
+class CParticle;
 class ENGINE_DLL CBreathBase : public CComponent
 {
 private:
@@ -19,10 +20,6 @@ public:
 	virtual void	LateUpdate_Component(const _float& fTimeDelta);
 	void Render_Breath(CPlayerMain* _pPlayer);
 
-private:
-	ID3DXMesh*				m_pCylinder = nullptr;
-	LPDIRECT3DDEVICE9		m_pGraphicDev;
-
 public:
 	static CBreathBase*		Create(LPDIRECT3DDEVICE9& _pGraphicDev);
 	virtual CComponent*		Clone(void);
@@ -30,6 +27,9 @@ public:
 private:
 	virtual void Free(void);
 
+private:
+	ID3DXMesh*				m_pCylinder = nullptr;
+	LPDIRECT3DDEVICE9		m_pGraphicDev;
 };
 END
 #endif // BreathBase_h__

@@ -34,10 +34,12 @@
 #include "HeightCol.h"
 #include "CliffCylinder.h"
 
+#include "Particle.h"
 #include "Part_Atk.h"
 #include "Part_Wind.h"
 #include "Part_Fragile.h"
 #include "Part_Leaf.h"
+#include "Part_Beam.h"
 //-------------------------------------------------------
 
 //현재 파티클들은 미리 리소스매니저에 원형을 vector의 형태로 등재해 두고, Enum값인 PARTICLEID를 통해 해당 벡터에 접근해 그 파티클을 복사한 새로운 파티클을 리턴해 주는 형식을 채택하고 있다.

@@ -221,6 +221,10 @@ void CParticle::Set_LifeTime(bool _isLifeLimit, _float _lifeTime)
 	m_bIsLifeLimit = _isLifeLimit;
 }
 
+void CParticle::Set_Origin(_vec3 _newOriginPos) {
+	m_vOrigin = _newOriginPos;
+}
+
 void CParticle::Free(void) {
 	Safe_Release(m_Tex);
 	Safe_Release(m_Vb);
