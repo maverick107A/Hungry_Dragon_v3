@@ -25,6 +25,7 @@ private:
 
 public:			
 	void Init_Info(LPDIRECT3DDEVICE9 pGraphicDev);
+	void Initialize_Time() { m_fTimeTick = 0.f; }
 	void Update_Info(const Engine::_float& _fTimeDelta);
 	void Render_UI();
 
@@ -32,8 +33,16 @@ public:
 	void Render_Frame();
 
 public:
+	void Push_EngineEvent(ENGINE_EVENT _tEvent);
+	void Push_EventFont(ENGINE_EVENT _tEvent);
+	void Occur_EngineEvent(ENGINE_EVENT _tEvent);
+	void Update_BuffPack(const Engine::_float& _fTimeDelta);
+	void Update_FontPack(const Engine::_float& _fTimeDelta);
+
+public:
 	void Draw_Tex(LPDIRECT3DTEXTURE9 _pTex, float _fCenterX, float _fCenterY, float _fScaleX, float _fCenterZ, float _fScaleY, float _fPosX, float _fPosY, DWORD _dwColor = D3DCOLOR_ARGB(255, 255, 255, 255));
 	void Draw_Tex(LPDIRECT3DTEXTURE9 _pTex, int _iRectX, int _iRectY, float _fScaleX, float _fScaleY, float _fPosX, float _fPosY, DWORD _dwColor = D3DCOLOR_ARGB(255, 255, 255, 255));
+	void Draw_Tex(LPDIRECT3DTEXTURE9 _pTex, int _iRectX, int _iRectY, float _fScaleX, float _fScaleY, float _RotX, float _RotY, float _RotZ, float _fPosX, float _fPosY, DWORD _dwColor = D3DCOLOR_ARGB(255, 255, 255, 255));
 	void Draw_Tex(IDirect3DBaseTexture9* _pTex, int _iRectX, int _iRectY, float _fScaleX, float _fScaleY, float _fPosX, float _fPosY, DWORD _dwColor = D3DCOLOR_ARGB(255, 255, 255, 255));
 	void Draw_TexPart(IDirect3DBaseTexture9* _pTex, int _iPivotX, int _iPivotY, int _iRectX, int _iRectY, float _fScaleX, float _fScaleY, float _fPosX, float _fPosY, DWORD _dwColor = D3DCOLOR_ARGB(255, 255, 255, 255));
 
@@ -59,6 +68,7 @@ private:
 	IDirect3DTexture9*	m_pBubble = nullptr;
 
 	IDirect3DTexture9*	m_pBuffFrame[4];
+	IDirect3DTexture9*	m_pPolygon;
 
 	CBarCon*			m_pBarCon = nullptr;
 	CIconCon*			m_pIconCon = nullptr;
@@ -69,6 +79,32 @@ private:
 	_uint				m_uMainFocus = 0;
 	_uint				m_uSubFocus = 0;
 
+	_float				m_fTimeTick = 0.f;
+	
+	// 자원 상호작용
+	_vec3				m_vDestination[5];		// 고정된 5개 자원 회수위치
+	typedef struct tagBuffPack
+	{
+		ENGINE_EVENT	tEvent;
+		_vec3			vDest;	// 도착하면 데이터 갱신
+		_vec3			vPos;
+		_vec3			vScale;
+		_vec3			vRot;
+		DWORD			dwColor;
+		_float			fLerpSpeed;
+	} BUFFPACK;
+	list<BUFFPACK> m_listBuffPack;
+
+
+	// 폰트 상호작용 
+	typedef struct tagFontPack
+	{
+		ENGINE_EVENT	tEvent;
+		_vec3			vPos;
+		_float			fLifeTime;
+		D3DXCOLOR		tColor;
+	} FONTPACK;
+	list<FONTPACK> m_listFontPack;
 };
 
 

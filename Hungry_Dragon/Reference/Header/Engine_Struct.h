@@ -233,7 +233,19 @@ namespace Engine
 		_uint uGame_Point;
 
 	}GOODS;
+
+
+	typedef struct tagEvents
+	{
+		tagEvents() {}
+		tagEvents(_uint _uEvent, _uint _uData) { uEventNum = _uEvent; uDataNum = _uData; }
+		_uint uEventNum;
+		_uint uDataNum;
+	}ENGINE_EVENT;
+
 }
+
+
 
 
 #endif // Engine_Struct_h__

@@ -134,4 +134,5 @@ void		Release_Utility(void)
 	CRenderer::GetInstance()->DestroyInstance();
 	CObjectPool::GetInstance()->DestroyInstance();
 	CParticleMgr::GetInstance()->DestroyInstance();
+	CEngineEventMgr::GetInstance()->DestroyInstance();
 }

@@ -112,6 +112,9 @@
     <Filter Include="02. UtilBase\02. Component\02. State\00.PlayerState\07.CaveRush">
       <UniqueIdentifier>{ecea96f9-7955-428e-b598-e7746ad43ef1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06. EngineEventMgr">
+      <UniqueIdentifier>{48c88107-cb98-448f-91da-425255dc7a94}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\Component.cpp">
@@ -221,6 +224,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\PHit.cpp">
       <Filter>02. UtilBase\02. Component\02. State\00.PlayerState\06.HIT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\EngineEventMgr.cpp">
+      <Filter>06. EngineEventMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -334,6 +340,9 @@
     </ClInclude>
     <ClInclude Include="..\Code\PHit.h">
       <Filter>02. UtilBase\02. Component\02. State\00.PlayerState\06.HIT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\EngineEventMgr.h">
+      <Filter>06. EngineEventMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

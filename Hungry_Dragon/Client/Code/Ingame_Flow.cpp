@@ -19,6 +19,7 @@
 #include "Tree_Object.h"
 #include "Color_Mask.h"
 #include "Transform.h"
+#include "Ingame_Info.h"
 
 USING(Engine)
 
@@ -134,6 +135,7 @@ void CIngame_Flow::Occur_Event(int _iEvent)
 		default:
 			break;
 		}
+		CIngame_Info::GetInstance()->Initialize_Time();
 		break;
 	}
 }

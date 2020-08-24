@@ -179,6 +179,7 @@ call CopyUtility.bat</Command>
     <ClCompile Include="..\Code\CollisionMgr.cpp" />
     <ClCompile Include="..\Code\Component.cpp" />
     <ClCompile Include="..\Code\Dynamic_Behavior.cpp" />
+    <ClCompile Include="..\Code\EngineEventMgr.cpp" />
     <ClCompile Include="..\Code\GameObject.cpp" />
     <ClCompile Include="..\Code\Layer.cpp" />
     <ClCompile Include="..\Code\Management.cpp" />
@@ -218,6 +219,7 @@ call CopyUtility.bat</Command>
     <ClInclude Include="..\Code\CollisionMgr.h" />
     <ClInclude Include="..\Code\Component.h" />
     <ClInclude Include="..\Code\Dynamic_Behavior.h" />
+    <ClInclude Include="..\Code\EngineEventMgr.h" />
     <ClInclude Include="..\Code\GameObject.h" />
     <ClInclude Include="..\Code\Layer.h" />
     <ClInclude Include="..\Code\Management.h" />

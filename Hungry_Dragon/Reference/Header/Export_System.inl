@@ -101,9 +101,11 @@ void	Set_InputDev(void)
 void		Release_System(void)
 {
 	CFmodMgr::GetInstance()->DestroyInstance();
+	CKeyMgr::GetInstance()->DestroyInstance();
 	CInputDev::GetInstance()->DestroyInstance();
 	CFontMgr::GetInstance()->DestroyInstance();
 	CFrameMgr::GetInstance()->DestroyInstance();
 	CTimerMgr::GetInstance()->DestroyInstance();
 	CGraphicDev::GetInstance()->DestroyInstance();
+	
 }
