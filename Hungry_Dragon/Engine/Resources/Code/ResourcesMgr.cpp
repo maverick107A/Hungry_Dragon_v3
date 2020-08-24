@@ -152,7 +152,15 @@ HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 	case BUFFER_TWINFACE:
 		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/TwinDragon_Head.dat");
 		break;
-
+	case FLYMOB_BODY:
+		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/FlyMob_Body.dat");
+		break;
+	case FLYMOB_WR:
+		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/FlyMob_WingR.dat");
+		break;
+	case FLYMOB_WL:
+		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/FlyMob_WingL.dat");
+		break;
 	}
 
 	m_pmapResource[wContainerIdx].emplace(pBufferTag, pResources);

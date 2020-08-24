@@ -208,7 +208,24 @@ _uint CScene_Loading::Loading_ForStage(void)
 		L"BUFFER_RIGHTHAND",
 		Engine::BUFFER_RIGHTHAND),
 		E_FAIL);
-		
+
+	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
+		RESOURCE_STATIC,
+		L"FLYMOB_BODY",
+		Engine::FLYMOB_BODY),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
+		RESOURCE_STATIC,
+		L"FLYMOB_WL",
+		Engine::FLYMOB_WL),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
+		RESOURCE_STATIC,
+		L"FLYMOB_WR",
+		Engine::FLYMOB_WR),
+		E_FAIL);
 
 	lstrcpy(m_szFinish, L"이미지 읽는 중...");
 

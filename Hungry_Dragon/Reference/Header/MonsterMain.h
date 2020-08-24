@@ -24,8 +24,11 @@ class ENGINE_DLL CMonsterMain : public Engine::CGameObject
 
 public:
 	enum MONSTERSTATE { MONSTER_IDLE, MONSTER_REBORN , MONSTER_ACTIVATE, MONSTER_SUICIDE, MONSTER_LAYDEAD , MONSTER_DEACTIVATE, MONSTER_DYING , MONSTER_END };
-	enum MONSTERTYPE { BUFF_HP, BUFF_SPEED, BUFF_SP, BUFF_EXP, BUFF_NONE, BUFF_END };
+	enum MONSTERTYPE { BUFF_HP, BUFF_MP , BUFF_SP, BUFF_EXP, BUFF_NONE, BUFF_END };
 	enum BOSSPARTS { PART_HEAD, PART_BODY, PART_LEFTARM, PART_RIGHTARM ,  PART_LEFTHAND , PART_RIGHTHAND, PARTS_END };
+	enum MONSTERPARTS { MOB_BODY, MOB_LEFTWING, MOB_RIGHTWING, MOB_END };
+
+
 protected:
 	explicit CMonsterMain(LPDIRECT3DDEVICE9 pGraphicDev);
 	virtual ~CMonsterMain(void);
@@ -65,6 +68,8 @@ protected:
 	Engine::CVICustom*			m_pBufferChrystalMeshCom = nullptr;
 
 	CAnimationTransform*		m_pPartsTrans[PARTS_END];
+	CAnimationTransform*		m_pMobPartsTrans[MOB_END];
+
 
 	CTransform*					m_pAuraTransform = nullptr;
 	Engine::CTexture*			m_pAuraTextureCom = nullptr;
@@ -83,7 +88,7 @@ protected:
 	MONSTERSTATE				m_preState;
 	MONSTERSTATE				m_eState;
 
-	MONSTERTYPE					m_eType;
+	MONSTERTYPE					m_eType = BUFF_NONE;
 
 	float						m_fPlayerDistance;
 	float						m_fDistance;
