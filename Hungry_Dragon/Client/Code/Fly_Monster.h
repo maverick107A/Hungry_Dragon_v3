@@ -49,6 +49,8 @@ private:
 	D3DXVECTOR3 m_vBodyPos;
 
 	float m_fShotingLate = 0;
+	float m_fShotingDelay = 0.9;
+
 	float m_fHeight = 0;
 	float		m_fAngle = 0;
 	Engine::CAnimation_Controller* m_pAnimationController;

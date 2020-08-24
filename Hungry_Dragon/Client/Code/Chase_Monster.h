@@ -37,7 +37,13 @@ public:
 private:
 
 	virtual void Free(void) override;
+private:
 
+	D3DXVECTOR3 m_vPos;
+	D3DXVECTOR3 m_vLookPos;
+	D3DXVECTOR3 m_vBodyPos;
+
+	float		m_fAngle = 0;
 };
 
 

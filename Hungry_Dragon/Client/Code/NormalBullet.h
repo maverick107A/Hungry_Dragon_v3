@@ -32,7 +32,8 @@ private:
 	void		State_Change();
 public:
 	static CNormal_Bullet*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
-
+public:
+	void Update_Animation(const float& fTimeDelta);
 private:
 	virtual void Free(void) override;
 
@@ -42,6 +43,7 @@ private:
 	BULLETSTATE		m_eState;
 	D3DXVECTOR3		m_vReflDir;
 	D3DXVECTOR3		m_FirstPos;
+	Engine::FRAME			m_tFrame;
 };
 
 

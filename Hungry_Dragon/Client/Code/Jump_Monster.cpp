@@ -17,13 +17,14 @@ HRESULT CJump_Monster::Ready_Object(void)
 {
 	Engine::CMonsterMain::Ready_Object();
 	Add_Component();
-	m_fSpeed = 20.f;
+	m_fSpeed = 100.f;
 	m_fMonster_HP = 100.f;
 	m_fMonster_MaxHP = 100.f;
 	m_fScale = 5.f;
 	m_fMaxScale = 5.f;
 	m_fDamaged = 5.f;
 	m_eState = MONSTER_REBORN;
+	m_tDeadColor = D3DXCOLOR(0.96f, 0.96f, 0.86f, 1.f);
 
 	return S_OK;
 }
@@ -57,27 +58,48 @@ int CJump_Monster::Update_Object(const float & fTimeDelta)
 
 	if (m_eState == MONSTER_ACTIVATE)
 	{
+		D3DXVECTOR3 vPos;
+		m_vPlayerPos = { m_vPlayerPos.x , 0 , m_vPlayerPos.z };
+
+		m_pTransform->Get_Info(Engine::INFO_POS, &m_vBodyPos);
+
+		m_vBodyPos = { m_vBodyPos.x , 0 , m_vBodyPos.z };
+
+		m_vPos = m_vPlayerPos - m_vBodyPos;
+		vPos = m_vPlayerPos - m_vBodyPos;
+		D3DXVec3Normalize(&vPos, &vPos);
+		m_vLookPos = { 0.f, 0.f ,1.f };
+
+		m_fAngle = acosf(D3DXVec3Dot(&vPos, &m_vLookPos));
+		
+		if (vPos.x < 0)
+			m_fAngle *= -1;
+
+		m_pTransform->m_vAngle.y = m_fAngle;
+
 		if(!m_bJump_check)
 		{
 			m_vChasePos = { m_vPlayerPos.x ,  0.f , m_vPlayerPos.z };
 			m_fJumpSpeed = m_fJumpPower;
 			m_bJump_check = true;
 		}
-
-		if(m_bJump_check)
-		{
-			m_pTransform->Chase_Target(&m_vChasePos, (fTimeDelta * m_fSpeed));
-			Jump(fTimeDelta);
-		}		
+	
 	}
+
+
+	if (m_bJump_check)
+	{
+		m_pTransform->Chase_Target(&m_vChasePos, (fTimeDelta * m_fSpeed));
+		Jump(fTimeDelta);
+	}
+
 	return m_iEvent;
 }
 
 void CJump_Monster::Render_Object(void)
 {
 	m_pTransform->Set_Transform(m_pGraphicDev);
-	m_pTextureCom->Set_Texture(5);
-	m_pBufferCubeCom->Render_Buffer();
+	m_pBufferMeshCom->Render_Buffer();
 	Engine::CMonsterMain::Render_Object();
 }
 
@@ -85,18 +107,12 @@ HRESULT CJump_Monster::Add_Component(void)
 {
 	Engine::CComponent*		pComponent = nullptr;
 
-	// buffer
-	pComponent = m_pBufferCubeCom = dynamic_cast<Engine::CTexture_Cube*>
-		(Engine::Clone(RESOURCE_STATIC, L"Buffer_CubeTex"));
-	NULL_CHECK_RETURN(pComponent, E_FAIL);
-	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Buffer", pComponent);
+	//
 
-	// Texture
-	pComponent = m_pTextureCom = dynamic_cast<Engine::CTexture*>
-		(Engine::Clone(RESOURCE_STAGE, L"Texture_BoxHead"));
+	pComponent = m_pBufferMeshCom = dynamic_cast<Engine::CVICustom*>
+		(Engine::Clone(RESOURCE_STATIC, L"BUFFER_RABBIT"));
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
-	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Texture", pComponent);
-
+	m_mapComponent[Engine::ID_STATIC].emplace(L"BUFFER_RABBIT", pComponent);
 
 	return S_OK;
 }

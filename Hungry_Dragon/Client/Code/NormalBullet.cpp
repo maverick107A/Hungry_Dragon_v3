@@ -24,7 +24,9 @@ HRESULT CNormal_Bullet::Ready_Object(void)
 	m_pTransform->m_vInfo[Engine::INFO_POS].y = m_vFirstPos.y;
 	m_pTransform->m_vInfo[Engine::INFO_POS].z = m_vFirstPos.z;
 
-
+	m_tFrame.fStartFrame = 0.f;
+	m_tFrame.fMaxFrame = 12.f;
+	m_tFrame.fFrameSpeed = 1.5f;
 
 	m_eState = IDLE_BULLET;
 	m_preState = IDLE_BULLET;
@@ -42,6 +44,7 @@ int CNormal_Bullet::Update_Object(const float & fTimeDelta)
 	if (m_bFirst)
 	{
 		m_pTransform->Set_Trans(&m_vFirstPos);
+		m_pTransform->Set_Scale(10.f);
 		m_bFirst = false;
 		m_iEvent = 0;
 		m_eState = IDLE_BULLET;
@@ -59,37 +62,13 @@ int CNormal_Bullet::Update_Object(const float & fTimeDelta)
 
 	if (m_eState == IDLE_BULLET)
 	{
-		m_pTransform->Dir_Fly(&m_FirstPos, (fTimeDelta * 100.f));
+		m_pTransform->Dir_Fly(&m_FirstPos, (fTimeDelta * 300.f));
 	}
 	else if (m_eState == DEAD_BULLET)
 	{
 		m_bFirst = true;
 		Dead_Bullet();
 	}
-
-
-	//else if (m_eState == REFLECT_BULLET)
-	//{
-
-	//	//D3DXVec3Normalize(&Dir, &Dir);
-	//	m_pTransform->Add_Trans(&m_vReflDir);
-	//	m_pTransform->m_vScale.x *= 0.99f;
-	//	m_pTransform->m_vScale.y *= 0.99f;
-	//	m_pTransform->m_vScale.z *= 0.99f;
-
-	//if (m_fDistance < 5 || m_pTransform->m_vScale.x < 0)
-	//{
-	//	m_eState = DEAD_BULLET;
-	//}
-
-	//}
-
-	//if (m_fDistance < 13)
-	//{
-	//	m_eState = REFLECT_BULLET;
-	//	m_vReflDir = { (float(rand() % 10) - 5.f)     , (float(rand() % 10) - 5.f)  , (float(rand() % 10) - 5.f) };
-	//	m_vReflDir *= 0.5f;
-	//}
 
 
 	D3DXVECTOR3 Dir = m_pTransform->m_vInfo[Engine::INFO_POS] - m_vPlayerPos;
@@ -106,16 +85,40 @@ int CNormal_Bullet::Update_Object(const float & fTimeDelta)
 		m_eState = DEAD_BULLET;
 	}
 
-	State_Change();
+	D3DXMATRIX		matView;
+	m_pGraphicDev->GetTransform(D3DTS_VIEW, &matView);
+	ZeroMemory(&matView.m[3][0], sizeof(D3DXVECTOR3));
+	D3DXMatrixInverse(&matView, NULL, &matView);
+	m_pTransform->m_matWorld = matView *  m_pTransform->m_matWorld;
 
+
+	State_Change();
+	Update_Animation(fTimeDelta);
 	return m_iEvent;
 }
 
 void CNormal_Bullet::Render_Object(void)
 {
 	m_pTransform->Set_Transform(m_pGraphicDev);
-	m_pTextureCom->Set_Texture(0);
-	m_pBufferCom->Render_Buffer();
+
+	m_pTextureCom->Set_Texture((int)m_tFrame.fStartFrame);
+
+	m_pGraphicDev->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
+	m_pGraphicDev->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
+	m_pGraphicDev->SetRenderState(D3DRS_ALPHAREF, 0);
+
+	m_pGraphicDev->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+	m_pGraphicDev->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+
+
+	m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
+
+	m_pBufferBoradCom->Render_Buffer();
+
+
+	m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
+	m_pGraphicDev->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
+
 }
 
 HRESULT CNormal_Bullet::Add_Component(void)
@@ -123,14 +126,14 @@ HRESULT CNormal_Bullet::Add_Component(void)
 	Engine::CComponent*		pComponent = nullptr;
 
 	// buffer
-	pComponent = m_pBufferCom = dynamic_cast<Engine::CTexture_Cube*>
-		(Engine::Clone(RESOURCE_STATIC, L"Buffer_CubeTex"));
+	pComponent = m_pBufferBoradCom = dynamic_cast<Engine::CMonsterBoard*>
+		(Engine::Clone(RESOURCE_STATIC, L"Sprite_Bat"));
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
-	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Buffer", pComponent);
+	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_Buffer", pComponent);
 
 	// Texture
 	pComponent = m_pTextureCom = dynamic_cast<Engine::CTexture*>
-		(Engine::Clone(RESOURCE_STAGE, L"Texture_BoxHead"));
+		(Engine::Clone(RESOURCE_STAGE, L"Texture_Posion"));
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Texture", pComponent);
 
@@ -156,6 +159,16 @@ CNormal_Bullet * CNormal_Bullet::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 		Engine::Safe_Release(pInstance);
 
 	return pInstance;
+}
+
+void CNormal_Bullet::Update_Animation(const float & fTimeDelta)
+{
+	m_tFrame.fStartFrame += m_tFrame.fMaxFrame * fTimeDelta * m_tFrame.fFrameSpeed;
+
+	if (m_tFrame.fStartFrame >= m_tFrame.fMaxFrame)
+	{
+		m_tFrame.fStartFrame = 0.f;
+	}
 }
 
 void CNormal_Bullet::Free(void)

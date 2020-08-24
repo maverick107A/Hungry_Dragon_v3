@@ -15,7 +15,9 @@ HRESULT Engine::CMonsterMain::Ready_Object(void)
 {
 
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
-
+	m_fDetect_Range = 400.f;
+	m_fDead_Range = 7000.f;
+	m_tDeadColor = D3DXCOLOR(1.f, 0.f, 0.f, 1.f);
 	return S_OK;
 }
 
@@ -36,7 +38,7 @@ int Engine::CMonsterMain::Update_Object(const float & fTimeDelta)
 
 	if (m_eState != MONSTER_DYING &&  m_eState != MONSTER_DEACTIVATE && m_eState != MONSTER_SUICIDE && m_eState != MONSTER_LAYDEAD)
 	{
-		if (m_fDistance < 400 && m_eState != MONSTER_DYING)
+		if (m_fDistance < m_fDetect_Range && m_eState != MONSTER_DYING)
 		{
 			m_eState = MONSTER_ACTIVATE;
 
@@ -46,7 +48,7 @@ int Engine::CMonsterMain::Update_Object(const float & fTimeDelta)
 			m_eState = MONSTER_IDLE;
 		}
 	}
-	if (m_fDistance > 7000)
+	if (m_fDistance > m_fDead_Range)
 	{
 		m_eState = MONSTER_REBORN;
 		m_iEvent = MONSTER_DEAD;
@@ -96,6 +98,7 @@ void Engine::CMonsterMain::LateUpdate_Object(const float & fTimeDelta)
 
 void Engine::CMonsterMain::State_Change()
 {
+
 		
 	if (m_preState != m_eState)
 	{
@@ -105,7 +108,7 @@ void Engine::CMonsterMain::State_Change()
 			//m_pParticle = Engine::Particle_Create(Engine::PART_ATK, _vec3(0.f, 0.f, 0.f));
 			m_pParticle = Engine::Particle_Create(Engine::PART_FRAGILE,_vec3(0.f, 0.f, 0.f));
 			static_cast<Engine::CParticle*>(m_pParticle)->Set_LifeTime(true, 1.f);
-			//Engine::Set_ParticleColor(static_cast<CParticle*>(m_pParticle), D3DXCOLOR(1.f, 0.f, 0.f, 1.f));
+			Engine::Set_ParticleColor(static_cast<CParticle*>(m_pParticle), m_tDeadColor);
 			switch (rand() % 4)
 			{
 			case 0:
@@ -126,6 +129,8 @@ void Engine::CMonsterMain::State_Change()
 		{
 			m_pParticle = Engine::Particle_Create(Engine::PART_FRAGILE, _vec3(0.f, 0.f, 0.f));
 			static_cast<Engine::CParticle*>(m_pParticle)->Set_LifeTime(true, 1.f);
+			Engine::Set_ParticleColor(static_cast<CParticle*>(m_pParticle), m_tDeadColor);
+
 		}				
 		if (m_eState == MONSTER_DYING)
 		{

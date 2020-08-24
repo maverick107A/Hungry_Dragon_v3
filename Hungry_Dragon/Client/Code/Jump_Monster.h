@@ -32,11 +32,18 @@ private:
 	void	Jump(const float& fTimeDelta);
 private:
 	bool					m_bJump_check = false;
-	float					m_fJumpPower = 0.5;
+	float					m_fJumpPower = 0.8f;
 	float					m_fJumpSpeed = 0.1f;
 	float					m_fAccel = 0.01f;
 	float					m_fFirstY;
 	D3DXVECTOR3				m_vChasePos;
+
+
+	D3DXVECTOR3 m_vPos;
+	D3DXVECTOR3 m_vLookPos;
+	D3DXVECTOR3 m_vBodyPos;
+
+	float		m_fAngle = 0;
 };
 
 

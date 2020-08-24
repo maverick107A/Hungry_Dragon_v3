@@ -227,6 +227,21 @@ _uint CScene_Loading::Loading_ForStage(void)
 		Engine::FLYMOB_WR),
 		E_FAIL);
 
+	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
+		RESOURCE_STATIC,
+		L"BUFFER_RABBIT",
+		Engine::BUFFER_RABBIT),
+		E_FAIL);
+	
+
+	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
+		RESOURCE_STATIC,
+		L"BUFFER_PIG",
+		Engine::BUFFER_PIG),
+		E_FAIL);
+
+	
+
 	lstrcpy(m_szFinish, L"이미지 읽는 중...");
 
 	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
@@ -282,10 +297,19 @@ _uint CScene_Loading::Loading_ForStage(void)
 
 	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
 		RESOURCE_STAGE,
+		L"Texture_Posion",
+		Engine::TEX_NORMAL,
+		L"../../Asset/Monster/Poison/%d.png", 13),
+		E_FAIL);
+
+
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+		RESOURCE_STAGE,
 		L"Texture_BoxHead",
 		Engine::TEX_NORMAL,
 		L"../../Asset/HeadPng/Head%d.png", 6),
 		E_FAIL);
+
 
 	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
 		RESOURCE_STAGE,

@@ -153,7 +153,7 @@ void CPart_Fragile::Reset_Particle(ATTRIBUTE * _attribute)
 	_attribute->iFrameIndex = rand() % 10;
 	_vec3 randPos = _vec3((_float)(rand()%10-5), (_float)(rand()%10-5), (_float)(rand()%10-5));
 	_attribute->vPosition += randPos;
-	_attribute->tColor=D3DXCOLOR((float)(rand()%255)/255.f, (float)(rand()%255) / 255.f, (float)(rand()%255) / 255.f, (float)(rand()%255) / 255.f);
+	//_attribute->tColor=D3DXCOLOR((float)(rand()%255)/255.f, (float)(rand()%255) / 255.f, (float)(rand()%255) / 255.f, (float)(rand()%255) / 255.f);
 	D3DXVec3Normalize(&_attribute->vVelocity, &(_attribute->vPosition-m_vOrigin));
 }
 

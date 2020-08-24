@@ -24,6 +24,8 @@ HRESULT CFly_Monster::Ready_Object(void)
 	m_fMaxScale = 5.f;
 	m_fDamaged = 5.f;
 	m_eState = MONSTER_REBORN;
+	m_fDetect_Range = 800.f;
+	m_tDeadColor = D3DXCOLOR(0.33f, 0.07f, 0.32f, 1.f);
 
 	return S_OK;
 }
@@ -83,7 +85,7 @@ int CFly_Monster::Update_Object(const float & fTimeDelta)
 
 			m_pTransform->m_vAngle.y = m_fAngle;
 
-			if (m_fShotingLate > 0.3f)
+			if (m_fShotingLate > m_fShotingDelay)
 			{
 				if (CIngame_Flow::GetInstance()->Get_StageID() != CIngame_Flow::STAGE_SKY)
 					m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain() + m_fHeight; ;

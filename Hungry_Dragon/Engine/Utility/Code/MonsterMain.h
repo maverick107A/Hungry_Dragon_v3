@@ -94,6 +94,9 @@ protected:
 	float						m_fDistance;
 	float						m_fSpeed;
 	float						m_fHeight;
+	float						m_fDetect_Range;
+	float						m_fDead_Range;
+
 
 
 	float						m_fMonster_HP;
@@ -102,7 +105,7 @@ protected:
 	float						m_fMaxScale;
 	float						m_fDamaged;
 
-
+	D3DXCOLOR					m_tDeadColor;
 
 public:
 	static CMonsterMain*	Create(LPDIRECT3DDEVICE9 pGraphicDev);

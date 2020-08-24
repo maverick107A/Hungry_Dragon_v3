@@ -24,6 +24,7 @@ HRESULT CChase_Monster::Ready_Object(void)
 	m_fMaxScale = 5.f;
 	m_fDamaged		 = 5.f;
 	m_eState = MONSTER_REBORN;
+	m_tDeadColor = D3DXCOLOR(0.97f, 0.63f, 0.58f, 1.f);
 
 	return S_OK;
 }
@@ -62,6 +63,28 @@ int CChase_Monster::Update_Object(const float & fTimeDelta)
 
 	if (m_eState == MONSTER_ACTIVATE && m_eState != MONSTER_DEACTIVATE)
 	{
+
+		D3DXVECTOR3 vPos;
+		m_vPlayerPos = { m_vPlayerPos.x , 0 , m_vPlayerPos.z };
+
+		m_pTransform->Get_Info(Engine::INFO_POS, &m_vBodyPos);
+
+		m_vBodyPos = { m_vBodyPos.x , 0 , m_vBodyPos.z };
+
+		m_vPos = m_vPlayerPos - m_vBodyPos;
+		vPos = m_vPlayerPos - m_vBodyPos;
+		D3DXVec3Normalize(&vPos, &vPos);
+		m_vLookPos = { 0.f, 0.f ,1.f };
+
+		m_fAngle = acosf(D3DXVec3Dot(&vPos, &m_vLookPos));
+
+		if (vPos.x < 0)
+			m_fAngle *= -1;
+
+		m_pTransform->m_vAngle.y = m_fAngle;
+
+
+
 		vPlayerPos = { m_vPlayerPos.x  , 0.f  , m_vPlayerPos.z };
 		m_pTransform->Chase_Target(&vPlayerPos, (fTimeDelta * m_fSpeed));
 		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
@@ -74,27 +97,22 @@ int CChase_Monster::Update_Object(const float & fTimeDelta)
 void CChase_Monster::Render_Object(void)
 {
 	m_pTransform->Set_Transform(m_pGraphicDev);
-	m_pTextureCom->Set_Texture(1);
-	m_pBufferCubeCom->Render_Buffer();
+	m_pBufferMeshCom->Render_Buffer();
 	Engine::CMonsterMain::Render_Object();
 }
 
 HRESULT CChase_Monster::Add_Component(void)
 {
-
 	Engine::CComponent*		pComponent = nullptr;
 
-	// buffer
-	pComponent = m_pBufferCubeCom = dynamic_cast<Engine::CTexture_Cube*>
-		(Engine::Clone(RESOURCE_STATIC, L"Buffer_CubeTex"));
-	NULL_CHECK_RETURN(pComponent, E_FAIL);
-	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Buffer", pComponent);
+	//
 
-	// Texture
-	pComponent = m_pTextureCom = dynamic_cast<Engine::CTexture*>
-		(Engine::Clone(RESOURCE_STAGE, L"Texture_BoxHead"));
+	pComponent = m_pBufferMeshCom = dynamic_cast<Engine::CVICustom*>
+		(Engine::Clone(RESOURCE_STATIC, L"BUFFER_PIG"));
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
-	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Texture", pComponent);
+	m_mapComponent[Engine::ID_STATIC].emplace(L"BUFFER_PIG", pComponent);
+
+	return S_OK;
 
 
 	return S_OK;

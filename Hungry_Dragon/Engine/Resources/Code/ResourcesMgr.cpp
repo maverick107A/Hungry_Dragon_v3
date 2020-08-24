@@ -161,6 +161,13 @@ HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 	case FLYMOB_WL:
 		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/FlyMob_WingL.dat");
 		break;
+	case BUFFER_RABBIT:
+		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/Rabbit.dat");
+		break;
+	case BUFFER_PIG:
+		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/Pig.dat");
+		break;
+		
 	}
 
 	m_pmapResource[wContainerIdx].emplace(pBufferTag, pResources);
