@@ -51,6 +51,11 @@ inline void	Render_Font_Center(const _tchar* pFontTag,
 	const _vec2* pPos,
 	D3DXCOLOR Color);
 
+inline void	Draw_Font_Center(LPD3DXSPRITE _pSprite, const _tchar* pFontTag,
+	const _tchar* pString,
+	const _vec2* pPos,
+	D3DXCOLOR Color);
+
 //InputDevice
 //Get
 inline _byte	Get_DIKeyState(_ubyte byKeyID);

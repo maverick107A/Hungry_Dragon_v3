@@ -66,6 +66,11 @@ inline void Render_Font_Center(const _tchar * pFontTag, const _tchar * pString, 
 	CFontMgr::GetInstance()->Render_Font_Center(pFontTag, pString, pPos, Color);
 }
 
+inline void Draw_Font_Center(LPD3DXSPRITE _pSprite, const _tchar * pFontTag, const _tchar * pString, const _vec2 * pPos, D3DXCOLOR Color)
+{
+	CFontMgr::GetInstance()->Draw_Font_Center(_pSprite, pFontTag, pString, pPos, Color);
+}
+
 // InputDev
 // Get
 _byte	Get_DIKeyState(_ubyte byKeyID)

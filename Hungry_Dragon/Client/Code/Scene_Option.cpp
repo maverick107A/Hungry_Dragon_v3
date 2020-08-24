@@ -129,7 +129,7 @@ void CScene_Option::Render_Scene(void) {
 	Engine::Render_Font_Center(L"Font_Light", str, &_vec2(1600.f, 400.f), D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.f));
 	wsprintf(str, L"조작");
 	Engine::Render_Font_Center(L"Font_Bold", str, &_vec2(1600.f, 500.f), D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.f));
-	wsprintf(str, L"마우스 감도 : %d", 0);
+	wsprintf(str, L"마우스 감도 : %d", 5);
 	Engine::Render_Font_Center(L"Font_Light", str, &_vec2(1600.f, 550.f), D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.f));
 
 	wsprintf(str, L"확인", 0);

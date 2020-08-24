@@ -30,6 +30,10 @@ public:
 		const _tchar* pString,
 		const _vec2* pPos,
 		D3DXCOLOR Color);
+	void	Draw_Font_Center(LPD3DXSPRITE _pSprite, const _tchar* pFontTag,
+		const _tchar* pString,
+		const _vec2* pPos,
+		D3DXCOLOR Color);
 
 private:
 	CFont*		Find_Font(const _tchar* pFontTag);

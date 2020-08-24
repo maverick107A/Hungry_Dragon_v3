@@ -53,6 +53,14 @@ void Engine::CFontMgr::Render_Font_Center(const _tchar* pFontTag, const _tchar* 
 
 }
 
+void CFontMgr::Draw_Font_Center(LPD3DXSPRITE _pSprite, const _tchar * pFontTag, const _tchar * pString, const _vec2 * pPos, D3DXCOLOR Color)
+{
+	CFont*	pFont = Find_Font(pFontTag);
+	NULL_CHECK(pFont);
+
+	pFont->Draw_Font_Center(_pSprite, pString, pPos, Color);
+}
+
 CFont* Engine::CFontMgr::Find_Font(const _tchar* pFontTag) {
 	auto	iter = find_if(m_mapFont.begin(), m_mapFont.end(), CTag_Finder(pFontTag));
 

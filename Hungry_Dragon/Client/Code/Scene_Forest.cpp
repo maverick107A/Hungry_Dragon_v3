@@ -10,7 +10,7 @@ CScene_Forest::CScene_Forest(LPDIRECT3DDEVICE9 pGraphicDev)
 }
 
 CScene_Forest::~CScene_Forest(void) {
-
+	int i = 0;
 }
 
 HRESULT CScene_Forest::Ready_Scene(void) {

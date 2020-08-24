@@ -48,6 +48,7 @@ _uint CScene_Loading::Loading_ForStage(void)
 		1),
 		E_FAIL);
 
+
 	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
 		RESOURCE_STATIC,
 		L"Buffer_LandTex",
@@ -56,6 +57,7 @@ _uint CScene_Loading::Loading_ForStage(void)
 		129,
 		1000),
 		E_FAIL);
+
 
 	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
 		RESOURCE_STATIC,
@@ -339,18 +341,13 @@ _uint CScene_Loading::Loading_ForStage(void)
 		L"../../Asset/Billboard/Meteor/Meteor00%.2d.png", 16),
 		E_FAIL);
 
+	
+
 	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
-		RESOURCE_STAGE,
+		RESOURCE_LOGO,
 		L"Texture_Breath",
 		Engine::TEX_NORMAL,
 		L"../../Asset/Billboard/Breath/Breath00%.2d.png", 24),
-		E_FAIL);
-
-	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
-		RESOURCE_STAGE,
-		L"Texture_DragonHead",
-		Engine::TEX_NORMAL,
-		L"../../Asset/Billboard/DragonHead/dragonhead00%.2d.png", 22),
 		E_FAIL);
 
 	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,

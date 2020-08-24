@@ -59,7 +59,17 @@ Engine::_int CMainApp::Update_MainApp(const Engine::_float& fTimeDelta)
 	Engine::Get_FMOD()->Update();
 	Engine::Set_InputDev();
 	CIngame_Flow::GetInstance()->Update_BeforeScene(fTimeDelta);
-	m_pManagementClass->Update_Scene(fTimeDelta);
+
+	
+	if (CIngame_Flow::GetInstance()->Get_IngamePause())
+	{
+		CIngame_Info::GetInstance()->Update_Frame();
+	}
+	else
+	{
+		m_pManagementClass->Update_Scene(fTimeDelta);
+	}
+	
 	CIngame_Flow::GetInstance()->Update_AfterScene(fTimeDelta);
 
 	return 0;
@@ -67,7 +77,17 @@ Engine::_int CMainApp::Update_MainApp(const Engine::_float& fTimeDelta)
 
 void CMainApp::LateUpdate_MainApp(const Engine::_float & fTimeDelta) {
 	CIngame_Flow::GetInstance()->LateUpdate_BeforeScene(fTimeDelta);
-	m_pManagementClass->LateUpdate_Scene(fTimeDelta);
+
+	
+	if (CIngame_Flow::GetInstance()->Get_IngamePause())
+	{
+		
+	}
+	else
+	{
+		m_pManagementClass->LateUpdate_Scene(fTimeDelta);
+	}
+
 	CIngame_Flow::GetInstance()->LateUpdate_AfterScene(fTimeDelta);
 
 }
@@ -79,6 +99,11 @@ void CMainApp::Render_MainApp(void)
 	CIngame_Flow::GetInstance()->Render_BeforeScene();
 	m_pManagementClass->Render_Scene();
 	CIngame_Flow::GetInstance()->Render_AfterScene();
+
+	if (CIngame_Flow::GetInstance()->Get_IngamePause())
+	{
+		CIngame_Info::GetInstance()->Render_Frame();
+	}
 
 	Engine::Render_End();
 

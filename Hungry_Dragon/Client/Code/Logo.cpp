@@ -115,14 +115,21 @@ HRESULT CLogo::Ready_Resource(LPDIRECT3DDEVICE9 pGraphicDev, RESOURCEID eMax) {
 		L"../../Asset/Billboard/logo/logo%d.png", 3),
 		E_FAIL);
 
-
-	FAILED_CHECK_RETURN(Engine::Ready_Texture(pGraphicDev,
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
 		RESOURCE_LOGO,
-		L"Texture_LoadingLoop",
+		L"Texture_DragonHead",
 		Engine::TEX_NORMAL,
-		L"../../Asset/Billboard/Loading/loading00%.2d.png", 60),
+		L"../../Asset/Billboard/DragonHead/dragonhead00%.2d.png", 22),
 		E_FAIL);
-	
+
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+		RESOURCE_LOGO,
+		L"Texture_Buffering",
+		Engine::TEX_NORMAL,
+		L"../../Asset/Billboard/Buffering/buffering00%.2d.png", 12),
+		E_FAIL);
+
+
 
 	return S_OK;
 }

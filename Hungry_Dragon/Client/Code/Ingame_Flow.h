@@ -50,6 +50,8 @@ public:			// 셋터/겟터
 
 	void Set_StageID(STAGEID eStageID) { m_eStageID = eStageID; }
 	STAGEID Get_StageID() { return m_eStageID; }
+	void Set_IngamePause(Engine::_bool _bPause) { m_bIngamePause = _bPause; }
+	Engine::_bool Get_IngamePause() { return m_bIngamePause; }
 	
 
 
@@ -74,6 +76,7 @@ private:
 	CColor_Mask*	m_pMaskTexObj[8];
 	Engine::CPlayerMain*	m_pPlayer = nullptr;
 	Engine::CTransform*		m_pPlayerTransform = nullptr;
+	Engine::_bool			m_bIngamePause = false;
 
 private:
 	// 출력할 글디바.

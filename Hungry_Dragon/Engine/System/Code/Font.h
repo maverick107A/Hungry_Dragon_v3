@@ -25,6 +25,10 @@ public:
 		const _vec2* pPos,
 		D3DXCOLOR Color);
 
+	void		Draw_Font_Center(LPD3DXSPRITE _pSprite , const _tchar* pString,
+		const _vec2* pPos,
+		D3DXCOLOR Color);
+
 private:
 	LPDIRECT3DDEVICE9		m_pGraphicDev;
 	LPD3DXFONT				m_pFont;

@@ -17,10 +17,10 @@ CLogo_Loop::~CLogo_Loop(void) {
 HRESULT CLogo_Loop::Ready_Object(void) {
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
-	m_pTransform->m_vScale.x = 0.18f;
+	m_pTransform->m_vScale.x = 0.40f;
 	m_pTransform->m_vScale.y = 0.32f;
 
-	m_pTransform->m_vInfo[Engine::INFO_POS] = _vec3(0.82f,-0.68f,0.2f);
+	m_pTransform->m_vInfo[Engine::INFO_POS] = _vec3(0.75f,-0.68f,0.2f);
 	//m_pTransform->m_vAngle.z = D3DXToRadian(45.f);
 
 	return S_OK;
@@ -31,7 +31,7 @@ int CLogo_Loop::Update_Object(const float& fTimeDelta) {
 
 	Engine::Add_RenderGroup(Engine::RENDER_UI, this);
 
-	m_uLogo = (m_uLogo + 1) % 240;
+	m_uLogo = (m_uLogo + 1) % 88;
 
 	return 0;
 }
@@ -62,7 +62,7 @@ HRESULT CLogo_Loop::Add_Component(void) {
 
 	// Texture
 	pComponent = m_pTextureCom = dynamic_cast<Engine::CTexture*>
-		(Engine::Clone(RESOURCE_LOGO, L"Texture_LoadingLoop"));
+		(Engine::Clone(RESOURCE_LOGO, L"Texture_DragonHead"));
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Texture", pComponent);
 
