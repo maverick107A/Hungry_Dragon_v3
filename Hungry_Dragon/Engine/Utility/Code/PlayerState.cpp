@@ -29,15 +29,6 @@ bool CPlayerState::Land_Check(float* _fHeight, _vec3* _vNorm)
 		return false;
 	}
 
-	if (pTerrain == nullptr)
-	{
-		if (_fHeight)
-			*_fHeight = 0.f;
-		if (_vNorm)
-			*_vNorm = _vec3(0.f, 1.f, 0.f);
-		return false;
-	}
-
 	float PosX = m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS].x;
 	float PosZ = m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS].z;
 	if (PosX > 0.f)

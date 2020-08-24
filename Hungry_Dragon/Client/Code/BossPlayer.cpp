@@ -13,8 +13,10 @@
 #include "PBreathIdle.h"
 #include "PBreathFly.h"
 #include "BreathBase.h"
+#include "PHit.h"
 #include "Terrain_Locater.h"
 #include "GiantGolem.h"
+#include "BossCamera.h"
 
 CBossPlayer::CBossPlayer(LPDIRECT3DDEVICE9 pGraphicDev)
 	: CPlayerMain(pGraphicDev)
@@ -30,6 +32,8 @@ CBossPlayer::~CBossPlayer(void)
 HRESULT CBossPlayer::Ready_Object(void)
 {
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
+
+	static_cast<CBossCamera*>(m_pCamera)->Switch_Phase(1);
 
 	m_pTransform->m_vInfo[Engine::INFO_POS].x = 0.f;
 	m_pTransform->m_vInfo[Engine::INFO_POS].y = 0.f;
@@ -74,7 +78,9 @@ int CBossPlayer::Update_Object(const float& fTimeDelta)
 	m_pCamera->Camera_Set(m_pGraphicDev, m_pTransform->m_vInfo[Engine::INFO_POS]);
 	State_Change();
 
-	
+	if (GetAsyncKeyState('H'))
+		m_eAnimation = ANI_HIT;
+
 	for (int i = 0; i < PARTS_END; ++i)
 	{
 		MOVEMENT nextFrameMovement = m_pAnimationController->Get_Movement(m_eAnimation,i);
@@ -183,6 +189,12 @@ void CBossPlayer::State_Change()
 		m_pState->Out_State();
 		m_pState->Release();
 		m_pState = Engine::CPBreathFly::Create();
+		m_pState->Enter_State(this);
+		break;
+	case STATE_HIT:
+		m_pState->Out_State();
+		m_pState->Release();
+		m_pState = Engine::CPHit::Create();
 		m_pState->Enter_State(this);
 		break;
 	}
@@ -314,6 +326,8 @@ void CBossPlayer::Animation_Render()
 	m_pPartsTrans[PART_LWING]->Set_Transform(m_pGraphicDev, m_pPartsTrans[PART_2BODY]->m_matWorld);
 	m_pPartsBuffer[PART_LWING]->Render_Buffer();
 
+	m_matOld5 = m_matOld4;
+	m_matOld4 = m_matOld3;
 	m_matOld3 = m_matOld2;
 	m_matOld2 = m_matOld1;
 	m_matOld1 = m_pTransform->Get_World();
@@ -442,7 +456,7 @@ void CBossPlayer::Preset_Animation()
 	m_pAnimationController->Insert_Revolute(ANI_IDLE, PART_LWING, 1, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, D3DX_PI*0.7f));
 	
 	//애니메이션 추가
-	m_pAnimationController->Add_Animator(ANI_IDLE);//Eat
+	m_pAnimationController->Add_Animator(ANI_IDLE);//Hit
 	m_pAnimationController->Add_Animator(ANI_IDLE);//Fly
 	m_pAnimationController->Add_Animator(ANI_IDLE);//BreathIdle
 	m_pAnimationController->Add_Animator(ANI_IDLE);//BreathFly
@@ -452,18 +466,18 @@ void CBossPlayer::Preset_Animation()
 	//새로운 애니메이터 생성
 	m_pPartsTrans[PART_JAW]->m_fDamping = 0.1f;
 	m_pPartsTrans[PART_FACE]->m_fDamping = 0.1f;
-	m_pAnimationController->Insert_Revolute(ANI_EAT, PART_JAW, 1, _vec3(0.f, 0.f, 1.f), _vec3(D3DX_PI*0.25f, 0.f, 0.f));
-	m_pAnimationController->Insert_Revolute(ANI_EAT, PART_FACE, 1, _vec3(0.f, 0.f, 1.f), _vec3(-D3DX_PI*0.25f, 0.f, 0.f));
-	m_pAnimationController->Insert_Trans(ANI_EAT, PART_JAW, 1, _vec3(0.f, 0.f, 1.f));
-	m_pAnimationController->Insert_Trans(ANI_EAT, PART_FACE, 1, _vec3(0.f, 0.f, 1.f));
-	m_pAnimationController->Insert_Revolute(ANI_EAT, PART_JAW, 2, _vec3(0.f, 0.f, 1.f), _vec3(0.f, 0.f, 0.f));
-	m_pAnimationController->Insert_Revolute(ANI_EAT, PART_FACE, 2, _vec3(0.f, 0.f, 1.f), _vec3(0.f, 0.f, 0.f));
-	m_pAnimationController->Insert_Trans(ANI_EAT, PART_JAW, 2, _vec3(0.f, 0.f, 1.f));
-	m_pAnimationController->Insert_Trans(ANI_EAT, PART_FACE, 2, _vec3(0.f, 0.f, 1.f));
-	m_pAnimationController->Insert_Revolute(ANI_EAT, PART_JAW, 3, _vec3(0.f, 0.f, 1.f), _vec3(D3DX_PI*0.25f, 0.f, 0.f));
-	m_pAnimationController->Insert_Revolute(ANI_EAT, PART_FACE, 3, _vec3(0.f, 0.f, 1.f), _vec3(-D3DX_PI*0.25f, 0.f, 0.f));
-	m_pAnimationController->Insert_Trans(ANI_EAT, PART_JAW, 3, _vec3(0.f, 0.f, 1.f));
-	m_pAnimationController->Insert_Trans(ANI_EAT, PART_FACE, 3, _vec3(0.f, 0.f, 1.f));
+	//m_pAnimationController->Insert_Revolute(ANI_HIT, PART_JAW, 1, _vec3(0.f, 0.f, 1.f), _vec3(D3DX_PI*0.25f, 0.f, 0.f));
+	//m_pAnimationController->Insert_Revolute(ANI_HIT, PART_FACE, 1, _vec3(0.f, 0.f, 1.f), _vec3(-D3DX_PI*0.25f, 0.f, 0.f));
+	//m_pAnimationController->Insert_Trans(ANI_HIT, PART_JAW, 1, _vec3(0.f, 0.f, 1.f));
+	//m_pAnimationController->Insert_Trans(ANI_HIT, PART_FACE, 1, _vec3(0.f, 0.f, 1.f));
+	//m_pAnimationController->Insert_Revolute(ANI_HIT, PART_JAW, 2, _vec3(0.f, 0.f, 1.f), _vec3(0.f, 0.f, 0.f));
+	//m_pAnimationController->Insert_Revolute(ANI_HIT, PART_FACE, 2, _vec3(0.f, 0.f, 1.f), _vec3(0.f, 0.f, 0.f));
+	//m_pAnimationController->Insert_Trans(ANI_HIT, PART_JAW, 2, _vec3(0.f, 0.f, 1.f));
+	//m_pAnimationController->Insert_Trans(ANI_HIT, PART_FACE, 2, _vec3(0.f, 0.f, 1.f));
+	//m_pAnimationController->Insert_Revolute(ANI_HIT, PART_JAW, 3, _vec3(0.f, 0.f, 1.f), _vec3(D3DX_PI*0.25f, 0.f, 0.f));
+	//m_pAnimationController->Insert_Revolute(ANI_HIT, PART_FACE, 3, _vec3(0.f, 0.f, 1.f), _vec3(-D3DX_PI*0.25f, 0.f, 0.f));
+	//m_pAnimationController->Insert_Trans(ANI_HIT, PART_JAW, 3, _vec3(0.f, 0.f, 1.f));
+	//m_pAnimationController->Insert_Trans(ANI_HIT, PART_FACE, 3, _vec3(0.f, 0.f, 1.f));
 
 	for (int i = 0; i < PARTS_END; ++i)
 		m_pAnimationController->Insert_Scale(ANI_IDLE, i, 1, _vec3(1.f, 1.f, 1.f));
@@ -773,4 +787,64 @@ void CBossPlayer::Preset_Animation()
 	m_pAnimationController->Insert_Revolute(ANI_FASTBREATH, PART_3BODY, 1, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f));
 	m_pAnimationController->Insert_Revolute(ANI_FASTBREATH, PART_WING, 1, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f));
 	m_pAnimationController->Insert_Revolute(ANI_FASTBREATH, PART_LWING, 1, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f));
+
+	//쳐맞기 0프레임
+	for (int i = 0; i < PARTS_END; ++i)
+		m_pAnimationController->Insert_Scale(ANI_HIT, i, 0, _vec3(1.f, 1.f, 1.f));
+
+	m_pAnimationController->Insert_Scale(ANI_HIT, PART_BODY, 0, _vec3(0.8f, 0.8f, 0.8f));
+	m_pAnimationController->Insert_Scale(ANI_HIT, PART_2BODY, 0, _vec3(0.8f, 0.8f, 0.8f));
+	m_pAnimationController->Insert_Scale(ANI_HIT, PART_3BODY, 0, _vec3(0.8f, 0.8f, 0.8f));
+
+	for (int i = 0; i < PARTS_END; ++i)
+		m_pAnimationController->Insert_Rotate(ANI_HIT, i, 0, _vec3(0.f, 0.f, 0.f));
+
+	//m_pAnimationController->Insert_Rotate(ANI_HIT, PART_FACE, 0, _vec3(-D3DX_PI*0.25f, 0.f, 0.f));
+	//m_pAnimationController->Insert_Rotate(ANI_HIT, PART_JAW, 0, _vec3(-D3DX_PI*0.25f, 0.f, 0.f));
+
+	m_pAnimationController->Insert_Trans(ANI_HIT, PART_JAW, 0, _vec3(0.f, 0.f, 1.f));
+	m_pAnimationController->Insert_Trans(ANI_HIT, PART_FACE, 0, _vec3(0.f, 0.f, 1.f));
+	m_pAnimationController->Insert_Trans(ANI_HIT, PART_BODY, 0, _vec3(0.f, 0.f, -1.5f));
+	m_pAnimationController->Insert_Trans(ANI_HIT, PART_2BODY, 0, _vec3(0.f, 0.f, -3.f));
+	m_pAnimationController->Insert_Trans(ANI_HIT, PART_3BODY, 0, _vec3(0.f, 0.f, -4.5f));
+	m_pAnimationController->Insert_Trans(ANI_HIT, PART_WING, 0, _vec3(1.f, 0.f, 3.f));
+	m_pAnimationController->Insert_Trans(ANI_HIT, PART_LWING, 0, _vec3(-1.f, 0.f, 3.f));
+
+	m_pAnimationController->Insert_Revolute(ANI_HIT, PART_JAW, 0, _vec3(0.f, 0.f, 0.f), _vec3(D3DX_PI*0.25f, 0.f, 0.f));
+	m_pAnimationController->Insert_Revolute(ANI_HIT, PART_FACE, 0, _vec3(0.f, 0.f, 0.f), _vec3(D3DX_PI*0.25f, 0.f, 0.f));
+	m_pAnimationController->Insert_Revolute(ANI_HIT, PART_BODY, 0, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f));
+	m_pAnimationController->Insert_Revolute(ANI_HIT, PART_2BODY, 0, _vec3(0.f, 0.f, 0.f), _vec3(-D3DX_PI*0.1f, 0.f, 0.f));
+	m_pAnimationController->Insert_Revolute(ANI_HIT, PART_3BODY, 0, _vec3(0.f, 0.f, 0.f), _vec3(-D3DX_PI*0.2f, 0.f, 0.f));
+	m_pAnimationController->Insert_Revolute(ANI_HIT, PART_WING, 0, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, -D3DX_PI*0.7f));
+	m_pAnimationController->Insert_Revolute(ANI_HIT, PART_LWING, 0, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, D3DX_PI*0.7f));
+
+	//쳐맞기 1프레임
+	for (int i = 0; i < PARTS_END; ++i)
+		m_pAnimationController->Insert_Scale(ANI_HIT, i, 1, _vec3(1.f, 1.f, 1.f));
+
+	m_pAnimationController->Insert_Scale(ANI_HIT, PART_BODY, 1, _vec3(0.8f, 0.8f, 0.8f));
+	m_pAnimationController->Insert_Scale(ANI_HIT, PART_2BODY, 1, _vec3(0.8f, 0.8f, 0.8f));
+	m_pAnimationController->Insert_Scale(ANI_HIT, PART_3BODY, 1, _vec3(0.8f, 0.8f, 0.8f));
+
+	for (int i = 0; i < PARTS_END; ++i)
+		m_pAnimationController->Insert_Rotate(ANI_HIT, i, 1, _vec3(0.f, 0.f, 0.f));
+
+	//m_pAnimationController->Insert_Rotate(ANI_HIT, PART_WING, 1, _vec3(0.f, D3DX_PI*0.5f, 0.f));
+	//m_pAnimationController->Insert_Rotate(ANI_HIT, PART_LWING, 1, _vec3(0.f, -D3DX_PI*0.5f, 0.f));
+
+	m_pAnimationController->Insert_Trans(ANI_HIT, PART_JAW, 1, _vec3(0.f, 0.f, 1.f));
+	m_pAnimationController->Insert_Trans(ANI_HIT, PART_FACE, 1, _vec3(0.f, 0.f, 1.f));
+	m_pAnimationController->Insert_Trans(ANI_HIT, PART_BODY, 1, _vec3(0.f, 0.f, -1.5f));
+	m_pAnimationController->Insert_Trans(ANI_HIT, PART_2BODY, 1, _vec3(0.f, 0.f, -3.f));
+	m_pAnimationController->Insert_Trans(ANI_HIT, PART_3BODY, 1, _vec3(0.f, 0.f, -4.5f));
+	m_pAnimationController->Insert_Trans(ANI_HIT, PART_WING, 1, _vec3(1.f, 0.f, 3.f));
+	m_pAnimationController->Insert_Trans(ANI_HIT, PART_LWING, 1, _vec3(-1.f, 0.f, 3.f));
+
+	m_pAnimationController->Insert_Revolute(ANI_HIT, PART_JAW, 1, _vec3(0.f, 0.f, 0.f), _vec3(D3DX_PI*0.25f, 0.f, 0.f));
+	m_pAnimationController->Insert_Revolute(ANI_HIT, PART_FACE, 1, _vec3(0.f, 0.f, 0.f), _vec3(D3DX_PI*0.25f, 0.f, 0.f));
+	m_pAnimationController->Insert_Revolute(ANI_HIT, PART_BODY, 1, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f));
+	m_pAnimationController->Insert_Revolute(ANI_HIT, PART_2BODY, 1, _vec3(0.f, 0.f, 0.f), _vec3(-D3DX_PI*0.1f, 0.f, 0.f));
+	m_pAnimationController->Insert_Revolute(ANI_HIT, PART_3BODY, 1, _vec3(0.f, 0.f, 0.f), _vec3(-D3DX_PI*0.2f, 0.f, 0.f));
+	m_pAnimationController->Insert_Revolute(ANI_HIT, PART_WING, 1, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, -D3DX_PI*0.7f));
+	m_pAnimationController->Insert_Revolute(ANI_HIT, PART_LWING, 1, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, D3DX_PI*0.7f));
 }

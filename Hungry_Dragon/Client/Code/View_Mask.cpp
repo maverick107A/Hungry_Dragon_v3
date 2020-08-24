@@ -3,6 +3,7 @@
 
 #include "Export_Function.h"
 #include "Ingame_Flow.h"
+#include "PlayerMain.h"
 #include "TestPlayer.h"
 #include "CameraMain.h"
 
@@ -20,7 +21,8 @@ CView_Mask::~CView_Mask(void) {
 HRESULT CView_Mask::Ready_Object(void) {
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
-	m_pCam = dynamic_cast<CTestPlayer*>(::Get_Object(L"GameLogic", L"TestPlayer"))->Get_Camera();
+	m_pPlayer = dynamic_cast<CPlayerMain*>(::Get_Object(L"GameLogic", L"TestPlayer"));
+	m_pCam = dynamic_cast<CPlayerMain*>(::Get_Object(L"GameLogic", L"TestPlayer"))->Get_Camera();
 
 	return S_OK;
 }
@@ -43,17 +45,16 @@ int CView_Mask::Update_Object(const float& fTimeDelta) {
 
 	m_uTexFrame = (m_uTexFrame + 1) % 30;
 
-	if (GetAsyncKeyState(VK_SHIFT) & 0x0001)
+	if (m_pPlayer->Get_AccelCheck())
 	{
 		if (!m_bAccel)
-		{
 			Engine::Get_FMOD()->PlayEffect(L"FlightOnce");
-		}
-	}
-
-	if (GetAsyncKeyState(VK_SHIFT) & 0x8000)
-	{
 		m_bAccel = true;
+	}
+	else
+		m_bAccel = false;
+	if (m_bAccel)
+	{
 		m_fAccel -= fTimeDelta;
 		if (0.f > m_fAccel)
 		{
@@ -62,9 +63,31 @@ int CView_Mask::Update_Object(const float& fTimeDelta) {
 	}
 	else
 	{
-		m_bAccel = false;
 		m_fAccel = 2.f;
 	}
+
+	//if (GetAsyncKeyState(VK_SHIFT) & 0x0001)
+	//{
+	//	if (!m_bAccel)
+	//	{
+	//		Engine::Get_FMOD()->PlayEffect(L"FlightOnce");
+	//	}
+	//}
+
+	//if (GetAsyncKeyState(VK_SHIFT) & 0x8000)
+	//{
+	//	m_bAccel = true;
+	//	m_fAccel -= fTimeDelta;
+	//	if (0.f > m_fAccel)
+	//	{
+	//		m_fAccel = 0.f;
+	//	}
+	//}
+	//else
+	//{
+	//	m_bAccel = false;
+	//	m_fAccel = 2.f;
+	//}
 
 	return 0;
 }

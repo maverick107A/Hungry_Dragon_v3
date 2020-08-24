@@ -79,9 +79,6 @@
     <Filter Include="02. UtilBase\02. Component\02. State\00.PlayerState\04.BreathIdle">
       <UniqueIdentifier>{fe30575b-8310-450d-b235-9ac0b8d72289}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. UtilBase\02. Component\02. State\00.PlayerState\06.CaveRush">
-      <UniqueIdentifier>{ecea96f9-7955-428e-b598-e7746ad43ef1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. UtilBase\02. Component\02. State\00.PlayerState\05.BreathFly">
       <UniqueIdentifier>{8d5824cb-c6a5-462c-82b1-cb9722498fdc}</UniqueIdentifier>
     </Filter>
@@ -108,6 +105,12 @@
     </Filter>
     <Filter Include="02. UtilBase\01. GameObject\36. Bullet">
       <UniqueIdentifier>{cb978f01-7c9e-4279-a5b1-7a1fd65c8196}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. UtilBase\02. Component\02. State\00.PlayerState\06.HIT">
+      <UniqueIdentifier>{4a05f3b5-2af6-4e79-ad10-ee423397dd91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. UtilBase\02. Component\02. State\00.PlayerState\07.CaveRush">
+      <UniqueIdentifier>{ecea96f9-7955-428e-b598-e7746ad43ef1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -175,7 +178,7 @@
       <Filter>02. UtilBase\01. GameObject\01. Monster</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\PCaveRush.cpp">
-      <Filter>02. UtilBase\02. Component\02. State\00.PlayerState\06.CaveRush</Filter>
+      <Filter>02. UtilBase\02. Component\02. State\00.PlayerState\07.CaveRush</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\CaveCamera.cpp">
       <Filter>02. UtilBase\02. Component\01. Camera\02. CaveCamera</Filter>
@@ -215,6 +218,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\BossCamera.cpp">
       <Filter>02. UtilBase\02. Component\01. Camera\03. BossCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\PHit.cpp">
+      <Filter>02. UtilBase\02. Component\02. State\00.PlayerState\06.HIT</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -285,7 +291,7 @@
       <Filter>02. UtilBase\01. GameObject\01. Monster</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\PCaveRush.h">
-      <Filter>02. UtilBase\02. Component\02. State\00.PlayerState\06.CaveRush</Filter>
+      <Filter>02. UtilBase\02. Component\02. State\00.PlayerState\07.CaveRush</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\CaveCamera.h">
       <Filter>02. UtilBase\02. Component\01. Camera\02. CaveCamera</Filter>
@@ -325,6 +331,9 @@
     </ClInclude>
     <ClInclude Include="..\Code\BossCamera.h">
       <Filter>02. UtilBase\02. Component\01. Camera\03. BossCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\PHit.h">
+      <Filter>02. UtilBase\02. Component\02. State\00.PlayerState\06.HIT</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -11,7 +11,6 @@ class CTexture;
 class CTerrain;
 class CParticle;
 class CResources;
-class CAnimation_Controller;
 
 END
 
@@ -43,10 +42,6 @@ private:
 	float m_vWAngle = 0.f;
 	float m_fWSpeed = 0.03f;
 
-	D3DXMATRIX m_matOld1;
-	D3DXMATRIX m_matOld2;
-	D3DXMATRIX m_matOld3;
-
 public:
 	static CBossPlayer*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 
@@ -55,7 +50,6 @@ private:
 
 public:
 	Engine::CParticle*				m_pParticle=nullptr;
-	Engine::CAnimation_Controller* m_pAnimationController;
 
 	//먹는거 컨트롤할 임시 변수
 	bool						m_bEatFirst=true;

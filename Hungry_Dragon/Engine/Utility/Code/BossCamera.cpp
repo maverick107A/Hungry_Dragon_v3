@@ -1,5 +1,7 @@
 #include "BossCamera.h"
 #include "BaseLand.h"
+#include "MonsterMain.h"
+#include "Transform.h"
 
 USING(Engine)
 
@@ -26,7 +28,7 @@ _int CBossCamera::Update_Camera(const _float & _fTimeDelta, float * _fAngleX, fl
 	switch (m_ePhase)
 	{
 	case Engine::CBossCamera::PHASE_ZERO:
-		Move_Phase01(_fAngleX, _fAngleY, _vLook, _vUp, _pPlayer);
+		Move_Phase01(_fAngleX, _fAngleY, _vLook, _vUp);
 		break;
 	case Engine::CBossCamera::PHASE_ONE:
 		Move_Phase2(_fAngleX, _fAngleY, _vLook, _vUp, _pPlayer);
@@ -73,7 +75,7 @@ void CBossCamera::Move_Camera(LPDIRECT3DDEVICE9 & pGraphicDev, _vec3 _vPos, floa
 	m_vDir = m_vPos + m_vDir;
 }
 
-void CBossCamera::Move_Phase01(float * _fAngleX, float * _fAngleY, _vec3 * _vLook, _vec3 * _vUp, CPlayerMain* _pPlayer)
+void CBossCamera::Move_Phase01(float * _fAngleX, float * _fAngleY, _vec3 * _vLook, _vec3 * _vUp)
 {
 	if (m_bLock)
 		return;
@@ -153,6 +155,18 @@ void CBossCamera::Move_Phase2(float * _fAngleX, float * _fAngleY, _vec3 * _vLook
 	D3DXVec3TransformNormal(&m_vUp, &m_vUp, &vRotTotal);
 	memcpy(_vUp, &m_vUp, sizeof(_vec3));
 	SetCursorPos(m_tCenter.x, m_tCenter.y);
+
+	if (_pPlayer->Get_Boss())
+	{	
+		_vec3 vRight;
+		m_vDir = _pPlayer->Get_Boss()->Get_Transform()->m_vInfo[Engine::INFO_POS] - _pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS];
+		m_vDir.y += 1000.f;
+		D3DXVec3Normalize(&m_vDir, &m_vDir);
+		D3DXVec3Cross(&vRight, &_vec3(0.f, 1.f, 0.f), &m_vDir);
+		D3DXVec3Cross(&m_vUp, &m_vDir, &vRight);
+		D3DXVec3Normalize(&m_vUp, &m_vUp);
+	}
+
 }
 
 void CBossCamera::Switch_Phase(int _iPhase)
@@ -160,34 +174,10 @@ void CBossCamera::Switch_Phase(int _iPhase)
 	switch (_iPhase)
 	{
 	case 0:
-		m_vAfterAngle.x = 0.f;
-		m_vAfterAngle.y = 0.f;
-		m_vAfterAngle.z = 0.f;
-		m_fCameraDis = 25.f;
 		m_ePhase = PHASE::PHASE_ZERO;
 		break;
 	case 1:
-		m_vAfterAngle.x = 0.f;
-		m_vAfterAngle.y = -D3DX_PI*0.5f;
-		m_vAfterAngle.z = 0.f;
-		m_fCameraDis = 23.f;
 		m_ePhase = PHASE::PHASE_ONE;
-		break;
-	case 2:
-		m_vAfterAngle.x = 0.f;
-		m_vAfterAngle.y = 0.f;
-		m_vAfterAngle.z = 0.f;
-		m_fCameraDis = 25.f;
-		while (true)
-		{
-			if (abs(m_vAfterAngle.z - m_vAngle.z) < D3DX_PI)
-				break;
-			if (m_vAfterAngle.z > m_vAngle.z)
-				m_vAngle.z += D3DX_PI*2.f;
-			else
-				m_vAngle.z -= D3DX_PI*2.f;
-		}
-		m_ePhase = PHASE::PHASE_TWO;
 		break;
 	}
 }

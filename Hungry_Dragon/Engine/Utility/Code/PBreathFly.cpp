@@ -95,7 +95,7 @@ void CPBreathFly::Update_State(const float& fTimeDelta)
 		vDir += D3DXVECTOR3(0.f, 1.f, 0.f);
 		bCheck = true;
 	}
-	if (GetAsyncKeyState(VK_SHIFT))
+	if (GetAsyncKeyState(VK_SHIFT) && 0 < m_pPlayer->Get_Stamina())
 	{
 		bShift = true;
 	}
@@ -118,7 +118,9 @@ void CPBreathFly::Update_State(const float& fTimeDelta)
 		D3DXVec3Normalize(&vDir, &vDir);
 		if (bShift)
 		{
+			m_pPlayer->Add_Stamina(-1);
 			vDir *= m_fBoostMulti;
+			m_pPlayer->Set_AccelCheck(true);
 			m_pPlayer->Set_Animation(ANI_FASTBREATH);
 		}
 		else

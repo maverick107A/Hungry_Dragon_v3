@@ -23,10 +23,13 @@ void CPLandIdle::Enter_State(CPlayerMain* _pPlayer)
 {
 	m_pPlayer = _pPlayer;
 	m_pPlayer->Set_Animation(ANI_IDLE);
+	m_pPlayer->Set_FrameSpeed(1.f);
 }
 
 void CPLandIdle::Update_State(const float& fTimeDelta)
 {
+	if (m_pPlayer->Get_Stamina() < 300)
+		m_pPlayer->Add_Stamina(2);
 	if (GetAsyncKeyState('W') || GetAsyncKeyState('S'))
 	{
 		m_pPlayer->Set_Sate(CPlayerMain::STATE_LANDRUSH);
@@ -39,6 +42,7 @@ void CPLandIdle::Update_State(const float& fTimeDelta)
 
 void CPLandIdle::Out_State()
 {
+	m_pPlayer->Set_FrameSpeed(3.f);
 }
 
 void CPLandIdle::LateUpdate_State()

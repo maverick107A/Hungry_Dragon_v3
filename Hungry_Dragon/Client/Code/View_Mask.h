@@ -11,6 +11,7 @@ class CTexture;
 class CTransform;
 class CRenderer;
 class CCameraMain;
+class CPlayerMain;
 
 END
 
@@ -44,6 +45,7 @@ private:
 	Engine::_float	m_fAccel = 1.f;
 
 	Engine::CCameraMain*			m_pCam = nullptr;
+	Engine::CPlayerMain*					m_pPlayer = nullptr;
 
 public:
 	static CView_Mask*	Create(LPDIRECT3DDEVICE9 pGraphicDev);

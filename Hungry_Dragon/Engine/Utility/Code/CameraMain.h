@@ -3,10 +3,9 @@
 
 #include "Component.h"
 #include "BaseLand.h"
+#include "PlayerMain.h"
 
 BEGIN(Engine)
-
-class CPlayerMain;
 
 class ENGINE_DLL CCameraMain : public CComponent
 {
@@ -17,7 +16,7 @@ protected:
 public:
 	HRESULT			Ready_Camera(void) { return 0; }
 	virtual _int	Update_Camera(const _float& _fTimeDelta, float* _fAngleX, float* _fAngleY, _vec3* _vLook, _vec3* _vUp, CPlayerMain* _pPlayer) { return 0; }
-	void			Camera_Set(LPDIRECT3DDEVICE9& _pGraphicDev, _vec3 _vPos);
+	void			Camera_Set(LPDIRECT3DDEVICE9& _pGraphicDev, _vec3 _vPos, CBaseLand* _pTerrain = nullptr);
 
 public:
 	_vec3			Get_Pos() { return m_vPos; }
@@ -43,7 +42,7 @@ protected:
 	//float			m_fAngleYReal = 0.f;
 	//float			m_fAngleZReal = 0.f;
 	float			m_fCameraDis = 400.f;
-	float			m_fCameraDisSpeed = 0.5f;
+	float			m_fCameraDisSpeed = 1.5f;
 	_vec3			m_vAngle = {0.f,0.f,0.f};
 	_vec3			m_vAfterAngle = {0.f,0.f,0.f};
 	_vec3			m_vDir = {0.f,0.f,0.f};

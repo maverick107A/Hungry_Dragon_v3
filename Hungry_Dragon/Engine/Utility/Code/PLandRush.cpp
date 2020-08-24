@@ -48,7 +48,7 @@ void CPLandRush::Update_State(const float& fTimeDelta)
 		vDir -= vRight;
 		bCheck = true;
 	}
-	if (GetAsyncKeyState(VK_SHIFT))
+	if (GetAsyncKeyState(VK_SHIFT) && 0 < m_pPlayer->Get_Stamina())
 	{
 		bShift = true;
 	}
@@ -59,6 +59,8 @@ void CPLandRush::Update_State(const float& fTimeDelta)
 		if (bShift)
 		{
 			vDir *= m_fBoostMulti;
+			m_pPlayer->Add_Stamina(-1);
+			m_pPlayer->Set_AccelCheck(true);
 			m_pPlayer->Set_Animation(ANI_FASTFLY);
 		}
 		else

@@ -29,8 +29,6 @@ void CPFly::Enter_State(CPlayerMain* _pPlayer)
 
 void CPFly::Update_State(const float& fTimeDelta)
 {
-	if (GetAsyncKeyState('G') & 0x0001 && 0 < m_pPlayer->Get_Mana())
-		m_pPlayer->Set_Sate(CPlayerMain::STATE_BREATHFLY);
 	D3DXVECTOR3 vDir = { 0.f,0.f,0.f };
 	D3DXVECTOR3 vLook = { 0.f,0.f,0.f };
 	D3DXVECTOR3 vRight = { 0.f,0.f,0.f };
@@ -85,7 +83,7 @@ void CPFly::Update_State(const float& fTimeDelta)
 		vDir += D3DXVECTOR3(0.f, 1.f, 0.f);
 		bCheck = true;
 	}
-	if (GetAsyncKeyState(VK_SHIFT))
+	if (GetAsyncKeyState(VK_SHIFT) && 0 < m_pPlayer->Get_Stamina())
 	{
 		bShift = true;
 	}
@@ -113,6 +111,7 @@ void CPFly::Update_State(const float& fTimeDelta)
 		if (bShift)
 		{
 			vDir *= m_fBoostMulti;
+			m_pPlayer->Add_Stamina(-1);
 			m_pPlayer->Set_AccelCheck(true);
 			m_pPlayer->Set_Animation(ANI_FASTFLY);
 		}
@@ -230,6 +229,8 @@ void CPFly::Update_State(const float& fTimeDelta)
 	}
 	if (Land_Check())
 		m_pPlayer->Set_Sate(CPlayerMain::STATE_LANDRUSH);
+	if (GetAsyncKeyState('G') & 0x0001 && 0 < m_pPlayer->Get_Mana())
+		m_pPlayer->Set_Sate(CPlayerMain::STATE_BREATHFLY);
 }
 
 void CPFly::Out_State()

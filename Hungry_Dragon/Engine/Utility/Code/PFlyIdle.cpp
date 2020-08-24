@@ -23,21 +23,15 @@ void CPFlyIdle::Enter_State(CPlayerMain* _pPlayer)
 {
 	m_pPlayer = _pPlayer;
 	m_pPlayer->Set_Animation(ANI_IDLE);
+	m_pPlayer->Set_FrameSpeed(1.f);
 }
 
 void CPFlyIdle::Update_State(const float& fTimeDelta)
 {
-	if (GetAsyncKeyState('G') & 0x0001 && 0 < m_pPlayer->Get_Mana())
-	{
-		m_pPlayer->Set_Sate(CPlayerMain::STATE_BREATHIDLE);
-		return;
-	}
 	if(m_pPlayer->Get_Mana() < 300)
 		m_pPlayer->Add_Mana(1);
-	if (GetAsyncKeyState('W') || GetAsyncKeyState('S') || GetAsyncKeyState('A') || GetAsyncKeyState('D') || GetAsyncKeyState(VK_SPACE))
-	{
-		m_pPlayer->Set_Sate(CPlayerMain::STATE_FLY);
-	}
+	if (m_pPlayer->Get_Stamina() < 300)
+		m_pPlayer->Add_Stamina(2);
 	if (GetAsyncKeyState(VK_RBUTTON))
 	{
 		Aim();
@@ -54,10 +48,20 @@ void CPFlyIdle::Update_State(const float& fTimeDelta)
 		m_pPlayer->Get_Transform()->m_vInCamPos.y += 0.1f*sinf(m_fAngle);
 		m_fAngle += 0.1f;
 	}
+	if (GetAsyncKeyState('W') || GetAsyncKeyState('S') || GetAsyncKeyState('A') || GetAsyncKeyState('D') || GetAsyncKeyState(VK_SPACE))
+	{
+		m_pPlayer->Set_Sate(CPlayerMain::STATE_FLY);
+	}
+	if (GetAsyncKeyState('G') & 0x0001 && 0 < m_pPlayer->Get_Mana())
+	{
+		m_pPlayer->Set_Sate(CPlayerMain::STATE_BREATHIDLE);
+		return;
+	}
 }
 
 void CPFlyIdle::Out_State()
 {
+	m_pPlayer->Set_FrameSpeed(3.f);
 }
 
 CPFlyIdle* Engine::CPFlyIdle::Create(void)

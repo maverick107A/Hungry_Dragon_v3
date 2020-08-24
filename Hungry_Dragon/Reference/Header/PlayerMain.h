@@ -2,9 +2,10 @@
 #define PlayerMain_h__
 
 #include "GameObject.h"
+#include "Animation_Controller.h"
 
 class CTerrain_Locater;
-class CGiantGolem;
+
 BEGIN(Engine)
 
 class CVIBuffer;
@@ -15,12 +16,14 @@ class CCameraMain;
 class CBaseLand;
 class CPlayerState;
 class CBreathBase;
+class CMonsterMain;
+class CAnimation_Controller;
 
 class ENGINE_DLL CPlayerMain : public Engine::CGameObject
 {
 public:
-	enum STATE { STATE_FLYIDLE, STATE_FLY, STATE_LANDIDLE, STATE_LANDRUSH, STATE_BREATHIDLE, STATE_BREATHFLY, STATE_END };
-	enum PARTS { PART_FACE, PART_JAW, PART_BODY, PART_2BODY, PART_3BODY, PART_WING, PART_LWING, PARTS_END};
+	enum STATE { STATE_FLYIDLE, STATE_FLY, STATE_LANDIDLE, STATE_LANDRUSH, STATE_BREATHIDLE, STATE_BREATHFLY, STATE_HIT, STATE_END };
+	enum PARTS { PART_FACE, PART_JAW, PART_BODY, PART_2BODY, PART_3BODY, PART_4BODY, PART_5BODY, PART_6BODY, PART_7BODY, PART_WING, PART_LWING, PARTS_END};
 
 protected:
 	explicit CPlayerMain(LPDIRECT3DDEVICE9 pGraphicDev);
@@ -49,6 +52,7 @@ public:
 	const float&			Get_AngleY() { return m_fAngleY; }
 	CBaseLand*				Get_Terrain() { return m_pTerrain; }
 	CCameraMain*			Get_Camera() { return m_pCamera; }
+	CMonsterMain*			Get_Boss() { return m_pBoss; }
 
 	ANIMATION				m_eAnimation = ANI_IDLE;
 
@@ -58,6 +62,8 @@ public:
 	void Set_MouseTime(float _fTime) { m_fMouseTime = _fTime; }
 	void Set_AccelCheck(bool _bCheck) { m_bAccelCheck = _bCheck; }
 	void Set_Animation(ANIMATION _eAni) { m_eAnimation = _eAni; }
+	void Set_Right(_vec3 _vRight) { m_vRight = _vRight; }
+	void Set_FrameSpeed(float _fSpeed) { m_pAnimationController->Set_FrameSpeed(_fSpeed); }
 
 public:
 	void Add_Hp(int _iHp) { m_iHp += _iHp; }
@@ -94,7 +100,17 @@ protected:
 	int						m_iMana = 300;
 
 	float					m_fColSize = 0.f;
-	CGiantGolem*			m_pBoss = nullptr;
+	CMonsterMain*			m_pBoss = nullptr;
+
+	D3DXMATRIX				m_matOld1;
+	D3DXMATRIX				m_matOld2;
+	D3DXMATRIX				m_matOld3;
+	D3DXMATRIX				m_matOld4;
+	D3DXMATRIX				m_matOld5;
+	D3DXMATRIX				m_matOld6;
+	D3DXMATRIX				m_matOld7;
+
+	Engine::CAnimation_Controller* m_pAnimationController;
 
 public:
 	D3DXVECTOR3				m_vNorm = { 0.f,1.f,0.f };

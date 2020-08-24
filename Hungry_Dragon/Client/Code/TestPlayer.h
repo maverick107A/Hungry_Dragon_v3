@@ -11,7 +11,6 @@ class CTexture;
 class CTerrain;
 class CParticle;
 class CResources;
-class CAnimation_Controller;
 
 END
 
@@ -27,14 +26,13 @@ public:
 	virtual int Update_Object(const float& fTimeDelta) override;
 	virtual void LateUpdate_Object(const float& fTimeDelta);
 	virtual void Render_Object(void) override;
-	void			Animation_Render();
+	void		Animation_Render();
 
 
 private:
 	virtual void	State_Change() override;
 	virtual HRESULT	Add_Component(void) override;
-	
-	void			Animations(const float& fTimeDelta);
+
 	void			Preset_Animation();
 
 	float m_vAngle = 0.f;
@@ -42,10 +40,6 @@ private:
 
 	float m_vWAngle = 0.f;
 	float m_fWSpeed = 0.03f;
-
-	D3DXMATRIX m_matOld1;
-	D3DXMATRIX m_matOld2;
-	D3DXMATRIX m_matOld3;
 
 public:
 	static CTestPlayer*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
@@ -55,7 +49,6 @@ private:
 
 public:
 	Engine::CParticle*				m_pParticle=nullptr;
-	Engine::CAnimation_Controller* m_pAnimationController;
 
 	//먹는거 컨트롤할 임시 변수
 	bool						m_bEatFirst=true;

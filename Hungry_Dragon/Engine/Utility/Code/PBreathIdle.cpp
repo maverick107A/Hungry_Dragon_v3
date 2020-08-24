@@ -24,25 +24,13 @@ void CPBreathIdle::Enter_State(CPlayerMain* _pPlayer)
 	m_pPlayer = _pPlayer;
 	m_pPlayer->Set_Breath(true);
 	m_pPlayer->Set_Animation(ANI_BREATHIDLE);
+	m_pPlayer->Set_FrameSpeed(1.f);
 }
 
 void CPBreathIdle::Update_State(const float& fTimeDelta)
 {
-	if (GetAsyncKeyState('G') & 0x0001)
-	{
-		m_pPlayer->Set_Sate(CPlayerMain::STATE_FLYIDLE);
-		return;
-	}
-	if (0 >= m_pPlayer->Get_Mana())
-	{
-		m_pPlayer->Set_Sate(CPlayerMain::STATE_FLYIDLE);
-		return;
-	}
-	m_pPlayer->Add_Mana(-1);
-	if (GetAsyncKeyState('W') || GetAsyncKeyState('S') || GetAsyncKeyState('A') || GetAsyncKeyState('D') || GetAsyncKeyState(VK_SPACE))
-	{
-		m_pPlayer->Set_Sate(CPlayerMain::STATE_BREATHFLY);
-	}
+	if (m_pPlayer->Get_Stamina() < 300)
+		m_pPlayer->Add_Stamina(2);
 
 	if (GetAsyncKeyState(VK_RBUTTON))
 	{
@@ -61,6 +49,21 @@ void CPBreathIdle::Update_State(const float& fTimeDelta)
 		m_fAngle += 0.1f;
 	}
 
+	if (GetAsyncKeyState('G') & 0x0001)
+	{
+		m_pPlayer->Set_Sate(CPlayerMain::STATE_FLYIDLE);
+		return;
+	}
+	if (0 >= m_pPlayer->Get_Mana())
+	{
+		m_pPlayer->Set_Sate(CPlayerMain::STATE_FLYIDLE);
+		return;
+	}
+	m_pPlayer->Add_Mana(-1);
+	if (GetAsyncKeyState('W') || GetAsyncKeyState('S') || GetAsyncKeyState('A') || GetAsyncKeyState('D') || GetAsyncKeyState(VK_SPACE))
+	{
+		m_pPlayer->Set_Sate(CPlayerMain::STATE_BREATHFLY);
+	}
 	//if(abs(m_pPlayer->Get_Transform()->m_vAngle.x) < 0.05f)
 	//	m_pPlayer->Get_Transform()->m_vAngle.x = 0.f;
 	//else if (m_pPlayer->Get_Transform()->m_vAngle.x > 0.f)
@@ -74,6 +77,7 @@ void CPBreathIdle::Update_State(const float& fTimeDelta)
 void CPBreathIdle::Out_State()
 {
 	m_pPlayer->Set_Breath(false);
+	m_pPlayer->Set_FrameSpeed(3.f);
 }
 
 CPBreathIdle* Engine::CPBreathIdle::Create(void)

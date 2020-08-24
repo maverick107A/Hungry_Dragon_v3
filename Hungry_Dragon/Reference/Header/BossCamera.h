@@ -8,7 +8,7 @@ class CBaseLand;
 
 class ENGINE_DLL CBossCamera : public CCameraMain
 {
-	enum PHASE { PHASE_ZERO, PHASE_ONE, PHASE_TWO, PHASE_END };
+	enum PHASE { PHASE_ZERO, PHASE_ONE, PHASE_END };
 private:
 	explicit CBossCamera(void);
 	virtual ~CBossCamera(void);
@@ -19,7 +19,7 @@ public:
 
 private:
 	void			Move_Camera(LPDIRECT3DDEVICE9& pGraphicDev, _vec3 _vPos, float* _fAngleX, float* _fAngleY);
-	void			Move_Phase01(float* _fAngleX, float* _fAngleY, _vec3 * _vLook, _vec3 * _vUp, CPlayerMain* _pPlayer);
+	void			Move_Phase01(float* _fAngleX, float* _fAngleY, _vec3 * _vLook, _vec3 * _vUp);
 	void			Move_Phase2(float* _fAngleX, float* _fAngleY, _vec3 * _vLook, _vec3 * _vUp, CPlayerMain* _pPlayer);
 
 public:

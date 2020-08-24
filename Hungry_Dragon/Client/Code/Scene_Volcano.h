@@ -29,7 +29,7 @@
 #include "BackGround.h"
 
 
-#include "TestPlayer.h"
+#include "BossPlayer.h"
 #include "RedSky.h"
 #include "Lava.h"
 #include "PlayerUI.h"
