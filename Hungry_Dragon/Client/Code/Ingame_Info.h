@@ -8,6 +8,7 @@
 
 class CBarCon;
 class CIconCon;
+class CCompassCon;
 
 class CIngame_Info
 {
@@ -27,6 +28,8 @@ public:
 
 public:
 	void Draw_Tex(LPDIRECT3DTEXTURE9 _pTex, int _iRectX, int _iRectY, float _fScaleX, float _fScaleY, float _fPosX, float _fPosY, DWORD _dwColor = D3DCOLOR_ARGB(255, 255, 255, 255));
+	void Draw_Tex(IDirect3DBaseTexture9* _pTex, int _iRectX, int _iRectY, float _fScaleX, float _fScaleY, float _fPosX, float _fPosY, DWORD _dwColor = D3DCOLOR_ARGB(255, 255, 255, 255));
+	void Draw_TexPart(IDirect3DBaseTexture9* _pTex, int _iPivotX, int _iPivotY, int _iRectX, int _iRectY, float _fScaleX, float _fScaleY, float _fPosX, float _fPosY, DWORD _dwColor = D3DCOLOR_ARGB(255, 255, 255, 255));
 
 
 public:
@@ -43,8 +46,10 @@ private:
 	Engine::_bool		m_bChargeReadySp = true;
 
 	IDirect3DTexture9*	m_pTexBar = nullptr;
+	IDirect3DTexture9*	m_pIndicator = nullptr;
 	CBarCon*			m_pBarCon = nullptr;
 	CIconCon*			m_pIconCon = nullptr;
+	CCompassCon*		m_pCompass = nullptr;
 	LPD3DXSPRITE		m_pSprite = nullptr;
 };
 

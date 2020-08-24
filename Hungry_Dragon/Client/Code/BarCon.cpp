@@ -30,25 +30,6 @@ _int CBarCon::Update_Object(const _float& fTimeDelta)
 	Engine::CGameObject::Update_Object(fTimeDelta);
 	//Engine::Add_RenderGroup(Engine::RENDER_PRIORITY, this);
 
-
-	if (!m_bDestroyed)
-	{
-		_vec3 vPlayerPos;
-		_vec3 vPos;
-		CIngame_Flow::GetInstance()->Get_PlayerTransform()->Get_Info(INFO_POS, &vPlayerPos);
-		m_pTransform->Get_Info(INFO_POS, &vPos);
-		vPos.y += 20.f;
-
-		
-
-		vPlayerPos -= vPos;
-		if (100.f > D3DXVec3Length(&vPlayerPos))
-		{
-			vPos.y += 80.f;
-			Engine::Set_ParticleTrans(Engine::Particle_Create(Engine::PART_LEAF, _vec3(0.f, 0.f, 0.f)), vPos);
-			m_bDestroyed = true;
-		}
-	}
 	return 0;
 }
 

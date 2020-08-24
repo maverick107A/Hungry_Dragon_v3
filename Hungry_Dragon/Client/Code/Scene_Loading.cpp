@@ -383,6 +383,20 @@ _uint CScene_Loading::Loading_ForStage(void)
 		L"../../Asset/HUD/hudicon%.2d.png", 6),
 		E_FAIL);
 
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"Texture_Compass",
+		Engine::TEX_NORMAL,
+		L"../../Asset/HUD/compass.png"),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"Texture_Indicator",
+		Engine::TEX_NORMAL,
+		L"../../Asset/HUD/indicator.png"),
+		E_FAIL);
+
 
 	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
 		RESOURCE_STAGE,

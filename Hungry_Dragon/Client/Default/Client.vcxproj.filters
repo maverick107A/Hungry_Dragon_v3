@@ -232,8 +232,14 @@
     <Filter Include="02. GameObject\02. UI\00. BarCon">
       <UniqueIdentifier>{933ee61d-aef4-4356-b57b-7f08ce4f8893}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. GameObject\02. UI\01.IconCon">
+    <Filter Include="02. GameObject\02. UI\01. IconCon">
       <UniqueIdentifier>{c9ed5aaf-da31-4e1c-9b9c-4e0abdf66229}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\71. Compass">
+      <UniqueIdentifier>{2c9a8f39-e924-46e0-9275-c3c7301674ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\02. UI\02. CompassCon">
+      <UniqueIdentifier>{5c40fe04-6677-4486-a902-3a26e9b0915f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -460,7 +466,10 @@
       <Filter>02. GameObject\02. UI\00. BarCon</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\IconCon.h">
-      <Filter>02. GameObject\02. UI\01.IconCon</Filter>
+      <Filter>02. GameObject\02. UI\01. IconCon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\CompassCon.h">
+      <Filter>02. GameObject\02. UI\02. CompassCon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -678,7 +687,10 @@
       <Filter>02. GameObject\02. UI\00. BarCon</Filter>
     </ClCompile>
     <ClCompile Include="..\Code\IconCon.cpp">
-      <Filter>02. GameObject\02. UI\01.IconCon</Filter>
+      <Filter>02. GameObject\02. UI\01. IconCon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\CompassCon.cpp">
+      <Filter>02. GameObject\02. UI\02. CompassCon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
