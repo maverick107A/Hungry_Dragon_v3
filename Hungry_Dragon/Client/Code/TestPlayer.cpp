@@ -70,6 +70,7 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 	m_pTransform->m_vInCamPos -= m_vUp*2.f;
 	m_pCamera->Update_Camera(fTimeDelta, &m_fAngleX, &m_fAngleY, &m_vLook, &m_vUp, m_pTerrain);
 	m_pState->Update_State(fTimeDelta);
+	D3DXVec3Cross(&m_vRight, &m_vUp, &m_vLook);
 	m_pCamera->Camera_Set(m_pGraphicDev, m_pTransform->m_vInfo[Engine::INFO_POS]);
 	//
 	State_Change();
@@ -501,8 +502,8 @@ void CTestPlayer::Preset_Animation()
 	m_pAnimationController->Insert_Trans(ANI_BREATHIDLE, PART_WING, 0, _vec3(1.f, 0.f, 0.f));
 	m_pAnimationController->Insert_Trans(ANI_BREATHIDLE, PART_LWING, 0, _vec3(-1.f, 0.f, 0.f));
 
-	m_pAnimationController->Insert_Revolute(ANI_BREATHIDLE, PART_JAW, 0, _vec3(0.f, 0.f, 0.f), _vec3(D3DX_PI*0.3f, 0.f, 0.f));
-	m_pAnimationController->Insert_Revolute(ANI_BREATHIDLE, PART_FACE, 0, _vec3(0.f, 0.f, 0.f), _vec3(-D3DX_PI*0.3f, 0.f, 0.f));
+	m_pAnimationController->Insert_Revolute(ANI_BREATHIDLE, PART_JAW, 0, _vec3(0.f, 0.f, 0.f), _vec3(D3DX_PI*0.25f, 0.f, 0.f));
+	m_pAnimationController->Insert_Revolute(ANI_BREATHIDLE, PART_FACE, 0, _vec3(0.f, 0.f, 0.f), _vec3(-D3DX_PI*0.25f, 0.f, 0.f));
 	m_pAnimationController->Insert_Revolute(ANI_BREATHIDLE, PART_BODY, 0, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f));
 	m_pAnimationController->Insert_Revolute(ANI_BREATHIDLE, PART_2BODY, 0, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f));
 	m_pAnimationController->Insert_Revolute(ANI_BREATHIDLE, PART_3BODY, 0, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f));
@@ -528,8 +529,8 @@ void CTestPlayer::Preset_Animation()
 	m_pAnimationController->Insert_Trans(ANI_BREATHIDLE, PART_WING, 1, _vec3(1.f, 0.f, 0.f));
 	m_pAnimationController->Insert_Trans(ANI_BREATHIDLE, PART_LWING, 1, _vec3(-1.f, 0.f, 0.f));
 
-	m_pAnimationController->Insert_Revolute(ANI_BREATHIDLE, PART_JAW, 1, _vec3(0.f, 0.f, 0.f), _vec3(D3DX_PI*0.3f, 0.f, 0.f));
-	m_pAnimationController->Insert_Revolute(ANI_BREATHIDLE, PART_FACE, 1, _vec3(0.f, 0.f, 0.f), _vec3(-D3DX_PI*0.3f, 0.f, 0.f));
+	m_pAnimationController->Insert_Revolute(ANI_BREATHIDLE, PART_JAW, 1, _vec3(0.f, 0.f, 0.f), _vec3(D3DX_PI*0.25f, 0.f, 0.f));
+	m_pAnimationController->Insert_Revolute(ANI_BREATHIDLE, PART_FACE, 1, _vec3(0.f, 0.f, 0.f), _vec3(-D3DX_PI*0.25f, 0.f, 0.f));
 	m_pAnimationController->Insert_Revolute(ANI_BREATHIDLE, PART_BODY, 1, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f));
 	m_pAnimationController->Insert_Revolute(ANI_BREATHIDLE, PART_2BODY, 1, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f));
 	m_pAnimationController->Insert_Revolute(ANI_BREATHIDLE, PART_3BODY, 1, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f));
@@ -618,8 +619,8 @@ void CTestPlayer::Preset_Animation()
 	m_pAnimationController->Insert_Trans(ANI_BREATHFLY, PART_WING, 0, _vec3(1.f, 0.f, 3.f));
 	m_pAnimationController->Insert_Trans(ANI_BREATHFLY, PART_LWING, 0, _vec3(-1.f, 0.f, 3.f));
 
-	m_pAnimationController->Insert_Revolute(ANI_BREATHFLY, PART_JAW, 0, _vec3(0.f, 0.f, 0.f), _vec3(D3DX_PI*0.3f, 0.f, 0.f));
-	m_pAnimationController->Insert_Revolute(ANI_BREATHFLY, PART_FACE, 0, _vec3(0.f, 0.f, 0.f), _vec3(-D3DX_PI*0.3f, 0.f, 0.f));
+	m_pAnimationController->Insert_Revolute(ANI_BREATHFLY, PART_JAW, 0, _vec3(0.f, 0.f, 0.f), _vec3(D3DX_PI*0.25f, 0.f, 0.f));
+	m_pAnimationController->Insert_Revolute(ANI_BREATHFLY, PART_FACE, 0, _vec3(0.f, 0.f, 0.f), _vec3(-D3DX_PI*0.25f, 0.f, 0.f));
 	m_pAnimationController->Insert_Revolute(ANI_BREATHFLY, PART_BODY, 0, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f));
 	m_pAnimationController->Insert_Revolute(ANI_BREATHFLY, PART_2BODY, 0, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f));
 	m_pAnimationController->Insert_Revolute(ANI_BREATHFLY, PART_3BODY, 0, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f));
@@ -648,8 +649,8 @@ void CTestPlayer::Preset_Animation()
 	m_pAnimationController->Insert_Trans(ANI_BREATHFLY, PART_WING, 1, _vec3(1.f, 0.f, 3.f));
 	m_pAnimationController->Insert_Trans(ANI_BREATHFLY, PART_LWING, 1, _vec3(-1.f, 0.f, 3.f));
 
-	m_pAnimationController->Insert_Revolute(ANI_BREATHFLY, PART_JAW, 1, _vec3(0.f, 0.f, 0.f), _vec3(D3DX_PI*0.3f, 0.f, 0.f));
-	m_pAnimationController->Insert_Revolute(ANI_BREATHFLY, PART_FACE, 1, _vec3(0.f, 0.f, 0.f), _vec3(-D3DX_PI*0.3f, 0.f, 0.f));
+	m_pAnimationController->Insert_Revolute(ANI_BREATHFLY, PART_JAW, 1, _vec3(0.f, 0.f, 0.f), _vec3(D3DX_PI*0.25f, 0.f, 0.f));
+	m_pAnimationController->Insert_Revolute(ANI_BREATHFLY, PART_FACE, 1, _vec3(0.f, 0.f, 0.f), _vec3(-D3DX_PI*0.25f, 0.f, 0.f));
 	m_pAnimationController->Insert_Revolute(ANI_BREATHFLY, PART_BODY, 1, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f));
 	m_pAnimationController->Insert_Revolute(ANI_BREATHFLY, PART_2BODY, 1, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f));
 	m_pAnimationController->Insert_Revolute(ANI_BREATHFLY, PART_3BODY, 1, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f));

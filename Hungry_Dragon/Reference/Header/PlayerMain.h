@@ -44,6 +44,7 @@ public:
 	CAnimationTransform*	Get_PartsTrans(int _i) { return m_pPartsTrans[_i]; }
 	const D3DXVECTOR3&		Get_Look() { return m_vLook; }
 	const D3DXVECTOR3&		Get_Up() { return m_vUp; }
+	const D3DXVECTOR3&		Get_Right() { return m_vRight; }
 	const float&			Get_AngleX() { return m_fAngleX; }
 	const float&			Get_AngleY() { return m_fAngleY; }
 	CBaseLand*				Get_Terrain() { return m_pTerrain; }
@@ -77,6 +78,7 @@ protected:
 	CBreathBase*			m_pBreath = nullptr;
 	D3DXVECTOR3				m_vLook;
 	D3DXVECTOR3				m_vUp;
+	D3DXVECTOR3				m_vRight;
 	float					m_fAngleX = 0.f;
 	float					m_fAngleY = 0.f;
 	bool					m_bAccelCheck = false;
@@ -95,10 +97,6 @@ protected:
 
 public:
 	D3DXVECTOR3				m_vNorm = { 0.f,1.f,0.f };
-	float					m_fCosX = 0.f;
-	float					m_fCosY = 0.f;
-	float					m_fSinX = 0.f;
-	float					m_fSinY = 0.f;
 
 public:
 	static CPlayerMain*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
