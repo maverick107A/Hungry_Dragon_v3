@@ -19,7 +19,7 @@ HRESULT Engine::CCaveCamera::Ready_Camera(void)
 	return S_OK;
 }
 
-_int Engine::CCaveCamera::Update_Camera(const _float& fTimeDelta, LPDIRECT3DDEVICE9& pGraphicDev, _vec3 _vPos, float* _fAngleX, float* _fAngleY, CBaseLand* _pTerrain)
+_int Engine::CCaveCamera::Update_Camera(const _float& fTimeDelta, LPDIRECT3DDEVICE9& pGraphicDev, _vec3 _vPos, float* _fAngleX, float* _fAngleY, CPlayerMain* _pPlayer)
 {
 	if (GetAsyncKeyState(VK_F2) & 0x0001)
 	{
@@ -51,7 +51,7 @@ _int Engine::CCaveCamera::Update_Camera(const _float& fTimeDelta, LPDIRECT3DDEVI
 	return 0;
 }
 
-_int CCaveCamera::Update_Camera(const _float & _fTimeDelta, float * _fAngleX, float * _fAngleY, _vec3 * _vLook, _vec3 * _vUp, CBaseLand * _pTerrain)
+_int CCaveCamera::Update_Camera(const _float & _fTimeDelta, float * _fAngleX, float * _fAngleY, _vec3 * _vLook, _vec3 * _vUp, CPlayerMain* _pPlayer)
 {
 	if (GetAsyncKeyState(VK_F2) & 0x0001)
 	{

@@ -9,6 +9,7 @@ BEGIN(Engine)
 class CSkyCube;
 class CTexture;
 class CTransform;
+class CCameraMain;
 class CRenderer;
 
 END
@@ -33,7 +34,7 @@ private:
 	Engine::CSkyCube*		m_pBufferCom = nullptr;
 	Engine::CTexture*		m_pTextureCom = nullptr;
 	Engine::CTransform*		m_pTransform = nullptr;
-	Engine::CTransform*		m_pPlayerTrans = nullptr;
+	Engine::CCameraMain*	m_pPlayerCamera = nullptr;
 
 public:
 	static CSkySphere*	Create(LPDIRECT3DDEVICE9 pGraphicDev);

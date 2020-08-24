@@ -4,7 +4,7 @@
 #include "GameObject.h"
 
 class CTerrain_Locater;
-
+class CGiantGolem;
 BEGIN(Engine)
 
 class CVIBuffer;
@@ -94,6 +94,7 @@ protected:
 	int						m_iMana = 300;
 
 	float					m_fColSize = 0.f;
+	CGiantGolem*			m_pBoss = nullptr;
 
 public:
 	D3DXVECTOR3				m_vNorm = { 0.f,1.f,0.f };

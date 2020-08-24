@@ -240,6 +240,8 @@
     </Filter>
     <Filter Include="02. GameObject\02. UI\02. CompassCon">
       <UniqueIdentifier>{5c40fe04-6677-4486-a902-3a26e9b0915f}</UniqueIdentifier>
+    <Filter Include="02. GameObject\01. Stage\01.Player\02. BossPlayer">
+      <UniqueIdentifier>{95827ce7-c9bd-4f79-8ecc-66c350b9a90e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -471,6 +473,9 @@
     <ClInclude Include="..\Code\CompassCon.h">
       <Filter>02. GameObject\02. UI\02. CompassCon</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\BossPlayer.h">
+      <Filter>02. GameObject\01. Stage\01.Player\02. BossPlayer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -691,6 +696,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\CompassCon.cpp">
       <Filter>02. GameObject\02. UI\02. CompassCon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\BossPlayer.cpp">
+      <Filter>02. GameObject\01. Stage\01.Player\02. BossPlayer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

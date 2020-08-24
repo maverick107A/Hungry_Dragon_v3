@@ -20,7 +20,7 @@ HRESULT Engine::CCamera::Ready_Camera(void)
 	return S_OK;
 }
 
-_int Engine::CCamera::Update_Camera(const _float& _fTimeDelta, float* _fAngleX, float* _fAngleY, _vec3* _vLook, _vec3* _vUp, CBaseLand* _pTerrain)
+_int Engine::CCamera::Update_Camera(const _float& _fTimeDelta, float* _fAngleX, float* _fAngleY, _vec3* _vLook, _vec3* _vUp, CPlayerMain* _pPlayer)
 {
 	if (GetAsyncKeyState(VK_F1) & 0x0001)
 		m_bLock = !m_bLock;
@@ -51,12 +51,12 @@ void CCamera::Move_Camera(float* _fAngleX, float* _fAngleY, _vec3* _vLook, _vec3
 	//짜증나는코드
 	float fYPlus;
 	if(cosf(m_vAfterAngle.x) > 0)
-		fYPlus = ((tPos.x - m_tCenter.x)*cosf(m_vAngle.z) + (tPos.y - m_tCenter.y)*sinf(m_vAngle.z))*0.0005f;
+		fYPlus = ((tPos.x - m_tCenter.x)*cosf(m_vAngle.z) + (tPos.y - m_tCenter.y)*sinf(m_vAngle.z))*0.0003f;
 	else
-		fYPlus = -((tPos.x - m_tCenter.x)*cosf(m_vAngle.z) + (tPos.y - m_tCenter.y)*sinf(m_vAngle.z))*0.0005f;
+		fYPlus = -((tPos.x - m_tCenter.x)*cosf(m_vAngle.z) + (tPos.y - m_tCenter.y)*sinf(m_vAngle.z))*0.0003f;
 	//끝
 	m_vAfterAngle.y += fYPlus;
-	m_vAfterAngle.x += ((tPos.y - m_tCenter.y)*cosf(m_vAngle.z) - (tPos.x - m_tCenter.x)*sinf(m_vAngle.z))*0.0005f;
+	m_vAfterAngle.x += ((tPos.y - m_tCenter.y)*cosf(m_vAngle.z) - (tPos.x - m_tCenter.x)*sinf(m_vAngle.z))*0.0003f;
 	memcpy(_fAngleX, &m_vAfterAngle.x, sizeof(float));
 	memcpy(_fAngleY, &m_vAfterAngle.y, sizeof(float));
 

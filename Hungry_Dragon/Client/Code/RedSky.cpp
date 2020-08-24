@@ -26,7 +26,7 @@ HRESULT CRedSky::Ready_Object(void)
 
 void CRedSky::Initialize_Object(void)
 {
-	m_pPlayerTrans = static_cast<Engine::CTransform*>(Engine::Get_Component(L"GameLogic", L"TestPlayer", L"Com_Transform", Engine::ID_DYNAMIC));
+	m_pPlayerCamera = static_cast<Engine::CCameraMain*>(Engine::Get_Component(L"GameLogic", L"TestPlayer", L"Com_Camera", Engine::ID_DYNAMIC));
 	m_pTransform->Set_Scale(100.f);
 }
 
@@ -47,7 +47,7 @@ _int CRedSky::Update_Object(const _float& fTimeDelta)
 
 void CRedSky::LateUpdate_Object(const float & fTimeDelta)
 {
-	_vec3 vPos = m_pPlayerTrans->m_vInfo[INFO_POS];
+	_vec3 vPos = m_pPlayerCamera->Get_Pos();
 
 	m_pTransform->m_vInfo[INFO_POS] = { vPos.x, vPos.y, vPos.z };
 

@@ -117,7 +117,12 @@ void CPBreathFly::Update_State(const float& fTimeDelta)
 	{
 		D3DXVec3Normalize(&vDir, &vDir);
 		if (bShift)
+		{
 			vDir *= m_fBoostMulti;
+			m_pPlayer->Set_Animation(ANI_FASTBREATH);
+		}
+		else
+			m_pPlayer->Set_Animation(ANI_BREATHFLY);
 		//속도적용
 		vDir *= fTimeDelta*m_fSpeed;
 		//가속

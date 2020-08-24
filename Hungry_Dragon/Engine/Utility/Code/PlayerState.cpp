@@ -23,9 +23,12 @@ Engine::CPlayerState::~CPlayerState(void)
 
 bool CPlayerState::Land_Check(float* _fHeight, _vec3* _vNorm)
 {
-	//D3DXVECTOR3* vPos = &m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS];
 	CBaseLand* pTerrain = m_pPlayer->Get_Terrain();
-	
+	if (nullptr == pTerrain)
+	{
+		return false;
+	}
+
 	if (pTerrain == nullptr)
 	{
 		if (_fHeight)
@@ -79,24 +82,7 @@ bool CPlayerState::Land_Check(float* _fHeight, _vec3* _vNorm)
 	//if (vPos->y > 13.f) 여기다 높이에 의한 컬링 만들어야함
 	//	return;
 
-	//m_uCurrSectorNum = ((int)fPlayerX + 25600) / 12800 + (9 - ((int)fPlayerZ + 51200) / 12800) * 5;
-	//int Vernum = (int(vPos->x*INVERSETILESIZE) + VERTEXSIZE*int(vPos->z*INVERSETILESIZE));
-
 	int Vernum = int(PosX*INVERSETILESIZE) + VERTEXSIZE*int(PosZ *INVERSETILESIZE);
-
-	//if (0 > Vernum || VERTEXSIZE*(VERTEXSIZE-1)-1 < Vernum)
-	//{
-	//	if(_fHeight)
-	//		*_fHeight = 0.f;
-	//	return false;
-	//}
-
-	//if (_fHeight)
-	//	*_fHeight = (float)pTerrain->Get_TerrainHeight()[Vernum]* 10.f;
-	//if (_vNorm)
-	//	*_vNorm = _vec3(0.f,1.f,0.f);
-	//if (m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS].y <= (float)pTerrain->Get_TerrainHeight()[Vernum]* 10.f)
-	//	return true;
 
 	D3DXVECTOR3 Vertex1 = { float(int(PosX*INVERSETILESIZE)*TILECX), 0.f, float(int(PosZ*INVERSETILESIZE)*TILECZ) };
 	D3DXVECTOR3 Vertex2 = { float(int(PosX*INVERSETILESIZE)*TILECX + TILECX), 0.f, float(int(PosZ*INVERSETILESIZE)*TILECZ) };
@@ -126,14 +112,6 @@ bool CPlayerState::Land_Check(float* _fHeight, _vec3* _vNorm)
 		if (_vNorm)
 			*_vNorm = vNorm;
 
-
-		if (GetAsyncKeyState(VK_LBUTTON))
-		{
-			TCHAR szBuff[256] = L"";
-			wsprintf(szBuff, L"1 :%d, 2 :%d, 3 :%d", (int)Vertex1.y * 100, (int)Vertex2.y * 100, (int)Vertex3.y * 100);
-			MessageBox(nullptr, szBuff, L"XY", 0);
-		}
-
 		if (m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS].y <= fTerrainHieght)
 			return true;
 	}
@@ -155,13 +133,6 @@ bool CPlayerState::Land_Check(float* _fHeight, _vec3* _vNorm)
 			*_fHeight = fTerrainHieght;
 		if (_vNorm)
 			*_vNorm = vNorm;
-
-		if (GetAsyncKeyState(VK_LBUTTON))
-		{
-			TCHAR szBuff[256] = L"";
-			wsprintf(szBuff, L"2 :%d, 3 :%d, 4 :%d", (int)(Vertex2.y * 100), (int)(Vertex3.y * 100), (int)(Vertex4.y * 100));
-			MessageBox(nullptr, szBuff, L"XY", 0);
-		}
 
 		if (m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS].y <= fTerrainHieght)
 			return true;

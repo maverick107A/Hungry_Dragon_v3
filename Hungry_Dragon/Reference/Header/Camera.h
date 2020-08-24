@@ -5,7 +5,6 @@
 
 BEGIN(Engine)
 
-class CBaseLand;
 
 class ENGINE_DLL CCamera : public CCameraMain
 {
@@ -15,7 +14,7 @@ private:
 
 public:
 	HRESULT			Ready_Camera(void);
-	virtual _int	Update_Camera(const _float& _fTimeDelta, float* _fAngleX, float* _fAngleY, _vec3* _vLook, _vec3* _vUp, CBaseLand* _pTerrain);
+	virtual _int	Update_Camera(const _float& _fTimeDelta, float* _fAngleX, float* _fAngleY, _vec3* _vLook, _vec3* _vUp, CPlayerMain* _pPlayer);
 	virtual _int	Update_CameraMFC(LPDIRECT3DDEVICE9& _pGraphicDev, _vec3 _vPos, _vec3* _vLook, _vec3* _vUp);
 
 private:

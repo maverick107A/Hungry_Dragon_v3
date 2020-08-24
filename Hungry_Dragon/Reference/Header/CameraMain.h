@@ -2,10 +2,11 @@
 #define CameraMain_h__
 
 #include "Component.h"
+#include "BaseLand.h"
 
 BEGIN(Engine)
 
-class CBaseLand;
+class CPlayerMain;
 
 class ENGINE_DLL CCameraMain : public CComponent
 {
@@ -15,7 +16,7 @@ protected:
 
 public:
 	HRESULT			Ready_Camera(void) { return 0; }
-	virtual _int	Update_Camera(const _float& _fTimeDelta, float* _fAngleX, float* _fAngleY, _vec3* _vLook, _vec3* _vUp, CBaseLand* _pTerrain) { return 0; }
+	virtual _int	Update_Camera(const _float& _fTimeDelta, float* _fAngleX, float* _fAngleY, _vec3* _vLook, _vec3* _vUp, CPlayerMain* _pPlayer) { return 0; }
 	void			Camera_Set(LPDIRECT3DDEVICE9& _pGraphicDev, _vec3 _vPos);
 
 public:

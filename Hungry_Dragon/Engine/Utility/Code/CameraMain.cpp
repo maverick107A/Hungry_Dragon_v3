@@ -14,7 +14,11 @@ Engine::CCameraMain::~CCameraMain(void)
 
 void CCameraMain::Camera_Set(LPDIRECT3DDEVICE9& _pGraphicDev, _vec3 _vPos)
 {
-	m_vPos = _vPos - m_vDir*m_fCameraDis;
+	_vec3 a = _vPos - m_vDir*m_fCameraDis - m_vPos;
+	m_vPos += a*0.2f;
+	//정확한 방향 설정
+	m_vDir = _vPos - m_vPos;
+	D3DXVec3Normalize(&m_vDir, &m_vDir);
 	D3DXMATRIX V;
 	D3DXMatrixLookAtLH(&V, &m_vPos, &_vPos, &m_vUp);
 	_pGraphicDev->SetTransform(D3DTS_VIEW, &V);

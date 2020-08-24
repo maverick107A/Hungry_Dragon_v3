@@ -114,9 +114,12 @@ void CPFly::Update_State(const float& fTimeDelta)
 		{
 			vDir *= m_fBoostMulti;
 			m_pPlayer->Set_AccelCheck(true);
+			m_pPlayer->Set_Animation(ANI_FASTFLY);
 		}
 		else if (bControl)
 			vDir *= m_fCheatMulti;
+		else
+			m_pPlayer->Set_Animation(ANI_FLY);
 		//속도적용
 		vDir *= fTimeDelta*m_fSpeed;
 		//가속

@@ -19,58 +19,17 @@ HRESULT Engine::CBossCamera::Ready_Camera(void)
 	return S_OK;
 }
 
-_int Engine::CBossCamera::Update_Camera(const _float& fTimeDelta, LPDIRECT3DDEVICE9& pGraphicDev, _vec3 _vPos, float* _fAngleX, float* _fAngleY, CBaseLand* _pTerrain)
+_int CBossCamera::Update_Camera(const _float & _fTimeDelta, float * _fAngleX, float * _fAngleY, _vec3 * _vLook, _vec3 * _vUp, CPlayerMain* _pPlayer)
 {
-	if (GetAsyncKeyState(VK_F2) & 0x0001)
-	{
-		m_bShock = true;
-		m_fShockAngle = 5.f;
-	}
-
-	Shock_Cam();
-
-	//switch (m_ePhase)
-	//{
-	//case Engine::CBossCamera::PHASE_ZERO:
-	//	Move_Phase01(pGraphicDev, _vPos, _fAngleX, _fAngleY);
-	//	break;
-	//case Engine::CBossCamera::PHASE_ONE:
-	//	Move_Phase01(pGraphicDev, _vPos, _fAngleX, _fAngleY);
-	//	break;
-	//case Engine::CBossCamera::PHASE_TWO:
-	//	Move_Phase2(pGraphicDev, _vPos, _fAngleX, _fAngleY);
-	//	break;
-	//}
-
-	Move_Camera(pGraphicDev, _vPos, _fAngleX, _fAngleY);
-
-	D3DXMATRIX V;
-	D3DXMatrixLookAtLH(&V, &m_vPos, &m_vDir, &m_vUp);
-	pGraphicDev->SetTransform(D3DTS_VIEW, &V);
-
-	return 0;
-}
-
-_int CBossCamera::Update_Camera(const _float & _fTimeDelta, float * _fAngleX, float * _fAngleY, _vec3 * _vLook, _vec3 * _vUp, CBaseLand * _pTerrain)
-{
-	if (GetAsyncKeyState(VK_F2) & 0x0001)
-	{
-		m_bShock = true;
-		m_fShockAngle = 5.f;
-	}
-
-	Shock_Cam();
+	//Shock_Cam();
 
 	switch (m_ePhase)
 	{
 	case Engine::CBossCamera::PHASE_ZERO:
-		Move_Phase01(_fAngleX, _fAngleY, _vLook, _vUp);
+		Move_Phase01(_fAngleX, _fAngleY, _vLook, _vUp, _pPlayer);
 		break;
 	case Engine::CBossCamera::PHASE_ONE:
-		Move_Phase01(_fAngleX, _fAngleY, _vLook, _vUp);
-		break;
-	case Engine::CBossCamera::PHASE_TWO:
-		Move_Phase2(_fAngleX, _fAngleY, _vLook, _vUp);
+		Move_Phase2(_fAngleX, _fAngleY, _vLook, _vUp, _pPlayer);
 		break;
 	}
 
@@ -114,18 +73,29 @@ void CBossCamera::Move_Camera(LPDIRECT3DDEVICE9 & pGraphicDev, _vec3 _vPos, floa
 	m_vDir = m_vPos + m_vDir;
 }
 
-void CBossCamera::Move_Phase01(float * _fAngleX, float * _fAngleY, _vec3 * _vLook, _vec3 * _vUp)
+void CBossCamera::Move_Phase01(float * _fAngleX, float * _fAngleY, _vec3 * _vLook, _vec3 * _vUp, CPlayerMain* _pPlayer)
 {
-	*_fAngleX = m_vAfterAngle.x;
-	*_fAngleY = m_vAfterAngle.y;
+	if (m_bLock)
+		return;
+	POINT tPos = {};
+	GetCursorPos(&tPos);
+	//짜증나는코드
+	float fYPlus;
+	if (cosf(m_vAfterAngle.x) > 0)
+		fYPlus = ((tPos.x - m_tCenter.x)*cosf(m_vAngle.z) + (tPos.y - m_tCenter.y)*sinf(m_vAngle.z))*0.0003f;
+	else
+		fYPlus = -((tPos.x - m_tCenter.x)*cosf(m_vAngle.z) + (tPos.y - m_tCenter.y)*sinf(m_vAngle.z))*0.0003f;
+	//끝
+	m_vAfterAngle.y += fYPlus;
+	m_vAfterAngle.x += ((tPos.y - m_tCenter.y)*cosf(m_vAngle.z) - (tPos.x - m_tCenter.x)*sinf(m_vAngle.z))*0.0003f;
+	memcpy(_fAngleX, &m_vAfterAngle.x, sizeof(float));
+	memcpy(_fAngleY, &m_vAfterAngle.y, sizeof(float));
 
 	float DeltaAngleX = m_vAfterAngle.x - m_vAngle.x;
 	float DeltaAngleY = m_vAfterAngle.y - m_vAngle.y;
-	float DeltaAngleZ = m_fShockAngle;
 
 	m_vAngle.x += DeltaAngleX*0.05f;
 	m_vAngle.y += DeltaAngleY*0.05f;
-	m_vAngle.z += DeltaAngleZ*0.03f;
 
 	D3DXMATRIX vRotZ;
 	D3DXMatrixRotationZ(&vRotZ, m_vAngle.z);
@@ -137,22 +107,36 @@ void CBossCamera::Move_Phase01(float * _fAngleX, float * _fAngleY, _vec3 * _vLoo
 
 	vRotTotal = vRotX*vRotY;
 	D3DXVec3TransformNormal(&m_vDir, &m_vLook, &vRotTotal);
+	memcpy(_vLook, &m_vDir, sizeof(_vec3));
 	//업백터
 	D3DXVec3TransformNormal(&m_vUp, &m_vUp, &vRotTotal);
+	memcpy(_vUp, &m_vUp, sizeof(_vec3));
+	SetCursorPos(m_tCenter.x, m_tCenter.y);
 }
 
-void CBossCamera::Move_Phase2(float * _fAngleX, float * _fAngleY, _vec3 * _vLook, _vec3 * _vUp)
+void CBossCamera::Move_Phase2(float * _fAngleX, float * _fAngleY, _vec3 * _vLook, _vec3 * _vUp, CPlayerMain* _pPlayer)
 {
-	*_fAngleX = m_vAfterAngle.x;
-	*_fAngleY = m_vAfterAngle.y;
+	if (m_bLock)
+		return;
+	POINT tPos = {};
+	GetCursorPos(&tPos);
+	//짜증나는코드
+	float fYPlus;
+	if (cosf(m_vAfterAngle.x) > 0)
+		fYPlus = ((tPos.x - m_tCenter.x)*cosf(m_vAngle.z) + (tPos.y - m_tCenter.y)*sinf(m_vAngle.z))*0.0003f;
+	else
+		fYPlus = -((tPos.x - m_tCenter.x)*cosf(m_vAngle.z) + (tPos.y - m_tCenter.y)*sinf(m_vAngle.z))*0.0003f;
+	//끝
+	m_vAfterAngle.y += fYPlus;
+	m_vAfterAngle.x += ((tPos.y - m_tCenter.y)*cosf(m_vAngle.z) - (tPos.x - m_tCenter.x)*sinf(m_vAngle.z))*0.0003f;
+	memcpy(_fAngleX, &m_vAfterAngle.x, sizeof(float));
+	memcpy(_fAngleY, &m_vAfterAngle.y, sizeof(float));
 
 	float DeltaAngleX = m_vAfterAngle.x - m_vAngle.x;
 	float DeltaAngleY = m_vAfterAngle.y - m_vAngle.y;
-	float DeltaAngleZ = m_vAfterAngle.z - m_vAngle.z + m_fShockAngle;
 
-	m_vAngle.x += DeltaAngleX*0.07f;
-	m_vAngle.y += DeltaAngleY*0.07f;
-	m_vAngle.z += DeltaAngleZ*0.03f;
+	m_vAngle.x += DeltaAngleX*0.05f;
+	m_vAngle.y += DeltaAngleY*0.05f;
 
 	D3DXMATRIX vRotZ;
 	D3DXMatrixRotationZ(&vRotZ, m_vAngle.z);
@@ -164,8 +148,11 @@ void CBossCamera::Move_Phase2(float * _fAngleX, float * _fAngleY, _vec3 * _vLook
 
 	vRotTotal = vRotX*vRotY;
 	D3DXVec3TransformNormal(&m_vDir, &m_vLook, &vRotTotal);
+	memcpy(_vLook, &m_vDir, sizeof(_vec3));
 	//업백터
 	D3DXVec3TransformNormal(&m_vUp, &m_vUp, &vRotTotal);
+	memcpy(_vUp, &m_vUp, sizeof(_vec3));
+	SetCursorPos(m_tCenter.x, m_tCenter.y);
 }
 
 void CBossCamera::Switch_Phase(int _iPhase)

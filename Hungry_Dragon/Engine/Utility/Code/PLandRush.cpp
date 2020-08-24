@@ -59,7 +59,10 @@ void CPLandRush::Update_State(const float& fTimeDelta)
 		if (bShift)
 		{
 			vDir *= m_fBoostMulti;
+			m_pPlayer->Set_Animation(ANI_FASTFLY);
 		}
+		else
+			m_pPlayer->Set_Animation(ANI_FLY);
 		vDir *= fTimeDelta*m_fSpeed;
 		m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS] += vDir;
 		float fDis = sqrtf(vDir.x*vDir.x + vDir.y*vDir.y + vDir.z*vDir.z);
@@ -72,40 +75,6 @@ void CPLandRush::Update_State(const float& fTimeDelta)
 				fAngleY *= -1;
 			m_pPlayer->Get_Transform()->m_vAngle.y = fAngleY;
 		}
-		//float fHeight;
-		//_vec3 vNorm;
-		//Land_Check(&fHeight, &vNorm);
-
-		//m_pPlayer->m_vNorm += (vNorm - m_pPlayer->m_vNorm)*0.2f;
-
-		//vNorm = m_pPlayer->m_vNorm;
-
-		//m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS].y += (fHeight - m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS].y)*0.2f;
-
-		////지형탈때 X각 구하기
-		////X각도
-		//fDis = sqrtf(vNorm.x*vNorm.x + vNorm.y*vNorm.y + vNorm.z*vNorm.z);
-		//fPlaneDis = sqrtf(vNorm.x*vNorm.x + vNorm.z*vNorm.z);
-		//float fAngleX = acosf(fPlaneDis / fDis);
-		////천장타기때 필요한 주석
-		////if (0 < vNorm.y)
-		////	fAngleX *= -1;
-		////Y각도
-		//float fAngleY;
-		//if (0.f == fPlaneDis)
-		//	fAngleY = 0.f;
-		//else
-		//{
-		//	fAngleY = acosf(vNorm.z / fPlaneDis);
-		//	if (0 > vNorm.x)
-		//	{
-		//		fAngleY *= -1;
-		//		fAngleY += Pi * 2;
-		//	}
-		//}
-		//m_pPlayer->Get_Transform()->m_vAngle.x = -(Pi*0.5f - fAngleX)*cosf(m_pPlayer->Get_Transform()->m_vAngle.y - fAngleY);
-
-
 	}
 	else
 	{
@@ -129,7 +98,7 @@ void CPLandRush::LateUpdate_State()
 
 	vNorm = m_pPlayer->m_vNorm;
 
-	m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS].y += (fHeight - m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS].y)*0.3f;
+	m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS].y = fHeight;
 
 	//지형탈때 X각 구하기
 	//X각도

@@ -40,7 +40,7 @@ void CCavePlayer::Initialize_Object(void)
 
 int CCavePlayer::Update_Object(const float& fTimeDelta)
 {
-	m_pCamera->Update_Camera(fTimeDelta, &m_fAngleX, &m_fAngleY, &m_vLook, &m_vUp, m_pTerrain);
+	m_pCamera->Update_Camera(fTimeDelta, &m_fAngleX, &m_fAngleY, &m_vLook, &m_vUp, this);
 	m_pState->Update_State(fTimeDelta);
 	m_pCamera->Camera_Set(m_pGraphicDev, m_pTransform->m_vInfo[Engine::INFO_POS]);
 	//

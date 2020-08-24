@@ -21,8 +21,8 @@ public:
 	virtual void Out_State();
 
 private:
-	float			m_fSpeed = 200.f;
-	float			m_fBoostMulti = 10.f;
+	float			m_fSpeed = 130.f;
+	float			m_fBoostMulti = 3.f;
 	float			m_fAngleSpeed = 0.1f;
 	float			m_fDamping = 0.85f;
 	_vec3			m_vSpeed = { 0.f,0.f,0.f };

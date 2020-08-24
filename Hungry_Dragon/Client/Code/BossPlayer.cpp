@@ -1,10 +1,10 @@
 #include "stdafx.h"
-#include "TestPlayer.h"
+#include "BossPlayer.h"
 
 #include "Export_Function.h"
 //Vi버퍼
 
-#include "Camera.h"
+#include "BossCamera.h"
 #include "PlayerState.h"
 #include "PFlyIdle.h"
 #include "PFly.h"
@@ -14,19 +14,20 @@
 #include "PBreathFly.h"
 #include "BreathBase.h"
 #include "Terrain_Locater.h"
+#include "GiantGolem.h"
 
-CTestPlayer::CTestPlayer(LPDIRECT3DDEVICE9 pGraphicDev)
+CBossPlayer::CBossPlayer(LPDIRECT3DDEVICE9 pGraphicDev)
 	: CPlayerMain(pGraphicDev)
 {
 
 }
 
-CTestPlayer::~CTestPlayer(void)
+CBossPlayer::~CBossPlayer(void)
 {
 
 }
 
-HRESULT CTestPlayer::Ready_Object(void)
+HRESULT CBossPlayer::Ready_Object(void)
 {
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
@@ -39,9 +40,9 @@ HRESULT CTestPlayer::Ready_Object(void)
 	for (int i = 0; i < PARTS_END; ++i)
 		m_pPartsTrans[i]->m_vScale = _vec3(1.f, 1.f, 1.f);
 
-	m_pPartsTrans[PART_BODY]->m_vScale = _vec3(0.7f, 0.7f, 0.7f);
-	m_pPartsTrans[PART_2BODY]->m_vScale = _vec3(0.7f, 0.7f, 0.7f);
-	m_pPartsTrans[PART_3BODY]->m_vScale = _vec3(0.7f, 0.7f, 0.7f);
+	//m_pPartsTrans[PART_BODY]->m_vScale = _vec3(0.7f, 0.7f, 0.7f);
+	//m_pPartsTrans[PART_2BODY]->m_vScale = _vec3(0.7f, 0.7f, 0.7f);
+	//m_pPartsTrans[PART_3BODY]->m_vScale = _vec3(0.7f, 0.7f, 0.7f);
 
 	D3DXMatrixIdentity(&m_matOld1);
 	D3DXMatrixIdentity(&m_matOld2);
@@ -52,27 +53,25 @@ HRESULT CTestPlayer::Ready_Object(void)
 	return S_OK;
 }
 
-void CTestPlayer::Initialize_Object(void)
+void CBossPlayer::Initialize_Object(void)
 {
-	m_pTerrrrrrrain = static_cast<CTerrain_Locater*>(((Engine::CLayer*)(Get_Parent()))->Get_Object(L"BackGround", Engine::Find_First, nullptr));
+	//m_pTerrrrrrrain = static_cast<CTerrain_Locater*>(((Engine::CLayer*)(Get_Parent()))->Get_Object(L"BackGround", Engine::Find_First, nullptr));
+	/*m_pBoss = static_cast<CGiantGolem*>(((Engine::CLayer*)(Get_Parent()))->Get_Object(L"Monster", Engine::Find_First, nullptr));*/
 }
 
-int CTestPlayer::Update_Object(const float& fTimeDelta)
+int CBossPlayer::Update_Object(const float& fTimeDelta)
 {
 	m_bAccelCheck = false;
 	if (Engine::Get_DIKeyState(DIK_K) & 0x80)
 		m_bBreath = !m_bBreath;
+	//보스 포인터 받아오기
+	m_pBoss = static_cast<CGiantGolem*>(((Engine::CLayer*)(Get_Parent()))->Get_Object(L"Monster", Engine::Find_First, nullptr));
 
-	//애니메이션 테스트
-	
-
-	//화면 내에서 플레어이거 아래에 위치하도록
 	m_pTransform->m_vInCamPos -= m_vUp*2.f;
 	m_pCamera->Update_Camera(fTimeDelta, &m_fAngleX, &m_fAngleY, &m_vLook, &m_vUp, this);
 	m_pState->Update_State(fTimeDelta);
 	D3DXVec3Cross(&m_vRight, &m_vUp, &m_vLook);
 	m_pCamera->Camera_Set(m_pGraphicDev, m_pTransform->m_vInfo[Engine::INFO_POS]);
-	//
 	State_Change();
 
 	
@@ -122,14 +121,12 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 	return 0;
 }
 
-void CTestPlayer::LateUpdate_Object(const float & fTimeDelta)
+void CBossPlayer::LateUpdate_Object(const float & fTimeDelta)
 {
-	if (m_pTerrrrrrrain)
-		m_pTerrain = m_pTerrrrrrrain->Get_Terrain();
 	m_pState->LateUpdate_State();
 }
 
-void CTestPlayer::Render_Object(void)
+void CBossPlayer::Render_Object(void)
 {
 	TCHAR str[64] = L"";
 	wsprintf(str, L"POSITION : (%d,%d,%d)", int(m_pTransform->m_vInfo[Engine::INFO_POS].x), int(m_pTransform->m_vInfo[Engine::INFO_POS].y), int(m_pTransform->m_vInfo[Engine::INFO_POS].z));
@@ -138,12 +135,9 @@ void CTestPlayer::Render_Object(void)
 	m_pGraphicDev->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_GOURAUD);
 	Animation_Render();
 	m_pGraphicDev->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_FLAT);
-	//if (m_bBreath) {
-	//	m_pBreath->Render_Breath(this);
-	//}
 }
 
-void CTestPlayer::Free(void)
+void CBossPlayer::Free(void)
 {
 	
 	m_pState->Release();
@@ -151,7 +145,7 @@ void CTestPlayer::Free(void)
 }
 
 
-void CTestPlayer::State_Change()
+void CBossPlayer::State_Change()
 {
 	switch (m_eState)
 	{
@@ -195,7 +189,7 @@ void CTestPlayer::State_Change()
 	m_eState = STATE::STATE_END;
 }
 
-HRESULT CTestPlayer::Add_Component(void)
+HRESULT CBossPlayer::Add_Component(void)
 {
 	Engine::CComponent*		pComponent = nullptr;
 
@@ -259,7 +253,7 @@ HRESULT CTestPlayer::Add_Component(void)
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_LWingTransform", pComponent);
 	//Camera
-	pComponent = m_pCamera = Engine::CCamera::Create();
+	pComponent = m_pCamera = Engine::CBossCamera::Create();
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_Camera", pComponent);
 
@@ -283,9 +277,9 @@ HRESULT CTestPlayer::Add_Component(void)
 	return S_OK;
 }
 
-CTestPlayer* CTestPlayer::Create(LPDIRECT3DDEVICE9 pGraphicDev)
+CBossPlayer* CBossPlayer::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 {
-	CTestPlayer*		pInstance = new CTestPlayer(pGraphicDev);
+	CBossPlayer*		pInstance = new CBossPlayer(pGraphicDev);
 
 	if (FAILED(pInstance->Ready_Object()))
 		Engine::Safe_Release(pInstance);
@@ -294,7 +288,7 @@ CTestPlayer* CTestPlayer::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 }
 
 
-void CTestPlayer::Animation_Render()
+void CBossPlayer::Animation_Render()
 {
 	_matrix matWorld;
 	//얼굴
@@ -325,7 +319,7 @@ void CTestPlayer::Animation_Render()
 	m_matOld1 = m_pTransform->Get_World();
 }
 
-void CTestPlayer::Animations(const float& fTimeDelta)
+void CBossPlayer::Animations(const float& fTimeDelta)
 {
 	//임시
 	if (0.f < m_fMouseTime)
@@ -408,7 +402,7 @@ void CTestPlayer::Animations(const float& fTimeDelta)
 	//
 }
 
-void CTestPlayer::Preset_Animation()
+void CBossPlayer::Preset_Animation()
 {
 	m_pAnimationController->Add_Animator(-1);
 
