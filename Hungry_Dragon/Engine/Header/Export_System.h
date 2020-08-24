@@ -8,6 +8,7 @@
 #include "FontMgr.h"
 #include "InputDev.h"
 #include "FmodMgr.h"
+#include "KeyMgr.h"
 
 BEGIN(Engine)
 
@@ -73,6 +74,11 @@ inline void		Release_System(void);
 //FmodMgr
 //Get
 inline CFmodMgr* Get_FMOD() { return CFmodMgr::GetInstance(); }
+
+
+//KeyMgr
+//Get
+inline CKeyMgr* Get_KeyMgr() { return CKeyMgr::GetInstance(); }
 
 
 

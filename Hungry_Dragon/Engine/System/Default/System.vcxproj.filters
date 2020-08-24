@@ -60,6 +60,9 @@
     <ClCompile Include="..\Code\FmodMgr.cpp">
       <Filter>05. FmodMgr</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\KeyMgr.cpp">
+      <Filter>04. InputDev</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Code\GraphicDev.h">
@@ -91,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="..\Code\FmodMgr.h">
       <Filter>05. FmodMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\KeyMgr.h">
+      <Filter>04. InputDev</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

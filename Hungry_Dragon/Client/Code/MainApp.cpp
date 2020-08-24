@@ -58,6 +58,7 @@ Engine::_int CMainApp::Update_MainApp(const Engine::_float& fTimeDelta)
 {
 	Engine::Get_FMOD()->Update();
 	Engine::Set_InputDev();
+	Engine::Get_KeyMgr()->Key_UpdateByDinput();
 	CIngame_Flow::GetInstance()->Update_BeforeScene(fTimeDelta);
 
 	
