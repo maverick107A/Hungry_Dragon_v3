@@ -45,17 +45,20 @@ private:
 	float		m_fAngle = 0;
 
 	float		m_fPatternTime = 0;
-	float		m_fPatternDelay = 10;
+	float		m_fPatternDelay = 4;
 
 	int		m_iMaxPatternNum = 6;
 	int		m_iPatternNum	 = 0;
+
+	bool		m_bChange = false;
 
 
 
 	D3DXVECTOR3 m_vPos;
 	D3DXVECTOR3 m_vLookPos;
 
-
+	int			m_f = 0;
+	bool		m_b = false;
 
 	Engine::CAnimation_Controller* m_pAnimationController;
 	BOSSPATTERN						m_ePattern = PAT_IDLE;

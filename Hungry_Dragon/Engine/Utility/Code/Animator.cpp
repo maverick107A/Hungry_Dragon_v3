@@ -34,16 +34,16 @@ _bool CAnimator::Update_Frame(_float _addFrame)
 
 		while (m_arrFrame[i] >= m_arrMaxFrame[i] + 1.f)
 		{
-			m_arrFrame[i] -= m_arrMaxFrame[i] + 1.f;
 			if (m_arrMaxFrame[i] == m_maxFrame) {
-				m_bFrameNotReset = false;
+				m_bFrameNotReset = true;
 			}
+			m_arrFrame[i] -= m_arrMaxFrame[i] + 1.f;
 		}
 	}
 
-	if (!m_bFrameNotReset) {
-		m_bFrameNotReset = true;
-		return false;
+	if (m_bFrameNotReset) {
+		m_bFrameNotReset = false;
+		return true;
 	}
 
 	return m_bFrameNotReset;

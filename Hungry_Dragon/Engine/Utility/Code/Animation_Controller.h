@@ -17,6 +17,7 @@ public:
 	void Set_FrameSpeed( _float _fSpeed);
 	void Set_PartsCnt(_int _partsCnt);
 	void Set_SpecificFrame(_int _animatorIndex, _int _partsIndex);
+	void Set_Pattern(_int _iPat);
 
 public:
 	virtual _int Update_Component(const _float& fTimeDelta);
@@ -58,6 +59,8 @@ private:
 	_float				m_fNowFrame;
 	_int				m_iMaxFrame=0;
 	_float				m_fFrameSpeed=3.f;
+
+	_int				m_iPat = -1;
 };
 END
 

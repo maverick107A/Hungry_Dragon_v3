@@ -42,6 +42,7 @@ int CGiantGolem::Update_Object(const float & fTimeDelta)
 		m_iEvent = OBJ_NOEVENT;
 		m_eState = MONSTER_IDLE;
 		m_ePattern = PAT_APEAR;
+		m_pAnimationController->Set_Pattern(m_ePattern);
 	}
 
 
@@ -89,10 +90,13 @@ int CGiantGolem::Update_Object(const float & fTimeDelta)
 
 	if (m_bPatternEnd)
 	{
-		m_ePattern = PAT_IDLE;
-		m_bPatternEnd = false;
+		if (PAT_IDLE != m_ePattern)
+		{
+			m_ePattern = PAT_IDLE;
+			m_bPatternEnd = false;
+			m_fPatternTime = 0;
+		}
 	}
-
 
 	if (m_ePattern == PAT_IDLE)
 	{
@@ -104,30 +108,63 @@ int CGiantGolem::Update_Object(const float & fTimeDelta)
 			{
 			case 0:
 				m_ePattern = PAT_PUNCH;
+				m_pAnimationController->Set_Pattern(m_ePattern);
 				++m_iPatternNum;
 				break;		
 			case 1:
 				m_ePattern = PAT_STOMP;
+				m_pAnimationController->Set_Pattern(m_ePattern);
 				++m_iPatternNum;
 				break;
 			
 			case 2:
 				m_ePattern = PAT_CICLE;
+				m_pAnimationController->Set_Pattern(m_ePattern);
 				++m_iPatternNum;
 				break;
 			
 			case 3:
 				m_ePattern = PAT_FIREBALL;
+				m_pAnimationController->Set_Pattern(m_ePattern);
 				m_iPatternNum = 0;
 				break;
 			}
-
-			m_fPatternDelay = 0;
+			for (int i = 0; i < BOSSPARTS::PARTS_END; ++i)
+			{
+				m_pAnimationController->Set_SpecificFrame(m_ePattern, i);
+			}
+			m_bPatternEnd = false;
 		}
-
 	}
 
+	if (GetAsyncKeyState('L') & 0x0001)
+	{
+		switch (m_iPatternNum)
+		{
+		case 0:
+			m_ePattern = PAT_PUNCH;
+			++m_iPatternNum;
+			break;
+		case 1:
+			m_ePattern = PAT_STOMP;
+			++m_iPatternNum;
+			break;
 
+		case 2:
+			m_ePattern = PAT_CICLE;
+			++m_iPatternNum;
+			break;
+
+		case 3:
+			m_ePattern = PAT_FIREBALL;
+			m_iPatternNum = 0;
+			break;
+		}
+		for (int i = 0; i < BOSSPARTS::PARTS_END; ++i)
+		{
+			m_pAnimationController->Set_SpecificFrame(m_ePattern, i);
+		}
+	}
 
 	for (int i = 0; i < PARTS_END; ++i)
 	{
@@ -138,7 +175,12 @@ int CGiantGolem::Update_Object(const float & fTimeDelta)
 		m_pPartsTrans[i]->m_vScale = nextFrameMovement.vecScale;
 	}
 
-
+		if (GetAsyncKeyState('O') & 0x0001)
+		{
+			TCHAR s[256];
+			wsprintf(s, L"Frame : %d", m_pAnimationController->Get_Movement(m_ePattern, 2).tFrame);
+			MessageBox(nullptr, s, L"", 0);
+		}
 	return m_iEvent;
 }
 
@@ -220,7 +262,7 @@ HRESULT CGiantGolem::Add_Component(void)
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	pComponent->Set_Address(this);
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_AnimationController", pComponent);
-
+	pComponent->Set_Address(this);
 	//애니메이션 설정
 	Preset_Animation();
 
@@ -381,22 +423,22 @@ void CGiantGolem::Preset_Animation()
 	m_pAnimationController->Insert_Trans(PAT_STOMP, PART_LEFTHAND, 30, _vec3(0.f, -1800.f, 0.f));
 
 	// 내려찍기
-	m_pAnimationController->Insert_Scale(PAT_STOMP, PART_RIGHTARM, 10, _vec3(500.f, 500.f, 500.f));
-	m_pAnimationController->Insert_Rotate(PAT_STOMP, PART_RIGHTARM, 10, _vec3(-D3DX_PI, 0.f, -0.5f));
-	m_pAnimationController->Insert_Trans(PAT_STOMP, PART_RIGHTARM, 10, _vec3(1700, 800.f, 0.f));
+	m_pAnimationController->Insert_Scale(PAT_STOMP, PART_RIGHTARM,  50, _vec3(500.f, 500.f, 500.f));
+	m_pAnimationController->Insert_Rotate(PAT_STOMP, PART_RIGHTARM, 50, _vec3(-D3DX_PI, 0.f, -0.5f));
+	m_pAnimationController->Insert_Trans(PAT_STOMP, PART_RIGHTARM,  50, _vec3(1700, 800.f, 0.f));
 	
-	m_pAnimationController->Insert_Scale(PAT_STOMP, PART_LEFTARM, 10, _vec3(500.f, 500.f, 500.f));
-	m_pAnimationController->Insert_Rotate(PAT_STOMP, PART_LEFTARM, 10, _vec3(D3DX_PI, D3DX_PI, -0.5f));
-	m_pAnimationController->Insert_Trans(PAT_STOMP, PART_LEFTARM, 10, _vec3(-1700, 800.f, 0.f));
+	m_pAnimationController->Insert_Scale(PAT_STOMP, PART_LEFTARM,  50, _vec3(500.f, 500.f, 500.f));
+	m_pAnimationController->Insert_Rotate(PAT_STOMP, PART_LEFTARM, 50, _vec3(D3DX_PI, D3DX_PI, -0.5f));
+	m_pAnimationController->Insert_Trans(PAT_STOMP, PART_LEFTARM,  50, _vec3(-1700, 800.f, 0.f));
 	
 	
-	m_pAnimationController->Insert_Scale(PAT_STOMP, PART_RIGHTHAND, 10, _vec3(500.f, 500.f, 500.f));
-	m_pAnimationController->Insert_Rotate(PAT_STOMP, PART_RIGHTHAND, 10, _vec3(0.f, 2.8f, 0.f));
-	m_pAnimationController->Insert_Trans(PAT_STOMP, PART_RIGHTHAND, 10, _vec3(0.f, -1200.f, 0.f));
+	m_pAnimationController->Insert_Scale(PAT_STOMP, PART_RIGHTHAND,  50, _vec3(500.f, 500.f, 500.f));
+	m_pAnimationController->Insert_Rotate(PAT_STOMP, PART_RIGHTHAND, 50, _vec3(0.f, 2.8f, 0.f));
+	m_pAnimationController->Insert_Trans(PAT_STOMP, PART_RIGHTHAND,  50, _vec3(0.f, -1200.f, 0.f));
 	
-	m_pAnimationController->Insert_Scale(PAT_STOMP, PART_LEFTHAND,  10, _vec3(500.f, 500.f, 500.f));
-	m_pAnimationController->Insert_Rotate(PAT_STOMP, PART_LEFTHAND, 10, _vec3(0.f, 2.76f, 0.f));
-	m_pAnimationController->Insert_Trans(PAT_STOMP, PART_LEFTHAND, 10, _vec3(0.f, -1200.f, 0.f));
+	m_pAnimationController->Insert_Scale(PAT_STOMP, PART_LEFTHAND,  50, _vec3(500.f, 500.f, 500.f));
+	m_pAnimationController->Insert_Rotate(PAT_STOMP, PART_LEFTHAND, 50, _vec3(0.f, 2.76f, 0.f));
+	m_pAnimationController->Insert_Trans(PAT_STOMP, PART_LEFTHAND,  50, _vec3(0.f, -1200.f, 0.f));
 
 
 	// 회전 회오리
@@ -411,13 +453,13 @@ void CGiantGolem::Preset_Animation()
 	m_pAnimationController->Insert_Rotate(PAT_CICLE, PART_LEFTARM, 10, _vec3(0.f, D3DX_PI, fQater));
 	m_pAnimationController->Insert_Trans(PAT_CICLE,  PART_LEFTARM, 10, _vec3(-1700, 800.f, 0.f));
 
-	m_pAnimationController->Insert_Scale(PAT_CICLE, PART_RIGHTARM, 1000, _vec3(500.f, 500.f, 500.f));
-	m_pAnimationController->Insert_Rotate(PAT_CICLE, PART_RIGHTARM, 1000, _vec3(0.f, 0.f, fQater));
-	m_pAnimationController->Insert_Trans(PAT_CICLE, PART_RIGHTARM, 1000, _vec3(1700, 800.f, 0.f));
+	m_pAnimationController->Insert_Scale(PAT_CICLE, PART_RIGHTARM, 30, _vec3(500.f, 500.f, 500.f));
+	m_pAnimationController->Insert_Rotate(PAT_CICLE, PART_RIGHTARM, 30, _vec3(0.f, 0.f, fQater));
+	m_pAnimationController->Insert_Trans(PAT_CICLE, PART_RIGHTARM, 30, _vec3(1700, 800.f, 0.f));
 
-	m_pAnimationController->Insert_Scale(PAT_CICLE, PART_LEFTARM,  1000, _vec3(500.f, 500.f, 500.f));
-	m_pAnimationController->Insert_Rotate(PAT_CICLE, PART_LEFTARM, 1000, _vec3(0.f, D3DX_PI, fQater));
-	m_pAnimationController->Insert_Trans(PAT_CICLE, PART_LEFTARM,  1000, _vec3(-1700, 800.f, 0.f));
+	m_pAnimationController->Insert_Scale(PAT_CICLE, PART_LEFTARM,  30, _vec3(500.f, 500.f, 500.f));
+	m_pAnimationController->Insert_Rotate(PAT_CICLE, PART_LEFTARM, 30, _vec3(0.f, D3DX_PI, fQater));
+	m_pAnimationController->Insert_Trans(PAT_CICLE, PART_LEFTARM,  30, _vec3(-1700, 800.f, 0.f));
 	
 	
 	

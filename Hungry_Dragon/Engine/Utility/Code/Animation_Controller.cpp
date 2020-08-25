@@ -57,6 +57,11 @@ void CAnimation_Controller::Set_SpecificFrame(_int _animatorIndex, _int _partsIn
 	m_arrAnimatior[_animatorIndex]->Set_SpecificFrame(_partsIndex);
 }
 
+void CAnimation_Controller::Set_Pattern(_int _iPat)
+{
+	m_iPat = _iPat;
+}
+
 _int CAnimation_Controller::Update_Component(const _float & fTimeDelta)
 {
 	m_fNowFrame = fTimeDelta*m_fFrameSpeed;
@@ -65,7 +70,7 @@ _int CAnimation_Controller::Update_Component(const _float & fTimeDelta)
 	{
 		bool isPatternEnd=m_arrAnimatior[i]->Update_Frame(m_fNowFrame);
 
-		if (isPatternEnd) {
+		if (isPatternEnd && i == m_iPat) {
 			((Engine::CGameObject*)(Get_Parent()))->Set_PatternEnd(isPatternEnd);
 		}
 	}
