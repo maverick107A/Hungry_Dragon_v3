@@ -68,7 +68,10 @@ private:
 	IDirect3DTexture9*	m_pBubble = nullptr;
 
 	IDirect3DTexture9*	m_pBuffFrame[4];
+	IDirect3DTexture9*	m_pBuffBar[4];
 	IDirect3DTexture9*	m_pPolygon;
+	IDirect3DTexture9*	m_pExpFrame;
+	IDirect3DTexture9*	m_pExpFrameCharge;
 
 	CBarCon*			m_pBarCon = nullptr;
 	CIconCon*			m_pIconCon = nullptr;
@@ -80,6 +83,8 @@ private:
 	_uint				m_uSubFocus = 0;
 
 	_float				m_fTimeTick = 0.f;
+	_float				m_fAcquireAction = 0.f;
+	_float				m_fBuffGage[4] = { 0 };
 	
 	// 자원 상호작용
 	_vec3				m_vDestination[5];		// 고정된 5개 자원 회수위치
