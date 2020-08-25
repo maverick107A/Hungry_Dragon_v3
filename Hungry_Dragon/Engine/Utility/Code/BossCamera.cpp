@@ -166,7 +166,7 @@ void CBossCamera::Move_Phase2(float * _fAngleX, float * _fAngleY, _vec3 * _vLook
 		D3DXVec3Cross(&m_vUp, &m_vDir, &vRight);
 		D3DXVec3Normalize(&m_vUp, &m_vUp);
 	}
-
+	
 }
 
 void CBossCamera::Switch_Phase(int _iPhase)
@@ -180,6 +180,14 @@ void CBossCamera::Switch_Phase(int _iPhase)
 		m_ePhase = PHASE::PHASE_ONE;
 		break;
 	}
+}
+
+void CBossCamera::Swap_Phase()
+{
+	if (m_ePhase)
+		m_ePhase = PHASE::PHASE_ZERO;
+	else
+		m_ePhase = PHASE::PHASE_ONE;
 }
 
 CBossCamera* Engine::CBossCamera::Create(void)

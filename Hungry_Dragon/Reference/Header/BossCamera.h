@@ -24,6 +24,7 @@ private:
 
 public:
 	void			Switch_Phase(int _iPhase);
+	void			Swap_Phase();
 
 private:
 	PHASE			m_ePhase = PHASE_ZERO;

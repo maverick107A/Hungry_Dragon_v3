@@ -71,6 +71,11 @@ int CBossPlayer::Update_Object(const float& fTimeDelta)
 
 	if (GetAsyncKeyState('R') & 0x0001)
 		m_bLock = !m_bLock;
+	if (GetAsyncKeyState('M') & 0x0001)
+	{
+		static_cast<CBossCamera*>(m_pCamera)->Swap_Phase();
+
+	}
 
 	//보스 포인터 받아오기
 	m_pBoss = static_cast<CGiantGolem*>(((Engine::CLayer*)(Get_Parent()))->Get_Object(L"Monster", Engine::Find_First, nullptr));
