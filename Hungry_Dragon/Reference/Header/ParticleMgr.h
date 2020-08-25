@@ -25,13 +25,17 @@ public:
 	void Particle_LateUpdate(const float& fTimeDelta);
 	void Particle_Render();
 	CResources* Particle_Create(Engine::PARTICLEID _eID, const _vec3 _pos);
+	CResources* Particle_Create_Static(Engine::PARTICLEID _eID, const _vec3 _pos);
 
 public:
-	bool Set_ParticleTrans(CResources* _particle,_vec3 _pos);
+	bool Set_ParticleTrans(CResources* _particle, _vec3 _pos);
+	bool Set_StaticParticleTrans(CResources* _particle,_vec3 _pos);
 
 private:
 	list<Engine::CResources*>	m_arrParticle;
+	list<Engine::CResources*>	m_arrStaticParticle;
 	list<Engine::_vec3>			m_arrTrans;
+	list<Engine::_vec3>			m_arrStaticTrans;
 	LPDIRECT3DDEVICE9			m_pGraphicDev;
 	CTransform*					m_pParticleTrans;
 	size_t						m_iParticleLimit  = 30;

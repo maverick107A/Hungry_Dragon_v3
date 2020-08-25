@@ -117,11 +117,11 @@ int CBossPlayer::Update_Object(const float& fTimeDelta)
 	if (m_bBreath&&m_pParticle == nullptr) {
 		_vec3 BeamPos;
 		memcpy(&BeamPos, &m_pTransform->m_matWorld._31, sizeof(_vec3));
-		m_pParticle = static_cast<CParticle*>(Engine::Particle_Create(Engine::PART_BEAM, BeamPos*2));
+		m_pParticle = static_cast<CParticle*>(Engine::Particle_Create_Static(Engine::PART_BEAM, BeamPos*2));
 		static_cast<CPart_Beam*>(m_pParticle)->Set_Player(this);
 		static_cast<CPart_Beam*>(m_pParticle)->Manual_Reset_Particle();
 		_matrix matMyPos = Get_Transform()->Get_World();
-		Engine::Set_ParticleTrans(m_pParticle, _vec3(matMyPos._41, matMyPos._42, matMyPos._43));
+		Engine::Set_StaticParticleTrans(m_pParticle, _vec3(matMyPos._41, matMyPos._42, matMyPos._43));
 	}
 	else if (!m_bBreath&&m_pParticle!=nullptr) {
 		m_pParticle->Set_Empty();
@@ -129,7 +129,7 @@ int CBossPlayer::Update_Object(const float& fTimeDelta)
 	}
 	else if (m_bBreath) {
 		_matrix matMyPos = Get_Transform()->Get_World();
-		Engine::Set_ParticleTrans(m_pParticle, _vec3(matMyPos._41, matMyPos._42, matMyPos._43));
+		Engine::Set_StaticParticleTrans(m_pParticle, _vec3(matMyPos._41, matMyPos._42, matMyPos._43));
 	}
 	
 

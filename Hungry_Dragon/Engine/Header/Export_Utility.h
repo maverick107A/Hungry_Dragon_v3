@@ -69,7 +69,9 @@ inline void Particle_Update(const float& fTimeDelta);
 inline void Particle_LateUpdate(const float& fTimeDelta);
 inline void Particle_Render();
 inline bool Set_ParticleTrans(CResources* _particle, _vec3 _pos);
+inline bool Set_StaticParticleTrans(CResources* _particle, _vec3 _pos);
 inline CResources* Particle_Create(Engine::PARTICLEID _eID, const _vec3 _pos);
+inline CResources* Particle_Create_Static(Engine::PARTICLEID _eID, const _vec3 _pos);
 
 // Event
 //Get

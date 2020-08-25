@@ -122,9 +122,19 @@ inline bool Set_ParticleTrans(Engine::CResources* _particle, Engine::_vec3 _pos)
 	return Engine::CParticleMgr::GetInstance()->Set_ParticleTrans(_particle, _pos);
 }
 
+inline bool Set_StaticParticleTrans(CResources * _particle, _vec3 _pos)
+{
+	return Engine::CParticleMgr::GetInstance()->Set_StaticParticleTrans(_particle, _pos);
+}
+
 inline Engine::CResources* Particle_Create(Engine::PARTICLEID _eID, const Engine::_vec3 _pos)
 {
 	return CParticleMgr::GetInstance()->Particle_Create(_eID,_pos);
+}
+
+inline CResources * Particle_Create_Static(Engine::PARTICLEID _eID, const _vec3 _pos)
+{
+	return CParticleMgr::GetInstance()->Particle_Create_Static(_eID, _pos);
 }
 
 inline bool Find_First(CGameObject * _caller, CGameObject * _callee)
