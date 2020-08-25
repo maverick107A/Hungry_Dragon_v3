@@ -33,7 +33,7 @@ HRESULT CBat_Monster::Ready_Object(void)
 	m_fMonster_HP = 100.f;
 	m_fScale = 1.f;
 	m_fMaxScale = 2.f;
-	m_fDamaged = 1.f;
+	m_fDamaged = 10.f;
 	m_eVariation = MONSTER_BAT;
 
 	return S_OK;

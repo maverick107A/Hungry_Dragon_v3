@@ -317,6 +317,10 @@ void CIngame_Info::Render_UI()
 	_uint uIdx = 0;
 	for (auto& tInfo : m_listPreyInfo)
 	{
+		if (tInfo.uType == 11)
+		{
+			tInfo.uType = 10;
+		}
 		if (10 < tInfo.uType)
 		{
 			tInfo.fLifeTime = 0.f;

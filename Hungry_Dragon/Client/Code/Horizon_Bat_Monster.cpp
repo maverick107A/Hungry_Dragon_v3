@@ -42,7 +42,7 @@ HRESULT CHorizonBat_Monster::Ready_Object(void)
 	m_fMonster_HP = 100.f;
 	m_fScale = 1.f;
 	m_fMaxScale = 3.f;
-	m_fDamaged = 1.f;
+	m_fDamaged = 10.f;
 	m_eVariation = MONSTER_HORIZONBAT;
 
 	m_fDead_Range = 3000.f;
