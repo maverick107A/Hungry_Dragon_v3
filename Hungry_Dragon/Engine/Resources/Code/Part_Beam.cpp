@@ -12,7 +12,7 @@ CPart_Beam::CPart_Beam(const CPart_Beam & rhs)
 	:CParticle(rhs)
 {
 	m_arrParticle = rhs.m_arrParticle;
-
+	m_iRadius = rhs.m_iRadius;
 	m_fDepth = rhs.m_fDepth;
 }
 
@@ -26,7 +26,7 @@ CPart_Beam::CPart_Beam(LPDIRECT3DDEVICE9 pGraphicDev, _vec3 _vOrigin, BoundingBo
 	m_BatchSize = 10;
 
 	m_fDepth = 100.f;
-	m_fRadius = 5.f;
+	m_iRadius = 14;
 
 	for (int i = 0; i < numParticle; ++i) {
 		Add_Particle();
@@ -52,6 +52,17 @@ void CPart_Beam::Set_Origin(_vec3 _origin) {
 
 void CPart_Beam::Set_Player(CPlayerMain * _pPlayer) {
 	m_pPlayer = _pPlayer;
+}
+
+void CPart_Beam::Set_Radius(_int _radius)
+{
+	if (_radius < 14)
+	{
+		m_iRadius = 14;
+		return;
+	}
+
+	m_iRadius = _radius;
 }
 
 void CPart_Beam::Reset_Particle(ATTRIBUTE * _attribute) {
@@ -103,10 +114,10 @@ void CPart_Beam::Reset_Particle(ATTRIBUTE * _attribute) {
 	}
 
 	do {
-		tempRadX = rand()*0.0000305185f * 14 - 7;
-		tempRadY = rand()*0.0000305185f * 14 - 7;
+		tempRadX = rand()*0.0000305185f * m_iRadius - m_iRadius*0.5f;
+		tempRadY = rand()*0.0000305185f * m_iRadius - m_iRadius*0.5f;
 		//tempZ = rand()*0.0000305185f * 3;
-	} while (tempRadX*tempRadX + tempRadY*tempRadY <= 25 || tempRadX*tempRadX + tempRadY*tempRadY > 49);
+	} while (tempRadX*tempRadX + tempRadY*tempRadY <= (m_iRadius-2.f)*(m_iRadius-2.f) || tempRadX*tempRadX + tempRadY*tempRadY > m_iRadius*m_iRadius);
 
 	_vec3 vOutput;
 	if (m_pPlayer)

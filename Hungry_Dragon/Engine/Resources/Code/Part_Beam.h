@@ -20,6 +20,8 @@ public:
 	void Set_BoundingBox(BoundingBox _boundingBox);
 	void Set_Origin(_vec3 _origin);
 	void Set_Player(CPlayerMain* _pPlayer);
+	//빔파티클 반지름 결정
+	void Set_Radius(_int _radius);
 
 public:
 	virtual void Reset_Particle(ATTRIBUTE* _attribute);
@@ -36,7 +38,7 @@ public:
 private:
 	//브레스 파티클 깊이
 	_float			m_fDepth;
-	_float			m_fRadius;
+	_int			m_iRadius;
 	CPlayerMain*	m_pPlayer;
 };
 
