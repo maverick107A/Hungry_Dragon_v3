@@ -26,17 +26,18 @@ public:
 	virtual void LateUpdate_Object(const float& fTimeDelta) override;
 public:
 	void Update_Animation(const float& fTimeDelta);
-
+	void Set_Red(bool _bBool) { m_RedBat = _bBool; }
 
 private:
 	HRESULT		Add_Component(void);
 
 public:
-	static CHorizonBat_Monster*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
+	static CHorizonBat_Monster*	Create(LPDIRECT3DDEVICE9 pGraphicDev , bool _bRed);
 
 private:
 	D3DXMATRIX		matBilboard;
 	float m_fHeight = 0;
+	bool	m_RedBat = false;
 private:
 	virtual void Free(void) override;
 

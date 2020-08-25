@@ -25,6 +25,7 @@ public:
 	HRESULT		Set_Monster_LayerMap(OBJID _Type, _int iCnt, _vec3 _Pos);
 	HRESULT		Set_Monster_CaveMap(OBJID _Type, _int iCnt, _vec3 _Pos);
 	HRESULT		Set_Monster_HorizonCaveMap(OBJID _Type, _int iCnt, _vec3 _Pos);
+	HRESULT		Set_Monster_HorizonCaveRedMap(OBJID _Type, _int iCnt, _vec3 _Pos);
 
 	HRESULT		Set_Monster_CloudMap(OBJID _Type, _int iCnt, _vec3 _Pos);
 	HRESULT		Clear_ObjectPool();

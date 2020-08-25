@@ -291,7 +291,7 @@ _uint CScene_Loading::Loading_ForStage(void)
 		RESOURCE_STAGE,
 		L"Texture_HrizonBat",
 		Engine::TEX_NORMAL,
-		L"../../Asset/Monster/CaveHrizonBat/%d.png", 13),
+		L"../../Asset/Monster/CaveHrizonBat/%d.png", 26),
 		E_FAIL);
 
 	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,

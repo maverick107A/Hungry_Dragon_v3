@@ -18,16 +18,25 @@ HRESULT CHorizonBat_Monster::Ready_Object(void)
 	Engine::CMonsterMain::Ready_Object();
 	Add_Component();
 
-	m_fSpeed = 50.f;
 	m_eState = MONSTER_REBORN;
 	
 	
-	m_tFrame.fStartFrame = 0.f;
-	m_tFrame.fMaxFrame   = 12.f;
-	m_tFrame.fFrameSpeed = 1.5f;
+	if (m_RedBat)
+	{
+		m_tFrame.fFirstFrame = 13.f;
+		m_tFrame.fStartFrame = 13.f;
+		m_tFrame.fMaxFrame = 25.f;
+		m_tFrame.fFrameSpeed = 1.5f;
+	}
+	else
+	{
+		m_tFrame.fStartFrame = 0.f;
+		m_tFrame.fFirstFrame = 0.f;
+
+		m_tFrame.fMaxFrame   = 12.f;
+		m_tFrame.fFrameSpeed = 1.5f;
+	}
 	m_fHeight = 0.f;
-
-
 	m_fSpeed = 0.3f;
 	m_fMonster_MaxHP = 100.f;
 	m_fMonster_HP = 100.f;
@@ -131,13 +140,15 @@ void CHorizonBat_Monster::Update_Animation(const float & fTimeDelta)
 
 	if (m_tFrame.fStartFrame >= m_tFrame.fMaxFrame)
 	{
-		m_tFrame.fStartFrame = 0.f;
+		m_tFrame.fStartFrame = m_tFrame.fFirstFrame;
 	}
 }
 
-CHorizonBat_Monster * CHorizonBat_Monster::Create(LPDIRECT3DDEVICE9 pGraphicDev)
+CHorizonBat_Monster * CHorizonBat_Monster::Create(LPDIRECT3DDEVICE9 pGraphicDev, bool _bRed)
 {
 	CHorizonBat_Monster*		pInstance = new CHorizonBat_Monster(pGraphicDev);
+	pInstance->Set_Red(_bRed);
+
 
 	if (FAILED(pInstance->Ready_Object()))
 		Engine::Safe_Release(pInstance);

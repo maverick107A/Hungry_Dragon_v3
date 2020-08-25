@@ -76,7 +76,11 @@ inline HRESULT	Set_Monster_HorizonCaveMap(OBJID _Type, _int iCnt, _vec3 _Pos)
 {
 	return CObjectPool::GetInstance()->Set_Monster_HorizonCaveMap(_Type, iCnt, _Pos);
 }
+inline HRESULT		Set_Monster_HorizonCaveRedMap(OBJID _Type, _int iCnt, _vec3 _Pos)
+{
+	return CObjectPool::GetInstance()->Set_Monster_HorizonCaveRedMap(_Type, iCnt, _Pos);
 
+}
 
 inline HRESULT Set_Monster_CloudMap(OBJID _Type, _int iCnt, _vec3 _Pos)
 {

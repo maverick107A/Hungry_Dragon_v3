@@ -18,7 +18,7 @@ HRESULT CBat_Monster::Ready_Object(void)
 	Engine::CMonsterMain::Ready_Object();
 	Add_Component();
 
-	m_fSpeed = 50.f;
+
 	m_eState = MONSTER_REBORN;
 	
 	
@@ -28,7 +28,7 @@ HRESULT CBat_Monster::Ready_Object(void)
 	m_fHeight = 0.f;
 
 
-	m_fSpeed = 1.f;
+	m_fSpeed = 0.5f;
 	m_fMonster_MaxHP = 100.f;
 	m_fMonster_HP = 100.f;
 	m_fScale = 1.f;

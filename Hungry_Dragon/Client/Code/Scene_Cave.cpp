@@ -160,7 +160,9 @@ _int CScene_Cave::Update_Scene(const _float& fTimeDelta)
 		break;
 	case CScene_Cave::PHASE_2:			// 카메라 횡스크롤
 		CIngame_Flow::GetInstance()->Set_StageID(CIngame_Flow::STAGE_CAVE_TWO);
+		Engine::Set_Monster_HorizonCaveRedMap(OBJID::HORIZON_REDMONSTER, 9999, m_vPlayerPos);	// 횡스크롤로 변경
 		Engine::Set_Monster_HorizonCaveMap(OBJID::HORIZON_MONSTER, 9999, m_vPlayerPos);	// 횡스크롤로 변경
+
 		break;
 	case CScene_Cave::PHASE_3:			// 카메라 Z회전 함
 										// 여기 몬스터 안나오게 해줘
@@ -280,8 +282,20 @@ HRESULT CScene_Cave::Ready_Layer_Environment(const _tchar * pLayerTag) {
 	
 	for (int i = 0; i < 1000; ++i)
 	{
-		FAILED_CHECK_RETURN(Register_ObjectPool<CBat_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
-		FAILED_CHECK_RETURN(Register_ObjectPool<CHorizonBat_Monster>(pLayer, OBJID::HORIZON_MONSTER), E_FAIL);
+		FAILED_CHECK_RETURN(Register_ObjectPool<CBat_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);	
+	}
+
+	for (int i = 0; i < 500; ++i)
+	{
+		pGameObject = CHorizonBat_Monster::Create(m_pGraphicDev, true );
+		NULL_CHECK_RETURN(pGameObject, E_FAIL);
+		pGameObject->Set_Address(pLayer);
+		Engine::Add_Object_Pool(pGameObject, OBJID::HORIZON_REDMONSTER);
+
+		pGameObject = CHorizonBat_Monster::Create(m_pGraphicDev, false);
+		NULL_CHECK_RETURN(pGameObject, E_FAIL);
+		pGameObject->Set_Address(pLayer);
+		Engine::Add_Object_Pool(pGameObject, OBJID::HORIZON_MONSTER);
 	}
 
 	//m_pVent->Set_Trans(_vec3(0.f,0.f, m_pCave->Get_EndPoint()+4000.f));

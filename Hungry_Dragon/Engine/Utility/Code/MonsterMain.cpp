@@ -124,10 +124,13 @@ void Engine::CMonsterMain::State_Change()
 		
 		if (m_eState == MONSTER_DEACTIVATE)
 		{
-			m_pParticle = Engine::Particle_Create(Engine::PART_ATK, _vec3(0.f, 0.f, 0.f));
-			//m_pParticle = Engine::Particle_Create(Engine::PART_FRAGILE,_vec3(0.f, 0.f, 0.f));
-			static_cast<Engine::CParticle*>(m_pParticle)->Set_LifeTime(true, m_fParticleLifeTime);
-			Engine::Set_ParticleColor(static_cast<CParticle*>(m_pParticle),D3DXCOLOR(1.f,0.f,0.f,1.f));
+			if (m_eVariation != MONSTER_HORIZONBAT && m_eVariation != MONSTER_BAT)
+			{
+				m_pParticle = Engine::Particle_Create(Engine::PART_ATK, _vec3(0.f, 0.f, 0.f));
+				//m_pParticle = Engine::Particle_Create(Engine::PART_FRAGILE,_vec3(0.f, 0.f, 0.f));
+				static_cast<Engine::CParticle*>(m_pParticle)->Set_LifeTime(true, m_fParticleLifeTime);
+				Engine::Set_ParticleColor(static_cast<CParticle*>(m_pParticle), D3DXCOLOR(1.f, 0.f, 0.f, 1.f));
+			}
 			switch (rand() % 4)
 			{
 			case 0:
@@ -155,13 +158,15 @@ void Engine::CMonsterMain::State_Change()
 		{
 			m_pParticle = nullptr;
 
-			CParticle*  tempParticle=static_cast<CParticle*>(Engine::Particle_Create(Engine::PART_FRAGILE, _vec3(0.f, 0.f, 0.f)));
-			tempParticle->Set_LifeTime(true, m_fParticleLifeTime);
-			Engine::Set_ParticleColor(static_cast<CParticle*>(tempParticle), m_tDeadColor);
-			D3DXVECTOR3	vParticlePos;
-			m_pTransform->Get_Info(Engine::INFO_POS, &vParticlePos);
-			Engine::Set_ParticleTrans(tempParticle, vParticlePos);
-
+			if(m_eVariation != MONSTER_HORIZONBAT && m_eVariation != MONSTER_BAT)
+			{
+				CParticle*  tempParticle=static_cast<CParticle*>(Engine::Particle_Create(Engine::PART_FRAGILE, _vec3(0.f, 0.f, 0.f)));
+				tempParticle->Set_LifeTime(true, m_fParticleLifeTime);
+				Engine::Set_ParticleColor(static_cast<CParticle*>(tempParticle), m_tDeadColor);
+				D3DXVECTOR3	vParticlePos;
+				m_pTransform->Get_Info(Engine::INFO_POS, &vParticlePos);
+				Engine::Set_ParticleTrans(tempParticle, vParticlePos);
+			}
 			// 여기서 스텟 넘겨주시면 됩니다.
 			switch (m_eType)
 			{
