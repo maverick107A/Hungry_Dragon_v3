@@ -95,7 +95,6 @@ HRESULT CScene_Cave::Ready_Scene(void)
 
 
 	Engine::Get_FMOD()->PlayBgm(L"CaveBgm");
-	//enum STAGEID { STAGE_FOREST, STAGE_CAVE_ONE, STAGE_CAVE_TWO, STAGE_CAVE_FINAL, STAGE_SKY, STAGE_LAVA, EVENT_END };
 	CIngame_Flow::GetInstance()->Set_StageID(CIngame_Flow::STAGE_CAVE_ONE);
 	return S_OK;
 }
@@ -161,7 +160,7 @@ _int CScene_Cave::Update_Scene(const _float& fTimeDelta)
 		break;
 	case CScene_Cave::PHASE_2:			// 카메라 횡스크롤
 		CIngame_Flow::GetInstance()->Set_StageID(CIngame_Flow::STAGE_CAVE_TWO);
-		Engine::Set_Monster_CaveMap(OBJID::HORIZON_MONSTER, 9999, m_vPlayerPos);	// 횡스크롤로 변경
+		Engine::Set_Monster_HorizonCaveMap(OBJID::HORIZON_MONSTER, 9999, m_vPlayerPos);	// 횡스크롤로 변경
 		break;
 	case CScene_Cave::PHASE_3:			// 카메라 Z회전 함
 										// 여기 몬스터 안나오게 해줘

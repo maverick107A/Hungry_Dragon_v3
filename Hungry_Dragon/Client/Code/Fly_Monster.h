@@ -48,8 +48,8 @@ private:
 	D3DXVECTOR3 m_vLookPos;
 	D3DXVECTOR3 m_vBodyPos;
 
-	float m_fShotingLate = 0;
-	float m_fShotingDelay = 0.9;
+	float m_fShotingLate = 0.f;
+	float m_fShotingDelay = 0.9f;
 
 	float m_fHeight = 0;
 	float		m_fAngle = 0;

@@ -28,13 +28,14 @@ HRESULT CHorizonBat_Monster::Ready_Object(void)
 	m_fHeight = 0.f;
 
 
-	m_fSpeed = 0.5f;
+	m_fSpeed = 0.3f;
 	m_fMonster_MaxHP = 100.f;
 	m_fMonster_HP = 100.f;
 	m_fScale = 1.f;
 	m_fMaxScale = 3.f;
 	m_fDamaged = 1.f;
 
+	m_fDead_Range = 3000.f;
 	return S_OK;
 }
 
@@ -66,27 +67,6 @@ int CHorizonBat_Monster::Update_Object(const float & fTimeDelta)
 		m_pTransform->Add_Trans(&vCaveDir);
 	}
 
-	// Y ºôº¸µå
-
-	//D3DXMATRIX		matView;
-	//m_pGraphicDev->GetTransform(D3DTS_VIEW, &matView);
-	//D3DXMatrixInverse(&matView, NULL, &matView);
-	//m_pTransform->m_matWorld._11 = matView._11;
-	//m_pTransform->m_matWorld._13 = matView._13;
-	//m_pTransform->m_matWorld._31 = matView._31;
-	//m_pTransform->m_matWorld._33 = matView._33;
-
-	// X ºôº¸µå
-
-	// D3DXMATRIX		matView;
-	// m_pGraphicDev->GetTransform(D3DTS_VIEW, &matView);
-	// D3DXMatrixInverse(&matView, NULL, &matView);
-	// m_pTransform->m_matWorld._22 = matView._22;
-	// m_pTransform->m_matWorld._23 = matView._23;
-	// m_pTransform->m_matWorld._32 = matView._32;
-	// m_pTransform->m_matWorld._33 = matView._33;
-
-	// ¿ùµå ºôº¸µå
 
 	D3DXMatrixIdentity(&matBilboard);
 	D3DXMATRIX		matView;
