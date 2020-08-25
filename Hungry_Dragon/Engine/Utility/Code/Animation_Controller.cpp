@@ -66,7 +66,7 @@ _int CAnimation_Controller::Update_Component(const _float & fTimeDelta)
 		bool isPatternEnd=m_arrAnimatior[i]->Update_Frame(m_fNowFrame);
 
 		if (isPatternEnd) {
-			//((Engine::CGameObject*)(Get_Parent()))->Set_PatternEnd(isPatternEnd);
+			((Engine::CGameObject*)(Get_Parent()))->Set_PatternEnd(isPatternEnd);
 		}
 	}
 

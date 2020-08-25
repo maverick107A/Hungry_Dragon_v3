@@ -24,6 +24,7 @@ HRESULT CGolem::Ready_Object(void)
 	m_fMaxScale = 15.f;
 	m_fDamaged = 2.f;
 	m_eState = MONSTER_REBORN;
+	m_fParticleLifeTime = 3.f;
 
 	return S_OK;
 }

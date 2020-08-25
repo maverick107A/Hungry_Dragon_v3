@@ -58,30 +58,31 @@ int CJump_Monster::Update_Object(const float & fTimeDelta)
 
 	if (m_eState == MONSTER_ACTIVATE)
 	{
-		D3DXVECTOR3 vPos;
-		m_vPlayerPos = { m_vPlayerPos.x , 0 , m_vPlayerPos.z };
-
-		m_pTransform->Get_Info(Engine::INFO_POS, &m_vBodyPos);
-
-		m_vBodyPos = { m_vBodyPos.x , 0 , m_vBodyPos.z };
-
-		m_vPos = m_vPlayerPos - m_vBodyPos;
-		vPos = m_vPlayerPos - m_vBodyPos;
-		D3DXVec3Normalize(&vPos, &vPos);
-		m_vLookPos = { 0.f, 0.f ,1.f };
-
-		m_fAngle = acosf(D3DXVec3Dot(&vPos, &m_vLookPos));
-		
-		if (vPos.x < 0)
-			m_fAngle *= -1;
-
-		m_pTransform->m_vAngle.y = m_fAngle;
 
 		if(!m_bJump_check)
 		{
+			D3DXVECTOR3 vPos;
+			m_vPlayerPos = { m_vPlayerPos.x , 0 , m_vPlayerPos.z };
+
+			m_pTransform->Get_Info(Engine::INFO_POS, &m_vBodyPos);
+
+			m_vBodyPos = { m_vBodyPos.x , 0 , m_vBodyPos.z };
+
+			m_vPos = m_vPlayerPos - m_vBodyPos;
+			vPos = m_vPlayerPos - m_vBodyPos;
+			D3DXVec3Normalize(&vPos, &vPos);
+			m_vLookPos = { 0.f, 0.f ,1.f };
+
+			m_fAngle = acosf(D3DXVec3Dot(&vPos, &m_vLookPos));
+
+			if (vPos.x < 0)
+				m_fAngle *= -1;
+
+			m_pTransform->m_vAngle.y = m_fAngle;
 			m_vChasePos = { m_vPlayerPos.x ,  0.f , m_vPlayerPos.z };
 			m_fJumpSpeed = m_fJumpPower;
 			m_bJump_check = true;
+
 		}
 	
 	}

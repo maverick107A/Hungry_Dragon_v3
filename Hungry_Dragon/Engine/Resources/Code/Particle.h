@@ -64,6 +64,9 @@ protected:
 
 	bool					m_bIsLifeLimit=false;
 	_float					m_fLifeTime;
+
+	float m_fZero = 10.f;
+	float m_fOne = 40.f;
 };
 
 END

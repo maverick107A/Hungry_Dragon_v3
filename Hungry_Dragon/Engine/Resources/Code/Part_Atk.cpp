@@ -14,7 +14,7 @@ CPart_Atk::CPart_Atk(const CPart_Atk & rhs)
 
 	m_fWidth = 5.f;
 	m_fHeight = 10.f;
-	
+	m_fZero = 30.f;
 }
 
 CPart_Atk::CPart_Atk(LPDIRECT3DDEVICE9 pGraphicDev, _vec3 vOrigin ,BoundingBox * boundingBox, int numParticle,float _fSize)
@@ -25,6 +25,8 @@ CPart_Atk::CPart_Atk(LPDIRECT3DDEVICE9 pGraphicDev, _vec3 vOrigin ,BoundingBox *
 	m_VbSize = 40;
 	m_vOffset = 0;
 	m_BatchSize = 10;
+
+	m_fZero = 30.f;
 
 	m_fWidth = 100.f;
 	m_fHeight = 1500.f;
@@ -71,6 +73,10 @@ void CPart_Atk::Reset_Particle(ATTRIBUTE* _attribute) {
 
 _int CPart_Atk::Update_Component(const _float & _fTimeDelta) {
 	if (Is_Empty()) {
+		return -1;
+	}
+
+	if (-1 == CParticle::Update_Component(_fTimeDelta)) {
 		return -1;
 	}
 

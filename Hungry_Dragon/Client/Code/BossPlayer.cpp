@@ -303,6 +303,7 @@ HRESULT CBossPlayer::Add_Component(void)
 	pComponent = m_pAnimationController = Engine::CAnimation_Controller::Create(PARTS_END);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_AnimationController", pComponent);
+	pComponent->Set_Address(this);
 
 	//애니메이션 설정
 	Preset_Animation();

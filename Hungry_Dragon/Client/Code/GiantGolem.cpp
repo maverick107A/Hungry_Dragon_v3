@@ -218,6 +218,7 @@ HRESULT CGiantGolem::Add_Component(void)
 	//애니메이션 컨트롤러
 	pComponent = m_pAnimationController = Engine::CAnimation_Controller::Create(PARTS_END);
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	pComponent->Set_Address(this);
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_AnimationController", pComponent);
 
 	//애니메이션 설정

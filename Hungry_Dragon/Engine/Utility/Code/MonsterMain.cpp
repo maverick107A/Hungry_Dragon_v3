@@ -27,9 +27,9 @@ int Engine::CMonsterMain::Update_Object(const float & fTimeDelta)
 	m_vPlayerPos = ((Engine::CLayer*)(this->Get_Parent()))->Get_PlayerPos();
 
 
-
+	// 이니셜라이저 오브젝트로 올려야됨
 	CGameObject* pPlayer = ((Engine::CLayer*)(Get_Parent()))->Get_Object(L"TestPlayer", Engine::Find_First, nullptr);
-	m_pPlayerJawTransformCom = static_cast<Engine::CTransform*>(pPlayer->Get_Component(L"Com_JawTransform", Engine::ID_DYNAMIC));
+	m_pPlayerTransformCom = static_cast<Engine::CTransform*>(pPlayer->Get_Component(L"Com_Transform", Engine::ID_DYNAMIC));
 
 
 
@@ -86,11 +86,11 @@ void Engine::CMonsterMain::Render_Object(void)
 
 void Engine::CMonsterMain::LateUpdate_Object(const float & fTimeDelta)
 {
-	m_vPlayerPos = ((Engine::CLayer*)(this->Get_Parent()))->Get_PlayerPos();
+
 	if (m_eState == MONSTER_DEACTIVATE)
 	{
-	
-		m_pTransform->Set_Trans(&m_pPlayerJawTransformCom->m_vInfo[Engine::INFO_POS]);
+		m_vPlayerPos = ((Engine::CLayer*)(this->Get_Parent()))->Get_PlayerPos() + (m_pPlayerTransformCom->m_vInfo[Engine::INFO_LOOK] * 1.2f);
+		m_pTransform->Set_Trans(&m_vPlayerPos);
 		m_pTransform->Update_Component(fTimeDelta);
 	}
 
@@ -114,10 +114,10 @@ void Engine::CMonsterMain::State_Change()
 		
 		if (m_eState == MONSTER_DEACTIVATE)
 		{
-			//m_pParticle = Engine::Particle_Create(Engine::PART_ATK, _vec3(0.f, 0.f, 0.f));
-			m_pParticle = Engine::Particle_Create(Engine::PART_FRAGILE,_vec3(0.f, 0.f, 0.f));
-			static_cast<Engine::CParticle*>(m_pParticle)->Set_LifeTime(true, 1.f);
-			Engine::Set_ParticleColor(static_cast<CParticle*>(m_pParticle), m_tDeadColor);
+			m_pParticle = Engine::Particle_Create(Engine::PART_ATK, _vec3(0.f, 0.f, 0.f));
+			//m_pParticle = Engine::Particle_Create(Engine::PART_FRAGILE,_vec3(0.f, 0.f, 0.f));
+			static_cast<Engine::CParticle*>(m_pParticle)->Set_LifeTime(true, m_fParticleLifeTime);
+			Engine::Set_ParticleColor(static_cast<CParticle*>(m_pParticle),D3DXCOLOR(1.f,0.f,0.f,1.f));
 			switch (rand() % 4)
 			{
 			case 0:
@@ -137,13 +137,20 @@ void Engine::CMonsterMain::State_Change()
 		if (m_eState == MONSTER_SUICIDE || m_eState == MONSTER_LAYDEAD)
 		{
 			m_pParticle = Engine::Particle_Create(Engine::PART_FRAGILE, _vec3(0.f, 0.f, 0.f));
-			static_cast<Engine::CParticle*>(m_pParticle)->Set_LifeTime(true, 1.f);
+			static_cast<Engine::CParticle*>(m_pParticle)->Set_LifeTime(true, m_fParticleLifeTime);
 			Engine::Set_ParticleColor(static_cast<CParticle*>(m_pParticle), m_tDeadColor);
 
 		}				
 		if (m_eState == MONSTER_DYING)
 		{
 			m_pParticle = nullptr;
+
+			CParticle*  tempParticle=static_cast<CParticle*>(Engine::Particle_Create(Engine::PART_FRAGILE, _vec3(0.f, 0.f, 0.f)));
+			tempParticle->Set_LifeTime(true, m_fParticleLifeTime);
+			Engine::Set_ParticleColor(static_cast<CParticle*>(tempParticle), m_tDeadColor);
+			D3DXVECTOR3	vParticlePos;
+			m_pTransform->Get_Info(Engine::INFO_POS, &vParticlePos);
+			Engine::Set_ParticleTrans(tempParticle, vParticlePos);
 
 			// 여기서 스텟 넘겨주시면 됩니다.
 			switch (m_eType)

@@ -21,6 +21,8 @@ CParticle::CParticle(const CParticle & rhs)
 	,m_vOffset(rhs.m_vOffset)
 	,m_BatchSize(rhs.m_BatchSize)
 	,m_fSpeed(rhs.m_fSpeed)
+	,m_fZero(rhs.m_fZero)
+	,m_fOne(rhs.m_fOne)
 {
 	m_BoundingBox = rhs.m_BoundingBox;
 
@@ -103,18 +105,16 @@ void CParticle::Render_Buffer(void) {
 }
 
 void CParticle::Render_Begin(void) {
-	float fZero = 30.f;
-	float fOne = 40.f;
 
 	m_pGraphicDev->SetRenderState(D3DRS_LIGHTING, false);
 	m_pGraphicDev->SetRenderState(D3DRS_POINTSPRITEENABLE, true);
 	m_pGraphicDev->SetRenderState(D3DRS_POINTSCALEENABLE, true);
 	m_pGraphicDev->SetRenderState(D3DRS_POINTSIZE, FloatToDword(m_fSize));
-	m_pGraphicDev->SetRenderState(D3DRS_POINTSIZE_MIN, FloatToDword(fZero));
+	m_pGraphicDev->SetRenderState(D3DRS_POINTSIZE_MIN, FloatToDword(m_fZero));
 
-	m_pGraphicDev->SetRenderState(D3DRS_POINTSCALE_A, FloatToDword(fZero));
-	m_pGraphicDev->SetRenderState(D3DRS_POINTSCALE_B, FloatToDword(fZero));
-	m_pGraphicDev->SetRenderState(D3DRS_POINTSCALE_C, FloatToDword(fOne));
+	m_pGraphicDev->SetRenderState(D3DRS_POINTSCALE_A, FloatToDword(m_fZero));
+	m_pGraphicDev->SetRenderState(D3DRS_POINTSCALE_B, FloatToDword(m_fZero));
+	m_pGraphicDev->SetRenderState(D3DRS_POINTSCALE_C, FloatToDword(m_fOne));
 
 	m_pGraphicDev->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
 	m_pGraphicDev->SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_SELECTARG1);
