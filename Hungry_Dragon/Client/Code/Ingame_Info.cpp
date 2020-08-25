@@ -38,9 +38,12 @@ CIngame_Info::~CIngame_Info(void)
 	for (int i = 0; i < 4; ++i)
 	{
 		Safe_Release(m_pBuffFrame[i]);
+		Safe_Release(m_pBuffBar[i]);
 	}
 	Safe_Release(m_pBubble);
 	Safe_Release(m_pPolygon);
+	Safe_Release(m_pExpFrame);
+	Safe_Release(m_pExpFrameCharge);
 }
 
 void CIngame_Info::Init_Info(LPDIRECT3DDEVICE9 pGraphicDev)
@@ -79,20 +82,28 @@ void CIngame_Info::Init_Info(LPDIRECT3DDEVICE9 pGraphicDev)
 	D3DXCreateTextureFromFile(m_pGraphicDev, L"../../Asset/HUD/BtnFrameFocus.png", &m_pBtnFrameFocus);
 	D3DXCreateTextureFromFile(m_pGraphicDev, L"../../Asset/HUD/MainMark.png", &m_pBubble);
 	D3DXCreateTextureFromFile(m_pGraphicDev, L"../../Asset/HUD/polygon.png", &m_pPolygon);
+	D3DXCreateTextureFromFile(m_pGraphicDev, L"../../Asset/HUD/ExpFrame.png", &m_pExpFrame);
+	D3DXCreateTextureFromFile(m_pGraphicDev, L"../../Asset/HUD/ExpFrameCharge.png", &m_pExpFrameCharge);
 	
 	TCHAR str[64] = L"";
 	for (int i = 0; i < 4; ++i)
 	{
 		wsprintf(str,L"../../Asset/HUD/BuffIcon%.2d.png", i);
 		D3DXCreateTextureFromFile(m_pGraphicDev, str, &m_pBuffFrame[i]);
+		wsprintf(str, L"../../Asset/HUD/BuffIconBar%.2d.png", i);
+		D3DXCreateTextureFromFile(m_pGraphicDev, str, &m_pBuffBar[i]);
 	}
 	
-	m_vDestination[0] = _vec3(50.f, 720.f, 0.f);
-	m_vDestination[1] = _vec3(50.f, 620.f, 0.f);
-	m_vDestination[2] = _vec3(50.f, 470.f, 0.f);
-	m_vDestination[3] = _vec3(50.f, 320.f, 0.f);
-	m_vDestination[4] = _vec3(50.f, 170.f, 0.f);
+	m_vDestination[4] = _vec3(60.f, 170.f, 0.f);
+	m_vDestination[0] = _vec3(1060.f, 120.f, 0.f);
+	m_vDestination[1] = _vec3(1210.f, 120.f, 0.f);
+	m_vDestination[2] = _vec3(1360.f, 120.f, 0.f);
+	m_vDestination[3] = _vec3(1510.f, 120.f, 0.f);
 
+	for (int i = 0; i < 4; ++i)
+	{
+		m_fBuffGage[i] = 0.f;
+	}
 }
 
 void CIngame_Info::Update_Info(const Engine::_float & _fTimeDelta)
@@ -106,6 +117,15 @@ void CIngame_Info::Update_Info(const Engine::_float & _fTimeDelta)
 
 	Update_BuffPack(_fTimeDelta);
 	Update_FontPack(_fTimeDelta);
+
+	for (int i = 0; i < 4; ++i)
+	{
+		m_fBuffGage[i] -= _fTimeDelta;
+		if (m_fBuffGage[i] < 0.f)
+		{
+			m_fBuffGage[i] = 0.f;
+		}
+	}
 
 	if (m_tPlayerStatus.fHp < m_tPlayerStatus.fDelay_Hp)
 	{
@@ -167,6 +187,11 @@ void CIngame_Info::Update_Info(const Engine::_float & _fTimeDelta)
 		m_uSubFocus = 0;
 	}
 
+	m_fAcquireAction -= _fTimeDelta;
+	if (0.f > m_fAcquireAction)
+	{
+		m_fAcquireAction = 0.f;
+	}
 }
 
 void CIngame_Info::Render_UI()
@@ -174,7 +199,9 @@ void CIngame_Info::Render_UI()
 	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
 
 	TCHAR str[32];
-	
+	_matrix matIdentity;
+	D3DXMatrixIdentity(&matIdentity);
+
 	// 나침반
 	_vec3 vLook;
 	CIngame_Flow::GetInstance()->Get_PlayerObject()->Get_Transform()->Get_Info(INFO_LOOK, &vLook);
@@ -225,30 +252,40 @@ void CIngame_Info::Render_UI()
 	Draw_Tex(m_pIconCon->Get_Texture(0), 512, 512, 0.04f, 0.04f, 183.f, 58.f);
 	Draw_Tex(m_pIconCon->Get_Texture(1), 512, 512, 0.04f, 0.04f, 188.f, 88.f);
 	Draw_Tex(m_pIconCon->Get_Texture(2), 512, 512, 0.04f, 0.04f, 183.f, 120.f);
-
 	
 
-	Draw_Tex(m_pTexBar, 1024, 128, 1.f, _fRectY, 300.f, 850.f, D3DCOLOR_ARGB(155, 255, 255, 255));
-	Draw_Tex(m_pBarCon->Get_Texture(4), 1024* m_tPlayerStatus.fStage * 0.01f, 128, 1.f, _fRectY, 300.f, 850.f, D3DCOLOR_ARGB(155, 255, 255, 255));
+	Draw_Tex(m_pExpFrame, 2048, 64, 0.78125f, 0.3f, 0.f, 880.f, D3DCOLOR_ARGB(155, 255, 255, 255));
+	Draw_Tex(m_pExpFrameCharge, int(2048 * m_tPlayerStatus.fStage * 0.01f), 64, 0.78125f, 0.3f, 0.f, 880.f, D3DCOLOR_ARGB(155, int(255* m_tPlayerStatus.fStage * 0.01f), 255, int(255*(1.f - m_tPlayerStatus.fStage * 0.01f))));
+	wsprintf(str, L"진행도 (%d%%)", (int)m_tPlayerStatus.fStage);
 
-	Draw_Tex(m_pIconCon->Get_Texture(3), 512, 512, 0.05f, 0.05f, 50.f, 180.f);
+	m_pSprite->SetTransform(&matIdentity);
+	Engine::Draw_Font_Center(m_pSprite, L"Font_LightSmall", str, &_vec2(1600.f, 850.f), D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
+
+	Draw_Tex(m_pIconCon->Get_Texture(3), 512, 512, 0.05f * (1.f + m_fAcquireAction), 0.05f * (1.f + m_fAcquireAction), 50.f-12.f*m_fAcquireAction, 180.f - 12.f*m_fAcquireAction);
 	wsprintf(str, L"%d", m_tPlayerGoods.uDelay_Polygons);
 	Engine::Render_Font(L"Font_Light", str, &_vec2(80.f, 180.f), D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
 
-	Draw_Tex(m_pIconCon->Get_Texture(4), 512, 512, 0.05f, 0.05f, 50.f, 210.f);
+	Draw_Tex(m_pIconCon->Get_Texture(4), 512, 512, 0.05f, 0.05f, 200.f, 150.f);
 	wsprintf(str, L"%d", m_tPlayerGoods.uGame_Point);
-	Engine::Render_Font(L"Font_Light", str, &_vec2(80.f, 210.f), D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
+	Engine::Render_Font(L"Font_Light", str, &_vec2(230.f, 150.f), D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
 
-	Draw_Tex(m_pIconCon->Get_Texture(5), 512, 512, 0.05f, 0.05f, 50.f, 240.f);
+	Draw_Tex(m_pIconCon->Get_Texture(5), 512, 512, 0.05f, 0.05f, 400.f, 150.f);
 	wsprintf(str, L"%.2d : %.2d : %.2d", int(m_fTimeTick) / 60, int(m_fTimeTick) % 60, int(m_fTimeTick*100.f)%100);
-	Engine::Render_Font(L"Font_Light", str, &_vec2(80.f, 240.f), D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
+	Engine::Render_Font(L"Font_Light", str, &_vec2(430.f, 150.f), D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
 
-
-	Draw_Tex(m_pBuffFrame[0], 256, 256, 0.5f, 0.5f, 50.f, 280.f, D3DCOLOR_ARGB(155, 255, 255, 255));
-	Draw_Tex(m_pBuffFrame[1], 256, 256, 0.5f, 0.5f, 50.f, 430.f, D3DCOLOR_ARGB(155, 255, 255, 255));
-	Draw_Tex(m_pBuffFrame[2], 256, 256, 0.5f, 0.5f, 50.f, 580.f, D3DCOLOR_ARGB(155, 255, 255, 255));
-	Draw_Tex(m_pBuffFrame[3], 256, 256, 0.5f, 0.5f, 50.f, 730.f, D3DCOLOR_ARGB(155, 255, 255, 255));
-
+	for (int i = 0; i < 4; ++i)
+	{
+		if (0 < m_fBuffGage[i])
+		{
+			Draw_Tex(m_pBuffFrame[i], 256, 256, 0.5f, 0.5f, 1000.f + 150.f*i, 50.f, D3DCOLOR_ARGB(155, 255, 255, 255));
+			Draw_Tex(m_pBuffBar[i], int(2.56f*m_fBuffGage[i]), 256, 0.5f, 0.5f, 1000.f + 150.f*i, 50.f, D3DCOLOR_ARGB(255, 255, 255, 255));
+		}
+		else
+		{
+			Draw_Tex(m_pBuffFrame[i], 256, 256, 0.5f, 0.5f, 1000.f + 150.f*i, 50.f, D3DCOLOR_ARGB(55, 255, 255, 255));
+		}
+		
+	}
 
 
 	for (auto& tPack : m_listBuffPack)
@@ -257,15 +294,18 @@ void CIngame_Info::Render_UI()
 		//Draw_Tex(m_pPolygon, 128, 128, tPack.vScale.x, tPack.vScale.y, tPack.vPos.x, tPack.vPos.y, tPack.dwColor);
 	}
 
+	
+
+	
+
+	m_pSprite->End();
+
 	for (auto& tPack : m_listFontPack)
 	{
 		wsprintf(str, L"+%d", (int)(tPack.tEvent.uDataNum));
-		Engine::Render_Font(L"Font_Light", str, &_vec2(2.f * tPack.vPos.x, tPack.vPos.y), tPack.tColor);
+		Engine::Render_Font(L"Font_Light", str, &_vec2(tPack.vPos.x-50.f, tPack.vPos.y - 50.f), tPack.tColor);
 		//Engine::Render_Font(L"Font_Light", str, &_vec2(400.f, 200.f), tPack.tColor);
 	}
-
-
-	m_pSprite->End();
 
 }
 
@@ -781,23 +821,41 @@ void CIngame_Info::Occur_EngineEvent(ENGINE_EVENT _tEvent)
 	switch (_tEvent.uEventNum)		// 밑에 버프 4개 적용하기
 	{
 	case 0:
-		
+		m_fBuffGage[_tEvent.uEventNum] += _tEvent.uDataNum;
+		if (100.f < m_fBuffGage[_tEvent.uEventNum])
+		{
+			m_fBuffGage[_tEvent.uEventNum] = 100.f;
+		}
 		break;
 	case 1:
-
+		m_fBuffGage[_tEvent.uEventNum] += _tEvent.uDataNum;
+		if (100.f < m_fBuffGage[_tEvent.uEventNum])
+		{
+			m_fBuffGage[_tEvent.uEventNum] = 100.f;
+		}
 		break;
 	case 2:
-
+		m_fBuffGage[_tEvent.uEventNum] += _tEvent.uDataNum;
+		if (100.f < m_fBuffGage[_tEvent.uEventNum])
+		{
+			m_fBuffGage[_tEvent.uEventNum] = 100.f;
+		}
 		break;
 	case 3:
-
+		m_fBuffGage[_tEvent.uEventNum] += _tEvent.uDataNum;
+		if (100.f < m_fBuffGage[_tEvent.uEventNum])
+		{
+			m_fBuffGage[_tEvent.uEventNum] = 100.f;
+		}
 		break;
 	case 4:
 		m_tPlayerGoods.uPolygons += _tEvent.uDataNum;
+		m_fAcquireAction = 1.f;
 		break;
 	}
 	Push_EventFont(_tEvent);
 	m_tPlayerGoods.uGame_Point += (50 + rand()%50);
+	m_tPlayerStatus.fStage += 1.f;
 }
 
 void CIngame_Info::Update_BuffPack(const Engine::_float & _fTimeDelta)
