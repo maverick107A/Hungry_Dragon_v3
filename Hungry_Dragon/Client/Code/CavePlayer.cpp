@@ -197,7 +197,6 @@ HRESULT CCavePlayer::Add_Component(void)
 
 void CCavePlayer::Animation_Render()
 {
-	_matrix matWorld;
 	//¾ó±¼
 	m_pPartsTrans[PART_FACE]->Set_Transform(m_pGraphicDev, m_pTransform->Get_World());
 	m_pPartsBuffer[PART_FACE]->Render_Buffer();

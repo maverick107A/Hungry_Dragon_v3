@@ -32,8 +32,7 @@ public:
 private:
 	virtual void	State_Change() override;
 	virtual HRESULT	Add_Component(void) override;
-	
-	void			Animations(const float& fTimeDelta);
+
 	void			Preset_Animation();
 
 	float m_vAngle = 0.f;

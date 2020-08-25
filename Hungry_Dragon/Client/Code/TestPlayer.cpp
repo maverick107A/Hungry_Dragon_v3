@@ -327,7 +327,6 @@ CTestPlayer* CTestPlayer::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 
 void CTestPlayer::Animation_Render()
 {
-	_matrix matWorld;
 	//얼굴
 	m_pPartsTrans[PART_FACE]->Set_Transform(m_pGraphicDev, m_pTransform->Get_World());
 	m_pPartsBuffer[PART_FACE]->Render_Buffer();
@@ -544,7 +543,6 @@ void CTestPlayer::Preset_Animation()
 	m_pAnimationController->Insert_Revolute(ANI_FASTBREATH, PART_FACE, 0, _vec3(0.f, 0.f, 0.f), _vec3(-D3DX_PI*0.25f, 0.f, 0.f));
 
 	//쳐맞기 0프레임
-
 	m_pAnimationController->Insert_Revolute(ANI_HIT, PART_JAW, 0, _vec3(0.f, 0.f, 0.f), _vec3(D3DX_PI*0.25f, 0.f, 0.f));
 	m_pAnimationController->Insert_Revolute(ANI_HIT, PART_FACE, 0, _vec3(0.f, 0.f, 0.f), _vec3(D3DX_PI*0.25f, 0.f, 0.f));
 	m_pAnimationController->Insert_Revolute(ANI_HIT, PART_BODY, 0, _vec3(0.f, 0.f, 0.f), _vec3(0.f, 0.f, 0.f));

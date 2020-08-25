@@ -10,7 +10,7 @@ Engine::CPlayerMain::CPlayerMain(LPDIRECT3DDEVICE9 pGraphicDev)
 
 Engine::CPlayerMain::~CPlayerMain(void)
 {
-
+	
 }
 
 void Engine::CPlayerMain::Free(void)

@@ -97,9 +97,9 @@ protected:
 	float					m_fSpeed = 10.f;
 	STATE					m_eState = STATE_END;
 
-	int						m_iHp = 300;
+	int						m_iHp = 100;
 	int						m_iStamina = 1000;
-	int						m_iMana = 300;
+	int						m_iMana = 100;
 
 	float					m_fColSize = 0.f;
 	CMonsterMain*			m_pBoss = nullptr;

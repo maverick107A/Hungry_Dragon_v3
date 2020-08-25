@@ -90,7 +90,7 @@ protected:
 	MONSTERSTATE				m_preState;
 	MONSTERSTATE				m_eState;
 	MONSTERTYPE					m_eType = BUFF_NONE;
-	MONSTERVARIATION			m_eVariation = MONSTER_VARIEND;
+	MONSTERVARIATION			m_eVariation = MONSTER_BOSSGOLEM;
 	float						m_fPlayerDistance;
 	float						m_fDistance;
 	float						m_fSpeed;
