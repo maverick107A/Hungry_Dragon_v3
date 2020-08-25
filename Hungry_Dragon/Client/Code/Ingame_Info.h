@@ -25,7 +25,7 @@ private:
 
 public:			
 	void Init_Info(LPDIRECT3DDEVICE9 pGraphicDev);
-	void Initialize_Time() { m_fTimeTick = 0.f; }
+	void Initialize_LocalInfo() { m_fTimeTick = 0.f; m_bStageClear = false; m_tPlayerGoods.uGame_Point = 0; m_tPlayerStatus.fStage = 0.f; }
 	void Update_Info(const Engine::_float& _fTimeDelta);
 	void Render_UI();
 

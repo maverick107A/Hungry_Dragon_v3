@@ -135,7 +135,7 @@ void CIngame_Flow::Occur_Event(int _iEvent)
 		default:
 			break;
 		}
-		CIngame_Info::GetInstance()->Initialize_Time();
+		CIngame_Info::GetInstance()->Initialize_LocalInfo();
 		break;
 	}
 }

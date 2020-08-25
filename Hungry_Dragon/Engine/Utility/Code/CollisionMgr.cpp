@@ -3,6 +3,7 @@
 #include "Transform.h"
 #include "MonsterMain.h"
 #include "PlayerMain.h"
+#include "Export_Function.h"
 
 USING(Engine)
 
@@ -66,6 +67,7 @@ void CCollisionMgr::Player_Monster(list<CGameObject*> * _pPlayer, list<CGameObje
 				{
 					static_cast<CMonsterMain*>(pMonster)->Kill_Monster(fTimeDelta);
 					Player->Set_MouseTime(1.f);
+					
 				}
 			}
 		}

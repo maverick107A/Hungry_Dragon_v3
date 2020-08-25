@@ -253,13 +253,6 @@ _uint CScene_Loading::Loading_ForStage(void)
 
 	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
 		RESOURCE_STAGE,
-		L"Texture_Terrain",
-		Engine::TEX_NORMAL,
-		L"../Bin/Resource/Texture/Terrain/Terrain0.png"),
-		E_FAIL);
-
-	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
-		RESOURCE_STAGE,
 		L"Texture_SkySphere",
 		Engine::TEX_CUBE,
 		L"../../Asset/Skybox/TestSkybox.dds"),
@@ -362,19 +355,19 @@ _uint CScene_Loading::Loading_ForStage(void)
 		L"../../Asset/Billboard/Erupt/erupt00%.2d.png", 44),
 		E_FAIL);
 
-	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+	/*FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
 		RESOURCE_STAGE,
 		L"Texture_FireEmblem",
 		Engine::TEX_NORMAL,
 		L"../../Asset/Billboard/FireEmblem/Fireemblem00%.2d.png", 72),
-		E_FAIL);
+		E_FAIL);*/
 
-	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+	/*FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
 		RESOURCE_STAGE,
 		L"Texture_FireRing",
 		Engine::TEX_NORMAL,
 		L"../../Asset/Billboard/Firering/firering00%.2d.png", 38),
-		E_FAIL);
+		E_FAIL);*/
 
 	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
 		RESOURCE_STAGE,
@@ -552,11 +545,19 @@ _uint CScene_Loading::Loading_ForStage(void)
 	// È¿°úÀ½
 	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/mouse_on.mp3", L"MouseOn");
 	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/breath_test.mp3", L"BreathTest");
+	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/long_breath.mp3", L"long_breath");
 	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/Fragile0.mp3", L"Fragile0");
 	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/Fragile1.mp3", L"Fragile1");
 	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/Fragile2.mp3", L"Fragile2");
 	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/Fragile3.mp3", L"Fragile3");
 	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/flight_once.mp3", L"FlightOnce");
+	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/break.mp3", L"break");
+	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/die1.mp3", L"rabbit_die");
+	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/die2.mp3", L"pig_die");
+	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/die3.mp3", L"bat_die1");
+	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/die4.mp3", L"bat_die2");
+	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/die5.mp3", L"bat_die3");
+	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/bite.mp3", L"bite");
 
 
 

@@ -334,15 +334,18 @@ void CIngame_Info::Render_UI()
 			break;
 		case 1:
 			wsprintf(str, L"돼지 소화 완료");
+
 			break;
 		case 2:
 			wsprintf(str, L"박쥐 소화 완료");
 			break;
 		case 3:
 			wsprintf(str, L"?? 소화 완료");
+
 			break;
 		case 4:
 			wsprintf(str, L"광석 소화 완료");
+
 			break;
 		case 5:
 			wsprintf(str, L"박쥐 소화 완료");
@@ -912,6 +915,78 @@ void CIngame_Info::Push_EngineEvent(ENGINE_EVENT _tEvent)
 	tInfo.uStage = uStageAccum;
 	tInfo.fLifeTime = 2.f;
 
+	switch (tInfo.uType)
+	{
+	case 0:
+		Get_FMOD()->PlayEffect(L"rabbit_die");
+		break;
+	case 1:
+		Get_FMOD()->PlayEffect(L"pig_die");
+
+		break;
+	case 2:
+		switch (rand() % 3)
+		{
+		case 0:
+			Get_FMOD()->PlayEffect(L"bat_die1");
+			break;
+		case 1:
+			Get_FMOD()->PlayEffect(L"bat_die2");
+			break;
+		case 2:
+			Get_FMOD()->PlayEffect(L"bat_die3");
+			break;
+		}
+		break;
+	case 3:
+
+		break;
+	case 4:
+		Get_FMOD()->PlayEffect(L"break");
+
+		break;
+	case 5:
+		switch (rand() % 3)
+		{
+		case 0:
+			Get_FMOD()->PlayEffect(L"bat_die1");
+			break;
+		case 1:
+			Get_FMOD()->PlayEffect(L"bat_die2");
+			break;
+		case 2:
+			Get_FMOD()->PlayEffect(L"bat_die3");
+			break;
+		}
+		break;
+	case 6:
+		Get_FMOD()->PlayEffect(L"break");
+		break;
+	case 7:
+		Get_FMOD()->PlayEffect(L"break");
+		break;
+	case 8:
+		//wsprintf(str, L"?? 소화 완료");
+		break;
+	case 9:
+		//wsprintf(str, L"보스 격파");
+		break;
+	case 10:
+		switch (rand() % 3)
+		{
+		case 0:
+			Get_FMOD()->PlayEffect(L"bat_die1");
+			break;
+		case 1:
+			Get_FMOD()->PlayEffect(L"bat_die2");
+			break;
+		case 2:
+			Get_FMOD()->PlayEffect(L"bat_die3");
+			break;
+		}
+		break;
+	}
+
 	// ui 푸쉬
 	m_listPreyInfo.emplace_back(tInfo);
 }
@@ -982,6 +1057,21 @@ void CIngame_Info::Occur_EngineEvent(ENGINE_EVENT _tEvent)
 	case 4:
 		m_tPlayerGoods.uPolygons += _tEvent.uDataNum;
 		m_fAcquireAction = 1.f;
+		break;
+	}
+	switch (rand() % 4)
+	{
+	case 0:
+		Get_FMOD()->PlayEffect(L"Fragile0");
+		break;
+	case 1:
+		Get_FMOD()->PlayEffect(L"Fragile1");
+		break;
+	case 2:
+		Get_FMOD()->PlayEffect(L"Fragile2");
+		break;
+	case 3:
+		Get_FMOD()->PlayEffect(L"Fragile3");
 		break;
 	}
 	Push_EventFont(_tEvent);

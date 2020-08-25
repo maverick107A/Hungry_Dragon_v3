@@ -1,6 +1,7 @@
 #include "PBreathIdle.h"
 #include "Transform.h"
 #include "PlayerMain.h"
+#include "Export_Function.h"
 
 USING(Engine)
 
@@ -25,6 +26,7 @@ void CPBreathIdle::Enter_State(CPlayerMain* _pPlayer)
 	m_pPlayer->Set_Breath(true);
 	m_pPlayer->Set_Animation(ANI_BREATHIDLE);
 	m_pPlayer->Set_FrameSpeed(1.f);
+	Engine::Get_FMOD()->PlayLoop(L"long_breath");
 }
 
 void CPBreathIdle::Update_State(const float& fTimeDelta)
@@ -78,6 +80,8 @@ void CPBreathIdle::Out_State()
 {
 	m_pPlayer->Set_Breath(false);
 	m_pPlayer->Set_FrameSpeed(3.f);
+	Engine::Get_FMOD()->StopLoop(L"long_breath");
+
 }
 
 CPBreathIdle* Engine::CPBreathIdle::Create(void)
