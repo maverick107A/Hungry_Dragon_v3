@@ -30,7 +30,7 @@ void CPLandIdle::Update_State(const float& fTimeDelta)
 {
 	if (m_pPlayer->Get_Stamina() < 300)
 		m_pPlayer->Add_Stamina(2);
-	if (GetAsyncKeyState('W') || GetAsyncKeyState('S'))
+	if (GetAsyncKeyState('W') || GetAsyncKeyState('S') || GetAsyncKeyState('A') || GetAsyncKeyState('D'))
 	{
 		m_pPlayer->Set_Sate(CPlayerMain::STATE_LANDRUSH);
 	}

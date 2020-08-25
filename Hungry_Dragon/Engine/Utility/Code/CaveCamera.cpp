@@ -16,6 +16,7 @@ HRESULT Engine::CCaveCamera::Ready_Camera(void)
 {
 	m_tCenter = { LONG(WINCX*0.5), LONG(WINCY*0.5) };
 	SetCursorPos(m_tCenter.x, m_tCenter.y);
+	m_fCameraDis = 30.f;
 	return S_OK;
 }
 
