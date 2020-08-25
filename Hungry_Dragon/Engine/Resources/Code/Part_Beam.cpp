@@ -14,6 +14,7 @@ CPart_Beam::CPart_Beam(const CPart_Beam & rhs)
 	m_arrParticle = rhs.m_arrParticle;
 
 	m_fDepth = rhs.m_fDepth;
+	m_iRadius = rhs.m_iRadius;
 }
 
 CPart_Beam::CPart_Beam(LPDIRECT3DDEVICE9 pGraphicDev, _vec3 _vOrigin, BoundingBox * boundingBox, int numParticle, float _fSize)
@@ -27,6 +28,7 @@ CPart_Beam::CPart_Beam(LPDIRECT3DDEVICE9 pGraphicDev, _vec3 _vOrigin, BoundingBo
 
 	m_fDepth = 100.f;
 	m_fRadius = 5.f;
+	m_iRadius=14;
 
 	for (int i = 0; i < numParticle; ++i) {
 		Add_Particle();
@@ -34,6 +36,11 @@ CPart_Beam::CPart_Beam(LPDIRECT3DDEVICE9 pGraphicDev, _vec3 _vOrigin, BoundingBo
 }
 
 CPart_Beam::~CPart_Beam(void) {
+}
+
+_int CPart_Beam::Get_Radius()
+{
+	return m_iRadius;
 }
 
 void CPart_Beam::Set_BoundingBox(BoundingBox _boundingBox) {
@@ -52,6 +59,17 @@ void CPart_Beam::Set_Origin(_vec3 _origin) {
 
 void CPart_Beam::Set_Player(CPlayerMain * _pPlayer) {
 	m_pPlayer = _pPlayer;
+}
+
+void CPart_Beam::Set_Radius(_int _radius)
+{
+	if (_radius < 14)
+	{
+		m_iRadius = 14;
+		return;
+	}
+
+	m_iRadius = _radius;
 }
 
 void CPart_Beam::Reset_Particle(ATTRIBUTE * _attribute) {
@@ -102,11 +120,13 @@ void CPart_Beam::Reset_Particle(ATTRIBUTE * _attribute) {
 		_attribute->vVelocity = _vec3(0.f, 0.f, 1.f);
 	}
 
+	float tempInnerRadius=(m_iRadius*0.5f-2)*(m_iRadius*0.5f-2);
+	float tempOuterRadius=m_iRadius*m_iRadius*0.25f;
 	do {
-		tempRadX = rand()*0.0000305185f * 14 - 7;
-		tempRadY = rand()*0.0000305185f * 14 - 7;
+		tempRadX = rand()*0.0000305185f * m_iRadius - m_iRadius*0.5f;
+		tempRadY = rand()*0.0000305185f * m_iRadius - m_iRadius*0.5f;
 		//tempZ = rand()*0.0000305185f * 3;
-	} while (tempRadX*tempRadX + tempRadY*tempRadY <= 25 || tempRadX*tempRadX + tempRadY*tempRadY > 49);
+	} while (tempRadX*tempRadX + tempRadY*tempRadY <= tempInnerRadius || tempRadX*tempRadX + tempRadY*tempRadY > tempOuterRadius);
 
 	_vec3 vOutput;
 	if (m_pPlayer)
