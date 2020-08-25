@@ -34,8 +34,8 @@ int CGiantGolem::Update_Object(const float & fTimeDelta)
 
 	if (m_eState == MONSTER_REBORN && m_eState != MONSTER_DEACTIVATE)
 	{
-		//m_vFirstPos = { 19200.f ,  -1500.f  ,  19200.f };
-		//m_pTransform->Set_Trans(&m_vFirstPos);
+		m_vFirstPos = { 19200.f ,  1500.f  ,  19200.f };
+		m_pTransform->Set_Trans(&m_vFirstPos);
 		//m_pTransform->Set_Scale(m_fMaxScale);
 		m_fMonster_HP = 100.f;
 		//m_fScale = 15.f;
