@@ -17,12 +17,6 @@ public:
 	virtual ~CPart_Beam(void);
 
 public:
-	//반지름을 리턴
-	_float Get_Radius()
-	{
-		return m_iRadius*0.5f;
-	}
-
 	void Set_BoundingBox(BoundingBox _boundingBox);
 	void Set_Origin(_vec3 _origin);
 	void Set_Player(CPlayerMain* _pPlayer);
