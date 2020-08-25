@@ -281,11 +281,15 @@ void CResourcesMgr::Load_Particle(LPDIRECT3DDEVICE9 pGraphicDev) {
 			pParticle = CPart_Beam::Create(pGraphicDev, 1000);
 			static_cast<Engine::CPart_Beam*>(pParticle)->Set_Texture(L"../../Asset/FogTex4.png");
 			break;
+		case  PART_STONE:
+			pParticle = CPart_Atk::Create(pGraphicDev, 500);
+			static_cast<Engine::CPart_Atk*>(pParticle)->Set_Texture(L"../../Asset/snowflake.dds");
+			break;
 		default:
 			pParticle = nullptr;
 			break;
 		}
-
+		
 		m_vecParticle.emplace_back(pParticle);
 	}
 }

@@ -17,13 +17,14 @@ HRESULT CGolem::Ready_Object(void)
 {
 	Engine::CMonsterMain::Ready_Object();
 	Add_Component();
-	m_fSpeed = 50.f;
+	m_fSpeed = 3.f;
 	m_fMonster_HP = 100.f;
 	m_fMonster_MaxHP = 100.f;
 	m_fScale = 15.f;
 	m_fMaxScale = 15.f;
 	m_fDamaged = 2.f;
 	m_eState = MONSTER_REBORN;
+	m_fDetect_Range = 800.f;
 	m_fParticleLifeTime = 3.f;
 	m_eVariation = MONSTER_RANDGOLEM;
 
@@ -41,7 +42,6 @@ int CGolem::Update_Object(const float & fTimeDelta)
 		m_pTransform->Set_Trans(&m_vFirstPos);
 		m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
 		m_pTransform->Set_Scale(m_fMaxScale);
-
 		m_fMonster_HP = 100.f;
 		m_fScale = 15.f;
 		m_pParticle = nullptr;
@@ -53,19 +53,22 @@ int CGolem::Update_Object(const float & fTimeDelta)
 	if (MONSTER_DEAD == Engine::CMonsterMain::Update_Object(fTimeDelta))
 	{
 		m_eState = MONSTER_REBORN;
-
+		
 		return m_iEvent;
 	}
 
 
+	if (m_eState == MONSTER_ACTIVATE && m_eState != MONSTER_DEACTIVATE && m_eState != MONSTER_DIG)
+	{
+		m_vHight = m_vPlayerPos.y - m_pTransform->m_vInfo[Engine::INFO_POS].y;
 
+		if (m_vHight > 300.f)
+		{
+			m_eState = MONSTER_DIG;
+			State_Change();
+		}
+	}
 
-	//if (m_eState == MONSTER_ACTIVATE && m_eState != MONSTER_DEACTIVATE)
-	//{
-	//	vPlayerPos = { m_vPlayerPos.x  , 0.f  , m_vPlayerPos.z };
-	//	m_pTransform->Chase_Target(&vPlayerPos, (fTimeDelta * m_fSpeed));
-	//	m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
-	//}
 
 	return m_iEvent;
 }
@@ -79,17 +82,24 @@ void CGolem::Render_Object(void)
 		m_fAngle = 0;
 	}
 
+
+	// ¸öÃ¼
+	m_pTransform->Set_Scale(8);
+	m_pTransform->Update_Component(0.01f);
+	m_pTransform->Set_Transform(m_pGraphicDev);
+
+	m_pBufferMeshCom->Render_Buffer();
+
+
+
 	if (m_eState != MONSTER_DEACTIVATE && m_eState != MONSTER_DYING)
 	{
 		m_pTransform->Get_Info(Engine::INFO_POS, &m_vLeftArmPos);
 		m_pTransform->Get_Info(Engine::INFO_POS, &m_vRightArmPos);
+		m_pTransform->Get_Info(Engine::INFO_POS, &m_vBodyPos);
+
 	}
 
-
-	m_pTransform->Get_Info(Engine::INFO_POS, &m_vBodyPos);
-
-
-	
 	// ¿À¸¥ÆÈ
 	m_pTransform->Set_Scale(5);
 	m_vLeftArmPos = { m_vLeftArmPos.x + (sinf(m_fAngle) * 10)  ,m_vLeftArmPos.y - 5.f , m_vLeftArmPos.z + (cosf(m_fAngle) * 10) };
@@ -110,19 +120,7 @@ void CGolem::Render_Object(void)
 
 	m_pBufferChrystalMeshCom->Render_Buffer();
 
-
-
-	// ¸öÃ¼
 	m_pTransform->Set_Trans(&m_vBodyPos);
-	m_pTransform->Set_Scale(8);
-	m_pTransform->Update_Component(0.01f);
-	m_pTransform->Set_Transform(m_pGraphicDev);
-
-
-	m_pBufferMeshCom->Render_Buffer();
-
-
-
 	Engine::CMonsterMain::Render_Object();
 }
 

@@ -44,7 +44,7 @@ int Engine::CMonsterMain::Update_Object(const float & fTimeDelta)
 	Dir.y = 0;
 	m_fDistance = D3DXVec3Length(&Dir);
 
-	if (m_eState != MONSTER_DYING &&  m_eState != MONSTER_DEACTIVATE && m_eState != MONSTER_SUICIDE && m_eState != MONSTER_LAYDEAD)
+	if (m_eState != MONSTER_DYING &&  m_eState != MONSTER_DEACTIVATE && m_eState != MONSTER_SUICIDE && m_eState != MONSTER_LAYDEAD && m_eState != MONSTER_DIG)
 	{
 		if (m_fDistance < m_fDetect_Range && m_eState != MONSTER_DYING)
 		{
@@ -67,6 +67,17 @@ int Engine::CMonsterMain::Update_Object(const float & fTimeDelta)
 		m_fMonster_HP -= m_fDamaged;
 		Dead_Monster();
 	}
+	if (m_eState == MONSTER_DIG)
+	{
+		m_fMonster_HP -= m_fDamaged;
+		m_pTransform->m_vInfo[Engine::INFO_POS].y -= m_fSpeed;
+		if (m_fMonster_HP < 0)
+		{
+				m_eState = MONSTER_REBORN;
+		m_iEvent = MONSTER_DEAD;
+		}
+	}
+	
 
 	if (m_eState == MONSTER_LAYDEAD)
 	{
@@ -136,10 +147,10 @@ void Engine::CMonsterMain::State_Change()
 		}
 		if (m_eState == MONSTER_SUICIDE || m_eState == MONSTER_LAYDEAD)
 		{
+			//Engine::CResources*			m_pParticle = nullptr;
 			m_pParticle = Engine::Particle_Create(Engine::PART_FRAGILE, _vec3(0.f, 0.f, 0.f));
 			static_cast<Engine::CParticle*>(m_pParticle)->Set_LifeTime(true, m_fParticleLifeTime);
 			Engine::Set_ParticleColor(static_cast<CParticle*>(m_pParticle), m_tDeadColor);
-
 		}				
 		if (m_eState == MONSTER_DYING)
 		{
@@ -178,6 +189,16 @@ void Engine::CMonsterMain::State_Change()
 			default:
 				break;
 			}
+		}
+
+		if (m_eState == MONSTER_DIG)
+		{
+			//m_pParticle = Engine::Particle_Create(Engine::PART_STONE, _vec3(0.f, 0.f, 0.f));
+			//static_cast<Engine::CParticle*>(m_pParticle)->Set_LifeTime(true, m_fParticleLifeTime);
+			//Engine::Set_ParticleColor(static_cast<CParticle*>(m_pParticle), D3DXCOLOR(1.f, 0.f, 0.f, 1.f));
+			m_pParticle = Engine::Particle_Create(Engine::PART_ATK, _vec3(0.f, 0.f, 0.f));
+			static_cast<Engine::CParticle*>(m_pParticle)->Set_LifeTime(true, m_fParticleLifeTime);
+			Engine::Set_ParticleColor(static_cast<CParticle*>(m_pParticle), D3DXCOLOR(0.8f, 0.78f, 0.13f, 1.f));
 		}
 
 		m_preState = m_eState;

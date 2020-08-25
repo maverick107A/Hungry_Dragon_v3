@@ -127,30 +127,30 @@ int CRun_Monster::Update_Object(const float & fTimeDelta)
 void CRun_Monster::Render_Object(void)
 {
 	m_pTransform->Set_Transform(m_pGraphicDev);
-	m_pTextureCom->Set_Texture(4);
+	m_pAuraTextureCom->Set_Texture((int)m_tFrame.fStartFrame);
 	m_pBufferCubeCom->Render_Buffer();
 
 
-	if (m_eType != CMonsterMain::BUFF_NONE)
-	{
-	
-		m_pAuraTransform->Set_Transform(m_pGraphicDev);
-		
-		m_pGraphicDev->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
-		m_pGraphicDev->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
-		m_pGraphicDev->SetRenderState(D3DRS_ALPHAREF, 0);
+	//if (m_eType != CMonsterMain::BUFF_NONE)
+	//{
+	//
+	//	m_pAuraTransform->Set_Transform(m_pGraphicDev);
+	//	
+	//	m_pGraphicDev->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
+	//	m_pGraphicDev->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
+	//	m_pGraphicDev->SetRenderState(D3DRS_ALPHAREF, 0);
 
-		m_pGraphicDev->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
-		m_pGraphicDev->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+	//	m_pGraphicDev->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+	//	m_pGraphicDev->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
 
-		m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
+	//	m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 
 
-		m_pAuraTextureCom->Set_Texture((int)m_tFrame.fStartFrame);
-		m_pBufferBoradCom->Render_Buffer();
+	//	
+	//	m_pBufferBoradCom->Render_Buffer();
 
-		m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
-	}
+	//	m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
+	//}
 
 	Engine::CMonsterMain::Render_Object();
 }

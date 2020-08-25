@@ -33,6 +33,8 @@ public:
 private:
 	D3DXVECTOR3 m_vBodyPos;
 	float		m_fAngle = 0;
+	float		m_fSuicideHeight = 0;
+	float		m_vHight;
 	D3DXVECTOR3 m_vLeftArmPos;
 	D3DXVECTOR3 m_vRightArmPos;
 private:
