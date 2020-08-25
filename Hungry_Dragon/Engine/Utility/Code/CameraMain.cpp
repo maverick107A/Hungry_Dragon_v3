@@ -103,7 +103,7 @@ void CCameraMain::Ride_Terrain(CBaseLand* _pTerrain)
 
 		if (m_vPos.y < fTerrainHieght)
 		{
-			m_fCameraDis = 0.1f;
+			m_fCameraDis = 1.f;
 			//if (m_fCameraDis < 0.f)
 			//	m_fCameraDis = 0.f;
 		}
@@ -126,7 +126,7 @@ void CCameraMain::Ride_Terrain(CBaseLand* _pTerrain)
 
 		if (m_vPos.y < fTerrainHieght)
 		{
-			m_fCameraDis = 0.1f;
+			m_fCameraDis = 1.f;
 			//if (m_fCameraDis < 0.f)
 			//	m_fCameraDis = 0.f;
 		}

@@ -29,23 +29,37 @@ void CPLandRush::Update_State(const float& fTimeDelta)
 {
 	//¶¥ÀÌµ¿
 	D3DXVECTOR3 vDir = { 0.f,0.f,0.f };
-
+	D3DXVECTOR3 vLook = { 0.f,0.f,0.f };
 	D3DXVECTOR3 vRight = { 0.f,0.f,0.f };
 
-	vRight.y = -sinf(m_pPlayer->Get_AngleX());
-	vRight.x = sinf(m_pPlayer->Get_AngleY());
-	vRight.z = cosf(m_pPlayer->Get_AngleY());
+	vLook.y = -sinf(m_pPlayer->Get_AngleX());
+	vLook.x = sinf(m_pPlayer->Get_AngleY());
+	vLook.z = cosf(m_pPlayer->Get_AngleY());
+
+	vLook.y = 0.f;
+	D3DXVec3Normalize(&vLook, &vLook);
+	D3DXVec3Cross(&vRight, &_vec3(0.f, 1.f, 0.f),&vLook);
 
 	bool bCheck = false;
 	bool bShift = false;
 	if (GetAsyncKeyState('W'))
 	{
-		vDir += vRight;
+		vDir += vLook;
 		bCheck = true;
 	}
 	else if (GetAsyncKeyState('S'))
 	{
+		vDir -= vLook;
+		bCheck = true;
+	}
+	if (GetAsyncKeyState('A'))
+	{
 		vDir -= vRight;
+		bCheck = true;
+	}
+	else if (GetAsyncKeyState('D'))
+	{
+		vDir += vRight;
 		bCheck = true;
 	}
 	if (GetAsyncKeyState(VK_SHIFT) && 0 < m_pPlayer->Get_Stamina())
@@ -54,7 +68,6 @@ void CPLandRush::Update_State(const float& fTimeDelta)
 	}
 	if (bCheck)
 	{
-		vDir.y = 0.f;
 		D3DXVec3Normalize(&vDir, &vDir);
 		if (bShift)
 		{

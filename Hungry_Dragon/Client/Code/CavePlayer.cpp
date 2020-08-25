@@ -46,39 +46,6 @@ int CCavePlayer::Update_Object(const float& fTimeDelta)
 	//
 	State_Change();
 
-	//ÀÓ½Ã
-	if (m_bBreath)
-	{
-		//m_pPartsTrans[PART_JAW]->m_vAngle.x = D3DX_PI*0.125f;
-		//m_pPartsTrans[PART_JAW]->m_vInfo[Engine::INFO_POS].y = -sinf(D3DX_PI*0.125f);
-		//m_pPartsTrans[PART_JAW]->m_vInfo[Engine::INFO_POS].z = cosf(D3DX_PI*0.125f);
-
-		//m_pPartsTrans[PART_FACE]->m_vAngle.x = -D3DX_PI*0.125f;
-		//m_pPartsTrans[PART_FACE]->m_vInfo[Engine::INFO_POS].y = sinf(D3DX_PI*0.125f);
-		//m_pPartsTrans[PART_FACE]->m_vInfo[Engine::INFO_POS].z = cosf(D3DX_PI*0.125f);
-
-		////m_pPartsTrans[PART_BODY]->m_vAngle.x = -D3DX_PI*0.125f;
-		////m_pPartsTrans[PART_BODY]->m_vInfo[Engine::INFO_POS].y = sinf(D3DX_PI*0.125f);
-		//m_pPartsTrans[PART_BODY]->m_vInfo[Engine::INFO_POS].z = -1.5f;
-		//m_pPartsTrans[PART_2BODY]->m_vInfo[Engine::INFO_POS].z = -3.f;
-		//m_pPartsTrans[PART_3BODY]->m_vInfo[Engine::INFO_POS].z = -4.5f;
-	}
-	else
-	{
-		/*m_pPartsTrans[PART_JAW]->m_vAngle.x = m_vAngle;
-		m_pPartsTrans[PART_JAW]->m_vInfo[Engine::INFO_POS].y = -sinf(m_vAngle);
-		m_pPartsTrans[PART_JAW]->m_vInfo[Engine::INFO_POS].z = cosf(m_vAngle);
-
-		m_pPartsTrans[PART_FACE]->m_vAngle.x = -m_vAngle;
-		m_pPartsTrans[PART_FACE]->m_vInfo[Engine::INFO_POS].y = sinf(m_vAngle);
-		m_pPartsTrans[PART_FACE]->m_vInfo[Engine::INFO_POS].z = cosf(m_vAngle);
-
-		m_pPartsTrans[PART_BODY]->m_vInfo[Engine::INFO_POS].z = -1.5f;
-		m_pPartsTrans[PART_2BODY]->m_vInfo[Engine::INFO_POS].z = -3.f;
-		m_pPartsTrans[PART_3BODY]->m_vInfo[Engine::INFO_POS].z = -4.5f;*/
-	}
-
-
 	if (m_vAngle < 0.f || m_vAngle > D3DX_PI*0.125f)
 		m_fSpeed *= -1;
 	m_vAngle += m_fSpeed;
@@ -203,31 +170,43 @@ void CCavePlayer::Animation_Render()
 {
 	_matrix matWorld;
 	//¾ó±¼
-	//matWorld = m_pPartsTrans[PART_FACE]->Get_World() * m_pTransform->Get_World();
-	//m_pPartsTrans[PART_FACE]->Set_World(&matWorld);
-	//m_pPartsTrans[PART_FACE]->Set_Transform(m_pGraphicDev);
-	//m_pPartsBuffer[PART_FACE]->Render_Buffer();
-	////ÅÎ
-	//matWorld = m_pPartsTrans[PART_JAW]->Get_World() * m_pTransform->Get_World();
-	//m_pPartsTrans[PART_JAW]->Set_World(&matWorld);
-	//m_pPartsTrans[PART_JAW]->Set_Transform(m_pGraphicDev);
-	//m_pPartsBuffer[PART_JAW]->Render_Buffer();
-	////¸öÅë
-	//matWorld = m_pPartsTrans[PART_BODY]->Get_World() * m_matOld1;
-	//m_pPartsTrans[PART_BODY]->Set_World(&matWorld);
-	//m_pPartsTrans[PART_BODY]->Set_Transform(m_pGraphicDev);
-	//m_pPartsBuffer[PART_BODY]->Render_Buffer();
+	m_pPartsTrans[PART_FACE]->Set_Transform(m_pGraphicDev, m_pTransform->Get_World());
+	m_pPartsBuffer[PART_FACE]->Render_Buffer();
+	//ÅÎ
+	m_pPartsTrans[PART_JAW]->Set_Transform(m_pGraphicDev, m_pTransform->Get_World());
+	m_pPartsBuffer[PART_JAW]->Render_Buffer();
+	//¸öÅë
+	m_pPartsTrans[PART_BODY]->Set_Transform(m_pGraphicDev, m_matOld1);
+	m_pPartsBuffer[PART_BODY]->Render_Buffer();
 
-	//matWorld = m_pPartsTrans[PART_2BODY]->Get_World() * m_matOld2;
-	//m_pPartsTrans[PART_2BODY]->Set_World(&matWorld);
-	//m_pPartsTrans[PART_2BODY]->Set_Transform(m_pGraphicDev);
-	//m_pPartsBuffer[PART_BODY]->Render_Buffer();
+	m_pPartsTrans[PART_2BODY]->Set_Transform(m_pGraphicDev, m_matOld2);
+	m_pPartsBuffer[PART_BODY]->Render_Buffer();
 
-	//matWorld = m_pPartsTrans[PART_3BODY]->Get_World() * m_matOld3;
-	//m_pPartsTrans[PART_3BODY]->Set_World(&matWorld);
-	//m_pPartsTrans[PART_3BODY]->Set_Transform(m_pGraphicDev);
-	//m_pPartsBuffer[PART_BODY]->Render_Buffer();
+	m_pPartsTrans[PART_3BODY]->Set_Transform(m_pGraphicDev, m_matOld3);
+	m_pPartsBuffer[PART_BODY]->Render_Buffer();
 
+	m_pPartsTrans[PART_4BODY]->Set_Transform(m_pGraphicDev, m_matOld4);
+	m_pPartsBuffer[PART_BODY]->Render_Buffer();
+
+	m_pPartsTrans[PART_5BODY]->Set_Transform(m_pGraphicDev, m_matOld5);
+	m_pPartsBuffer[PART_BODY]->Render_Buffer();
+
+	m_pPartsTrans[PART_6BODY]->Set_Transform(m_pGraphicDev, m_matOld5);
+	m_pPartsBuffer[PART_BODY]->Render_Buffer();
+
+	m_pPartsTrans[PART_7BODY]->Set_Transform(m_pGraphicDev, m_matOld5);
+	m_pPartsBuffer[PART_BODY]->Render_Buffer();
+	//³¯°³
+	m_pPartsTrans[PART_WING]->Set_Transform(m_pGraphicDev, m_pPartsTrans[PART_2BODY]->m_matWorld);
+	m_pPartsBuffer[PART_WING]->Render_Buffer();
+
+	m_pPartsTrans[PART_LWING]->Set_Transform(m_pGraphicDev, m_pPartsTrans[PART_2BODY]->m_matWorld);
+	m_pPartsBuffer[PART_LWING]->Render_Buffer();
+
+	m_matOld7 = m_matOld6;
+	m_matOld6 = m_matOld5;
+	m_matOld5 = m_matOld4;
+	m_matOld4 = m_matOld3;
 	m_matOld3 = m_matOld2;
 	m_matOld2 = m_matOld1;
 	m_matOld1 = m_pTransform->Get_World();
