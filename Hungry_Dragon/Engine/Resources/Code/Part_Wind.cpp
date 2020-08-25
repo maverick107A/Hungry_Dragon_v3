@@ -20,7 +20,9 @@ CPart_Wind::CPart_Wind(LPDIRECT3DDEVICE9 pGraphicDev, _vec3 _vOrigin, BoundingBo
 	m_VbSize = 500;
 	m_vOffset = 0;
 	m_BatchSize = 100;
-	m_fSpeed = 10.f;
+	m_fSpeed = 30.f;
+	m_fOne = 150.f;
+	m_fZero = 10.f;
 
 	for (int i = 0; i < numParticle; ++i)
 	{

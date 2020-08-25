@@ -267,7 +267,8 @@ void CResourcesMgr::Load_Particle(LPDIRECT3DDEVICE9 pGraphicDev) {
 			static_cast<Engine::CPart_Atk*>(pParticle)->Set_Texture(L"../../Asset/snowflake.dds");
 			break;
 		case PART_WIND:
-			pParticle = CPart_Wind::Create(pGraphicDev, 70, 100.f);
+			pParticle = CPart_Wind::Create(pGraphicDev, 250, 50.f);
+			static_cast<Engine::CPart_Atk*>(pParticle)->Set_Texture(L"../../Asset/snowflake.dds");
 			break;
 		case PART_FRAGILE:
 			pParticle = CPart_Fragile::Create(pGraphicDev, 500);

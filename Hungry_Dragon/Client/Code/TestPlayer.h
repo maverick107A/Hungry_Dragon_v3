@@ -49,6 +49,7 @@ private:
 
 public:
 	Engine::CParticle*				m_pParticle=nullptr;
+	Engine::CParticle*				m_pParticleWind = nullptr;
 
 	//먹는거 컨트롤할 임시 변수
 	bool						m_bEatFirst=true;

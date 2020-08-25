@@ -117,14 +117,21 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 		static_cast<CPart_Beam*>(m_pParticle)->Set_Radius(30);
 		_matrix matMyPos = Get_Transform()->Get_World();
 		Engine::Set_StaticParticleTrans(m_pParticle, _vec3(matMyPos._41, matMyPos._42, matMyPos._43));
+
+		m_pParticleWind=static_cast<CParticle*>(Engine::Particle_Create_Static(Engine::PART_WIND, BeamPos * 2));
+		Engine::Set_StaticParticleTrans(m_pParticleWind, _vec3(matMyPos._41, matMyPos._42, matMyPos._43));
 	}
 	else if (!m_bBreath&&m_pParticle!=nullptr) {
 		m_pParticle->Set_Empty();
 		m_pParticle = nullptr;
+
+		m_pParticleWind->Set_Empty();
+		m_pParticleWind = nullptr;
 	}
 	else if (m_bBreath) {
 		_matrix matMyPos = Get_Transform()->Get_World();
 		Engine::Set_StaticParticleTrans(m_pParticle, _vec3(matMyPos._41, matMyPos._42, matMyPos._43));
+		Engine::Set_StaticParticleTrans(m_pParticleWind, _vec3(matMyPos._41, matMyPos._42, matMyPos._43));
 	}
 	
 
