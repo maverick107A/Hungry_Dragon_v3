@@ -78,6 +78,7 @@ protected:
 	Engine::CHeightCol**		m_pTerrain = nullptr;
 	CTerrain_Locater*			m_ptempTerrain = nullptr;
 	Engine::CResources*			m_pParticle = nullptr;
+	Engine::CTransform*			 m_pPlayerJawTransformCom;
 
 	D3DXVECTOR3					m_vLook;
 	D3DXVECTOR3					vPlayerPos;
@@ -104,7 +105,6 @@ protected:
 	float						m_fScale;
 	float						m_fMaxScale;
 	float						m_fDamaged;
-
 	D3DXCOLOR					m_tDeadColor;
 
 public:

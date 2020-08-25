@@ -26,6 +26,14 @@ int Engine::CMonsterMain::Update_Object(const float & fTimeDelta)
 
 	m_vPlayerPos = ((Engine::CLayer*)(this->Get_Parent()))->Get_PlayerPos();
 
+
+
+	CGameObject* pPlayer = ((Engine::CLayer*)(Get_Parent()))->Get_Object(L"TestPlayer", Engine::Find_First, nullptr);
+	m_pPlayerJawTransformCom = static_cast<Engine::CTransform*>(pPlayer->Get_Component(L"Com_JawTransform", Engine::ID_DYNAMIC));
+
+
+
+
 	Engine::CGameObject::Update_Object(fTimeDelta);
 
 	D3DXVECTOR3	vMonsterPos;
@@ -81,7 +89,8 @@ void Engine::CMonsterMain::LateUpdate_Object(const float & fTimeDelta)
 	m_vPlayerPos = ((Engine::CLayer*)(this->Get_Parent()))->Get_PlayerPos();
 	if (m_eState == MONSTER_DEACTIVATE)
 	{
-		m_pTransform->Set_Trans(&m_vPlayerPos);
+	
+		m_pTransform->Set_Trans(&m_pPlayerJawTransformCom->m_vInfo[Engine::INFO_POS]);
 		m_pTransform->Update_Component(fTimeDelta);
 	}
 
