@@ -280,7 +280,7 @@ HRESULT CScene_Volcano::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 	
 	FAILED_CHECK_RETURN(Register_GameObject<CBossPlayer>(pLayer, L"TestPlayer"), E_FAIL);
 	FAILED_CHECK_RETURN(Register_GameObject<CVolcano_Parts>(pLayer, L"Land"), E_FAIL);
-	FAILED_CHECK_RETURN(Register_ObjectPool<CGiantGolem>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
+	FAILED_CHECK_RETURN(Register_GameObject<CGiantGolem>(pLayer, L"BossObject"), E_FAIL);
 
 	//pGameObject = m_pParentsBody = CGiantGolem_Body::Create(m_pGraphicDev);
 	//NULL_CHECK_RETURN(pGameObject, E_FAIL);
