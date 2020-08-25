@@ -66,7 +66,12 @@ void CPBreathFly::Update_State(const float& fTimeDelta)
 	vRotTotal = vRotX*vRotY;
 	D3DXVec3TransformNormal(&vLook, &_vec3(0.f, 0.f, 1.f), &vRotTotal);
 
-	D3DXVec3Cross(&vRight, &m_pPlayer->Get_Up(), &vLook);
+	if (m_pPlayer->Get_LockOn())
+	{
+		vLook = m_pPlayer->Get_Camera()->Get_Dir();
+	}
+
+	D3DXVec3Cross(&vRight, &m_pPlayer->Get_Camera()->Get_Up(), &vLook);
 
 	bool bCheck = false;
 	bool bShift = false;

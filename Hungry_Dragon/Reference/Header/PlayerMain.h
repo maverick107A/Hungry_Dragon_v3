@@ -43,6 +43,7 @@ public:
 	float					Get_ColSize() { return m_fColSize; }
 	bool					Get_Breath() { return m_bBreath; }
 	bool					Get_AccelCheck() { return m_bAccelCheck; }
+	bool					Get_LockOn() { return m_bLock; }
 	CTransform*				Get_Transform() { return m_pTransform; }
 	CAnimationTransform*	Get_PartsTrans(int _i) { return m_pPartsTrans[_i]; }
 	const D3DXVECTOR3&		Get_Look() { return m_vLook; }
@@ -91,6 +92,7 @@ protected:
 	bool					m_bLand = false;
 	bool					m_bShift = false;
 	bool					m_bBreath = false;
+	bool					m_bLock = false;
 	float					m_fMouseTime = 0.f;
 	float					m_fSpeed = 10.f;
 	STATE					m_eState = STATE_END;

@@ -2,6 +2,7 @@
 #include "PlayerMain.h"
 #include "Transform.h"
 #include "Terrain.h"
+#include "CameraMain.h"
 #include "BaseLand.h"
 
 USING(Engine)
@@ -170,6 +171,11 @@ void CPlayerState::Aim()
 
 	vRotTotal = vRotX*vRotY;
 	D3DXVec3TransformNormal(&vLook, &_vec3(0.f, 0.f, 1.f), &vRotTotal);
+
+	if (m_pPlayer->Get_LockOn())
+	{
+		vLook = m_pPlayer->Get_Camera()->Get_Dir();
+	}
 
 	float fDis = sqrtf(vLook.x*vLook.x + vLook.y*vLook.y + vLook.z*vLook.z);
 	float fPlaneDis = sqrtf(vLook.x*vLook.x + vLook.z*vLook.z);
