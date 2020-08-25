@@ -42,6 +42,7 @@ private:
 	_uint					m_uLength;
 	_uint					m_uVerCntX;
 	_uint					m_uVerCntZ;
+	_float					m_fLoopPivot=0.f;
 
 public:
 	static CCloud_Locater*	Create(LPDIRECT3DDEVICE9 pGraphicDev);

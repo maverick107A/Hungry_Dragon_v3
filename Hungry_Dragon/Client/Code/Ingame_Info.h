@@ -75,7 +75,7 @@ private:
 	IDirect3DTexture9*	m_pExpFrameCharge;
 
 	IDirect3DTexture9*	m_pPortraitFrame;
-	IDirect3DTexture9*	m_pPortrait[10];
+	IDirect3DTexture9*	m_pPortrait[11];
 
 
 

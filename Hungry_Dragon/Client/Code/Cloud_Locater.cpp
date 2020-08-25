@@ -40,6 +40,11 @@ _int CCloud_Locater::Update_Object(const _float& fTimeDelta)
 	Engine::CGameObject::Update_Object(fTimeDelta);
 	//Engine::Add_RenderGroup(Engine::RENDER_PRIORITY, this);
 
+	m_fLoopPivot += 128.f*fTimeDelta;
+	if (m_fLoopPivot > 38400.f)
+	{
+		m_fLoopPivot -= 38400.f;
+	}
 	
 	_bool bOutline = true;
 
@@ -83,7 +88,7 @@ void CCloud_Locater::Render_Object(void)
 	{
 		for (int j = 0; j < 3; ++j)
 		{
-			m_pCloud[_iIdx]->Set_Trans(_vec3(-6400.f,-1000.f, (float)((int)(m_uLength*(m_uVerCntZ - 1))*(iPlayerZ-1+i)) + j*38400.f ));
+			m_pCloud[_iIdx]->Set_Trans(_vec3(-6400.f,-1000.f, (float)((int)(m_uLength*(m_uVerCntZ - 1))*(iPlayerZ-1+i)) + j*38400.f - m_fLoopPivot));
 			m_pCloud[_iIdx]->Render_Object();
 			_iIdx = (_iIdx+1)%9;
 		}
@@ -94,7 +99,7 @@ void CCloud_Locater::Render_Object(void)
 	{
 		for (int j = 0; j < 3; ++j)
 		{
-			m_pCloud[_iIdx]->Set_Trans(_vec3(-6400.f, 1000.f, (float)((int)(m_uLength*(m_uVerCntZ - 1))*(iPlayerZ - 1 + i)) + j*38400.f));
+			m_pCloud[_iIdx]->Set_Trans(_vec3(-6400.f, 1000.f, (float)((int)(m_uLength*(m_uVerCntZ - 1))*(iPlayerZ - 1 + i)) + j*38400.f - m_fLoopPivot));
 			m_pCloud[_iIdx]->Render_Object();
 			_iIdx = (_iIdx + 1) % 9;
 		}

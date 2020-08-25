@@ -45,7 +45,7 @@ CIngame_Info::~CIngame_Info(void)
 	Safe_Release(m_pExpFrame);
 	Safe_Release(m_pExpFrameCharge);
 	Safe_Release(m_pPortraitFrame);
-	for (int i = 0; i < 10; ++i)
+	for (int i = 0; i < 11; ++i)
 	{
 		Safe_Release(m_pPortrait[i]);
 	}
@@ -96,7 +96,7 @@ void CIngame_Info::Init_Info(LPDIRECT3DDEVICE9 pGraphicDev)
 
 	TCHAR str[64] = L"";
 
-	for (int i = 0; i < 10; ++i)
+	for (int i = 0; i < 11; ++i)
 	{
 		wsprintf(str, L"../../Asset/HUD/portrait/portrait%.2d.png", i);
 		D3DXCreateTextureFromFile(m_pGraphicDev, str, &m_pPortrait[i]);
@@ -317,6 +317,10 @@ void CIngame_Info::Render_UI()
 	_uint uIdx = 0;
 	for (auto& tInfo : m_listPreyInfo)
 	{
+		if (10 < tInfo.uType)
+		{
+			tInfo.fLifeTime = 0.f;
+		}
 		Draw_Tex(m_pPortraitFrame, 1024, 512, 0.2f, 0.2f, 1350.f, 800.f - 130.f*float(uSize - uIdx), D3DCOLOR_ARGB(int(tInfo.fLifeTime * 127.f), 255, 255, 255));
 		Draw_Tex(m_pPortrait[tInfo.uType], 512, 512, 0.1f, 0.1f, 1376.f, 826.f - 130.f*float(uSize - uIdx), D3DCOLOR_ARGB(int(tInfo.fLifeTime * 127.f), 255, 255, 255));
 		switch (tInfo.uType)
@@ -344,15 +348,15 @@ void CIngame_Info::Render_UI()
 			break;
 		case 7:
 			wsprintf(str, L"광석 소화 완료");
-
 			break;
 		case 8:
 			wsprintf(str, L"?? 소화 완료");
-
 			break;
 		case 9:
 			wsprintf(str, L"보스 격파");
-
+			break;
+		case 10:
+			wsprintf(str, L"박쥐 소화 완료");
 			break;
 		}
 		

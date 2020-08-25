@@ -30,6 +30,7 @@ public:
 
 public:
 	void Set_Trans(_vec3& _vPos);
+	void Add_Trans(_vec3& _vPos);
 	void Set_RotationReverse();
 	void Set_Height(_float _fHeight, _uint _uContrast);
 	CHeightCol*	Get_BufferCom() { return m_pBufferCom; }

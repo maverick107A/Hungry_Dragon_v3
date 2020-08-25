@@ -61,6 +61,12 @@ void CCloud_Parts::Set_Trans(_vec3 & _vPos)
 	m_pTransform->Update_Component(0);
 }
 
+void CCloud_Parts::Add_Trans(_vec3 & _vPos)
+{
+	m_pTransform->Add_Trans(&_vPos);
+	m_pTransform->Update_Component(0);
+}
+
 void CCloud_Parts::Set_RotationReverse()
 {
 	m_pTransform->Rotation(ROTATION::ROT_Z, D3DX_PI);

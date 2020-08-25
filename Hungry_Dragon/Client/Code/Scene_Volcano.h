@@ -37,6 +37,7 @@
 #include "Volcano_Parts.h"
 #include "Meteor_Spawner.h"
 #include "View_Mask.h"
+#include "Volcano_Erupt.h"
 
 //-------------------------------------------------------
 
