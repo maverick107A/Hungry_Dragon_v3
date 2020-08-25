@@ -23,15 +23,13 @@ HRESULT Engine::CMonsterMain::Ready_Object(void)
 
 int Engine::CMonsterMain::Update_Object(const float & fTimeDelta)
 {
-
-	m_vPlayerPos = ((Engine::CLayer*)(this->Get_Parent()))->Get_PlayerPos();
-
+	
 
 	// 이니셜라이저 오브젝트로 올려야됨
 	CGameObject* pPlayer = ((Engine::CLayer*)(Get_Parent()))->Get_Object(L"TestPlayer", Engine::Find_First, nullptr);
 	m_pPlayerTransformCom = static_cast<Engine::CTransform*>(pPlayer->Get_Component(L"Com_Transform", Engine::ID_DYNAMIC));
 
-
+	 m_pPlayerTransformCom->Get_Info(Engine::INFO_POS ,&m_vPlayerPos);
 
 
 	Engine::CGameObject::Update_Object(fTimeDelta);
@@ -67,6 +65,7 @@ int Engine::CMonsterMain::Update_Object(const float & fTimeDelta)
 		m_fMonster_HP -= m_fDamaged;
 		Dead_Monster();
 	}
+
 	if (m_eState == MONSTER_DIG)
 	{
 		m_fMonster_HP -= m_fDamaged;

@@ -16,9 +16,6 @@
     <Filter Include="03. Renderer">
       <UniqueIdentifier>{712e0a2f-0cd7-48e1-bb60-af37e2c77fe4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. UtilBase\00. Layer">
-      <UniqueIdentifier>{33de7a8e-1c86-4263-903a-a6d5917a8f26}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02. UtilBase\01. GameObject">
       <UniqueIdentifier>{8460ec04-c97d-4f02-8a14-e4479c49f72c}</UniqueIdentifier>
     </Filter>
@@ -114,6 +111,9 @@
     </Filter>
     <Filter Include="06. EngineEventMgr">
       <UniqueIdentifier>{48c88107-cb98-448f-91da-425255dc7a94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. UtilBase\00. Layer">
+      <UniqueIdentifier>{33de7a8e-1c86-4263-903a-a6d5917a8f26}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

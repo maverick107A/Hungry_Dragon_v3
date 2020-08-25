@@ -99,7 +99,7 @@ protected:
 	float						m_fDead_Range;
 
 
-
+	
 	float						m_fMonster_HP;
 	float						m_fMonster_MaxHP;
 	float						m_fScale;

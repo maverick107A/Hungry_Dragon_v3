@@ -36,7 +36,7 @@ public:
 
 private:
 	map<const _tchar*, list<CGameObject*>>		m_mapObject;
-	_vec3										m_vPlayerPos;
+	_vec3										m_vPlayerPos = { 0.f , 0.f , 0.f};
 
 public:
 	static CLayer*		Create(void);
