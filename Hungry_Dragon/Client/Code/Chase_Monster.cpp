@@ -24,6 +24,7 @@ HRESULT CChase_Monster::Ready_Object(void)
 	m_fMaxScale = 5.f;
 	m_fDamaged		 = 5.f;
 	m_eState = MONSTER_REBORN;
+	m_eVariation = MONSTER_CHASE;
 	m_tDeadColor = D3DXCOLOR(0.97f, 0.63f, 0.58f, 1.f);
 
 	return S_OK;

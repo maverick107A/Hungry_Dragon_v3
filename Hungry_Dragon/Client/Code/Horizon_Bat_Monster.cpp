@@ -34,6 +34,7 @@ HRESULT CHorizonBat_Monster::Ready_Object(void)
 	m_fScale = 1.f;
 	m_fMaxScale = 3.f;
 	m_fDamaged = 1.f;
+	m_eVariation = MONSTER_HORIZONBAT;
 
 	m_fDead_Range = 3000.f;
 	return S_OK;

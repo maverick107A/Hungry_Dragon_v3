@@ -25,6 +25,8 @@ HRESULT CFly_Monster::Ready_Object(void)
 	m_fDamaged = 5.f;
 	m_eState = MONSTER_REBORN;
 	m_fDetect_Range = 800.f;
+	m_eVariation = MONSTER_FLY;
+
 	m_tDeadColor = D3DXCOLOR(0.33f, 0.07f, 0.32f, 1.f);
 
 	return S_OK;

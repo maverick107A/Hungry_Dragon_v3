@@ -24,7 +24,7 @@ HRESULT CFlyGolem::Ready_Object(void)
 	m_fMaxScale = 15.f;
 	m_fDamaged = 2.f;
 	m_eState = MONSTER_REBORN;
-
+	m_eVariation = MONSTER_FLYGOLEM;
 	return S_OK;
 }
 

@@ -24,6 +24,7 @@ HRESULT CRun_Monster::Ready_Object(void)
 	m_fDamaged = 5.f;
 	m_eState = MONSTER_REBORN;
 
+	m_eVariation = MONSTER_RUN;
 
 	switch (rand() % 4)
 	{

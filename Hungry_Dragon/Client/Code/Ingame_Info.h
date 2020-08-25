@@ -38,6 +38,7 @@ public:
 	void Occur_EngineEvent(ENGINE_EVENT _tEvent);
 	void Update_BuffPack(const Engine::_float& _fTimeDelta);
 	void Update_FontPack(const Engine::_float& _fTimeDelta);
+	void Update_PreyPack(const Engine::_float& _fTimeDelta);
 
 public:
 	void Draw_Tex(LPDIRECT3DTEXTURE9 _pTex, float _fCenterX, float _fCenterY, float _fScaleX, float _fCenterZ, float _fScaleY, float _fPosX, float _fPosY, DWORD _dwColor = D3DCOLOR_ARGB(255, 255, 255, 255));
@@ -73,6 +74,11 @@ private:
 	IDirect3DTexture9*	m_pExpFrame;
 	IDirect3DTexture9*	m_pExpFrameCharge;
 
+	IDirect3DTexture9*	m_pPortraitFrame;
+	IDirect3DTexture9*	m_pPortrait[10];
+
+
+
 	CBarCon*			m_pBarCon = nullptr;
 	CIconCon*			m_pIconCon = nullptr;
 	CCompassCon*		m_pCompass = nullptr;
@@ -85,9 +91,12 @@ private:
 	_float				m_fTimeTick = 0.f;
 	_float				m_fAcquireAction = 0.f;
 	_float				m_fBuffGage[4] = { 0 };
+
 	
 	// 자원 상호작용
 	_vec3				m_vDestination[5];		// 고정된 5개 자원 회수위치
+
+
 	typedef struct tagBuffPack
 	{
 		ENGINE_EVENT	tEvent;
@@ -110,6 +119,18 @@ private:
 		D3DXCOLOR		tColor;
 	} FONTPACK;
 	list<FONTPACK> m_listFontPack;
+
+	// 소화 정보
+	typedef struct tagPreyInfo
+	{
+		_uint uType;
+		_uint uPoly;
+		_uint uPoint;
+		_uint uStage;
+		_uint uBuff;
+		_float	fLifeTime;
+	}PREYINFO;
+	list<PREYINFO> m_listPreyInfo;
 };
 
 

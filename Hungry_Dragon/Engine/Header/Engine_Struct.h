@@ -239,8 +239,10 @@ namespace Engine
 	{
 		tagEvents() {}
 		tagEvents(_uint _uEvent, _uint _uData) { uEventNum = _uEvent; uDataNum = _uData; }
+		tagEvents(_uint _uEvent, _uint _uData, _uint _uType) { uEventNum = _uEvent; uDataNum = _uData; uTypeNum = _uType; }
 		_uint uEventNum;
 		_uint uDataNum;
+		_uint uTypeNum;
 	}ENGINE_EVENT;
 
 }

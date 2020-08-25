@@ -44,6 +44,14 @@ CIngame_Info::~CIngame_Info(void)
 	Safe_Release(m_pPolygon);
 	Safe_Release(m_pExpFrame);
 	Safe_Release(m_pExpFrameCharge);
+	Safe_Release(m_pPortraitFrame);
+	for (int i = 0; i < 10; ++i)
+	{
+		Safe_Release(m_pPortrait[i]);
+	}
+	m_listBuffPack.clear();
+	m_listFontPack.clear();
+	m_listPreyInfo.clear();
 }
 
 void CIngame_Info::Init_Info(LPDIRECT3DDEVICE9 pGraphicDev)
@@ -84,8 +92,17 @@ void CIngame_Info::Init_Info(LPDIRECT3DDEVICE9 pGraphicDev)
 	D3DXCreateTextureFromFile(m_pGraphicDev, L"../../Asset/HUD/polygon.png", &m_pPolygon);
 	D3DXCreateTextureFromFile(m_pGraphicDev, L"../../Asset/HUD/ExpFrame.png", &m_pExpFrame);
 	D3DXCreateTextureFromFile(m_pGraphicDev, L"../../Asset/HUD/ExpFrameCharge.png", &m_pExpFrameCharge);
-	
+	D3DXCreateTextureFromFile(m_pGraphicDev, L"../../Asset/HUD/portrait/portrait_frame.png", &m_pPortraitFrame);
+
 	TCHAR str[64] = L"";
+
+	for (int i = 0; i < 10; ++i)
+	{
+		wsprintf(str, L"../../Asset/HUD/portrait/portrait%.2d.png", i);
+		D3DXCreateTextureFromFile(m_pGraphicDev, str, &m_pPortrait[i]);
+	}
+	
+	
 	for (int i = 0; i < 4; ++i)
 	{
 		wsprintf(str,L"../../Asset/HUD/BuffIcon%.2d.png", i);
@@ -117,6 +134,7 @@ void CIngame_Info::Update_Info(const Engine::_float & _fTimeDelta)
 
 	Update_BuffPack(_fTimeDelta);
 	Update_FontPack(_fTimeDelta);
+	Update_PreyPack(_fTimeDelta);
 
 	for (int i = 0; i < 4; ++i)
 	{
@@ -199,6 +217,7 @@ void CIngame_Info::Render_UI()
 	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
 
 	TCHAR str[32];
+	_matrix matScale;
 	_matrix matIdentity;
 	D3DXMatrixIdentity(&matIdentity);
 
@@ -290,11 +309,97 @@ void CIngame_Info::Render_UI()
 
 	for (auto& tPack : m_listBuffPack)
 	{
-		Draw_Tex(m_pPolygon, 128, 128, tPack.vScale.x, tPack.vScale.y, 0.f,0.f, tPack.vRot.z, tPack.vPos.x, tPack.vPos.y, tPack.dwColor);
+		Draw_Tex(m_pPolygon, 128, 128, tPack.vScale.x, tPack.vScale.y, 0.f, 0.f, tPack.vRot.z, tPack.vPos.x, tPack.vPos.y, tPack.dwColor);
 		//Draw_Tex(m_pPolygon, 128, 128, tPack.vScale.x, tPack.vScale.y, tPack.vPos.x, tPack.vPos.y, tPack.dwColor);
 	}
 
-	
+	_uint uSize = m_listPreyInfo.size();
+	_uint uIdx = 0;
+	for (auto& tInfo : m_listPreyInfo)
+	{
+		Draw_Tex(m_pPortraitFrame, 1024, 512, 0.2f, 0.2f, 1350.f, 800.f - 130.f*float(uSize - uIdx), D3DCOLOR_ARGB(int(tInfo.fLifeTime * 127.f), 255, 255, 255));
+		Draw_Tex(m_pPortrait[tInfo.uType], 512, 512, 0.1f, 0.1f, 1376.f, 826.f - 130.f*float(uSize - uIdx), D3DCOLOR_ARGB(int(tInfo.fLifeTime * 127.f), 255, 255, 255));
+		switch (tInfo.uType)
+		{
+		case 0:
+			wsprintf(str, L"토끼 소화 완료");
+			break;
+		case 1:
+			wsprintf(str, L"돼지 소화 완료");
+			break;
+		case 2:
+			wsprintf(str, L"박쥐 소화 완료");
+			break;
+		case 3:
+			wsprintf(str, L"?? 소화 완료");
+			break;
+		case 4:
+			wsprintf(str, L"광석 소화 완료");
+			break;
+		case 5:
+			wsprintf(str, L"박쥐 소화 완료");
+			break;
+		case 6:
+			wsprintf(str, L"광석 소화 완료");
+			break;
+		case 7:
+			wsprintf(str, L"광석 소화 완료");
+
+			break;
+		case 8:
+			wsprintf(str, L"?? 소화 완료");
+
+			break;
+		case 9:
+			wsprintf(str, L"보스 격파");
+
+			break;
+		}
+		
+		D3DXMatrixScaling(&matScale, 0.5f, 0.5f, 1.f);
+		m_pSprite->SetTransform(&matScale);
+		Draw_Font_Center(m_pSprite, L"Font_Light", str, &_vec2(1478.f * 4.f, (818.f - 130.f*float(uSize - uIdx))*2.f), D3DXCOLOR(0.6f, 0.8f, 0.f, tInfo.fLifeTime*0.5f));
+		wsprintf(str, L"+%d 폴리곤", tInfo.uPoly);
+		Draw_Font_Center(m_pSprite, L"Font_LightSmall", str, &_vec2(1478.f * 4.f, (838.f - 130.f*float(uSize - uIdx))*2.f), D3DXCOLOR(0.6f, 0.8f, 0.f, tInfo.fLifeTime*0.5f));
+		wsprintf(str, L"+%d 점수", tInfo.uPoint);
+		Draw_Font_Center(m_pSprite, L"Font_LightSmall", str, &_vec2(1478.f * 4.f, (848.f - 130.f*float(uSize - uIdx))*2.f), D3DXCOLOR(0.6f, 0.8f, 0.f, tInfo.fLifeTime*0.5f));
+		wsprintf(str, L"+%d 진행도", tInfo.uStage);
+		Draw_Font_Center(m_pSprite, L"Font_LightSmall", str, &_vec2(1478.f * 4.f, (858.f - 130.f*float(uSize - uIdx))*2.f), D3DXCOLOR(0.6f, 0.8f, 0.f, tInfo.fLifeTime*0.5f));
+
+		D3DXCOLOR tColor;
+		switch (tInfo.uBuff)
+		{
+		case 0:
+			wsprintf(str, L"체력 버프 획득");
+			tColor = D3DXCOLOR(0.2f, 0.8f, 0.2f, tInfo.fLifeTime*0.5f);
+			break;
+		case 1:
+			wsprintf(str, L"마력 버프 획득");
+			tColor = D3DXCOLOR(0.2f, 0.2f, 0.8f, tInfo.fLifeTime*0.5f);
+			break;
+		case 2:
+			wsprintf(str, L"기력 버프 획득");
+			tColor = D3DXCOLOR(0.8f, 0.8f, 0.2f, tInfo.fLifeTime*0.5f);
+			break;
+		case 3:
+			wsprintf(str, L"화력 버프 획득");
+			tColor = D3DXCOLOR(0.8f, 0.2f, 0.2f, tInfo.fLifeTime*0.5f);
+			break;
+		case 4:
+
+			break;
+		}
+		if (tInfo.uBuff != 4)
+		{
+			Draw_Font_Center(m_pSprite, L"Font_LightSmall", str, &_vec2(1478.f * 4.f, (868.f - 130.f*float(uSize - uIdx))*2.f), tColor);
+
+		}
+		
+		//Draw_Tex(m_pPolygon, 128, 128, tPack.vScale.x, tPack.vScale.y, tPack.vPos.x, tPack.vPos.y, tPack.dwColor);
+		++uIdx;
+	}
+
+
 
 	
 
@@ -747,6 +852,11 @@ void CIngame_Info::Render_Frame()
 void CIngame_Info::Push_EngineEvent(ENGINE_EVENT _tEvent)
 {
 	BUFFPACK tPack;
+	PREYINFO tInfo;
+
+	tInfo.uPoly = _tEvent.uDataNum;
+	tInfo.uBuff = _tEvent.uEventNum;
+	tInfo.uType = _tEvent.uTypeNum;
 
 	switch (_tEvent.uEventNum)	// 버프팩 생성
 	{
@@ -757,7 +867,7 @@ void CIngame_Info::Push_EngineEvent(ENGINE_EVENT _tEvent)
 		tPack.dwColor = D3DCOLOR_ARGB(255, 0, 128, 255);
 		break;
 	case 2:
-		tPack.dwColor = D3DCOLOR_ARGB(255, 128, 128, 0);
+		tPack.dwColor = D3DCOLOR_ARGB(255, 192, 192, 0);
 		break;
 	case 3:
 		tPack.dwColor = D3DCOLOR_ARGB(255, 255, 0, 0);
@@ -767,12 +877,16 @@ void CIngame_Info::Push_EngineEvent(ENGINE_EVENT _tEvent)
 		break;
 	}
 	_uint uDataAccum = _tEvent.uDataNum;
+	_uint uPointAccum = 0;
+	_uint uStageAccum = 0;
 	while (uDataAccum != 0)
 	{
 		_uint uDataCnt = min(uDataAccum, 10 + (rand() % 30));
 		uDataAccum -= uDataCnt;
 		tPack.tEvent.uDataNum = uDataCnt;
 		tPack.tEvent.uEventNum = _tEvent.uEventNum;
+		tPack.tEvent.uTypeNum = (50 + rand() % 50);
+		uPointAccum += tPack.tEvent.uTypeNum;
 
 		tPack.vDest = m_vDestination[_tEvent.uEventNum];
 		tPack.vRot = _vec3(float(rand() % 628) * 0.01f, float(rand() % 628)* 0.01f, float(rand() % 628)* 0.01f);
@@ -780,11 +894,18 @@ void CIngame_Info::Push_EngineEvent(ENGINE_EVENT _tEvent)
 		tPack.vScale = _vec3(0.2f, 0.2f, 1.f);		// 거리에따라 감소
 		tPack.fLerpSpeed = 3.f + float(rand() % 50)*0.1f;
 		m_listBuffPack.emplace_back(tPack);
+		++uStageAccum;
 		if (uDataAccum == 0 || 9999 < uDataAccum)
 		{
 			break;
 		}
 	}
+	tInfo.uPoint = uPointAccum;
+	tInfo.uStage = uStageAccum;
+	tInfo.fLifeTime = 2.f;
+
+	// ui 푸쉬
+	m_listPreyInfo.emplace_back(tInfo);
 }
 
 void CIngame_Info::Push_EventFont(ENGINE_EVENT _tEvent)
@@ -815,6 +936,8 @@ void CIngame_Info::Push_EventFont(ENGINE_EVENT _tEvent)
 	tPack.vPos = m_vDestination[_tEvent.uEventNum] + _vec3((float)(rand() % 100), (float)(rand() % 100), 0.f);
 	m_listFontPack.emplace_back(tPack);
 }
+
+
 
 void CIngame_Info::Occur_EngineEvent(ENGINE_EVENT _tEvent)
 {
@@ -854,7 +977,7 @@ void CIngame_Info::Occur_EngineEvent(ENGINE_EVENT _tEvent)
 		break;
 	}
 	Push_EventFont(_tEvent);
-	m_tPlayerGoods.uGame_Point += (50 + rand()%50);
+	m_tPlayerGoods.uGame_Point += _tEvent.uTypeNum;
 	m_tPlayerStatus.fStage += 1.f;
 }
 
@@ -885,6 +1008,22 @@ void CIngame_Info::Update_FontPack(const Engine::_float & _fTimeDelta)
 		if (0.f > iter->fLifeTime)
 		{
 			iter = m_listFontPack.erase(iter);
+		}
+		else
+		{
+			++iter;
+		}
+	}
+}
+
+void CIngame_Info::Update_PreyPack(const Engine::_float & _fTimeDelta)
+{
+	for (auto& iter = m_listPreyInfo.begin(); iter != m_listPreyInfo.end();)
+	{
+		iter->fLifeTime -= _fTimeDelta;
+		if (0.f > iter->fLifeTime)
+		{
+			iter = m_listPreyInfo.erase(iter);
 		}
 		else
 		{

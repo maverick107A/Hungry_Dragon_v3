@@ -156,20 +156,22 @@ void Engine::CMonsterMain::State_Change()
 			switch (m_eType)
 			{
 			case Engine::CMonsterMain::BUFF_HP:
-				Get_EventMgr()->Set_Event(0, 10+(rand()%50));
+				Get_EventMgr()->Set_Event(0, 10+(rand()%50), m_eVariation);
 				break;
 			case Engine::CMonsterMain::BUFF_MP:
-				Get_EventMgr()->Set_Event(1, 10 + (rand() % 50));
+				Get_EventMgr()->Set_Event(1, 10 + (rand() % 50), m_eVariation);
+
 				break;
 			case Engine::CMonsterMain::BUFF_SP:
-				Get_EventMgr()->Set_Event(2, 10 + (rand() % 50));
+				Get_EventMgr()->Set_Event(2, 10 + (rand() % 50), m_eVariation);
+
 				break;
 			case Engine::CMonsterMain::BUFF_EXP:
-				Get_EventMgr()->Set_Event(3, 10 + (rand() % 50));
+				Get_EventMgr()->Set_Event(3, 10 + (rand() % 50), m_eVariation);
+
 				break;
 			case Engine::CMonsterMain::BUFF_NONE:
-				Get_EventMgr()->Set_Event(4, 30 + (rand() % 200));
-
+				Get_EventMgr()->Set_Event(4, 30 + (rand() % 200), m_eVariation);
 				break;
 			case Engine::CMonsterMain::BUFF_END:
 				break;
