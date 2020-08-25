@@ -58,7 +58,7 @@ int CGiantGolem::Update_Object(const float & fTimeDelta)
 	{ 
 		m_pTransform->m_vAngle.y += 0.3f;
 	}
-	else if(m_ePattern == PAT_IDLE)
+	else 
 	{
 		D3DXVECTOR3 vPos;
 		m_vPlayerPos = { m_vPlayerPos.x , 0 , m_vPlayerPos.z };
@@ -71,13 +71,18 @@ int CGiantGolem::Update_Object(const float & fTimeDelta)
 		vPos = m_vPlayerPos - m_vBodyPos;
 		D3DXVec3Normalize(&vPos, &vPos);
 		m_vLookPos = { 0.f, 0.f ,1.f };
-		
+
 		m_fAngle = acosf(D3DXVec3Dot(&vPos, &m_vLookPos));
 
 		if (vPos.x < 0)
 			m_fAngle *= -1;
 
-		m_pTransform->m_vAngle.y = m_fAngle;
+		if (m_ePattern == PAT_IDLE) {
+			m_pTransform->m_vAngle.y += (m_fAngle - m_pTransform->m_vAngle.y)*fTimeDelta;
+		}
+		else {
+			m_pTransform->m_vAngle.y += (m_fAngle - m_pTransform->m_vAngle.y)*fTimeDelta*0.3f;
+		}
 	}
 
 
