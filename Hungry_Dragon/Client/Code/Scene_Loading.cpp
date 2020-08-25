@@ -242,6 +242,11 @@ _uint CScene_Loading::Loading_ForStage(void)
 		Engine::BUFFER_PIG),
 		E_FAIL);
 
+	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
+		RESOURCE_STATIC,
+		L"BUFFER_BOMB",
+		Engine::BUFFER_BOMB),
+		E_FAIL);
 	
 
 	lstrcpy(m_szFinish, L"이미지 읽는 중...");

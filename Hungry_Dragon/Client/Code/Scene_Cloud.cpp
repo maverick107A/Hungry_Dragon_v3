@@ -313,17 +313,17 @@ HRESULT CScene_Cloud::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 		FAILED_CHECK_RETURN(Register_ObjectPool<CFly_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
 	}
 
-	for (int i = 0; i < 50; ++i)
-	{
-		FAILED_CHECK_RETURN(Register_ObjectPool<CRedCrystal_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
-	}
+
 
 	for (int i = 0; i < 10000; ++i)
 	{
 		FAILED_CHECK_RETURN(Register_ObjectPool<CNormal_Bullet>(pLayer, OBJID::NORMAL_BULLET), E_FAIL);
 		//	FAILED_CHECK_RETURN(Register_ObjectPool<CMonsterBeam>(pLayer, OBJID::NORMAL_BULLET), E_FAIL);
 	}
-
+	for (int i = 0; i < 50; ++i)
+	{
+		FAILED_CHECK_RETURN(Register_ObjectPool<CRedCrystal_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
+	}
 
 	return S_OK;
 }

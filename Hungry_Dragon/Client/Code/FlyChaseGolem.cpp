@@ -126,7 +126,7 @@ void CFlyChaseGolem::Render_Object(void)
 			m_vBombPos = { m_vBodyPos.x ,m_vBodyPos.y - 20.f ,m_vBodyPos.z };
 		}
 		m_pTransform->Set_Trans(&m_vBombPos);
-		m_pTransform->Set_Scale(8);
+		m_pTransform->Set_Scale(3);
 		m_pTransform->Update_Component(0.01f);
 		m_pTransform->Set_Transform(m_pGraphicDev);
 
@@ -144,7 +144,7 @@ HRESULT CFlyChaseGolem::Add_Component(void)
 
 	// buffer
 	pComponent = m_pBufferMeshCom = dynamic_cast<Engine::CVICustom*>
-		(Engine::Clone(RESOURCE_STAGE, L"BUFFER_ROCKMESH"));
+		(Engine::Clone(RESOURCE_STATIC, L"BUFFER_BOMB"));
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Buffer", pComponent);
 

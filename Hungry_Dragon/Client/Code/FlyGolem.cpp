@@ -53,12 +53,11 @@ int CFlyGolem::Update_Object(const float & fTimeDelta)
 	}
 
 
-	//if (m_eState == MONSTER_ACTIVATE && m_eState != MONSTER_DEACTIVATE)
-	//{
-	//	vPlayerPos = { m_vPlayerPos.x  , 0.f  , m_vPlayerPos.z };
-	//	m_pTransform->Chase_Target(&vPlayerPos, (fTimeDelta * m_fSpeed));
-	//	m_pTransform->m_vInfo[Engine::INFO_POS].y = Ride_Terrain();
-	//}
+	if (m_fDistance < 50)
+	{
+		m_eState = MONSTER_SUICIDE;
+		State_Change();
+	}
 
 	return m_iEvent;
 }
@@ -126,7 +125,7 @@ void CFlyGolem::Render_Object(void)
 		m_vBombPos = { m_vBodyPos.x ,m_vBodyPos.y - 20.f ,m_vBodyPos.z };
 	}
 	m_pTransform->Set_Trans(&m_vBombPos);
-	m_pTransform->Set_Scale(8);
+	m_pTransform->Set_Scale(3);
 	m_pTransform->Update_Component(0.01f);
 	m_pTransform->Set_Transform(m_pGraphicDev);
 
@@ -144,7 +143,7 @@ HRESULT CFlyGolem::Add_Component(void)
 
 	// buffer
 	pComponent = m_pBufferMeshCom = dynamic_cast<Engine::CVICustom*>
-		(Engine::Clone(RESOURCE_STAGE, L"BUFFER_ROCKMESH"));
+		(Engine::Clone(RESOURCE_STATIC, L"BUFFER_BOMB"));
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Buffer", pComponent);
 

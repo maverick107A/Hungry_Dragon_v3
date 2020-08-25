@@ -167,6 +167,9 @@ HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 	case BUFFER_PIG:
 		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/Pig.dat");
 		break;
+	case  BUFFER_BOMB:
+		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/BombMob.dat");
+		break;
 		
 	}
 

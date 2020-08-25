@@ -272,7 +272,7 @@ void CGiantGolem::Preset_Animation()
 	// Left
 	// Arm
 	m_pAnimationController->Insert_Scale(PAT_APEAR, PART_LEFTARM,	10, _vec3(500.f, 500.f, 500.f));
-	m_pAnimationController->Insert_Rotate(PAT_APEAR, PART_LEFTARM,	10, _vec3(0.7f, 4.14, 0.f));
+	m_pAnimationController->Insert_Rotate(PAT_APEAR, PART_LEFTARM,	10, _vec3(0.7f, 4.14f, 0.f));
 	m_pAnimationController->Insert_Trans(PAT_APEAR, PART_LEFTARM,	10, _vec3(-1000.f, 800.f, 0.f));
 	//// Hand
 	m_pAnimationController->Insert_Scale(PAT_APEAR, PART_LEFTHAND,  10, _vec3(500.f, 500.f, 500.f));
