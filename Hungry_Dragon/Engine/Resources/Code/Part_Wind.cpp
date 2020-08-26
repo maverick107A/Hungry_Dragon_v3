@@ -1,4 +1,5 @@
 #include "Part_Wind.h"
+#include "PlayerMain.h"
 
 USING(Engine)
 
@@ -51,16 +52,26 @@ void CPart_Wind::Set_Origin(_vec3 _origin)
 	}
 }
 
+void CPart_Wind::Set_Player(CPlayerMain * _pPlayer)
+{
+	m_pPlayer = _pPlayer;
+}
+
 void CPart_Wind::Reset_Particle(ATTRIBUTE * _attribute)
 {
 	_attribute->bAlive = true;
 
 	_attribute->vPosition = m_vOrigin;
-	_attribute->vPosition.x += WINCX*0.5f - rand()*(WINCX) / RAND_MAX;
-	_attribute->vPosition.y += WINCY*0.5f - rand()*(WINCY) / RAND_MAX;
-	_attribute->vVelocity = (_attribute->vPosition - m_vOrigin)*m_fSpeed;
+	if (m_pPlayer)
+	{
+		_attribute->vPosition += m_pPlayer->Get_Up()*(WINCY*0.5f - rand()*(WINCY) / RAND_MAX);
+		_attribute->vPosition += m_pPlayer->Get_Right()*(WINCX*0.5f - rand()*(WINCX) / RAND_MAX);
+		//_attribute->vPosition.x += WINCX*0.5f - rand()*(WINCX) / RAND_MAX;
+		//_attribute->vPosition.y += WINCY*0.5f - rand()*(WINCY) / RAND_MAX;
+		_attribute->vVelocity = (_attribute->vPosition - m_vOrigin)*m_fSpeed;
 
-	_attribute->tColor = D3DXCOLOR(255.f, 255.f, 255.f, 255.f);
+		_attribute->tColor = D3DXCOLOR(255.f, 255.f, 255.f, 255.f);
+	}
 
 }
 

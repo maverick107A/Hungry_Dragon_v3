@@ -15,6 +15,7 @@
 #include "BreathBase.h"
 #include "PHit.h"
 #include "Terrain_Locater.h"
+#include "Part_Wind.h"
 
 CTestPlayer::CTestPlayer(LPDIRECT3DDEVICE9 pGraphicDev)
 	: CPlayerMain(pGraphicDev)
@@ -61,10 +62,6 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 	m_bAccelCheck = false;
 	if (Engine::Get_DIKeyState(DIK_K) & 0x80)
 		m_bBreath = !m_bBreath;
-	if (GetAsyncKeyState(VK_RIGHT))
-		m_iBreathRad += 1;
-	if (GetAsyncKeyState(VK_LEFT))
-		m_iBreathRad -= 1;
 	//R 키 누르면 생성
 	//if ((GetAsyncKeyState('R') & 0x8000) ) {
 	//	Engine::_vec3 vOrigin=Engine::_vec3(0.f,0.f,3.f);
@@ -148,6 +145,7 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 		Engine::Set_StaticParticleTrans(m_pParticle, _vec3(matMyPos._41, matMyPos._42, matMyPos._43));
 
 		m_pParticleWind=static_cast<CParticle*>(Engine::Particle_Create_Static(Engine::PART_WIND, BeamPos * 2));
+		static_cast<CPart_Wind*>(m_pParticleWind)->Set_Player(this);
 		Engine::Set_StaticParticleTrans(m_pParticleWind, _vec3(matMyPos._41, matMyPos._42, matMyPos._43));
 	}
 	else if (!m_bBreath&&m_pParticle!=nullptr) {

@@ -5,7 +5,11 @@
 
 #include "TimerMgr.h"
 
+
 BEGIN(Engine)
+
+class CPlayerMain;
+
 class ENGINE_DLL CPart_Wind :public CParticle
 {
 public:
@@ -17,6 +21,7 @@ public:
 public:
 	void Set_BoundingBox(BoundingBox _boundingBox);
 	void Set_Origin(_vec3 _origin);
+	void Set_Player(CPlayerMain* _pPlayer);
 
 public:
 	virtual void	Reset_Particle(ATTRIBUTE* _attribute);
@@ -26,6 +31,9 @@ public:
 	static CPart_Wind* Create(LPDIRECT3DDEVICE9 pGraphicDev, int numParticle, float _fSize = 0.25f);
 	virtual CResources*	Clone(_vec3 _origin, BoundingBox _boundingBox);
 	virtual void Free(void);
+
+private:
+	CPlayerMain*	m_pPlayer;
 };
 
 
