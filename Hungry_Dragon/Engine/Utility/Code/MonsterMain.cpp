@@ -67,8 +67,8 @@ int Engine::CMonsterMain::Update_Object(const float & fTimeDelta)
 
 	if (m_eState == MONSTER_SUICIDE)
 	{
-		m_fMonster_HP -= m_fDamaged;
-		Dead_Monster();
+		m_eState = MONSTER_REBORN;
+		m_iEvent = MONSTER_DEAD;
 	}
 
 	if (m_eState == MONSTER_DIG)
@@ -85,8 +85,8 @@ int Engine::CMonsterMain::Update_Object(const float & fTimeDelta)
 
 	if (m_eState == MONSTER_LAYDEAD)
 	{
-		m_fMonster_HP -= (m_fMonster_MaxHP * 0.2f);
-		Dead_Monster();
+		m_iEvent = MONSTER_DEAD;
+		m_eState = MONSTER_DYING;
 	}
 	
 	
@@ -177,10 +177,10 @@ void Engine::CMonsterMain::State_Change()
 
 				break;
 			case Engine::CMonsterMain::BUFF_NONE:
-				if(m_eVariation != MONSTER_FLYGOLEM && m_eVariation != MONSTER_FLYCHASEGOLEM)
-				{ 
+				//if(m_eVariation != MONSTER_FLYGOLEM && m_eVariation != MONSTER_FLYCHASEGOLEM)
+				//{ 
 					Get_EventMgr()->Set_Event(4, 30 + (rand() % 200), m_eVariation);
-				}
+				//}
 				break;
 			case Engine::CMonsterMain::BUFF_END:
 				break;

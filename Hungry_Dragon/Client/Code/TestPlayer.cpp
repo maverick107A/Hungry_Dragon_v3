@@ -143,6 +143,7 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 		static_cast<CPart_Beam*>(m_pParticle)->Set_Player(this);
 		static_cast<CPart_Beam*>(m_pParticle)->Set_Radius(m_iBreathRad);
 		static_cast<CPart_Beam*>(m_pParticle)->Manual_Reset_Particle();
+		m_pParticle->Set_ZeroToOne(10.f*sqrt(m_iBreathRad), 40.f * sqrt(m_iBreathRad));
 		_matrix matMyPos = Get_Transform()->Get_World();
 		Engine::Set_StaticParticleTrans(m_pParticle, _vec3(matMyPos._41, matMyPos._42, matMyPos._43));
 

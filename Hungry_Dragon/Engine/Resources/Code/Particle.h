@@ -22,6 +22,8 @@ public:
 	void			Set_LifeTime(bool _isLifeLimit, _float _lifeTime);
 	void			Set_Origin(_vec3 _newOriginPos);
 
+	void			Set_ZeroToOne(float _fZero, float _fOne) { m_fZero = _fZero; m_fOne = _fOne;	};
+
 public:
 	virtual HRESULT Ready_Buffer(void);
 	virtual void	Render_Buffer(void);

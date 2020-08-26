@@ -21,7 +21,7 @@ HRESULT CFlyGolem::Ready_Object(void)
 	m_fMonster_HP = 100.f;
 	m_fMonster_MaxHP = 100.f;
 	m_fScale = 15.f;
-	m_fMaxScale = 15.f;
+	m_fMaxScale = 30.f;
 	m_fDamaged = 2.f;
 	m_eState = MONSTER_REBORN;
 	m_eVariation = MONSTER_FLYGOLEM;
@@ -65,75 +65,72 @@ int CFlyGolem::Update_Object(const float & fTimeDelta)
 
 void CFlyGolem::Render_Object(void)
 {
-	m_fAngle += 0.5f;
-
-	if (m_fAngle > 6.28319)
+	if (m_eState != MONSTER_SUICIDE)
 	{
-		m_fAngle = 0;
+		m_fAngle += 0.5f;
+
+		if (m_fAngle > 6.28319)
+		{
+			m_fAngle = 0;
+		}
+
+
+
+		CIngame_Flow::GetInstance()->Set_MaskColor(2);
+		// ¸öÃ¼
+		m_pTransform->Set_Scale(m_fMaxScale);
+		m_pTransform->Update_Component(0.01f);
+		m_pTransform->Set_Transform(m_pGraphicDev);
+
+
+		m_pBufferChrystalMeshCom->Render_Buffer();
+
+		if (m_eState != MONSTER_DEACTIVATE && m_eState != MONSTER_DYING)
+		{
+			m_pTransform->Get_Info(Engine::INFO_POS, &m_vLeftArmPos);
+			m_pTransform->Get_Info(Engine::INFO_POS, &m_vRightArmPos);
+			m_pTransform->Get_Info(Engine::INFO_POS, &m_vBodyPos);
+		}
+
+
+		// ¿À¸¥ÆÈ
+		m_pTransform->Set_Scale(m_fScale);
+		m_vLeftArmPos = { m_vLeftArmPos.x + (sinf(m_fAngle) * 10)  ,m_vLeftArmPos.y - 5.f , m_vLeftArmPos.z + (cosf(m_fAngle) * 10) };
+		m_pTransform->Set_Trans(&m_vLeftArmPos);
+		m_pTransform->Update_Component(0.01f);
+		m_pTransform->Set_Transform(m_pGraphicDev);
+
+
+		m_pBufferChrystalMeshCom->Render_Buffer();
+
+		// ¿Þ? ÆÈ
+		m_pTransform->Set_Scale(m_fScale);
+		m_vRightArmPos = { m_vRightArmPos.x - (sinf(m_fAngle) * 10)  ,m_vRightArmPos.y - 5.f , m_vRightArmPos.z - (cosf(m_fAngle) * 10) };
+		m_pTransform->Set_Trans(&m_vRightArmPos);
+		m_pTransform->Update_Component(0.01f);
+		m_pTransform->Set_Transform(m_pGraphicDev);
+
+
+		m_pBufferChrystalMeshCom->Render_Buffer();
+
+		//// ÆøÅº
+		if (m_eState == MONSTER_DEACTIVATE || m_fMonster_HP < 0)
+		{
+			m_vBombPos = { m_vBombPos.x ,m_vBombPos.y - 20.f ,m_vBombPos.z };
+		}
+		else
+		{
+			m_vBombPos = { m_vBodyPos.x ,m_vBodyPos.y - 20.f ,m_vBodyPos.z };
+		}
+		m_pTransform->Set_Trans(&m_vBombPos);
+		m_pTransform->Set_Scale(10);
+		m_pTransform->Update_Component(0.01f);
+		m_pTransform->Set_Transform(m_pGraphicDev);
+
+		m_pBufferMeshCom->Render_Buffer();
+
+		m_pTransform->Set_Trans(&m_vBodyPos);
 	}
-
-	if (m_eState != MONSTER_DEACTIVATE && m_eState != MONSTER_DYING)
-	{
-		m_pTransform->Get_Info(Engine::INFO_POS, &m_vLeftArmPos);
-		m_pTransform->Get_Info(Engine::INFO_POS, &m_vRightArmPos);
-	}
-
-
-	m_pTransform->Get_Info(Engine::INFO_POS, &m_vBodyPos);
-
-
-	CIngame_Flow::GetInstance()->Set_MaskColor(2);
-
-	// ¿À¸¥ÆÈ
-	m_pTransform->Set_Scale(15);
-	m_vLeftArmPos = { m_vLeftArmPos.x + (sinf(m_fAngle) * 10)  ,m_vLeftArmPos.y - 5.f , m_vLeftArmPos.z + (cosf(m_fAngle) * 10) };
-	m_pTransform->Set_Trans(&m_vLeftArmPos);
-	m_pTransform->Update_Component(0.01f);
-	m_pTransform->Set_Transform(m_pGraphicDev);
-
-
-	m_pBufferChrystalMeshCom->Render_Buffer();
-
-	// ¿Þ? ÆÈ
-	m_pTransform->Set_Scale(15);
-	m_vRightArmPos = { m_vRightArmPos.x - (sinf(m_fAngle) * 10)  ,m_vRightArmPos.y - 5.f , m_vRightArmPos.z - (cosf(m_fAngle) * 10) };
-	m_pTransform->Set_Trans(&m_vRightArmPos);
-	m_pTransform->Update_Component(0.01f);
-	m_pTransform->Set_Transform(m_pGraphicDev);
-
-
-	m_pBufferChrystalMeshCom->Render_Buffer();
-
-
-
-	// ¸öÃ¼
-	m_pTransform->Set_Trans(&m_vBodyPos);
-	m_pTransform->Set_Scale(30);
-	m_pTransform->Update_Component(0.01f);
-	m_pTransform->Set_Transform(m_pGraphicDev);
-
-
-	m_pBufferChrystalMeshCom->Render_Buffer();
-
-	// ÆøÅº
-
-	if (m_eState == MONSTER_DEACTIVATE || m_fMonster_HP < 0)
-	{
-		m_vBombPos = { m_vBombPos.x ,m_vBombPos.y - 20.f ,m_vBombPos.z };
-	}
-	else
-	{
-		m_vBombPos = { m_vBodyPos.x ,m_vBodyPos.y - 20.f ,m_vBodyPos.z };
-	}
-	m_pTransform->Set_Trans(&m_vBombPos);
-	m_pTransform->Set_Scale(10);
-	m_pTransform->Update_Component(0.01f);
-	m_pTransform->Set_Transform(m_pGraphicDev);
-
-	m_pTransform->Set_Trans(&m_vBodyPos);
-
-	m_pBufferMeshCom->Render_Buffer();
-
 
 	Engine::CMonsterMain::Render_Object();
 }
