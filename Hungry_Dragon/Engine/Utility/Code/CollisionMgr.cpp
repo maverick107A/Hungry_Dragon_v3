@@ -35,6 +35,7 @@ void CCollisionMgr::Player_Monster(list<CGameObject*> * _pPlayer, list<CGameObje
 		_vec3 vTemp;
 		float fTemp;
 		float ColSize = Player->Get_ColSize();
+		float fSquareRad = powf(Player->Get_BreathRad(),2);
 		pPlayer->Get_Transform()->Get_Info(Engine::INFO_POS, &vPlayerPos);
 		if (Player->Get_Breath())
 		{
@@ -51,7 +52,7 @@ void CCollisionMgr::Player_Monster(list<CGameObject*> * _pPlayer, list<CGameObje
 
 				_vec3 vMola = vPlayerPos + vDir*fTemp - vMonsterPos;
 
-				if(D3DXVec3Dot(&vMola,&vMola) < ColSize)
+				if(D3DXVec3Dot(&vMola,&vMola) < fSquareRad)
 					static_cast<CMonsterMain*>(pMonster)->Kill_Lay_Monster(fTimeDelta);
 
 			}

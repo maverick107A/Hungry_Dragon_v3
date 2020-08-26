@@ -61,7 +61,10 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 	m_bAccelCheck = false;
 	if (Engine::Get_DIKeyState(DIK_K) & 0x80)
 		m_bBreath = !m_bBreath;
-
+	if (GetAsyncKeyState(VK_RIGHT))
+		m_iBreathRad += 1;
+	if (GetAsyncKeyState(VK_LEFT))
+		m_iBreathRad -= 1;
 	//R 키 누르면 생성
 	//if ((GetAsyncKeyState('R') & 0x8000) ) {
 	//	Engine::_vec3 vOrigin=Engine::_vec3(0.f,0.f,3.f);
