@@ -36,6 +36,7 @@ protected:
 
 public:
 	virtual HRESULT Ready_Object(void) override;
+	virtual void		Initialize_Object(void);
 	virtual int Update_Object(const float& fTimeDelta) override;
 	virtual void Render_Object(void) override;
 	virtual void LateUpdate_Object(const float& fTimeDelta) override;
@@ -108,6 +109,8 @@ protected:
 	D3DXCOLOR					m_tDeadColor;
 
 	float						m_fParticleLifeTime=1.f;
+
+	bool		m_bFirst = true;
 
 public:
 	static CMonsterMain*	Create(LPDIRECT3DDEVICE9 pGraphicDev);

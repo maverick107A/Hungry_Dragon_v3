@@ -117,7 +117,7 @@ HRESULT CObjectPool::Set_Monster_CaveMap(OBJID _Type, _int iCnt, _vec3 _Pos)
 	for (int i = 0; i < iCnt; ++i)
 	{
 		
-		_vec3 _pPos = { sinf(D3DX_PI * ((rand() % 100) * 0.02f)) * m_fRaidus , cosf(D3DX_PI * ((rand() % 100) * 0.02f)) * m_fRaidus  , _Pos.z + (rand() % 7000) };
+		_vec3 _pPos = { sinf(D3DX_PI * ((rand() % 100) * 0.02f)) * m_fRaidus , cosf(D3DX_PI * ((rand() % 100) * 0.02f)) * m_fRaidus  , _Pos.z + (rand() % 8000) };
 		CGameObject* insertedMonster = m_listObject[_Type].front();
 		insertedMonster->Set_Pos(_pPos);
 		m_Layer->Add_Object(L"Monster", insertedMonster);
@@ -164,7 +164,7 @@ HRESULT CObjectPool::Set_Monster_HorizonCaveRedMap(OBJID _Type, _int iCnt, _vec3
 	for (int i = 0; i < iCnt; ++i)
 	{
 
-		_vec3 _pPos = { _Pos.x , _Pos.y  , (float)(rand() % 5000) };
+		_vec3 _pPos = { _Pos.x , _Pos.y + (rand() % 15)  , (float)(rand() % 5000) };
 		CGameObject* insertedMonster = m_listObject[_Type].front();
 		insertedMonster->Set_Pos(_pPos);
 		m_Layer->Add_Object(L"Monster", insertedMonster);

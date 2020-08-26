@@ -45,7 +45,7 @@ HRESULT CHorizonBat_Monster::Ready_Object(void)
 	m_fDamaged = 10.f;
 	m_eVariation = MONSTER_HORIZONBAT;
 
-	m_fDead_Range = 3000.f;
+	m_fDead_Range = 5000.f;
 	return S_OK;
 }
 
@@ -67,7 +67,7 @@ int CHorizonBat_Monster::Update_Object(const float & fTimeDelta)
 	if (MONSTER_DEAD == Engine::CMonsterMain::Update_Object(fTimeDelta) || CIngame_Flow::GetInstance()->Get_StageID() != CIngame_Flow::STAGE_CAVE_TWO)
 	{
 		m_eState = MONSTER_REBORN;
-		m_iEvent = MONSTER_DEAD;
+		m_iEvent = CAVEHORIZONBAT_DEAD;
 		return m_iEvent;
 	}
 

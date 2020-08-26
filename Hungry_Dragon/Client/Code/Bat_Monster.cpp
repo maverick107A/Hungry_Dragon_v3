@@ -27,6 +27,7 @@ HRESULT CBat_Monster::Ready_Object(void)
 	m_tFrame.fFrameSpeed = 1.5f;
 	m_fHeight = 0.f;
 
+	m_fDead_Range = 8000.f;
 
 	m_fSpeed = 0.5f;
 	m_fMonster_MaxHP = 100.f;

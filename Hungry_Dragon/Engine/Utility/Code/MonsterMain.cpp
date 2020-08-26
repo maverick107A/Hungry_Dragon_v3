@@ -21,13 +21,18 @@ HRESULT Engine::CMonsterMain::Ready_Object(void)
 	return S_OK;
 }
 
+void CMonsterMain::Initialize_Object(void)
+{
+}
+
 int Engine::CMonsterMain::Update_Object(const float & fTimeDelta)
 {
-	
 
-	// 이니셜라이저 오브젝트로 올려야됨
-	//CGameObject* pPlayer = ((Engine::CLayer*)(Get_Parent()))->Get_Object(L"TestPlayer", Engine::Find_First, nullptr);
-	m_pPlayerTransformCom = static_cast<Engine::CTransform*>(Engine::Get_Component(L"GameLogic", L"TestPlayer", L"Com_Transform", Engine::ID_DYNAMIC));
+	if (m_bFirst)
+	{
+		m_pPlayerTransformCom = static_cast<Engine::CTransform*>(Engine::Get_Component(L"GameLogic", L"TestPlayer", L"Com_Transform", Engine::ID_DYNAMIC));
+		m_bFirst = false; 
+	}
 
 	 m_pPlayerTransformCom->Get_Info(Engine::INFO_POS ,&m_vPlayerPos);
 
@@ -201,7 +206,7 @@ void Engine::CMonsterMain::Dead_Monster()
 {
 	m_pTransform->Set_Scale(m_fScale);
 
-	if (m_fMonster_HP < 0)
+	if (m_fMonster_HP <= 0)
 	{
 		m_iEvent = MONSTER_DEAD;
 		m_eState = MONSTER_DYING;
@@ -325,6 +330,12 @@ void Engine::CMonsterMain::Kill_Monster(const float& fTimeDelta)
 	m_fMonster_HP -= m_fDamaged;
 	m_fScale = m_fMonster_HP / m_fMonster_MaxHP;
 	m_fScale = m_fMaxScale * m_fScale;
+
+	if (m_fScale <= 0)
+	{
+		m_fScale = 0;
+	}
+
 	Dead_Monster();
 }
 

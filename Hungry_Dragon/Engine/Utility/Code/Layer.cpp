@@ -2,7 +2,6 @@
 #include "ObjectPool.h"
 #include "CollisionMgr.h"
 #include "ParticleMgr.h"
-
 #include "MonsterMain.h"
 
 USING(Engine)
@@ -48,8 +47,13 @@ _int Engine::CLayer::Update_Layer(const _float& fTimeDelta)
 			iEnd = (*iter_obj)->Update_Object(fTimeDelta);
 
 			if (iEnd == MONSTER_DEAD)
-			{
+			{			
 				CObjectPool::GetInstance()->Add_Object_Pool(*iter_obj, OBJID::STAND_MONSTER);
+				iter_obj = (*iter).second.erase(iter_obj);
+			}
+			else if (iEnd == CAVEHORIZONBAT_DEAD)
+			{
+				CObjectPool::GetInstance()->Add_Object_Pool(*iter_obj, OBJID::HORIZON_REDMONSTER);
 				iter_obj = (*iter).second.erase(iter_obj);
 			}
 			else if (iEnd == BULLET_DEAD)

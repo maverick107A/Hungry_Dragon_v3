@@ -33,7 +33,7 @@ namespace Engine
 #define PLAYERBULLET_DEAD 14
 #define MONSTER_DEAD	15
 #define BULLET_DEAD		16
-
+#define	CAVEHORIZONBAT_DEAD 18
 
 }
 
