@@ -94,7 +94,7 @@ void CFlyGolem::Render_Object(void)
 
 
 		// ¿À¸¥ÆÈ
-		m_pTransform->Set_Scale(m_fScale);
+		m_pTransform->Set_Scale(m_fScale);s
 		m_vLeftArmPos = { m_vLeftArmPos.x + (sinf(m_fAngle) * 10)  ,m_vLeftArmPos.y - 5.f , m_vLeftArmPos.z + (cosf(m_fAngle) * 10) };
 		m_pTransform->Set_Trans(&m_vLeftArmPos);
 		m_pTransform->Update_Component(0.01f);

@@ -77,8 +77,8 @@ int Engine::CMonsterMain::Update_Object(const float & fTimeDelta)
 		m_pTransform->m_vInfo[Engine::INFO_POS].y -= m_fSpeed;
 		if (m_fMonster_HP < 0)
 		{
-				m_eState = MONSTER_REBORN;
-		m_iEvent = MONSTER_DEAD;
+			m_eState = MONSTER_REBORN;
+			m_iEvent = MONSTER_DEAD;
 		}
 	}
 	
@@ -177,10 +177,7 @@ void Engine::CMonsterMain::State_Change()
 
 				break;
 			case Engine::CMonsterMain::BUFF_NONE:
-				//if(m_eVariation != MONSTER_FLYGOLEM && m_eVariation != MONSTER_FLYCHASEGOLEM)
-				//{ 
-					Get_EventMgr()->Set_Event(4, 30 + (rand() % 200), m_eVariation);
-				//}
+				Get_EventMgr()->Set_Event(4, 30 + (rand() % 200), m_eVariation);
 				break;
 			case Engine::CMonsterMain::BUFF_END:
 				break;

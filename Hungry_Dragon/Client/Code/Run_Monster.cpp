@@ -37,22 +37,22 @@ HRESULT CRun_Monster::Ready_Object(void)
 		break;
 	case 1:
 		m_eType = Engine::CMonsterMain::BUFF_HP;
-		m_tFrame.fStartFrame = 16.f;
-		m_tFrame.fFirstFrame = 16.f;
+		m_tFrame.fStartFrame = 15.f;
+		m_tFrame.fFirstFrame = 15.f;
 		m_tFrame.fMaxFrame = 29.f;
 		m_tFrame.fFrameSpeed = 1.0f;
 		break;
 	case 2:
 		m_eType = Engine::CMonsterMain::BUFF_EXP;
-		m_tFrame.fStartFrame = 31.f;
-		m_tFrame.fFirstFrame = 31.f;
+		m_tFrame.fStartFrame = 30.f;
+		m_tFrame.fFirstFrame = 30.f;
 		m_tFrame.fMaxFrame = 44.f;
 		m_tFrame.fFrameSpeed = 1.0f;
 		break;
 	case 3:
 		m_eType = Engine::CMonsterMain::BUFF_SP;
-		m_tFrame.fStartFrame = 46.f;
-		m_tFrame.fFirstFrame = 46.f;
+		m_tFrame.fStartFrame = 45.f;
+		m_tFrame.fFirstFrame = 45.f;
 		m_tFrame.fMaxFrame = 59.f;
 		m_tFrame.fFrameSpeed = 1.0f;
 		break;
@@ -90,9 +90,14 @@ int CRun_Monster::Update_Object(const float & fTimeDelta)
 	if (MONSTER_DEAD == Engine::CMonsterMain::Update_Object(fTimeDelta))
 	{
 		m_eState = MONSTER_REBORN;
-
 		return m_iEvent;
 	}
+
+	/*if (m_eState == MONSTER_DEACTIVATE) {
+		m_eType;
+		m_tFrame;
+ 		int iA = 10;
+	}*/
 
 
 	if (m_eState == MONSTER_ACTIVATE)
@@ -127,30 +132,31 @@ int CRun_Monster::Update_Object(const float & fTimeDelta)
 void CRun_Monster::Render_Object(void)
 {
 	m_pTransform->Set_Transform(m_pGraphicDev);
-	m_pAuraTextureCom->Set_Texture((int)m_tFrame.fStartFrame);
+
 	m_pBufferCubeCom->Render_Buffer();
 
 
-	//if (m_eType != CMonsterMain::BUFF_NONE)
-	//{
-	//
-	//	m_pAuraTransform->Set_Transform(m_pGraphicDev);
-	//	
-	//	m_pGraphicDev->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
-	//	m_pGraphicDev->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
-	//	m_pGraphicDev->SetRenderState(D3DRS_ALPHAREF, 0);
+	if (m_eType != CMonsterMain::BUFF_NONE)
+	{
+	
+		m_pAuraTransform->Set_Transform(m_pGraphicDev);
+		
+		m_pGraphicDev->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
+		m_pGraphicDev->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
+		m_pGraphicDev->SetRenderState(D3DRS_ALPHAREF, 0);
 
-	//	m_pGraphicDev->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
-	//	m_pGraphicDev->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+		m_pGraphicDev->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+		m_pGraphicDev->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
 
-	//	m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
+		m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 
 
-	//	
-	//	m_pBufferBoradCom->Render_Buffer();
-
-	//	m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
-	//}
+		m_pAuraTextureCom->Set_Texture((int)m_tFrame.fStartFrame);
+		m_pBufferBoradCom->Render_Buffer();
+		m_pAuraTextureCom->Set_Texture(0);
+		m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
+		m_pGraphicDev->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
+	}
 
 	Engine::CMonsterMain::Render_Object();
 }
@@ -203,7 +209,7 @@ void CRun_Monster::Update_Animation(const float & fTimeDelta)
 {
 	m_tFrame.fStartFrame += m_tFrame.fMaxFrame * fTimeDelta * m_tFrame.fFrameSpeed;
 
-	if (m_tFrame.fStartFrame >= m_tFrame.fMaxFrame)
+	if (m_tFrame.fStartFrame >= m_tFrame.fMaxFrame+1)
 	{
 		m_tFrame.fStartFrame = m_tFrame.fFirstFrame;
 	}
