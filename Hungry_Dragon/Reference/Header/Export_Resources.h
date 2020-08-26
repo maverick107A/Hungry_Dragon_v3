@@ -29,8 +29,6 @@ inline HRESULT	Ready_Texture(LPDIRECT3DDEVICE9 pGraphicDev,
 
 inline void	Load_Particle(LPDIRECT3DDEVICE9 pGraphicDev);
 
-inline void	Load_ParticleMFC(LPDIRECT3DDEVICE9 pGraphicDev);
-
 inline CResources*	Get_Particle(LPDIRECT3DDEVICE9 pGraphicDev,
 	PARTICLEID _ePartID,
 	BoundingBox _boundingBox,

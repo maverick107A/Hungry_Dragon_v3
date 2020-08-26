@@ -121,6 +121,12 @@
     <Filter Include="00. Resources\02. Particle\04. Part_Beam">
       <UniqueIdentifier>{efad24f0-3d9d-413d-bb5d-d80483f85864}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00. Resources\05. DefaultMesh">
+      <UniqueIdentifier>{11edd515-d11d-45b8-89fe-fe3f48559afe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00. Resources\05. DefaultMesh\00. Torus">
+      <UniqueIdentifier>{851581f9-86f2-445c-84a4-20728b5706a8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\Resources.cpp">
@@ -248,6 +254,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Part_Beam.cpp">
       <Filter>00. Resources\02. Particle\04. Part_Beam</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Torus.cpp">
+      <Filter>00. Resources\05. DefaultMesh\00. Torus</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -379,6 +388,9 @@
     </ClInclude>
     <ClInclude Include="..\Code\Part_Beam.h">
       <Filter>00. Resources\02. Particle\04. Part_Beam</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Torus.h">
+      <Filter>00. Resources\05. DefaultMesh\00. Torus</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

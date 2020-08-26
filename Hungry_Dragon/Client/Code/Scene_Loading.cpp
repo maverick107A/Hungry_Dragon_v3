@@ -90,6 +90,12 @@ _uint CScene_Loading::Loading_ForStage(void)
 
 	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
 		RESOURCE_STAGE,
+		L"BUFFER_TORUS",
+		Engine::BUFFER_TORUS),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
+		RESOURCE_STAGE,
 		L"BUFFER_CAVECYLINDER",
 		Engine::BUFFER_CAVECYLINDER),
 		E_FAIL);

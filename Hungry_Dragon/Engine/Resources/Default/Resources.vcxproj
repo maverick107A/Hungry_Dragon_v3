@@ -204,6 +204,7 @@ call CopyResources.bat</Command>
     <ClCompile Include="..\Code\TerrainTex.cpp" />
     <ClCompile Include="..\Code\Texture.cpp" />
     <ClCompile Include="..\Code\Texture_Square.cpp" />
+    <ClCompile Include="..\Code\Torus.cpp" />
     <ClCompile Include="..\Code\TreeBoard.cpp" />
     <ClCompile Include="..\Code\UnitSector.cpp" />
     <ClCompile Include="..\Code\VentCube.cpp" />
@@ -249,6 +250,7 @@ call CopyResources.bat</Command>
     <ClInclude Include="..\Code\TerrainTex.h" />
     <ClInclude Include="..\Code\Texture.h" />
     <ClInclude Include="..\Code\Texture_Square.h" />
+    <ClInclude Include="..\Code\Torus.h" />
     <ClInclude Include="..\Code\TreeBoard.h" />
     <ClInclude Include="..\Code\UnitSector.h" />
     <ClInclude Include="..\Code\VentCube.h" />

@@ -11,6 +11,7 @@ class CVICustom;
 class CTexture;
 class CTransform;
 class CTerrainTex;
+class CTorus;
 
 END
 
@@ -37,6 +38,7 @@ private:
 	float		m_fAngle = 0;
 	D3DXVECTOR3 m_vLeftArmPos;
 	D3DXVECTOR3 m_vRightArmPos;
+
 private:
 	virtual void Free(void) override;
 

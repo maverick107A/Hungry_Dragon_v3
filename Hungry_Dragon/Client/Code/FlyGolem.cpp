@@ -94,7 +94,7 @@ void CFlyGolem::Render_Object(void)
 
 
 		// ¿À¸¥ÆÈ
-		m_pTransform->Set_Scale(m_fScale);s
+		m_pTransform->Set_Scale(m_fScale);
 		m_vLeftArmPos = { m_vLeftArmPos.x + (sinf(m_fAngle) * 10)  ,m_vLeftArmPos.y - 5.f , m_vLeftArmPos.z + (cosf(m_fAngle) * 10) };
 		m_pTransform->Set_Trans(&m_vLeftArmPos);
 		m_pTransform->Update_Component(0.01f);
@@ -151,8 +151,6 @@ HRESULT CFlyGolem::Add_Component(void)
 		(Engine::Clone(RESOURCE_STAGE, L"BUFFER_CHRYSTAL"));
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_STATIC].emplace(L"Chrystal_Buffer", pComponent);
-	
-
 
 	return S_OK;
 }
@@ -178,6 +176,5 @@ CFlyGolem * CFlyGolem::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 
 void CFlyGolem::Free(void)
 {
-
 	Engine::CMonsterMain::Free();
 }

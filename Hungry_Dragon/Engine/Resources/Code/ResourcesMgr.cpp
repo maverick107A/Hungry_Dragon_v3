@@ -139,7 +139,6 @@ HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 	case BUFFER_DIAMOB_UNDER:
 		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/Mob_Dia_Under.dat");
 		break;
-	
 	case BUFFER_GOLEMBODY:
 		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/GiantBody4.dat");
 		break;
@@ -170,7 +169,9 @@ HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 	case  BUFFER_BOMB:
 		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/BombMob.dat");
 		break;
-		
+	case  BUFFER_TORUS:
+		pResources = CTorus::Create(pGraphicDev);
+		break;
 	}
 
 	m_pmapResource[wContainerIdx].emplace(pBufferTag, pResources);
@@ -291,34 +292,6 @@ void CResourcesMgr::Load_Particle(LPDIRECT3DDEVICE9 pGraphicDev) {
 			break;
 		}
 		
-		m_vecParticle.emplace_back(pParticle);
-	}
-}
-
-void CResourcesMgr::Load_ParticleMFC(LPDIRECT3DDEVICE9 pGraphicDev) {
-	//파티클 전용 타이머 추가
-	CTimerMgr::GetInstance()->Ready_Timer(L"Paticle_Timer");
-
-	CParticle* pParticle;
-
-	for (int i = 0; i < PART_END; ++i) {
-		switch (i) {
-		case PART_ATK:
-			pParticle = CPart_Atk::Create(pGraphicDev, 500);
-			static_cast<Engine::CPart_Atk*>(pParticle)->Set_Texture(L"../Asset/snowflake.dds");
-			break;
-		case PART_WIND:
-			pParticle = CPart_Wind::Create(pGraphicDev, 70, 100.f);
-			break;
-		case PART_FRAGILE:
-			pParticle = CPart_Fragile::Create(pGraphicDev, 500);
-			static_cast<Engine::CPart_Fragile*>(pParticle)->Set_TexArrayMFC();
-			break;
-		default:
-			pParticle = nullptr;
-			break;
-		}
-
 		m_vecParticle.emplace_back(pParticle);
 	}
 }

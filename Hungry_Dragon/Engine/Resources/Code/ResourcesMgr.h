@@ -33,6 +33,7 @@
 #include "Texture.h"
 #include "HeightCol.h"
 #include "CliffCylinder.h"
+#include "Torus.h"
 
 #include "Particle.h"
 #include "Part_Atk.h"
@@ -75,7 +76,6 @@ public:
 
 	//미리 벡터 공간 m_vecParticle에 모든 파티클 효과를 생성해 적재해 놓는 함수
 	void	Load_Particle(LPDIRECT3DDEVICE9 pGraphicDev);
-	void	Load_ParticleMFC(LPDIRECT3DDEVICE9 pGraphicDev);
 
 	//Particle 프리셋에서 클론한 파티클을 리턴하는 함수
 	CResources*	Get_Particle(LPDIRECT3DDEVICE9 pGraphicDev,

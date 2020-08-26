@@ -32,11 +32,6 @@ inline void Load_Particle(LPDIRECT3DDEVICE9 pGraphicDev) {
 	CResourcesMgr::GetInstance()->Load_Particle(pGraphicDev);
 }
 
-inline void Load_ParticleMFC(LPDIRECT3DDEVICE9 pGraphicDev) {
-	CResourcesMgr::GetInstance()->Load_ParticleMFC(pGraphicDev);
-}
-
-
 void	Render_Buffer(const _ushort& wContainerIdx, const _tchar* pBufferTag)
 {
 	CResourcesMgr::GetInstance()->Render_Buffer(wContainerIdx, pBufferTag);

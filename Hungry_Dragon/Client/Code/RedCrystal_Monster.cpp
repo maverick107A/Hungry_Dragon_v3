@@ -137,6 +137,9 @@ void CRedCrystal_Monster::Render_Object(void)
 		m_pTransform->Update_Component(0.01f);
 		m_pTransform->Set_Transform(m_pGraphicDev);
 
+		m_pGraphicDev->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
+		m_pGraphicDev->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
+		m_pGraphicDev->SetRenderState(D3DRS_ALPHAREF, 0);
 
 		m_pBufferMeshCom->Render_Buffer();
 
@@ -193,7 +196,7 @@ void CRedCrystal_Monster::Render_Object(void)
 
 		m_pTransform->Set_Trans(&m_vBodyPos);
 
-
+		
 		if (m_eType != CMonsterMain::BUFF_NONE)
 		{
 			m_pAuraTransform->Set_Transform(m_pGraphicDev);
@@ -205,6 +208,8 @@ void CRedCrystal_Monster::Render_Object(void)
 			m_pBufferBoradCom->Render_Buffer();
 			m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 		}
+
+		m_pGraphicDev->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
 	}
 
 	Engine::CMonsterMain::Render_Object();
