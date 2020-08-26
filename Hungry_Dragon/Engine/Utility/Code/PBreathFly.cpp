@@ -129,7 +129,11 @@ void CPBreathFly::Update_State(const float& fTimeDelta)
 			m_pPlayer->Set_Animation(ANI_FASTBREATH);
 		}
 		else
+		{
+			if (m_pPlayer->Get_Stamina() < m_pPlayer->Get_MaxStamina())
+				m_pPlayer->Add_Stamina(1);
 			m_pPlayer->Set_Animation(ANI_BREATHFLY);
+		}
 		//속도적용
 		vDir *= fTimeDelta*m_fSpeed;
 		//가속

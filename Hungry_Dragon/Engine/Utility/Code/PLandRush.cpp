@@ -27,6 +27,8 @@ void CPLandRush::Enter_State(CPlayerMain* _pPlayer)
 
 void CPLandRush::Update_State(const float& fTimeDelta)
 {
+	if (m_pPlayer->Get_Mana() < m_pPlayer->Get_MaxMana())
+		m_pPlayer->Add_Mana(1);
 	//¶¥ÀÌµ¿
 	D3DXVECTOR3 vDir = { 0.f,0.f,0.f };
 	D3DXVECTOR3 vLook = { 0.f,0.f,0.f };
@@ -77,7 +79,11 @@ void CPLandRush::Update_State(const float& fTimeDelta)
 			m_pPlayer->Set_Animation(ANI_FASTFLY);
 		}
 		else
+		{
 			m_pPlayer->Set_Animation(ANI_FLY);
+			if (m_pPlayer->Get_Stamina() < m_pPlayer->Get_MaxStamina())
+				m_pPlayer->Add_Stamina(1);
+		}
 		vDir *= fTimeDelta*m_fSpeed;
 		m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS] += vDir;
 		float fDis = sqrtf(vDir.x*vDir.x + vDir.y*vDir.y + vDir.z*vDir.z);

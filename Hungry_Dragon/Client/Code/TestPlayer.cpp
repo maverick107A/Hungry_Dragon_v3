@@ -45,6 +45,7 @@ HRESULT CTestPlayer::Ready_Object(void)
 	D3DXMatrixIdentity(&m_matOld3);
 	D3DXMatrixIdentity(&m_matOld3);
 
+	m_iBreathRad = 30;
 
 	m_fColSize = 400.f;
 	return S_OK;
@@ -60,6 +61,30 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 	m_bAccelCheck = false;
 	if (Engine::Get_DIKeyState(DIK_K) & 0x80)
 		m_bBreath = !m_bBreath;
+
+	//R 키 누르면 생성
+	//if ((GetAsyncKeyState('R') & 0x8000) ) {
+	//	Engine::_vec3 vOrigin=Engine::_vec3(0.f,0.f,3.f);
+	//	Engine::BoundingBox tempBoundingBox;
+	//	tempBoundingBox.vMax = Engine::_vec3(WINCX,WINCY,100.f);
+	//	tempBoundingBox.vMin = Engine::_vec3(-WINCX, -WINCY, -100.f);
+	//	Engine::CResources* tempParticle = Engine::Get_Particle(m_pGraphicDev, Engine::PART_WIND, tempBoundingBox, vOrigin);
+
+	//	//나중엔 미리 올려 놓는 식으로 구현하자
+	//	static_cast<Engine::CPart_Wind*>(tempParticle)->Set_Texture(L"../../Asset/snowflake.dds");
+	//	m_arrParticle.emplace_back( tempParticle);
+	//}
+	//for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end();) {
+	//	int life = (*iter)->Update_Component(fTimeDelta);
+
+	//	if (life == 0) {
+	//		++iter;
+	//	}
+	//	else {
+	//		Safe_Release(*iter);
+	//		iter = m_arrParticle.erase(iter);
+	//	}
+	//}
 
 	//화면 내에서 플레어이거 아래에 위치하도록
 	m_pTransform->m_vInCamPos -= m_vUp*2.f;
@@ -113,8 +138,8 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 		memcpy(&BeamPos, &m_pTransform->m_matWorld._31, sizeof(_vec3));
 		m_pParticle = static_cast<CParticle*>(Engine::Particle_Create_Static(Engine::PART_BEAM, BeamPos*2));
 		static_cast<CPart_Beam*>(m_pParticle)->Set_Player(this);
+		static_cast<CPart_Beam*>(m_pParticle)->Set_Radius(m_iBreathRad);
 		static_cast<CPart_Beam*>(m_pParticle)->Manual_Reset_Particle();
-		static_cast<CPart_Beam*>(m_pParticle)->Set_Radius(30);
 		_matrix matMyPos = Get_Transform()->Get_World();
 		Engine::Set_StaticParticleTrans(m_pParticle, _vec3(matMyPos._41, matMyPos._42, matMyPos._43));
 

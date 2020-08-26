@@ -31,7 +31,7 @@ void CPBreathIdle::Enter_State(CPlayerMain* _pPlayer)
 
 void CPBreathIdle::Update_State(const float& fTimeDelta)
 {
-	if (m_pPlayer->Get_Stamina() < 300)
+	if (m_pPlayer->Get_Stamina() < m_pPlayer->Get_MaxStamina())
 		m_pPlayer->Add_Stamina(2);
 
 	if (GetAsyncKeyState(VK_RBUTTON))

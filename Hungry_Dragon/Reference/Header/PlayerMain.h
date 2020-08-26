@@ -38,8 +38,12 @@ public:
 
 public:
 	int						Get_Hp() { return m_iHp; }
+	int						Get_MaxHp() { return m_iMaxHp; }
 	int						Get_Stamina() { return m_iStamina; }
+	int						Get_MaxStamina() { return m_iMaxStamina; }
 	int						Get_Mana() { return m_iMana; }
+	int						Get_MaxMana() { return m_iMaxMana; }
+	int						Get_BreathRad() { return m_iBreathRad; }
 	float					Get_ColSize() { return m_fColSize; }
 	bool					Get_Breath() { return m_bBreath; }
 	bool					Get_AccelCheck() { return m_bAccelCheck; }
@@ -60,6 +64,7 @@ public:
 public:
 	void Set_Sate(STATE _eState) { m_eState = _eState; }
 	void Set_Breath(bool _bCheck) { m_bBreath = _bCheck; }
+	void Set_BreathRad(int _iRad) { m_iBreathRad = _iRad; }
 	void Set_MouseTime(float _fTime) { m_fMouseTime = _fTime; }
 	void Set_AccelCheck(bool _bCheck) { m_bAccelCheck = _bCheck; }
 	void Set_Animation(ANIMATION _eAni) { m_eAnimation = _eAni; }
@@ -70,6 +75,7 @@ public:
 	void Add_Hp(int _iHp) { m_iHp += _iHp; }
 	void Add_Stamina(int _iStamina) { m_iStamina += _iStamina; }
 	void Add_Mana(int _iMana) { m_iMana += _iMana; }
+	void Add_BreathRad(int _iRad) { m_iBreathRad += _iRad; }
 
 protected:
 	virtual void State_Change() {};
@@ -98,8 +104,12 @@ protected:
 	STATE					m_eState = STATE_END;
 
 	int						m_iHp = 100;
-	int						m_iStamina = 1000;
+	int						m_iMaxHp = 100;
+	int						m_iStamina = 100;
+	int						m_iMaxStamina = 100;
 	int						m_iMana = 100;
+	int						m_iMaxMana = 100;
+
 
 	float					m_fColSize = 0.f;
 	CMonsterMain*			m_pBoss = nullptr;
@@ -114,6 +124,7 @@ protected:
 
 	Engine::CAnimation_Controller* m_pAnimationController;
 
+	int						m_iBreathRad = 10;
 public:
 	D3DXVECTOR3				m_vNorm = { 0.f,1.f,0.f };
 

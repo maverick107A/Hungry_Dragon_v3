@@ -28,7 +28,9 @@ void CPLandIdle::Enter_State(CPlayerMain* _pPlayer)
 
 void CPLandIdle::Update_State(const float& fTimeDelta)
 {
-	if (m_pPlayer->Get_Stamina() < 300)
+	if (m_pPlayer->Get_Mana() < m_pPlayer->Get_MaxMana())
+		m_pPlayer->Add_Mana(1);
+	if (m_pPlayer->Get_Stamina() < m_pPlayer->Get_MaxStamina())
 		m_pPlayer->Add_Stamina(2);
 	if (GetAsyncKeyState('W') || GetAsyncKeyState('S') || GetAsyncKeyState('A') || GetAsyncKeyState('D'))
 	{

@@ -29,6 +29,8 @@ void CPFly::Enter_State(CPlayerMain* _pPlayer)
 
 void CPFly::Update_State(const float& fTimeDelta)
 {
+	if (m_pPlayer->Get_Mana() < m_pPlayer->Get_MaxMana())
+		m_pPlayer->Add_Mana(1);
 	D3DXVECTOR3 vDir = { 0.f,0.f,0.f };
 	D3DXVECTOR3 vLook = { 0.f,0.f,0.f };
 	D3DXVECTOR3 vRight = { 0.f,0.f,0.f };
@@ -123,7 +125,11 @@ void CPFly::Update_State(const float& fTimeDelta)
 		else if (bControl)
 			vDir *= m_fCheatMulti;
 		else
+		{
+			if (m_pPlayer->Get_Stamina() < m_pPlayer->Get_MaxStamina())
+				m_pPlayer->Add_Stamina(1);
 			m_pPlayer->Set_Animation(ANI_FLY);
+		}
 		//속도적용
 		vDir *= fTimeDelta*m_fSpeed;
 		//가속

@@ -41,6 +41,8 @@ private:
 	float m_vWAngle = 0.f;
 	float m_fWSpeed = 0.03f;
 
+	list<Engine::CResources*>  m_arrParticle;
+
 public:
 	static CTestPlayer*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 
