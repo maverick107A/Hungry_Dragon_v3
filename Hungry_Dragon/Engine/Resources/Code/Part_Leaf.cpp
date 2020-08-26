@@ -14,6 +14,9 @@ CPart_Leaf::CPart_Leaf(const CPart_Leaf & rhs)
 
 	m_fWidth = 5.f;
 	m_fHeight = 10.f;
+
+	m_fZero = 80;
+	m_fOne = 100;
 	
 }
 

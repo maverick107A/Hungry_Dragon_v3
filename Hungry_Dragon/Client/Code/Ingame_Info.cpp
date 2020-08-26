@@ -65,7 +65,7 @@ void CIngame_Info::Init_Info(LPDIRECT3DDEVICE9 pGraphicDev)
 	m_tPlayerStatus.fMax_Hp		= 100.f;
 				   
 	m_tPlayerStatus.fStage		= 0.f;  
-	m_tPlayerStatus.fMax_Stage	= 100.f;
+	m_tPlayerStatus.fMax_Stage	= 1000.f;
 				   
 	m_tPlayerStatus.fSp			= 0.f;
 	m_tPlayerStatus.fDelay_Sp	= 100.f;
@@ -154,7 +154,7 @@ void CIngame_Info::Update_Info(const Engine::_float & _fTimeDelta)
 		m_tPlayerStatus.fDelay_Hp = m_tPlayerStatus.fHp;
 	}
 
-	if (100.f <= m_tPlayerStatus.fStage)
+	if (1000.f <= m_tPlayerStatus.fStage)
 	{
 		m_bStageClear = true;
 	}
@@ -274,8 +274,8 @@ void CIngame_Info::Render_UI()
 	
 
 	Draw_Tex(m_pExpFrame, 2048, 64, 0.78125f, 0.3f, 0.f, 880.f, D3DCOLOR_ARGB(155, 255, 255, 255));
-	Draw_Tex(m_pExpFrameCharge, int(2048 * m_tPlayerStatus.fStage * 0.01f), 64, 0.78125f, 0.3f, 0.f, 880.f, D3DCOLOR_ARGB(155, int(255* m_tPlayerStatus.fStage * 0.01f), 255, int(255*(1.f - m_tPlayerStatus.fStage * 0.01f))));
-	wsprintf(str, L"진행도 (%d%%)", (int)m_tPlayerStatus.fStage);
+	Draw_Tex(m_pExpFrameCharge, int(2048 * m_tPlayerStatus.fStage * 0.001f), 64, 0.78125f, 0.3f, 0.f, 880.f, D3DCOLOR_ARGB(155, int(255* m_tPlayerStatus.fStage * 0.001f), 255, int(255*(1.f - m_tPlayerStatus.fStage * 0.001f))));
+	wsprintf(str, L"진행도 (%d.%d%%)", (int)(m_tPlayerStatus.fStage*0.1f), ((int)(m_tPlayerStatus.fStage)%10));
 
 	m_pSprite->SetTransform(&matIdentity);
 	Engine::Draw_Font_Center(m_pSprite, L"Font_LightSmall", str, &_vec2(1600.f, 850.f), D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
@@ -546,7 +546,12 @@ void CIngame_Info::Update_Frame()
 			switch (m_uMainFocus)
 			{
 			case 0:
-
+				switch (m_uSubFocus)
+				{
+				case 1:
+					CIngame_Flow::GetInstance()->Get_PlayerObject()->Add_BreathRad(1);
+					break;
+				}
 				break;
 			case 1:
 
@@ -728,11 +733,16 @@ void CIngame_Info::Render_Frame()
 		case 0:
 			wsprintf(str, L"업그레이드");
 
+			Draw_Tex(m_pIconCon->Get_Texture(3), 512, 512, 0.2f , 0.2f , 1200.f, 300.f );
+			wsprintf(sub_str, L"%d", m_tPlayerGoods.uPolygons);
+			m_pSprite->SetTransform(&matIdentity);
+			Engine::Draw_Font_Center(m_pSprite, L"Font_BoldBig", sub_str, &_vec2(2500.f, 300.f), D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
+
 			m_pSprite->SetTransform(&matIdentity);
 
 			wsprintf(sub_str, L"허기");
 			Engine::Draw_Font_Center(m_pSprite, L"Font_Bold", sub_str, &_vec2(1600.f, 300.f), D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.f));
-			wsprintf(sub_str, L"폐활량");
+			wsprintf(sub_str, L"폐활량 : %d", CIngame_Flow::GetInstance()->Get_PlayerObject()->Get_BreathRad());
 			Engine::Draw_Font_Center(m_pSprite, L"Font_Bold", sub_str, &_vec2(1600.f, 400.f), D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.f));
 			wsprintf(sub_str, L"지구력");
 			Engine::Draw_Font_Center(m_pSprite, L"Font_Bold", sub_str, &_vec2(1600.f, 500.f), D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.f));
@@ -748,7 +758,7 @@ void CIngame_Info::Render_Frame()
 
 				break;
 			case 1:
-				wsprintf(sub_str, L"◀ 폐활량 ▶");
+				wsprintf(sub_str, L"◀ 폐활량 : %d ▶", CIngame_Flow::GetInstance()->Get_PlayerObject()->Get_BreathRad());
 				Engine::Draw_Font_Center(m_pSprite, L"Font_Bold", sub_str, &_vec2(1600.f, 400.f), D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
 
 				break;
@@ -1077,6 +1087,10 @@ void CIngame_Info::Occur_EngineEvent(ENGINE_EVENT _tEvent)
 	Push_EventFont(_tEvent);
 	m_tPlayerGoods.uGame_Point += _tEvent.uTypeNum;
 	m_tPlayerStatus.fStage += 1.f;
+	if (1000.f < m_tPlayerStatus.fStage)
+	{
+		m_tPlayerStatus.fStage = 1000.f;
+	}
 }
 
 void CIngame_Info::Update_BuffPack(const Engine::_float & _fTimeDelta)

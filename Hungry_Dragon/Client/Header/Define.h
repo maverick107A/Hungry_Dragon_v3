@@ -18,8 +18,8 @@ enum COLORMASKID { MASK_BLACK, MASK_DARKBLUE, MASK_EMERALD, MASK_ORANGE, MASK_PU
 #define INVERSETILESIZE 0.01f
 
 
-//#define DEBUG_WITHOUT_TREE 0		// 트리 리소스 디버깅
-#define DEBUG_WITHOUT_TREE 1		// 이러면 나무 리소스 로딩 안하고 빠르게 씬 불러옴
+#define DEBUG_WITHOUT_TREE 0		// 트리 리소스 디버깅
+//#define DEBUG_WITHOUT_TREE 1		// 이러면 나무 리소스 로딩 안하고 빠르게 씬 불러옴
 
 
 #endif // Define_h__
