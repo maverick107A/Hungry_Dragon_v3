@@ -14,6 +14,7 @@ class CResources;
 
 END
 
+
 class CTestPlayer : public Engine::CPlayerMain
 {
 private:

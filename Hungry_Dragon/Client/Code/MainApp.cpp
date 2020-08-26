@@ -22,6 +22,7 @@
 #include "Export_Function.h"
 #include "Ingame_Flow.h"
 #include "Ingame_Info.h"
+#include "Line_Renderer.h"
 
 //-------------------------------------------------------
 //기타 헤더**********************************************
@@ -48,7 +49,7 @@ HRESULT CMainApp::Ready_MainApp(void)
 	FAILED_CHECK_RETURN(Ready_Scene(m_pGraphicDev, &m_pManagementClass), E_FAIL);
 	Engine::Load_Particle(m_pGraphicDev);
 	CIngame_Flow::GetInstance()->Init_Flow(m_pGraphicDev, m_pDeviceClass->GetSprite());
-
+	CLine_Renderer::GetInstance()->Ready_Renderer(m_pGraphicDev);
 	
 
 	return S_OK;
@@ -179,6 +180,7 @@ void CMainApp::Free(void)
 	CIngame_Info::DestroyInstance();
 	CIngame_Flow::GetInstance()->Release_AllResources();
 	CIngame_Flow::DestroyInstance();
+	CLine_Renderer::DestroyInstance();
 
 	Engine::Safe_Release(m_pGraphicDev);
 

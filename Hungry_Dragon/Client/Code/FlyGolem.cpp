@@ -100,7 +100,6 @@ void CFlyGolem::Render_Object(void)
 		m_pTransform->Update_Component(0.01f);
 		m_pTransform->Set_Transform(m_pGraphicDev);
 
-
 		m_pBufferChrystalMeshCom->Render_Buffer();
 
 		// ¿Þ? ÆÈ

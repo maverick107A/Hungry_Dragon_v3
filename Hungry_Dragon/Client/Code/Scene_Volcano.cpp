@@ -3,6 +3,7 @@
 #include "Export_Function.h"
 #include "Ingame_Flow.h"
 #include "Ingame_Info.h"
+#include "Line_Renderer.h"
 
 CScene_Volcano::CScene_Volcano(LPDIRECT3DDEVICE9 pGraphicDev)
 	: Engine::CScene(pGraphicDev) {
@@ -131,6 +132,8 @@ _int CScene_Volcano::Update_Scene(const _float& fTimeDelta) {
 
 	CIngame_Info::GetInstance()->Update_Info(fTimeDelta);
 	
+	CLine_Renderer::GetInstance()->Update_Renderer(fTimeDelta);
+
 	return 0;
 }
 
@@ -185,6 +188,8 @@ void CScene_Volcano::Render_Scene(void) {
 	m_mapLayer[L"UI"]->Render_Layer();
 
 	Engine::Particle_Render();
+
+	CLine_Renderer::GetInstance()->Render_Renderer();
 
 	CIngame_Info::GetInstance()->Render_UI();
 }

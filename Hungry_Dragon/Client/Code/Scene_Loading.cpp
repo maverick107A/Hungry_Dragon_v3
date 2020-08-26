@@ -398,6 +398,13 @@ _uint CScene_Loading::Loading_ForStage(void)
 
 	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
 		RESOURCE_STAGE,
+		L"Texture_BillDot",
+		Engine::TEX_NORMAL,
+		L"../../Asset/Billboard/Dot/dot.png"),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+		RESOURCE_STAGE,
 		L"Texture_GageBar",
 		Engine::TEX_NORMAL,
 		L"../../Asset/HUD/gagebar%.2d.png", 6),

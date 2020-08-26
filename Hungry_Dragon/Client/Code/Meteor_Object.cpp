@@ -3,6 +3,7 @@
 
 #include "Export_Function.h"
 #include "Ingame_Flow.h"
+#include "Line_Renderer.h"
 
 USING(Engine)
 
@@ -22,8 +23,8 @@ HRESULT CMeteor_Object::Ready_Object(void) {
 }
 
 int CMeteor_Object::Update_Object(const float& fTimeDelta) {
-		Engine::CGameObject::Update_Object(fTimeDelta);
-
+	Engine::CGameObject::Update_Object(fTimeDelta);
+	
 	Engine::Add_RenderGroup(Engine::RENDER_UI, this);
 
 	//m_pTransform->Add_Trans(&_vec3(0.f, -m_fForwardSpeed * fTimeDelta,0.f));
@@ -67,8 +68,16 @@ int CMeteor_Object::Update_Object(const float& fTimeDelta) {
 		}
 	}
 
+	_vec3 vPos;
+	m_pTransform->Get_Info(INFO_POS, &vPos);
+	CLine_Renderer::GetInstance()->Draw_Dot(vPos.x, vPos.y , vPos.z , 2560.f, 2560.f);
 
 
+	_uint uRand = rand() % 20 + 10;
+	for (int i = 0; i < uRand; ++i)
+	{
+		CLine_Renderer::GetInstance()->Draw_Dot(vPos.x+((rand()%1000) - 500), vPos.y + ((rand() % 1000) - 500), vPos.z + ((rand() % 1000) - 500), 384.f, 256.f);
+	}
 	return 0;
 }
 
@@ -95,9 +104,11 @@ void CMeteor_Object::Render_Object(void) {
 	m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
 	m_pBufferCom->Render_Buffer();
 	m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
+
 }
 
 void CMeteor_Object::Free(void) {
+
 	Engine::CGameObject::Free();
 }
 
@@ -117,6 +128,7 @@ HRESULT CMeteor_Object::Add_Component(void) {
 	FAILED_CHECK(Clone_Component<CTexture>(&m_pTextureCom, RESOURCE_STAGE, L"Texture_Meteor", ID_STATIC, L"Com_Texture"));
 	FAILED_CHECK(Clone_Component<CTexture>(&m_pTextureBoom, RESOURCE_STAGE, L"Texture_Boom", ID_STATIC, L"Com_Texture2"));
 	FAILED_CHECK(Register_Component<CTransform>(&m_pTransform, ID_DYNAMIC, L"Com_Transform"));
+
 
 	return S_OK;
 }

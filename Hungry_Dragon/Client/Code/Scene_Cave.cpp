@@ -9,6 +9,7 @@
 #include "PlayerUI.h"
 #include "Ingame_Flow.h"
 #include "Ingame_Info.h"
+#include "Line_Renderer.h"
 
 CScene_Cave::CScene_Cave(LPDIRECT3DDEVICE9 pGraphicDev)
 	: Engine::CScene(pGraphicDev)
@@ -174,6 +175,8 @@ _int CScene_Cave::Update_Scene(const _float& fTimeDelta)
 
 	CIngame_Info::GetInstance()->Update_Info(fTimeDelta);
 	
+	CLine_Renderer::GetInstance()->Update_Renderer(fTimeDelta);
+
 	return 0;
 }
 
@@ -206,6 +209,8 @@ void CScene_Cave::Render_Scene(void)
 	m_pFogEffect->End();
 
 	m_mapLayer[L"UI"]->Render_Layer();
+
+	CLine_Renderer::GetInstance()->Render_Renderer();
 
 	CIngame_Info::GetInstance()->Render_UI();
 

@@ -174,6 +174,7 @@ call CopyUtility.bat</Command>
     <ClInclude Include="..\Code\BillCloud_Locater.h" />
     <ClInclude Include="..\Code\BillCloud_Object.h" />
     <ClInclude Include="..\Code\BossBullet.h" />
+    <ClInclude Include="..\Code\Bill_Line.h" />
     <ClInclude Include="..\Code\BossPlayer.h" />
     <ClInclude Include="..\Code\Cave.h" />
     <ClInclude Include="..\Code\CavePlayer.h" />
@@ -202,6 +203,7 @@ call CopyUtility.bat</Command>
     <ClInclude Include="..\Code\Ingame_Info.h" />
     <ClInclude Include="..\Code\Jump_Monster.h" />
     <ClInclude Include="..\Code\Lava.h" />
+    <ClInclude Include="..\Code\Line_Renderer.h" />
     <ClInclude Include="..\Code\Logo.h" />
     <ClInclude Include="..\Code\Logo_Loop.h" />
     <ClInclude Include="..\Code\MainApp.h" />
@@ -256,6 +258,7 @@ call CopyUtility.bat</Command>
     <ClCompile Include="..\Code\BillCloud_Locater.cpp" />
     <ClCompile Include="..\Code\BillCloud_Object.cpp" />
     <ClCompile Include="..\Code\BossBullet.cpp" />
+    <ClCompile Include="..\Code\Bill_Line.cpp" />
     <ClCompile Include="..\Code\BossPlayer.cpp" />
     <ClCompile Include="..\Code\Cave.cpp" />
     <ClCompile Include="..\Code\CavePlayer.cpp" />
@@ -284,6 +287,7 @@ call CopyUtility.bat</Command>
     <ClCompile Include="..\Code\Ingame_Info.cpp" />
     <ClCompile Include="..\Code\Jump_Monster.cpp" />
     <ClCompile Include="..\Code\Lava.cpp" />
+    <ClCompile Include="..\Code\Line_Renderer.cpp" />
     <ClCompile Include="..\Code\Logo.cpp" />
     <ClCompile Include="..\Code\Logo_Loop.cpp" />
     <ClCompile Include="..\Code\MainApp.cpp" />

@@ -247,6 +247,12 @@
     <Filter Include="02. GameObject\01. Stage\90. Accel_Torus">
       <UniqueIdentifier>{a04bac10-8692-4446-b605-922a1ef2bcae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. GameObject\01. Stage\72. Bill_Line">
+      <UniqueIdentifier>{30924cdd-85e0-41a3-ad7a-26b0cf999315}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. GameObject\01. Stage\98. Line_Renderer">
+      <UniqueIdentifier>{34132a4f-9618-416e-a685-5989df68368d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -488,6 +494,12 @@
 </ClInclude>
     <ClInclude Include="..\Code\BossBullet.h">
       <Filter>02. GameObject\01. Stage\02.Bullet</Filter>
+</ClInclude>
+    <ClInclude Include="..\Code\Bill_Line.h">
+      <Filter>02. GameObject\01. Stage\72. Bill_Line</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Line_Renderer.h">
+      <Filter>02. GameObject\01. Stage\98. Line_Renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -718,9 +730,15 @@
     </ClCompile>
     <ClCompile Include="..\Code\Accel_Torus.cpp">
       <Filter>02. GameObject\01. Stage\90. Accel_Torus</Filter>
- </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Code\BossBullet.cpp">
       <Filter>02. GameObject\01. Stage\02.Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Bill_Line.cpp">
+      <Filter>02. GameObject\01. Stage\72. Bill_Line</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Line_Renderer.cpp">
+      <Filter>02. GameObject\01. Stage\98. Line_Renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -3,6 +3,7 @@
 #include "Export_Function.h"
 #include "Ingame_Flow.h"
 #include "Ingame_Info.h"
+#include "Line_Renderer.h"
 
 
 CScene_Cloud::CScene_Cloud(LPDIRECT3DDEVICE9 pGraphicDev)
@@ -147,6 +148,8 @@ _int CScene_Cloud::Update_Scene(const _float& fTimeDelta) {
 
 	CIngame_Info::GetInstance()->Update_Info(fTimeDelta);
 	
+	CLine_Renderer::GetInstance()->Update_Renderer(fTimeDelta);
+
 	return 0;
 }
 
@@ -203,6 +206,8 @@ void CScene_Cloud::Render_Scene(void) {
 	m_pGraphicDev->GetTransform(D3DTS_PROJECTION, &matPers);
 
 	Engine::Particle_Render();
+
+	CLine_Renderer::GetInstance()->Render_Renderer();
 
 	CIngame_Info::GetInstance()->Render_UI();
 }

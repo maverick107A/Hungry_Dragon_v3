@@ -6,6 +6,7 @@
 #include "CompassCon.h"
 #include "Ingame_Flow.h"
 #include "PlayerMain.h"
+#include "Line_Renderer.h"
 
 USING(Engine)
 
@@ -296,12 +297,12 @@ void CIngame_Info::Render_UI()
 	{
 		if (0 < m_fBuffGage[i])
 		{
-			Draw_Tex(m_pBuffFrame[i], 256, 256, 0.5f, 0.5f, 1000.f + 150.f*i, 50.f, D3DCOLOR_ARGB(155, 255, 255, 255));
+			Draw_Tex(m_pBuffFrame[i], 256, 256, 0.5f, 0.5f, 1000.f + 150.f*i, 50.f, D3DCOLOR_ARGB(255, 255, 255, 255));
 			Draw_Tex(m_pBuffBar[i], int(2.56f*m_fBuffGage[i]), 256, 0.5f, 0.5f, 1000.f + 150.f*i, 50.f, D3DCOLOR_ARGB(255, 255, 255, 255));
 		}
 		else
 		{
-			Draw_Tex(m_pBuffFrame[i], 256, 256, 0.5f, 0.5f, 1000.f + 150.f*i, 50.f, D3DCOLOR_ARGB(55, 255, 255, 255));
+			Draw_Tex(m_pBuffFrame[i], 256, 256, 0.5f, 0.5f, 1000.f + 150.f*i, 50.f, D3DCOLOR_ARGB(155, 255, 255, 255));
 		}
 		
 	}
@@ -325,8 +326,14 @@ void CIngame_Info::Render_UI()
 		{
 			tInfo.fLifeTime = 0.f;
 		}
-		Draw_Tex(m_pPortraitFrame, 1024, 512, 0.2f, 0.2f, 1350.f, 800.f - 130.f*float(uSize - uIdx), D3DCOLOR_ARGB(int(tInfo.fLifeTime * 127.f), 255, 255, 255));
-		Draw_Tex(m_pPortrait[tInfo.uType], 512, 512, 0.1f, 0.1f, 1376.f, 826.f - 130.f*float(uSize - uIdx), D3DCOLOR_ARGB(int(tInfo.fLifeTime * 127.f), 255, 255, 255));
+		float fAlpha = tInfo.fLifeTime;
+		if (1.f < fAlpha)
+		{
+			fAlpha = 1.f;
+		}
+
+		Draw_Tex(m_pPortraitFrame, 1024, 512, 0.2f, 0.2f, 1350.f, 800.f - 130.f*float(uSize - uIdx), D3DCOLOR_ARGB(int(fAlpha * 255.f), 255, 255, 255));
+		Draw_Tex(m_pPortrait[tInfo.uType], 512, 512, 0.1f, 0.1f, 1376.f, 826.f - 130.f*float(uSize - uIdx), D3DCOLOR_ARGB(int(fAlpha * 255.f), 255, 255, 255));
 		switch (tInfo.uType)
 		{
 		case 0:
@@ -369,32 +376,33 @@ void CIngame_Info::Render_UI()
 		
 		D3DXMatrixScaling(&matScale, 0.5f, 0.5f, 1.f);
 		m_pSprite->SetTransform(&matScale);
-		Draw_Font_Center(m_pSprite, L"Font_Light", str, &_vec2(1478.f * 4.f, (818.f - 130.f*float(uSize - uIdx))*2.f), D3DXCOLOR(0.6f, 0.8f, 0.f, tInfo.fLifeTime*0.5f));
+		
+		Draw_Font_Center(m_pSprite, L"Font_Light", str, &_vec2(1478.f * 4.f, (818.f - 130.f*float(uSize - uIdx))*2.f), D3DXCOLOR(0.6f, 0.8f, 0.f, fAlpha));
 		wsprintf(str, L"+%d Æú¸®°ï", tInfo.uPoly);
-		Draw_Font_Center(m_pSprite, L"Font_LightSmall", str, &_vec2(1478.f * 4.f, (838.f - 130.f*float(uSize - uIdx))*2.f), D3DXCOLOR(0.6f, 0.8f, 0.f, tInfo.fLifeTime*0.5f));
+		Draw_Font_Center(m_pSprite, L"Font_LightSmall", str, &_vec2(1478.f * 4.f, (838.f - 130.f*float(uSize - uIdx))*2.f), D3DXCOLOR(0.6f, 0.8f, 0.f, fAlpha));
 		wsprintf(str, L"+%d Á¡¼ö", tInfo.uPoint);
-		Draw_Font_Center(m_pSprite, L"Font_LightSmall", str, &_vec2(1478.f * 4.f, (848.f - 130.f*float(uSize - uIdx))*2.f), D3DXCOLOR(0.6f, 0.8f, 0.f, tInfo.fLifeTime*0.5f));
+		Draw_Font_Center(m_pSprite, L"Font_LightSmall", str, &_vec2(1478.f * 4.f, (848.f - 130.f*float(uSize - uIdx))*2.f), D3DXCOLOR(0.6f, 0.8f, 0.f, fAlpha));
 		wsprintf(str, L"+%d ÁøÇàµµ", tInfo.uStage);
-		Draw_Font_Center(m_pSprite, L"Font_LightSmall", str, &_vec2(1478.f * 4.f, (858.f - 130.f*float(uSize - uIdx))*2.f), D3DXCOLOR(0.6f, 0.8f, 0.f, tInfo.fLifeTime*0.5f));
+		Draw_Font_Center(m_pSprite, L"Font_LightSmall", str, &_vec2(1478.f * 4.f, (858.f - 130.f*float(uSize - uIdx))*2.f), D3DXCOLOR(0.6f, 0.8f, 0.f, fAlpha));
 
 		D3DXCOLOR tColor;
 		switch (tInfo.uBuff)
 		{
 		case 0:
 			wsprintf(str, L"Ã¼·Â ¹öÇÁ È¹µæ");
-			tColor = D3DXCOLOR(0.2f, 0.8f, 0.2f, tInfo.fLifeTime*0.5f);
+			tColor = D3DXCOLOR(0.2f, 0.8f, 0.2f, fAlpha);
 			break;
 		case 1:
 			wsprintf(str, L"¸¶·Â ¹öÇÁ È¹µæ");
-			tColor = D3DXCOLOR(0.2f, 0.2f, 0.8f, tInfo.fLifeTime*0.5f);
+			tColor = D3DXCOLOR(0.2f, 0.2f, 0.8f, fAlpha);
 			break;
 		case 2:
 			wsprintf(str, L"±â·Â ¹öÇÁ È¹µæ");
-			tColor = D3DXCOLOR(0.8f, 0.8f, 0.2f, tInfo.fLifeTime*0.5f);
+			tColor = D3DXCOLOR(0.8f, 0.8f, 0.2f, fAlpha);
 			break;
 		case 3:
 			wsprintf(str, L"È­·Â ¹öÇÁ È¹µæ");
-			tColor = D3DXCOLOR(0.8f, 0.2f, 0.2f, tInfo.fLifeTime*0.5f);
+			tColor = D3DXCOLOR(0.8f, 0.2f, 0.2f, fAlpha);
 			break;
 		case 4:
 
@@ -415,6 +423,9 @@ void CIngame_Info::Render_UI()
 	
 
 	m_pSprite->End();
+
+	wsprintf(str, L"¶óÀÎ·»´õ ¼ö : %d", CLine_Renderer::GetInstance()->Get_Size());
+	Engine::Render_Font(L"Font_Light", str, &_vec2(1000.f, 200.f), D3DXCOLOR(1.f,1.f,1.f,1.f));
 
 	for (auto& tPack : m_listFontPack)
 	{
@@ -923,7 +934,7 @@ void CIngame_Info::Push_EngineEvent(ENGINE_EVENT _tEvent)
 	}
 	tInfo.uPoint = uPointAccum;
 	tInfo.uStage = uStageAccum;
-	tInfo.fLifeTime = 2.f;
+	tInfo.fLifeTime = 4.f;
 
 	switch (tInfo.uType)
 	{

@@ -16,6 +16,7 @@
 #include "PHit.h"
 #include "Terrain_Locater.h"
 #include "Part_Wind.h"
+#include "Line_Renderer.h"
 
 CTestPlayer::CTestPlayer(LPDIRECT3DDEVICE9 pGraphicDev)
 	: CPlayerMain(pGraphicDev)
@@ -162,6 +163,10 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 	}
 	
 
+	_vec3 vPos;
+	m_pTransform->Get_Info(INFO_POS, &vPos);
+	CLine_Renderer::GetInstance()->Draw_Dot(vPos.x, vPos.y, vPos.z);
+
 	return 0;
 }
 
@@ -174,6 +179,8 @@ void CTestPlayer::LateUpdate_Object(const float & fTimeDelta)
 
 void CTestPlayer::Render_Object(void)
 {
+
+
 	TCHAR str[64] = L"";
 	wsprintf(str, L"POSITION : (%d,%d,%d)", int(m_pTransform->m_vInfo[Engine::INFO_POS].x), int(m_pTransform->m_vInfo[Engine::INFO_POS].y), int(m_pTransform->m_vInfo[Engine::INFO_POS].z));
 	Engine::Render_Font(L"Font_Light", str, &_vec2(50.f, 10.f), D3DXCOLOR(1.f, 1.f, 0.f, 1.f));
@@ -184,6 +191,8 @@ void CTestPlayer::Render_Object(void)
 	//if (m_bBreath) {
 	//	m_pBreath->Render_Breath(this);
 	//}
+
+	
 }
 
 void CTestPlayer::Free(void)
