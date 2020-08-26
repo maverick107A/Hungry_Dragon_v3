@@ -33,7 +33,7 @@ public:
 private:
 	D3DXVECTOR3 m_vBodyPos;
 	D3DXVECTOR3 m_vBombPos;
-
+	float	m_fMaxHalfScale;
 	float		m_fAngle = 0;
 	D3DXVECTOR3 m_vLeftArmPos;
 	D3DXVECTOR3 m_vRightArmPos;

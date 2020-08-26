@@ -20,8 +20,11 @@ HRESULT CFlyChaseGolem::Ready_Object(void)
 	m_fSpeed = 150.f;
 	m_fMonster_HP = 100.f;
 	m_fMonster_MaxHP = 100.f;
-	m_fScale = 15.f;
-	m_fMaxScale = 15.f;
+	m_fScale = 30.f;
+	m_fMaxScale = 30.f;
+	m_fMaxHalfScale = 15.f;
+	m_fDead_Range = 10000.f;
+
 	m_fDamaged = 2.f;
 	m_eState = MONSTER_REBORN;
 	m_eVariation = MONSTER_FLYCHASEGOLEM;
@@ -58,7 +61,7 @@ int CFlyChaseGolem::Update_Object(const float & fTimeDelta)
 		m_pTransform->Chase_Fly_Target(&m_vPlayerPos, (fTimeDelta * m_fSpeed));
 	}
 
-	if (m_fDistance < 50)
+	if (m_fDistance < 150)
 	{
 		m_eState = MONSTER_SUICIDE;
 		State_Change();
@@ -78,11 +81,11 @@ void CFlyChaseGolem::Render_Object(void)
 			m_fAngle = 0;
 		}
 
-
+		
 
 		CIngame_Flow::GetInstance()->Set_MaskColor(5);
 		// ¸öÃ¼
-		m_pTransform->Set_Scale(8);
+		m_pTransform->Set_Scale(m_fMaxScale);
 		m_pTransform->Update_Component(0.01f);
 		m_pTransform->Set_Transform(m_pGraphicDev);
 
@@ -98,7 +101,7 @@ void CFlyChaseGolem::Render_Object(void)
 
 
 		// ¿À¸¥ÆÈ
-		m_pTransform->Set_Scale(5);
+		m_pTransform->Set_Scale(m_fMaxHalfScale);
 		m_vLeftArmPos = { m_vLeftArmPos.x + (sinf(m_fAngle) * 10)  ,m_vLeftArmPos.y - 5.f , m_vLeftArmPos.z + (cosf(m_fAngle) * 10) };
 		m_pTransform->Set_Trans(&m_vLeftArmPos);
 		m_pTransform->Update_Component(0.01f);
@@ -108,7 +111,7 @@ void CFlyChaseGolem::Render_Object(void)
 		m_pBufferChrystalMeshCom->Render_Buffer();
 
 		// ¿Þ? ÆÈ
-		m_pTransform->Set_Scale(5);
+		m_pTransform->Set_Scale(m_fMaxHalfScale);
 		m_vRightArmPos = { m_vRightArmPos.x - (sinf(m_fAngle) * 10)  ,m_vRightArmPos.y - 5.f , m_vRightArmPos.z - (cosf(m_fAngle) * 10) };
 		m_pTransform->Set_Trans(&m_vRightArmPos);
 		m_pTransform->Update_Component(0.01f);
@@ -127,7 +130,7 @@ void CFlyChaseGolem::Render_Object(void)
 			m_vBombPos = { m_vBodyPos.x ,m_vBodyPos.y - 20.f ,m_vBodyPos.z };
 		}
 		m_pTransform->Set_Trans(&m_vBombPos);
-		m_pTransform->Set_Scale(3);
+		m_pTransform->Set_Scale(10);
 		m_pTransform->Update_Component(0.01f);
 		m_pTransform->Set_Transform(m_pGraphicDev);
 

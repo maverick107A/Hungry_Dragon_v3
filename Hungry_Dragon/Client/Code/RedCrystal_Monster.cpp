@@ -132,7 +132,7 @@ void CRedCrystal_Monster::Render_Object(void)
 
 		CIngame_Flow::GetInstance()->Set_MaskColor(5);
 		// ¸öÃ¼
-		m_pTransform->Set_Scale(8);
+		m_pTransform->Set_Scale(20);
 		m_pTransform->m_vScale.y += 3;
 		m_pTransform->Update_Component(0.01f);
 		m_pTransform->Set_Transform(m_pGraphicDev);
@@ -151,7 +151,7 @@ void CRedCrystal_Monster::Render_Object(void)
 
 
 		// ¿À¸¥ÆÈ
-		m_pTransform->Set_Scale(5);
+		m_pTransform->Set_Scale(10);
 		m_vLeftArmPos = { m_vLeftArmPos.x + (sinf(m_fAngle) * 10)  ,m_vLeftArmPos.y , m_vLeftArmPos.z + (cosf(m_fAngle) * 10) };
 		m_pTransform->Set_Trans(&m_vLeftArmPos);
 		m_pTransform->Update_Component(0.01f);
@@ -161,7 +161,7 @@ void CRedCrystal_Monster::Render_Object(void)
 		m_pBufferMeshCom->Render_Buffer();
 
 		// ¿Þ? ÆÈ
-		m_pTransform->Set_Scale(5);
+		m_pTransform->Set_Scale(10);
 		m_vRightArmPos = { m_vRightArmPos.x - (sinf(m_fAngle) * 10)  ,m_vRightArmPos.y, m_vRightArmPos.z - (cosf(m_fAngle) * 10) };
 		m_pTransform->Set_Trans(&m_vRightArmPos);
 		m_pTransform->Update_Component(0.01f);
@@ -171,7 +171,7 @@ void CRedCrystal_Monster::Render_Object(void)
 		m_pBufferMeshCom->Render_Buffer();
 
 
-		m_pTransform->Set_Scale(5);
+		m_pTransform->Set_Scale(10);
 		m_vUpArmPos = { m_vUpArmPos.x + (sinf(m_fAngle + (D3DX_PI * 0.5f)) * 10)  ,m_vUpArmPos.y , m_vUpArmPos.z + (cosf(m_fAngle + (D3DX_PI * 0.5f)) * 10) };
 		m_pTransform->Set_Trans(&m_vUpArmPos);
 		m_pTransform->Update_Component(0.01f);
@@ -181,7 +181,7 @@ void CRedCrystal_Monster::Render_Object(void)
 		m_pBufferMeshCom->Render_Buffer();
 
 
-		m_pTransform->Set_Scale(5);
+		m_pTransform->Set_Scale(10);
 		m_vDownArmPos = { m_vDownArmPos.x - (sinf(m_fAngle + (D3DX_PI * 0.5f)) * 10)  ,m_vDownArmPos.y , m_vDownArmPos.z - (cosf(m_fAngle + (D3DX_PI * 0.5f)) * 10) };
 		m_pTransform->Set_Trans(&m_vDownArmPos);
 		m_pTransform->Update_Component(0.01f);

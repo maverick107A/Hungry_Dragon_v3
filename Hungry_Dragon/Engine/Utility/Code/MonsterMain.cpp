@@ -177,7 +177,10 @@ void Engine::CMonsterMain::State_Change()
 
 				break;
 			case Engine::CMonsterMain::BUFF_NONE:
-				Get_EventMgr()->Set_Event(4, 30 + (rand() % 200), m_eVariation);
+				if(m_eVariation != MONSTER_FLYGOLEM && m_eVariation != MONSTER_FLYCHASEGOLEM)
+				{ 
+					Get_EventMgr()->Set_Event(4, 30 + (rand() % 200), m_eVariation);
+				}
 				break;
 			case Engine::CMonsterMain::BUFF_END:
 				break;

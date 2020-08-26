@@ -310,7 +310,7 @@ HRESULT CScene_Cloud::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 		FAILED_CHECK_RETURN(Register_ObjectPool<CFlyChaseGolem>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
 
 
-		FAILED_CHECK_RETURN(Register_ObjectPool<CFly_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
+	//	FAILED_CHECK_RETURN(Register_ObjectPool<CFly_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
 	}
 
 
