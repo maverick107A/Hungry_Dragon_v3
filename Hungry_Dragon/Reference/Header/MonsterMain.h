@@ -43,11 +43,13 @@ public:
 	virtual void State_Change();
 
 public:
-	void		 Dead_Monster();
+	void				Dead_Monster();
 	virtual float		Ride_Terrain();
 
 	//가의묵이 추가한 충돌확인용 임시 함수
 	void		Kill_Monster(const float& fTimeDelta);
+	void		Kill_Boss(const float& fTimeDelta);
+
 	void		Kill_Lay_Monster(const float & fTimeDelta);
 
 

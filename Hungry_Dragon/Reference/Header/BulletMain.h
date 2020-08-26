@@ -9,6 +9,7 @@ class CTexture_Cube;
 class CTexture;
 class CTransform;
 class CMonsterBoard;
+class CVICustom;
 
 class ENGINE_DLL CBulletMain : public Engine::CGameObject
 {
@@ -37,6 +38,7 @@ protected:
 	Engine::CMonsterBoard*		m_pBufferBoradCom = nullptr;
 	Engine::CTexture_Cube*		m_pBufferCom = nullptr;
 	Engine::CTexture*			m_pTextureCom = nullptr;
+	Engine::CVICustom *			m_pBufferMeshCom = nullptr;
 	D3DXVECTOR3					m_vLook;
 	D3DXVECTOR3					vPlayerPos;
 	int							m_iEvent = 0;

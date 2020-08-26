@@ -28,7 +28,7 @@
 
 #include "MonsterBeam.h"
 #include "NormalBullet.h"
-
+#include "BossBullet.h"
 #include "BackGround.h"
 
 
