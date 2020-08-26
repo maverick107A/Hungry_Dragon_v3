@@ -16,7 +16,7 @@ END
 USING(Engine)
 
 class CMeteor_Object : public Engine::CGameObject {
-private:
+protected:
 	explicit CMeteor_Object(LPDIRECT3DDEVICE9 pGraphicDev);
 	virtual ~CMeteor_Object(void);
 
@@ -31,10 +31,10 @@ public:
 	void	Set_Trans(_vec3& _vPos);
 	void	Set_Speed(float _fSpeed) { m_fForwardSpeed = _fSpeed; }
 
-private:
+protected:
 	HRESULT		Add_Component(void);
 
-private:
+protected:
 	Engine::CTexture_Square*			m_pBufferCom = nullptr;
 	Engine::CTexture*		m_pTextureCom = nullptr;
 	Engine::CTexture*		m_pTextureBoom = nullptr;
@@ -51,7 +51,7 @@ private:
 
 public:
 	static CMeteor_Object*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
-private:
+protected:
 	virtual void Free(void) override;
 
 };

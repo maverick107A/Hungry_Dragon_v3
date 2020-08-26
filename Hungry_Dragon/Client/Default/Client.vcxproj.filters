@@ -253,6 +253,9 @@
     <Filter Include="02. GameObject\01. Stage\98. Line_Renderer">
       <UniqueIdentifier>{34132a4f-9618-416e-a685-5989df68368d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. GameObject\01. Stage\68. Meteor_Object\00. Circular">
+      <UniqueIdentifier>{d851d2e7-adee-4ae1-9411-15b5e92b5c29}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -491,15 +494,18 @@
     </ClInclude>
     <ClInclude Include="..\Code\Accel_Torus.h">
       <Filter>02. GameObject\01. Stage\90. Accel_Torus</Filter>
-</ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Code\BossBullet.h">
       <Filter>02. GameObject\01. Stage\02.Bullet</Filter>
-</ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Code\Bill_Line.h">
       <Filter>02. GameObject\01. Stage\72. Bill_Line</Filter>
     </ClInclude>
     <ClInclude Include="..\Code\Line_Renderer.h">
       <Filter>02. GameObject\01. Stage\98. Line_Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Code\Meteor_Circular.h">
+      <Filter>02. GameObject\01. Stage\68. Meteor_Object\00. Circular</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -739,6 +745,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Line_Renderer.cpp">
       <Filter>02. GameObject\01. Stage\98. Line_Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Meteor_Circular.cpp">
+      <Filter>02. GameObject\01. Stage\68. Meteor_Object\00. Circular</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -13,6 +13,7 @@ class CBaseLand;
 END
 
 class CMeteor_Object;
+class CMeteor_Circular;
 
 USING(Engine)
 
@@ -30,6 +31,7 @@ public:
 
 public:
 	void Instantiate_Meteor(_vec3& vPos);
+	void Instantiate_CircularMeteor(_vec3 _vRadius, _vec3 _vCenter, _vec3 _vAxis, float _fSpeed, float _fAngle);	// 수선의발(반지름), 중심, 축, 회전속도, 생성 위치 
 
 
 private:
@@ -41,10 +43,15 @@ private:
 	Engine::CTransform*		m_pPlayerTrans = nullptr;
 	vector<CMeteor_Object*>	m_vecObjectPool;
 	vector<CMeteor_Object*>::iterator	m_iterFinder;		// 순회자
-	CMeteor_Object*				m_pMeteor;
+	CMeteor_Object*			m_pMeteor;
 	_bool					m_bActive = true;
 	_float					m_fSummonTick = 0.f;
 	_float					m_fSummonTime = 0.25f;
+
+
+	vector<CMeteor_Circular*>	m_vecCircularPool;
+	vector<CMeteor_Circular*>::iterator	m_iterCircular;		// 순회자
+	CMeteor_Circular*		m_pCircular;
 public:
 	static CMeteor_Spawner*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 private:
