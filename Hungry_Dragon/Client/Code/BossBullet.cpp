@@ -30,7 +30,7 @@ HRESULT CBoss_Bullet::Ready_Object(void)
 
 	m_eState = IDLE_BULLET;
 	m_preState = IDLE_BULLET;
-
+	m_pTransform->m_vAngle.x += D3DX_PI;
 
 
 	return S_OK;
@@ -44,7 +44,7 @@ int CBoss_Bullet::Update_Object(const float & fTimeDelta)
 	if (m_bFirst)
 	{
 		m_pTransform->Set_Trans(&m_vFirstPos);
-		m_pTransform->Set_Scale(10.f);
+		m_pTransform->Set_Scale(3000.f);
 		m_bFirst = false;
 		m_iEvent = 0;
 		m_eState = IDLE_BULLET;
@@ -54,7 +54,7 @@ int CBoss_Bullet::Update_Object(const float & fTimeDelta)
 		Engine::CTransform* pPlayerTransformCom = static_cast<Engine::CTransform*>(pPlayer->Get_Component(L"Com_Transform", Engine::ID_DYNAMIC));
 
 		pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);
-
+		
 		m_FirstPos = m_vPlayerPos - m_pTransform->m_vInfo[Engine::INFO_POS];
 
 		m_pTransform->Compute_LookAtTarget(&m_vPlayerPos);
@@ -64,7 +64,8 @@ int CBoss_Bullet::Update_Object(const float & fTimeDelta)
 
 	if (m_eState == IDLE_BULLET)
 	{
-		m_pTransform->Dir_Fly(&m_FirstPos, (fTimeDelta * 300.f));
+		m_pTransform->Dir_Fly(&m_FirstPos, (fTimeDelta * 1500.f));
+		m_pTransform->Chase_Rotaion(&m_vPlayerPos);	
 	}
 	else if (m_eState == DEAD_BULLET)
 	{
@@ -77,12 +78,7 @@ int CBoss_Bullet::Update_Object(const float & fTimeDelta)
 	m_fDistance = D3DXVec3Length(&Dir);
 
 
-
-	if (m_fDistance > 5000)
-	{
-		m_eState = DEAD_BULLET;
-	}
-	else if (m_fDistance < 5)
+	if (m_fDistance < 5)
 	{
 		m_eState = DEAD_BULLET;
 	}
