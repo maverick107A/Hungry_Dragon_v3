@@ -31,6 +31,7 @@ public:
 	virtual int Update_Object(const float& fTimeDelta) override;
 	virtual void Render_Object(void) override;
 	virtual void LateUpdate_Object(const float& fTimeDelta) override;
+	void Shooting(void);
 private:
 	HRESULT		Add_Component(void);
 	void		Preset_Animation();
@@ -55,6 +56,8 @@ private:
 
 
 	D3DXVECTOR3 m_vPos;
+	D3DXVECTOR3 m_vShootPos;
+
 	D3DXVECTOR3 m_vLookPos;
 
 	int			m_f = 0;

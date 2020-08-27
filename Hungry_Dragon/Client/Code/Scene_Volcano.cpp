@@ -320,7 +320,11 @@ HRESULT CScene_Volcano::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 
 
 	
-
+	for (int i = 0; i < 1000; ++i)
+	{
+		//FAILED_CHECK_RETURN(Register_ObjectPool<CNormal_Bullet>(pLayer, OBJID::NORMAL_BULLET), E_FAIL);
+		FAILED_CHECK_RETURN(Register_ObjectPool<CBoss_Bullet>(pLayer, OBJID::NORMAL_BULLET), E_FAIL);
+	}
 
 
 

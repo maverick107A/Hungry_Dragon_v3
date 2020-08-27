@@ -24,6 +24,7 @@
 #include "GiantGolem.h"
 
 
+#include "BossBullet.h"
 
 
 #include "BackGround.h"

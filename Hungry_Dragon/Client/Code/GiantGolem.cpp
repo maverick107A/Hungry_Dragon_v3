@@ -85,13 +85,8 @@ int CGiantGolem::Update_Object(const float & fTimeDelta)
 		}
 	}
 
-
-	//m_pAnimationController->Set_SpecificFrame(PAT_IDLE, PART_HEAD);
-	//m_pAnimationController->Set_SpecificFrame(PAT_IDLE, PART_BODY);
-	//m_pAnimationController->Set_SpecificFrame(PAT_IDLE, PART_LEFTARM);
-	//m_pAnimationController->Set_SpecificFrame(PAT_IDLE, PART_LEFTHAND);
-	//m_pAnimationController->Set_SpecificFrame(PAT_IDLE, PART_RIGHTARM);
-	//m_pAnimationController->Set_SpecificFrame(PAT_IDLE, PART_RIGHTHAND);
+	if(m_ePattern == PAT_FIREBALL)
+		Shooting();
 
 
 	if (m_bPatternEnd)
@@ -548,7 +543,7 @@ void CGiantGolem::Animation_Render()
 	// Hand
 	m_pPartsTrans[PART_LEFTHAND]->Set_Transform(m_pGraphicDev, m_pPartsTrans[PART_LEFTARM]->Get_WorldWithoutScale());
 	m_pBufferChrystalMeshCom->Render_Buffer();
-	
+	m_vShootPos = { m_pPartsTrans[PART_LEFTHAND]->Get_WorldWithoutScale()._41 ,  m_pPartsTrans[PART_LEFTHAND]->Get_WorldWithoutScale()._42 ,  m_pPartsTrans[PART_LEFTHAND]->Get_WorldWithoutScale()._43 };
 	//= Right
 	// Arm
 	m_pPartsTrans[PART_RIGHTARM]->Set_Transform(m_pGraphicDev, m_pPartsTrans[PART_BODY]->Get_WorldWithoutScale());
@@ -566,16 +561,34 @@ void CGiantGolem::LateUpdate_Object(const float & fTimeDelta)
 	Engine::CMonsterMain::LateUpdate_Object(fTimeDelta);
 }
 
+
+
+void CGiantGolem::Shooting(void)
+{
+
+		
+	_matrix _World;
+	_World = m_pPartsTrans[PART_LEFTHAND]->Get_WorldWithoutScale();
+	_World *= m_pPartsTrans[PART_LEFTARM]->Get_WorldWithoutScale();
+	_World *= m_pPartsTrans[PART_BODY]->Get_WorldWithoutScale();
+
+
+
+	_vec3 vPos = { _World._41  ,	_World._42 , _World._43 };
+
+	Engine::Set_Bullet_LayerMap(Engine::OBJID::NORMAL_BULLET, 1, m_vShootPos);
+
+}
+
+
+
+
 CGiantGolem * CGiantGolem::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 {
 	CGiantGolem*		pInstance = new CGiantGolem(pGraphicDev);
 
-
 	if (FAILED(pInstance->Ready_Object()))
 		Engine::Safe_Release(pInstance);
-
-
-
 
 	return pInstance;
 }
