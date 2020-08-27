@@ -23,8 +23,10 @@ public:
 	virtual HRESULT Ready_Object(void) override;
 	virtual int Update_Object(const float& fTimeDelta) override;
 	virtual void Render_Object(void) override;
+	void Render_Sprite(LPDIRECT3DTEXTURE9 _pTex);
 
 public:
+	void Set_Sprite(LPD3DXSPRITE _pSprite, DWORD _dwColor) { m_pSprite = _pSprite; m_dwColor = _dwColor; }
 	void Set_Pos(_vec3 _vPos) { m_vPosOrigin = _vPos; }
 	void Set_Scale(_float _fScale) { m_fScale = _fScale; }
 	void Set_Speed(_float _fSpeed) { m_fShrinkSpeed = _fSpeed; }
@@ -35,8 +37,13 @@ private:
 
 
 private:
+	// 스프라이트용
+	LPD3DXSPRITE				m_pSprite = nullptr;
+	DWORD						m_dwColor = 0;
+
+
+	// 공용
 	CTexture_Square*			m_pBufferCom = nullptr;
-	//CTexture*		m_pTextureCom = nullptr;
 	CTransform*		m_pTransform = nullptr;
 	CRenderer*		m_pRendererCom = nullptr;
 

@@ -311,6 +311,7 @@ void CIngame_Info::Render_UI()
 	for (auto& tPack : m_listBuffPack)
 	{
 		Draw_Tex(m_pPolygon, 128, 128, tPack.vScale.x, tPack.vScale.y, 0.f, 0.f, tPack.vRot.z, tPack.vPos.x, tPack.vPos.y, tPack.dwColor);
+		CLine_Renderer::GetInstance()->Draw_DotSprite(m_pSprite, tPack.vPos.x, tPack.vPos.y, 1.f, 1.f, tPack.dwColor); // ¹º°¡ ÅÍÁü
 		//Draw_Tex(m_pPolygon, 128, 128, tPack.vScale.x, tPack.vScale.y, tPack.vPos.x, tPack.vPos.y, tPack.dwColor);
 	}
 
@@ -420,7 +421,7 @@ void CIngame_Info::Render_UI()
 
 
 
-	
+	//CLine_Renderer::GetInstance()->Render_SpriteMode();
 
 	m_pSprite->End();
 

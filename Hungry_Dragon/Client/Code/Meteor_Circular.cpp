@@ -4,6 +4,7 @@
 #include "Export_Function.h"
 #include "Ingame_Flow.h"
 #include "Line_Renderer.h"
+#include "Ingame_Flow.h"
 
 USING(Engine)
 
@@ -72,7 +73,12 @@ int CMeteor_Circular::Update_Object(const float& fTimeDelta) {
 		m_uTexFrame = (m_uTexFrame + 1) % 16;
 
 		// Ãæµ¹
-		
+		_vec3 vDist = CIngame_Flow::GetInstance()->Get_PlayerTransform()->m_vInfo[INFO_POS] - m_vPosOrigin;
+		if (D3DXVec3Dot(&vDist, &vDist) < 57600.f)
+		{
+			m_bBoom = true;
+			CIngame_Flow::GetInstance()->Get_PlayerObject()->Add_Hp(-40);
+		}
 	}
 
 	_vec3 vPos;
@@ -80,7 +86,7 @@ int CMeteor_Circular::Update_Object(const float& fTimeDelta) {
 	CLine_Renderer::GetInstance()->Draw_Dot(vPos.x, vPos.y , vPos.z , 512.f, 512.f);
 
 
-	_uint uRand = rand() % 20 + 10;
+	_uint uRand = rand() % 10 + 5;
 	for (int i = 0; i < uRand; ++i)
 	{
 		CLine_Renderer::GetInstance()->Draw_Dot(vPos.x+((rand()%256) - 128), vPos.y + ((rand() % 256) - 128), vPos.z + ((rand() % 256) - 128), 384.f, 256.f);

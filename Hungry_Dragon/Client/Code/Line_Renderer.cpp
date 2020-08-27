@@ -19,7 +19,12 @@ CLine_Renderer::~CLine_Renderer(void) {
 	{
 		Safe_Release(pLine);
 	}
+	for (auto& pLine : m_listSprite)
+	{
+		Safe_Release(pLine);
+	}
 	m_listLine.clear();
+	m_listSprite.clear();
 	Safe_Release(m_pTex);
 }
 
@@ -39,6 +44,19 @@ int CLine_Renderer::Update_Renderer(const float& fTimeDelta) {
 		{
 			Safe_Release(*iter);
 			iter = m_listLine.erase(iter);
+		}
+		else
+		{
+			++iter;
+		}
+
+	}
+	for (auto& iter = m_listSprite.begin(); iter != m_listSprite.end();)
+	{
+		if ((*iter)->Update_Object(fTimeDelta) == OBJ_DEAD)
+		{
+			Safe_Release(*iter);
+			iter = m_listSprite.erase(iter);
 		}
 		else
 		{
@@ -76,6 +94,15 @@ void CLine_Renderer::Render_Renderer(void) {
 
 }
 
+void CLine_Renderer::Render_SpriteMode()
+{
+	for (auto& pLine : m_listSprite)
+	{
+		pLine->Render_Sprite(m_pTex);
+	}
+
+}
+
 void CLine_Renderer::Draw_Dot(float _fX, float _fY, float _fZ, float _fSpeed , float _fScale )
 {
 	CBill_Line* pLine = CBill_Line::Create(m_pGraphicDev);
@@ -83,6 +110,16 @@ void CLine_Renderer::Draw_Dot(float _fX, float _fY, float _fZ, float _fSpeed , f
 	pLine->Set_Scale(_fScale);
 	pLine->Set_Speed(_fSpeed);
 	m_listLine.emplace_back(pLine);
+}
+
+void CLine_Renderer::Draw_DotSprite(LPD3DXSPRITE _pSprite, float _fX, float _fY, float _fSpeed, float _fScale, DWORD _dwColor)
+{
+	CBill_Line* pLine = CBill_Line::Create(m_pGraphicDev);
+	pLine->Set_Sprite(_pSprite, _dwColor);
+	pLine->Set_Pos(_vec3(_fX, _fY, 0.f));
+	pLine->Set_Scale(_fScale);
+	pLine->Set_Speed(_fSpeed);
+	m_listSprite.emplace_back(pLine);
 }
 
 void CLine_Renderer::Draw_Line(_vec3 _vSrc, _vec3 _vDest, _uint _uLerp, float _fSpeed, float _fScale)

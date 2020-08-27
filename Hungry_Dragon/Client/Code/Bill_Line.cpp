@@ -66,6 +66,19 @@ void CBill_Line::Render_Object(void) {
 
 }
 
+void CBill_Line::Render_Sprite(LPDIRECT3DTEXTURE9 _pTex)
+{
+	D3DXMATRIX matScale;
+	D3DXMATRIX matTrans;
+	D3DXMATRIX matWorld;
+	RECT tRect = { 0,0,64,64 };
+	D3DXMatrixScaling(&matScale, m_fScale, m_fScale, 0.f);
+	D3DXMatrixTranslation(&matTrans, m_vPosOrigin.x, m_vPosOrigin.y, 0.f);
+	matWorld = matScale * matTrans;
+	m_pSprite->SetTransform(&matWorld);
+	m_pSprite->Draw(_pTex, &tRect, nullptr, nullptr, m_dwColor);
+}
+
 void CBill_Line::Free(void) {
 	Engine::CGameObject::Free();
 }
