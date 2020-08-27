@@ -63,6 +63,7 @@ private:
 	void		Key_Input(const float& fTimeDelta);
 public:
 	Engine::CTransform* Get_Transform() { return m_pTransform; }
+	Engine::CAnimationTransform* Get_Parts_Transform(BOSSPARTS _parts) { return m_pPartsTrans[_parts]; }
 protected:
 	Engine::CTexture_Cube*		m_pBufferCubeCom = nullptr;
 	Engine::CMonsterBoard*		m_pBufferBoradCom = nullptr;
