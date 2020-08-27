@@ -61,6 +61,10 @@ private:
 	HRESULT	Ready_Layer_UI(const _tchar* pLayerTag);
 
 public:
+	//가속링 위치 잡아주는 함수
+	void Set_AccelRingPos(Engine::CLayer* pLayer);
+
+public:
 	static CScene_Cloud*		Create(LPDIRECT3DDEVICE9 pGraphicDev);
 
 private:

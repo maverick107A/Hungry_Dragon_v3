@@ -27,6 +27,7 @@ public:
 
 public:
 	void Get_Radius(_float* _fInnerRadius, _float* _fOuterRadius);
+	_vec3 Get_Pos();
 	void Set_Trans(_vec3& _vPos);
 
 private:

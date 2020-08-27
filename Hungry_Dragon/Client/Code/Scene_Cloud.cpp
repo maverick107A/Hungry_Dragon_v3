@@ -219,6 +219,21 @@ void CScene_Cloud::Free(void) {
 	Safe_Release(m_pFogEffect);
 }
 
+void CScene_Cloud::Set_AccelRingPos(Engine::CLayer* pLayer)
+{
+	CAccel_Torus* tempAccel;
+	_vec3 vOrigin = _vec3(0.f, 0.f, 500.f);
+	for (int i = 0; i < 500; ++i)
+	{
+		tempAccel =CAccel_Torus::Create(m_pGraphicDev);
+		tempAccel->Set_Trans(vOrigin);
+		pLayer->Add_Object(L"Accel_Torus",tempAccel);
+		vOrigin.x += (5 - rand() % 10) * 75;
+		vOrigin.y += (5 - rand() % 10) * 75;
+		vOrigin.z += 2000;
+	}
+}
+
 CScene_Cloud* CScene_Cloud::Create(LPDIRECT3DDEVICE9 pGraphicDev) {
 	CScene_Cloud*	pInstance = new CScene_Cloud(pGraphicDev);
 	
@@ -330,8 +345,7 @@ HRESULT CScene_Cloud::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 		FAILED_CHECK_RETURN(Register_ObjectPool<CRedCrystal_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
 	}
 
-	CAccel_Torus* pTempTorus = CAccel_Torus::Create(m_pGraphicDev);
-	pLayer->Add_Object(L"Accel_Torus", pTempTorus);
+	Set_AccelRingPos(pLayer);
 
 	return S_OK;
 }

@@ -48,6 +48,12 @@ void CAccel_Torus::Get_Radius(_float * _fInnerRadius, _float * _fOuterRadius)
 		m_pTorus->Get_Radius(_fInnerRadius, _fOuterRadius);
 }
 
+_vec3 CAccel_Torus::Get_Pos()
+{
+	_matrix tempMatrix = m_pTransform->Get_World();
+	return _vec3(tempMatrix._41, tempMatrix._42, tempMatrix._43);
+}
+
 void CAccel_Torus::Set_Trans(_vec3 & _vPos) {
 	m_pTransform->Set_Trans(&_vPos);
 	m_pTransform->Update_Component(0);
