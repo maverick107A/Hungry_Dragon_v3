@@ -33,10 +33,6 @@ _int CCliff_Object::Update_Object(const _float& fTimeDelta)
 	Engine::CGameObject::Update_Object(fTimeDelta);
 	//Engine::Add_RenderGroup(Engine::RENDER_PRIORITY, this);
 
-	
-	_bool bOutline = true;
-
-
 	return 0;
 }
 
@@ -77,7 +73,6 @@ void CCliff_Object::Free(void)
 
 HRESULT CCliff_Object::Add_Component(void)
 {
-	Engine::CComponent*		pComponent = nullptr;	
 
 	//Transform
 	FAILED_CHECK(Register_Component<CTransform>(&m_pTransform, ID_DYNAMIC, L"Com_Transform"));

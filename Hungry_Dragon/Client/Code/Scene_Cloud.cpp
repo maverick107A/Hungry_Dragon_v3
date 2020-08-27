@@ -330,6 +330,9 @@ HRESULT CScene_Cloud::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 		FAILED_CHECK_RETURN(Register_ObjectPool<CRedCrystal_Monster>(pLayer, OBJID::STAND_MONSTER), E_FAIL);
 	}
 
+	CAccel_Torus* pTempTorus = CAccel_Torus::Create(m_pGraphicDev);
+	pLayer->Add_Object(L"Accel_Torus", pTempTorus);
+
 	return S_OK;
 }
 

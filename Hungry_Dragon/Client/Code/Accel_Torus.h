@@ -26,7 +26,7 @@ public:
 	virtual void Render_Object(void)override;
 
 public:
-	void Set_Transe(_vec3& _vPos);
+	void Set_Trans(_vec3& _vPos);
 
 private:
 	HRESULT		Add_Component(void);
@@ -39,7 +39,7 @@ private:
 
 private:
 	Engine::CTorus*		m_pTorus=nullptr;
-	Engine::CTransform*	m_pTransform;
+	Engine::CTransform*	m_pTransform=nullptr;
 
 
 };

@@ -20,6 +20,8 @@
 #include "FlyChaseGolem.h"
 #include "RedCrystal_Monster.h"
 
+#include "Accel_Torus.h"
+
 #include "NormalBullet.h"
 
 
