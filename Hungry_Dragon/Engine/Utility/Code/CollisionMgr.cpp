@@ -110,17 +110,41 @@ void CCollisionMgr::Player_Boss(list<CGameObject*>* _pPlayer, list<CGameObject*>
 		{
 			for (auto& pBoss : *_pBoss)
 			{
+				CMonsterMain* Boss = static_cast<CMonsterMain*>(pBoss);
 				_vec3 vMonsterPos, vDis;
 				pBoss->Get_Transform()->Get_Info(Engine::INFO_POS, &vMonsterPos);
 				vDis = vPlayerPos - vMonsterPos;
 				if (powf(vDis.x, 2) + powf(vDis.y, 2) + powf(vDis.z, 2) < ColSize)
 				{
-					static_cast<CMonsterMain*>(pBoss)->Kill_Monster(fTimeDelta);
+					Boss->Kill_Monster(fTimeDelta);
 					Player->Set_MouseTime(1.f);
 
 				}
 				//부위 공격 위치랑 사이즈 바꿔야함
-				if (powf(vDis.x, 2) + powf(vDis.y, 2) + powf(vDis.z, 2) < ColSize)
+				_vec3 vLhandPos, vRhandPos, vLDis, vRDis;
+				_matrix matLeft, matRight;
+				float BossSize, HandSize;
+				matLeft = Boss->Get_Parts_Transform(CMonsterMain::BOSSPARTS::PART_LEFTHAND)->m_matWorld*Boss->Get_Parts_Transform(CMonsterMain::BOSSPARTS::PART_LEFTARM)->Get_WorldWithoutScale()*Boss->Get_Parts_Transform(CMonsterMain::BOSSPARTS::PART_BODY)->Get_WorldWithoutScale()*Boss->Get_Transform()->m_matWorld;
+				matLeft = Boss->Get_Parts_Transform(CMonsterMain::BOSSPARTS::PART_RIGHTHAND)->m_matWorld*Boss->Get_Parts_Transform(CMonsterMain::BOSSPARTS::PART_RIGHTARM)->Get_WorldWithoutScale()*Boss->Get_Parts_Transform(CMonsterMain::BOSSPARTS::PART_BODY)->Get_WorldWithoutScale()*Boss->Get_Transform()->m_matWorld;
+
+				memcpy(&vLhandPos, &matLeft._41, sizeof(_vec3));
+				memcpy(&vRhandPos, &matRight._41, sizeof(_vec3));
+				HandSize = Boss->Get_Parts_Transform(CMonsterMain::BOSSPARTS::PART_LEFTHAND)->m_vScale.x;
+				BossSize = Boss->Get_Transform()->m_vScale.x;
+				vLDis = vPlayerPos - vLhandPos;
+				vRDis = vPlayerPos - vRhandPos;
+				if (D3DXVec3Dot(&vLDis,&vLDis) < BossSize*BossSize*HandSize*HandSize*9)
+				{
+					if (Player->Get_State() != CPlayerMain::STATE::STATE_HIT)
+					{
+						vDis.y = 0.f;
+						D3DXVec3Normalize(&vDis, &vDis);
+						Player->Set_HitDir(vDis);
+						Player->Set_Sate(CPlayerMain::STATE::STATE_HIT);
+						Player->Add_Hp(-30);
+					}
+				}
+				if (D3DXVec3Dot(&vRDis, &vRDis) < BossSize*BossSize*HandSize*HandSize*9)
 				{
 					if (Player->Get_State() != CPlayerMain::STATE::STATE_HIT)
 					{

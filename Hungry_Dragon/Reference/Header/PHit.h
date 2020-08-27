@@ -22,7 +22,7 @@ public:
 
 private:
 	float					m_fAngle = 0.f;
-	float					m_fDis = 1.f;
+	float					m_fDis = 100.f;
 	float					m_fTime = 1.f;
 
 public:
