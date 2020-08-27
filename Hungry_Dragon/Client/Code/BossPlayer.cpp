@@ -17,6 +17,7 @@
 #include "Terrain_Locater.h"
 #include "GiantGolem.h"
 #include "BossCamera.h"
+#include "Line_Renderer.h"
 
 CBossPlayer::CBossPlayer(LPDIRECT3DDEVICE9 pGraphicDev)
 	: CPlayerMain(pGraphicDev)
@@ -114,6 +115,15 @@ int CBossPlayer::Update_Object(const float& fTimeDelta)
 	
 	Engine::CGameObject::Update_Object(fTimeDelta);
 
+	//날개 끝 위치
+	_matrix matTotal = m_pPartsTrans[PART_WING]->m_matWorld*m_pPartsTrans[PART_2BODY]->m_matWorld*m_matOld2;
+	_vec3 vWing = { 7.1f, -0.4f, -0.3f };
+	D3DXVec3TransformCoord(&m_vRWingPos, &vWing, &matTotal);
+	matTotal = m_pPartsTrans[PART_LWING]->m_matWorld*m_pPartsTrans[PART_2BODY]->m_matWorld*m_matOld2;
+	vWing = { -7.1f, -0.4f, -0.3f };
+	D3DXVec3TransformCoord(&m_vLWingPos, &vWing, &matTotal);
+	//여기까지
+
 	if (m_bBreath&&m_pParticle == nullptr) {
 		_vec3 BeamPos;
 		memcpy(&BeamPos, &m_pTransform->m_matWorld._31, sizeof(_vec3));
@@ -132,6 +142,8 @@ int CBossPlayer::Update_Object(const float& fTimeDelta)
 		Engine::Set_StaticParticleTrans(m_pParticle, _vec3(matMyPos._41, matMyPos._42, matMyPos._43));
 	}
 	
+	CLine_Renderer::GetInstance()->Draw_Dot(m_vRWingPos.x, m_vRWingPos.y, m_vRWingPos.z, 30.f, 10.f);
+	CLine_Renderer::GetInstance()->Draw_Dot(m_vLWingPos.x, m_vLWingPos.y, m_vLWingPos.z, 30.f, 10.f);
 
 	return 0;
 }
@@ -145,7 +157,7 @@ void CBossPlayer::Render_Object(void)
 {
 	TCHAR str[64] = L"";
 	wsprintf(str, L"POSITION : (%d,%d,%d)", int(m_pTransform->m_vInfo[Engine::INFO_POS].x), int(m_pTransform->m_vInfo[Engine::INFO_POS].y), int(m_pTransform->m_vInfo[Engine::INFO_POS].z));
-	Engine::Render_Font(L"Font_Light", str, &_vec2(50.f, 10.f), D3DXCOLOR(1.f, 1.f, 0.f, 1.f));
+	Engine::Render_Font(L"Font_Light", str, &_vec2(50.f, 800.f), D3DXCOLOR(1.f, 1.f, 0.f, 1.f));
 
 	m_pGraphicDev->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_GOURAUD);
 	Animation_Render();
@@ -154,7 +166,6 @@ void CBossPlayer::Render_Object(void)
 
 void CBossPlayer::Free(void)
 {
-	
 	m_pState->Release();
 	Engine::CGameObject::Free();
 }

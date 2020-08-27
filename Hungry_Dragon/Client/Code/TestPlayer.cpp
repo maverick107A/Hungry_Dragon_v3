@@ -37,7 +37,7 @@ HRESULT CTestPlayer::Ready_Object(void)
 	m_pTransform->m_vInfo[Engine::INFO_POS].y = 1000.f;
 	m_pTransform->m_vInfo[Engine::INFO_POS].z = 0.f;
 
-	m_pTransform->Set_Scale(8.f);
+	m_pTransform->Set_Scale(6.f);
 
 	D3DXMatrixIdentity(&m_matOld1);
 	D3DXMatrixIdentity(&m_matOld2);
@@ -64,7 +64,7 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 	if (Engine::Get_DIKeyState(DIK_K) & 0x80)
 		m_bBreath = !m_bBreath;
 
-	//화면 내에서 플레어이거 아래에 위치하도록
+	//화면 내에서 플레어이가 아래에 위치하도록
 	m_pTransform->m_vInCamPos -= m_vUp*2.f;
 	m_pCamera->Update_Camera(fTimeDelta, &m_fAngleX, &m_fAngleY, &m_vLook, &m_vUp, this);
 	m_pState->Update_State(fTimeDelta);
@@ -109,10 +109,10 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 	Engine::CGameObject::Update_Object(fTimeDelta);
 
 	//날개 끝 위치
-	_matrix matTotal = m_pPartsTrans[PART_WING]->m_matWorld*m_pTransform->m_matWorld;
+	_matrix matTotal = m_pPartsTrans[PART_WING]->m_matWorld*m_pPartsTrans[PART_2BODY]->m_matWorld*m_matOld2;
 	_vec3 vWing = { 7.1f, -0.4f, -0.3f };
 	D3DXVec3TransformCoord(&m_vRWingPos, &vWing, &matTotal);
-	matTotal = m_pPartsTrans[PART_LWING]->m_matWorld*m_pTransform->m_matWorld;
+	matTotal = m_pPartsTrans[PART_LWING]->m_matWorld*m_pPartsTrans[PART_2BODY]->m_matWorld*m_matOld2;
 	vWing = { -7.1f, -0.4f, -0.3f };
 	D3DXVec3TransformCoord(&m_vLWingPos, &vWing, &matTotal);
 	//여기까지
@@ -148,7 +148,19 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 
 	_vec3 vPos;
 	m_pTransform->Get_Info(INFO_POS, &vPos);
-	CLine_Renderer::GetInstance()->Draw_Dot(vPos.x, vPos.y, vPos.z);
+	//CLine_Renderer::GetInstance()->Draw_Dot(vPos.x, vPos.y, vPos.z);
+	CLine_Renderer::GetInstance()->Draw_Dot(m_vRWingPos.x, m_vRWingPos.y, m_vRWingPos.z, 30.f, 10.f);
+	CLine_Renderer::GetInstance()->Draw_Dot(m_vLWingPos.x, m_vLWingPos.y, m_vLWingPos.z, 30.f, 10.f);
+
+	//if (GetAsyncKeyState(VK_LBUTTON) & 0x0001)
+	//{
+	//	m_vP = vPos;
+	//	m_vL = { m_pTransform->m_matWorld._31,m_pTransform->m_matWorld._32,m_pTransform->m_matWorld._33 };
+	//	m_fMouseTime = 0.5f;
+	//}
+	//m_vP += m_vL*5.f;
+	//CLine_Renderer::GetInstance()->Draw_Dot(m_vP.x, m_vP.y, m_vP.z);
+
 
 	return 0;
 }
@@ -162,11 +174,9 @@ void CTestPlayer::LateUpdate_Object(const float & fTimeDelta)
 
 void CTestPlayer::Render_Object(void)
 {
-
-
 	TCHAR str[64] = L"";
 	wsprintf(str, L"POSITION : (%d,%d,%d)", int(m_pTransform->m_vInfo[Engine::INFO_POS].x), int(m_pTransform->m_vInfo[Engine::INFO_POS].y), int(m_pTransform->m_vInfo[Engine::INFO_POS].z));
-	Engine::Render_Font(L"Font_Light", str, &_vec2(50.f, 10.f), D3DXCOLOR(1.f, 1.f, 0.f, 1.f));
+	Engine::Render_Font(L"Font_Light", str, &_vec2(50.f, 800.f), D3DXCOLOR(1.f, 1.f, 0.f, 1.f));
 
 	m_pGraphicDev->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_GOURAUD);
 	Animation_Render();

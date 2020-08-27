@@ -19,6 +19,7 @@ private:
 public:
 	static bool Find_First(CGameObject* _caller, CGameObject* _callee);
 	static void Player_Monster(list<CGameObject*>* _pPlayer, list<CGameObject*>* _pMonster, const float& fTimeDelta);
+	static void Player_Boss(list<CGameObject*>* _pPlayer, list<CGameObject*>* _pBoss, const float& fTimeDelta);
 	static bool Player_MonsterCol(CGameObject* _caller, CGameObject* _callee);
 
 	// CBase을(를) 통해 상속됨

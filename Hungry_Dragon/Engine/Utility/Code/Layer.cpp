@@ -133,19 +133,30 @@ void CLayer::LateUpdate_Layer(const _float & fTimeDelta)
 			(*iter_obj)->LateUpdate_Object(fTimeDelta);
 		}
 	}
-
-	//충돌처리
-	map<const _tchar*, list<CGameObject*>>::iterator mapMonster = find_if(m_mapObject.begin(), m_mapObject.end(), CTag_Finder(L"Monster"));
-	if (mapMonster == m_mapObject.end())
-		return;
-	list<CGameObject*>	listMonster = mapMonster->second;
-
 	map<const _tchar*, list<CGameObject*>>::iterator mapPlayer = find_if(m_mapObject.begin(), m_mapObject.end(), CTag_Finder(L"TestPlayer"));
 	if (mapPlayer == m_mapObject.end())
 		return;
 	list<CGameObject*>	listPlayer = mapPlayer->second;
 
-	CCollisionMgr::Player_Monster(&listPlayer, &listMonster, fTimeDelta);
+	//충돌처리
+	map<const _tchar*, list<CGameObject*>>::iterator mapMonster = find_if(m_mapObject.begin(), m_mapObject.end(), CTag_Finder(L"Monster"));
+	if (mapMonster != m_mapObject.end())
+	{
+		list<CGameObject*>	listMonster = mapMonster->second;
+
+		CCollisionMgr::Player_Monster(&listPlayer, &listMonster, fTimeDelta);
+	}
+	//보스
+	map<const _tchar*, list<CGameObject*>>::iterator mapBoss = find_if(m_mapObject.begin(), m_mapObject.end(), CTag_Finder(L"BossObject"));
+	if (mapBoss != m_mapObject.end())
+	{
+		list<CGameObject*>	listBoss = mapBoss->second;
+
+		CCollisionMgr::Player_Boss(&listPlayer, &listBoss, fTimeDelta);
+	}
+
+
+	//몬스터 충돌
 
 
 	//다른 버전

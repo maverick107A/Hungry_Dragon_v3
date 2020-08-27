@@ -123,11 +123,6 @@ _int CScene_Volcano::Update_Scene(const _float& fTimeDelta) {
 
 	Engine::Particle_Update(fTimeDelta);
 
-	//플레이어 위치 최신화
-	pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);
-	Engine::Set_Monster_LayerMap(OBJID::STAND_MONSTER, 9999, m_vPlayerPos);
-	
-	
 	Engine::CScene::Update_Scene(fTimeDelta);
 
 	CIngame_Info::GetInstance()->Update_Info(fTimeDelta);

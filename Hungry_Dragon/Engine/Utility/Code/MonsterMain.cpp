@@ -59,7 +59,7 @@ int Engine::CMonsterMain::Update_Object(const float & fTimeDelta)
 			m_eState = MONSTER_IDLE;
 		}
 	}
-	if (m_fDistance > m_fDead_Range)
+	if (m_fDistance > m_fDead_Range && 	m_eVariation != MONSTER_BOSSGOLEM)
 	{
 		m_eState = MONSTER_REBORN;
 		m_iEvent = MONSTER_DEAD;
@@ -333,7 +333,7 @@ void Engine::CMonsterMain::Kill_Monster(const float& fTimeDelta)
 
 	if (m_fScale <= 0)
 	{
-		m_fScale = 0;
+		m_fScale = 0.01f;
 	}
 
 	Dead_Monster();

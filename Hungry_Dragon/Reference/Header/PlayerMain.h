@@ -60,7 +60,8 @@ public:
 	CMonsterMain*			Get_Boss() { return m_pBoss; }
 	_vec3					Get_Lwing() { return m_vLWingPos; }
 	_vec3					Get_RWing() { return m_vRWingPos; }
-
+	_vec3					Get_HitDir() { return m_vHitDir; }
+	STATE					Get_State() { return m_eState; }
 
 	ANIMATION				m_eAnimation = ANI_IDLE;
 
@@ -72,6 +73,7 @@ public:
 	void Set_AccelCheck(bool _bCheck) { m_bAccelCheck = _bCheck; }
 	void Set_Animation(ANIMATION _eAni) { m_eAnimation = _eAni; }
 	void Set_Right(_vec3 _vRight) { m_vRight = _vRight; }
+	void Set_HitDir(_vec3 _vDir) { m_vHitDir = _vDir; }
 	void Set_FrameSpeed(float _fSpeed) { m_pAnimationController->Set_FrameSpeed(_fSpeed); }
 
 public:
@@ -129,6 +131,7 @@ protected:
 
 	_vec3					m_vRWingPos;
 	_vec3					m_vLWingPos;
+	_vec3					m_vHitDir;
 
 	int						m_iBreathRad = 10;
 public:
