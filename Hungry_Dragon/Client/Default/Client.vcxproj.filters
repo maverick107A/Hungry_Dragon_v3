@@ -256,7 +256,7 @@
     <Filter Include="02. GameObject\01. Stage\68. Meteor_Object\00. Circular">
       <UniqueIdentifier>{d851d2e7-adee-4ae1-9411-15b5e92b5c29}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02. GameObject\01. Stage\72. Goal">
+    <Filter Include="02. GameObject\01. Stage\72.Goal">
       <UniqueIdentifier>{b2d2b2c7-96bd-41ca-bf91-93194caf4556}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

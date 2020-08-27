@@ -44,6 +44,9 @@ private:
 
 	list<Engine::CResources*>  m_arrParticle;
 
+	D3DXVECTOR3 m_vP = {0.f,0.f,0.f};
+	D3DXVECTOR3 m_vL = { 0.f,0.f,0.f };
+
 public:
 	static CTestPlayer*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 

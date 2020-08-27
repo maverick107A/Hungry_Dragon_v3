@@ -34,9 +34,7 @@ void CPHit::Update_State(const float& fTimeDelta)
 	m_fTime -= fTimeDelta;
 
 
-	_vec3 vDir;
-
-	memcpy(&vDir, &m_pPlayer->Get_Transform()->m_matWorld._31, sizeof(_vec3));
+	_vec3 vDir = m_pPlayer->Get_HitDir();
 	m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS] += vDir*m_fDis;
 	
 	m_fDis *= 0.95f;
