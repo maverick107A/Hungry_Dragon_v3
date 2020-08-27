@@ -125,8 +125,6 @@ HRESULT Engine::CDragonJaw::Ready_Buffer(void)
 
 void Engine::CDragonJaw::Render_Buffer(void)
 {
-	m_pVB->Unlock();
-
 	CVIBuffer::Render_Buffer();
 }
 

@@ -182,8 +182,6 @@ HRESULT Engine::CDragonWing::Ready_Buffer(void)
 
 void Engine::CDragonWing::Render_Buffer(void)
 {
-	m_pVB->Unlock();
-
 	CVIBuffer::Render_Buffer();
 }
 

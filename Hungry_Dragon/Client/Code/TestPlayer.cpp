@@ -63,29 +63,6 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 	m_bAccelCheck = false;
 	if (Engine::Get_DIKeyState(DIK_K) & 0x80)
 		m_bBreath = !m_bBreath;
-	//R 키 누르면 생성
-	//if ((GetAsyncKeyState('R') & 0x8000) ) {
-	//	Engine::_vec3 vOrigin=Engine::_vec3(0.f,0.f,3.f);
-	//	Engine::BoundingBox tempBoundingBox;
-	//	tempBoundingBox.vMax = Engine::_vec3(WINCX,WINCY,100.f);
-	//	tempBoundingBox.vMin = Engine::_vec3(-WINCX, -WINCY, -100.f);
-	//	Engine::CResources* tempParticle = Engine::Get_Particle(m_pGraphicDev, Engine::PART_WIND, tempBoundingBox, vOrigin);
-
-	//	//나중엔 미리 올려 놓는 식으로 구현하자
-	//	static_cast<Engine::CPart_Wind*>(tempParticle)->Set_Texture(L"../../Asset/snowflake.dds");
-	//	m_arrParticle.emplace_back( tempParticle);
-	//}
-	//for (list<Engine::CResources*>::iterator iter = m_arrParticle.begin(); iter != m_arrParticle.end();) {
-	//	int life = (*iter)->Update_Component(fTimeDelta);
-
-	//	if (life == 0) {
-	//		++iter;
-	//	}
-	//	else {
-	//		Safe_Release(*iter);
-	//		iter = m_arrParticle.erase(iter);
-	//	}
-	//}
 
 	//화면 내에서 플레어이거 아래에 위치하도록
 	m_pTransform->m_vInCamPos -= m_vUp*2.f;
@@ -97,11 +74,8 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 	if (GetAsyncKeyState('H'))
 	{
 		m_eState = STATE::STATE_HIT;
-
-		//m_eAnimation = ANI_HIT;
-		//float fDeltaAngle = -D3DX_PI*0.5f - m_pTransform->m_vAngle.x;
-		//m_pTransform->m_vAngle.x += fDeltaAngle;
 	}
+
 	State_Change();
 
 	
@@ -133,6 +107,15 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 	}
 	
 	Engine::CGameObject::Update_Object(fTimeDelta);
+
+	//날개 끝 위치
+	_matrix matTotal = m_pPartsTrans[PART_WING]->m_matWorld*m_pTransform->m_matWorld;
+	_vec3 vWing = { 7.1f, -0.4f, -0.3f };
+	D3DXVec3TransformCoord(&m_vRWingPos, &vWing, &matTotal);
+	matTotal = m_pPartsTrans[PART_LWING]->m_matWorld*m_pTransform->m_matWorld;
+	vWing = { -7.1f, -0.4f, -0.3f };
+	D3DXVec3TransformCoord(&m_vLWingPos, &vWing, &matTotal);
+	//여기까지
 
 	if (m_bBreath&&m_pParticle == nullptr) {
 		_vec3 BeamPos;

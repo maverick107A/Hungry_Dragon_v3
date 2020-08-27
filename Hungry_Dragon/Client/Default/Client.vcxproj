@@ -196,6 +196,7 @@ call CopyUtility.bat</Command>
     <ClInclude Include="..\Code\GiantGolem_Left_Hand.h" />
     <ClInclude Include="..\Code\GiantGolem_Right_Arm.h" />
     <ClInclude Include="..\Code\GiantGolem_Right_Hand.h" />
+    <ClInclude Include="..\Code\Goal.h" />
     <ClInclude Include="..\Code\Golem.h" />
     <ClInclude Include="..\Code\Horizon_Bat_Monster.h" />
     <ClInclude Include="..\Code\IconCon.h" />
@@ -281,6 +282,7 @@ call CopyUtility.bat</Command>
     <ClCompile Include="..\Code\GiantGolem_Left_Hand.cpp" />
     <ClCompile Include="..\Code\GiantGolem_Right_Arm.cpp" />
     <ClCompile Include="..\Code\GiantGolem_Right_Hand.cpp" />
+    <ClCompile Include="..\Code\Goal.cpp" />
     <ClCompile Include="..\Code\Golem.cpp" />
     <ClCompile Include="..\Code\Horizon_Bat_Monster.cpp" />
     <ClCompile Include="..\Code\IconCon.cpp" />

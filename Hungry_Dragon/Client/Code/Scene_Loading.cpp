@@ -154,6 +154,21 @@ _uint CScene_Loading::Loading_ForStage(void)
 		L"BUFFER_LWING",
 		Engine::BUFFER_LWING),
 		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Texture(m_pGraphicDev,
+		RESOURCE_STAGE,
+		L"TEXTURE_OUTLINE",
+		Engine::TEX_NORMAL,
+		L"../../Asset/PlayerOutLine/OutLine.png", 1),
+		E_FAIL);
+
+	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,
+		RESOURCE_STATIC,
+		L"BUFFER_OUTLINE",
+		Engine::BUFFER_OUTLINE,
+		9,
+		6),
+		E_FAIL);
 	//
 
 	FAILED_CHECK_RETURN(Engine::Ready_Buffer(m_pGraphicDev,

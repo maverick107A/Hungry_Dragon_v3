@@ -58,6 +58,9 @@ public:
 	CBaseLand*				Get_Terrain() { return m_pTerrain; }
 	CCameraMain*			Get_Camera() { return m_pCamera; }
 	CMonsterMain*			Get_Boss() { return m_pBoss; }
+	_vec3					Get_Lwing() { return m_vLWingPos; }
+	_vec3					Get_RWing() { return m_vRWingPos; }
+
 
 	ANIMATION				m_eAnimation = ANI_IDLE;
 
@@ -123,6 +126,9 @@ protected:
 	D3DXMATRIX				m_matOld7;
 
 	Engine::CAnimation_Controller* m_pAnimationController;
+
+	_vec3					m_vRWingPos;
+	_vec3					m_vLWingPos;
 
 	int						m_iBreathRad = 10;
 public:
