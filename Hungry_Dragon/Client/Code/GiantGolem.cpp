@@ -187,11 +187,7 @@ int CGiantGolem::Update_Object(const float & fTimeDelta)
 
 void CGiantGolem::Render_Object(void)
 {
-	//TCHAR str[64] = L"";
-	////wsprintf(str, L"POSITION : (%d,%d,%d)", (int)m_vPos.x, (int)m_vPos.y, (int)m_vPos.z);
-	//wsprintf(str, L"POSITION : (%d,%d,%d)", (int)m_pPartsTrans[PART_RIGHTHAND]->m_matWorld._41, (int)m_pPartsTrans[PART_RIGHTHAND]->m_matWorld._42, (int)m_pPartsTrans[PART_RIGHTHAND]->m_matWorld._43);
-	//Engine::Render_Font(L"Font_Light", str, &_vec2(50.f, 10.f), D3DXCOLOR(1.f, 1.f, 0.f, 1.f));
-
+	
 	m_pGraphicDev->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_GOURAUD);
 	Animation_Render();
 	m_pGraphicDev->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_FLAT);

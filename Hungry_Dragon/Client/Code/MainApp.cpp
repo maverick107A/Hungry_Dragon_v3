@@ -96,6 +96,13 @@ void CMainApp::LateUpdate_MainApp(const Engine::_float & fTimeDelta) {
 
 void CMainApp::Render_MainApp(void)
 {
+	//_float	fTimer_Immediate = Engine::Get_TimeDelta(L"Timer_Immediate");
+	//_float	fTimer_FPS60 = Engine::Get_TimeDelta(L"Timer_FPS60");
+	//TCHAR str[64] = L"";
+	//wsprintf(str, L"FPS : %d", (int)fTimer_FPS60);
+	//Engine::Render_Font(L"Font_Light", str, &_vec2(50.f, 10.f), D3DXCOLOR(1.f, 1.f, 0.f, 1.f));
+
+
 	Engine::Render_Begin(D3DXCOLOR(0.f, 0.f, 1.f, 1.f));
 
 	CIngame_Flow::GetInstance()->Render_BeforeScene();
