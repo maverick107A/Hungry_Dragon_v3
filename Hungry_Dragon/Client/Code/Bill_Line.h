@@ -30,7 +30,7 @@ public:
 	void Set_Pos(_vec3 _vPos) { m_vPosOrigin = _vPos; }
 	void Set_Scale(_float _fScale) { m_fScale = _fScale; }
 	void Set_Speed(_float _fSpeed) { m_fShrinkSpeed = _fSpeed; }
-	void Set_Color(_uint _uNum) { m_uTexColor = _uNum; }
+	void Set_Color(_uint _uNum);
 
 private:
 	HRESULT		Add_Component(void);

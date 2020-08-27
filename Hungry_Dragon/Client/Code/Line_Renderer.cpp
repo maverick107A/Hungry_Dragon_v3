@@ -83,6 +83,7 @@ void CLine_Renderer::Render_Renderer(void) {
 	m_pGraphicDev->SetRenderState(D3DRS_ALPHATESTENABLE, true);
 	m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
 	m_pGraphicDev->SetRenderState(D3DRS_ZWRITEENABLE, false);
+	m_pGraphicDev->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_FLAT);
 	m_pGraphicDev->SetTexture(0, m_pTex);
 	for (auto& pLine : m_listLine)
 	{
@@ -91,7 +92,7 @@ void CLine_Renderer::Render_Renderer(void) {
 	m_pGraphicDev->SetRenderState(D3DRS_ZWRITEENABLE, true);
 	m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
 	m_pGraphicDev->SetRenderState(D3DRS_ALPHATESTENABLE, false);
-
+	m_pGraphicDev->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_GOURAUD);
 }
 
 void CLine_Renderer::Render_SpriteMode()
@@ -103,12 +104,13 @@ void CLine_Renderer::Render_SpriteMode()
 
 }
 
-void CLine_Renderer::Draw_Dot(float _fX, float _fY, float _fZ, float _fSpeed , float _fScale )
+void CLine_Renderer::Draw_Dot(float _fX, float _fY, float _fZ, float _fSpeed , float _fScale, DWORD _dwColor)
 {
 	CBill_Line* pLine = CBill_Line::Create(m_pGraphicDev);
 	pLine->Set_Pos(_vec3(_fX, _fY, _fZ));
 	pLine->Set_Scale(_fScale);
 	pLine->Set_Speed(_fSpeed);
+	pLine->Set_Color(_dwColor);
 	m_listLine.emplace_back(pLine);
 }
 
@@ -119,6 +121,7 @@ void CLine_Renderer::Draw_DotSprite(LPD3DXSPRITE _pSprite, float _fX, float _fY,
 	pLine->Set_Pos(_vec3(_fX, _fY, 0.f));
 	pLine->Set_Scale(_fScale);
 	pLine->Set_Speed(_fSpeed);
+	pLine->Set_Color(_dwColor);
 	m_listSprite.emplace_back(pLine);
 }
 

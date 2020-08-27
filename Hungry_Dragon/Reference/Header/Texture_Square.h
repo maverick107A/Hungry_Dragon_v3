@@ -16,6 +16,12 @@ public:
 	virtual void Render_Buffer(void) override;
 
 public:
+	void Set_VertexColor(DWORD _dwColor);
+
+private:
+	LPDWORD m_pColorEntry;
+
+public:
 	static CTexture_Square* Create(LPDIRECT3DDEVICE9 pGraphicDev);
 	virtual CComponent* Clone(void) override;
 	virtual void Free(void) override;

@@ -83,13 +83,13 @@ int CMeteor_Circular::Update_Object(const float& fTimeDelta) {
 
 	_vec3 vPos;
 	m_pTransform->Get_Info(INFO_POS, &vPos);
-	CLine_Renderer::GetInstance()->Draw_Dot(vPos.x, vPos.y , vPos.z , 512.f, 512.f);
+	CLine_Renderer::GetInstance()->Draw_Dot(vPos.x, vPos.y , vPos.z , 512.f, 512.f, D3DCOLOR_ARGB(255, 255,255,255));
 
 
 	_uint uRand = rand() % 10 + 5;
 	for (int i = 0; i < uRand; ++i)
 	{
-		CLine_Renderer::GetInstance()->Draw_Dot(vPos.x+((rand()%256) - 128), vPos.y + ((rand() % 256) - 128), vPos.z + ((rand() % 256) - 128), 384.f, 256.f);
+		CLine_Renderer::GetInstance()->Draw_Dot(vPos.x+((rand()%256) - 128), vPos.y + ((rand() % 256) - 128), vPos.z + ((rand() % 256) - 128), 384.f, 256.f, D3DCOLOR_ARGB(255, 255,255,255));
 	}
 	return 0;
 }

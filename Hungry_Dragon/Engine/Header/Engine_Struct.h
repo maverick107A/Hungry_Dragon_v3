@@ -73,7 +73,29 @@ namespace Engine
 
 	}VTXTEX;
 
-	const _ulong	FVF_TEX = D3DFVF_XYZ | D3DFVF_NORMAL |D3DFVF_TEX1;
+	const _ulong	FVF_TEX = D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX1;
+
+	typedef struct tagVertexBoard
+	{
+		_vec3		vPosition;
+		_ulong		dwColor;
+		_vec2		vTexUV;
+
+		tagVertexBoard(_float _x, _float _y, _float _z, _uint _c, _float _u, _float _v) {
+			vPosition.x = _x;
+			vPosition.y = _y;
+			vPosition.z = _z;
+
+			dwColor = _c;
+
+			vTexUV.x = _u;
+			vTexUV.y = _v;
+		}
+
+	}VTXBOARD;
+
+	const _ulong	FVF_BOARD = D3DFVF_XYZ | D3DFVF_DIFFUSE | D3DFVF_TEX1;
+
 
 	typedef struct INDEX16
 	{

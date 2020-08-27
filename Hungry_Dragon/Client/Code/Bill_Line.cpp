@@ -81,14 +81,21 @@ void CBill_Line::Render_Sprite(LPDIRECT3DTEXTURE9 _pTex)
 
 void CBill_Line::Free(void) {
 	Engine::CGameObject::Free();
+	Safe_Release(m_pBufferCom);
 }
 
+
+void CBill_Line::Set_Color(_uint _uNum)
+{
+	m_pBufferCom->Set_VertexColor(_uNum);
+}
 
 HRESULT CBill_Line::Add_Component(void) {
 	Engine::CComponent*		pComponent = nullptr;
 
 	//// buffer
-	FAILED_CHECK(Clone_Component<CTexture_Square>(&m_pBufferCom, RESOURCE_STATIC, L"Buffer_TexSquare", ID_STATIC, L"Com_Buffer"));
+	m_pBufferCom = CTexture_Square::Create(m_pGraphicDev);
+	//FAILED_CHECK(Clone_Component<CTexture_Square>(&m_pBufferCom, RESOURCE_STATIC, L"Buffer_TexSquare", ID_STATIC, L"Com_Buffer"));
 	//FAILED_CHECK(Clone_Component<CTexture>(&m_pTextureCom, RESOURCE_STAGE, L"Texture_BillDot", ID_STATIC, L"Com_Texture"));
 	FAILED_CHECK(Register_Component<CTransform>(&m_pTransform, ID_DYNAMIC, L"Com_Transform"));
 

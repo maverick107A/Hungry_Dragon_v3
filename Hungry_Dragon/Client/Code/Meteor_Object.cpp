@@ -70,13 +70,13 @@ int CMeteor_Object::Update_Object(const float& fTimeDelta) {
 
 	_vec3 vPos;
 	m_pTransform->Get_Info(INFO_POS, &vPos);
-	CLine_Renderer::GetInstance()->Draw_Dot(vPos.x, vPos.y , vPos.z , 2560.f, 2560.f);
+	CLine_Renderer::GetInstance()->Draw_Dot(vPos.x, vPos.y , vPos.z , 2560.f, 2560.f, D3DCOLOR_ARGB(255,255,255,255));
 
 
 	_uint uRand = rand() % 20 + 10;
 	for (int i = 0; i < uRand; ++i)
 	{
-		CLine_Renderer::GetInstance()->Draw_Dot(vPos.x+((rand()%1000) - 500), vPos.y + ((rand() % 1000) - 500), vPos.z + ((rand() % 1000) - 500), 384.f, 256.f);
+		CLine_Renderer::GetInstance()->Draw_Dot(vPos.x+((rand()%1000) - 500), vPos.y + ((rand() % 1000) - 500), vPos.z + ((rand() % 1000) - 500), 384.f, 256.f, D3DCOLOR_ARGB(255, 255,255,255));
 	}
 	return 0;
 }

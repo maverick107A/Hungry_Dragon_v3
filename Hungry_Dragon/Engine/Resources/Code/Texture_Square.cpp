@@ -10,6 +10,7 @@ CTexture_Square::CTexture_Square(LPDIRECT3DDEVICE9 pGraphicDev)
 CTexture_Square::CTexture_Square(const CTexture_Square & rhs) 
 	:CVIBuffer(rhs)
 {
+	m_pColorEntry = rhs.m_pColorEntry;
 }
 
 CTexture_Square::~CTexture_Square(void) {
@@ -18,15 +19,15 @@ CTexture_Square::~CTexture_Square(void) {
 HRESULT CTexture_Square::Ready_Buffer(void) {
 	m_dwVtxCnt = 4;
 	m_dwTriCnt = 2;
-	m_dwVtxSize = sizeof(VTXTEX);
-	m_dwFVF = FVF_TEX;
+	m_dwVtxSize = sizeof(VTXBOARD);
+	m_dwFVF = FVF_BOARD;
 
 	m_dwIdxSize = sizeof(INDEX16);
 	m_IdxFmt = D3DFMT_INDEX16;
 
 	FAILED_CHECK_RETURN(CVIBuffer::Ready_Buffer(), E_FAIL);
 
-	VTXTEX*		pVertex = nullptr;
+	VTXBOARD*		pVertex = nullptr;
 
 	m_pVB->Lock(0, 0, (void**)&pVertex, 0);
 
@@ -42,12 +43,11 @@ HRESULT CTexture_Square::Ready_Buffer(void) {
 	pVertex[3].vPosition = _vec3(-0.5f, -0.5f, 0.f);
 	pVertex[3].vTexUV = _vec2(0.f, 1.f);
 
-	_vec3 tempNormalVec = Calcul_Normal(pVertex[0].vPosition, pVertex[1].vPosition, pVertex[2].vPosition);
-
-	pVertex[0].vNormal = tempNormalVec;
-	pVertex[1].vNormal = tempNormalVec;
-	pVertex[2].vNormal = tempNormalVec;
-	pVertex[3].vNormal = tempNormalVec;
+	pVertex[0].dwColor = 0xffffffff;
+	pVertex[1].dwColor = 0xffffffff;
+	pVertex[2].dwColor = 0xffffffff;
+	pVertex[3].dwColor = 0xffffffff;
+	m_pColorEntry = &pVertex[0].dwColor;
 
 	m_pVB->Unlock();
 
@@ -70,6 +70,11 @@ HRESULT CTexture_Square::Ready_Buffer(void) {
 
 void CTexture_Square::Render_Buffer(void) {
 	CVIBuffer::Render_Buffer();
+}
+
+void CTexture_Square::Set_VertexColor(DWORD _dwColor)
+{
+	memcpy(m_pColorEntry, &_dwColor, sizeof(DWORD));
 }
 
 void CTexture_Square::Free(void) {
