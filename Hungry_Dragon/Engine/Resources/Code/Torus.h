@@ -12,6 +12,9 @@ protected:
 	virtual ~CTorus(void);
 
 public:
+	void Get_Radius(_float* _fInnerRadius, _float* _fOuterRadius);
+
+public:
 	virtual HRESULT Ready_Buffer(void);
 	virtual void	Render_Buffer(void);
 
@@ -22,8 +25,8 @@ public:
 
 protected:
 	ID3DXMesh*		m_pTorus;
-	_float			m_fInnerRadius;
-	_float			m_fOuterRadius;
+	_float			m_fInnerRadius=5.f;
+	_float			m_fOuterRadius=60.f;
 };
 
 END

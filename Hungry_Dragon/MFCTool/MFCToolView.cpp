@@ -187,8 +187,6 @@ void CMFCToolView::OnInitialUpdate() {
 	m_pTransformCamera = Engine::CTransform::Create();
 	m_pTransformWorld = Engine::CTransform::Create();
 
-	Engine::Load_ParticleMFC(m_pGraphicDev);
-
 	_matrix  matProj;
 
 	D3DXMatrixPerspectiveFovLH(&matProj,

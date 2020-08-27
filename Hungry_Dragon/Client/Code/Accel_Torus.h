@@ -26,6 +26,7 @@ public:
 	virtual void Render_Object(void)override;
 
 public:
+	void Get_Radius(_float* _fInnerRadius, _float* _fOuterRadius);
 	void Set_Trans(_vec3& _vPos);
 
 private:
@@ -40,7 +41,8 @@ private:
 private:
 	Engine::CTorus*		m_pTorus=nullptr;
 	Engine::CTransform*	m_pTransform=nullptr;
-
+	D3DXCOLOR GOLD = D3DCOLOR_XRGB(255,215,0);
+	D3DMATERIAL9 GOLD_MATERIAL;
 
 };
 #endif // !Accel_Torus_h__

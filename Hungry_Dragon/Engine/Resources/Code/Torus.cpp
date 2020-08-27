@@ -21,7 +21,22 @@ CTorus::CTorus(const CTorus & rhs)
 CTorus::~CTorus(void) {
 }
 
+void CTorus::Get_Radius(_float * _fInnerRadius, _float * _fOuterRadius)
+{
+	if (nullptr != _fInnerRadius)
+	{
+		*_fInnerRadius = m_fInnerRadius;
+	}
+
+	if (nullptr != _fOuterRadius)
+	{
+		*_fOuterRadius = m_fOuterRadius;
+	}
+}
+
 HRESULT CTorus::Ready_Buffer(void) {
+	m_fInnerRadius = 5.f;
+	m_fOuterRadius = 60.f;
 	return D3DXCreateTorus(m_pGraphicDev, m_fInnerRadius, m_fOuterRadius, 10, 10, &m_pTorus, nullptr);
 }
 

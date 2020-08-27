@@ -14,9 +14,11 @@ CAccel_Torus::~CAccel_Torus(void) {
 HRESULT CAccel_Torus::Ready_Object(void) {
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
-	m_pTransform->Set_Scale(10000.f);
-	m_pTransform->Set_Trans(&_vec3(0.f, 1000.f, 6000.f));
-	m_pTransform->Update_Component(0.f);
+	GOLD_MATERIAL.Ambient = GOLD;
+	GOLD_MATERIAL.Diffuse = GOLD;
+	GOLD_MATERIAL.Specular = GOLD;
+	GOLD_MATERIAL.Emissive = GOLD;
+	GOLD_MATERIAL.Power = 2.f;
 	return S_OK;
 }
 
@@ -30,8 +32,20 @@ _int CAccel_Torus::Update_Object(const _float & fTimeDelta) {
 }
 
 void CAccel_Torus::Render_Object(void) {
+	D3DMATERIAL9 tempMaterial;
 	m_pTransform->Set_Transform(m_pGraphicDev);
+	m_pGraphicDev->SetRenderState(D3DRS_LIGHTING, true);
+	m_pGraphicDev->GetMaterial(&tempMaterial);
+	m_pGraphicDev->SetMaterial(&GOLD_MATERIAL);
 	m_pTorus->Render_Buffer();
+	m_pGraphicDev->SetMaterial(&tempMaterial);
+	m_pGraphicDev->SetRenderState(D3DRS_LIGHTING, false);
+}
+
+void CAccel_Torus::Get_Radius(_float * _fInnerRadius, _float * _fOuterRadius)
+{
+	if (nullptr != m_pTorus)
+		m_pTorus->Get_Radius(_fInnerRadius, _fOuterRadius);
 }
 
 void CAccel_Torus::Set_Trans(_vec3 & _vPos) {
