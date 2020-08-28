@@ -138,7 +138,9 @@ protected:
 	Engine::CAnimation_Controller* m_pAnimationController;
 
 	_vec3					m_vRWingPos;
+	_vec3					m_vRMWingPos;
 	_vec3					m_vLWingPos;
+	_vec3					m_vLMWingPos;
 	_vec3					m_vHitDir;
 
 	int						m_iBreathRad = 10;
