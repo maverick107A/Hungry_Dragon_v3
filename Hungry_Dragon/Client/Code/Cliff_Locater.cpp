@@ -92,7 +92,6 @@ HRESULT CCliff_Locater::Add_Component(void)
 		m_vecCliff.emplace_back(CCliff_Object::Create(m_pGraphicDev));
 		m_vecCliff[i]->Set_Trans(_vec3(-11400.f ,0.f, 12800.f * (i)));
 		m_vecCliff[i]->Update_Object(0);
-		
 	}
 	for (int i = 50; i < 100; ++i)
 	{

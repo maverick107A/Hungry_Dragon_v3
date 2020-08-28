@@ -74,7 +74,12 @@ void CTexture_Square::Render_Buffer(void) {
 
 void CTexture_Square::Set_VertexColor(DWORD _dwColor)
 {
+	VTXBOARD*		pVertex = nullptr;
+	m_pVB->Lock(0, 0, (void**)&pVertex, 0);
 	memcpy(m_pColorEntry, &_dwColor, sizeof(DWORD));
+	memcpy(&pVertex[0].dwColor, &_dwColor, sizeof(DWORD));
+	m_pColorEntry = &pVertex[0].dwColor;
+	m_pVB->Unlock();
 }
 
 void CTexture_Square::Free(void) {

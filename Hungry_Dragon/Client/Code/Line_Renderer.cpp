@@ -4,6 +4,7 @@
 #include "Export_Function.h"
 #include "Ingame_Flow.h"
 #include "Bill_Line.h"
+#include "Bill_AlphaLine.h"
 
 USING(Engine)
 
@@ -19,11 +20,16 @@ CLine_Renderer::~CLine_Renderer(void) {
 	{
 		Safe_Release(pLine);
 	}
+	for (auto& pLine : m_listColorLine)
+	{
+		Safe_Release(pLine);
+	}
 	for (auto& pLine : m_listSprite)
 	{
 		Safe_Release(pLine);
 	}
 	m_listLine.clear();
+	m_listColorLine.clear();
 	m_listSprite.clear();
 	Safe_Release(m_pTex);
 }
@@ -44,6 +50,19 @@ int CLine_Renderer::Update_Renderer(const float& fTimeDelta) {
 		{
 			Safe_Release(*iter);
 			iter = m_listLine.erase(iter);
+		}
+		else
+		{
+			++iter;
+		}
+
+	}
+	for (auto& iter = m_listColorLine.begin(); iter != m_listColorLine.end();)
+	{
+		if ((*iter)->Update_Object(fTimeDelta) == OBJ_DEAD)
+		{
+			Safe_Release(*iter);
+			iter = m_listColorLine.erase(iter);
 		}
 		else
 		{
@@ -85,6 +104,10 @@ void CLine_Renderer::Render_Renderer(void) {
 	m_pGraphicDev->SetRenderState(D3DRS_ZWRITEENABLE, false);
 	m_pGraphicDev->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_FLAT);
 	m_pGraphicDev->SetTexture(0, m_pTex);
+	for (auto& pLine : m_listColorLine)
+	{
+		pLine->Render_Object();
+	}
 	for (auto& pLine : m_listLine)
 	{
 		pLine->Render_Object();
@@ -112,6 +135,16 @@ void CLine_Renderer::Draw_Dot(float _fX, float _fY, float _fZ, float _fSpeed , f
 	pLine->Set_Speed(_fSpeed);
 	pLine->Set_Color(_dwColor);
 	m_listLine.emplace_back(pLine);
+}
+
+void CLine_Renderer::Draw_ColorDot(float _fX, float _fY, float _fZ, float _fSpeed, float _fScale, DWORD _dwColor)
+{
+	CBill_AlphaLine* pLine = CBill_AlphaLine::Create(m_pGraphicDev);
+	pLine->Set_Pos(_vec3(_fX, _fY, _fZ));
+	pLine->Set_Scale(_fScale);
+	pLine->Set_Speed(_fSpeed);
+	pLine->Set_Color(_dwColor);
+	m_listColorLine.emplace_back(pLine);
 }
 
 void CLine_Renderer::Draw_DotSprite(LPD3DXSPRITE _pSprite, float _fX, float _fY, float _fSpeed, float _fScale, DWORD _dwColor)

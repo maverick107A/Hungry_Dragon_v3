@@ -82,7 +82,7 @@ HRESULT CScene_Cloud::Ready_Scene(void) {
 	m_hFogTechHandle = m_pFogEffect->GetTechniqueByName("TShader");
 	m_hvFog = m_pFogEffect->GetParameterByName(NULL, "vFog");
 	
-	Engine::Get_FMOD()->PlayBgm(L"CloudBgm");
+	Engine::Get_FMOD()->PlayBgm(L"Devil's Pit");
 
 	CIngame_Flow::GetInstance()->Set_StageID(CIngame_Flow::STAGE_SKY);
 	return S_OK;

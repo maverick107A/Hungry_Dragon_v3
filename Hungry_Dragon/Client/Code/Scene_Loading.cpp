@@ -570,6 +570,8 @@ _uint CScene_Loading::Loading_ForStage(void)
 	Engine::Get_FMOD()->Insert_Bgm("../../Asset/Sound/Bgm/Night_Survivor.mp3", L"CaveBgm");
 	Engine::Get_FMOD()->Insert_Bgm("../../Asset/Sound/Bgm/Flower_Valley.mp3", L"CloudBgm");
 	Engine::Get_FMOD()->Insert_Bgm("../../Asset/Sound/Bgm/Scrap_Valley_Entry.mp3", L"VolcanoBgm");
+	Engine::Get_FMOD()->Insert_Bgm("../../Asset/Sound/Bgm/Devil's Pit.mp3", L"Devil's Pit");
+	Engine::Get_FMOD()->Insert_Bgm("../../Asset/Sound/Bgm/Infinite Azure.mp3", L"Infinite Azure");
 	// È¿°úÀ½
 	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/mouse_on.mp3", L"MouseOn");
 	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/breath_test.mp3", L"BreathTest");

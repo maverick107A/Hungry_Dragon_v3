@@ -87,7 +87,7 @@ int CMeteor_Circular::Update_Object(const float& fTimeDelta) {
 
 
 	_uint uRand = rand() % 10 + 5;
-	for (int i = 0; i < uRand; ++i)
+	for (int i = 0; i < 1; ++i)
 	{
 		CLine_Renderer::GetInstance()->Draw_Dot(vPos.x+((rand()%256) - 128), vPos.y + ((rand() % 256) - 128), vPos.z + ((rand() % 256) - 128), 384.f, 256.f, D3DCOLOR_ARGB(255, 255,255,255));
 	}

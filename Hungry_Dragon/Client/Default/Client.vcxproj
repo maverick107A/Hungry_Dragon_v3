@@ -173,6 +173,7 @@ call CopyUtility.bat</Command>
     <ClInclude Include="..\Code\Bat_Monster.h" />
     <ClInclude Include="..\Code\BillCloud_Locater.h" />
     <ClInclude Include="..\Code\BillCloud_Object.h" />
+    <ClInclude Include="..\Code\Bill_AlphaLine.h" />
     <ClInclude Include="..\Code\BossBullet.h" />
     <ClInclude Include="..\Code\Bill_Line.h" />
     <ClInclude Include="..\Code\BossPlayer.h" />
@@ -259,6 +260,7 @@ call CopyUtility.bat</Command>
     <ClCompile Include="..\Code\Bat_Monster.cpp" />
     <ClCompile Include="..\Code\BillCloud_Locater.cpp" />
     <ClCompile Include="..\Code\BillCloud_Object.cpp" />
+    <ClCompile Include="..\Code\Bill_AlphaLine.cpp" />
     <ClCompile Include="..\Code\BossBullet.cpp" />
     <ClCompile Include="..\Code\Bill_Line.cpp" />
     <ClCompile Include="..\Code\BossPlayer.cpp" />

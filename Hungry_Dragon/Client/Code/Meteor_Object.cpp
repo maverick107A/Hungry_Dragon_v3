@@ -74,9 +74,9 @@ int CMeteor_Object::Update_Object(const float& fTimeDelta) {
 
 
 	_uint uRand = rand() % 20 + 10;
-	for (int i = 0; i < uRand; ++i)
+	for (int i = 0; i < 1; ++i)
 	{
-		CLine_Renderer::GetInstance()->Draw_Dot(vPos.x+((rand()%1000) - 500), vPos.y + ((rand() % 1000) - 500), vPos.z + ((rand() % 1000) - 500), 384.f, 256.f, D3DCOLOR_ARGB(255, 255,255,255));
+		CLine_Renderer::GetInstance()->Draw_Dot(vPos.x+((rand()%1000) - 500), vPos.y + ((rand() % 1000) - 500), vPos.z + ((rand() % 1000) - 500), 768.f, 512.f, D3DCOLOR_ARGB(255, 255,255,255));
 	}
 	return 0;
 }
