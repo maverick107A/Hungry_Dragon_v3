@@ -222,15 +222,33 @@ void CScene_Cloud::Free(void) {
 void CScene_Cloud::Set_AccelRingPos(Engine::CLayer* pLayer)
 {
 	CAccel_Torus* tempAccel;
-	_vec3 vOrigin = _vec3(0.f, 0.f, 500.f);
-	for (int i = 0; i < 500; ++i)
+	_vec3 vOrigin = _vec3(0.f, 0.f, 1000.f);
+	for (int i = 0; i < 250; ++i)
 	{
 		tempAccel =CAccel_Torus::Create(m_pGraphicDev);
 		tempAccel->Set_Trans(vOrigin);
 		pLayer->Add_Object(L"Accel_Torus",tempAccel);
 		vOrigin.x += (5 - rand() % 10) * 75;
-		vOrigin.y += (5 - rand() % 10) * 75;
-		vOrigin.z += 2000;
+		vOrigin.y += (5 - rand() % 10) * 50;
+		vOrigin.z += 2500;
+
+		if (vOrigin.x < -5500)
+		{
+			vOrigin.x = -5350;
+		}
+		else if (vOrigin.x > 5500)
+		{
+			vOrigin.x = 5350;
+		}
+
+		if (vOrigin.y < -1000)
+		{
+			vOrigin.y = -900;
+		}
+		else if (vOrigin.y > 1000)
+		{
+			vOrigin.y = 900;
+		}
 	}
 }
 

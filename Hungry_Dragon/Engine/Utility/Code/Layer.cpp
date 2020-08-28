@@ -155,6 +155,14 @@ void CLayer::LateUpdate_Layer(const _float & fTimeDelta)
 		CCollisionMgr::Player_Boss(&listPlayer, &listBoss, fTimeDelta);
 	}
 
+	//링충돌
+	map<const _tchar*, list<CGameObject*>>::iterator mapAccelRing = find_if(m_mapObject.begin(), m_mapObject.end(), CTag_Finder(L"Accel_Torus"));
+	if (mapAccelRing != m_mapObject.end())
+	{
+		list<CGameObject*>* pListAccelRing = &(mapAccelRing->second);
+
+		CCollisionMgr::Player_AccelRing(&listPlayer, pListAccelRing);
+	}
 
 	//몬스터 충돌
 

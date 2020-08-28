@@ -114,7 +114,7 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 	m_fSpeed = m_fBaseSpeed + m_fPlusSpeed;
 	if (m_fPlusSpeed != 0.f)
 	{
-		m_fPlusSpeed -= fTimeDelta*10.f;
+		m_fPlusSpeed -= fTimeDelta*30.f;
 		if (m_fPlusSpeed < 0.f)
 			m_fPlusSpeed = 0.f;
 	}

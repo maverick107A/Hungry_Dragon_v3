@@ -170,6 +170,31 @@ bool CCollisionMgr::Player_MonsterCol(CGameObject * _caller, CGameObject * _call
 	return ((powf(vDis.x, 2) + powf(vDis.y, 2) + powf(vDis.z, 2)) < 400);
 }
 
+void CCollisionMgr::Player_AccelRing(list<CGameObject*>* _pPlayer, list<CGameObject*>* _pAccelIing)
+{
+	CPlayerMain* pPlayer = static_cast<CPlayerMain*>(_pPlayer->front());
+	_vec3 vPlayerPos;
+	pPlayer->Get_Transform()->Get_Info(Engine::INFO_POS, &vPlayerPos);
+
+	list<CGameObject*>::iterator iter_Ring = _pAccelIing->begin();
+	int iA = 10;
+	for (; iter_Ring != _pAccelIing->end(); ++iter_Ring)
+	{
+		_vec3 vRingPos;
+			
+		CTransform* tempTrans = (*iter_Ring)->Get_Transform();
+		tempTrans->Get_Info(Engine::INFO_POS, &vRingPos);
+		
+		_vec3 vDis = vRingPos - vPlayerPos;
+		D3DXVec3Dot(&vDis, &vDis);
+		if (D3DXVec3Dot(&vDis, &vDis) < 55.f*55.f)
+		{
+			pPlayer->Set_PlusSpeed(120.f);
+		}
+	}
+
+}
+
 
 void Engine::CCollisionMgr::Free(void)
 {

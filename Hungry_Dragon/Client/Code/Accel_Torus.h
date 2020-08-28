@@ -41,7 +41,6 @@ private:
 
 private:
 	Engine::CTorus*		m_pTorus=nullptr;
-	Engine::CTransform*	m_pTransform=nullptr;
 	D3DXCOLOR GOLD = D3DCOLOR_XRGB(255,215,0);
 	D3DMATERIAL9 GOLD_MATERIAL;
 
