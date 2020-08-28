@@ -150,6 +150,13 @@ _int CScene_Cloud::Update_Scene(const _float& fTimeDelta) {
 	
 	CLine_Renderer::GetInstance()->Update_Renderer(fTimeDelta);
 
+	_vec3 vPos;
+	CIngame_Flow::GetInstance()->Get_PlayerTransform()->Get_Info(INFO_POS, &vPos);
+	CIngame_Info::GetInstance()->Get_PlayerInfo()->fStage = vPos.z*0.01f;
+	if (CIngame_Info::GetInstance()->Get_PlayerInfo()->fStage < 0.f)
+	{
+		CIngame_Info::GetInstance()->Get_PlayerInfo()->fStage = 0.f;
+	}
 	return 0;
 }
 
