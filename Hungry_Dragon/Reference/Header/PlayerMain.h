@@ -78,7 +78,7 @@ public:
 	void Set_Right(_vec3 _vRight) { m_vRight = _vRight; }
 	void Set_HitDir(_vec3 _vDir) { m_vHitDir = _vDir; }
 	void Set_FrameSpeed(float _fSpeed) { m_pAnimationController->Set_FrameSpeed(_fSpeed); }
-	void Set_PlusSpeed(float _fSpeed) { m_fPlusSpeed = _fSpeed; }
+	void Set_PlusSpeed(float _fSpeed);
 	void Set_Exhaust(float _fTime) { m_fExhaust = _fTime; }
 
 public:

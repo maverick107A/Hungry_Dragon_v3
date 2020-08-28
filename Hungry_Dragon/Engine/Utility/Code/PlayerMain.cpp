@@ -1,5 +1,6 @@
 #include "PlayerMain.h"
 
+#include "Export_Function.h"
 
 Engine::CPlayerMain::CPlayerMain(LPDIRECT3DDEVICE9 pGraphicDev)
 	: CGameObject(pGraphicDev)
@@ -11,6 +12,12 @@ Engine::CPlayerMain::CPlayerMain(LPDIRECT3DDEVICE9 pGraphicDev)
 Engine::CPlayerMain::~CPlayerMain(void)
 {
 	
+}
+
+void Engine::CPlayerMain::Set_PlusSpeed(float _fSpeed)
+{
+	Engine::Get_FMOD()->PlayEffect(L"RingThrough");
+	m_fPlusSpeed = _fSpeed;
 }
 
 void Engine::CPlayerMain::Free(void)

@@ -241,13 +241,13 @@ void CScene_Cloud::Set_AccelRingPos(Engine::CLayer* pLayer)
 			vOrigin.x = 4500;
 		}
 
-		if (vOrigin.y < -1000)
+		if (vOrigin.y < -800)
 		{
-			vOrigin.y = -900;
+			vOrigin.y = -700;
 		}
-		else if (vOrigin.y > 1000)
-		{
-			vOrigin.y = 900;
+		else if (vOrigin.y > 800)
+		{	
+			vOrigin.y = 700;
 		}
 	}
 }
