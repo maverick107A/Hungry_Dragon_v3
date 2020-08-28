@@ -20,7 +20,6 @@ public:
 	virtual void Out_State();
 
 private:
-	float			m_fSpeed = 40.f;
 	float			m_fBoostMulti = 3.f;
 	float			m_fCheatMulti = 80.f;
 	float			m_fAngleSpeed = 0.15f;
@@ -31,7 +30,7 @@ private:
 public:
 	static CPFly*		Create(void);
 	virtual CComponent*		Clone(void);
-
+	
 private:
 	virtual void Free(void);
 

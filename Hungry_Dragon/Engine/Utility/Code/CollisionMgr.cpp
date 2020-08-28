@@ -35,7 +35,7 @@ void CCollisionMgr::Player_Monster(list<CGameObject*> * _pPlayer, list<CGameObje
 		_vec3 vTemp;
 		float fTemp;
 		float ColSize = Player->Get_ColSize();
-		float fSquareRad = powf(Player->Get_BreathRad(),2);
+		float fSquareRad = powf(float(Player->Get_BreathRad()),2);
 		pPlayer->Get_Transform()->Get_Info(Engine::INFO_POS, &vPlayerPos);
 		if (Player->Get_Breath())
 		{
@@ -85,7 +85,7 @@ void CCollisionMgr::Player_Boss(list<CGameObject*>* _pPlayer, list<CGameObject*>
 		_vec3 vTemp;
 		float fTemp;
 		float ColSize = Player->Get_ColSize();
-		float fSquareRad = powf(Player->Get_BreathRad(), 2);
+		float fSquareRad = powf(float(Player->Get_BreathRad()), 2);
 		pPlayer->Get_Transform()->Get_Info(Engine::INFO_POS, &vPlayerPos);
 		if (Player->Get_Breath())
 		{

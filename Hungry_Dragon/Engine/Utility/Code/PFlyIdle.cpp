@@ -30,7 +30,7 @@ void CPFlyIdle::Update_State(const float& fTimeDelta)
 {
 	if(m_pPlayer->Get_Mana() < m_pPlayer->Get_MaxMana())
 		m_pPlayer->Add_Mana(1);
-	if (m_pPlayer->Get_Stamina() < m_pPlayer->Get_MaxStamina())
+	if (m_pPlayer->Get_Stamina() < m_pPlayer->Get_MaxStamina() && m_pPlayer->Get_Exhaust() < 0.f)
 		m_pPlayer->Add_Stamina(2);
 	if (GetAsyncKeyState(VK_RBUTTON))
 	{

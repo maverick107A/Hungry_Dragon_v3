@@ -87,7 +87,7 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 		m_pPartsTrans[i]->m_vAfterRevAngle = nextFrameMovement.vecRevolution;
 		m_pPartsTrans[i]->m_vScale = nextFrameMovement.vecScale;
 	}
-
+	//입 움직이기
 	if (0.f < m_fMouseTime) {
 		m_fMouseTime -= fTimeDelta;
 
@@ -97,15 +97,29 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 		m_pPartsTrans[PART_FACE]->m_vAfterRevAngle.x = -m_vAngle;
 		m_pPartsTrans[PART_FACE]->m_vAfterPos.z = 1.f;
 		if (m_vAngle < -D3DX_PI*0.15f || m_vAngle > D3DX_PI*0.33f)
-			m_fSpeed *= -1;
-		m_vAngle += m_fSpeed;
+			m_fMSpeed *= -1;
+		m_vAngle += m_fMSpeed;
 	}
 	else
 	{
 		m_vAngle = 0.f;
-		m_fSpeed = 0.1f;
+		m_fMSpeed = 0.1f;
 	}
 	
+	if (GetAsyncKeyState('P'))
+	{
+		m_fPlusSpeed = 40.f;
+	}
+
+	m_fSpeed = m_fBaseSpeed + m_fPlusSpeed;
+	if (m_fPlusSpeed != 0.f)
+	{
+		m_fPlusSpeed -= fTimeDelta*10.f;
+		if (m_fPlusSpeed < 0.f)
+			m_fPlusSpeed = 0.f;
+	}
+	m_fExhaust -= fTimeDelta;
+
 	Engine::CGameObject::Update_Object(fTimeDelta);
 
 	//날개 끝 위치
@@ -127,24 +141,36 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 		m_pParticle->Set_ZeroToOne(10.f*sqrt(m_iBreathRad), 40.f * sqrt(m_iBreathRad));
 		_matrix matMyPos = Get_Transform()->Get_World();
 		Engine::Set_StaticParticleTrans(m_pParticle, _vec3(matMyPos._41, matMyPos._42, matMyPos._43));
-
-		m_pParticleWind=static_cast<CParticle*>(Engine::Particle_Create_Static(Engine::PART_WIND, BeamPos * 2));
-		static_cast<CPart_Wind*>(m_pParticleWind)->Set_Player(this);
-		Engine::Set_StaticParticleTrans(m_pParticleWind, _vec3(matMyPos._41, matMyPos._42, matMyPos._43));
 	}
 	else if (!m_bBreath&&m_pParticle!=nullptr) {
 		m_pParticle->Set_Empty();
 		m_pParticle = nullptr;
-
-		m_pParticleWind->Set_Empty();
-		m_pParticleWind = nullptr;
 	}
 	else if (m_bBreath) {
 		_matrix matMyPos = Get_Transform()->Get_World();
 		Engine::Set_StaticParticleTrans(m_pParticle, _vec3(matMyPos._41, matMyPos._42, matMyPos._43));
+	}
+	//가속시 윈드파티클
+	if (m_fPlusSpeed != 0.f && m_pParticleWind == nullptr)
+	{
+		_matrix matMyPos = Get_Transform()->Get_World();
+		_vec3 vWindStart;
+		memcpy(&vWindStart, &matMyPos, sizeof(_vec3));
+		m_pParticleWind = static_cast<CParticle*>(Engine::Particle_Create_Static(Engine::PART_WIND, vWindStart * 3));
+		static_cast<CPart_Wind*>(m_pParticleWind)->Set_Player(this);
 		Engine::Set_StaticParticleTrans(m_pParticleWind, _vec3(matMyPos._41, matMyPos._42, matMyPos._43));
 	}
-	
+	else if (m_fPlusSpeed == 0.f && m_pParticleWind != nullptr)
+	{
+		m_pParticleWind->Set_Empty();
+		m_pParticleWind = nullptr;
+	}
+	else if (m_fPlusSpeed != 0.f)
+	{
+		_matrix matMyPos = Get_Transform()->Get_World();
+		Engine::Set_StaticParticleTrans(m_pParticleWind, _vec3(matMyPos._41, matMyPos._42, matMyPos._43));
+	}
+
 
 	_vec3 vPos;
 	m_pTransform->Get_Info(INFO_POS, &vPos);

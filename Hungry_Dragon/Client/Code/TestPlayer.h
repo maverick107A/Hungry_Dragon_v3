@@ -37,10 +37,7 @@ private:
 	void			Preset_Animation();
 
 	float m_vAngle = 0.f;
-	float m_fSpeed = 0.1f;
-
-	float m_vWAngle = 0.f;
-	float m_fWSpeed = 0.03f;
+	float m_fMSpeed = 0.1f;
 
 	list<Engine::CResources*>  m_arrParticle;
 

@@ -113,6 +113,10 @@ int CBossPlayer::Update_Object(const float& fTimeDelta)
 		m_vAngle += m_fSpeed;
 	}
 	
+	m_fSpeed = m_fBaseSpeed + m_fPlusSpeed;
+	m_fPlusSpeed *= 0.995;
+	m_fExhaust -= fTimeDelta;
+
 	Engine::CGameObject::Update_Object(fTimeDelta);
 
 	//날개 끝 위치

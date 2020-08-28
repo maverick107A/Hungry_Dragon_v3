@@ -100,9 +100,12 @@ void CPBreathFly::Update_State(const float& fTimeDelta)
 		vDir += D3DXVECTOR3(0.f, 1.f, 0.f);
 		bCheck = true;
 	}
-	if (GetAsyncKeyState(VK_SHIFT) && 0 < m_pPlayer->Get_Stamina())
+	if (GetAsyncKeyState(VK_SHIFT))
 	{
-		bShift = true;
+		if (0 < m_pPlayer->Get_Stamina())
+			bShift = true;
+		else
+			m_pPlayer->Set_Exhaust(1.5f);
 	}
 	//if (GetAsyncKeyState('Q'))
 	//{
@@ -130,12 +133,12 @@ void CPBreathFly::Update_State(const float& fTimeDelta)
 		}
 		else
 		{
-			if (m_pPlayer->Get_Stamina() < m_pPlayer->Get_MaxStamina())
+			if (m_pPlayer->Get_Stamina() < m_pPlayer->Get_MaxStamina() && m_pPlayer->Get_Exhaust() < 0.f)
 				m_pPlayer->Add_Stamina(1);
 			m_pPlayer->Set_Animation(ANI_BREATHFLY);
 		}
 		//속도적용
-		vDir *= fTimeDelta*m_fSpeed;
+		vDir *= fTimeDelta*m_pPlayer->Get_Speed();
 		//가속
 		m_vSpeed += vDir;
 		//감쇠

@@ -45,6 +45,8 @@ public:
 	int						Get_MaxMana() { return m_iMaxMana; }
 	int						Get_BreathRad() { return m_iBreathRad; }
 	float					Get_ColSize() { return m_fColSize; }
+	float					Get_Speed() { return m_fSpeed; }
+	float					Get_Exhaust() { return m_fExhaust; }
 	bool					Get_Breath() { return m_bBreath; }
 	bool					Get_AccelCheck() { return m_bAccelCheck; }
 	bool					Get_LockOn() { return m_bLock; }
@@ -63,6 +65,7 @@ public:
 	_vec3					Get_HitDir() { return m_vHitDir; }
 	STATE					Get_State() { return m_eState; }
 
+
 	ANIMATION				m_eAnimation = ANI_IDLE;
 
 public:
@@ -75,6 +78,8 @@ public:
 	void Set_Right(_vec3 _vRight) { m_vRight = _vRight; }
 	void Set_HitDir(_vec3 _vDir) { m_vHitDir = _vDir; }
 	void Set_FrameSpeed(float _fSpeed) { m_pAnimationController->Set_FrameSpeed(_fSpeed); }
+	void Set_PlusSpeed(float _fSpeed) { m_fPlusSpeed = _fSpeed; }
+	void Set_Exhaust(float _fTime) { m_fExhaust = _fTime; }
 
 public:
 	void Add_Hp(int _iHp) { m_iHp += _iHp; }
@@ -99,13 +104,16 @@ protected:
 	D3DXVECTOR3				m_vRight;
 	float					m_fAngleX = 0.f;
 	float					m_fAngleY = 0.f;
+	float					m_fBaseSpeed = 40.f;
+	float					m_fPlusSpeed = 0.f;
+	float					m_fSpeed = 0.f;
+	float					m_fExhaust = 0.f;
 	bool					m_bAccelCheck = false;
 	bool					m_bLand = false;
 	bool					m_bShift = false;
 	bool					m_bBreath = false;
 	bool					m_bLock = false;
 	float					m_fMouseTime = 0.f;
-	float					m_fSpeed = 10.f;
 	STATE					m_eState = STATE_END;
 
 	int						m_iHp = 100;
