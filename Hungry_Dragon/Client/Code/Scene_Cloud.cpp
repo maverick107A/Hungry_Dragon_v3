@@ -232,13 +232,13 @@ void CScene_Cloud::Set_AccelRingPos(Engine::CLayer* pLayer)
 		vOrigin.y += (5 - rand() % 10) * 50;
 		vOrigin.z += 2500;
 
-		if (vOrigin.x < -5500)
+		if (vOrigin.x < -4750)
 		{
-			vOrigin.x = -5350;
+			vOrigin.x = -4500;
 		}
-		else if (vOrigin.x > 5500)
+		else if (vOrigin.x > 4750)
 		{
-			vOrigin.x = 5350;
+			vOrigin.x = 4500;
 		}
 
 		if (vOrigin.y < -1000)

@@ -57,6 +57,10 @@ int CGiantGolem::Update_Object(const float & fTimeDelta)
 	if (m_ePattern == PAT_CICLE)
 	{ 
 		m_pTransform->m_vAngle.y += 0.3f;
+		if (m_pTransform->m_vAngle.y >= D3DXToRadian(360.f))
+		{
+			m_pTransform->m_vAngle.y -= D3DXToRadian(360.f);
+		}
 	}
 	else 
 	{

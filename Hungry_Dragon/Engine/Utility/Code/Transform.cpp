@@ -159,7 +159,12 @@ _matrix CTransform::Get_World()
 
 void Engine::CTransform::Rotation(ROTATION eType, const _float& fAngle)
 {
-	*(((_float*)&m_vAngle) + eType) += fAngle;
+	if(eType==ROT_Z)
+		*(((_float*)&m_vAngle) + 2) += fAngle;
+	else if (eType == ROT_X)
+		*(((_float*)&m_vAngle)) += fAngle;
+	else if (eType == ROT_Y)
+		*(((_float*)&m_vAngle)+1) += fAngle;
 }
 
 const _matrix * CTransform::Compute_LookAtTarget(const _vec3 * pTargetPos)

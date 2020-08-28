@@ -26,6 +26,7 @@ void CAccel_Torus::Initialize_Object() {
 }
 
 _int CAccel_Torus::Update_Object(const _float & fTimeDelta) {
+	m_pTransform->Rotation(Engine::ROT_Z, D3DXToRadian(1.f));
 	Engine::CGameObject::Update_Object(fTimeDelta);
 
 	return 0;
