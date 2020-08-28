@@ -109,8 +109,8 @@ int CBossPlayer::Update_Object(const float& fTimeDelta)
 		m_pPartsTrans[PART_FACE]->m_vAfterRevAngle.x = -m_vAngle;
 		m_pPartsTrans[PART_FACE]->m_vAfterPos.z = 1.f;
 		if (m_vAngle < -D3DX_PI*0.15f || m_vAngle > D3DX_PI*0.33f)
-			m_fSpeed *= -1;
-		m_vAngle += m_fSpeed;
+			m_fMSpeed *= -1;
+		m_vAngle += m_fMSpeed;
 	}
 	
 	m_fSpeed = m_fBaseSpeed + m_fPlusSpeed;

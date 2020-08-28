@@ -104,6 +104,8 @@ protected:
 	D3DXVECTOR3				m_vRight;
 	float					m_fAngleX = 0.f;
 	float					m_fAngleY = 0.f;
+	float					m_vAngle = 0.f;
+	float					m_fMSpeed = 0.1f;
 	float					m_fBaseSpeed = 40.f;
 	float					m_fPlusSpeed = 0.f;
 	float					m_fSpeed = 0.f;

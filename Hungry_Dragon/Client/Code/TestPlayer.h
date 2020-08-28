@@ -36,9 +36,6 @@ private:
 
 	void			Preset_Animation();
 
-	float m_vAngle = 0.f;
-	float m_fMSpeed = 0.1f;
-
 	list<Engine::CResources*>  m_arrParticle;
 
 	D3DXVECTOR3 m_vP = {0.f,0.f,0.f};
