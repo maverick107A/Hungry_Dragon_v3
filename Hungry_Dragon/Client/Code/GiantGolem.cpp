@@ -85,9 +85,18 @@ int CGiantGolem::Update_Object(const float & fTimeDelta)
 		}
 	}
 
-	if(m_ePattern == PAT_FIREBALL)
-		Shooting();
+	if (m_ePattern == PAT_FIREBALL)
+	{
+		m_fShotingLate += fTimeDelta;
 
+		if (m_fShotingLate > m_fShotingDelay)
+		{
+			Shooting();
+			m_fShotingLate = 0;
+		}
+
+	}
+		
 
 	if (m_bPatternEnd)
 	{
@@ -503,7 +512,7 @@ void CGiantGolem::Preset_Animation()
 	
 	
 	
-	// È¸Àü È¸¿À¸®
+	//  »§¾ß¤À»§¾ß
 	m_pAnimationController->Add_Animator(PAT_IDLE);
 
 	// ¿ÞÆÈ Á¶ÁØ
@@ -516,7 +525,15 @@ void CGiantGolem::Preset_Animation()
 	m_pAnimationController->Insert_Rotate(PAT_FIREBALL, PART_LEFTHAND,5, _vec3(0.f, 2.76f, 0.f));
 	m_pAnimationController->Insert_Trans(PAT_FIREBALL, PART_LEFTHAND, 5, _vec3(0.f, -1800.f, 0.f));
 
-
+	// ¿ÞÆÈ Á¶ÁØ
+	// ¿Þ ¾î±ú
+	m_pAnimationController->Insert_Scale(PAT_FIREBALL, PART_LEFTARM,  15, _vec3(500.f, 500.f, 500.f));
+	m_pAnimationController->Insert_Rotate(PAT_FIREBALL, PART_LEFTARM, 15, _vec3(fQater, D3DX_PI, -0.3f));
+	m_pAnimationController->Insert_Trans(PAT_FIREBALL, PART_LEFTARM,  15, _vec3(-1200, 500.f, 0.f));
+	// ¿Þ ¼Õ															
+	m_pAnimationController->Insert_Scale(PAT_FIREBALL, PART_LEFTHAND,  15, _vec3(500.f, 500.f, 500.f));
+	m_pAnimationController->Insert_Rotate(PAT_FIREBALL, PART_LEFTHAND, 15, _vec3(0.f, 8.76f, 0.f));
+	m_pAnimationController->Insert_Trans(PAT_FIREBALL, PART_LEFTHAND,  15, _vec3(0.f, -1800.f, 0.f));
 }
 
 void CGiantGolem::Animation_Render()

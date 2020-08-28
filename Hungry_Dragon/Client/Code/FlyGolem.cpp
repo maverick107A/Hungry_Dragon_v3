@@ -25,7 +25,8 @@ HRESULT CFlyGolem::Ready_Object(void)
 	m_fDamaged = 2.f;
 	m_eState = MONSTER_REBORN;
 	m_eVariation = MONSTER_FLYGOLEM;
-	m_fDead_Range = 10000.f;
+	m_fDead_Range = 20000.f;
+
 	return S_OK;
 }
 

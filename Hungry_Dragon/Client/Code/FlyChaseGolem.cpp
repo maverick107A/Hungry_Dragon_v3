@@ -23,7 +23,8 @@ HRESULT CFlyChaseGolem::Ready_Object(void)
 	m_fScale = 30.f;
 	m_fMaxScale = 30.f;
 	m_fMaxHalfScale = 15.f;
-	m_fDead_Range = 10000.f;
+	m_fDead_Range = 20000.f;
+
 
 	m_fDamaged = 2.f;
 	m_eState = MONSTER_REBORN;

@@ -57,6 +57,12 @@ private:
 	D3DXVECTOR3 m_vLookPos;
 
 
+	int			m_f = 0;
+	bool		m_b = false;
+	float		m_fShotingLate = 0;
+	float		m_fShotingDelay = 1.8;
+
+
 	Engine::CAnimation_Controller* m_pAnimationController;
 	BOSSPATTERN						m_ePattern = PAT_IDLE;
 

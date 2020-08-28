@@ -44,7 +44,7 @@ int CBoss_Bullet::Update_Object(const float & fTimeDelta)
 	if (m_bFirst)
 	{
 		m_pTransform->Set_Trans(&m_vFirstPos);
-		m_pTransform->Set_Scale(3000.f);
+		m_pTransform->Set_Scale(1500.f);
 		m_bFirst = false;
 		m_iEvent = 0;
 		m_eState = IDLE_BULLET;
