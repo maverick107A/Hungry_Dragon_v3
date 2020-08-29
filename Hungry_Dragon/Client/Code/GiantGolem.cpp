@@ -2,7 +2,7 @@
 #include "Export_Function.h"
 #include "Terrain_Locater.h"
 #include "GiantGolem.h"
-
+#include "Boss_Flow.h"
 
 CGiantGolem::CGiantGolem(LPDIRECT3DDEVICE9 pGraphicDev)
 	:Engine::CMonsterMain(pGraphicDev)
@@ -35,7 +35,7 @@ int CGiantGolem::Update_Object(const float & fTimeDelta)
 
 	if (m_eState == MONSTER_REBORN && m_eState != MONSTER_DEACTIVATE)
 	{
-		m_vFirstPos = { 19200.f ,  2500.f  ,  19200.f };
+		m_vFirstPos = { 19200.f ,  -2500.f  ,  19200.f };
 		m_pTransform->Set_Trans(&m_vFirstPos);
 		m_pTransform->Set_Scale(m_fMaxScale);
 		m_fMonster_HP = m_fMonster_MaxHP;
@@ -101,6 +101,15 @@ int CGiantGolem::Update_Object(const float & fTimeDelta)
 
 	}
 		
+	if (m_ePattern == PAT_APEAR && m_pTransform->m_vInfo[Engine::INFO_POS].y < 2500.f )
+	{
+		D3DXVECTOR3 _vPos = { 0.f, 10.f, 0.f };
+		m_pTransform->Add_Trans(&_vPos);
+	}
+	else if (m_ePattern == PAT_APEAR && m_pTransform->m_vInfo[Engine::INFO_POS].y >= 2500.f)
+	{
+		CBoss_Flow::GetInstance()->Set_Phase(CBoss_Flow::PHASE_2);
+	}
 
 	if (m_bPatternEnd)
 	{
@@ -166,7 +175,6 @@ void CGiantGolem::Set_Phase_One_Pattern(float  _fTimeDelta)
 				m_pAnimationController->Set_Pattern(m_ePattern);
 				++m_iPatternNum;
 				break;
-	
 			case 3:
 				m_ePattern = PAT_FIREBALL;
 				m_pAnimationController->Set_Pattern(m_ePattern);
@@ -294,29 +302,28 @@ void CGiantGolem::Preset_Animation()
 
 
 
-
 	// 두등 등장
 	m_pAnimationController->Add_Animator(PAT_IDLE);
 
 	// 팔 크로스!
 	// Left
 	// Arm
-	m_pAnimationController->Insert_Scale(PAT_APEAR, PART_LEFTARM,	10, _vec3(500.f, 500.f, 500.f));
-	m_pAnimationController->Insert_Rotate(PAT_APEAR, PART_LEFTARM,	10, _vec3(0.7f, 4.14f, 0.f));
-	m_pAnimationController->Insert_Trans(PAT_APEAR, PART_LEFTARM,	10, _vec3(-1000.f, 800.f, 0.f));
-	//// Hand
-	m_pAnimationController->Insert_Scale(PAT_APEAR, PART_LEFTHAND,  10, _vec3(500.f, 500.f, 500.f));
-	m_pAnimationController->Insert_Rotate(PAT_APEAR, PART_LEFTHAND, 10, _vec3(-1.5f, 2.76f, 0.6f));
-	m_pAnimationController->Insert_Trans(PAT_APEAR, PART_LEFTHAND,  10, _vec3(300.f, -1000.f, 0.f));
-	// Right
-	// Arm
-	m_pAnimationController->Insert_Scale(PAT_APEAR, PART_RIGHTARM,  10, _vec3(500.f, 500.f, 500.f));
-	m_pAnimationController->Insert_Rotate(PAT_APEAR, PART_RIGHTARM, 10, _vec3(-1.0f, -1.f, 0.f));
-	m_pAnimationController->Insert_Trans(PAT_APEAR, PART_RIGHTARM,  10, _vec3(1200.f, 800.f, 0.f));
-	//// Hand
-	m_pAnimationController->Insert_Scale(PAT_APEAR, PART_RIGHTHAND,  10, _vec3(500.f, 500.f, 500.f));
-	m_pAnimationController->Insert_Rotate(PAT_APEAR, PART_RIGHTHAND, 10, _vec3(1.0f, 2.8f, -0.5f));
-	m_pAnimationController->Insert_Trans(PAT_APEAR, PART_RIGHTHAND,  10, _vec3(300.f, -1000.f, 0.f));
+	m_pAnimationController->Insert_Scale(PAT_APEAR, PART_LEFTARM,	 50, _vec3(500.f, 500.f, 500.f));
+	m_pAnimationController->Insert_Rotate(PAT_APEAR, PART_LEFTARM,	 50, _vec3(0.7f, 4.14f, 0.f));
+	m_pAnimationController->Insert_Trans(PAT_APEAR, PART_LEFTARM,	 50, _vec3(-1000.f, 800.f, 0.f));
+	//// Hand														 5
+	m_pAnimationController->Insert_Scale(PAT_APEAR, PART_LEFTHAND,   50, _vec3(500.f, 500.f, 500.f));
+	m_pAnimationController->Insert_Rotate(PAT_APEAR, PART_LEFTHAND,  50, _vec3(-1.5f, 2.76f, 0.6f));
+	m_pAnimationController->Insert_Trans(PAT_APEAR, PART_LEFTHAND,   50, _vec3(300.f, -1000.f, 0.f));
+	// Right														 5
+	// Arm															 5
+	m_pAnimationController->Insert_Scale(PAT_APEAR, PART_RIGHTARM,   50, _vec3(500.f, 500.f, 500.f));
+	m_pAnimationController->Insert_Rotate(PAT_APEAR, PART_RIGHTARM,  50, _vec3(-1.0f, -1.f, 0.f));
+	m_pAnimationController->Insert_Trans(PAT_APEAR, PART_RIGHTARM,   50, _vec3(1200.f, 800.f, 0.f));
+	//// Hand														 5
+	m_pAnimationController->Insert_Scale(PAT_APEAR, PART_RIGHTHAND,  50, _vec3(500.f, 500.f, 500.f));
+	m_pAnimationController->Insert_Rotate(PAT_APEAR, PART_RIGHTHAND, 50, _vec3(1.0f, 2.8f, -0.5f));
+	m_pAnimationController->Insert_Trans(PAT_APEAR, PART_RIGHTHAND,  50, _vec3(300.f, -1000.f, 0.f));
 
 
 

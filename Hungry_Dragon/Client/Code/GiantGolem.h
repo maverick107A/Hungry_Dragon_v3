@@ -17,8 +17,6 @@ END
 
 class  CGiantGolem : public Engine::CMonsterMain
 {
-
-
 public:
 	enum BOSSPATTERN { PAT_IDLE, PAT_APEAR , PAT_PUNCH , PAT_STOMP , PAT_CICLE , PAT_FIREBALL , PAT_END };
 

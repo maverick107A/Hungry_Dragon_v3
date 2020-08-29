@@ -31,7 +31,7 @@ private:
 	CGiantGolem*	m_pBoss = nullptr;
 	CTransform*		m_pPlayerTransform = nullptr;
 	_bool			m_bBossPause = false;
-	PHASEID			m_uPhaseNum = PHASE_2;
+	PHASEID			m_uPhaseNum = PHASE_1;
 	
 
 private:

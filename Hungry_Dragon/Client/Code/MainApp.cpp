@@ -23,6 +23,7 @@
 #include "Ingame_Flow.h"
 #include "Ingame_Info.h"
 #include "Line_Renderer.h"
+#include "Boss_Flow.h"
 
 //-------------------------------------------------------
 //기타 헤더**********************************************
@@ -187,6 +188,7 @@ void CMainApp::Free(void)
 	CIngame_Info::DestroyInstance();
 	CIngame_Flow::GetInstance()->Release_AllResources();
 	CIngame_Flow::DestroyInstance();
+	CBoss_Flow::DestroyInstance();
 	CLine_Renderer::DestroyInstance();
 
 	Engine::Safe_Release(m_pGraphicDev);
