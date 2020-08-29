@@ -112,73 +112,6 @@ int CGiantGolem::Update_Object(const float & fTimeDelta)
 		}
 	}
 
-	if (m_ePattern == PAT_IDLE)
-	{
-		m_fPatternTime += fTimeDelta;
-
-		if (m_fPatternTime > m_fPatternDelay)
-		{
-			switch (m_iPatternNum)
-			{
-			case 0:
-				m_ePattern = PAT_PUNCH;
-				m_pAnimationController->Set_Pattern(m_ePattern);
-				++m_iPatternNum;
-				break;		
-			case 1:
-				m_ePattern = PAT_STOMP;
-				m_pAnimationController->Set_Pattern(m_ePattern);
-				++m_iPatternNum;
-				break;
-			
-			case 2:
-				m_ePattern = PAT_CICLE;
-				m_pAnimationController->Set_Pattern(m_ePattern);
-				++m_iPatternNum;
-				break;
-			
-			case 3:
-				m_ePattern = PAT_FIREBALL;
-				m_pAnimationController->Set_Pattern(m_ePattern);
-				m_iPatternNum = 0;
-				break;
-			}
-			for (int i = 0; i < BOSSPARTS::PARTS_END; ++i)
-			{
-				m_pAnimationController->Set_SpecificFrame(m_ePattern, i);
-			}
-			m_bPatternEnd = false;
-		}
-	}
-
-	if (GetAsyncKeyState('L') & 0x0001)
-	{
-		switch (m_iPatternNum)
-		{
-		case 0:
-			m_ePattern = PAT_PUNCH;
-			++m_iPatternNum;
-			break;
-		case 1:
-			m_ePattern = PAT_STOMP;
-			++m_iPatternNum;
-			break;
-
-		case 2:
-			m_ePattern = PAT_CICLE;
-			++m_iPatternNum;
-			break;
-
-		case 3:
-			m_ePattern = PAT_FIREBALL;
-			m_iPatternNum = 0;
-			break;
-		}
-		for (int i = 0; i < BOSSPARTS::PARTS_END; ++i)
-		{
-			m_pAnimationController->Set_SpecificFrame(m_ePattern, i);
-		}
-	}
 
 	for (int i = 0; i < PARTS_END; ++i)
 	{
@@ -205,6 +138,48 @@ void CGiantGolem::Render_Object(void)
 	Animation_Render();
 	m_pGraphicDev->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_FLAT);
 
+}
+
+void CGiantGolem::Set_Phase_One_Pattern(float  _fTimeDelta)
+{
+	if (m_ePattern == PAT_IDLE)
+	{
+		m_fPatternTime += _fTimeDelta;
+	
+		if (m_fPatternTime > m_fPatternDelay)
+		{
+			switch (m_iPatternNum)
+			{
+			case 0:
+				m_ePattern = PAT_PUNCH;
+				m_pAnimationController->Set_Pattern(m_ePattern);
+				++m_iPatternNum;
+				break;
+			case 1:
+				m_ePattern = PAT_STOMP;
+				m_pAnimationController->Set_Pattern(m_ePattern);
+				++m_iPatternNum;
+				break;
+	
+			case 2:
+				m_ePattern = PAT_CICLE;
+				m_pAnimationController->Set_Pattern(m_ePattern);
+				++m_iPatternNum;
+				break;
+	
+			case 3:
+				m_ePattern = PAT_FIREBALL;
+				m_pAnimationController->Set_Pattern(m_ePattern);
+				m_iPatternNum = 0;
+				break;
+			}
+			for (int i = 0; i < BOSSPARTS::PARTS_END; ++i)
+			{
+				m_pAnimationController->Set_SpecificFrame(m_ePattern, i);
+			}
+			m_bPatternEnd = false;
+		}
+	}
 }
 
 HRESULT CGiantGolem::Add_Component(void)
@@ -595,6 +570,14 @@ void CGiantGolem::Shooting(void)
 
 	Engine::Set_Bullet_LayerMap(Engine::OBJID::NORMAL_BULLET, 1, m_vShootPos);
 
+}
+
+void CGiantGolem::Set_Pattern(BOSSPATTERN _pattern)
+{
+	if (m_ePattern == PAT_IDLE)
+	{
+		m_ePattern = _pattern;
+	}
 }
 
 

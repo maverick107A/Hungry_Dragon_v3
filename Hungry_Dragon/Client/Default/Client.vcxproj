@@ -177,6 +177,7 @@ call CopyUtility.bat</Command>
     <ClInclude Include="..\Code\BossBullet.h" />
     <ClInclude Include="..\Code\Bill_Line.h" />
     <ClInclude Include="..\Code\BossPlayer.h" />
+    <ClInclude Include="..\Code\Boss_Flow.h" />
     <ClInclude Include="..\Code\Cave.h" />
     <ClInclude Include="..\Code\CavePlayer.h" />
     <ClInclude Include="..\Code\Chase_Monster.h" />
@@ -264,6 +265,7 @@ call CopyUtility.bat</Command>
     <ClCompile Include="..\Code\BossBullet.cpp" />
     <ClCompile Include="..\Code\Bill_Line.cpp" />
     <ClCompile Include="..\Code\BossPlayer.cpp" />
+    <ClCompile Include="..\Code\Boss_Flow.cpp" />
     <ClCompile Include="..\Code\Cave.cpp" />
     <ClCompile Include="..\Code\CavePlayer.cpp" />
     <ClCompile Include="..\Code\Chase_Monster.cpp" />

@@ -3,18 +3,22 @@
 #include "Export_Function.h"
 #include "Ingame_Flow.h"
 #include "Ingame_Info.h"
+#include "Boss_Flow.h"
 #include "Line_Renderer.h"
 
 CScene_Volcano::CScene_Volcano(LPDIRECT3DDEVICE9 pGraphicDev)
-	: Engine::CScene(pGraphicDev) {
+	: Engine::CScene(pGraphicDev) 
+{
 
 }
 
-CScene_Volcano::~CScene_Volcano(void) {
+CScene_Volcano::~CScene_Volcano(void) 
+{
 
 }
 
-HRESULT CScene_Volcano::Ready_Scene(void) {
+HRESULT CScene_Volcano::Ready_Scene(void) 
+{
 
 	Engine::Ready_ParticleMgr(m_pGraphicDev);
 
@@ -128,6 +132,9 @@ _int CScene_Volcano::Update_Scene(const _float& fTimeDelta) {
 	CIngame_Info::GetInstance()->Update_Info(fTimeDelta);
 	
 	CLine_Renderer::GetInstance()->Update_Renderer(fTimeDelta);
+
+	CBoss_Flow::GetInstance()->Update_BossFlow(fTimeDelta);
+
 
 	return 0;
 }
@@ -276,14 +283,16 @@ HRESULT CScene_Volcano::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 	pLayer->Set_Address();
 
 	Engine::CGameObject*		pGameObject = nullptr;
-	
+	CGiantGolem*				pObject = nullptr;
+
 	
 	FAILED_CHECK_RETURN(Register_GameObject<CBossPlayer>(pLayer, L"TestPlayer"), E_FAIL);
 	FAILED_CHECK_RETURN(Register_GameObject<CVolcano_Parts>(pLayer, L"Land"), E_FAIL);
-	FAILED_CHECK_RETURN(Register_GameObject<CGiantGolem>(pLayer, L"BossObject"), E_FAIL);
+	FAILED_CHECK_RETURN(Register_GameObject<CGiantGolem>( &pObject, pLayer, L"BossObject"), E_FAIL);
 	FAILED_CHECK_RETURN(Register_GameObject<CVolcano_Erupt>(pLayer, L"Erupt"), E_FAIL);
 
-	//pGameObject = m_pParentsBody = CGiantGolem_Body::Create(m_pGraphicDev);
+	CBoss_Flow::GetInstance()->Ready_Boss_Flow( m_pGraphicDev , pObject);
+	//pGameObject = m_pParentsBody = CGiantGolem::Create(m_pGraphicDev);
 	//NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	//pGameObject->Set_Address(pLayer);
 	//Engine::Add_Object_Pool(pGameObject, OBJID::STAND_MONSTER);

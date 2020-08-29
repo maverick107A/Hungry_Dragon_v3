@@ -519,6 +519,9 @@
     <ClInclude Include="..\Code\Bill_AlphaLine.h">
       <Filter>02. GameObject\01. Stage\73. Billl_AlphaLine</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\Boss_Flow.h">
+      <Filter>97. WorkFlow</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -766,6 +769,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Bill_AlphaLine.cpp">
       <Filter>02. GameObject\01. Stage\73. Billl_AlphaLine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Boss_Flow.cpp">
+      <Filter>97. WorkFlow</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

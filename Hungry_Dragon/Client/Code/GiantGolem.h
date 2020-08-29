@@ -32,15 +32,29 @@ public:
 	virtual void Render_Object(void) override;
 	virtual void LateUpdate_Object(const float& fTimeDelta) override;
 	void Shooting(void);
+
+public:
+	// Get | Set
+	BOSSPATTERN Get_Pattern()	{ return m_ePattern;  }
+	float		Get_HP()		{ return m_fMonster_HP; }
+	float		Get_Scale()		{ return m_fScale; }
+
+	void		Set_Phase_One_Pattern(float  _fTimeDelta);
+
+	void		Set_Pattern(BOSSPATTERN _pattern);
+
+
 private:
 	HRESULT		Add_Component(void);
 	void		Preset_Animation();
+	void		Animation_Render();
 
-	void Animation_Render();
 
 public:
 	static CGiantGolem*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 
+	
+	
 private:
 	D3DXVECTOR3 m_vBodyPos;
 	float		m_fAngle = 0;
@@ -52,8 +66,7 @@ private:
 	int		m_iPatternNum	 = 0;
 
 	D3DXVECTOR3 m_vPos;
-	D3DXVECTOR3 m_vShootPos;
-
+	D3DXVECTOR3 m_vShootPos; 
 	D3DXVECTOR3 m_vLookPos;
 
 

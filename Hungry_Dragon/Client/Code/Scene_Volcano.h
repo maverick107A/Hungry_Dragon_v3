@@ -22,7 +22,7 @@
 #include "GiantGolem_Right_Arm.h"
 #include "GiantGolem_Right_Hand.h"
 #include "GiantGolem.h"
-
+#include "Boss_Flow.h"
 
 #include "BossBullet.h"
 
