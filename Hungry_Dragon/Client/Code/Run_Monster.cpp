@@ -26,6 +26,11 @@ HRESULT CRun_Monster::Ready_Object(void)
 
 	m_eVariation = MONSTER_RUN;
 
+
+	m_pTransform->m_vScale = _vec3(1.f, 1.f, 3.f);
+	m_pTransform->Rotation(Engine::ROT_X, D3DXToRadian(90.f));
+	m_pTransform->Update_Component(0.f);
+
 	switch (rand() % 4)
 	{
 	case 0:
@@ -133,7 +138,7 @@ void CRun_Monster::Render_Object(void)
 {
 	m_pTransform->Set_Transform(m_pGraphicDev);
 
-	m_pBufferCubeCom->Render_Buffer();
+	m_pBufferMeshCom->Render_Buffer();
 
 
 	if (m_eType != CMonsterMain::BUFF_NONE)
@@ -166,8 +171,8 @@ HRESULT CRun_Monster::Add_Component(void)
 	Engine::CComponent*		pComponent = nullptr;
 
 	// buffer
-	pComponent = m_pBufferCubeCom = dynamic_cast<Engine::CTexture_Cube*>
-		(Engine::Clone(RESOURCE_STATIC, L"Buffer_CubeTex"));
+	pComponent = m_pBufferMeshCom = dynamic_cast<Engine::CVICustom*>
+		(Engine::Clone(RESOURCE_STATIC, L"BUFFER_TREASURE"));
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_STATIC].emplace(L"Com_Buffer", pComponent);
 

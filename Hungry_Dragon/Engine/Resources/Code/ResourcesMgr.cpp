@@ -172,6 +172,9 @@ HRESULT Engine::CResourcesMgr::Ready_Buffer(LPDIRECT3DDEVICE9 pGraphicDev,
 	case  BUFFER_BOMB:
 		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/BombMob.dat");
 		break;
+	case BUFFER_TREASURE:
+		pResources = CVICustom::Create(pGraphicDev, L"../../Asset/VIMesh/Treasure.dat");
+		break;
 	case  BUFFER_TORUS:
 		pResources = CTorus::Create(pGraphicDev);
 		break;
