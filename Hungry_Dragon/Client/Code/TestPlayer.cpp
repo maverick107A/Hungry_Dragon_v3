@@ -155,6 +155,12 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 		_matrix matMyPos = Get_Transform()->Get_World();
 		Engine::Set_StaticParticleTrans(m_pParticle, _vec3(matMyPos._41, matMyPos._42, matMyPos._43));
 	}
+
+	if (m_bBreath)
+	{
+		Engine::Get_FMOD()->PlayEffect(L"Breath");
+	}
+
 	//가속시 윈드파티클
 	if (m_fPlusSpeed != 0.f && m_pParticleWind == nullptr)
 	{

@@ -596,6 +596,7 @@ _uint CScene_Loading::Loading_ForStage(void)
 	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/die5.mp3", L"bat_die3");
 	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/bite.mp3", L"bite");
 	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/RingThrough.wav", L"RingThrough");
+	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/Breath2.wav", L"Breath");
 
 
 
