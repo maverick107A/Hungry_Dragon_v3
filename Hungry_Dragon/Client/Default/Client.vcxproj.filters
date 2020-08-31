@@ -262,6 +262,9 @@
     <Filter Include="02. GameObject\01. Stage\73. Billl_AlphaLine">
       <UniqueIdentifier>{a20e68e6-1e08-4157-881d-8ca96daaf73d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02. GameObject\01. Stage\68. Meteor_Object\01. Linear">
+      <UniqueIdentifier>{076edc1c-dfea-45c5-a1b8-2fb32f09dd52}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -522,6 +525,9 @@
     <ClInclude Include="..\Code\Boss_Flow.h">
       <Filter>97. WorkFlow</Filter>
     </ClInclude>
+    <ClInclude Include="..\Code\Meteor_Linear.h">
+      <Filter>02. GameObject\01. Stage\68. Meteor_Object\01. Linear</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -772,6 +778,9 @@
     </ClCompile>
     <ClCompile Include="..\Code\Boss_Flow.cpp">
       <Filter>97. WorkFlow</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Code\Meteor_Linear.cpp">
+      <Filter>02. GameObject\01. Stage\68. Meteor_Object\01. Linear</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -7,6 +7,7 @@
 #include "Ingame_Flow.h"
 #include "Meteor_Object.h"
 #include "Meteor_Circular.h"
+#include "Meteor_Linear.h"
 
 CMeteor_Spawner::CMeteor_Spawner(LPDIRECT3DDEVICE9 pGraphicDev)
 	: Engine::CGameObject(pGraphicDev)
@@ -51,6 +52,7 @@ _int CMeteor_Spawner::Update_Object(const _float& fTimeDelta)
 	}
 
 	m_fSummonTick += fTimeDelta;
+	m_fFireTick += fTimeDelta;
 	if (m_fSummonTick >= m_fSummonTime)
 	{
 		m_fSummonTick -= m_fSummonTime;
@@ -69,6 +71,18 @@ _int CMeteor_Spawner::Update_Object(const _float& fTimeDelta)
 	{
 		if (pObj->Get_Active())
 			pObj->Update_Object(fTimeDelta);
+	}
+	for (auto& iter = m_listLinearPool.begin(); iter != m_listLinearPool.end();)
+	{
+		if ((*iter)->Update_Object(fTimeDelta) == OBJ_DEAD)
+		{
+			Safe_Release(*iter);
+			iter = m_listLinearPool.erase(iter);
+		}
+		else
+		{
+			++iter;
+		}
 	}
 
 
@@ -99,6 +113,11 @@ void CMeteor_Spawner::Render_Object(void)
 		if (pObj->Get_Active())
 			pObj->Render_Object();
 	}
+	for (auto& pObj : m_listLinearPool)
+	{
+		if (pObj->Get_Active())
+			pObj->Render_Object();
+	}
 
 	//m_pGraphicDev->SetRenderState(D3DRS_ALPHATESTENABLE, false);
 	m_pGraphicDev->SetRenderState(D3DRS_ZWRITEENABLE, true);
@@ -107,6 +126,10 @@ void CMeteor_Spawner::Render_Object(void)
 
 void CMeteor_Spawner::Spawn_Meteor()
 {
+	if (m_bActive)
+	{
+		return;
+	}
 	m_bActive = true;
 	m_vecObjectPool.reserve(50);
 	m_vecCircularPool.reserve(10);
@@ -124,6 +147,25 @@ void CMeteor_Spawner::Spawn_Meteor()
 	}
 	m_iterFinder = m_vecObjectPool.begin();
 	m_iterCircular = m_vecCircularPool.begin();
+}
+
+void CMeteor_Spawner::Fire_Meteor()
+{
+	if (m_fFireTime < m_fFireTick)
+	{
+		m_fFireTick = 0.f;
+		for (auto& pObj : m_vecCircularPool)
+		{
+			if (pObj->Get_Active())
+			{
+				_vec3 vSrc, vDest;
+				vSrc = pObj->Get_PosOrigin();
+				m_pPlayerTrans->Get_Info(INFO_POS, &vDest);
+				// ¹ß½Î!
+				Instantiate_LinearMeteor(_vec3(500.f,0.f,0.f), vSrc, vDest, 3.f, 0.3f);
+			}
+		}
+	}
 }
 
 void CMeteor_Spawner::Instantiate_Meteor(_vec3 & vPos)
@@ -179,6 +221,27 @@ void CMeteor_Spawner::Instantiate_CircularMeteor(_vec3 _vRadius, _vec3 _vCenter,
 	m_pCircular->Set_Angle(_fAngle);
 }
 
+void CMeteor_Spawner::Instantiate_LinearMeteor(_vec3 _vRadius, _vec3 _vSrc, _vec3 _vDest, float _fLimit, float _fAngle)
+{
+	if (m_listLinearPool.size() > 10)
+	{
+		return;
+	}
+	m_pLinear = CMeteor_Linear::Create(m_pGraphicDev);
+
+	m_pLinear->Set_Radius(_vRadius);
+	m_pLinear->Set_Trans(_vSrc);
+	m_pLinear->Set_Dest(_vDest);
+	m_pLinear->Set_Limit(_fLimit);
+	m_pLinear->Set_Angle(_fAngle);
+	_vec3 vDelta = _vSrc - _vec3(19200.f,_vSrc.y + float((rand()%38400) - 19200), 19200.f);
+	D3DXVec3Normalize(&vDelta, &vDelta);
+	m_pLinear->Set_Delta(vDelta);
+
+
+	m_listLinearPool.emplace_back(m_pLinear);
+}
+
 void CMeteor_Spawner::Free(void)
 {
 
@@ -189,6 +252,10 @@ void CMeteor_Spawner::Free(void)
 		Safe_Release(pObj);
 	}
 	for (auto& pObj : m_vecCircularPool)
+	{
+		Safe_Release(pObj);
+	}
+	for (auto& pObj : m_listLinearPool)
 	{
 		Safe_Release(pObj);
 	}

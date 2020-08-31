@@ -30,6 +30,7 @@ public:
 	void	Set_Active(bool _bActive) { m_bActive = _bActive; }		// ¾÷µ«
 	void	Set_Trans(_vec3& _vPos);
 	void	Set_Speed(float _fSpeed) { m_fForwardSpeed = _fSpeed; }
+	_vec3	Get_PosOrigin() { return m_vPosOrigin; }
 
 protected:
 	HRESULT		Add_Component(void);

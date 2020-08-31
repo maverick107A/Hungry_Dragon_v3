@@ -1,28 +1,28 @@
 #include "stdafx.h"
-#include "Meteor_Object.h"
+#include "Meteor_Linear.h"
 
 #include "Export_Function.h"
 #include "Ingame_Flow.h"
 #include "Line_Renderer.h"
+#include "Ingame_Flow.h"
 
 USING(Engine)
 
-CMeteor_Object::CMeteor_Object(LPDIRECT3DDEVICE9 pGraphicDev)
-	: Engine::CGameObject(pGraphicDev) {
+CMeteor_Linear::CMeteor_Linear(LPDIRECT3DDEVICE9 pGraphicDev)
+	: CMeteor_Object(pGraphicDev) {
 
 }
 
-CMeteor_Object::~CMeteor_Object(void) {
+CMeteor_Linear::~CMeteor_Linear(void) {
 
 }
 
-HRESULT CMeteor_Object::Ready_Object(void) {
+HRESULT CMeteor_Linear::Ready_Object(void) {
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
-	m_fForwardSpeed = 10000.f;
 	return S_OK;
 }
 
-int CMeteor_Object::Update_Object(const float& fTimeDelta) {
+int CMeteor_Linear::Update_Object(const float& fTimeDelta) {
 	Engine::CGameObject::Update_Object(fTimeDelta);
 	
 	Engine::Add_RenderGroup(Engine::RENDER_UI, this);
@@ -31,16 +31,20 @@ int CMeteor_Object::Update_Object(const float& fTimeDelta) {
 	
 	_matrix matView;
 	_matrix matScale;
-	_matrix matTrans;
 	_vec3	vecTrans;
+	
 	if (m_bBoom)
 	{
-		D3DXMatrixScaling(&matScale, 512.f, 512.f, 1.f);			// 텍스처의 크기
+		D3DXMatrixScaling(&matScale, 1024.f, 1024.f, 1.f);			// 텍스처의 크기
 	}
 	else
 	{
-		m_vPosOrigin += _vec3(0.f, -m_fForwardSpeed * fTimeDelta, 0.f);
-		D3DXMatrixScaling(&matScale, 2560.f, 2560.f, 1.f);			// 텍스처의 크기
+		_vec3 vDestLerp = m_vDest - m_vPosOrigin;
+		D3DXVec3Normalize(&vDestLerp, &vDestLerp);
+		D3DXVec3Lerp(&m_vDelta, &m_vDelta, &vDestLerp, 0.05f);
+		m_vPosOrigin += m_vDelta * 6000.f * fTimeDelta;
+
+		D3DXMatrixScaling(&matScale, 5120.f, 5120.f, 1.f);			// 텍스처의 크기
 	}
 	m_pGraphicDev->GetTransform(D3DTS_VIEW, &matView);
 	memcpy(&vecTrans, &m_vPosOrigin, sizeof(_vec3));
@@ -56,32 +60,44 @@ int CMeteor_Object::Update_Object(const float& fTimeDelta) {
 		{
 			m_bActive = false;
 			m_bBoom = false;
+			return OBJ_DEAD;
 		}
 	}
 	else
 	{
 		m_uTexFrame = (m_uTexFrame + 1) % 16;
-		if (m_vPosOrigin.y < 1000.f)
+
+		// 충돌
+		_vec3 vDist = CIngame_Flow::GetInstance()->Get_PlayerTransform()->m_vInfo[INFO_POS] - m_vPosOrigin;
+		if (D3DXVec3Dot(&vDist, &vDist) < 57600.f)
 		{
 			m_bBoom = true;
-			m_uTexFrame = 0;
+			CIngame_Flow::GetInstance()->Get_PlayerObject()->Add_Hp(-10);
+		}
+		else
+		{
+			m_fLimit -= fTimeDelta;
+			if (m_fLimit < 0.f)
+			{
+				m_bBoom = true;
+			}
 		}
 	}
 
 	_vec3 vPos;
 	m_pTransform->Get_Info(INFO_POS, &vPos);
-	CLine_Renderer::GetInstance()->Draw_Dot(vPos.x, vPos.y , vPos.z , 2560.f, 2560.f, D3DCOLOR_ARGB(255,255,255,255));
+	CLine_Renderer::GetInstance()->Draw_Dot(vPos.x, vPos.y , vPos.z , 512.f, 512.f, D3DCOLOR_ARGB(255, 255,255,255));
 
 
-	_uint uRand = rand() % 20 + 10;
+	_uint uRand = rand() % 10 + 5;
 	for (int i = 0; i < 1; ++i)
 	{
-		CLine_Renderer::GetInstance()->Draw_Dot(vPos.x+((rand()%1000) - 500), vPos.y + ((rand() % 1000) - 500), vPos.z + ((rand() % 1000) - 500), 768.f, 512.f, D3DCOLOR_ARGB(255, 255,255,255));
+		CLine_Renderer::GetInstance()->Draw_Dot(vPos.x+((rand()%256) - 128), vPos.y + ((rand() % 256) - 128), vPos.z + ((rand() % 256) - 128), 384.f, 256.f, D3DCOLOR_ARGB(255, 255,255,255));
 	}
 	return 0;
 }
 
-void CMeteor_Object::Render_Object(void) {
+void CMeteor_Linear::Render_Object(void) {
 
 	if (!m_bActive)
 		return;
@@ -107,20 +123,13 @@ void CMeteor_Object::Render_Object(void) {
 
 }
 
-void CMeteor_Object::Free(void) {
+void CMeteor_Linear::Free(void) {
 
-	Engine::CGameObject::Free();
+	CMeteor_Object::Free();
 }
 
 
-void CMeteor_Object::Set_Trans(_vec3& _vPos)
-{
-	m_pTransform->Set_Trans(&_vPos);
-	m_vPosOrigin = _vPos;
-	m_pTransform->Update_Component(0);
-}
-
-HRESULT CMeteor_Object::Add_Component(void) {
+HRESULT CMeteor_Linear::Add_Component(void) {
 	Engine::CComponent*		pComponent = nullptr;
 
 	// buffer
@@ -133,8 +142,8 @@ HRESULT CMeteor_Object::Add_Component(void) {
 	return S_OK;
 }
 
-CMeteor_Object* CMeteor_Object::Create(LPDIRECT3DDEVICE9 pGraphicDev) {
-	CMeteor_Object*		pInstance = new CMeteor_Object(pGraphicDev);
+CMeteor_Linear* CMeteor_Linear::Create(LPDIRECT3DDEVICE9 pGraphicDev) {
+	CMeteor_Linear*		pInstance = new CMeteor_Linear(pGraphicDev);
 
 	if (FAILED(pInstance->Ready_Object()))
 		Engine::Safe_Release(pInstance);
