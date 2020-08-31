@@ -607,8 +607,6 @@ _uint CScene_Loading::Loading_ForStage(void)
 	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/Takeon.wav", L"Takeon");
 
 
-
-
 	lstrcpy(m_szFinish, L"ÁöÇü Âï´Â Áß...");
 
 	CIngame_Flow::GetInstance()->Load_ForestTerrain();

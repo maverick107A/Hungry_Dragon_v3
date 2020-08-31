@@ -1013,6 +1013,22 @@ void CIngame_Info::Push_EngineEvent(ENGINE_EVENT _tEvent)
 	m_listPreyInfo.emplace_back(tInfo);
 }
 
+void CIngame_Info::Push_OnePolygon()
+{
+	BUFFPACK tPack;
+	tPack.dwColor = D3DCOLOR_ARGB(255, 128 + (rand() % 128), 128 + (rand() % 128), 128 + (rand() % 128));
+	tPack.tEvent.uDataNum = 5+rand()%5;
+	tPack.tEvent.uEventNum = 4;
+	tPack.tEvent.uTypeNum = (10 + rand() % 10);
+	tPack.vDest = m_vDestination[4];
+	tPack.vRot = _vec3(float(rand() % 628) * 0.01f, float(rand() % 628)* 0.01f, float(rand() % 628)* 0.01f);
+	tPack.vPos = _vec3(700.f + float(rand() % 100) * 2.f, 400.f + float(rand() % 100), 0.f);
+	tPack.vScale = _vec3(0.2f, 0.2f, 1.f);		// 거리에따라 감소
+	tPack.fLerpSpeed = 3.f + float(rand() % 50)*0.1f;
+	m_listBuffPack.emplace_back(tPack);	
+}
+
+
 void CIngame_Info::Push_EventFont(ENGINE_EVENT _tEvent)
 {
 	FONTPACK tPack;

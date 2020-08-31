@@ -35,16 +35,16 @@ void CBoss_Flow::Update_BossFlow(float _fTimeDelta)
 		break;
 	case CBoss_Flow::PHASE_2:		// 팔 휘두르는 1페이즈
 		m_pBoss->Set_Phase_One_Pattern(_fTimeDelta);
-		//if (50.f < fRatio)
-		//{
+		if (500.f < fRatio)
+		{
 			m_uPhaseNum = PHASE_3;
 			m_pSpawner->Spawn_Meteor();
-		//}
+		}
 		break;
 	case CBoss_Flow::PHASE_3:		// 메테오 오지게 쏘는 2페이즈
 		m_pBoss->Set_Phase_One_Pattern(_fTimeDelta);
 		m_pSpawner->Fire_Meteor();
-		if (95.f < fRatio)
+		if (980.f < fRatio)
 		{
 			m_uPhaseNum = PHASE_4;
 		}

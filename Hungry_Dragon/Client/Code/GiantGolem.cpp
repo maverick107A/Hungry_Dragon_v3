@@ -3,6 +3,7 @@
 #include "Terrain_Locater.h"
 #include "GiantGolem.h"
 #include "Boss_Flow.h"
+#include "Ingame_Info.h"
 
 CGiantGolem::CGiantGolem(LPDIRECT3DDEVICE9 pGraphicDev)
 	:Engine::CMonsterMain(pGraphicDev)
@@ -212,34 +213,13 @@ int CGiantGolem::Update_Object(const float & fTimeDelta)
 	}
 
 
-
-	
-	
-
 	if (m_bHit)
 	{
 		// 점수 넣어영
-
-		
+		CIngame_Info::GetInstance()->Push_OnePolygon();
 
 	}
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	m_bHit = false;
 
 	return m_iEvent;
 }

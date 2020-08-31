@@ -170,7 +170,11 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 
 	if (m_bBreath)
 	{
-		Engine::Get_FMOD()->PlayEffect(L"Breath");
+		Engine::Get_FMOD()->PlayLoop(L"Breath");
+	}
+	else
+	{
+		Engine::Get_FMOD()->StopLoop(L"Breath");
 	}
 
 	//가속시 윈드파티클

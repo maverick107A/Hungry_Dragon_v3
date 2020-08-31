@@ -27,7 +27,7 @@ void CMonsterMain::Initialize_Object(void)
 
 int Engine::CMonsterMain::Update_Object(const float & fTimeDelta)
 {
-	m_bHit = false;
+	
 
 	if (m_bFirst)
 	{

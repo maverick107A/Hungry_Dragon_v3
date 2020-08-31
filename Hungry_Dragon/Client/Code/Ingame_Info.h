@@ -34,6 +34,7 @@ public:
 
 public:
 	void Push_EngineEvent(ENGINE_EVENT _tEvent);
+	void Push_OnePolygon();
 	void Push_EventFont(ENGINE_EVENT _tEvent);
 	void Occur_EngineEvent(ENGINE_EVENT _tEvent);
 	void Update_BuffPack(const Engine::_float& _fTimeDelta);
