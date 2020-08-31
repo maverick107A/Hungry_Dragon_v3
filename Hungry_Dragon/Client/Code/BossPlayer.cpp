@@ -79,7 +79,7 @@ int CBossPlayer::Update_Object(const float& fTimeDelta)
 	}
 
 	//보스 포인터 받아오기
-	m_pBoss = static_cast<CGiantGolem*>(((Engine::CLayer*)(Get_Parent()))->Get_Object(L"Monster", Engine::Find_First, nullptr));
+	m_pBoss = static_cast<CGiantGolem*>(((Engine::CLayer*)(Get_Parent()))->Get_Object(L"BossObject", Engine::Find_First, nullptr));
 
 	m_pTransform->m_vInCamPos -= m_vUp*2.f;
 	m_pCamera->Update_Camera(fTimeDelta, &m_fAngleX, &m_fAngleY, &m_vLook, &m_vUp, this);
