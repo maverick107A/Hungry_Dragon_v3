@@ -44,6 +44,7 @@ _int CTree_Object::Update_Object(const _float& fTimeDelta)
 		vPlayerPos -= vPos;
 		if (100.f > D3DXVec3Length(&vPlayerPos))
 		{
+			Engine::Get_FMOD()->PlayEffect(L"tree_crash");
 			vPos.y += 80.f;
 			Engine::Set_ParticleTrans(Engine::Particle_Create(Engine::PART_LEAF, _vec3(0.f, 0.f, 0.f)), vPos);
 			m_bDestroyed = true;

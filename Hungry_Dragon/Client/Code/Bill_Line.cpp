@@ -42,6 +42,10 @@ int CBill_Line::Update_Object(const float& fTimeDelta) {
 	// 점점 사라지고 삭제
 	//m_vPosOrigin.x += 1000.f * fTimeDelta;
 	m_fScale -= m_fShrinkSpeed * fTimeDelta;
+	if (m_bDecreaseZ)
+	{
+		m_vPosOrigin.z -= 20.f * fTimeDelta;
+	}
 	if (0.f > m_fScale)
 	{
 		return OBJ_DEAD;

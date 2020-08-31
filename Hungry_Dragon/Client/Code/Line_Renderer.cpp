@@ -127,13 +127,25 @@ void CLine_Renderer::Render_SpriteMode()
 
 }
 
-void CLine_Renderer::Draw_Dot(float _fX, float _fY, float _fZ, float _fSpeed , float _fScale, DWORD _dwColor)
+void CLine_Renderer::Draw_Dot(float _fX, float _fY, float _fZ, float _fSpeed, float _fScale, DWORD _dwColor)
 {
 	CBill_Line* pLine = CBill_Line::Create(m_pGraphicDev);
 	pLine->Set_Pos(_vec3(_fX, _fY, _fZ));
 	pLine->Set_Scale(_fScale);
 	pLine->Set_Speed(_fSpeed);
 	pLine->Set_Color(_dwColor);
+	pLine->Set_DecZ(false);
+	m_listLine.emplace_back(pLine);
+}
+
+void CLine_Renderer::Draw_DotZ(float _fX, float _fY, float _fZ, float _fSpeed, float _fScale, DWORD _dwColor)
+{
+	CBill_Line* pLine = CBill_Line::Create(m_pGraphicDev);
+	pLine->Set_Pos(_vec3(_fX, _fY, _fZ));
+	pLine->Set_Scale(_fScale);
+	pLine->Set_Speed(_fSpeed);
+	pLine->Set_Color(_dwColor);
+	pLine->Set_DecZ(true);
 	m_listLine.emplace_back(pLine);
 }
 

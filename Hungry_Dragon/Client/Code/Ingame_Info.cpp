@@ -1098,7 +1098,7 @@ void CIngame_Info::Occur_EngineEvent(ENGINE_EVENT _tEvent)
 	}
 	Push_EventFont(_tEvent);
 	m_tPlayerGoods.uGame_Point += _tEvent.uTypeNum;
-	m_tPlayerStatus.fStage += 1.f;
+	m_tPlayerStatus.fStage += float(rand()%50 + 10)*0.1f;
 	if (1000.f < m_tPlayerStatus.fStage)
 	{
 		m_tPlayerStatus.fStage = 1000.f;

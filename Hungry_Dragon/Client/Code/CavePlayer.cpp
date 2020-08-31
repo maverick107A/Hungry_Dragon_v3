@@ -81,9 +81,11 @@ int CCavePlayer::Update_Object(const float& fTimeDelta)
 
 	_vec3 vPos;
 	m_pTransform->Get_Info(INFO_POS, &vPos);
-	CLine_Renderer::GetInstance()->Draw_Dot(vPos.x, vPos.y, vPos.z, 60.f, 10.f, D3DXCOLOR(255, 255, 255, 255));
-	CLine_Renderer::GetInstance()->Draw_Dot(m_vRWingPos.x, m_vRWingPos.y, m_vRWingPos.z, 30.f, 10.f, D3DXCOLOR(255, 255, 255, 255));
-	CLine_Renderer::GetInstance()->Draw_Dot(m_vLWingPos.x, m_vLWingPos.y, m_vLWingPos.z, 30.f, 10.f, D3DXCOLOR(255, 255, 255, 255));
+	CLine_Renderer::GetInstance()->Draw_DotZ(vPos.x, vPos.y, vPos.z + (float(rand() % 20) - 5.f)*0.1f, 3.f, 3.f, D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
+	CLine_Renderer::GetInstance()->Draw_DotZ(m_vRWingPos.x, m_vRWingPos.y, m_vRWingPos.z+(float(rand()% 20) - 5.f)*0.1f, 1.f, 1.f, D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
+	CLine_Renderer::GetInstance()->Draw_DotZ(m_vRMWingPos.x, m_vRMWingPos.y, m_vRMWingPos.z + (float(rand() % 20) - 5.f)*0.1f, 1.f, 1.f, D3DXCOLOR(0.9f, 0.9f, 0.9f, 1.f));
+	CLine_Renderer::GetInstance()->Draw_DotZ(m_vLMWingPos.x, m_vLMWingPos.y, m_vLMWingPos.z + (float(rand() % 20) - 5.f)*0.1f, 1.f, 1.f, D3DXCOLOR(0.8f, 0.8f, 0.8f, 1.f));
+	CLine_Renderer::GetInstance()->Draw_DotZ(m_vLWingPos.x, m_vLWingPos.y, m_vLWingPos.z + (float(rand() % 20) - 5.f)*0.1f, 1.f, 1.f, D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.f));
 
 	return 0;
 }

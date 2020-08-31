@@ -31,6 +31,7 @@ public:
 	void Set_Scale(_float _fScale) { m_fScale = _fScale; }
 	void Set_Speed(_float _fSpeed) { m_fShrinkSpeed = _fSpeed; }
 	void Set_Color(_uint _uNum);
+	void Set_DecZ(bool _bDec) { m_bDecreaseZ = _bDec; }
 
 private:
 	HRESULT		Add_Component(void);
@@ -53,6 +54,7 @@ private:
 
 	float m_fScale = 1.f;
 	float m_fShrinkSpeed = 1.f;
+	bool  m_bDecreaseZ = false;
 
 public:
 	static CBill_Line*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
