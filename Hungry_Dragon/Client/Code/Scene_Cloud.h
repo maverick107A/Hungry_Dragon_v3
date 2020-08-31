@@ -79,6 +79,9 @@ private:
 	CBillCloud_Locater*			m_pBillCloudLocater = nullptr;
 	CView_Mask*					m_pMaskSprite = nullptr;
 
+	//¸Ê¿¡ »Ñ·ÁÁú ¸µ °¹¼ö
+	_int						m_iRingCnt=150;
+
 private:
 	virtual void Free(void) override;
 private:

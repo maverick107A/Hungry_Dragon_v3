@@ -190,6 +190,7 @@ void CCollisionMgr::Player_AccelRing(list<CGameObject*>* _pPlayer, list<CGameObj
 		if (D3DXVec3Dot(&vDis, &vDis) < 55.f*55.f)
 		{
 			pPlayer->Set_PlusSpeed(120.f);
+			pPlayer->Add_Stamina(30.f);
 		}
 	}
 

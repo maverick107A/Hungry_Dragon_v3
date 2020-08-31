@@ -16,6 +16,7 @@ CScene_Cloud::~CScene_Cloud(void) {
 }
 
 HRESULT CScene_Cloud::Ready_Scene(void) {
+	srand((unsigned int)time(NULL));
 
 	Engine::Ready_ParticleMgr(m_pGraphicDev);
 
@@ -152,7 +153,8 @@ _int CScene_Cloud::Update_Scene(const _float& fTimeDelta) {
 
 	_vec3 vPos;
 	CIngame_Flow::GetInstance()->Get_PlayerTransform()->Get_Info(INFO_POS, &vPos);
-	CIngame_Info::GetInstance()->Get_PlayerInfo()->fStage = vPos.z*0.01f;
+	//CIngame_Info::GetInstance()->Get_PlayerInfo()->fStage = vPos.z*0.0001f;
+	CIngame_Info::GetInstance()->Get_PlayerInfo()->fStage = vPos.z/(m_iRingCnt*2500.f)*1000;
 	if (CIngame_Info::GetInstance()->Get_PlayerInfo()->fStage < 0.f)
 	{
 		CIngame_Info::GetInstance()->Get_PlayerInfo()->fStage = 0.f;
@@ -230,22 +232,22 @@ void CScene_Cloud::Set_AccelRingPos(Engine::CLayer* pLayer)
 {
 	CAccel_Torus* tempAccel;
 	_vec3 vOrigin = _vec3(0.f, 0.f, 1000.f);
-	for (int i = 0; i < 250; ++i)
+	for (int i = 0; i < m_iRingCnt; ++i)
 	{
 		tempAccel =CAccel_Torus::Create(m_pGraphicDev);
 		tempAccel->Set_Trans(vOrigin);
 		pLayer->Add_Object(L"Accel_Torus",tempAccel);
-		vOrigin.x += (5 - rand() % 10) * 75;
+		vOrigin.x += (5 - rand() % 11) * 75;
 		vOrigin.y += (5 - rand() % 10) * 50;
 		vOrigin.z += 2500;
 
-		if (vOrigin.x < -4750)
+		if (vOrigin.x < -1400)
 		{
-			vOrigin.x = -4500;
+			vOrigin.x = -1325;
 		}
-		else if (vOrigin.x > 4750)
+		else if (vOrigin.x > 1400)
 		{
-			vOrigin.x = 4500;
+			vOrigin.x = 1325;
 		}
 
 		if (vOrigin.y < -800)
