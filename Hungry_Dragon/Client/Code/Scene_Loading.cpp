@@ -603,6 +603,7 @@ _uint CScene_Loading::Loading_ForStage(void)
 	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/Bound.wav", L"Bound");
 	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/Kick.wav", L"Kick");
 	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/LavaBurn.wav", L"LavaBurn");
+	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/LavaBurnLong.mp3", L"LavaBurnLong");
 	Engine::Get_FMOD()->Insert_Sfx("../../Asset/Sound/Sfx/Takeon.wav", L"Takeon");
 
 
