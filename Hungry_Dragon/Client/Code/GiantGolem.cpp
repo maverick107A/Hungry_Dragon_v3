@@ -158,7 +158,7 @@ int CGiantGolem::Update_Object(const float & fTimeDelta)
 	if (m_ePattern == PAT_CICLE)
 	{
 		if (m_fCicleLate == 0)
-			Get_FMOD()->PlayLoop(L"LavaBurn");
+			Get_FMOD()->PlayEffect(L"LavaBurnLong");
 
 		m_fCicleLate += 5;
 	}
