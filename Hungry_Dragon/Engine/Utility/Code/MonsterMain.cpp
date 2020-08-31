@@ -343,9 +343,13 @@ void CMonsterMain::Kill_Boss(const float & fTimeDelta)
 {
 	if (m_fScale > 0.01f)
 	{
-		m_fMonster_HP -= m_fDamaged;
+ 		m_fMonster_HP -= m_fDamaged;
 		m_fScale = m_fMonster_HP / m_fMonster_MaxHP;
 		m_fScale = m_fMaxScale * m_fScale;
+		if (m_fScale < 0.01f)
+		{
+			m_fScale = 0.01f;
+		}
 		m_pTransform->Set_Scale(m_fScale);
 	}
 }

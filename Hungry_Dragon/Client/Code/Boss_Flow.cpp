@@ -26,7 +26,7 @@ CBoss_Flow::~CBoss_Flow(void)
 
 void CBoss_Flow::Update_BossFlow(float _fTimeDelta)
 {
-	float fRatio = (20000.f - m_pBoss->Get_HP())*0.005f;
+	float fRatio = (20000.f - m_pBoss->Get_HP())*0.05f;
 
 	switch (m_uPhaseNum)
 	{
@@ -58,7 +58,11 @@ void CBoss_Flow::Update_BossFlow(float _fTimeDelta)
 		break;
 	}
 
-	
+	if (fRatio < 0)
+	{
+		fRatio = 999;
+	}
+
 	CIngame_Info::GetInstance()->Get_PlayerInfo()->fStage = fRatio;
 }
 
