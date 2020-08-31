@@ -24,7 +24,7 @@ HRESULT CGiantGolem::Ready_Object(void)
 	m_fScale = 3.f;
 	m_fMaxScale = 3.f;
 	// m_fMaxScale = 0.01f;
-	m_fDamaged = 5.f;
+	m_fDamaged = 15.f;
 	m_eState = MONSTER_REBORN;
 	m_ePattern = PAT_APEAR;
 	m_fDead_Range = 999999.f;
