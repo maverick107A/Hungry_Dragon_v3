@@ -298,6 +298,7 @@ void CScene_Cloud::Free(void) {
 
 void CScene_Cloud::Set_AccelRingPos(Engine::CLayer* pLayer)
 {
+	m_iRingCnt = 40;
 	CAccel_Torus* tempAccel;
 	_vec3 vOrigin = _vec3(0.f, 0.f, 1000.f);
 	for (int i = 0; i < m_iRingCnt; ++i)
