@@ -1,5 +1,6 @@
 #include "CameraMain.h"
 #include "BaseLand.h"
+#include "Export_Function.h"
 
 USING(Engine)
 
@@ -12,13 +13,35 @@ Engine::CCameraMain::~CCameraMain(void)
 
 }
 
-void CCameraMain::Camera_Set(LPDIRECT3DDEVICE9& _pGraphicDev, _vec3 _vPos, CBaseLand* _pTerrain)
+void CCameraMain::Camera_Set(LPDIRECT3DDEVICE9& _pGraphicDev, _vec3 _vPos/*, _vec3 _vUp, _vec3 _vRight*/, CBaseLand* _pTerrain)
 {
 	_vec3 vDeltaPos = _vPos - m_vDir*m_fCameraDis - m_vPos;
 	m_vPos += vDeltaPos*0.2f;
 	Ride_Terrain(_pTerrain);
 	//정확한 방향 설정
 	m_vDir = _vPos - m_vPos;
+
+	if (Engine::Get_DIKeyState(DIK_NUMPAD0))
+	{
+		_vec3 vRight;
+		D3DXVec3Cross(&vRight, &m_vUp, &m_vLook);
+		switch (rand()%4)
+		{
+		case 0:
+			m_vPos += m_vUp;
+			break;
+		case 1:
+			m_vPos -= m_vUp;
+			break;
+		case 2:
+			m_vPos += vRight;
+			break;
+		case 3:
+			m_vPos -= vRight;
+			break;
+		}
+	}
+
 	D3DXVec3Normalize(&m_vDir, &m_vDir);
 	D3DXMATRIX V;
 	D3DXMatrixLookAtLH(&V, &m_vPos, &_vPos, &m_vUp);
