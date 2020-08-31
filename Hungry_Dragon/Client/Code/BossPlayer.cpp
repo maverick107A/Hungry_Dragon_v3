@@ -36,9 +36,9 @@ HRESULT CBossPlayer::Ready_Object(void)
 
 	static_cast<CBossCamera*>(m_pCamera)->Switch_Phase(1);
 
-	m_pTransform2->m_vInfo[Engine::INFO_POS].x = 0.f;
-	m_pTransform2->m_vInfo[Engine::INFO_POS].y = 0.f;
-	m_pTransform2->m_vInfo[Engine::INFO_POS].z = 500.f;
+	m_pTransform2->m_vInfo[Engine::INFO_POS].x = 6500.f;
+	m_pTransform2->m_vInfo[Engine::INFO_POS].y = 6500.f;
+	m_pTransform2->m_vInfo[Engine::INFO_POS].z = 5000.f;
 
 	m_pTransform2->Set_Scale(8.f);
 
