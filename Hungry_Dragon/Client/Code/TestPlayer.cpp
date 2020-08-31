@@ -33,11 +33,11 @@ HRESULT CTestPlayer::Ready_Object(void)
 {
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
-	m_pTransform2->m_vInfo[Engine::INFO_POS].x = 0.f;
-	m_pTransform2->m_vInfo[Engine::INFO_POS].y = 1000.f;
-	m_pTransform2->m_vInfo[Engine::INFO_POS].z = 0.f;
+	m_pTransform->m_vInfo[Engine::INFO_POS].x = 0.f;
+	m_pTransform->m_vInfo[Engine::INFO_POS].y = 1000.f;
+	m_pTransform->m_vInfo[Engine::INFO_POS].z = 0.f;
 
-	m_pTransform2->Set_Scale(6.f);
+	m_pTransform->Set_Scale(6.f);
 
 	D3DXMatrixIdentity(&m_matOld1);
 	D3DXMatrixIdentity(&m_matOld2);
@@ -121,7 +121,18 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 	}
 	m_fExhaust -= fTimeDelta;
 
+	if (!m_bLockk)
+	{
+		m_pTransform2->m_vAngle = m_pTransform->m_vAngle;
+		m_pTransform2->m_vInCamPos = m_pTransform->m_vInCamPos;
+		for (int i = 0; i < Engine::INFO_END; ++i)
+			m_pTransform2->m_vInfo[i] = m_pTransform->m_vInfo[i];
+		m_pTransform2->m_vScale = m_pTransform->m_vScale;
+		m_pTransform2->m_vTrans = m_pTransform->m_vTrans;
+	}
+
 	Engine::CGameObject::Update_Object(fTimeDelta);
+
 
 	//날개 끝 위치
 	_matrix matTotal = m_pPartsTrans[PART_WING]->m_matWorld*m_pPartsTrans[PART_2BODY]->m_matWorld*m_matOld2;
@@ -200,9 +211,6 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 	//}
 	//m_vP += m_vL*5.f;
 	//CLine_Renderer::GetInstance()->Draw_Dot(m_vP.x, m_vP.y, m_vP.z);
-
-	if(!m_bLockk)
-		m_pTransform2->m_matWorld = m_pTransform->m_matWorld;
 
 	return 0;
 }
@@ -326,7 +334,7 @@ HRESULT CTestPlayer::Add_Component(void)
 
 	pComponent = m_pTransform2 = Engine::CTransform::Create();
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
-	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_Transform", pComponent);
+	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_Transform2", pComponent);
 	//얼굴
 	pComponent = m_pPartsTrans[PART_FACE] = Engine::CAnimationTransform::Create();
 	NULL_CHECK_RETURN(pComponent, E_FAIL);

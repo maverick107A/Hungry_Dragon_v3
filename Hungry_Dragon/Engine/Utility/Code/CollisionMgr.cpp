@@ -102,7 +102,7 @@ void CCollisionMgr::Player_Boss(list<CGameObject*>* _pPlayer, list<CGameObject*>
 
 				_vec3 vMola = vPlayerPos + vDir*fTemp - vMonsterPos;
 
-				if (D3DXVec3Dot(&vMola, &vMola) < fSquareRad)
+				if (sqrtf(D3DXVec3Dot(&vMola, &vMola)) < (float(Player->Get_BreathRad()) + 1000*static_cast<CMonsterMain*>(pBoss)->Get_Transform()->m_vScale.x))
 					static_cast<CMonsterMain*>(pBoss)->Kill_Boss(fTimeDelta);
 			}
 		}
