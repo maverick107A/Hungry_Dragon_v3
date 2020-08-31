@@ -961,7 +961,7 @@ void CIngame_Info::Push_EngineEvent(ENGINE_EVENT _tEvent)
 		}
 		break;
 	case 3:
-
+		Get_FMOD()->PlayEffect(L"Treasure");
 		break;
 	case 4:
 		Get_FMOD()->PlayEffect(L"break");
