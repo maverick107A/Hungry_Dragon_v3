@@ -6,6 +6,7 @@
 #include "CaveCamera.h"
 #include "PlayerState.h"
 #include "PCaveRush.h"
+#include "Line_Renderer.h"
 //#include "CaveCamera.h"
 
 CCavePlayer::CCavePlayer(LPDIRECT3DDEVICE9 pGraphicDev)
@@ -64,6 +65,26 @@ int CCavePlayer::Update_Object(const float& fTimeDelta)
 	}
 
 	Engine::CGameObject::Update_Object(fTimeDelta);
+
+	//날개 끝 위치
+	_matrix matTotal = m_pPartsTrans[PART_WING]->m_matWorld*m_pPartsTrans[PART_2BODY]->m_matWorld*m_matOld2;
+	_vec3 vWing = { 7.1f, -0.4f, -0.3f };
+	D3DXVec3TransformCoord(&m_vRWingPos, &vWing, &matTotal);
+	vWing = { 4.1f, -0.4f, -0.3f };
+	D3DXVec3TransformCoord(&m_vRMWingPos, &vWing, &matTotal);
+	matTotal = m_pPartsTrans[PART_LWING]->m_matWorld*m_pPartsTrans[PART_2BODY]->m_matWorld*m_matOld2;
+	vWing = { -7.1f, -0.4f, -0.3f };
+	D3DXVec3TransformCoord(&m_vLWingPos, &vWing, &matTotal);
+	vWing = { -4.1f, -0.4f, -0.3f };
+	D3DXVec3TransformCoord(&m_vLMWingPos, &vWing, &matTotal);
+	//여기까지
+
+	_vec3 vPos;
+	m_pTransform->Get_Info(INFO_POS, &vPos);
+	CLine_Renderer::GetInstance()->Draw_Dot(vPos.x, vPos.y, vPos.z, 60.f, 10.f, D3DXCOLOR(255, 255, 255, 255));
+	CLine_Renderer::GetInstance()->Draw_Dot(m_vRWingPos.x, m_vRWingPos.y, m_vRWingPos.z, 30.f, 10.f, D3DXCOLOR(255, 255, 255, 255));
+	CLine_Renderer::GetInstance()->Draw_Dot(m_vLWingPos.x, m_vLWingPos.y, m_vLWingPos.z, 30.f, 10.f, D3DXCOLOR(255, 255, 255, 255));
+
 	return 0;
 }
 
