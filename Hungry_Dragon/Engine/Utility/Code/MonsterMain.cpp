@@ -27,6 +27,7 @@ void CMonsterMain::Initialize_Object(void)
 
 int Engine::CMonsterMain::Update_Object(const float & fTimeDelta)
 {
+	m_bHit = false;
 
 	if (m_bFirst)
 	{
@@ -35,7 +36,7 @@ int Engine::CMonsterMain::Update_Object(const float & fTimeDelta)
 	}
 
 	 m_pPlayerTransformCom->Get_Info(Engine::INFO_POS ,&m_vPlayerPos);
-
+	  
 
 	Engine::CGameObject::Update_Object(fTimeDelta);
 
@@ -343,6 +344,7 @@ void CMonsterMain::Kill_Boss(const float & fTimeDelta)
 {
 	if (m_fScale > 0.01f)
 	{
+		m_bHit = true;
  		m_fMonster_HP -= m_fDamaged;
 		m_fScale = m_fMonster_HP / m_fMonster_MaxHP;
 		m_fScale = m_fMaxScale * m_fScale;

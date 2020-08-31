@@ -115,6 +115,8 @@ protected:
 	float						m_fParticleLifeTime=1.f;
 
 	bool		m_bFirst = true;
+	bool		m_bHit = false;
+
 
 public:
 	static CMonsterMain*	Create(LPDIRECT3DDEVICE9 pGraphicDev);

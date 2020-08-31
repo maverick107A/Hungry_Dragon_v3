@@ -216,7 +216,13 @@ int CGiantGolem::Update_Object(const float & fTimeDelta)
 	
 	
 
+	if (m_bHit)
+	{
+		// 점수 넣어영
 
+		
+
+	}
 	
 
 
