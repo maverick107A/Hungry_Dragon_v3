@@ -93,19 +93,24 @@ int CHorizonBat_Monster::Update_Object(const float & fTimeDelta)
 void CHorizonBat_Monster::Render_Object(void)
 {	
 	m_pTransform->Set_Transform(m_pGraphicDev);
-	
-	m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
-	
+
+	m_pGraphicDev->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
 	m_pGraphicDev->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	m_pGraphicDev->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
-	
+	m_pGraphicDev->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
+	m_pGraphicDev->SetRenderState(D3DRS_ALPHAREF, 0);
+	m_pGraphicDev->SetRenderState(D3DRS_ALPHATESTENABLE, true);
+	m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
+	m_pGraphicDev->SetRenderState(D3DRS_ZWRITEENABLE, false);
+
 	m_pTextureCom->Set_Texture((int)m_tFrame.fStartFrame);
 	m_pBufferBoradCom->Render_Buffer();
 	Engine::CMonsterMain::Render_Object();
-	
-	m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 
 
+	m_pGraphicDev->SetRenderState(D3DRS_ZWRITEENABLE, true);
+	m_pGraphicDev->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
+	m_pGraphicDev->SetRenderState(D3DRS_ALPHATESTENABLE, false);
 }
 
 HRESULT CHorizonBat_Monster::Add_Component(void)
