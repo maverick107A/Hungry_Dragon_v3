@@ -342,18 +342,22 @@ void Engine::CMonsterMain::Kill_Monster(const float& fTimeDelta)
 
 void CMonsterMain::Kill_Boss(const float & fTimeDelta)
 {
-	if (m_fScale > 0.01f)
+
+	m_bHit = true;
+ 	m_fMonster_HP -= m_fDamaged;
+	if (m_fMonster_HP <= 0)
 	{
-		m_bHit = true;
- 		m_fMonster_HP -= m_fDamaged;
-		m_fScale = m_fMonster_HP / m_fMonster_MaxHP;
-		m_fScale = m_fMaxScale * m_fScale;
-		if (m_fScale < 0.01f)
-		{
-			m_fScale = 0.01f;
-		}
-		m_pTransform->Set_Scale(m_fScale);
+		m_fMonster_HP = 0;
 	}
+
+	m_fScale = m_fMonster_HP / m_fMonster_MaxHP;
+	m_fScale = m_fMaxScale * m_fScale;
+	if (m_fScale < 0.01f)
+	{
+		m_fScale = 0.01f;
+	}
+	m_pTransform->Set_Scale(m_fScale);
+	
 }
 
 void Engine::CMonsterMain::Kill_Lay_Monster(const float & fTimeDelta)
