@@ -70,8 +70,18 @@ private:
 
 	int			m_f = 0;
 	bool		m_b = false;
+
 	float		m_fShotingLate = 0;
 	float		m_fShotingDelay = 1.8;
+
+	float		m_fPunchLate = 0;
+	float		m_fPunchDelay = 7.0f;
+
+
+	float		m_fStompLate = 0;
+	float		m_fStompDelay = 10.3f;
+
+	float		m_fCicleLate = 0;
 
 
 	Engine::CAnimation_Controller* m_pAnimationController;

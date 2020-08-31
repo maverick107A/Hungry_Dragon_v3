@@ -64,6 +64,8 @@ int CGiantGolem::Update_Object(const float & fTimeDelta)
 	}
 	else 
 	{
+
+		Get_FMOD()->StopLoop(L"LavaBurn");
 		D3DXVECTOR3 vPos;
 		m_vPlayerPos = { m_vPlayerPos.x , 0 , m_vPlayerPos.z };
 
@@ -95,12 +97,82 @@ int CGiantGolem::Update_Object(const float & fTimeDelta)
 
 		if (m_fShotingLate > m_fShotingDelay)
 		{
+			Get_FMOD()->PlayEffect(L"Takeon");
 			Shooting();
 			m_fShotingLate = 0;
 		}
 
 	}
+	else
+		m_fShotingLate = 0;
+
+
+	if (m_ePattern == PAT_PUNCH)
+	{
+		if (m_fPunchLate == 0)
+			Get_FMOD()->PlayEffect(L"LavaBurn");    // ÁØºñ
+
+		m_fPunchLate += fTimeDelta;
+		if (m_fPunchLate > m_fPunchDelay)
+		{
+			if(m_fPunchLate < 10.f)
+			Get_FMOD()->PlayEffect(L"Kick");	    // ÆÝÄ¡
+
+			m_fPunchLate = 10;
+
+		}
+	}
+	else
+		m_fPunchLate = 0;
+
+
+
+
+	if (m_ePattern == PAT_STOMP)
+	{
+		if (m_fStompLate == 0)
+			Get_FMOD()->PlayEffect(L"LavaBurn");    // ÁØºñ
+
+
+		m_fStompLate += fTimeDelta;
 		
+		
+		if (m_fStompLate > m_fStompDelay)
+		{
+			if (m_fStompLate < 15.f)
+			Get_FMOD()->PlayEffect(L"Bound");		// ³»·ÁÂï±â
+
+			m_fStompLate = 15;
+
+		}
+	}
+	else
+		m_fStompLate = 0;
+	
+
+
+
+
+
+
+	if (m_ePattern == PAT_CICLE)
+	{
+		if (m_fCicleLate == 0)
+			Get_FMOD()->PlayLoop(L"LavaBurn");
+
+		m_fCicleLate += 5;
+	}
+	else
+		m_fCicleLate = 0;
+
+
+
+
+
+
+
+
+
 	if (m_ePattern == PAT_APEAR && m_pTransform->m_vInfo[Engine::INFO_POS].y < 2500.f )
 	{
 		D3DXVECTOR3 _vPos = { 0.f, 10.f, 0.f };
@@ -132,12 +204,37 @@ int CGiantGolem::Update_Object(const float & fTimeDelta)
 		m_pPartsTrans[i]->m_vScale = nextFrameMovement.vecScale;
 	}
 
-		if (GetAsyncKeyState('O') & 0x0001)
-		{
-			TCHAR s[256];
-			wsprintf(s, L"Frame : %d", m_pAnimationController->Get_Movement(m_ePattern, 2).tFrame);
-			MessageBox(nullptr, s, L"", 0);
-		}
+	if (GetAsyncKeyState('O') & 0x0001)
+	{
+		TCHAR s[256];
+		wsprintf(s, L"Frame : %d", m_pAnimationController->Get_Movement(m_ePattern, 2).tFrame);
+		MessageBox(nullptr, s, L"", 0);
+	}
+
+
+
+	
+	
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	return m_iEvent;
 }
 
