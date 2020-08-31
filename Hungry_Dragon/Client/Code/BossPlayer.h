@@ -37,6 +37,7 @@ private:
 
 	float m_vWAngle = 0.f;
 	float m_fWSpeed = 0.03f;
+	bool m_bLockk = false;
 
 public:
 	static CBossPlayer*	Create(LPDIRECT3DDEVICE9 pGraphicDev);

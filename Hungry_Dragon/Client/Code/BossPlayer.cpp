@@ -36,11 +36,11 @@ HRESULT CBossPlayer::Ready_Object(void)
 
 	static_cast<CBossCamera*>(m_pCamera)->Switch_Phase(1);
 
-	m_pTransform->m_vInfo[Engine::INFO_POS].x = 0.f;
-	m_pTransform->m_vInfo[Engine::INFO_POS].y = 0.f;
-	m_pTransform->m_vInfo[Engine::INFO_POS].z = 500.f;
+	m_pTransform2->m_vInfo[Engine::INFO_POS].x = 0.f;
+	m_pTransform2->m_vInfo[Engine::INFO_POS].y = 0.f;
+	m_pTransform2->m_vInfo[Engine::INFO_POS].z = 500.f;
 
-	m_pTransform->Set_Scale(8.f);
+	m_pTransform2->Set_Scale(8.f);
 
 	for (int i = 0; i < PARTS_END; ++i)
 		m_pPartsTrans[i]->m_vScale = _vec3(1.f, 1.f, 1.f);
@@ -69,7 +69,10 @@ int CBossPlayer::Update_Object(const float& fTimeDelta)
 	m_bAccelCheck = false;
 	if (Engine::Get_DIKeyState(DIK_K) & 0x80)
 		m_bBreath = !m_bBreath;
-
+	if (Engine::Get_DIKeyState(DIK_NUMPAD8) & 0x80)
+	{
+		m_bLockk = !m_bLockk;
+	}
 	if (GetAsyncKeyState('R') & 0x0001)
 		m_bLock = !m_bLock;
 	if (GetAsyncKeyState('M') & 0x0001)
@@ -81,11 +84,11 @@ int CBossPlayer::Update_Object(const float& fTimeDelta)
 	//보스 포인터 받아오기
 	m_pBoss = static_cast<CGiantGolem*>(((Engine::CLayer*)(Get_Parent()))->Get_Object(L"BossObject", Engine::Find_First, nullptr));
 
-	m_pTransform->m_vInCamPos -= m_vUp*2.f;
+	m_pTransform2->m_vInCamPos -= m_vUp*2.f;
 	m_pCamera->Update_Camera(fTimeDelta, &m_fAngleX, &m_fAngleY, &m_vLook, &m_vUp, this);
 	m_pState->Update_State(fTimeDelta);
 	D3DXVec3Cross(&m_vRight, &m_vUp, &m_vLook);
-	m_pCamera->Camera_Set(m_pGraphicDev, m_pTransform->m_vInfo[Engine::INFO_POS]);
+	m_pCamera->Camera_Set(m_pGraphicDev, m_pTransform2->m_vInfo[Engine::INFO_POS]);
 	State_Change();
 
 	if (GetAsyncKeyState('H'))
@@ -116,6 +119,16 @@ int CBossPlayer::Update_Object(const float& fTimeDelta)
 	m_fSpeed = m_fBaseSpeed + m_fPlusSpeed;
 	m_fPlusSpeed *= 0.995;
 	m_fExhaust -= fTimeDelta;
+
+	if (!m_bLockk)
+	{
+		m_pTransform->m_vAngle = m_pTransform2->m_vAngle;
+		m_pTransform->m_vInCamPos = m_pTransform2->m_vInCamPos;
+		for (int i = 0; i < Engine::INFO_END; ++i)
+			m_pTransform->m_vInfo[i] = m_pTransform2->m_vInfo[i];
+		m_pTransform->m_vScale = m_pTransform2->m_vScale;
+		m_pTransform->m_vTrans = m_pTransform2->m_vTrans;
+	}
 
 	Engine::CGameObject::Update_Object(fTimeDelta);
 
@@ -269,6 +282,10 @@ HRESULT CBossPlayer::Add_Component(void)
 	pComponent = m_pTransform = Engine::CTransform::Create();
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_Transform", pComponent);
+
+	pComponent = m_pTransform2 = Engine::CTransform::Create();
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_Transform2", pComponent);
 	//얼굴
 	pComponent = m_pPartsTrans[PART_FACE] = Engine::CAnimationTransform::Create();
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
