@@ -27,7 +27,7 @@ class CVent;
 
 class CScene_Cave : public Engine::CScene
 {
-	enum SCENEPHASE{ PHASE_1 , PHASE_2, PHASE_3, PHASE_END};
+	enum SCENEPHASE{ PHASE_1 , PHASE_2, PHASE_3, PHASE_4, PHASE_END};
 private:
 	explicit CScene_Cave(LPDIRECT3DDEVICE9 pGraphicDev);
 	virtual ~CScene_Cave(void);

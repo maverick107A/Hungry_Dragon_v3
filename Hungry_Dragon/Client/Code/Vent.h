@@ -30,6 +30,7 @@ public:
 	
 public:
 	void Set_ObsLoop(bool _bLoop) { m_bLoop = _bLoop; }
+	void Set_Loop(bool _bLoop) { m_bVentLoop = _bLoop; }
 	void Set_Active(bool _bActive) { m_bActive = _bActive; }		// ¾÷µ«
 	void Set_Trans(_vec3& _vPos);
 	void Set_Speed(float _fSpeed) { m_fForwardSpeed = _fSpeed; }
@@ -57,6 +58,7 @@ private:
 	float					m_fForwardSpeed = 1.f;
 	float					m_fUpdateTick = 0.f;
 	bool					m_bLoop = true;
+	bool					m_bVentLoop = true;
 	bool					m_bActive = true;
 	float					m_fCaveLength = 0.f;
 

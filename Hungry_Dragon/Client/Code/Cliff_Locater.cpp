@@ -87,18 +87,23 @@ HRESULT CCliff_Locater::Add_Component(void)
 	FAILED_CHECK(Register_Component<CTransform>(&m_pTransform, ID_DYNAMIC, L"Com_Transform"));
 	
 	// 절벽 오브젝트 세팅
-	for (int i = 0; i < 50; ++i)
+	for (int i = 0; i < 20; ++i)
 	{
 		m_vecCliff.emplace_back(CCliff_Object::Create(m_pGraphicDev));
 		m_vecCliff[i]->Set_Trans(_vec3(-11400.f ,0.f, 12800.f * (i)));
 		m_vecCliff[i]->Update_Object(0);
 	}
-	for (int i = 50; i < 100; ++i)
+	for (int i = 50; i < 70; ++i)
 	{
 		m_vecCliff.emplace_back(CCliff_Object::Create(m_pGraphicDev));
-		m_vecCliff[i]->Set_Trans(_vec3(11400.f, 0.f, 12800.f * (i-50)));
-		m_vecCliff[i]->Update_Object(0);
+		m_vecCliff[i-30]->Set_Trans(_vec3(11400.f, 0.f, 12800.f * (i-50)));
+		m_vecCliff[i-30]->Update_Object(0);
 	}
+
+	m_vecCliff.emplace_back(CCliff_Object::Create(m_pGraphicDev));
+	m_vecCliff[40]->Set_Trans(_vec3(0.f, 0.f, 112800.f));
+	m_vecCliff[40]->Update_Object(0);
+
 	return S_OK;
 }
 

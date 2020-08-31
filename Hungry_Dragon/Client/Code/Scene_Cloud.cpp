@@ -83,7 +83,49 @@ HRESULT CScene_Cloud::Ready_Scene(void) {
 	m_hFogTechHandle = m_pFogEffect->GetTechniqueByName("TShader");
 	m_hvFog = m_pFogEffect->GetParameterByName(NULL, "vFog");
 	
+	//
+	// Create effect.
+	//
+	hr = D3DXCreateEffectFromFile(
+		m_pGraphicDev,
+		L"../../Asset/Shader/fog_red.txt",
+		0,                // no preprocessor definitions
+		0,                // no ID3DXInclude interface
+		D3DXSHADER_DEBUG, // compile flags
+		0,                // don't share parameters
+		&m_pDarkEffect,
+		&errorBuffer);
+
+	// output any error messages
+	if (errorBuffer)
+	{
+		TCHAR szTemp[512];
+		MultiByteToWideChar(0, 0, (char*)errorBuffer->GetBufferPointer(), strlen((char*)errorBuffer->GetBufferPointer()), szTemp, strlen((char*)errorBuffer->GetBufferPointer()));
+		::MessageBox(0, szTemp, 0, 0);
+		//::MessageBox(0, (char*)errorBuffer->GetBufferPointer(), 0, 0);
+		Safe_Release(errorBuffer);
+	}
+
+	if (FAILED(hr))
+	{
+		::MessageBox(0, L"D3DXCreateEffectFromFile() - FAILED", 0, 0);
+		return E_FAIL;
+	}
+
+	// 
+	// Save Frequently Accessed Parameter Handles
+	//
+
+	m_hDarkTechHandle = m_pDarkEffect->GetTechniqueByName("Fog");
+
+
+
+
+
 	Engine::Get_FMOD()->PlayBgm(L"Devil's Pit");
+
+
+
 
 	CIngame_Flow::GetInstance()->Set_StageID(CIngame_Flow::STAGE_SKY);
 	return S_OK;
@@ -97,6 +139,10 @@ _int CScene_Cloud::Update_Scene(const _float& fTimeDelta) {
 		else
 			m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 		m_bWireFrame = !m_bWireFrame;
+	}
+	if (GetAsyncKeyState(VK_F3) & 0x0001)
+	{
+		m_bFogEnable = !m_bFogEnable;
 	}
 	if (GetAsyncKeyState(VK_F4) & 0x0001)
 	{
@@ -171,15 +217,7 @@ void CScene_Cloud::LateUpdate_Scene(const _float & fTimeDelta)
 
 void CScene_Cloud::Render_Scene(void) {
 
-	// set the technique to use
-	m_pFogEffect->SetTechnique(m_hFogTechHandle);
 
-	UINT numPasses = 0;
-	m_pFogEffect->Begin(&numPasses, 0);
-	
-
-	D3DXMATRIX I;
-	D3DXMatrixIdentity(&I);
 	
 	// 행렬 및 파티클/스카이박스 렌더
 	_matrix matWorld;
@@ -190,18 +228,47 @@ void CScene_Cloud::Render_Scene(void) {
 	m_mapLayer[L"Environment"]->Render_Layer();
 
 	// 안개셰이더
-	if(m_bFogEnable)
+	if (m_bFogEnable)
+	{	// set the technique to use
+		m_pFogEffect->SetTechnique(m_hFogTechHandle);
+
+		UINT numPasses = 0;
+		m_pFogEffect->Begin(&numPasses, 0);
+
+
+		D3DXMATRIX I;
+		D3DXMatrixIdentity(&I);
+
 		m_pFogEffect->BeginPass(0);
 
-	D3DXVECTOR4 vFog;
-	vFog.x = m_far / (m_far - m_near);
-	vFog.y = -1.0f / (m_far - m_near);
-	//if (m_hvFog != NULL) m_pFogEffect->SetVector(m_hvFog, &vFog);
+		D3DXVECTOR4 vFog;
+		vFog.x = m_far / (m_far - m_near);
+		vFog.y = -1.0f / (m_far - m_near);
+		//if (m_hvFog != NULL) m_pFogEffect->SetVector(m_hvFog, &vFog);
 
-	// 게임에 적용
-	m_mapLayer[L"GameLogic"]->Render_Layer();
-	
-	m_pFogEffect->End();
+		// 게임에 적용
+		m_mapLayer[L"GameLogic"]->Render_Layer();
+
+		m_pFogEffect->End();
+	}
+
+	else
+	{
+		// set the technique to use
+		m_pDarkEffect->SetTechnique(m_hDarkTechHandle);
+
+		UINT numPasses = 0;
+		m_pDarkEffect->Begin(&numPasses, 0);
+
+
+		m_pDarkEffect->BeginPass(0);
+
+		m_mapLayer[L"GameLogic"]->Render_Layer();
+
+		m_pDarkEffect->End();
+	}
+
+
 
 	m_mapLayer[L"IgnoreEffect"]->Render_Layer();
 
@@ -226,6 +293,7 @@ void CScene_Cloud::Free(void) {
 	Engine::CScene::Free();
 	Engine::Clear_ObjectPool();
 	Safe_Release(m_pFogEffect);
+	Safe_Release(m_pDarkEffect);
 }
 
 void CScene_Cloud::Set_AccelRingPos(Engine::CLayer* pLayer)

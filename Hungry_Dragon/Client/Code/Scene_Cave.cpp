@@ -10,6 +10,7 @@
 #include "Ingame_Flow.h"
 #include "Ingame_Info.h"
 #include "Line_Renderer.h"
+#include "Cloud_Locater.h"
 
 CScene_Cave::CScene_Cave(LPDIRECT3DDEVICE9 pGraphicDev)
 	: Engine::CScene(pGraphicDev)
@@ -104,6 +105,10 @@ _int CScene_Cave::Update_Scene(const _float& fTimeDelta)
 {
 	Engine::CScene::Update_Scene(fTimeDelta);
 
+	if (GetAsyncKeyState(VK_F3) & 0x0001)
+	{
+		m_bFogEnable = !m_bFogEnable;
+	}
 	if (GetAsyncKeyState(VK_F4) & 0x0001)
 	{
 		CIngame_Flow::GetInstance()->Change_SceneTo(SCENENUM::SCENE_MENU);
@@ -122,7 +127,7 @@ _int CScene_Cave::Update_Scene(const _float& fTimeDelta)
 	}
 	if (GetAsyncKeyState(VK_F8) & 0x0001)
 	{
-		m_ePhaseNum = (SCENEPHASE)(((int)m_ePhaseNum + 1) % 3);
+		m_ePhaseNum = (SCENEPHASE)(((int)m_ePhaseNum + 1) % 4);
 		switch (m_ePhaseNum)		// Ready 부분
 		{
 		case CScene_Cave::PHASE_1:
@@ -147,6 +152,11 @@ _int CScene_Cave::Update_Scene(const _float& fTimeDelta)
 			static_cast<CCavePlayer*>(Get_Object(L"GameLogic", L"TestPlayer"))->Switch_Phase(2);
 			m_pCave->Set_Speed(400.f);
 			m_pVent->Set_Speed(400.f);
+			break;
+		case CScene_Cave::PHASE_4:
+			m_pCave->Set_Loop(false);
+			m_pVent->Set_Loop(false);
+			m_pVent->Set_ObsLoop(false);
 			break;
 		default:
 			break;
@@ -326,6 +336,9 @@ HRESULT CScene_Cave::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 	CGameObject* tempPlayer = pLayer->Get_Object(L"TestPlayer", Engine::Find_First, nullptr);
 	pPlayerTransformCom = static_cast<CTransform*>(tempPlayer->Get_Component(L"Com_Transform", Engine::ID_DYNAMIC));
 	pPlayerTransformCom->Get_Info(Engine::INFO_POS, &m_vPlayerPos);
+
+	FAILED_CHECK_RETURN(Register_GameObject<CCloud_Locater>(pLayer, L"Cloud"), E_FAIL);
+
 	return S_OK;
 }
 

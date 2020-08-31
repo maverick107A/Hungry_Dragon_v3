@@ -169,8 +169,8 @@ void CBossPlayer::LateUpdate_Object(const float & fTimeDelta)
 void CBossPlayer::Render_Object(void)
 {
 	TCHAR str[64] = L"";
-	wsprintf(str, L"POSITION : (%d,%d,%d)", int(m_pTransform->m_vInfo[Engine::INFO_POS].x), int(m_pTransform->m_vInfo[Engine::INFO_POS].y), int(m_pTransform->m_vInfo[Engine::INFO_POS].z));
-	Engine::Render_Font(L"Font_Light", str, &_vec2(50.f, 800.f), D3DXCOLOR(1.f, 1.f, 0.f, 1.f));
+	//wsprintf(str, L"POSITION : (%d,%d,%d)", int(m_pTransform->m_vInfo[Engine::INFO_POS].x), int(m_pTransform->m_vInfo[Engine::INFO_POS].y), int(m_pTransform->m_vInfo[Engine::INFO_POS].z));
+	//Engine::Render_Font(L"Font_Light", str, &_vec2(50.f, 800.f), D3DXCOLOR(1.f, 1.f, 0.f, 1.f));
 
 	m_pGraphicDev->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_GOURAUD);
 	Animation_Render();

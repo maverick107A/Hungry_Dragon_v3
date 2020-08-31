@@ -51,7 +51,8 @@ _int CVent::Update_Object(const _float& fTimeDelta)
 	m_pTransform->Add_Trans(&_vec3(0.f, 0.f, -m_fForwardSpeed*fTimeDelta));
 	m_pTransformBeyond->Add_Trans(&_vec3(0.f, 0.f, -m_fForwardSpeed*fTimeDelta));
 
-	
+	if (m_bVentLoop)
+	{
 		if (-m_fCaveLength*0.8f >= m_pTransform->Get_World()._43)
 		{
 			m_pTransform->Add_Trans(&_vec3(0.f, 0.f, m_fCaveLength*2.f));
@@ -62,7 +63,7 @@ _int CVent::Update_Object(const _float& fTimeDelta)
 			m_pTransformBeyond->Add_Trans(&_vec3(0.f, 0.f, m_fCaveLength*2.f));
 
 		}
-	
+	}
 	
 	bool	bCheck = false;
 	for (auto& pObs : m_listActiveObs)
