@@ -10,7 +10,6 @@ BEGIN(Engine)
 
 class CVIBuffer;
 class CTexture;
-class CTransform;
 class CAnimationTransform;
 class CCameraMain;
 class CBaseLand;
@@ -94,6 +93,7 @@ protected:
 protected:
 	CVIBuffer*				m_pPartsBuffer[PARTS_END];
 	CAnimationTransform*	m_pPartsTrans[PARTS_END];
+	CTransform*				m_pTransform2 = nullptr;
 	CCameraMain*			m_pCamera = nullptr;
 	CTerrain_Locater*		m_pTerrrrrrrain = nullptr;
 	CBaseLand*				m_pTerrain = nullptr;

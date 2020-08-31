@@ -33,11 +33,11 @@ HRESULT CTestPlayer::Ready_Object(void)
 {
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
-	m_pTransform->m_vInfo[Engine::INFO_POS].x = 0.f;
-	m_pTransform->m_vInfo[Engine::INFO_POS].y = 1000.f;
-	m_pTransform->m_vInfo[Engine::INFO_POS].z = 0.f;
+	m_pTransform2->m_vInfo[Engine::INFO_POS].x = 0.f;
+	m_pTransform2->m_vInfo[Engine::INFO_POS].y = 1000.f;
+	m_pTransform2->m_vInfo[Engine::INFO_POS].z = 0.f;
 
-	m_pTransform->Set_Scale(6.f);
+	m_pTransform2->Set_Scale(6.f);
 
 	D3DXMatrixIdentity(&m_matOld1);
 	D3DXMatrixIdentity(&m_matOld2);
@@ -63,7 +63,8 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 	m_bAccelCheck = false;
 	if (Engine::Get_DIKeyState(DIK_K) & 0x80)
 		m_bBreath = !m_bBreath;
-
+	if (Engine::Get_DIKeyState(DIK_NUMPAD8) & 0x80)
+		m_bLockk = !m_bLockk;
 	//화면 내에서 플레어이가 아래에 위치하도록
 	m_pTransform->m_vInCamPos -= m_vUp*2.f;
 	m_pCamera->Update_Camera(fTimeDelta, &m_fAngleX, &m_fAngleY, &m_vLook, &m_vUp, this);
@@ -138,7 +139,7 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 
 	if (m_bBreath&&m_pParticle == nullptr) {
 		_vec3 BeamPos;
-		memcpy(&BeamPos, &m_pTransform->m_matWorld._31, sizeof(_vec3));
+		memcpy(&BeamPos, &m_pTransform2->m_matWorld._31, sizeof(_vec3));
 		m_pParticle = static_cast<CParticle*>(Engine::Particle_Create_Static(Engine::PART_BEAM, BeamPos*2));
 		static_cast<CPart_Beam*>(m_pParticle)->Set_Player(this);
 		static_cast<CPart_Beam*>(m_pParticle)->Set_Radius(m_iBreathRad);
@@ -184,7 +185,7 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 
 
 	_vec3 vPos;
-	m_pTransform->Get_Info(INFO_POS, &vPos);
+	m_pTransform2->Get_Info(INFO_POS, &vPos);
 	CLine_Renderer::GetInstance()->Draw_Dot(vPos.x, vPos.y, vPos.z, 60.f, 30.f, D3DXCOLOR(0,0,0,255));
 	CLine_Renderer::GetInstance()->Draw_Dot(m_vRWingPos.x, m_vRWingPos.y, m_vRWingPos.z, 30.f, 10.f, D3DXCOLOR(0, 0, 0, 255));
 	CLine_Renderer::GetInstance()->Draw_Dot(m_vRMWingPos.x, m_vRMWingPos.y, m_vRMWingPos.z, 30.f, 10.f, D3DXCOLOR(0, 0, 0, 255));
@@ -194,12 +195,14 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 	//if (GetAsyncKeyState(VK_LBUTTON) & 0x0001)
 	//{
 	//	m_vP = vPos;
-	//	m_vL = { m_pTransform->m_matWorld._31,m_pTransform->m_matWorld._32,m_pTransform->m_matWorld._33 };
+	//	m_vL = { m_pTransform2->m_matWorld._31,m_pTransform2->m_matWorld._32,m_pTransform2->m_matWorld._33 };
 	//	m_fMouseTime = 0.5f;
 	//}
 	//m_vP += m_vL*5.f;
 	//CLine_Renderer::GetInstance()->Draw_Dot(m_vP.x, m_vP.y, m_vP.z);
 
+	if(!m_bLockk)
+		m_pTransform2->m_matWorld = m_pTransform->m_matWorld;
 
 	return 0;
 }
@@ -214,7 +217,7 @@ void CTestPlayer::LateUpdate_Object(const float & fTimeDelta)
 void CTestPlayer::Render_Object(void)
 {
 	TCHAR str[64] = L"";
-	//wsprintf(str, L"POSITION : (%d,%d,%d)", int(m_pTransform->m_vInfo[Engine::INFO_POS].x), int(m_pTransform->m_vInfo[Engine::INFO_POS].y), int(m_pTransform->m_vInfo[Engine::INFO_POS].z));
+	//wsprintf(str, L"POSITION : (%d,%d,%d)", int(m_pTransform2->m_vInfo[Engine::INFO_POS].x), int(m_pTransform2->m_vInfo[Engine::INFO_POS].y), int(m_pTransform2->m_vInfo[Engine::INFO_POS].z));
 	//Engine::Render_Font(L"Font_Light", str, &_vec2(50.f, 800.f), D3DXCOLOR(1.f, 1.f, 0.f, 1.f));
 
 	m_pGraphicDev->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_GOURAUD);
@@ -320,6 +323,10 @@ HRESULT CTestPlayer::Add_Component(void)
 	pComponent = m_pTransform = Engine::CTransform::Create();
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
 	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_Transform", pComponent);
+
+	pComponent = m_pTransform2 = Engine::CTransform::Create();
+	NULL_CHECK_RETURN(pComponent, E_FAIL);
+	m_mapComponent[Engine::ID_DYNAMIC].emplace(L"Com_Transform", pComponent);
 	//얼굴
 	pComponent = m_pPartsTrans[PART_FACE] = Engine::CAnimationTransform::Create();
 	NULL_CHECK_RETURN(pComponent, E_FAIL);
@@ -404,10 +411,10 @@ CTestPlayer* CTestPlayer::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 void CTestPlayer::Animation_Render()
 {
 	//얼굴
-	m_pPartsTrans[PART_FACE]->Set_Transform(m_pGraphicDev, m_pTransform->Get_World());
+	m_pPartsTrans[PART_FACE]->Set_Transform(m_pGraphicDev, m_pTransform2->Get_World());
 	m_pPartsBuffer[PART_FACE]->Render_Buffer();
 	//턱
-	m_pPartsTrans[PART_JAW]->Set_Transform(m_pGraphicDev, m_pTransform->Get_World());
+	m_pPartsTrans[PART_JAW]->Set_Transform(m_pGraphicDev, m_pTransform2->Get_World());
 	m_pPartsBuffer[PART_JAW]->Render_Buffer();
 	//몸통
 	m_pPartsTrans[PART_BODY]->Set_Transform(m_pGraphicDev, m_matOld1);
@@ -443,7 +450,7 @@ void CTestPlayer::Animation_Render()
 	m_matOld4 = m_matOld3;
 	m_matOld3 = m_matOld2;
 	m_matOld2 = m_matOld1;
-	m_matOld1 = m_pTransform->Get_World();
+	m_matOld1 = m_pTransform2->Get_World();
 }
 
 void CTestPlayer::Preset_Animation()

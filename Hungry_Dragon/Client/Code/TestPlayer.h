@@ -40,7 +40,7 @@ private:
 
 	D3DXVECTOR3 m_vP = {0.f,0.f,0.f};
 	D3DXVECTOR3 m_vL = { 0.f,0.f,0.f };
-
+	bool			m_bLockk = false;;
 public:
 	static CTestPlayer*	Create(LPDIRECT3DDEVICE9 pGraphicDev);
 
