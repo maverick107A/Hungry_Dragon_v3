@@ -425,8 +425,8 @@ void CIngame_Info::Render_UI()
 
 	m_pSprite->End();
 
-	wsprintf(str, L"¶óÀÎ·»´õ ¼ö : %d", CLine_Renderer::GetInstance()->Get_Size());
-	Engine::Render_Font(L"Font_Light", str, &_vec2(1000.f, 200.f), D3DXCOLOR(1.f,1.f,1.f,1.f));
+	//wsprintf(str, L"¶óÀÎ·»´õ ¼ö : %d", CLine_Renderer::GetInstance()->Get_Size());
+	//Engine::Render_Font(L"Font_Light", str, &_vec2(1000.f, 200.f), D3DXCOLOR(1.f,1.f,1.f,1.f));
 
 	for (auto& tPack : m_listFontPack)
 	{

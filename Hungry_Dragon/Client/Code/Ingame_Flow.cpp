@@ -167,6 +167,8 @@ Engine::CPlayerMain * CIngame_Flow::Get_PlayerObject()
 void CIngame_Flow::Init_PlayerObjectByScene()
 {
 	m_pPlayer = static_cast<Engine::CPlayerMain*>(Get_Object(L"GameLogic", L"TestPlayer"));
+	m_pPlayerTransform = static_cast<Engine::CTransform*>(Get_Component(L"GameLogic", L"TestPlayer", L"Com_Transform", ID_DYNAMIC));
+
 }
 
 void CIngame_Flow::Load_ForestTerrain()
