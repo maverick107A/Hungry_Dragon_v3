@@ -41,13 +41,13 @@ void CPBreathIdle::Update_State(const float& fTimeDelta)
 	else
 	{
 		//중심잡기
-		if (abs(m_pPlayer->Get_Transform()->m_vAngle.x) < 0.05f)
-			m_pPlayer->Get_Transform()->m_vAngle.x = 0.f;
-		else if (m_pPlayer->Get_Transform()->m_vAngle.x > 0.f)
-			m_pPlayer->Get_Transform()->m_vAngle.x -= 0.05f;
+		if (abs(m_pPlayer->Get_Transform2()->m_vAngle.x) < 0.05f)
+			m_pPlayer->Get_Transform2()->m_vAngle.x = 0.f;
+		else if (m_pPlayer->Get_Transform2()->m_vAngle.x > 0.f)
+			m_pPlayer->Get_Transform2()->m_vAngle.x -= 0.05f;
 		else
-			m_pPlayer->Get_Transform()->m_vAngle.x += 0.05f;
-		m_pPlayer->Get_Transform()->m_vInCamPos.y += 0.1f*sinf(m_fAngle);
+			m_pPlayer->Get_Transform2()->m_vAngle.x += 0.05f;
+		m_pPlayer->Get_Transform2()->m_vInCamPos.y += 0.1f*sinf(m_fAngle);
 		m_fAngle += 0.1f;
 	}
 
@@ -66,13 +66,13 @@ void CPBreathIdle::Update_State(const float& fTimeDelta)
 	{
 		m_pPlayer->Set_Sate(CPlayerMain::STATE_BREATHFLY);
 	}
-	//if(abs(m_pPlayer->Get_Transform()->m_vAngle.x) < 0.05f)
-	//	m_pPlayer->Get_Transform()->m_vAngle.x = 0.f;
-	//else if (m_pPlayer->Get_Transform()->m_vAngle.x > 0.f)
-	//	m_pPlayer->Get_Transform()->m_vAngle.x -= 0.05f;
+	//if(abs(m_pPlayer->Get_Transform2()->m_vAngle.x) < 0.05f)
+	//	m_pPlayer->Get_Transform2()->m_vAngle.x = 0.f;
+	//else if (m_pPlayer->Get_Transform2()->m_vAngle.x > 0.f)
+	//	m_pPlayer->Get_Transform2()->m_vAngle.x -= 0.05f;
 	//else
-	//	m_pPlayer->Get_Transform()->m_vAngle.x += 0.05f;
-	//m_pPlayer->Get_Transform()->m_vInCamPos.y += 0.1f*sinf(m_fAngle);
+	//	m_pPlayer->Get_Transform2()->m_vAngle.x += 0.05f;
+	//m_pPlayer->Get_Transform2()->m_vInCamPos.y += 0.1f*sinf(m_fAngle);
 	//m_fAngle += 0.1f;
 }
 

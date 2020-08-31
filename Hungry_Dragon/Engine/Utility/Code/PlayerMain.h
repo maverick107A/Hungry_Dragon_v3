@@ -50,6 +50,7 @@ public:
 	bool					Get_AccelCheck() { return m_bAccelCheck; }
 	bool					Get_LockOn() { return m_bLock; }
 	CTransform*				Get_Transform() { return m_pTransform; }
+	CTransform*				Get_Transform2() { return m_pTransform2; }
 	CAnimationTransform*	Get_PartsTrans(int _i) { return m_pPartsTrans[_i]; }
 	const D3DXVECTOR3&		Get_Look() { return m_vLook; }
 	const D3DXVECTOR3&		Get_Up() { return m_vUp; }

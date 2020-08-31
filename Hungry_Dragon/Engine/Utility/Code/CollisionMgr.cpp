@@ -118,7 +118,6 @@ void CCollisionMgr::Player_Boss(list<CGameObject*>* _pPlayer, list<CGameObject*>
 				{
 					Boss->Kill_Monster(fTimeDelta);
 					Player->Set_MouseTime(1.f);
-
 				}
 				//부위 공격 위치랑 사이즈 바꿔야함
 				_vec3 vLhandPos, vRhandPos, vLDis, vRDis;

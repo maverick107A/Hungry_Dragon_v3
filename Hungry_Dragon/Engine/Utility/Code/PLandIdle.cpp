@@ -54,7 +54,7 @@ void CPLandIdle::LateUpdate_State()
 
 	Land_Check(&fHeight, &vNorm);
 
-	m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS].y += (fHeight - m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS].y)*0.2f;
+	m_pPlayer->Get_Transform2()->m_vInfo[Engine::INFO_POS].y += (fHeight - m_pPlayer->Get_Transform2()->m_vInfo[Engine::INFO_POS].y)*0.2f;
 }
 
 CPLandIdle* Engine::CPLandIdle::Create(void)

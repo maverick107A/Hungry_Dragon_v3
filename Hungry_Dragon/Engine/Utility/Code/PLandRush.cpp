@@ -88,16 +88,16 @@ void CPLandRush::Update_State(const float& fTimeDelta)
 				m_pPlayer->Add_Stamina(1);
 		}
 		vDir *= fTimeDelta*m_fSpeed;
-		m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS] += vDir;
+		m_pPlayer->Get_Transform2()->m_vInfo[Engine::INFO_POS] += vDir;
 		float fDis = sqrtf(vDir.x*vDir.x + vDir.y*vDir.y + vDir.z*vDir.z);
 		float fPlaneDis = sqrtf(vDir.x*vDir.x + vDir.z*vDir.z);
-		//m_pPlayer->Get_Transform()->m_vAngle.x = 0.f;
+		//m_pPlayer->Get_Transform2()->m_vAngle.x = 0.f;
 		if (0.f != fPlaneDis)
 		{
 			float fAngleY = acosf(vDir.z / fPlaneDis);
 			if (0 > vDir.x)
 				fAngleY *= -1;
-			m_pPlayer->Get_Transform()->m_vAngle.y = fAngleY;
+			m_pPlayer->Get_Transform2()->m_vAngle.y = fAngleY;
 		}
 	}
 	else
@@ -107,7 +107,7 @@ void CPLandRush::Update_State(const float& fTimeDelta)
 	//이륙
 	if (GetAsyncKeyState(VK_SPACE))
 	{
-		m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS] += _vec3(0.f, 1.f, 0.f);
+		m_pPlayer->Get_Transform2()->m_vInfo[Engine::INFO_POS] += _vec3(0.f, 1.f, 0.f);
 		m_pPlayer->Set_Sate(CPlayerMain::STATE_FLY);
 	}
 }
@@ -122,7 +122,7 @@ void CPLandRush::LateUpdate_State()
 
 	vNorm = m_pPlayer->m_vNorm;
 
-	m_pPlayer->Get_Transform()->m_vInfo[Engine::INFO_POS].y = fHeight;
+	m_pPlayer->Get_Transform2()->m_vInfo[Engine::INFO_POS].y = fHeight;
 
 	//지형탈때 X각 구하기
 	//X각도
@@ -145,7 +145,7 @@ void CPLandRush::LateUpdate_State()
 			fAngleY += Pi * 2;
 		}
 	}
-	m_pPlayer->Get_Transform()->m_vAngle.x = -(Pi*0.5f - fAngleX)*cosf(m_pPlayer->Get_Transform()->m_vAngle.y - fAngleY);
+	m_pPlayer->Get_Transform2()->m_vAngle.x = -(Pi*0.5f - fAngleX)*cosf(m_pPlayer->Get_Transform2()->m_vAngle.y - fAngleY);
 }
 
 void CPLandRush::Out_State()

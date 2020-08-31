@@ -33,11 +33,11 @@ HRESULT CTestPlayer::Ready_Object(void)
 {
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 
-	m_pTransform->m_vInfo[Engine::INFO_POS].x = 0.f;
-	m_pTransform->m_vInfo[Engine::INFO_POS].y = 1000.f;
-	m_pTransform->m_vInfo[Engine::INFO_POS].z = 0.f;
+	m_pTransform2->m_vInfo[Engine::INFO_POS].x = 0.f;
+	m_pTransform2->m_vInfo[Engine::INFO_POS].y = 1000.f;
+	m_pTransform2->m_vInfo[Engine::INFO_POS].z = 0.f;
 
-	m_pTransform->Set_Scale(6.f);
+	m_pTransform2->Set_Scale(6.f);
 
 	D3DXMatrixIdentity(&m_matOld1);
 	D3DXMatrixIdentity(&m_matOld2);
@@ -64,13 +64,21 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 	if (Engine::Get_DIKeyState(DIK_K) & 0x80)
 		m_bBreath = !m_bBreath;
 	if (Engine::Get_DIKeyState(DIK_NUMPAD8) & 0x80)
-		m_bLockk = !m_bLockk;
+	{
+		if (m_bLockk)
+		{
+			m_bLockk = false;
+			m_bCheck = true;
+		}
+		else
+			m_bLockk = true;
+	}
 	//화면 내에서 플레어이가 아래에 위치하도록
-	m_pTransform->m_vInCamPos -= m_vUp*2.f;
+	m_pTransform2->m_vInCamPos -= m_vUp*2.f;
 	m_pCamera->Update_Camera(fTimeDelta, &m_fAngleX, &m_fAngleY, &m_vLook, &m_vUp, this);
 	m_pState->Update_State(fTimeDelta);
 	D3DXVec3Cross(&m_vRight, &m_vUp, &m_vLook);
-	m_pCamera->Camera_Set(m_pGraphicDev, m_pTransform->m_vInfo[Engine::INFO_POS], m_pTerrain);
+	m_pCamera->Camera_Set(m_pGraphicDev, m_pTransform2->m_vInfo[Engine::INFO_POS], m_pTerrain);
 	//
 	if (GetAsyncKeyState('H'))
 	{
@@ -121,7 +129,8 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 	}
 	m_fExhaust -= fTimeDelta;
 
-	if (!m_bLockk)
+
+	if (m_bCheck)
 	{
 		m_pTransform2->m_vAngle = m_pTransform->m_vAngle;
 		m_pTransform2->m_vInCamPos = m_pTransform->m_vInCamPos;
@@ -129,6 +138,17 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 			m_pTransform2->m_vInfo[i] = m_pTransform->m_vInfo[i];
 		m_pTransform2->m_vScale = m_pTransform->m_vScale;
 		m_pTransform2->m_vTrans = m_pTransform->m_vTrans;
+		m_bCheck = false;
+	}
+
+	if (!m_bLockk)
+	{
+		m_pTransform->m_vAngle = m_pTransform2->m_vAngle;
+		m_pTransform->m_vInCamPos = m_pTransform2->m_vInCamPos;
+		for (int i = 0; i < Engine::INFO_END; ++i)
+			m_pTransform->m_vInfo[i] = m_pTransform2->m_vInfo[i];
+		m_pTransform->m_vScale = m_pTransform2->m_vScale;
+		m_pTransform->m_vTrans = m_pTransform2->m_vTrans;
 	}
 
 	Engine::CGameObject::Update_Object(fTimeDelta);
@@ -150,7 +170,7 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 
 	if (m_bBreath&&m_pParticle == nullptr) {
 		_vec3 BeamPos;
-		memcpy(&BeamPos, &m_pTransform2->m_matWorld._31, sizeof(_vec3));
+		memcpy(&BeamPos, &m_pTransform->m_matWorld._31, sizeof(_vec3));
 		m_pParticle = static_cast<CParticle*>(Engine::Particle_Create_Static(Engine::PART_BEAM, BeamPos*2));
 		static_cast<CPart_Beam*>(m_pParticle)->Set_Player(this);
 		static_cast<CPart_Beam*>(m_pParticle)->Set_Radius(m_iBreathRad);
@@ -200,7 +220,7 @@ int CTestPlayer::Update_Object(const float& fTimeDelta)
 
 
 	_vec3 vPos;
-	m_pTransform2->Get_Info(INFO_POS, &vPos);
+	m_pTransform->Get_Info(INFO_POS, &vPos);
 	CLine_Renderer::GetInstance()->Draw_Dot(vPos.x, vPos.y, vPos.z, 60.f, 30.f, D3DXCOLOR(0,0,0,255));
 	CLine_Renderer::GetInstance()->Draw_Dot(m_vRWingPos.x, m_vRWingPos.y, m_vRWingPos.z, 30.f, 10.f, D3DXCOLOR(0, 0, 0, 255));
 	CLine_Renderer::GetInstance()->Draw_Dot(m_vRMWingPos.x, m_vRMWingPos.y, m_vRMWingPos.z, 30.f, 10.f, D3DXCOLOR(0, 0, 0, 255));
@@ -423,10 +443,10 @@ CTestPlayer* CTestPlayer::Create(LPDIRECT3DDEVICE9 pGraphicDev)
 void CTestPlayer::Animation_Render()
 {
 	//얼굴
-	m_pPartsTrans[PART_FACE]->Set_Transform(m_pGraphicDev, m_pTransform2->Get_World());
+	m_pPartsTrans[PART_FACE]->Set_Transform(m_pGraphicDev, m_pTransform->Get_World());
 	m_pPartsBuffer[PART_FACE]->Render_Buffer();
 	//턱
-	m_pPartsTrans[PART_JAW]->Set_Transform(m_pGraphicDev, m_pTransform2->Get_World());
+	m_pPartsTrans[PART_JAW]->Set_Transform(m_pGraphicDev, m_pTransform->Get_World());
 	m_pPartsBuffer[PART_JAW]->Render_Buffer();
 	//몸통
 	m_pPartsTrans[PART_BODY]->Set_Transform(m_pGraphicDev, m_matOld1);
@@ -462,7 +482,7 @@ void CTestPlayer::Animation_Render()
 	m_matOld4 = m_matOld3;
 	m_matOld3 = m_matOld2;
 	m_matOld2 = m_matOld1;
-	m_matOld1 = m_pTransform2->Get_World();
+	m_matOld1 = m_pTransform->Get_World();
 }
 
 void CTestPlayer::Preset_Animation()
