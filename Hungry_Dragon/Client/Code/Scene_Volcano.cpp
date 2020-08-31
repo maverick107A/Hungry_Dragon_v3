@@ -86,6 +86,7 @@ HRESULT CScene_Volcano::Ready_Scene(void)
 	m_hFogTechHandle = m_pFogEffect->GetTechniqueByName("Fog");
 
 	Engine::Get_FMOD()->PlayBgm(L"VACANT INTERFERENCE");
+	Engine::Get_FMOD()->PlayEffectChartered(L"earthquake");
 
 	CIngame_Flow::GetInstance()->Set_StageID(CIngame_Flow::STAGE_LAVA);
 	return S_OK;
