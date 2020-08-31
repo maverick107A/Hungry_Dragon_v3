@@ -24,23 +24,8 @@ HRESULT CMeteor_Spawner::Ready_Object(void)
 	FAILED_CHECK_RETURN(Add_Component(), E_FAIL);
 	m_fSummonTime = 0.25f;
 	m_fSummonTick = 0.f;
-
-	m_vecObjectPool.reserve(50);
-	m_vecCircularPool.reserve(10);
-	for (int i = 0; i < 50; ++i)
-	{
-		m_pMeteor = CMeteor_Object::Create(m_pGraphicDev);
-		m_vecObjectPool.emplace_back(m_pMeteor);
-		m_pMeteor->Set_Active(false);
-	}
-	for (int i = 0; i < 10; ++i)
-	{
-		m_pCircular = CMeteor_Circular::Create(m_pGraphicDev);
-		m_vecCircularPool.emplace_back(m_pCircular);
-		m_pCircular->Set_Active(false);
-	}
-	m_iterFinder = m_vecObjectPool.begin();
-	m_iterCircular = m_vecCircularPool.begin();
+	m_bActive = false;
+	
 	return S_OK;
 }
 
@@ -118,6 +103,27 @@ void CMeteor_Spawner::Render_Object(void)
 	//m_pGraphicDev->SetRenderState(D3DRS_ALPHATESTENABLE, false);
 	m_pGraphicDev->SetRenderState(D3DRS_ZWRITEENABLE, true);
 
+}
+
+void CMeteor_Spawner::Spawn_Meteor()
+{
+	m_bActive = true;
+	m_vecObjectPool.reserve(50);
+	m_vecCircularPool.reserve(10);
+	for (int i = 0; i < 50; ++i)
+	{
+		m_pMeteor = CMeteor_Object::Create(m_pGraphicDev);
+		m_vecObjectPool.emplace_back(m_pMeteor);
+		m_pMeteor->Set_Active(false);
+	}
+	for (int i = 0; i < 10; ++i)
+	{
+		m_pCircular = CMeteor_Circular::Create(m_pGraphicDev);
+		m_vecCircularPool.emplace_back(m_pCircular);
+		m_pCircular->Set_Active(false);
+	}
+	m_iterFinder = m_vecObjectPool.begin();
+	m_iterCircular = m_vecCircularPool.begin();
 }
 
 void CMeteor_Spawner::Instantiate_Meteor(_vec3 & vPos)

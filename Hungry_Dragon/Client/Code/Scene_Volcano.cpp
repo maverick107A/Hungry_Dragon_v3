@@ -30,6 +30,8 @@ HRESULT CScene_Volcano::Ready_Scene(void)
 	FAILED_CHECK_RETURN(Ready_Layer_GameLogic(L"GameLogic"), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_Layer_UI(L"UI"), E_FAIL);
 
+	CBoss_Flow::GetInstance()->Set_Spawner(m_pSpawner);
+
 	CIngame_Flow::GetInstance()->Init_PlayerObjectByScene();
 
 	// 임시 적용
@@ -83,7 +85,7 @@ HRESULT CScene_Volcano::Ready_Scene(void)
 
 	m_hFogTechHandle = m_pFogEffect->GetTechniqueByName("Fog");
 
-	Engine::Get_FMOD()->PlayBgm(L"VolcanoBgm");
+	Engine::Get_FMOD()->PlayBgm(L"VACANT INTERFERENCE");
 
 	CIngame_Flow::GetInstance()->Set_StageID(CIngame_Flow::STAGE_LAVA);
 	return S_OK;
@@ -97,6 +99,10 @@ _int CScene_Volcano::Update_Scene(const _float& fTimeDelta) {
 		else
 			m_pGraphicDev->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 		m_bWireFrameMode = !m_bWireFrameMode;
+	}
+	if (Engine::Get_KeyMgr()->Key_Down(KM_F3))
+	{
+
 	}
 	if (GetAsyncKeyState(VK_F4) & 0x0001)
 	{
@@ -292,6 +298,7 @@ HRESULT CScene_Volcano::Ready_Layer_GameLogic(const _tchar * pLayerTag) {
 	FAILED_CHECK_RETURN(Register_GameObject<CVolcano_Erupt>(pLayer, L"Erupt"), E_FAIL);
 
 	CBoss_Flow::GetInstance()->Ready_Boss_Flow( m_pGraphicDev , pObject);
+	
 	//pGameObject = m_pParentsBody = CGiantGolem::Create(m_pGraphicDev);
 	//NULL_CHECK_RETURN(pGameObject, E_FAIL);
 	//pGameObject->Set_Address(pLayer);

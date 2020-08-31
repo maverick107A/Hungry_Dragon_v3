@@ -4,6 +4,7 @@
 #include "Define.h"
 #include "Engine_Define.h"
 #include "GiantGolem.h"
+#include "Meteor_Spawner.h"
 
 USING(Engine)
 
@@ -23,12 +24,14 @@ public:
 	void Ready_Boss_Flow(LPDIRECT3DDEVICE9 pGraphicDev, CGiantGolem* _pBoss);
 public:
 	void Set_Phase(PHASEID _eID) { m_uPhaseNum = _eID; }
+	void Set_Spawner(CMeteor_Spawner* _pSpawner) { m_pSpawner = _pSpawner; }
 public:
 	void	Update_BossFlow(float _fTimeDelta);
 	void	Render_Sfx();
 
 private:
 	CGiantGolem*	m_pBoss = nullptr;
+	CMeteor_Spawner* m_pSpawner = nullptr;
 	CTransform*		m_pPlayerTransform = nullptr;
 	_bool			m_bBossPause = false;
 	PHASEID			m_uPhaseNum = PHASE_1;

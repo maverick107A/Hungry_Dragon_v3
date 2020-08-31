@@ -29,6 +29,8 @@ public:
 	virtual _int Update_Object(const _float& fTimeDelta) override;
 	virtual void Render_Object(void) override;
 
+	void Spawn_Meteor();
+
 public:
 	void Instantiate_Meteor(_vec3& vPos);
 	void Instantiate_CircularMeteor(_vec3 _vRadius, _vec3 _vCenter, _vec3 _vAxis, float _fSpeed, float _fAngle);	// 수선의발(반지름), 중심, 축, 회전속도, 생성 위치 
