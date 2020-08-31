@@ -82,7 +82,8 @@ public:
 
 public:
 	void Add_Hp(int _iHp) { m_iHp += _iHp; }
-	void Add_Stamina(int _iStamina) { m_iStamina += _iStamina; if (m_iStamina > m_iMaxStamina-1)m_iStamina = m_iMaxMana-1; }
+	void Add_Stamina(int _iStamina) { m_iStamina += _iStamina;}
+	void Add_StaminaInCloud(int _iStamina) { m_iStamina += _iStamina; if (m_iStamina > m_iMaxStamina-1)m_iStamina = m_iMaxMana-1; }
 	void Add_Mana(int _iMana) { m_iMana += _iMana; }
 	void Add_BreathRad(int _iRad) { m_iBreathRad += _iRad; }
 
